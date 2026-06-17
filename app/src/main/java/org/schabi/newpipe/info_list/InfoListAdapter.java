@@ -219,6 +219,25 @@ public class InfoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return infoItemList;
     }
 
+    /**
+     * Resolves the {@link StreamInfoItem} bound at the given adapter position, accounting for
+     * the optional header. Used by the swipe-actions feature to know which stream a swipe
+     * gesture was performed on.
+     *
+     * @param adapterPosition the position as reported by a {@link RecyclerView.ViewHolder}
+     * @return the bound {@link StreamInfoItem}, or {@code null} if the position is out of
+     *         range or doesn't hold a stream (e.g. it's the header, footer, or another type)
+     */
+    @Nullable
+    public StreamInfoItem getStreamItem(final int adapterPosition) {
+        final int index = hasHeader() ? adapterPosition - 1 : adapterPosition;
+        if (index < 0 || index >= infoItemList.size()) {
+            return null;
+        }
+        final InfoItem item = infoItemList.get(index);
+        return item instanceof StreamInfoItem ? (StreamInfoItem) item : null;
+    }
+
     @Override
     public int getItemCount() {
         int count = infoItemList.size();

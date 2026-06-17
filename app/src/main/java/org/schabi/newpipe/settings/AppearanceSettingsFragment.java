@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceManager;
 
 import org.schabi.newpipe.R;
 import org.schabi.newpipe.util.Constants;
@@ -22,6 +23,7 @@ public class AppearanceSettingsFragment extends BasePreferenceFragment {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             removePreference(getString(R.string.player_notification_screen_key));
         }
+        disableGridPreferencesIfSwipeActionsEnabled();
 
         final String themeKey = getString(R.string.theme_key);
         // the key of the active theme when settings were opened (or recreated after theme change)
@@ -49,6 +51,32 @@ public class AppearanceSettingsFragment extends BasePreferenceFragment {
             });
         } else {
             removePreference(nightThemeKey);
+        }
+    }
+
+    /**
+     * Swiping needs full-width rows, so while swipe actions are enabled (see
+     * {@link GestureSettingsFragment}) the grid layout option is locked off and list view
+     * is forced (see {@link ThemeHelper#getItemViewMode}).
+     */
+    private void disableGridPreferencesIfSwipeActionsEnabled() {
+        final boolean swipeActionsEnabled = PreferenceManager
+                .getDefaultSharedPreferences(requireContext())
+                .getBoolean(getString(R.string.enable_swipe_actions_key), false);
+        if (!swipeActionsEnabled) {
+            return;
+        }
+
+        for (final int keyRes : new int[] {
+                R.string.grid_layout_enabled_key,
+                R.string.grid_columns_key,
+                R.string.grid_columns_landscape_key,
+        }) {
+            final Preference preference = findPreference(getString(keyRes));
+            if (preference != null) {
+                preference.setEnabled(false);
+                preference.setSummary(R.string.swipe_actions_force_list_mode_summary);
+            }
         }
     }
 

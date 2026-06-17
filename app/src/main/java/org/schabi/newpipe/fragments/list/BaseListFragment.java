@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.schabi.newpipe.R;
@@ -33,6 +34,8 @@ import org.schabi.newpipe.fragments.OnScrollBelowItemsListener;
 import org.schabi.newpipe.info_list.ItemViewMode;
 import org.schabi.newpipe.info_list.dialog.InfoItemDialog;
 import org.schabi.newpipe.info_list.InfoListAdapter;
+import org.schabi.newpipe.info_list.swipe.StreamSwipeItemTouchCallback;
+import org.schabi.newpipe.info_list.swipe.SwipeActionPreferences;
 import org.schabi.newpipe.util.NavigationHelper;
 import org.schabi.newpipe.util.OnClickGesture;
 import org.schabi.newpipe.util.StateSaver;
@@ -60,6 +63,8 @@ public abstract class BaseListFragment<I, N> extends BaseStateFragment<I>
     protected InfoListAdapter infoListAdapter;
     protected RecyclerView itemsList;
     private int focusedPosition = -1;
+    @Nullable
+    private ItemTouchHelper swipeActionsTouchHelper;
 
     /*//////////////////////////////////////////////////////////////////////////
     // LifeCycle
@@ -230,6 +235,23 @@ public abstract class BaseListFragment<I, N> extends BaseStateFragment<I>
                 ? getGridLayoutManager() : getListLayoutManager());
         infoListAdapter.setItemViewMode(itemViewMode);
         infoListAdapter.notifyDataSetChanged();
+        refreshSwipeActions();
+    }
+
+    /**
+     * Attaches or detaches the swipe-actions {@link ItemTouchHelper} depending on whether the
+     * feature is currently enabled in the settings (see {@link SwipeActionPreferences}).
+     */
+    private void refreshSwipeActions() {
+        if (swipeActionsTouchHelper == null) {
+            final StreamSwipeItemTouchCallback callback = new StreamSwipeItemTouchCallback(
+                    this,
+                    viewHolder -> infoListAdapter.getStreamItem(
+                            viewHolder.getBindingAdapterPosition()));
+            swipeActionsTouchHelper = new ItemTouchHelper(callback);
+        }
+        swipeActionsTouchHelper.attachToRecyclerView(
+                SwipeActionPreferences.isEnabled(requireContext()) ? itemsList : null);
     }
 
     @Override
@@ -527,7 +549,8 @@ public abstract class BaseListFragment<I, N> extends BaseStateFragment<I>
                     || key.equals(getString(R.string.grid_layout_enabled_key))
                     || key.equals(getString(R.string.grid_columns_key))
                     || key.equals(getString(R.string.grid_columns_landscape_key))
-                    || key.equals(getString(R.string.use_experimental_new_ui_key))) {
+                    || key.equals(getString(R.string.use_experimental_new_ui_key))
+                    || key.equals(getString(R.string.enable_swipe_actions_key))) {
                 updateFlags |= LIST_MODE_UPDATE_FLAG;
             }
         } catch (final Exception e) {

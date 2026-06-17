@@ -42,6 +42,7 @@ import org.schabi.newpipe.extractor.NewPipe;
 import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 import org.schabi.newpipe.info_list.ItemViewMode;
+import org.schabi.newpipe.info_list.swipe.SwipeActionPreferences;
 
 public final class ThemeHelper {
     private ThemeHelper() {
@@ -367,6 +368,11 @@ public final class ThemeHelper {
      * @return Returns one of ItemViewMode
      */
     public static ItemViewMode getItemViewMode(final Context context) {
+        // Swiping needs full-width rows, so force list view while swipe actions are enabled,
+        // overriding both grid and card mode (see GestureSettingsFragment).
+        if (SwipeActionPreferences.isEnabled(context)) {
+            return ItemViewMode.LIST;
+        }
         final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         if (preferences.getBoolean(context.getString(R.string.card_mode_enabled_key), false)) {
             return ItemViewMode.CARD;

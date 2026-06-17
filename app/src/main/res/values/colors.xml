@@ -100,4 +100,17 @@
     <color name="filler_segment">#7300ff</color>
     <color name="pending_segment">#ffffff</color>
 
+    <!-- Swipe action background colors, shown behind a stream item while it is being
+         swiped left/right, one per action so the user can tell them apart at a glance. -->
+    <color name="swipe_action_enqueue">#1976D2</color>
+    <color name="swipe_action_enqueue_next">#3F51B5</color>
+    <color name="swipe_action_start_background">#7B1FA2</color>
+    <color name="swipe_action_start_popup">#F57C00</color>
+    <color name="swipe_action_append_playlist">#388E3C</color>
+    <color name="swipe_action_share">#D81B60</color>
+    <color name="swipe_action_download">#5D4037</color>
+    <color name="swipe_action_open_in_browser">#00838F</color>
+    <color name="swipe_action_mark_as_watched">#455A64</color>
+    <color name="swipe_action_remove_from_playlist">#C62828</color>
+
 </resources>
