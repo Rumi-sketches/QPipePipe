@@ -1497,13 +1497,16 @@ public final class VideoDetailFragment
                 ));
     }
 
-    // This method overrides default behaviour when setAutoPlay() is called.
-    // Don't auto play if the user selected an external player or disabled it in settings
+    // Whether playback should start automatically once the opened stream finishes loading.
+    // This reflects the caller's intent recorded via setAutoPlay() -- e.g. a manual tap forces
+    // it on (see NavigationHelper.openVideoDetailFragment). The "Autoplay" setting is applied by
+    // those callers, so it is intentionally not re-checked here (doing so double-gated it and
+    // suppressed explicit, manual taps). Still gated on the player not being in a non-video mode
+    // and on the panel not being hidden.
     private boolean isAutoplayEnabled() {
         return autoPlayEnabled
                 && (!isPlayerAvailable() || player.videoPlayerSelected())
-                && bottomSheetState != BottomSheetBehavior.STATE_HIDDEN
-                && PlayerHelper.isAutoplayAllowedByUser(requireContext());
+                && bottomSheetState != BottomSheetBehavior.STATE_HIDDEN;
     }
 
     private void addVideoPlayerView() {
