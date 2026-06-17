@@ -46,6 +46,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.xwray.groupie.GroupieAdapter
 import com.xwray.groupie.Item
@@ -70,6 +71,8 @@ import org.schabi.newpipe.extractor.utils.Utils.isNullOrEmpty
 import org.schabi.newpipe.fragments.BaseStateFragment
 import org.schabi.newpipe.info_list.ItemViewMode
 import org.schabi.newpipe.info_list.dialog.InfoItemDialog
+import org.schabi.newpipe.info_list.swipe.StreamSwipeItemTouchCallback
+import org.schabi.newpipe.info_list.swipe.SwipeActionPreferences
 import org.schabi.newpipe.ktx.animate
 import org.schabi.newpipe.ktx.animateHideRecyclerViewAllowingScrolling
 import org.schabi.newpipe.ktx.slideUp
@@ -104,6 +107,7 @@ class FeedFragment : BaseStateFragment<FeedState>() {
     private var oldestSubscriptionUpdate: OffsetDateTime? = null
 
     private lateinit var groupAdapter: GroupieAdapter
+    private var swipeActionsTouchHelper: ItemTouchHelper? = null
     @JvmField var showPlayedItems: Boolean = true
 
     private var onSettingsChangeListener: SharedPreferences.OnSharedPreferenceChangeListener? = null
@@ -164,6 +168,9 @@ class FeedFragment : BaseStateFragment<FeedState>() {
                     updateListViewModeOnResume = true
                 }
                 getString(R.string.grid_columns_landscape_key) -> {
+                    updateListViewModeOnResume = true
+                }
+                getString(R.string.enable_swipe_actions_key) -> {
                     updateListViewModeOnResume = true
                 }
                 getString(R.string.pull_to_refresh_key) -> {
@@ -252,10 +259,43 @@ class FeedFragment : BaseStateFragment<FeedState>() {
 
     private fun setupListViewMode() {
         // does everything needed to setup the layouts for grid or list modes
-        groupAdapter.spanCount = if (shouldUseGridLayout(context)) getGridSpanCountStreams(context) else 1
+        // Swipe actions force list view (see ThemeHelper.getItemViewMode, already respected by
+        // handleLoadedState()'s itemVersion below), so span count must follow suit regardless
+        // of the grid layout preference checked next.
+        val forceListForSwipeActions = SwipeActionPreferences.isEnabled(requireContext())
+        groupAdapter.spanCount = if (!forceListForSwipeActions && shouldUseGridLayout(context)) {
+            getGridSpanCountStreams(context)
+        } else {
+            1
+        }
         feedBinding.itemsList.layoutManager = GridLayoutManager(requireContext(), groupAdapter.spanCount).apply {
             spanSizeLookup = groupAdapter.spanSizeLookup
         }
+        refreshSwipeActions()
+    }
+
+    /**
+     * Attaches or detaches the swipe-actions [ItemTouchHelper] depending on whether the feature
+     * is currently enabled in the settings (see [SwipeActionPreferences]).
+     */
+    private fun refreshSwipeActions() {
+        var helper = swipeActionsTouchHelper
+        if (helper == null) {
+            val callback = StreamSwipeItemTouchCallback(this) { viewHolder ->
+                val position = viewHolder.bindingAdapterPosition
+                if (position in 0 until groupAdapter.itemCount) {
+                    (groupAdapter.getItem(position) as? StreamItem)
+                        ?.streamWithState?.stream?.toStreamInfoItem()
+                } else {
+                    null
+                }
+            }
+            helper = ItemTouchHelper(callback)
+            swipeActionsTouchHelper = helper
+        }
+        helper.attachToRecyclerView(
+            if (SwipeActionPreferences.isEnabled(requireContext())) feedBinding.itemsList else null
+        )
     }
 
     override fun initListeners() {
@@ -430,6 +470,7 @@ class FeedFragment : BaseStateFragment<FeedState>() {
 
         feedBinding.itemsList.adapter = null
         _feedBinding = null
+        swipeActionsTouchHelper = null
         playlistControlBinding?.let { binding ->
             binding.playlistCtrlPlayAllButton.setOnClickListener(null)
             binding.playlistCtrlPlayPopupButton.setOnClickListener(null)
