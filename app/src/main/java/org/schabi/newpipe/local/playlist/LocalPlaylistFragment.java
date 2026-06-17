@@ -1,6 +1,7 @@
 package org.schabi.newpipe.local.playlist;
 
 import android.content.*;
+import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -48,6 +49,9 @@ import org.schabi.newpipe.extractor.stream.StreamInfoItem;
 import org.schabi.newpipe.fragments.BackPressable;
 import org.schabi.newpipe.info_list.dialog.InfoItemDialog;
 import org.schabi.newpipe.info_list.dialog.StreamDialogDefaultEntry;
+import org.schabi.newpipe.info_list.swipe.SwipeAction;
+import org.schabi.newpipe.info_list.swipe.SwipeActionPainter;
+import org.schabi.newpipe.info_list.swipe.SwipeActionPreferences;
 import org.schabi.newpipe.local.BaseLocalListFragment;
 import org.schabi.newpipe.local.dialog.PlaylistDialog;
 import org.schabi.newpipe.local.history.HistoryRecordManager;
@@ -1160,10 +1164,29 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
     }
 
 
+    @Override
+    protected boolean handlesOwnSwipeGestures() {
+        // This fragment already combines drag-to-reorder with its own swipe handling
+        // (see getItemTouchCallback() below), which folds in the global swipe-actions
+        // preference itself.
+        return true;
+    }
+
     private ItemTouchHelper.SimpleCallback getItemTouchCallback() {
+        // The "swipe actions on videos" setting (see GestureSettingsFragment) is a superset of
+        // this fragment's own swipe-to-delete/enqueue setting: when it's on, left and right are
+        // both available and configurable just like everywhere else, with REMOVE_FROM_PLAYLIST
+        // standing in for what used to be the dedicated "delete" option.
+        final boolean useGlobalSwipeActions = SwipeActionPreferences.isEnabled(requireContext());
         int directions = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
-        int swipeDirections;
-        if (shouldUseGridLayout(requireContext())) {
+        final int swipeDirections;
+        if (useGlobalSwipeActions) {
+            // Swipe actions force list view (see ThemeHelper.getItemViewMode), so rows are
+            // always full-width here regardless of the grid layout preference checked below;
+            // there is no conflict with drag-to-reorder to avoid.
+            directions |= ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
+            swipeDirections = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
+        } else if (shouldUseGridLayout(requireContext())) {
             directions |= ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
             // In grid layout, disable swipe to avoid conflict with drag
             swipeDirections = ItemTouchHelper.ACTION_STATE_IDLE;
@@ -1222,39 +1245,100 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
             }
 
             @Override
-            public int getSwipeDirs(@NonNull RecyclerView recyclerView, 
-                                   @NonNull RecyclerView.ViewHolder viewHolder) {
+            public int getSwipeDirs(@NonNull final RecyclerView recyclerView,
+                                   @NonNull final RecyclerView.ViewHolder viewHolder) {
                 // Disable swipe for header items (position 0)
                 if (itemListAdapter != null && viewHolder.getBindingAdapterPosition() == 0) {
                     return 0; // No swipe directions allowed for header
                 }
-                
-                // Check if swipe is disabled in preferences
-                final String swipeAction = PreferenceManager.getDefaultSharedPreferences(requireContext())
-                        .getString(getString(R.string.local_playlist_swipe_action_key), "delete");
-                if ("disable".equals(swipeAction)) {
-                    return 0; // No swipe directions allowed when disabled
+
+                if (!useGlobalSwipeActions) {
+                    // Check if swipe is disabled in preferences
+                    final String swipeAction = PreferenceManager
+                            .getDefaultSharedPreferences(requireContext())
+                            .getString(getString(R.string.local_playlist_swipe_action_key),
+                                    "delete");
+                    if ("disable".equals(swipeAction)) {
+                        return 0; // No swipe directions allowed when disabled
+                    }
                 }
-                
+
                 return super.getSwipeDirs(recyclerView, viewHolder);
+            }
+
+            @Override
+            public void onChildDraw(@NonNull final Canvas canvas,
+                                    @NonNull final RecyclerView recyclerView,
+                                    @NonNull final RecyclerView.ViewHolder viewHolder,
+                                    final float dX, final float dY,
+                                    final int actionState, final boolean isCurrentlyActive) {
+                if (useGlobalSwipeActions
+                        && actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
+                    final SwipeAction action = dX > 0
+                            ? SwipeActionPreferences.getRightAction(requireContext())
+                            : SwipeActionPreferences.getLeftAction(requireContext());
+                    SwipeActionPainter.drawBackground(canvas, viewHolder.itemView, dX, action);
+                }
+                super.onChildDraw(
+                        canvas, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
             }
 
             @Override
             public void onSwiped(@NonNull final RecyclerView.ViewHolder viewHolder,
                                  final int swipeDir) {
-                if (itemListAdapter != null) {
-                    final int index = viewHolder.getBindingAdapterPosition() - 1;
-                    // Get the correct list based on whether filtering is enabled
-                    final List<LocalItem> currentItems = itemListAdapter.getCurrentItemsList();
-                    if (index != -1 && index < currentItems.size()) {
-                        final Object item = currentItems.get(index);
-                        if (item instanceof PlaylistStreamEntry) {
-                            handleSwipeAction((PlaylistStreamEntry) item, viewHolder);
-                        }
-                    }
-                }
+                onPlaylistItemSwiped(viewHolder, swipeDir, useGlobalSwipeActions);
             }
         };
+    }
+
+    /**
+     * Resolves which {@link PlaylistStreamEntry} was swiped and dispatches either the legacy
+     * single-action behaviour or the configured {@link SwipeAction} for the swiped direction.
+     *
+     * @param viewHolder the swiped row
+     * @param swipeDir the direction it was swiped in ({@link ItemTouchHelper#LEFT} or
+     *                 {@link ItemTouchHelper#RIGHT})
+     * @param useGlobalSwipeActions whether to use the global swipe-actions preference instead
+     *                              of this fragment's own legacy single-action setting
+     */
+    private void onPlaylistItemSwiped(final RecyclerView.ViewHolder viewHolder,
+                                      final int swipeDir,
+                                      final boolean useGlobalSwipeActions) {
+        if (itemListAdapter == null) {
+            return;
+        }
+        final int index = viewHolder.getBindingAdapterPosition() - 1;
+        // Get the correct list based on whether filtering is enabled
+        final List<LocalItem> currentItems = itemListAdapter.getCurrentItemsList();
+        if (index == -1 || index >= currentItems.size()) {
+            return;
+        }
+        final Object item = currentItems.get(index);
+        if (!(item instanceof PlaylistStreamEntry)) {
+            return;
+        }
+        final PlaylistStreamEntry entry = (PlaylistStreamEntry) item;
+
+        if (!useGlobalSwipeActions) {
+            handleSwipeAction(entry, viewHolder);
+            return;
+        }
+
+        final SwipeAction action = swipeDir == ItemTouchHelper.RIGHT
+                ? SwipeActionPreferences.getRightAction(requireContext())
+                : SwipeActionPreferences.getLeftAction(requireContext());
+        if (action == SwipeAction.REMOVE_FROM_PLAYLIST) {
+            showDeleteConfirmationDialog(entry, viewHolder);
+            return;
+        }
+        // The item isn't removed, so rebind it to snap the row back to its resting position.
+        itemListAdapter.notifyItemChanged(viewHolder.getBindingAdapterPosition());
+        try {
+            action.action.onClick(LocalPlaylistFragment.this, entry.toStreamInfoItem());
+        } catch (final Exception e) {
+            showUiErrorSnackbar(LocalPlaylistFragment.this,
+                    "Performing swipe action " + action, e);
+        }
     }
 
     /*//////////////////////////////////////////////////////////////////////////

@@ -494,6 +494,13 @@ public final class BookmarkFragment extends BaseLocalListFragment<List<PlaylistL
 
     }
 
+    @Override
+    protected boolean handlesOwnSwipeGestures() {
+        // This fragment lists bookmarked playlists, not streams, and already attaches its own
+        // ItemTouchHelper for drag-to-reorder (see getItemTouchCallback() below).
+        return true;
+    }
+
     private ItemTouchHelper.SimpleCallback getItemTouchCallback() {
         int directions = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
         if (shouldUseGridLayout(requireContext())) {

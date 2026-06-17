@@ -13,6 +13,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
@@ -22,6 +23,8 @@ import org.schabi.newpipe.databinding.PignateFooterBinding;
 import org.schabi.newpipe.fragments.BaseStateFragment;
 import org.schabi.newpipe.fragments.list.ListViewContract;
 import org.schabi.newpipe.info_list.ItemViewMode;
+import org.schabi.newpipe.info_list.swipe.StreamSwipeItemTouchCallback;
+import org.schabi.newpipe.info_list.swipe.SwipeActionPreferences;
 import org.schabi.newpipe.util.ThemeHelper;
 
 import static org.schabi.newpipe.ktx.ViewUtils.animate;
@@ -53,6 +56,8 @@ public abstract class BaseLocalListFragment<I, N> extends BaseStateFragment<I>
     protected LocalItemListAdapter itemListAdapter;
     protected RecyclerView itemsList;
     private int updateFlags = 0;
+    @Nullable
+    private ItemTouchHelper swipeActionsTouchHelper;
 
     /*//////////////////////////////////////////////////////////////////////////
     // Lifecycle - Creation
@@ -89,6 +94,16 @@ public abstract class BaseLocalListFragment<I, N> extends BaseStateFragment<I>
     }
 
     /**
+     * Fragments that already attach their own {@link ItemTouchHelper} to {@link #itemsList}
+     * (e.g. for drag-to-reorder, possibly combined with their own swipe handling) should
+     * override this to return {@code true}, since a {@link RecyclerView} can only have one
+     * {@link ItemTouchHelper} attached at a time.
+     */
+    protected boolean handlesOwnSwipeGestures() {
+        return false;
+    }
+
+    /**
      * Updates the item view mode based on user preference.
      */
     private void refreshItemViewMode() {
@@ -98,6 +113,26 @@ public abstract class BaseLocalListFragment<I, N> extends BaseStateFragment<I>
                 ? getGridLayoutManager() : getListLayoutManager());
         itemListAdapter.setItemViewMode(appliedItemViewMode);
         itemListAdapter.notifyDataSetChanged();
+        refreshSwipeActions();
+    }
+
+    /**
+     * Attaches or detaches the swipe-actions {@link ItemTouchHelper} depending on whether the
+     * feature is currently enabled in the settings (see {@link SwipeActionPreferences}).
+     */
+    private void refreshSwipeActions() {
+        if (handlesOwnSwipeGestures()) {
+            return;
+        }
+        if (swipeActionsTouchHelper == null) {
+            final StreamSwipeItemTouchCallback callback = new StreamSwipeItemTouchCallback(
+                    this,
+                    viewHolder -> itemListAdapter.getStreamItem(
+                            viewHolder.getBindingAdapterPosition()));
+            swipeActionsTouchHelper = new ItemTouchHelper(callback);
+        }
+        swipeActionsTouchHelper.attachToRecyclerView(
+                SwipeActionPreferences.isEnabled(requireContext()) ? itemsList : null);
     }
 
     /*//////////////////////////////////////////////////////////////////////////
@@ -178,6 +213,7 @@ public abstract class BaseLocalListFragment<I, N> extends BaseStateFragment<I>
         super.onDestroyView();
         itemsList = null;
         itemListAdapter = null;
+        swipeActionsTouchHelper = null;
     }
 
     /*//////////////////////////////////////////////////////////////////////////
@@ -267,7 +303,8 @@ public abstract class BaseLocalListFragment<I, N> extends BaseStateFragment<I>
                 || key.equals(getString(R.string.grid_layout_enabled_key))
                 || key.equals(getString(R.string.grid_columns_key))
                 || key.equals(getString(R.string.grid_columns_landscape_key))
-                || key.equals(getString(R.string.use_experimental_new_ui_key)))) {
+                || key.equals(getString(R.string.use_experimental_new_ui_key))
+                || key.equals(getString(R.string.enable_swipe_actions_key)))) {
             updateFlags |= LIST_MODE_UPDATE_FLAG;
         }
     }

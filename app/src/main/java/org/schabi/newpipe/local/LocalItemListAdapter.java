@@ -246,6 +246,32 @@ public class LocalItemListAdapter extends RecyclerView.Adapter<RecyclerView.View
         return isFilterEnabled ? filteredItems : localItems;
     }
 
+    /**
+     * Resolves the {@link StreamInfoItem} bound at the given adapter position, accounting for
+     * the optional header. Used by the swipe-actions feature to know which stream a swipe
+     * gesture was performed on.
+     *
+     * @param adapterPosition the position as reported by a {@link RecyclerView.ViewHolder}
+     * @return the bound item converted to a {@link StreamInfoItem}, or {@code null} if the
+     *         position is out of range or doesn't hold a stream (e.g. it's the header, footer,
+     *         or a bookmarked-playlist entry)
+     */
+    @Nullable
+    public StreamInfoItem getStreamItem(final int adapterPosition) {
+        final List<LocalItem> items = getCurrentItemsList();
+        final int index = adapterOffsetWithoutHeader(adapterPosition);
+        if (index < 0 || index >= items.size()) {
+            return null;
+        }
+        final LocalItem item = items.get(index);
+        if (item instanceof PlaylistStreamEntry) {
+            return ((PlaylistStreamEntry) item).toStreamInfoItem();
+        } else if (item instanceof StreamStatisticsEntry) {
+            return ((StreamStatisticsEntry) item).toStreamInfoItem();
+        }
+        return null;
+    }
+
     @Override
     public int getItemCount() {
         int count = (isFilterEnabled?filteredItems:localItems).size();
