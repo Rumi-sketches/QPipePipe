@@ -252,6 +252,13 @@ public final class VideoDetailFragment
         // It will do nothing if the player is not in fullscreen mode
         hideSystemUiIfNeeded();
 
+        // The service is bound with BIND_AUTO_CREATE and can connect before its Player exists
+        // (e.g. the OS recreated a killed service while restoring the app). Nothing to set up
+        // until the player is there.
+        if (!isPlayerAvailable()) {
+            return;
+        }
+
         if (!player.videoPlayerSelected() && !playAfterConnect) {
             return;
         }
