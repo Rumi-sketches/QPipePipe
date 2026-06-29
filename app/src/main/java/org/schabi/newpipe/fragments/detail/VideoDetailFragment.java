@@ -116,6 +116,7 @@ import static org.schabi.newpipe.extractor.services.bilibili.utils.isFirstP;
 import static org.schabi.newpipe.ktx.ViewUtils.animate;
 import static org.schabi.newpipe.ktx.ViewUtils.animateRotation;
 import static org.schabi.newpipe.player.helper.PlayerHelper.globalScreenOrientationLocked;
+import static org.schabi.newpipe.player.helper.PlayerHelper.isClearingQueueConfirmationRequired;
 import static org.schabi.newpipe.player.playqueue.PlayQueueItem.RECOVERY_UNSET;
 import static org.schabi.newpipe.util.ExtractorHelper.showMetaInfoInTextView;
 
@@ -963,14 +964,17 @@ public final class VideoDetailFragment
                                    @Nullable final String newUrl,
                                    @NonNull final String newTitle,
                                    @Nullable final PlayQueue newQueue) {
-        if (isPlayerAvailable() && newQueue != null && playQueue != null
-                && playQueue.getItem() != null && !playQueue.getItem().getUrl().equals(newUrl)) {
-            // Preloading can be disabled since playback is surely being replaced.
-            player.disablePreloadingOfCurrentTrack();
-        }
+        loadVideoIfUserConfirms(newServiceId, newUrl, newQueue, () -> {
+            if (isPlayerAvailable() && newQueue != null && playQueue != null
+                    && playQueue.getItem() != null
+                    && !playQueue.getItem().getUrl().equals(newUrl)) {
+                // Preloading can be disabled since playback is surely being replaced.
+                player.disablePreloadingOfCurrentTrack();
+            }
 
-        setInitialData(newServiceId, newUrl, newTitle, newQueue);
-        startLoading(false, true);
+            setInitialData(newServiceId, newUrl, newTitle, newQueue);
+            startLoading(false, true);
+        });
     }
 
     private void prepareAndHandleInfoIfNeededAfterDelay(final StreamInfo info,
@@ -1359,7 +1363,8 @@ public final class VideoDetailFragment
         if (append) { //resumePlayback: false
             NavigationHelper.enqueueOnPlayer(activity, queue, PlayerType.POPUP);
         } else {
-            NavigationHelper.playOnPopupPlayer(activity, queue, true);
+            replaceQueueIfUserConfirms(() -> NavigationHelper
+                    .playOnPopupPlayer(activity, queue, true));
         }
     }
 
@@ -1386,7 +1391,7 @@ public final class VideoDetailFragment
             onScreenRotationButtonClicked();
         }
 
-        openMainPlayer();
+        replaceQueueIfUserConfirms(this::openMainPlayer);
     }
 
     /**
@@ -1411,7 +1416,8 @@ public final class VideoDetailFragment
         if (append) {
             NavigationHelper.enqueueOnPlayer(activity, queue, PlayerType.AUDIO);
         } else {
-            NavigationHelper.playOnBackgroundPlayer(activity, queue, true);
+            replaceQueueIfUserConfirms(() -> NavigationHelper
+                    .playOnBackgroundPlayer(activity, queue, true));
         }
     }
 
@@ -2456,6 +2462,132 @@ public final class VideoDetailFragment
             }
         }
         return item;
+    }
+
+    private void replaceQueueIfUserConfirms(final Runnable onAllow) {
+        @Nullable final PlayQueue activeQueue = isPlayerAvailable() ? player.getPlayQueue() : null;
+        final boolean hasMultiItemQueue = activeQueue != null && activeQueue.size() > 1;
+
+        // Player will have STATE_IDLE when a user pressed back button
+        if (isClearingQueueConfirmationRequired(activity)
+                && playerIsNotStopped()
+                && hasMultiItemQueue
+                && activeQueue != null
+                && !activeQueue.equals(playQueue)) {
+            showClearingQueueConfirmation(serviceId, url, playQueue, onAllow);
+        } else {
+            onAllow.run();
+        }
+    }
+
+    /**
+     * Same purpose as {@link #replaceQueueIfUserConfirms(Runnable)}, but meant to be called
+     * before the new stream's data has been loaded (e.g. from {@link #selectAndLoadVideo}),
+     * i.e. before {@link #playQueue} has been updated to reflect the new target. Since
+     * {@link #playQueue} cannot be used for comparison yet, the queue currently playing in the
+     * active player is compared directly against the URL of the stream about to be loaded.
+     *
+     * @param newServiceId the service id of the stream that is about to be loaded
+     * @param newUrl       the url of the stream that is about to replace the active one,
+     *                     if confirmed
+     * @param newQueue     the play queue of the stream about to be loaded, if already known
+     * @param onAllow      the action to run once the navigation is allowed to proceed
+     */
+    private void loadVideoIfUserConfirms(final int newServiceId,
+                                         @Nullable final String newUrl,
+                                         @Nullable final PlayQueue newQueue,
+                                         final Runnable onAllow) {
+        @Nullable final PlayQueue activeQueue = isPlayerAvailable() ? player.getPlayQueue() : null;
+        @Nullable final PlayQueueItem activeItem =
+                activeQueue != null ? activeQueue.getItem() : null;
+        final boolean hasMultiItemQueue = activeQueue != null && activeQueue.size() > 1;
+
+        if (isClearingQueueConfirmationRequired(activity)
+                && playerIsNotStopped()
+                && hasMultiItemQueue
+                && activeItem != null
+                && !activeItem.getUrl().equals(newUrl)) {
+            showClearingQueueConfirmation(newServiceId, newUrl, newQueue, onAllow);
+        } else {
+            onAllow.run();
+        }
+    }
+
+    /**
+     * Asks the user what to do with the stream about to be loaded, given that there is an active
+     * queue with more than one item that would otherwise be silently replaced: play it now
+     * (replacing the active queue, see {@code onPlayNow}), enqueue it next, or enqueue it at the
+     * end of the active queue.
+     *
+     * @param newServiceId    the service id of the stream about to be loaded
+     * @param newUrl          the url of the stream about to be loaded
+     * @param newQueueIfKnown the play queue of the stream about to be loaded, if already known;
+     *                        otherwise it will be fetched before enqueueing
+     * @param onPlayNow       the action to run if the user chooses to play the stream right away
+     */
+    private void showClearingQueueConfirmation(final int newServiceId,
+                                                @Nullable final String newUrl,
+                                                @Nullable final PlayQueue newQueueIfKnown,
+                                                final Runnable onPlayNow) {
+        final CharSequence[] items = {
+                getString(R.string.clear_queue_confirmation_play_now),
+                getString(R.string.enqueue_next_stream),
+                getString(R.string.enqueue_stream),
+        };
+
+        new AlertDialog.Builder(activity)
+                .setTitle(R.string.clear_queue_confirmation_description)
+                .setItems(items, (dialog, which) -> {
+                    switch (which) {
+                        case 1:
+                            enqueueNewStream(newServiceId, newUrl, newQueueIfKnown, true);
+                            break;
+                        case 2:
+                            enqueueNewStream(newServiceId, newUrl, newQueueIfKnown, false);
+                            break;
+                        default:
+                            onPlayNow.run();
+                            break;
+                    }
+                })
+                .setNegativeButton(R.string.cancel, null)
+                .show();
+    }
+
+    /**
+     * Enqueues the given stream on the currently active player, fetching its info first if
+     * {@code queueIfKnown} was not already available.
+     *
+     * @param newServiceId the service id of the stream to enqueue
+     * @param newUrl       the url of the stream to enqueue
+     * @param queueIfKnown the play queue of the stream to enqueue, if already known
+     * @param playNext     whether to enqueue right after the current stream, or at the end
+     */
+    private void enqueueNewStream(final int newServiceId,
+                                  @Nullable final String newUrl,
+                                  @Nullable final PlayQueue queueIfKnown,
+                                  final boolean playNext) {
+        if (queueIfKnown != null) {
+            if (playNext) {
+                NavigationHelper.enqueueNextOnPlayer(activity, queueIfKnown);
+            } else {
+                NavigationHelper.enqueueOnPlayer(activity, queueIfKnown);
+            }
+            return;
+        }
+
+        if (newUrl == null) {
+            return;
+        }
+        SparseItemUtil.fetchStreamInfoAndSaveToDatabase(activity, newServiceId, newUrl,
+                streamInfo -> {
+                    final SinglePlayQueue queue = new SinglePlayQueue(streamInfo);
+                    if (playNext) {
+                        NavigationHelper.enqueueNextOnPlayer(activity, queue);
+                    } else {
+                        NavigationHelper.enqueueOnPlayer(activity, queue);
+                    }
+                });
     }
 
     private void showExternalPlaybackDialog() {

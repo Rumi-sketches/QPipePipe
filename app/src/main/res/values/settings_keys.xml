@@ -28,6 +28,7 @@
     <string name="popup_remember_size_pos_key">popup_remember_size_pos_key</string>
     <string name="use_inexact_seek_key">use_inexact_seek_key</string>
     <string name="auto_queue_key">auto_queue_key</string>
+    <string name="clear_queue_confirmation_key">clear_queue_confirmation_key</string>
     <string name="screen_brightness_key">screen_brightness_key</string>
     <string name="screen_brightness_timestamp_key">screen_brightness_timestamp_key</string>
     <string name="popup_saved_width_key">popup_saved_width</string>

@@ -87,6 +87,10 @@
 <string name="auto_queue_title">Auto-enqueue next stream</string>
 <string name="auto_queue_summary">Continue ending (non-repeating) playback queue by appending a related stream</string>
 <string name="auto_queue_toggle">Auto-enqueuing</string>
+<string name="clear_queue_confirmation_title">Ask for confirmation before clearing a queue</string>
+<string name="clear_queue_confirmation_summary">Switching from one player to another may replace your queue</string>
+<string name="clear_queue_confirmation_description">The active player queue will be replaced</string>
+<string name="clear_queue_confirmation_play_now">Play now</string>
 <string name="volume_gesture_control_title">Volume gesture control</string>
 <string name="volume_gesture_control_summary">Use gestures to control player volume</string>
 <string name="brightness_gesture_control_title">Brightness gesture control</string>
