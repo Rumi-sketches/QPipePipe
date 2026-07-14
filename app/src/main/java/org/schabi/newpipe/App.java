@@ -3,6 +3,7 @@ package org.schabi.newpipe;
 import android.content.*;
 import android.content.pm.ResolveInfo;
 import android.os.Build;
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,7 @@ import org.acra.config.CoreConfigurationBuilder;
 import org.schabi.newpipe.error.ReCaptchaActivity;
 import org.schabi.newpipe.extractor.NewPipe;
 import org.schabi.newpipe.extractor.downloader.Downloader;
+import org.schabi.newpipe.extractor.services.youtube.YoutubeApiDecoder;
 import org.schabi.newpipe.ktx.ExceptionUtils;
 import org.schabi.newpipe.settings.NewPipeSettings;
 import org.schabi.newpipe.util.*;
@@ -79,9 +81,15 @@ public class App extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        EdgeToEdgeWorkaround.apply();
-
         app = this;
+
+        if (ACRA.isACRASenderServiceProcess()) {
+            Log.i(TAG, "This is the ACRA sender process! "
+                    + "Aborting initialization of App[onCreate]");
+            return;
+        }
+
+        EdgeToEdgeWorkaround.apply();
 
         if (ProcessPhoenix.isPhoenixProcess(this)) {
             Log.i(TAG, "This is a phoenix process! "
@@ -112,6 +120,12 @@ public class App extends MultiDexApplication {
         NewPipe.init(getDownloader(),
             Localization.getPreferredLocalization(this),
             Localization.getPreferredContentCountry(this));
+        final AndroidWebViewAvailabilityChecker webViewAvailabilityChecker =
+                new AndroidWebViewAvailabilityChecker(this);
+        NewPipe.setWebViewAvailabilityChecker(webViewAvailabilityChecker);
+        webViewAvailabilityChecker.warmUp();
+        final WebViewJavaScriptDecoder decoder = new WebViewJavaScriptDecoder(this);
+        YoutubeApiDecoder.setLocalDecoder(decoder);
 
         Localization.initPrettyTime(Localization.resolvePrettyTime(getApplicationContext()));
 
@@ -122,7 +136,33 @@ public class App extends MultiDexApplication {
 
         // Initialize image loader
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        NewPipe.setForceSabr(prefs.getBoolean(getString(R.string.force_sabr_key), false));
+        final String youtubePlayerClientKey = getString(R.string.youtube_player_client_key);
+        final String[] youtubePlayerClients = getResources()
+                .getStringArray(R.array.youtube_player_client_values);
+        final boolean hasYouTubeLogin = !TextUtils.isEmpty(prefs.getString(
+                getString(R.string.youtube_cookies_key), null));
+        final String defaultYoutubePlayerClient = hasYouTubeLogin
+                ? "tv_downgraded" : "mweb";
+        String youtubePlayerClient = prefs.getString(youtubePlayerClientKey,
+                defaultYoutubePlayerClient);
+        boolean isYoutubePlayerClientValid = false;
+        for (final String client : youtubePlayerClients) {
+            if (client.equals(youtubePlayerClient)) {
+                isYoutubePlayerClientValid = true;
+                break;
+            }
+        }
+        if (!isYoutubePlayerClientValid) {
+            youtubePlayerClient = defaultYoutubePlayerClient;
+            prefs.edit().putString(youtubePlayerClientKey, youtubePlayerClient).apply();
+        }
+        if ((hasYouTubeLogin && !"tv_downgraded".equals(youtubePlayerClient)
+                && !"mweb".equals(youtubePlayerClient))
+                || (!hasYouTubeLogin && "tv_downgraded".equals(youtubePlayerClient))) {
+            youtubePlayerClient = defaultYoutubePlayerClient;
+            prefs.edit().putString(youtubePlayerClientKey, youtubePlayerClient).apply();
+        }
+        NewPipe.setYoutubePlayerClient(youtubePlayerClient);
         PicassoHelper.init(this);
         PicassoHelper.setShouldLoadImages(
                 prefs.getBoolean(getString(R.string.download_thumbnail_key), true));
@@ -159,7 +199,9 @@ public class App extends MultiDexApplication {
 
 
     protected Downloader getDownloader() {
-        final DownloaderImpl downloader = DownloaderImpl.init(null);
+        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        final DownloaderImpl downloader = DownloaderImpl.init(null, prefs.getBoolean(
+                getString(R.string.use_dns_over_https_fallback_key), false));
         setCookiesToDownloader(downloader);
         return downloader;
     }

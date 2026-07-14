@@ -575,6 +575,15 @@
 <string name="error_progress_lost">Progress lost, because the file was deleted</string>
 <string name="error_timeout">Connection timeout</string>
 <string name="error_download_resource_gone">Cannot recover this download</string>
+<string name="error_sabr_download_failed">SABR download failed</string>
+<string name="error_sabr_download_format">This SABR format cannot be downloaded</string>
+<string name="error_sabr_download_initialization">SABR initialization failed</string>
+<string name="error_sabr_download_protected">This SABR stream needs attestation</string>
+<string name="error_sabr_download_stalled">SABR stopped returning media</string>
+<string name="error_sabr_download_network">SABR download failed because of the network</string>
+<string name="error_sabr_download_muxing">Could not mux SABR media</string>
+<string name="error_sabr_download_storage">Could not write the SABR download</string>
+<string name="error_sabr_download_protocol">SABR protocol error</string>
 <string name="clear_download_history">Clear download history</string>
 <string name="confirm_prompt">Do you want to clear your download history or delete all downloaded files?</string>
 <string name="delete_downloaded_files">Delete downloaded files</string>
@@ -921,7 +930,7 @@
 <string name="sponsor_promote">Become a supporter</string>
 <string name="random_play_order_title">Random Order</string>
 <string name="random_play_order_summary">Automatically shuffle your local playlists when playing in the background</string>
-<string name="update_log">### New Features\n\n- Added experimental support for the YouTube SABR protocol, with an option to force enable it in Advanced Settings (YouTube)\n- Support downloading videos while logged into an account (YouTube)\n- Re-added support for auto-translated captions (works only when logged into an account) (YouTube)\n- Support searching for videos within a specific channel (YouTube)\n- Support sorting videos within a channel (YouTube)\n- Persist the last selected search filters\n- Support custom aspect ratio in the video player\n- Support positioning the tab bar at the bottom of the home page\n- Support themed icon\n\n### Bug Fixes\n\n- Fix some videos failing to parse and showing content unavailable errors (YouTube)\n- Fix all playlists showing as empty(YouTube)\n- Fix \"Related videos\" missing upload dates on the video page (YouTube)\n- Fix the app incorrectly auto-selecting the highest resolution when the video\'s lowest available resolution is lower than the default setting\n- Fix SponsorBlock segment markers not updating correctly when switching videos in the same queue\n- Fix the \"Send Email\" function failing to correctly identify email apps on the device\n- Fix an issue where all videos in a playlist incorrectly showed the playlist creator as their uploader (YouTube)\n- Fix playback errors causing some videos to stop unexpectedly (Bilibili)\n- Fix downloading not working on armv7 and x86 architectures (Bilibili, Niconico)\n- Fix `b23.tv` short links not being parsed correctly (Bilibili)\n- Fix timestamps in links being ignored (Niconico)\n- Fix comments not displaying correctly when enabling the experimental new UI\n- Fix crashes occurring in specific scenarios\n\n### UI\n\n- Remove the recommendation to enable the dedicated feed and move the related setting to Advanced Settings\n- Update the display of the search history button on the main tab to avoid duplicate icons\n- Update Russian translations\n- Update Polish translations\n\n### Others\n\n- Fully support 16KB page size, slightly improving performance on Android 16+\n- Upgrade target SDK to 36\n- Improve stability</string>
+<string name="update_log">- Fixed SABR playback issues that caused frequent buffering, network errors, infinite loading, and unexpected crashes under certain conditions.\n\n- Significantly improved SABR playback performance across the board, including much faster loading and seeking, as well as substantially reduced data usage.</string>
 <string name="speeding_playback_title">Long-press to speeding the playback</string>
 <string name="view_on_github">View on GitHub</string>
 <string name="donation_dialog_title">Support the Project</string>
@@ -1048,8 +1057,6 @@
 <string name="use_experimental_new_ui_summary">Use the new Compose-based UI, still being optimized. Changing this will restart the app.</string>
 <string name="force_end_on_overtime_title">Force end on overtime</string>
 <string name="force_end_on_overtime_summary">Force end playback when current position exceeds stream duration, as a workaround for streams that do not stop naturally</string>
-<string name="force_sabr_title">Force SABR</string>
-<string name="force_sabr_summary">Route all YouTube videos through the SABR pipeline instead of DASH/HLS. Experimental: may cause playback failures on some devices or videos</string>
 <string name="use_old_search_filter_title">Use old search filter</string>
 <string name="use_old_search_filter_summary">Use the old menu-based search filter instead of the new dialog UI</string>
 <string name="main_tabs_position_summary">Move main tab selector to the bottom</string>
@@ -1080,4 +1087,8 @@
 <string name="export_data_to_newpipe_title">Export to NewPipe</string>
 <string name="export_data_to_newpipe_summary">Export backup in a NewPipe-compatible format</string>
 <string name="settings_category_other_platforms_title">Other platforms</string>
+<string name="use_dns_over_https_fallback_title">Use DNS over HTTPS fallback</string>
+<string name="use_dns_over_https_fallback_summary">Retry failed system DNS lookups using Cloudflare DNS over HTTPS. Changing this will restart the app.</string>
+<string name="youtube_player_client_title">YouTube extraction endpoint</string>
+<string name="webview_unavailable_youtube_hint">WebView unavailable. Please make sure your WebView version is higher than 80.\n\nAndroid 6 and 10: Update Android WebView in Play Store.\nAndroid 7, 8, 9: Update Chrome in Play Store.\nOther versions: This should not happen. Please report it on our GitHub.</string>
 </resources>
