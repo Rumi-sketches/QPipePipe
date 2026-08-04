@@ -15,8 +15,10 @@ import org.schabi.newpipe.extractor.services.youtube.sabr.SabrMediaSegment;
 import org.schabi.newpipe.extractor.services.youtube.sabr.SabrSegmentRequest;
 import org.schabi.newpipe.extractor.services.youtube.sabr.YoutubeSabrFormat;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InterruptedIOException;
 import java.util.List;
 import java.util.Map;
 
@@ -24,8 +26,9 @@ public final class SabrSegmentDataSource implements DataSource {
     private static final String TAG = "SabrSegmentDataSource";
 
     private static final long WAIT_MS = 250;
-    private static final long RECOVERY_FAILURE_MS = 10_000;
-    private static final long REFETCH_AFTER_MS = 2_000;
+    private static final long RECOVERY_AFTER_NO_PROGRESS_MS = 10_000;
+    private static final long RECOVERY_RETRY_MS = 10_000;
+    private static final long RECOVERY_FAILURE_MS = 30_000;
     private static final long FORWARD_SEEK_AHEAD_MS = 30_000;
 
     @Nullable
@@ -44,6 +47,10 @@ public final class SabrSegmentDataSource implements DataSource {
     private byte[] data;
     @Nullable
     private InputStream dataStream;
+    @Nullable
+    private SabrMediaSegment progressiveSegment;
+    private long progressiveReaderGeneration = -1;
+    private int progressiveDataEndPosition = -1;
     private long bytesRemaining;
     private int pos;
     private boolean opened;
@@ -102,8 +109,11 @@ public final class SabrSegmentDataSource implements DataSource {
         this.canceled = false;
         closeDataStream();
         this.data = null;
+        this.progressiveSegment = null;
+        this.progressiveReaderGeneration = -1;
+        this.progressiveDataEndPosition = -1;
         this.pos = (int) Math.max(0, dataSpec.position);
-        final SabrSegmentRequest request = requestFromUri(dataSpec.uri);
+        SabrSegmentRequest request = requestFromUri(dataSpec.uri);
         final YoutubeSabrFormat format = request.getFormat();
         final long availableRemaining;
         final int openedBytes;
@@ -123,16 +133,36 @@ public final class SabrSegmentDataSource implements DataSource {
             System.arraycopy(init, 0, both, 0, init.length);
             System.arraycopy(media, 0, both, init.length, media.length);
             this.data = both;
+            if (progressiveSegment != null) {
+                progressiveDataEndPosition = both.length;
+            }
             availableRemaining = Math.max(0, data.length - pos);
             openedBytes = data.length;
         } else {
-            final SabrMediaSegment segment = awaitSegment(request);
+            SabrMediaSegment segment = awaitSegment(request);
+            if (segment != null) {
+                try {
+                    this.dataStream = segment.openStream();
+                } catch (final FileNotFoundException e) {
+                    Log.w(TAG, "Spool file vanished before open; refetching video="
+                            + holder.videoId + " itag=" + format.getItag()
+                            + " seq=" + request.getSequenceNumber());
+                    holder.session.discardCachedSegment(request);
+                    progressiveSegment = null;
+                    segment = awaitSegment(request);
+                    if (segment != null) {
+                        this.dataStream = segment.openStream();
+                    }
+                }
+            }
             if (segment == null) {
                 this.data = new byte[0];
                 availableRemaining = 0;
                 openedBytes = 0;
             } else {
-                this.dataStream = segment.openStream();
+                if (progressiveSegment != null) {
+                    progressiveDataEndPosition = segment.getLength();
+                }
                 final long skipped = skipFully(dataStream, Math.max(0, dataSpec.position));
                 this.pos = (int) Math.min(Integer.MAX_VALUE, skipped);
                 availableRemaining = Math.max(0, segment.getLength() - skipped);
@@ -183,6 +213,7 @@ public final class SabrSegmentDataSource implements DataSource {
             System.arraycopy(data, pos, target, offset, toCopy);
             pos += toCopy;
             bytesRemaining -= toCopy;
+            maybeAdvanceProgressiveReader();
             return toCopy;
         }
         if (dataStream == null) {
@@ -196,7 +227,23 @@ public final class SabrSegmentDataSource implements DataSource {
         }
         pos = (int) Math.min(Integer.MAX_VALUE, (long) pos + read);
         bytesRemaining -= read;
+        maybeAdvanceProgressiveReader();
         return read;
+    }
+
+    private void maybeAdvanceProgressiveReader() {
+        final SabrMediaSegment segment = progressiveSegment;
+        if (segment == null || progressiveDataEndPosition < 0
+                || pos < progressiveDataEndPosition || !segment.isComplete() || holder == null) {
+            return;
+        }
+        final YoutubeSabrFormat format = segment.getHeader().getItag()
+                == holder.videoFormat.getItag() ? holder.videoFormat : holder.audioFormat;
+        holder.setReaderPositionMs(readerOwner, progressiveReaderGeneration, format.getItag(),
+                segment.getHeader().getStartMs() + segment.getHeader().getDurationMs());
+        progressiveSegment = null;
+        progressiveReaderGeneration = -1;
+        progressiveDataEndPosition = -1;
     }
 
     private SabrSegmentRequest requestFromUri(final Uri u) throws IOException {
@@ -246,8 +293,10 @@ public final class SabrSegmentDataSource implements DataSource {
             throw invalidatedException(request.getFormat());
         }
         final SabrStreamPump pump = holder.getPump(localization);
-        final long readerGeneration = holder.getReaderGeneration(readerOwner);
+        long readerGeneration = holder.getReaderGeneration(readerOwner);
         final long waitStart = System.currentTimeMillis();
+        long noProgressSinceMs = waitStart;
+        long mediaProgressVersion = holder.session.getMediaProgressVersion();
         long recoveryAtMs = -1;
         long lastRecoveryAtMs = -1;
         boolean loggedWait = false;
@@ -255,6 +304,18 @@ public final class SabrSegmentDataSource implements DataSource {
             while (true) {
             if (canceled) {
                 throw new IOException("SABR segment read canceled");
+            }
+            if (!request.isInitializationSegment()) {
+                final long currentReaderGeneration = holder.getReaderGeneration(readerOwner);
+                if (readerGeneration < 0 && currentReaderGeneration >= 0) {
+                    readerGeneration = currentReaderGeneration;
+                    noProgressSinceMs = System.currentTimeMillis();
+                    mediaProgressVersion = holder.session.getMediaProgressVersion();
+                } else if (readerGeneration >= 0
+                        && currentReaderGeneration != readerGeneration) {
+                    throw new InterruptedIOException("SABR reader demand superseded for itag="
+                            + format.getItag() + ", seq=" + request.getSequenceNumber());
+                }
             }
             holder.throwIfTerminal();
             if (holder.isInvalidated()) {
@@ -267,6 +328,12 @@ public final class SabrSegmentDataSource implements DataSource {
                 holder.session.addDiagnosticEvent("beyond_end itag=" + format.getItag()
                         + " seq=" + request.getSequenceNumber());
                 return null;
+            }
+            final IOException demandFailure = !request.isInitializationSegment()
+                    && readerGeneration >= 0
+                    ? pump.takeDemandFailure(request, readerOwner, readerGeneration) : null;
+            if (demandFailure != null) {
+                throw demandFailure;
             }
             final IOException networkFailure = pump.takeNetworkFailure();
             if (networkFailure != null) {
@@ -282,7 +349,7 @@ public final class SabrSegmentDataSource implements DataSource {
                 segment = pump.getCached(request);
             } else {
                 try {
-                    segment = holder.session.awaitCachedSegment(request, WAIT_MS);
+                    segment = holder.session.awaitReadableSegment(request, WAIT_MS);
                 } catch (final InterruptedException e) {
                     Thread.currentThread().interrupt();
                     throw new IOException("Interrupted waiting for SABR segment", e);
@@ -296,9 +363,14 @@ public final class SabrSegmentDataSource implements DataSource {
                         + " bytes=" + segment.getLength()
                         + " disk=" + segment.isDiskBacked());
                 if (!segment.getHeader().isInitSegment()) {
-                    holder.setReaderPositionMs(readerOwner,
-                            holder.getReaderGeneration(readerOwner), format.getItag(),
-                            segment.getHeader().getStartMs() + segment.getHeader().getDurationMs());
+                    if (segment.isComplete()) {
+                        holder.setReaderPositionMs(readerOwner, readerGeneration, format.getItag(),
+                                segment.getHeader().getStartMs()
+                                        + segment.getHeader().getDurationMs());
+                    } else {
+                        progressiveSegment = segment;
+                        progressiveReaderGeneration = readerGeneration;
+                    }
                 }
                 return segment;
             }
@@ -310,7 +382,7 @@ public final class SabrSegmentDataSource implements DataSource {
                         + " seq=" + request.getSequenceNumber());
                 return null;
             }
-            if (!request.isInitializationSegment()) {
+            if (!request.isInitializationSegment() && readerGeneration >= 0) {
                 pump.requestSegmentDemand(request, readerOwner, readerGeneration);
             }
             if (!loggedWait && System.currentTimeMillis() - waitStart > 1000) {
@@ -331,9 +403,26 @@ public final class SabrSegmentDataSource implements DataSource {
                         + " readerHeadMs=" + holder.getReaderHeadMs());
             }
             final long now = System.currentTimeMillis();
-            if (now - waitStart > REFETCH_AFTER_MS
-                    && (lastRecoveryAtMs < 0 || now - lastRecoveryAtMs > REFETCH_AFTER_MS)
-                    && pump.canRecover()) {
+            final long currentMediaProgressVersion = holder.session.getMediaProgressVersion();
+            if (currentMediaProgressVersion != mediaProgressVersion) {
+                mediaProgressVersion = currentMediaProgressVersion;
+                noProgressSinceMs = now;
+                recoveryAtMs = -1;
+                lastRecoveryAtMs = -1;
+            }
+            if (holder.session.getDemandBackoffRemainingMs() > 0) {
+                // Server-directed pacing is not a playback stall. Keep polling so cancellation and
+                // reader replacement remain responsive, but do not let the local recovery watchdog
+                // reposition the session and attempt another request before the server deadline.
+                noProgressSinceMs = now;
+                recoveryAtMs = -1;
+                lastRecoveryAtMs = -1;
+            }
+            if (now - noProgressSinceMs > RECOVERY_AFTER_NO_PROGRESS_MS
+                    && (lastRecoveryAtMs < 0
+                            || now - lastRecoveryAtMs > RECOVERY_RETRY_MS)
+                    && pump.canRecover()
+                    && (request.isInitializationSegment() || readerGeneration >= 0)) {
                 String recovery;
                 if (request.isInitializationSegment()) {
                     recovery = "init";
@@ -344,18 +433,19 @@ public final class SabrSegmentDataSource implements DataSource {
                             .getSegmentStartMs(format, request.getSequenceNumber());
                     if (segStartMs < edgeMs) {
                         recovery = "rewind";
-                        holder.setReaderPositionMs(readerOwner,
-                                holder.getReaderGeneration(readerOwner), format.getItag(),
+                        holder.setReaderPositionMs(readerOwner, readerGeneration, format.getItag(),
                                 segStartMs);
                         pump.requestRefetchFrom(request);
                     } else if (segStartMs > edgeMs + FORWARD_SEEK_AHEAD_MS) {
                         recovery = "forward";
-                        holder.setReaderPositionMs(readerOwner,
-                                holder.getReaderGeneration(readerOwner), format.getItag(),
+                        holder.setReaderPositionMs(readerOwner, readerGeneration, format.getItag(),
                                 segStartMs);
                         pump.requestForwardSeekTo(request);
                     } else {
-                        recovery = "near_edge_wait";
+                        recovery = "near_edge_refetch";
+                        holder.setReaderPositionMs(readerOwner, readerGeneration,
+                                format.getItag(), segStartMs);
+                        pump.requestRefetchFrom(request);
                     }
                 }
                 holder.session.addDiagnosticEvent("recovery type=" + recovery

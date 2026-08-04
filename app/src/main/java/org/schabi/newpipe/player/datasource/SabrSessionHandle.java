@@ -8,8 +8,8 @@ import androidx.annotation.Nullable;
 import java.io.IOException;
 import java.util.IdentityHashMap;
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
 
 /** Coordinates one lazy SABR session lease across overlapping MediaPeriods and loader threads. */
 final class SabrSessionHandle {
@@ -18,7 +18,7 @@ final class SabrSessionHandle {
     private final Map<Object, Integer> trackModes = new IdentityHashMap<>();
 
     @Nullable private SabrSessionStore.Lease lease;
-    @Nullable private CompletableFuture<SabrSessionStore.Lease> acquisition;
+    @Nullable private FutureTask<SabrSessionStore.Lease> acquisition;
     private int activePeriods;
     private long periodGeneration;
     private long playerTimeMs;
@@ -63,7 +63,7 @@ final class SabrSessionHandle {
 
     @NonNull
     SabrSessionStore.Holder acquireHolder() throws IOException {
-        final CompletableFuture<SabrSessionStore.Lease> future;
+        final FutureTask<SabrSessionStore.Lease> future;
         final long generation;
         final boolean create;
         synchronized (this) {
@@ -75,7 +75,8 @@ final class SabrSessionHandle {
             }
             generation = periodGeneration;
             if (acquisition == null) {
-                acquisition = new CompletableFuture<>();
+                acquisition = new FutureTask<>(
+                        () -> SabrSessionStore.acquire(appContext, spec));
                 create = true;
             } else {
                 create = false;
@@ -84,11 +85,7 @@ final class SabrSessionHandle {
         }
 
         if (create) {
-            try {
-                future.complete(SabrSessionStore.acquire(appContext, spec));
-            } catch (final Throwable failure) {
-                future.completeExceptionally(failure);
-            }
+            future.run();
         }
 
         final SabrSessionStore.Lease acquired = await(future);
@@ -116,7 +113,7 @@ final class SabrSessionHandle {
     }
 
     private SabrSessionStore.Lease await(
-            @NonNull final CompletableFuture<SabrSessionStore.Lease> future) throws IOException {
+            @NonNull final FutureTask<SabrSessionStore.Lease> future) throws IOException {
         try {
             return future.get();
         } catch (final InterruptedException e) {
@@ -221,5 +218,6 @@ final class SabrSessionHandle {
         if (leaseToClose != null) {
             leaseToClose.close();
         }
+        spec.discardPreparedSession();
     }
 }

@@ -264,7 +264,7 @@ public final class Player implements
 
     public ExoPlayer simpleExoPlayer;
     private AudioReactor audioReactor;
-    private MediaSessionManager mediaSessionManager;
+    @Nullable private MediaSessionManager mediaSessionManager;
     private PlayerMediaSession playerMediaSession;
     @Nullable private SurfaceHolderCallback surfaceHolderCallback;
 
@@ -293,6 +293,7 @@ public final class Player implements
     private boolean isFullscreen = false;
     private boolean isVerticalVideo = false;
     private boolean fragmentIsVisible = false;
+    private long startupTraceId;
 
     private boolean isFullscreenGestureEnabled = true;
 
@@ -306,6 +307,18 @@ public final class Player implements
     private PlayerBinding binding;
 
     private final Handler controlsVisibilityHandler = new Handler();
+    private final Handler sabrBackoffHandler = new Handler();
+    private final Runnable sabrBackoffUpdate = new Runnable() {
+        @Override
+        public void run() {
+            updateSabrBackoffCountdown();
+            if (currentState == STATE_BLOCKED
+                    || (!exoPlayerIsNull() && simpleExoPlayer.getPlaybackState()
+                    == androidx.media3.common.Player.STATE_BUFFERING)) {
+                sabrBackoffHandler.postDelayed(this, 250L);
+            }
+        }
+    };
 
     // fullscreen player
     private boolean isQueueVisible = false;
@@ -759,6 +772,11 @@ public final class Player implements
 
     @SuppressWarnings("MethodLength")
     public void handleIntent(@NonNull final Intent intent) {
+        final long intentStartupTraceId = PlaybackStartupTrace.fromIntent(intent);
+        if (intentStartupTraceId > 0) {
+            startupTraceId = intentStartupTraceId;
+            PlaybackStartupTrace.mark(startupTraceId, "service_intent_received");
+        }
         // fail fast if no play queue was provided
         final String queueCache = intent.getStringExtra(PLAY_QUEUE_KEY);
         if (queueCache == null) {
@@ -947,12 +965,14 @@ public final class Player implements
                               final boolean playbackSkipSilence,
                               final boolean playOnReady,
                               final boolean isMuted) {
+        PlaybackStartupTrace.mark(startupTraceId, "player_init_started");
         destroyPlayer();
         initPlayer(playOnReady);
 
         playQueue = queue;
         playQueue.init();
         reloadPlayQueueManager();
+        PlaybackStartupTrace.mark(startupTraceId, "media_source_manager_ready");
 
         if (playQueueAdapter != null) {
             playQueueAdapter.dispose();
@@ -990,6 +1010,7 @@ public final class Player implements
             Log.d(TAG, "destroyPlayer() called");
         }
 
+        stopSabrBackoffCountdown();
         cleanupVideoSurface();
 
         if (!exoPlayerIsNull()) {
@@ -2344,6 +2365,7 @@ public final class Player implements
                 }
                 break;
             case androidx.media3.common.Player.STATE_READY: //3
+                PlaybackStartupTrace.mark(startupTraceId, "player_ready");
                 if (!isPrepared) {
                     isPrepared = true;
                     onPrepared(playWhenReady);
@@ -2404,6 +2426,7 @@ public final class Player implements
         if (currentState == STATE_BLOCKED) {
             changeState(STATE_BUFFERING);
         }
+        PlaybackStartupTrace.mark(startupTraceId, "media_source_attached");
         simpleExoPlayer.setMediaSource(mediaSource, false);
         simpleExoPlayer.prepare();
     }
@@ -2608,6 +2631,7 @@ public final class Player implements
         if (DEBUG) {
             Log.d(TAG, "onBlocked() called");
         }
+        startSabrBackoffCountdown();
         if (!isProgressLoopRunning()) {
             startProgressLoop();
         }
@@ -2634,6 +2658,7 @@ public final class Player implements
         if (DEBUG) {
             Log.d(TAG, "onPlaying() called");
         }
+        stopSabrBackoffCountdown();
         if (!isProgressLoopRunning()) {
             startProgressLoop();
         }
@@ -2680,6 +2705,7 @@ public final class Player implements
         }
         binding.loadingPanel.setBackgroundColor(Color.TRANSPARENT);
         binding.loadingPanel.setVisibility(View.VISIBLE);
+        startSabrBackoffCountdown();
 
         binding.getRoot().setKeepScreenOn(true);
         if (NotificationUtil.getInstance().shouldUpdateBufferingSlot()) {
@@ -2691,6 +2717,7 @@ public final class Player implements
         if (DEBUG) {
             Log.d(TAG, "onPaused() called");
         }
+        stopSabrBackoffCountdown();
         if (isProgressLoopRunning()) {
             stopProgressLoop();
         }
@@ -2728,6 +2755,7 @@ public final class Player implements
             Log.d(TAG, "onPausedSeek() called");
         }
 
+        stopSabrBackoffCountdown();
         animatePlayButtons(false, 100);
         binding.getRoot().setKeepScreenOn(true);
 
@@ -2738,6 +2766,7 @@ public final class Player implements
         if (DEBUG) {
             Log.d(TAG, "onCompleted() called" + (playQueue == null ? ". playQueue is null" : ""));
         }
+        stopSabrBackoffCountdown();
         if (playQueue == null) {
             return;
         }
@@ -2767,6 +2796,35 @@ public final class Player implements
         animate(binding.currentDisplaySeek, false, 200, AnimationType.SCALE_AND_ALPHA);
         binding.loadingPanel.setVisibility(View.GONE);
         animate(binding.surfaceForeground, true, 100);
+    }
+
+    private void startSabrBackoffCountdown() {
+        SabrBackoffCoordinator.getInstance().setPlayerBuffering(context, true);
+        sabrBackoffHandler.removeCallbacks(sabrBackoffUpdate);
+        sabrBackoffUpdate.run();
+    }
+
+    private void stopSabrBackoffCountdown() {
+        SabrBackoffCoordinator.getInstance().setPlayerBuffering(context, false);
+        sabrBackoffHandler.removeCallbacks(sabrBackoffUpdate);
+        if (binding != null) {
+            binding.sabrBackoffCountdown.setVisibility(View.GONE);
+        }
+    }
+
+    private void updateSabrBackoffCountdown() {
+        if (binding == null) {
+            return;
+        }
+        final long remainingMs = SabrBackoffCoordinator.getInstance().getRemainingMs();
+        if (remainingMs <= 0L) {
+            binding.sabrBackoffCountdown.setVisibility(View.GONE);
+            return;
+        }
+        final int seconds = SabrBackoffCoordinator.remainingSeconds(remainingMs);
+        binding.sabrBackoffCountdown.setText(context.getString(
+                R.string.sabr_backoff_notification_content, seconds));
+        binding.sabrBackoffCountdown.setVisibility(View.VISIBLE);
     }
 
     private void animatePlayButtons(final boolean show, final int duration) {
@@ -3074,6 +3132,7 @@ public final class Player implements
 
     @Override
     public void onRenderedFirstFrame() {
+        PlaybackStartupTrace.finish(startupTraceId);
         //TODO check if this causes black screen when switching to fullscreen
         animate(binding.surfaceForeground, false, DEFAULT_CONTROLS_DURATION);
     }
@@ -4041,8 +4100,13 @@ case ERROR_CODE_DECODER_INIT_FAILED: {
     @Override // own playback listener
     @Nullable
     public MediaSource sourceOf(final PlayQueueItem item, final StreamInfo info) {
+        PlaybackStartupTrace.mark(startupTraceId, "resolver_started");
+        final MediaSource resolved;
         if (audioPlayerSelected()) {
-            return Optional.ofNullable(audioResolver.resolve(info)).orElse(videoResolver.resolve(info)) ;
+            resolved = Optional.ofNullable(audioResolver.resolve(info))
+                    .orElse(videoResolver.resolve(info));
+            PlaybackStartupTrace.mark(startupTraceId, "resolver_finished");
+            return resolved;
         }
 
         if (isAudioOnly && videoResolver.getStreamSourceType().orElse(
@@ -4051,7 +4115,10 @@ case ERROR_CODE_DECODER_INIT_FAILED: {
             // If the current info has only video streams with audio and if the stream is played as
             // audio, we need to use the audio resolver, otherwise the video stream will be played
             // in background.
-            return Optional.ofNullable(audioResolver.resolve(info)).orElse(videoResolver.resolve(info)) ;
+            resolved = Optional.ofNullable(audioResolver.resolve(info))
+                    .orElse(videoResolver.resolve(info));
+            PlaybackStartupTrace.mark(startupTraceId, "resolver_finished");
+            return resolved;
         }
 
         // Even if the stream is played in background, we need to use the video resolver if the
@@ -4061,7 +4128,9 @@ case ERROR_CODE_DECODER_INIT_FAILED: {
         // Note that the video is not fetched when the app is in background because the video
         // renderer is fully disabled (see useVideoSource method), except for HLS streams
         // (see https://github.com/google/ExoPlayer/issues/9282).
-        return videoResolver.resolve(info);
+        resolved = videoResolver.resolve(info);
+        PlaybackStartupTrace.mark(startupTraceId, "resolver_finished");
+        return resolved;
     }
 
     public void disablePreloadingOfCurrentTrack() {
@@ -5362,6 +5431,7 @@ case ERROR_CODE_DECODER_INIT_FAILED: {
         return prefs;
     }
 
+    @Nullable
     public MediaSessionManager getMediaSessionManager() {
         return mediaSessionManager;
     }
