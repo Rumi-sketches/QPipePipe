@@ -22,6 +22,7 @@ public class GestureSettingsFragment extends BasePreferenceFragment {
         addPreferencesFromResourceRegistry();
         updateSeekOptions();
         initSwipeActionsPreference();
+        setupSpeedGestureMutualExclusion();
     }
 
     /**
@@ -48,6 +49,31 @@ public class GestureSettingsFragment extends BasePreferenceFragment {
                 // The dialog applies the change itself on confirmation, so block the
                 // automatic update here to avoid flipping it before the user decides.
                 return false;
+            }
+            return true;
+        });
+    }
+
+    private void setupSpeedGestureMutualExclusion() {
+        final SwitchPreferenceCompat fullscreenPref = findPreference(
+                getString(R.string.fullscreen_gesture_control_key));
+        final SwitchPreferenceCompat speedPref = findPreference(
+                getString(R.string.playback_speed_gesture_control_key));
+
+        if (fullscreenPref == null || speedPref == null) {
+            return;
+        }
+
+        fullscreenPref.setOnPreferenceChangeListener((pref, newValue) -> {
+            if (Boolean.TRUE.equals(newValue)) {
+                speedPref.setChecked(false);
+            }
+            return true;
+        });
+
+        speedPref.setOnPreferenceChangeListener((pref, newValue) -> {
+            if (Boolean.TRUE.equals(newValue)) {
+                fullscreenPref.setChecked(false);
             }
             return true;
         });
