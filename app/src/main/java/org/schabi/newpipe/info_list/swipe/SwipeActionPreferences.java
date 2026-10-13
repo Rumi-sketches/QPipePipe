@@ -10,7 +10,7 @@ import org.schabi.newpipe.R;
 
 /**
  * Central place to read the "swipe actions on videos" preferences (see
- * {@code gesture_settings.xml}), so the various places that need to know whether the
+ * {@code qpipepipe_settings.xml}), so the various places that need to know whether the
  * feature is on, and which action is bound to which direction, don't each re-derive it.
  */
 public final class SwipeActionPreferences {

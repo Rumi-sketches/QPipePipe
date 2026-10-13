@@ -100,6 +100,7 @@ import org.schabi.newpipe.player.mediasession.PlayerServiceInterface;
 import org.schabi.newpipe.player.mediaitem.PlayerMediaItem;
 import org.schabi.newpipe.player.playqueue.PlayQueue;
 import org.schabi.newpipe.player.playqueue.SinglePlayQueue;
+import org.schabi.newpipe.qpipepipe.QPipePipePreferences;
 import org.schabi.newpipe.sleep.SleepTimerService;
 import org.schabi.newpipe.util.*;
 import org.schabi.newpipe.util.external_communication.KoreUtils;
@@ -121,8 +122,8 @@ import static org.schabi.newpipe.extractor.services.bilibili.utils.isFirstP;
 import static org.schabi.newpipe.ktx.ViewUtils.animate;
 import static org.schabi.newpipe.ktx.ViewUtils.animateRotation;
 import static org.schabi.newpipe.player.helper.PlayerHelper.globalScreenOrientationLocked;
-import static org.schabi.newpipe.player.helper.PlayerHelper.isClearingQueueConfirmationRequired;
 import static org.schabi.newpipe.player.playqueue.PlayQueue.RECOVERY_UNSET;
+import static org.schabi.newpipe.qpipepipe.QPipePipePreferences.isClearingQueueConfirmationRequired;
 import static org.schabi.newpipe.util.ExtractorHelper.showMetaInfoInTextView;
 
 public final class VideoDetailFragment
@@ -1523,16 +1524,15 @@ public final class VideoDetailFragment
                 ));
     }
 
-    // Whether playback should start automatically once the opened stream finishes loading.
-    // This reflects the caller's intent recorded via setAutoPlay() -- e.g. a manual tap forces
-    // it on (see NavigationHelper.openVideoDetailFragment). The "Autoplay" setting is applied by
-    // those callers, so it is intentionally not re-checked here (doing so double-gated it and
-    // suppressed explicit, manual taps). Still gated on the player not being in a non-video mode
-    // and on the panel not being hidden.
+    // This method overrides default behaviour when setAutoPlay() is called.
+    // Don't auto play if the user selected an external player or disabled it in settings
+    // (QPipePipe: unless "tapping a video always plays it" is on, see QPipePipePreferences)
     private boolean isAutoplayEnabled() {
         return autoPlayEnabled
                 && (!isPlayerAvailable() || player.videoPlayerSelected())
-                && bottomSheetState != BottomSheetBehavior.STATE_HIDDEN;
+                && bottomSheetState != BottomSheetBehavior.STATE_HIDDEN
+                && (QPipePipePreferences.isTapAlwaysPlays(requireContext())
+                        || PlayerHelper.isAutoplayAllowedByUser(requireContext()));
     }
 
     private void addVideoPlayerView() {

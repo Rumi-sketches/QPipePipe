@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, kept apart from strings.xml so upstream merges and translation
+     updates don't touch them. -->
+<resources>
+    <string name="qpipepipe_settings_title">QPipePipe</string>
+    <string name="qpipepipe_settings_summary">Queue and swipe features added by this fork</string>
+    <string name="qpipepipe_category_playback">Playback</string>
+    <string name="qpipepipe_category_swipe_actions">Swipe actions</string>
+    <string name="tap_always_plays_title">Tapping a video always plays it</string>
+    <string name="tap_always_plays_summary">Start playback when you open a video, even if Autoplay is limited to Wi-Fi or turned off. Autoplay still applies to automatic starts</string>
+    <string name="clear_queue_confirmation_title">Ask for confirmation before clearing a queue</string>
+    <string name="clear_queue_confirmation_summary">Switching from one player to another may replace your queue</string>
+    <string name="clear_queue_confirmation_description">The active player queue will be replaced</string>
+    <string name="clear_queue_confirmation_play_now">Play now</string>
+    <string name="enable_swipe_actions_title">Enable swipe actions on videos</string>
+    <string name="enable_swipe_actions_summary">Swipe a video left or right on the homepage, search results, playlists and channel groups to trigger a quick action</string>
+    <string name="swipe_left_action_title">Swipe left action</string>
+    <string name="swipe_right_action_title">Swipe right action</string>
+    <string name="enable_swipe_actions_warning_title">Swipe actions enabled</string>
+    <string name="enable_swipe_actions_warning_message">Swiping needs full-width rows to work reliably, so list view will be used instead of grid or card view wherever swipe actions are available. You can turn this off again at any time.</string>
+    <string name="swipe_actions_force_list_mode_summary">Disabled while swipe actions are enabled, which forces list view</string>
+    <string name="remove_from_playlist_swipe_action">Remove from playlist (playlists only)</string>
+</resources>

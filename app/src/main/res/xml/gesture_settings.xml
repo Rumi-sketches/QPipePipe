@@ -90,36 +90,4 @@
             app:singleLineTitle="false"
             app:iconSpaceReserved="false"
             app:useSimpleSummaryProvider="true" />
-
-    <SwitchPreferenceCompat
-            android:defaultValue="false"
-            android:key="@string/enable_swipe_actions_key"
-            android:summary="@string/enable_swipe_actions_summary"
-            android:title="@string/enable_swipe_actions_title"
-            app:singleLineTitle="false"
-            app:iconSpaceReserved="false" />
-
-    <ListPreference
-            android:defaultValue="ENQUEUE"
-            android:dependency="@string/enable_swipe_actions_key"
-            android:entries="@array/swipe_action_entries"
-            android:entryValues="@array/swipe_action_values"
-            android:key="@string/swipe_left_action_key"
-            android:summary="%s"
-            android:title="@string/swipe_left_action_title"
-            app:singleLineTitle="false"
-            app:iconSpaceReserved="false"
-            app:useSimpleSummaryProvider="true" />
-
-    <ListPreference
-            android:defaultValue="APPEND_PLAYLIST"
-            android:dependency="@string/enable_swipe_actions_key"
-            android:entries="@array/swipe_action_entries"
-            android:entryValues="@array/swipe_action_values"
-            android:key="@string/swipe_right_action_key"
-            android:summary="%s"
-            android:title="@string/swipe_right_action_title"
-            app:singleLineTitle="false"
-            app:iconSpaceReserved="false"
-            app:useSimpleSummaryProvider="true" />
 </PreferenceScreen>

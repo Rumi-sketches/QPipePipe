@@ -59,6 +59,7 @@ import org.schabi.newpipe.player.helper.PlayerHelper;
 import org.schabi.newpipe.player.helper.PlayerHolder;
 import org.schabi.newpipe.player.mediaitem.PlayerMediaItem;
 import org.schabi.newpipe.player.playqueue.PlayQueue;
+import org.schabi.newpipe.qpipepipe.QPipePipePreferences;
 import org.schabi.newpipe.settings.SettingsActivity;
 import org.schabi.newpipe.util.external_communication.ShareUtils;
 
@@ -389,18 +390,16 @@ public final class NavigationHelper {
         final boolean autoPlay;
         @Nullable final PlayerService.PlayerType playerType = PlayerHolder.getInstance().getType();
         if (!PlayerHolder.getInstance().isPlayerOpen()) {
-            // No player open: opening a stream this way is an explicit user action (e.g. tapping
-            // a video), i.e. a manual play, so always start it. The "autoplay" setting is meant
-            // to govern automatic starts (such as auto-advancing the queue when a stream ends),
-            // not an explicit tap, so it is intentionally not consulted here.
-            autoPlay = true;
+            // no player open
+            autoPlay = QPipePipePreferences.isTapAlwaysPlays(context)
+                    || PlayerHelper.isAutoplayAllowedByUser(context);
         } else if (switchingPlayers) {
             // switching player to main player
             autoPlay = PlayerHolder.getInstance().isPlaying(); // keep play/pause state
         } else if (playerType == PlayerService.PlayerType.VIDEO) {
-            // Opening a new stream by tapping it while the main player is already showing: also
-            // a manual play (see above), so start it.
-            autoPlay = true;
+            // opening new stream while already playing in main player
+            autoPlay = QPipePipePreferences.isTapAlwaysPlays(context)
+                    || PlayerHelper.isAutoplayAllowedByUser(context);
         } else {
             // opening new stream while already playing in another player
             autoPlay = false;

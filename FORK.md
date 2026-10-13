@@ -37,19 +37,36 @@ git -C PipePipe rev-parse v5.4.0:PipePipeExtractor  # extractor commit to check 
    checks below on a device. The app has no unit tests (`testDebugUnitTest`
    reports `NO-SOURCE`), so compiling is the only automatic check.
 
+## QPipePipe settings layer
+
+Fork code and resources live in their own files so upstream merges rarely touch
+them:
+
+- `org.schabi.newpipe.qpipepipe`: `QPipePipeSettingsFragment` (the
+  "QPipePipe" screen at the top of Settings) and `QPipePipePreferences`.
+- `res/xml/qpipepipe_settings.xml`, `res/values/settings_keys_qpipepipe.xml`,
+  `res/values/strings_qpipepipe.xml`, `res/values/colors_qpipepipe.xml`.
+
+Upstream files touched only to plug the layer in: one entry in
+`main_settings.xml`, one line in `SettingsResourceRegistry`. New fork settings
+go in this screen, not in the upstream screens. Preference keys predate the
+screen and must not be renamed, or users lose their choices.
+
 ## Fork patches
 
-### Manual play ignores the Autoplay setting
+### Tapping a video always plays it
 
-Commit `292f3839d`. Files: `NavigationHelper.openVideoDetailFragment`,
-`VideoDetailFragment.isAutoplayEnabled`.
+Commit `292f3839d`, made optional in the QPipePipe screen. Files:
+`NavigationHelper.openVideoDetailFragment`, `VideoDetailFragment.isAutoplayEnabled`.
+Key: `tap_always_plays_key` (default on).
 
-Tapping a video is an explicit play, so it starts even when Autoplay is set to
-"Wi-Fi only" or "Never". The Autoplay setting still governs automatic starts
-such as auto-queue. `isAutoplayEnabled()` must not re-check
-`isAutoplayAllowedByUser()`.
+When on, tapping a video starts it even when Autoplay is set to "Wi-Fi only" or
+"Never"; the Autoplay setting still governs automatic starts such as
+auto-queue. When off, upstream behaviour applies. Both places must check
+`isTapAlwaysPlays() || isAutoplayAllowedByUser()`.
 
-Check: Autoplay "Never", tap a video from the feed: it plays.
+Check: Autoplay "Never", tap a video from the feed: it plays with the switch on
+and does not start with the switch off.
 
 ### Swipe actions on stream rows
 
@@ -59,10 +76,10 @@ Commits `de610c1d3`, `b4ae6219b`, `e3ef93aad`. Code in
 `BaseListFragment`, `InfoListAdapter`, `BaseLocalListFragment`,
 `LocalItemListAdapter`, `LocalPlaylistFragment`, `BookmarkFragment`,
 `FeedFragment`, `ThemeHelper.getItemViewMode`, `AppearanceSettingsFragment`,
-`GestureSettingsFragment.initSwipeActionsPreference`. Keys:
+`QPipePipeSettingsFragment.initSwipeActionsPreference`. Keys:
 `enable_swipe_actions_key`, `swipe_left_action_key`, `swipe_right_action_key`.
 
-Settings > Gestures sets one action per swipe direction (enqueue, enqueue
+Settings > QPipePipe sets one action per swipe direction (enqueue, enqueue
 next, background, popup, add to playlist, share, download, open in browser,
 mark as watched, remove from playlist). Enabling it forces list view. Rows snap
 back after the action. Enqueue with no active player opens the video detail
@@ -75,8 +92,8 @@ action runs.
 ### Clear-queue confirmation with enqueue options
 
 Commit `fb4865a17`. Files: `VideoDetailFragment` (`loadVideoIfUserConfirms`
-and the dialog), `PlayerHelper.isClearingQueueConfirmationRequired`,
-`advanced_settings.xml`. Key: `clear_queue_confirmation_key`.
+and the dialog), `QPipePipePreferences.isClearingQueueConfirmationRequired`.
+Key: `clear_queue_confirmation_key`.
 
 Upstream removed this setting. The fork restores it: when a queue is playing
 and the user opens a different video, a dialog offers Play now, Enqueue next
@@ -101,11 +118,8 @@ returns early instead of dereferencing a null player. Upstream `a43bcc346`
 
 ## Known conflicts
 
-- `GestureSettingsFragment.onCreatePreferences`: keep
-  `initSwipeActionsPreference()` and the upstream setup method next to it
-  (renamed to `setupVerticalSwipeGestureMutualExclusion()` in v5.4.0).
-- `VideoDetailFragment` imports: keep `isClearingQueueConfirmationRequired`;
-  `RECOVERY_UNSET` moved to `PlayQueue` in v5.4.0.
+- `VideoDetailFragment` imports: `RECOVERY_UNSET` moved to `PlayQueue` in
+  v5.4.0.
 - v5.4.0 replaced `PlayQueueItem` with `PlayerMediaItem` (`PlayQueue.getItem()`).
   `loadVideoIfUserConfirms` had to be ported; the merge was clean but did not
   compile.

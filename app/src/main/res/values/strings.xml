@@ -87,10 +87,6 @@
 <string name="auto_queue_title">Auto-enqueue next stream</string>
 <string name="auto_queue_summary">Continue ending (non-repeating) playback queue by appending a related stream</string>
 <string name="auto_queue_toggle">Auto-enqueuing</string>
-<string name="clear_queue_confirmation_title">Ask for confirmation before clearing a queue</string>
-<string name="clear_queue_confirmation_summary">Switching from one player to another may replace your queue</string>
-<string name="clear_queue_confirmation_description">The active player queue will be replaced</string>
-<string name="clear_queue_confirmation_play_now">Play now</string>
 <string name="volume_gesture_control_title">Volume gesture control</string>
 <string name="volume_gesture_control_summary">Use gestures to control player volume</string>
 <string name="brightness_gesture_control_title">Brightness gesture control</string>
@@ -1028,14 +1024,6 @@
 <string name="webview_cookies_cleared">WebView cookies have been cleared</string>
 <string name="remove_from_playlist_confirmation">Remove this item from playlist?</string>
 <string name="local_playlist_swipe_action_title">Right swipe action in local playlists</string>
-<string name="enable_swipe_actions_title">Enable swipe actions on videos</string>
-<string name="enable_swipe_actions_summary">Swipe a video left or right on the homepage, search results, playlists and channel groups to trigger a quick action</string>
-<string name="swipe_left_action_title">Swipe left action</string>
-<string name="swipe_right_action_title">Swipe right action</string>
-<string name="enable_swipe_actions_warning_title">Swipe actions enabled</string>
-<string name="enable_swipe_actions_warning_message">Swiping needs full-width rows to work reliably, so list view will be used instead of grid or card view wherever swipe actions are available. You can turn this off again at any time.</string>
-<string name="swipe_actions_force_list_mode_summary">Disabled while swipe actions are enabled, which forces list view</string>
-<string name="remove_from_playlist_swipe_action">Remove from playlist (playlists only)</string>
 <string name="youtube_login_warning_title">Log in only when needed</string>
 <string name="youtube_login_warning_message">Due to YouTube\'s encryption, logged-in playback only provides AVC formats, audio-only downloads are unavailable, in-progress live streams cannot be rewound, and extraction is less stable. \n\nYou should log in only if:\n1. You cannot watch videos anonymously because of IP blocks\n2. You need to watch age-restricted videos\n3. You are a member of a channel and need to watch its member-only videos\n\nIf video extraction or playback fails while logged in, please try logging out and report the issue on GitHub.</string>
 <string name="filter">Filter</string>

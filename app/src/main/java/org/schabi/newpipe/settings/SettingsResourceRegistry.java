@@ -5,6 +5,7 @@ import androidx.annotation.XmlRes;
 import androidx.fragment.app.Fragment;
 
 import org.schabi.newpipe.R;
+import org.schabi.newpipe.qpipepipe.QPipePipeSettingsFragment;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -48,6 +49,7 @@ public final class SettingsResourceRegistry {
         add(SponsorBlockSettingsFragment.class, R.xml.sponsor_block_settings);
         add(SponsorBlockCategoriesSettingsFragment.class, R.xml.sponsor_block_category_settings);
         add(FilterSettingsFragment.class, R.xml.filter_settings);
+        add(QPipePipeSettingsFragment.class, R.xml.qpipepipe_settings);
     }
 
     private SettingRegistryEntry add(

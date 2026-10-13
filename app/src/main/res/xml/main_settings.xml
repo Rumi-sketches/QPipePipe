@@ -5,6 +5,13 @@
     android:title="@string/settings">
 
     <PreferenceScreen
+        android:fragment="org.schabi.newpipe.qpipepipe.QPipePipeSettingsFragment"
+        android:icon="@drawable/ic_playlist_play"
+        android:summary="@string/qpipepipe_settings_summary"
+        android:title="@string/qpipepipe_settings_title"
+        app:iconSpaceReserved="false" />
+
+    <PreferenceScreen
         android:fragment="org.schabi.newpipe.settings.VideoAudioSettingsFragment"
         android:icon="@drawable/ic_headset"
         android:title="@string/settings_category_player_title"

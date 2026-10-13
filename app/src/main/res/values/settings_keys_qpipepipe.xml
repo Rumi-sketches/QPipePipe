@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe settings keys, kept apart from settings_keys.xml so upstream merges don't
+     touch them. The key values match the ones used before the QPipePipe settings screen
+     existed, so users keep their choices. -->
+<resources translatable="false">
+    <string name="qpipepipe_settings_key">qpipepipe_settings_key</string>
+    <string name="tap_always_plays_key">tap_always_plays_key</string>
+    <string name="clear_queue_confirmation_key">clear_queue_confirmation_key</string>
+    <string name="enable_swipe_actions_key">enable_swipe_actions_key</string>
+    <string name="swipe_left_action_key">swipe_left_action_key</string>
+    <string name="swipe_right_action_key">swipe_right_action_key</string>
+    <string-array name="swipe_action_entries">
+        <item>@string/enqueue_stream</item>
+        <item>@string/enqueue_next_stream</item>
+        <item>@string/start_here_on_background</item>
+        <item>@string/start_here_on_popup</item>
+        <item>@string/add_to_playlist</item>
+        <item>@string/share</item>
+        <item>@string/download</item>
+        <item>@string/open_in_browser</item>
+        <item>@string/mark_as_watched</item>
+        <item>@string/remove_from_playlist_swipe_action</item>
+    </string-array>
+    <string-array name="swipe_action_values">
+        <item>ENQUEUE</item>
+        <item>ENQUEUE_NEXT</item>
+        <item>START_HERE_ON_BACKGROUND</item>
+        <item>START_HERE_ON_POPUP</item>
+        <item>APPEND_PLAYLIST</item>
+        <item>SHARE</item>
+        <item>DOWNLOAD</item>
+        <item>OPEN_IN_BROWSER</item>
+        <item>MARK_AS_WATCHED</item>
+        <item>REMOVE_FROM_PLAYLIST</item>
+    </string-array>
+</resources>

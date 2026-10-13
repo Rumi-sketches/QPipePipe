@@ -56,7 +56,7 @@ public class AppearanceSettingsFragment extends BasePreferenceFragment {
 
     /**
      * Swiping needs full-width rows, so while swipe actions are enabled (see
-     * {@link GestureSettingsFragment}) the grid layout option is locked off and list view
+     * {@link org.schabi.newpipe.qpipepipe.QPipePipeSettingsFragment}) the grid layout option is locked off and list view
      * is forced (see {@link ThemeHelper#getItemViewMode}).
      */
     private void disableGridPreferencesIfSwipeActionsEnabled() {

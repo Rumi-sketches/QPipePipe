@@ -30,7 +30,6 @@
     <string name="popup_remember_size_pos_key">popup_remember_size_pos_key</string>
     <string name="use_inexact_seek_key">use_inexact_seek_key</string>
     <string name="auto_queue_key">auto_queue_key</string>
-    <string name="clear_queue_confirmation_key">clear_queue_confirmation_key</string>
     <string name="screen_brightness_key">screen_brightness_key</string>
     <string name="screen_brightness_timestamp_key">screen_brightness_timestamp_key</string>
     <string name="popup_saved_width_key">popup_saved_width</string>
@@ -1664,33 +1663,6 @@
     <string name="pull_to_refresh_key">pull_to_refresh_key</string>
     <string name="local_playlist_swipe_action_key">local_playlist_swipe_action_key</string>
     <string name="disable_android_auto_key">disable_android_auto_key</string>
-    <string name="enable_swipe_actions_key">enable_swipe_actions_key</string>
-    <string name="swipe_left_action_key">swipe_left_action_key</string>
-    <string name="swipe_right_action_key">swipe_right_action_key</string>
-    <string-array name="swipe_action_entries">
-        <item>@string/enqueue_stream</item>
-        <item>@string/enqueue_next_stream</item>
-        <item>@string/start_here_on_background</item>
-        <item>@string/start_here_on_popup</item>
-        <item>@string/add_to_playlist</item>
-        <item>@string/share</item>
-        <item>@string/download</item>
-        <item>@string/open_in_browser</item>
-        <item>@string/mark_as_watched</item>
-        <item>@string/remove_from_playlist_swipe_action</item>
-    </string-array>
-    <string-array name="swipe_action_values">
-        <item>ENQUEUE</item>
-        <item>ENQUEUE_NEXT</item>
-        <item>START_HERE_ON_BACKGROUND</item>
-        <item>START_HERE_ON_POPUP</item>
-        <item>APPEND_PLAYLIST</item>
-        <item>SHARE</item>
-        <item>DOWNLOAD</item>
-        <item>OPEN_IN_BROWSER</item>
-        <item>MARK_AS_WATCHED</item>
-        <item>REMOVE_FROM_PLAYLIST</item>
-    </string-array>
     <string-array name="filter_type_entries">
         <item>@string/search_result</item>
         <item>@string/recommended_videos</item>
