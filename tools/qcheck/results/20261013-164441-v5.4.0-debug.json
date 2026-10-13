@@ -1,0 +1,87 @@
+{
+  "package": "InfinityLoop1309.NewPipeEnhanced.debug",
+  "started": "2026-10-13 16:44:41",
+  "version": [
+    "5.4.0"
+  ],
+  "features": [
+    {
+      "name": "tap always plays",
+      "verdict": "PASS",
+      "on": true,
+      "off": false
+    },
+    {
+      "name": "clear-queue dialog",
+      "verdict": "PASS",
+      "on": true,
+      "off": false
+    },
+    {
+      "name": "swipe enqueue",
+      "verdict": "PASS",
+      "on": true,
+      "off": false
+    }
+  ],
+  "timings": {
+    "cold_start": {
+      "median_ms": 824.0,
+      "min_ms": 804,
+      "max_ms": 842,
+      "failed": 0,
+      "samples": [
+        804,
+        834,
+        812,
+        842,
+        811,
+        835,
+        825,
+        827,
+        823,
+        818
+      ]
+    },
+    "video_jNQXAC9IVRw": {
+      "median_ms": 4179.5,
+      "min_ms": 4059,
+      "max_ms": 4464,
+      "failed": 1,
+      "samples": [
+        4464,
+        4059,
+        null,
+        4087,
+        4272
+      ]
+    },
+    "video_aqz-KE-bpKQ": {
+      "median_ms": 4089,
+      "min_ms": 4054,
+      "max_ms": 4445,
+      "failed": 0,
+      "samples": [
+        4077,
+        4093,
+        4089,
+        4054,
+        4445
+      ]
+    },
+    "video_dQw4w9WgXcQ": {
+      "median_ms": 4468,
+      "min_ms": 4097,
+      "max_ms": 4643,
+      "failed": 0,
+      "samples": [
+        4125,
+        4097,
+        4477,
+        4468,
+        4643
+      ]
+    }
+  },
+  "crashes": []
+}

@@ -33,9 +33,28 @@ git -C PipePipe rev-parse v5.4.0:PipePipeExtractor  # extractor commit to check 
 5. When upstream moves or rewrites code a patch depends on, port the patch to
    the new code instead of restoring the old code. If the port is not obvious,
    stop and ask.
-6. After the merge, `./gradlew assembleDebug` must pass, then run the manual
-   checks below on a device. The app has no unit tests (`testDebugUnitTest`
-   reports `NO-SOURCE`), so compiling is the only automatic check.
+6. After the merge, `./gradlew assembleDebug` must pass, then run the release
+   checks below. The app has no unit tests (`testDebugUnitTest` reports
+   `NO-SOURCE`), so compiling is the only check that runs without a phone.
+
+## Release checks
+
+With an unlocked phone connected over adb and the new debug build at hand:
+
+```sh
+python tools/qcheck/qcheck.py --apk app/build/outputs/apk/debug/<apk>     --baseline tools/qcheck/results/<previous release>.json
+```
+
+The script upgrades the installed debug build, checks that QPipePipe settings
+survive, runs the feature checks marked "Check" below with each feature on and
+off (a check that also passes with the feature off is reported as
+INSENSITIVE), measures app and video start times, compares them with the
+baseline (15% threshold) and collects crashes. It restores the user's
+preferences at the end. Keep the result file of each release in
+`tools/qcheck/results/`.
+
+The "no crash on reconnect" patch has no automated check: the OS has to kill
+and recreate the player service, which adb cannot trigger reliably.
 
 ## QPipePipe settings layer
 
