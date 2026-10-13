@@ -71,6 +71,7 @@ import org.schabi.newpipe.fragments.detail.VideoDetailFragment;
 import org.schabi.newpipe.fragments.list.search.SearchFragment;
 import org.schabi.newpipe.local.feed.notifications.NotificationWorker;
 import org.schabi.newpipe.player.Player;
+import org.schabi.newpipe.player.PlayerIntentConstants;
 import org.schabi.newpipe.player.event.OnKeyDownListener;
 import org.schabi.newpipe.player.helper.PlayerHolder;
 import org.schabi.newpipe.player.playqueue.PlayQueue;
@@ -216,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
             dialog1.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialog) {
-                    if((storedVersionCode / 100 < 1107 && currentTime - lastShowDonationTime > 14 * 24 * 60 * 60 * 1000)
+                    if((storedVersionCode / 100 < 1109 && currentTime - lastShowDonationTime > 14 * 24 * 60 * 60 * 1000)
                             || currentTime - lastShowDonationTime > 30L * 24 * 60 * 60 * 1000) {
                         prefs.edit().putLong("last_show_donation_time", currentTime).apply();
                         dialog2.show();
@@ -841,7 +842,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (linkType) {
                     case STREAM:
                         final String intentCacheKey = intent.getStringExtra(
-                                Player.PLAY_QUEUE_KEY);
+                                PlayerIntentConstants.PLAY_QUEUE_KEY);
                         final PlayQueue playQueue = intentCacheKey != null
                                 ? SerializedCache.getInstance()
                                 .take(intentCacheKey, PlayQueue.class)

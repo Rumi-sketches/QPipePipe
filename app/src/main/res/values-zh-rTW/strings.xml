@@ -803,7 +803,7 @@
 <string name="sponsor_promote">成為支持者</string>
 <string name="random_play_order_title">隨機順序</string>
 <string name="random_play_order_summary">在背景播放時自動隨機播放您的本地播放列表</string>
-<string name="update_log">### 新功能\n\n- 新增調整播放速度的手勢\n- 新增雙指縮放支援\n- 新增對較高預設影片解析度的支援\n- 新增清除所有訂閱的選項\n- 恢復對 SABR 播放的支援\n\n### 錯誤修正\n\n- 修正登入使用者收到「無法提供內容」錯誤而無法觀看影片的問題\n- 修正藍牙硬體控制無效的問題\n- 修正電視上無法快轉或倒轉的問題\n- 修正 Mix 播放清單與「主題」頻道無法正確解析的問題 (YouTube)\n- 修正未過濾來自已封鎖頻道的播放清單的問題\n- 修正透過點擊導覽仍可進入已封鎖頻道的問題\n- 修正本機播放清單中缺少付費標示的問題\n- 修正搜尋無結果且付費曲目顯示一般錯誤的問題 (Bandcamp)\n- 修正特定裝置在執行某些操作時閃退的問題\n\n### 行為\n\n- 搜尋篩選器保留功能現在為可選，且預設為停用\n- 匯入訂閱時擷取頻道資訊功能現在為可選\n- 訂閱更新失敗現在會提示錯誤並附帶詳細報告\n- 長按「未載入」區域現在會顯示更新失敗的頻道清單\n\n### UI\n\n- 訂閱匯入與匯出選項現在也可在「備份設定」中找到</string>
+<string name="update_log">### 新功能\n\n- 大幅優化電視控制\n- 新增支援直播畫質選擇\n- 「向下滑動以最小化」手勢現在可在設定中進行配置\n- 優化內容過濾器的刪除互動\n- 新增支援推薦/熱門直播 (NicoNico)\n- 新增支援頻道的直播分頁 (NicoNico)\n\n### 錯誤修復\n\n- 修復「以全螢幕啟動」設定無效的問題\n- 修復無法使用分割畫面模式的問題\n- 修復進入全螢幕模式時字幕會消失的問題\n- 修復內容封鎖未套用於公開播放清單的問題\n- 修復直播暫停時仍持續擷取資料的問題\n- 修復使用 SABR 協定中斷的影片無法恢復播放的問題\n- 修復在特定條件下開始播放時可能發生的崩潰問題\n- 修復在某些情況下播放清單總時長會無限增加的問題\n- 修復在特定條件下刪除觀看紀錄所引起的崩潰問題\n- 修復全新安裝時不喜歡計數器未預設停用的問題\n- 修復在特定條件下發生的下載失敗問題 (Bilibili)\n- 修復推薦直播顯示為空的問題 (Bilibili)</string>
 <string name="speeding_playback_title">按住以加速播放</string>
 <string name="view_on_github">在 GitHub 上查看</string>
 <string name="donation_dialog_title">支持這項計畫</string>
@@ -1061,4 +1061,15 @@
 <string name="channel_is_blocked">此頻道在您的封鎖名單中</string>
 <string name="resize_pinch">捏合</string>
 <string name="pinch_to_zoom_selected">雙指捏合以縮放。</string>
+<string name="rotate_fullscreen_to_video_orientation_title">依影片方向旋轉全螢幕</string>
+<string name="rotate_fullscreen_to_video_orientation_summary">在全螢幕模式下，根據影片將螢幕旋轉為直向或橫向</string>
+<string name="rotation_controls_fullscreen_title">旋轉時自動切換全螢幕</string>
+<string name="rotation_controls_fullscreen_summary">系統自動旋轉開啟時，旋轉到橫向會進入全螢幕，旋轉到直向會退出全螢幕</string>
+<string name="niconico_login_summary">Token 只會在必要時使用。登入頁面可能無法在 WebView 版本過舊的舊型裝置上正常運作。</string>
+<string name="minimize_gesture_control_title">向下滑動以最小化</string>
+<string name="minimize_gesture_control_summary">在播放器上向下滑動即可將其縮小為迷你播放器 — %s</string>
+<string name="minimize_gesture_none_description">停用</string>
+<string name="minimize_gesture_non_fullscreen_description">僅限非全螢幕狀態</string>
+<string name="minimize_gesture_fullscreen_description">全螢幕與非全螢幕狀態 (將停用全螢幕與播放速度滑動手勢)</string>
+<string name="delete_filter_confirm">您要從篩選清單中刪除 \"%s\" 嗎？</string>
 </resources>

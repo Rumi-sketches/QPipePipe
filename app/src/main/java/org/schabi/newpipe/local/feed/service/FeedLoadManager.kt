@@ -19,6 +19,7 @@ import org.schabi.newpipe.extractor.NewPipe
 import org.schabi.newpipe.extractor.feed.FeedInfo
 import org.schabi.newpipe.extractor.ListInfo
 import org.schabi.newpipe.extractor.exceptions.ContentNotAvailableException
+import org.schabi.newpipe.extractor.exceptions.ContentNotSupportedException
 import org.schabi.newpipe.extractor.stream.StreamInfoItem
 import org.schabi.newpipe.local.feed.FeedDatabaseManager
 import org.schabi.newpipe.local.subscription.SubscriptionManager
@@ -315,21 +316,24 @@ class FeedLoadManager(private val context: Context) {
                     when {
                         notification.isOnNext -> {
                             val info = notification.value!!
+                            val reportableErrors = info.errors.filterNot {
+                                it is ContentNotSupportedException
+                            }
 
                             notification.value!!.newStreams = filterNewStreams(info.streams)
 
                             feedDatabaseManager.upsertAll(info.uid, info.streams)
                             subscriptionManager.updateFromInfo(info)
 
-                            if (info.errors.isNotEmpty()) {
+                            if (reportableErrors.isNotEmpty()) {
                                 // Log errors for this specific channel
-                                Log.w(TAG, "Channel '${info.name}' (${info.serviceId}:${info.url}) had ${info.errors.size} error(s):")
-                                info.errors.forEachIndexed { index, error ->
+                                Log.w(TAG, "Channel '${info.name}' (${info.serviceId}:${info.url}) had ${reportableErrors.size} error(s):")
+                                reportableErrors.forEachIndexed { index, error ->
                                     Log.w(TAG, "  Error ${index + 1}: ${error.javaClass.simpleName}: ${error.message}", error)
                                 }
 
                                 feedResultsHolder.addErrors(
-                                    info.errors.map {
+                                    reportableErrors.map {
                                         FeedLoadService.RequestException(
                                             info.uid,
                                             "${info.serviceId}:${info.url}",

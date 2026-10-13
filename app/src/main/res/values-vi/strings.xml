@@ -860,7 +860,7 @@ nSự khác biệt giữa hai loại này là cái nào nhanh thường thiếu 
 <string name="sponsor_promote">Trở thành người ủng hộ</string>
 <string name="random_play_order_title">Trình tự ngẫu nhiên</string>
 <string name="random_play_order_summary">Tự động xáo trộn danh sách phát cục bộ của bạn khi phát trong nền</string>
-<string name="update_log">### Tính năng mới\n\n- Thêm cử chỉ để điều chỉnh tốc độ phát\n- Thêm hỗ trợ chụm để thu phóng (pinch-to-zoom)\n- Thêm hỗ trợ độ phân giải video mặc định cao hơn\n- Thêm tùy chọn xóa tất cả các kênh đăng ký\n- Khôi phục hỗ trợ phát lại SABR\n\n### Sửa lỗi\n\n- Sửa lỗi người dùng đã đăng nhập gặp lỗi \"Nội dung không khả dụng\" và không thể xem video\n- Sửa lỗi các nút điều khiển phần cứng Bluetooth không hoạt động\n- Sửa lỗi không thể tua nhanh hoặc tua lại trên TV\n- Sửa lỗi danh sách phát Mix và các kênh \"Chủ đề\" không được phân tích cú pháp chính xác (YouTube)\n- Sửa lỗi danh sách phát từ các kênh bị chặn không được lọc\n- Sửa lỗi vẫn có thể truy cập các kênh bị chặn thông qua thao tác nhấp điều hướng\n- Sửa lỗi thiếu các chỉ báo trả phí trong danh sách phát cục bộ\n- Sửa lỗi tìm kiếm không trả về kết quả nào và các bản nhạc trả phí hiển thị lỗi chung chung (Bandcamp)\n- Sửa lỗi treo ứng dụng trên một số thiết bị cụ thể khi thực hiện các thao tác nhất định\n\n### Hành vi\n\n- Việc lưu giữ bộ lọc tìm kiếm hiện là tùy chọn và bị vô hiệu hóa theo mặc định\n- Việc lấy thông tin kênh hiện là tùy chọn khi nhập danh sách đăng ký\n- Các lỗi cập nhật đăng ký hiện sẽ hiển thị thông báo lỗi kèm theo báo cáo chi tiết\n- Nhấn giữ vùng \"Chưa tải\" (Not loaded) hiện sẽ hiển thị danh sách các kênh không thể cập nhật\n\n### Giao diện\n\n- Các tùy chọn nhập và xuất danh sách đăng ký hiện cũng có sẵn trong Cài đặt sao lưu</string>
+<string name="update_log">### Tính năng mới\n\n- Tối ưu hóa đáng kể điều khiển TV\n- Thêm hỗ trợ chọn chất lượng video trong các luồng trực tiếp\n- Cử chỉ \"Vuốt xuống để thu nhỏ\" hiện có thể định cấu hình trong Cài đặt\n- Tối ưu hóa tương tác xóa cho các bộ lọc nội dung\n- Thêm hỗ trợ cho các luồng trực tiếp Đề xuất/Phổ biến (NicoNico)\n- Thêm hỗ trợ cho tab Trực tiếp trên các kênh (NicoNico)\n\n### Sửa lỗi\n\n- Sửa lỗi cài đặt \"Bắt đầu ở chế độ toàn màn hình\" không hoạt động\n- Sửa lỗi chế độ chia đôi màn hình không khả dụng\n- Sửa lỗi phụ đề biến mất khi vào chế độ toàn màn hình\n- Sửa lỗi chặn nội dung không áp dụng cho danh sách phát công khai\n- Sửa lỗi luồng trực tiếp tiếp tục tải dữ liệu trong khi tạm dừng\n- Sửa lỗi video bị chấm dứt sử dụng giao thức SABR không thể tiếp tục phát\n- Sửa lỗi sự cố có thể xảy ra khi bắt đầu phát lại trong các điều kiện cụ thể\n- Sửa lỗi tổng thời lượng danh sách phát tăng vô hạn trong một số trường hợp nhất định\n- Sửa lỗi sự cố do xóa lịch sử xem trong các điều kiện cụ thể\n- Sửa lỗi bộ đếm không thích không bị tắt theo mặc định trên các bản cài đặt mới\n- Sửa lỗi tải xuống thất bại xảy ra trong các điều kiện cụ thể (Bilibili)\n- Sửa lỗi các luồng trực tiếp được đề xuất hiển thị trống (Bilibili)</string>
 <string name="speeding_playback_title">Nhấn và giữ để tăng tốc độ phát lại</string>
 <string name="view_on_github">Xem trên GitHub</string>
 <string name="donation_dialog_title">Hỗ trợ Dự án</string>
@@ -1116,4 +1116,15 @@ nSự khác biệt giữa hai loại này là cái nào nhanh thường thiếu 
 <string name="channel_is_blocked">Kênh này nằm trong danh sách chặn của bạn</string>
 <string name="resize_pinch">Chụm</string>
 <string name="pinch_to_zoom_selected">Chụm để thu phóng.</string>
+<string name="rotate_fullscreen_to_video_orientation_title">Xoay toàn màn hình theo hướng video</string>
+<string name="rotate_fullscreen_to_video_orientation_summary">Xoay màn hình sang dọc hoặc ngang dựa trên video khi ở chế độ toàn màn hình</string>
+<string name="rotation_controls_fullscreen_title">Tự động chuyển đổi chế độ toàn màn hình khi xoay</string>
+<string name="rotation_controls_fullscreen_summary">Khi tính năng tự động xoay của hệ thống được bật, xoay sang hướng ngang sẽ vào chế độ toàn màn hình và xoay sang hướng dọc sẽ thoát chế độ toàn màn hình</string>
+<string name="niconico_login_summary">Token sẽ chỉ được sử dụng khi cần thiết. Trang đăng nhập có thể không hoạt động trên các thiết bị cũ với WebView đã lỗi thời.</string>
+<string name="minimize_gesture_control_title">Vuốt xuống để thu nhỏ</string>
+<string name="minimize_gesture_control_summary">Vuốt xuống trên trình phát để thu gọn thành trình phát thu nhỏ — %s</string>
+<string name="minimize_gesture_none_description">Đã tắt</string>
+<string name="minimize_gesture_non_fullscreen_description">Chỉ bên ngoài chế độ toàn màn hình</string>
+<string name="minimize_gesture_fullscreen_description">Trong và ngoài chế độ toàn màn hình (tắt cử chỉ vuốt toàn màn hình và tốc độ phát)</string>
+<string name="delete_filter_confirm">Bạn có muốn xóa \"%s\" khỏi danh sách bộ lọc không?</string>
 </resources>
