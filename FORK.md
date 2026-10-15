@@ -94,7 +94,15 @@ APKs in `app\build\outputs\apk\release\`.
 
 ## Release checks
 
-With an unlocked phone connected over adb and the new debug build at hand:
+Use a dedicated test phone (no screen lock, Wi-Fi on, plugged in) with the
+debug build installed. With more than one phone connected, set
+`ANDROID_SERIAL=<serial>` (from `adb devices`). Start times depend on the phone
+and the network, so the baseline must come from the same phone; the result
+file records the model and the script flags a mismatch. The script changes the
+app preferences with `run-as`; on ROMs that block it, it uses
+`DebugPreferencesReceiver`, which exists only in debug builds
+(`app/src/debug/`) and only accepts broadcasts from adb's shell. With the new debug
+build at hand:
 
 ```sh
 python tools/qcheck/qcheck.py --apk app/build/outputs/apk/debug/QPipePipe_<version>-arm64-v8a-debug.apk \
