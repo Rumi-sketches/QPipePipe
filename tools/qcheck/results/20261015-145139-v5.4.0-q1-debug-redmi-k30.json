@@ -1,0 +1,88 @@
+{
+  "package": "io.github.rumisketches.qpipepipe.debug",
+  "device": "Redmi K30 5G",
+  "started": "2026-10-15 14:51:39",
+  "version": [
+    "5.4.0-q1"
+  ],
+  "features": [
+    {
+      "name": "tap always plays",
+      "verdict": "PASS",
+      "on": true,
+      "off": false
+    },
+    {
+      "name": "clear-queue dialog",
+      "verdict": "PASS",
+      "on": true,
+      "off": false
+    },
+    {
+      "name": "swipe enqueue",
+      "verdict": "PASS",
+      "on": true,
+      "off": false
+    }
+  ],
+  "timings": {
+    "cold_start": {
+      "median_ms": 1711.5,
+      "min_ms": 1349,
+      "max_ms": 2628,
+      "failed": 0,
+      "samples": [
+        2549,
+        1349,
+        2387,
+        1366,
+        1635,
+        2628,
+        1788,
+        1464,
+        2591,
+        1389
+      ]
+    },
+    "video_jNQXAC9IVRw": {
+      "median_ms": 7814,
+      "min_ms": 5913,
+      "max_ms": 8012,
+      "failed": 0,
+      "samples": [
+        6292,
+        8012,
+        5913,
+        7814,
+        7967
+      ]
+    },
+    "video_aqz-KE-bpKQ": {
+      "median_ms": 7246,
+      "min_ms": 6901,
+      "max_ms": 7679,
+      "failed": 0,
+      "samples": [
+        7679,
+        6961,
+        7276,
+        6901,
+        7246
+      ]
+    },
+    "video_dQw4w9WgXcQ": {
+      "median_ms": 6961,
+      "min_ms": 6558,
+      "max_ms": 7564,
+      "failed": 0,
+      "samples": [
+        6883,
+        7278,
+        6961,
+        7564,
+        6558
+      ]
+    }
+  },
+  "crashes": []
+}
