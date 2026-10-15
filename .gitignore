@@ -23,3 +23,10 @@ bin/
 *.code-workspace
 /config.py
 __pycache__
+
+# Local AI agent instructions and notes (not part of the project)
+/CLAUDE.md
+/CLAUDE.local.md
+/AGENTS.md
+/PROGRESS.md
+.claude/
