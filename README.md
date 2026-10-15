@@ -36,6 +36,10 @@ PipePipe's settings:
   with Autoplay limited to Wi-Fi or turned off. Autoplay still controls automatic
   starts. On by default.
 
+| Settings > QPipePipe | Swiping a row to enqueue it | Queue protection |
+|:---:|:---:|:---:|
+| <img src="docs/screenshots/settings.png" alt="The QPipePipe settings screen" width="260"> | <img src="docs/screenshots/swipe.png" alt="A search result swiped left, showing the enqueue action" width="260"> | <img src="docs/screenshots/queue-dialog.png" alt="Dialog offering Play now, Enqueue next and Enqueue" width="260"> |
+
 **And more to come!** 🚀
 
 Startup notices say where they come from: "QPipePipe" for this fork's release notes
