@@ -9,6 +9,10 @@ off while the checks run.
 Usage:
     python tools/qcheck/qcheck.py [--apk PATH] [--package ID] [--baseline FILE]
 
+With more than one phone connected, pick one with ANDROID_SERIAL=<serial> (see
+"adb devices"). Start times depend on the phone: compare only with a baseline
+from the same model, which the result file records.
+
 Results are printed and written to tools/qcheck/results/<timestamp>.json; keep
 the file of each release as the baseline for the next one. With --baseline
 (an earlier result file) start times are compared against it. A copy of the
@@ -381,9 +385,13 @@ def measure_timings():
     return timings
 
 
-def compare(timings, baseline_file):
-    baseline = json.loads(Path(baseline_file).read_text(encoding="utf-8"))["timings"]
+def compare(timings, baseline_file, device):
+    baseline_result = json.loads(Path(baseline_file).read_text(encoding="utf-8"))
+    baseline = baseline_result["timings"]
     regressions = []
+    if baseline_result.get("device", device) != device:
+        regressions.append(f"baseline is from {baseline_result['device']}, not {device}:"
+                           " start times are not comparable")
     for name, t in timings.items():
         if t["failed"]:
             regressions.append(f"{name}: {t['failed']} of {len(t['samples'])} starts failed")
@@ -417,7 +425,10 @@ def main():
     (backup_dir / f"prefs-backup-{stamp}.xml").write_text(user_prefs, encoding="utf-8")
     fork_keys = ["tap_always_plays_key", "clear_queue_confirmation_key",
                  "enable_swipe_actions_key", "swipe_left_action_key", "swipe_right_action_key"]
-    result = {"package": PACKAGE, "started": time.strftime("%Y-%m-%d %H:%M:%S")}
+    device = shell("getprop", "ro.product.model").strip()
+    print(f"Phone: {device}, Android {shell('getprop', 'ro.build.version.release').strip()}")
+    result = {"package": PACKAGE, "device": device,
+              "started": time.strftime("%Y-%m-%d %H:%M:%S")}
     adb("logcat", "-b", "crash", "-c")
     screen_timeout = keep_screen_on()
     try:
@@ -438,7 +449,7 @@ def main():
             print("Start times")
             result["timings"] = measure_timings()
             if args.baseline:
-                result["regressions"] = compare(result["timings"], args.baseline)
+                result["regressions"] = compare(result["timings"], args.baseline, device)
                 print("Regressions over threshold:", result["regressions"] or "none")
     finally:
         write_prefs(user_prefs)
