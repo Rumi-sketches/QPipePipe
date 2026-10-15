@@ -1,0 +1,88 @@
+{
+  "package": "io.github.rumisketches.qpipepipe.debug",
+  "started": "2026-10-15 11:56:06",
+  "version": [
+    "5.4.0-q1"
+  ],
+  "features": [
+    {
+      "name": "tap always plays",
+      "verdict": "PASS",
+      "on": true,
+      "off": false
+    },
+    {
+      "name": "clear-queue dialog",
+      "verdict": "PASS",
+      "on": true,
+      "off": false
+    },
+    {
+      "name": "swipe enqueue",
+      "verdict": "ERROR",
+      "on": "error: no search results",
+      "off": "error: no search results"
+    }
+  ],
+  "timings": {
+    "cold_start": {
+      "median_ms": 813.5,
+      "min_ms": 803,
+      "max_ms": 834,
+      "failed": 0,
+      "samples": [
+        803,
+        803,
+        805,
+        803,
+        822,
+        817,
+        810,
+        834,
+        829,
+        824
+      ]
+    },
+    "video_jNQXAC9IVRw": {
+      "median_ms": 3864,
+      "min_ms": 3522,
+      "max_ms": 4228,
+      "failed": 0,
+      "samples": [
+        3864,
+        3522,
+        4184,
+        3843,
+        4228
+      ]
+    },
+    "video_aqz-KE-bpKQ": {
+      "median_ms": 4204,
+      "min_ms": 3850,
+      "max_ms": 5486,
+      "failed": 0,
+      "samples": [
+        4215,
+        4180,
+        5486,
+        3850,
+        4204
+      ]
+    },
+    "video_dQw4w9WgXcQ": {
+      "median_ms": 4460,
+      "min_ms": 3835,
+      "max_ms": 5100,
+      "failed": 0,
+      "samples": [
+        5100,
+        4460,
+        3835,
+        3848,
+        4607
+      ]
+    }
+  },
+  "regressions": [],
+  "crashes": []
+}

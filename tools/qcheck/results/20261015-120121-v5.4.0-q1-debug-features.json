@@ -1,0 +1,28 @@
+{
+  "package": "io.github.rumisketches.qpipepipe.debug",
+  "started": "2026-10-15 12:01:21",
+  "version": [
+    "5.4.0-q1"
+  ],
+  "features": [
+    {
+      "name": "tap always plays",
+      "verdict": "PASS",
+      "on": true,
+      "off": false
+    },
+    {
+      "name": "clear-queue dialog",
+      "verdict": "PASS",
+      "on": true,
+      "off": false
+    },
+    {
+      "name": "swipe enqueue",
+      "verdict": "PASS",
+      "on": true,
+      "off": false
+    }
+  ],
+  "crashes": []
+}

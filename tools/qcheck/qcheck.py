@@ -43,6 +43,8 @@ BASE_PREFS = {
     "enable_search_history": False,
     "enable_playback_resume": False,
     "autoplay_key": "autoplay_always_key",
+    # Video links open the player directly; the default asks how to open them.
+    "preferred_open_action_key": "video_player",
     "tap_always_plays_key": True,
     "clear_queue_confirmation_key": False,
     "enable_swipe_actions_key": False,
@@ -64,10 +66,25 @@ def shell(*args):
 def check_device():
     if "\tdevice" not in adb("devices"):
         sys.exit("No phone connected over adb.")
+    shell("input", "keyevent", "KEYCODE_WAKEUP")
     if "isKeyguardShowing=true" in shell("dumpsys", "window"):
         sys.exit("The phone is locked: unlock it and keep the screen on.")
     if PACKAGE not in shell("pm", "list", "packages", PACKAGE):
         sys.exit(f"{PACKAGE} is not installed.")
+
+
+SCREEN_OFF_TIMEOUT_MS = "1800000"
+
+
+def keep_screen_on():
+    """Raises the screen timeout to 30 minutes for the run; returns the value to restore.
+
+    When the screen turns off the phone locks and the system freezes the app, so every
+    later check fails. "Stay awake while charging" is not enough: some phones ignore it.
+    """
+    previous = shell("settings", "get", "system", "screen_off_timeout").strip()
+    shell("settings", "put", "system", "screen_off_timeout", SCREEN_OFF_TIMEOUT_MS)
+    return previous if previous.isdigit() else "60000"
 
 
 def force_stop():
@@ -368,6 +385,8 @@ def compare(timings, baseline_file):
     baseline = json.loads(Path(baseline_file).read_text(encoding="utf-8"))["timings"]
     regressions = []
     for name, t in timings.items():
+        if t["failed"]:
+            regressions.append(f"{name}: {t['failed']} of {len(t['samples'])} starts failed")
         old = baseline.get(name, {}).get("median_ms")
         if old and t["median_ms"] and t["median_ms"] > old * (1 + REGRESSION_THRESHOLD):
             regressions.append(f"{name}: {old} -> {t['median_ms']} ms")
@@ -400,6 +419,7 @@ def main():
                  "enable_swipe_actions_key", "swipe_left_action_key", "swipe_right_action_key"]
     result = {"package": PACKAGE, "started": time.strftime("%Y-%m-%d %H:%M:%S")}
     adb("logcat", "-b", "crash", "-c")
+    screen_timeout = keep_screen_on()
     try:
         if args.apk:
             print("Upgrade install")
@@ -422,6 +442,7 @@ def main():
                 print("Regressions over threshold:", result["regressions"] or "none")
     finally:
         write_prefs(user_prefs)
+        shell("settings", "put", "system", "screen_off_timeout", screen_timeout)
         crashes = adb("logcat", "-b", "crash", "-d")
         result["crashes"] = [l for l in crashes.splitlines() if PACKAGE in l or "FATAL" in l]
         print(f"Crashes: {len(result['crashes'])}")
@@ -430,7 +451,7 @@ def main():
         out_file = out_dir / f"{stamp}.json"
         out_file.write_text(json.dumps(result, indent=2), encoding="utf-8")
         print(f"Results: {out_file}")
-        print("User preferences restored.")
+        print("User preferences and screen timeout restored.")
 
 
 if __name__ == "__main__":
