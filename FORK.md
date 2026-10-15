@@ -34,9 +34,9 @@ git -C PipePipe rev-parse v5.4.0:PipePipeExtractor  # extractor commit to check 
    the new code instead of restoring the old code. If the port is not obvious,
    stop and ask.
 6. Reset `qpipepipeRelease` in `app/qpipepipe.gradle` to 1 (see Versions).
-7. After the merge, `./gradlew assembleDebug` must pass, then run the release
-   checks below. The app has no unit tests (`testDebugUnitTest` reports
-   `NO-SOURCE`), so compiling is the only check that runs without a phone.
+7. After the merge, `./gradlew assembleDebug testDebugUnitTest` must pass, then
+   run the release checks below. Upstream has no unit tests; the fork's are in
+   `app/src/test/.../qpipepipe/`. Everything else needs a phone.
 
 ## Identity and versions
 
