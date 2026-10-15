@@ -31,8 +31,8 @@ import org.schabi.newpipe.NewPipeDatabase;
 import org.schabi.newpipe.R;
 import org.schabi.newpipe.database.playlist.model.PlaylistRemoteEntity;
 import org.schabi.newpipe.database.stream.model.StreamEntity;
-import org.schabi.newpipe.databinding.PlaylistControlBinding;
 import org.schabi.newpipe.databinding.PlaylistHeaderBinding;
+import org.schabi.newpipe.databinding.PlaylistResumeControlBinding;
 import org.schabi.newpipe.error.ErrorInfo;
 import org.schabi.newpipe.error.ErrorUtil;
 import org.schabi.newpipe.error.UserAction;
@@ -49,6 +49,7 @@ import org.schabi.newpipe.local.playlist.RemotePlaylistManager;
 import org.schabi.newpipe.player.PlayerService.PlayerType;
 import org.schabi.newpipe.player.playqueue.PlayQueue;
 import org.schabi.newpipe.player.playqueue.PlaylistPlayQueue;
+import org.schabi.newpipe.qpipepipe.PlaylistResumeControls;
 import org.schabi.newpipe.util.ExtractorHelper;
 import org.schabi.newpipe.util.Localization;
 import org.schabi.newpipe.util.NavigationHelper;
@@ -84,7 +85,8 @@ public class PlaylistFragment extends BaseListInfoFragment<StreamInfoItem, Playl
     //////////////////////////////////////////////////////////////////////////*/
 
     private PlaylistHeaderBinding headerBinding;
-    private PlaylistControlBinding playlistControlBinding;
+    private PlaylistResumeControlBinding playlistControlBinding;
+    private PlaylistResumeControls resumeControls;
 
     private MenuItem playlistBookmarkButton;
     private boolean isInfinitePlayList;
@@ -132,6 +134,8 @@ public class PlaylistFragment extends BaseListInfoFragment<StreamInfoItem, Playl
         headerBinding = PlaylistHeaderBinding
                 .inflate(activity.getLayoutInflater(), itemsList, false);
         playlistControlBinding = headerBinding.playlistControl;
+        resumeControls = new PlaylistResumeControls(playlistControlBinding, this::getStreamItems,
+                itemsList);
 
         return headerBinding::getRoot;
     }
@@ -180,9 +184,21 @@ public class PlaylistFragment extends BaseListInfoFragment<StreamInfoItem, Playl
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if (resumeControls != null && currentInfo != null) {
+            resumeControls.refresh();
+        }
+    }
+
+    @Override
     public void onDestroyView() {
+        if (resumeControls != null) {
+            resumeControls.dispose();
+        }
         headerBinding = null;
         playlistControlBinding = null;
+        resumeControls = null;
 
         super.onDestroyView();
         if (isBookmarkButtonReady != null) {
@@ -353,13 +369,17 @@ public class PlaylistFragment extends BaseListInfoFragment<StreamInfoItem, Playl
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(getPlaylistBookmarkSubscriber());
 
+        resumeControls.refresh();
         playlistControlBinding.playlistCtrlPlayAllButton.setOnClickListener(view ->
-                NavigationHelper.playOnMainPlayer(activity, getPlayQueue()));
+                resumeControls.startFromResumePoint(index ->
+                        NavigationHelper.playOnMainPlayer(activity, getPlayQueue(index))));
         playlistControlBinding.playlistCtrlPlayPopupButton.setOnClickListener(view ->
-                NavigationHelper.playOnPopupPlayer(activity, getPlayQueue(), false));
+                resumeControls.startFromResumePoint(index ->
+                        NavigationHelper.playOnPopupPlayer(activity, getPlayQueue(index), false)));
         playlistControlBinding.playlistCtrlPlayBgButton.setOnClickListener(view ->
-                NavigationHelper.
-                        playOnBackgroundPlayer(activity, getPlayQueue(), false));
+                resumeControls.startFromResumePoint(index ->
+                        NavigationHelper.playOnBackgroundPlayer(activity, getPlayQueue(index),
+                                false)));
 
         playlistControlBinding.playlistCtrlPlayPopupButton.setOnLongClickListener(view -> {
             NavigationHelper.enqueueOnPlayer(activity, getPlayQueue(), PlayerType.POPUP);
@@ -377,19 +397,24 @@ public class PlaylistFragment extends BaseListInfoFragment<StreamInfoItem, Playl
     }
 
     private PlayQueue getPlayQueue(final int index) {
+        return new PlaylistPlayQueue(
+                currentInfo.getServiceId(),
+                currentInfo.getUrl(),
+                currentInfo.getNextPage(),
+                getStreamItems(),
+                index
+        );
+    }
+
+    /** The streams loaded so far, in the order they are queued in. */
+    private List<StreamInfoItem> getStreamItems() {
         final List<StreamInfoItem> infoItems = new ArrayList<>();
         for (final InfoItem i : infoListAdapter.getItemsList()) {
             if (i instanceof StreamInfoItem) {
                 infoItems.add((StreamInfoItem) i);
             }
         }
-        return new PlaylistPlayQueue(
-                currentInfo.getServiceId(),
-                currentInfo.getUrl(),
-                currentInfo.getNextPage(),
-                infoItems,
-                index
-        );
+        return infoItems;
     }
 
     /*//////////////////////////////////////////////////////////////////////////

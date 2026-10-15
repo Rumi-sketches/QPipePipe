@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe dimensions, kept apart from dimens.xml so upstream merges don't touch them. -->
+<resources>
+    <!-- Playlist header play buttons (playlist_resume_control.xml) -->
+    <dimen name="playlist_ctrl_button_size">44dp</dimen>
+    <dimen name="playlist_ctrl_button_radius">22dp</dimen>
+</resources>
