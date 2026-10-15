@@ -100,7 +100,7 @@ jobs:
             build="**failed**: the merge has no conflicts but does not compile. See [the run]($RUN_URL) and port the fork patches (FORK.md, merge rule 5)."
           fi
           cat > ../pr-body.md <<EOF
-          PipePipe v$VERSION is out. It merged into \`$BRANCH\` without conflicts, and \`qpipepipeRelease\` is back to 1.
+          PipePipe v$VERSION is out. It merged into \`$BRANCH\` without conflicts; \`qpipepipeRelease\` is back to 1 and \`tools/upstream/pins.properties\` pins the new release.
 
           - Client: InfinityLoop1308/PipePipeClient@$CLIENT_SHA
           - Extractor: InfinityLoop1308/PipePipeExtractor@$EXTRACTOR_SHA (check out this commit in \`../PipePipeExtractor\`)
@@ -138,7 +138,8 @@ jobs:
           git fetch origin && git checkout $BRANCH
           git fetch https://github.com/InfinityLoop1308/PipePipeClient.git $CLIENT_SHA
           git merge --no-ff -m "Merge upstream v$VERSION into dev" $CLIENT_SHA
-          # resolve, then set qpipepipeRelease = 1 in app/qpipepipe.gradle
+          # resolve, then set qpipepipeRelease = 1 in app/qpipepipe.gradle and pin the release:
+          python tools/upstream/check_upstream.py --write-pins v$VERSION
           git -C ../PipePipeExtractor fetch origin && git -C ../PipePipeExtractor checkout $EXTRACTOR_SHA
           ./gradlew assembleDebug testDebugUnitTest
           git push

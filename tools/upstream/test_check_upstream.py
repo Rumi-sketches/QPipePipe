@@ -1,7 +1,8 @@
 """Tests for check_upstream.py: python -m unittest discover tools/upstream"""
 import unittest
 
-from check_upstream import based_on_version, parse_version, reset_fork_release
+from check_upstream import (based_on_version, parse_version, reset_fork_release,
+                            write_pins)
 
 
 class VersionTest(unittest.TestCase):
@@ -26,6 +27,11 @@ class VersionTest(unittest.TestCase):
                          "x\ndef qpipepipeRelease = 1\ny")
         self.assertEqual(reset_fork_release("def qpipepipeRelease = 1\n"),
                          "def qpipepipeRelease = 1\n")
+
+    def test_write_pins_keeps_comments(self):
+        old = "# pinned release\nversion=5.4.0\nclient=aaa\nextractor=bbb\n"
+        self.assertEqual(write_pins(old, "5.5.0", "ccc", "ddd"),
+                         "# pinned release\nversion=5.5.0\nclient=ccc\nextractor=ddd\n")
 
 
 if __name__ == "__main__":

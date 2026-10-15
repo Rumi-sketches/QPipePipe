@@ -1,0 +1,120 @@
+# Builds and signs the release APKs when a QPipePipe tag (vX.Y.Z-qN) is pushed, checks the
+# version and the certificate, and creates a draft GitHub Release with notes and checksums
+# for the maintainer to review and publish. See FORK.md, "Release build in CI".
+name: Release build
+
+on:
+  push:
+    tags: ["v*-q*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag, e.g. v5.4.0-q2 (must exist unless dry_run)"
+        required: true
+      source_ref:
+        description: "Build this ref instead of the tag (testing)"
+        required: false
+        default: ""
+      dry_run:
+        description: "Build without signing and create no release"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ inputs.tag || github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      TAG: ${{ inputs.tag || github.ref_name }}
+      DRY_RUN: ${{ inputs.dry_run && 'true' || 'false' }}
+    steps:
+      - name: Check out the release
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.source_ref || inputs.tag || github.ref }}
+          path: PipePipeClient
+
+      - name: Read the pinned extractor
+        id: pins
+        run: |
+          extractor=$(sed -n 's/^extractor=//p' PipePipeClient/tools/upstream/pins.properties)
+          if [ -z "$extractor" ]; then echo "::error::No extractor in pins.properties"; exit 1; fi
+          echo "extractor=$extractor" >> "$GITHUB_OUTPUT"
+
+      - name: Check out the extractor
+        uses: actions/checkout@v4
+        with:
+          repository: InfinityLoop1308/PipePipeExtractor
+          ref: ${{ steps.pins.outputs.extractor }}
+          path: PipePipeExtractor
+
+      - name: Set up JDK 25
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "25"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Write the keystore
+        if: env.DRY_RUN != 'true'
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+        run: |
+          if [ -z "$KEYSTORE_BASE64" ]; then
+            echo "::error::Set the KEYSTORE_BASE64 and KEYSTORE_PASSWORD secrets (FORK.md)"; exit 1
+          fi
+          echo "$KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/release.jks"
+
+      - name: Build the release APKs
+        working-directory: PipePipeClient
+        env:
+          KEY_PATH: ${{ inputs.dry_run != true && format('{0}/release.jks', runner.temp) || '' }}
+          KEY_ALIAS: qpipepipe
+          KEY_STORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+        run: ./gradlew assembleRelease --no-daemon
+
+      - name: Remove the keystore
+        if: always()
+        run: rm -f "$RUNNER_TEMP/release.jks"
+
+      - name: Check version and signature
+        working-directory: PipePipeClient
+        run: |
+          tools=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
+          cert=$(tr -d '[:space:]' < tools/release/certificate-sha256.txt)
+          for apk in app/build/outputs/apk/release/*.apk; do
+            name=$("$tools/aapt2" dump badging "$apk" | sed -n "s/.*versionName='\([^']*\)'.*/\1/p")
+            if [ "v$name" != "$TAG" ]; then
+              echo "::error::$(basename "$apk") is version $name, the tag is $TAG"; exit 1
+            fi
+            if [ "$DRY_RUN" != "true" ] && ! "$tools/apksigner" verify --print-certs "$apk" \
+                | grep -q "SHA-256 digest: $cert"; then
+              echo "::error::$(basename "$apk") is not signed with the release certificate"; exit 1
+            fi
+            echo "$(basename "$apk"): version $name OK"
+          done
+
+      - name: Write the release notes
+        working-directory: PipePipeClient
+        run: |
+          python3 tools/release/release_notes.py --apk-dir app/build/outputs/apk/release > ../notes.md
+          cat ../notes.md
+
+      - name: Create the draft release
+        if: env.DRY_RUN != 'true'
+        working-directory: PipePipeClient
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$TAG" --draft --verify-tag --title "$TAG" --notes-file ../notes.md \
+            app/build/outputs/apk/release/*.apk
