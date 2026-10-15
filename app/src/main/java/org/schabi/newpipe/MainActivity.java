@@ -75,6 +75,7 @@ import org.schabi.newpipe.player.PlayerIntentConstants;
 import org.schabi.newpipe.player.event.OnKeyDownListener;
 import org.schabi.newpipe.player.helper.PlayerHolder;
 import org.schabi.newpipe.player.playqueue.PlayQueue;
+import org.schabi.newpipe.qpipepipe.QPipePipeNotices;
 import org.schabi.newpipe.util.*;
 import org.schabi.newpipe.util.external_communication.ShareUtils;
 import org.schabi.newpipe.views.FocusOverlayView;
@@ -196,14 +197,14 @@ public class MainActivity extends AppCompatActivity {
         long lastShowDonationTime = prefs.getLong("last_show_donation_time", 0);
         long currentTime = System.currentTimeMillis();
 
-        if (currentVersionCode > storedVersionCode + 90) {
+        if (QPipePipeNotices.hasReleaseNotes(storedVersionCode)) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle(R.string.fragment_feed_title);
-            builder.setMessage(R.string.update_log);
+            builder.setMessage(QPipePipeNotices.getReleaseNotes(this, storedVersionCode));
             builder.setPositiveButton(R.string.ok, null);
 
             AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
-            builder2.setTitle(R.string.donation_dialog_title);
+            builder2.setTitle(QPipePipeNotices.fromPipePipe(this, R.string.donation_dialog_title));
             builder2.setMessage(R.string.donation_dialog_message);
 
             builder2.setPositiveButton(R.string.sponsor_promote, (dialog, which) -> {
@@ -237,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
                     handler.post(() -> {
                         AlertDialog.Builder builder3 = new AlertDialog.Builder(this);
                         builder3.setMessage(result.contents);
-                        builder3.setTitle(R.string.announcement);
+                        builder3.setTitle(QPipePipeNotices.fromPipePipe(this, R.string.announcement));
                         builder3.setPositiveButton(R.string.ok, (dialog, which) -> {
                             prefs.edit().putString("last_announcement_id", result.latestId).apply();
                         });
@@ -247,6 +248,7 @@ public class MainActivity extends AppCompatActivity {
             });
         } catch (Exception ignore) {
         }
+        QPipePipeNotices.showAnnouncements(this);
 
 
         int isFirstRun = prefs.getInt("isFirstRun", 0);

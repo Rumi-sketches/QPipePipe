@@ -53,6 +53,11 @@ as upstream sets them.
 - Version code `upstream code * 1000 + N * 10 + ABI` (ABI 1-4).
 - GitHub release names must be `v<version name>` (e.g. `v5.4.0-q1`):
   `NewVersionWorker` reads them from the QPipePipe releases to offer updates.
+- Release notes: rewrite `qpipepipe_update_log` (`strings_qpipepipe.xml`) for
+  every fork release. The What's New dialog shows it under "QPipePipe
+  <version>:" and, when the upstream release changed, upstream's
+  `update_log` under "PipePipe <version>:". Never edit `update_log`: it is
+  upstream's text and translations.
 - Launcher icon: `qpipepipe_launcher_*` drawables and
   `qpipepipe_launcher_background`, wired in `mipmap-anydpi-v26/ic_launcher.xml`;
   the legacy `mipmap-*/ic_launcher.png` are replaced.
@@ -164,6 +169,20 @@ upstream addresses.
 Check: on the error screen (shown after a crash or a failed video) the email
 button addresses the QPipePipe email and the GitHub button opens the
 QPipePipe issues.
+
+### Startup notices say where they come from
+
+Files: `QPipePipeNotices`, `MainActivity` (What's New, donation and
+announcement dialogs).
+
+Upstream's announcement and donation dialogs are titled "PipePipe: ...".
+QPipePipe announcements come from the `Announcement` page of the QPipePipe
+wiki, in upstream's format (`## yyMMdd` headings), titled "QPipePipe:
+Announcement". What's New appears after every version change, fork releases
+included (upstream only showed it when the version code grew by more than 90).
+
+Check: install over an older build: What's New shows the QPipePipe notes, and
+the PipePipe notes too when the upstream version changed.
 
 ## Upstream services
 
