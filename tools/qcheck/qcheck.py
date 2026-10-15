@@ -2,12 +2,17 @@
 
 Runs the fork feature checks listed in FORK.md, measures app and video start
 times and looks for crashes. It needs a debuggable build (it reads and writes
-the app preferences with run-as) and an unlocked phone. The user's preferences
+the app preferences with run-as, or through the debug build's
+DebugPreferencesReceiver where the ROM blocks run-as) and an unlocked phone. The user's preferences
 are saved first and restored at the end; watch and search history are turned
 off while the checks run.
 
 Usage:
     python tools/qcheck/qcheck.py [--apk PATH] [--package ID] [--baseline FILE]
+
+With more than one phone connected, pick one with ANDROID_SERIAL=<serial> (see
+"adb devices"). Start times depend on the phone: compare only with a baseline
+from the same model, which the result file records.
 
 Results are printed and written to tools/qcheck/results/<timestamp>.json; keep
 the file of each release as the baseline for the next one. With --baseline
@@ -15,6 +20,7 @@ the file of each release as the baseline for the next one. With --baseline
 user's preferences is kept in build/qcheck/ during the run (never commit it).
 """
 import argparse
+import base64
 import json
 import os
 import re
@@ -48,6 +54,13 @@ BASE_PREFS = {
     "tap_always_plays_key": True,
     "clear_queue_confirmation_key": False,
     "enable_swipe_actions_key": False,
+    # The checks look for English labels ("Enqueue", "Play now").
+    "app_language_key": "en",
+    # Startup dialogs cover the main screen and hide it from uiautomator: mark the
+    # announcements and this version's What's New as already seen.
+    "last_announcement_id": "991231",
+    "qpipepipe_last_announcement_id": "991231",
+    "version_code": 2_000_000_000,
 }
 
 
@@ -102,22 +115,51 @@ def launch():
 PREFS_FILE = f"shared_prefs/{PACKAGE}_preferences.xml"
 
 
+PREFS_RECEIVER = "org.schabi.newpipe.qpipepipe.DebugPreferencesReceiver"
+USE_RUN_AS = True  # set by detect_prefs_access()
+
+
+def detect_prefs_access():
+    """Some custom ROMs block run-as with SELinux; the debug build has a receiver for that."""
+    global USE_RUN_AS
+    USE_RUN_AS = "uid=" in shell("run-as", PACKAGE, "id")
+    if not USE_RUN_AS:
+        print("run-as is blocked on this phone: using the debug preferences receiver")
+
+
+def prefs_broadcast(*extras):
+    out = shell("am", "broadcast", "-n", f"{PACKAGE}/{PREFS_RECEIVER}", *extras)
+    match = re.search(r'data="([^"]*)"', out)
+    return match.group(1) if match else ""
+
+
 def read_prefs():
-    return shell("run-as", PACKAGE, "cat", PREFS_FILE)
+    if USE_RUN_AS:
+        return shell("run-as", PACKAGE, "cat", PREFS_FILE)
+    data = prefs_broadcast("--es", "op", "read")
+    return "" if data.startswith("error") else base64.b64decode(data).decode("utf-8")
 
 
 def write_prefs(xml):
     force_stop()
-    adb("shell", f"run-as {PACKAGE} sh -c 'cat > {PREFS_FILE}'", stdin=xml)
+    if USE_RUN_AS:
+        adb("shell", f"run-as {PACKAGE} sh -c 'cat > {PREFS_FILE}'", stdin=xml)
+        return
+    encoded = base64.b64encode(xml.encode("utf-8")).decode("ascii")
+    if prefs_broadcast("--es", "op", "write", "--es", "xml", encoded) != "ok":
+        raise RuntimeError("the debug preferences receiver could not write the preferences")
+    force_stop()
 
 
 def set_prefs(values):
     xml = read_prefs()
     for key, value in values.items():
-        xml = re.sub(rf'\s*<(boolean|string) name="{re.escape(key)}"[^>]*?(/>|>.*?</string>)',
+        xml = re.sub(rf'\s*<(boolean|string|int) name="{re.escape(key)}"[^>]*?(/>|>.*?</string>)',
                      "", xml, flags=re.S)
         if isinstance(value, bool):
             entry = f'<boolean name="{key}" value="{str(value).lower()}" />'
+        elif isinstance(value, int):
+            entry = f'<int name="{key}" value="{value}" />'
         else:
             entry = f'<string name="{key}">{value}</string>'
         xml = xml.replace("</map>", f"    {entry}\n</map>")
@@ -381,9 +423,13 @@ def measure_timings():
     return timings
 
 
-def compare(timings, baseline_file):
-    baseline = json.loads(Path(baseline_file).read_text(encoding="utf-8"))["timings"]
+def compare(timings, baseline_file, device):
+    baseline_result = json.loads(Path(baseline_file).read_text(encoding="utf-8"))
+    baseline = baseline_result["timings"]
     regressions = []
+    if baseline_result.get("device", device) != device:
+        regressions.append(f"baseline is from {baseline_result['device']}, not {device}:"
+                           " start times are not comparable")
     for name, t in timings.items():
         if t["failed"]:
             regressions.append(f"{name}: {t['failed']} of {len(t['samples'])} starts failed")
@@ -407,6 +453,7 @@ def main():
     PREFS_FILE = f"shared_prefs/{PACKAGE}_preferences.xml"
 
     check_device()
+    detect_prefs_access()
     user_prefs = read_prefs()
     if "<map" not in user_prefs:
         sys.exit("Cannot read the app preferences: is this a debuggable build?")
@@ -417,7 +464,10 @@ def main():
     (backup_dir / f"prefs-backup-{stamp}.xml").write_text(user_prefs, encoding="utf-8")
     fork_keys = ["tap_always_plays_key", "clear_queue_confirmation_key",
                  "enable_swipe_actions_key", "swipe_left_action_key", "swipe_right_action_key"]
-    result = {"package": PACKAGE, "started": time.strftime("%Y-%m-%d %H:%M:%S")}
+    device = shell("getprop", "ro.product.model").strip()
+    print(f"Phone: {device}, Android {shell('getprop', 'ro.build.version.release').strip()}")
+    result = {"package": PACKAGE, "device": device,
+              "started": time.strftime("%Y-%m-%d %H:%M:%S")}
     adb("logcat", "-b", "crash", "-c")
     screen_timeout = keep_screen_on()
     try:
@@ -438,7 +488,7 @@ def main():
             print("Start times")
             result["timings"] = measure_timings()
             if args.baseline:
-                result["regressions"] = compare(result["timings"], args.baseline)
+                result["regressions"] = compare(result["timings"], args.baseline, device)
                 print("Regressions over threshold:", result["regressions"] or "none")
     finally:
         write_prefs(user_prefs)

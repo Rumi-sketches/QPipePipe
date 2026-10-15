@@ -34,9 +34,9 @@ git -C PipePipe rev-parse v5.4.0:PipePipeExtractor  # extractor commit to check 
    the new code instead of restoring the old code. If the port is not obvious,
    stop and ask.
 6. Reset `qpipepipeRelease` in `app/qpipepipe.gradle` to 1 (see Versions).
-7. After the merge, `./gradlew assembleDebug` must pass, then run the release
-   checks below. The app has no unit tests (`testDebugUnitTest` reports
-   `NO-SOURCE`), so compiling is the only check that runs without a phone.
+7. After the merge, `./gradlew assembleDebug testDebugUnitTest` must pass, then
+   run the release checks below. Upstream has no unit tests; the fork's are in
+   `app/src/test/.../qpipepipe/`. Everything else needs a phone.
 
 ## Identity and versions
 
@@ -62,9 +62,47 @@ as upstream sets them.
   `qpipepipe_launcher_background`, wired in `mipmap-anydpi-v26/ic_launcher.xml`;
   the legacy `mipmap-*/ic_launcher.png` are replaced.
 
+## Forking QPipePipe
+
+To publish your own build, change these, or your users get QPipePipe's updates and
+announcements and your crash reports reach QPipePipe:
+
+1. `app/qpipepipe.gradle`: `qpipepipeApplicationId`, `qpipepipeGithubRepo` and
+   `qpipepipeContactEmail`. The update check, the announcements and the error screen
+   read them from `BuildConfig`.
+2. `github_url` in `res/values/donottranslate.xml` (the GitHub link in About). It stays
+   in upstream's file to avoid a conflict on every merge.
+3. Your own keystore, and the certificate fingerprint in `README.md`.
+4. `ERROR_EMAIL_SUBJECT` in `ErrorActivity` and the app name in `app/qpipepipe.gradle`
+   if you rename the app.
+
+`tools/release/build-release.ps1` and `tools/qcheck/results/` are the QPipePipe
+maintainer's: the script has their keystore path, the results come from their phone.
+`tools/qcheck/qcheck.py` works with any phone (`--package <your debug app id>`).
+
+## Signed release build
+
+The maintainer builds the signed APKs locally; the keystore and its password never
+leave their machine:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File tools\release\build-release.ps1
+```
+
+The script asks for the keystore password, builds `assembleRelease` and lists the
+APKs in `app\build\outputs\apk\release\`.
+
 ## Release checks
 
-With an unlocked phone connected over adb and the new debug build at hand:
+Use a dedicated test phone (no screen lock, Wi-Fi on, plugged in) with the
+debug build installed. With more than one phone connected, set
+`ANDROID_SERIAL=<serial>` (from `adb devices`). Start times depend on the phone
+and the network, so the baseline must come from the same phone; the result
+file records the model and the script flags a mismatch. The script changes the
+app preferences with `run-as`; on ROMs that block it, it uses
+`DebugPreferencesReceiver`, which exists only in debug builds
+(`app/src/debug/`) and only accepts broadcasts from adb's shell. With the new debug
+build at hand:
 
 ```sh
 python tools/qcheck/qcheck.py --apk app/build/outputs/apk/debug/QPipePipe_<version>-arm64-v8a-debug.apk \
@@ -159,7 +197,8 @@ returns early instead of dereferencing a null player. Upstream `a43bcc346`
 ### Bug reports go to QPipePipe
 
 Files: `ErrorActivity` (`ERROR_EMAIL_ADDRESS`, `ERROR_EMAIL_SUBJECT`,
-`ERROR_GITHUB_ISSUE_URL`), `donottranslate.xml` (`github_url`).
+`ERROR_GITHUB_ISSUE_URL`, built from `BuildConfig.QPIPEPIPE_CONTACT_EMAIL` and
+`QPIPEPIPE_GITHUB_REPO`), `donottranslate.xml` (`github_url`).
 
 The error screen's email and GitHub buttons and the GitHub link in About
 point to this fork, so upstream does not receive reports caused by fork code.
@@ -177,8 +216,10 @@ announcement dialogs).
 
 Upstream's announcement and donation dialogs are titled "PipePipe: ...".
 QPipePipe announcements come from the `Announcement` page of the QPipePipe
-wiki, in upstream's format (`## yyMMdd` headings), titled "QPipePipe:
-Announcement". What's New appears after every version change, fork releases
+wiki, in upstream's format (`## yyMMdd` headings, newest first), titled
+"QPipePipe: Announcement". The app reads the page's raw markdown at most every
+6 hours; fetching the HTML page on every start slowed video starts by about
+half a second. What's New appears after every version change, fork releases
 included (upstream only showed it when the version code grew by more than 90).
 
 Check: install over an older build: What's New shows the QPipePipe notes, and
