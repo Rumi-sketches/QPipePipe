@@ -53,7 +53,10 @@ anything. Locally: `python tools/upstream/check_upstream.py --dry-run`.
 5. When upstream moves or rewrites code a patch depends on, port the patch to
    the new code instead of restoring the old code. If the port is not obvious,
    stop and ask.
-6. Reset `qpipepipeRelease` in `app/qpipepipe.gradle` to 1 (see Versions).
+6. Reset `qpipepipeRelease` in `app/qpipepipe.gradle` to 1 (see Versions) and pin
+   the release in `tools/upstream/pins.properties`
+   (`python tools/upstream/check_upstream.py --write-pins vX.Y.Z`). The watcher
+   does both for clean merges.
 7. After the merge, `./gradlew assembleDebug testDebugUnitTest` must pass, then
    run the release checks below. Upstream has no unit tests; the fork's are in
    `app/src/test/.../qpipepipe/`. Everything else needs a phone.
@@ -92,7 +95,8 @@ announcements and your crash reports reach QPipePipe:
    read them from `BuildConfig`.
 2. `github_url` in `res/values/donottranslate.xml` (the GitHub link in About). It stays
    in upstream's file to avoid a conflict on every merge.
-3. Your own keystore, and the certificate fingerprint in `README.md`.
+3. Your own keystore and its secrets, and the certificate fingerprint in
+   `tools/release/certificate-sha256.txt` and `README.md`.
 4. `ERROR_EMAIL_SUBJECT` in `ErrorActivity` and the app name in `app/qpipepipe.gradle`
    if you rename the app.
 
@@ -100,17 +104,42 @@ announcements and your crash reports reach QPipePipe:
 maintainer's: the script has their keystore path, the results come from their phone.
 `tools/qcheck/qcheck.py` works with any phone (`--package <your debug app id>`).
 
-## Signed release build
+## Publishing a release
 
-The maintainer builds the signed APKs locally; the keystore and its password never
-leave their machine:
+After the release checks below:
+
+1. Merge a pull request from `dev` to `main` with a merge commit.
+2. Tag the merge commit and push the tag:
+   `git tag v5.4.0-q2 origin/main && git push origin v5.4.0-q2`.
+3. `.github/workflows/release.yml` builds with the extractor in
+   `tools/upstream/pins.properties`, signs, checks that every APK has the tag's
+   version and the certificate in `tools/release/certificate-sha256.txt`, and
+   creates a **draft** GitHub Release named after the tag, with notes from
+   `tools/release/release_notes.py` (QPipePipe notes, install steps, certificate,
+   checksums).
+4. Review the draft on the Releases page and publish it. Publishing is what makes
+   the app offer the update.
+5. Merge `main` back into `dev`.
+
+The workflow signs with two repository secrets, set once by the maintainer from
+their own terminal so the password never passes through anyone else:
+
+```powershell
+[Convert]::ToBase64String([IO.File]::ReadAllBytes("$env:USERPROFILE\keystores\qpipepipe-release.jks")) | gh secret set KEYSTORE_BASE64 -R Rumi-sketches/QPipePipe
+gh secret set KEYSTORE_PASSWORD -R Rumi-sketches/QPipePipe
+```
+
+Run by hand with `dry_run` (and `source_ref` to build a branch), the workflow
+builds unsigned and creates nothing.
+
+Local fallback, with the same checks:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File tools\release\build-release.ps1
 ```
 
-The script asks for the keystore password, builds `assembleRelease` and lists the
-APKs in `app\build\outputs\apk\release\`.
+It asks for the keystore password, builds `assembleRelease` and fails unless every
+APK in `app\build\outputs\apk\release\` is signed with the release certificate.
 
 ## Release checks
 

@@ -11,7 +11,7 @@ param(
     [string]$KeyAlias = "qpipepipe",
     [string]$JavaHome = "C:\Program Files\Eclipse Adoptium\jdk-25.0.3.9-hotspot",
     # SHA-256 of the release certificate, as published in README.md.
-    [string]$CertSha256 = "83a7ca6a819ee2d59079753ab5f18ff66c2bbfe6234015f8b17c554aac22cd36"
+    [string]$CertSha256 = (Get-Content "$PSScriptRoot\certificate-sha256.txt" -Raw).Trim()
 )
 $ErrorActionPreference = "Stop"
 $root = (Resolve-Path "$PSScriptRoot\..\..").Path
