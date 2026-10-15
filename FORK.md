@@ -275,9 +275,11 @@ QPipePipe issues.
 
 ### Updates are downloaded and installed in the app
 
-Files: `NewVersionWorker` (QPipePipe releases, `-qN` versions, notification),
+Files: `NewVersionWorker` (QPipePipe releases, `-qN` versions, notification,
+"latest version" toast), `App` (update channel description),
 `QPipePipeUpdateActivity`, `QPipePipeInstallReceiver`, `AndroidManifest.xml`
-(`REQUEST_INSTALL_PACKAGES`, the activity and the receiver).
+(`REQUEST_INSTALL_PACKAGES`, the activity and the receiver). Their texts are the
+`qpipepipe_update_*` strings, so they say QPipePipe and are English only.
 
 The update notification ("QPipePipe X is available") opens a dialog: download
 and install, release notes, later. The APK for the device's ABI is downloaded
