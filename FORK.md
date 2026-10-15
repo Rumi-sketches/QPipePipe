@@ -62,6 +62,18 @@ as upstream sets them.
   `qpipepipe_launcher_background`, wired in `mipmap-anydpi-v26/ic_launcher.xml`;
   the legacy `mipmap-*/ic_launcher.png` are replaced.
 
+## Signed release build
+
+The maintainer builds the signed APKs locally; the keystore and its password never
+leave their machine:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File tools\release\build-release.ps1
+```
+
+The script asks for the keystore password, builds `assembleRelease` and lists the
+APKs in `app\build\outputs\apk\release\`.
+
 ## Release checks
 
 With an unlocked phone connected over adb and the new debug build at hand:
