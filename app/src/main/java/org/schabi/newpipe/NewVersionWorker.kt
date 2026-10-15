@@ -193,7 +193,8 @@ class NewVersionWorker(
         private val DEBUG = MainActivity.DEBUG
         private val TAG = NewVersionWorker::class.java.simpleName
         private val RELEASE_APK_ABIS = listOf("armeabi-v7a", "arm64-v8a", "x86_64", "x86")
-        private const val NEWPIPE_API_URL = "https://api.github.com/repositories/490984887/releases"
+        // QPipePipe releases, named "v<upstream version>-q<N>", e.g. v5.4.0-q1.
+        private const val NEWPIPE_API_URL = "https://api.github.com/repos/Rumi-sketches/QPipePipe/releases"
         private const val IS_MANUAL = "isManual"
 
         private fun getReleaseApkAbi(name: String): String? {
@@ -226,11 +227,16 @@ data class Version(
     val major: Int,
     val minor: Int,
     val patch: Int,
-    val betaVersion: Int? // null表示正式版，数字表示beta版本号
+    val betaVersion: Int?, // null表示正式版，数字表示beta版本号
+    val qpipepipeRelease: Int // N in "-qN", 0 when absent
 )
 
+private val QPIPEPIPE_RELEASE_SUFFIX = Regex("-q([0-9]+)$")
+
 private fun parseVersion(versionStr: String): Version {
-    val normalized = versionStr.removePrefix("v")
+    val qpipepipeMatch = QPIPEPIPE_RELEASE_SUFFIX.find(versionStr)
+    val qpipepipeRelease = qpipepipeMatch?.groupValues?.get(1)?.toInt() ?: 0
+    val normalized = versionStr.removePrefix("v").removeSuffix(qpipepipeMatch?.value ?: "")
     val parts = normalized.split("-beta", limit = 2)
     val mainPart = parts[0]
 
@@ -247,7 +253,7 @@ private fun parseVersion(versionStr: String): Version {
         else -> parts[1].toIntOrNull() // 是 "-beta1" 这样的格式
     }
 
-    return Version(major, minor, patch, betaVersion)
+    return Version(major, minor, patch, betaVersion, qpipepipeRelease)
 }
 
 private fun compareVersions(v1: Version, v2: Version): Int {
@@ -263,7 +269,8 @@ private fun compareVersions(v1: Version, v2: Version): Int {
 
     // 主版本号相同，比较beta版本
     return when {
-        v1.betaVersion == null && v2.betaVersion == null -> 0  // 都是正式版
+        v1.betaVersion == null && v2.betaVersion == null ->
+            v1.qpipepipeRelease.compareTo(v2.qpipepipeRelease)
         v1.betaVersion == null -> 1  // v1是正式版，比beta版大
         v2.betaVersion == null -> -1 // v2是正式版，比beta版大
         else -> v1.betaVersion.compareTo(v2.betaVersion) // 比较beta版本号

@@ -33,16 +33,37 @@ git -C PipePipe rev-parse v5.4.0:PipePipeExtractor  # extractor commit to check 
 5. When upstream moves or rewrites code a patch depends on, port the patch to
    the new code instead of restoring the old code. If the port is not obvious,
    stop and ask.
-6. After the merge, `./gradlew assembleDebug` must pass, then run the release
+6. Reset `qpipepipeRelease` in `app/qpipepipe.gradle` to 1 (see Versions).
+7. After the merge, `./gradlew assembleDebug` must pass, then run the release
    checks below. The app has no unit tests (`testDebugUnitTest` reports
    `NO-SOURCE`), so compiling is the only check that runs without a phone.
+
+## Identity and versions
+
+`app/qpipepipe.gradle`, applied last from `app/build.gradle`, overrides
+upstream's app id, app name, version and APK file names. Upstream keeps
+editing `baseVersionCode` and `appVersionName` in `build.gradle`; leave them
+as upstream sets them.
+
+- App id `io.github.rumisketches.qpipepipe` (`.debug` for debug builds). It
+  must never change, or installed apps stop receiving updates.
+- Version name `<upstream version>-q<N>`, e.g. `5.4.0-q1`. Bump
+  `qpipepipeRelease` for every fork release; reset it to 1 when merging a new
+  upstream release.
+- Version code `upstream code * 1000 + N * 10 + ABI` (ABI 1-4).
+- GitHub release names must be `v<version name>` (e.g. `v5.4.0-q1`):
+  `NewVersionWorker` reads them from the QPipePipe releases to offer updates.
+- Launcher icon: `qpipepipe_launcher_*` drawables and
+  `qpipepipe_launcher_background`, wired in `mipmap-anydpi-v26/ic_launcher.xml`;
+  the legacy `mipmap-*/ic_launcher.png` are replaced.
 
 ## Release checks
 
 With an unlocked phone connected over adb and the new debug build at hand:
 
 ```sh
-python tools/qcheck/qcheck.py --apk app/build/outputs/apk/debug/<apk>     --baseline tools/qcheck/results/<previous release>.json
+python tools/qcheck/qcheck.py --apk app/build/outputs/apk/debug/QPipePipe_<version>-arm64-v8a-debug.apk \
+    --baseline tools/qcheck/results/<previous release>.json
 ```
 
 The script upgrades the installed debug build, checks that QPipePipe settings

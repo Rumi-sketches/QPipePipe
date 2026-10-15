@@ -27,7 +27,7 @@ from pathlib import Path
 os.environ["MSYS_NO_PATHCONV"] = "1"  # keep Git Bash from rewriting /sdcard paths
 sys.stdout.reconfigure(encoding="utf-8")
 
-PACKAGE = "InfinityLoop1309.NewPipeEnhanced.debug"
+PACKAGE = "io.github.rumisketches.qpipepipe.debug"
 MAIN_ACTIVITY = "org.schabi.newpipe.MainActivity"
 SEARCH_QUERY = "nasa"
 # Short, long-lived public videos, unlikely to disappear.

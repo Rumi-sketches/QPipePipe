@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Launcher icon background, behind qpipepipe_launcher_foreground. -->
+    <color name="qpipepipe_launcher_background">#6E0F3D</color>
+
     <!-- Swipe action background colors, shown behind a stream item while it is being
          swiped left/right, one per action so the user can tell them apart at a glance. -->
     <color name="swipe_action_enqueue">#1976D2</color>

@@ -314,3 +314,6 @@ static String getGitWorkingBranch() {
         return ""
     }
 }
+
+// QPipePipe overrides (app id, name, version); must stay last.
+apply from: "qpipepipe.gradle"
