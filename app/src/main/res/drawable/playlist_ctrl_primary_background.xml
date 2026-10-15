@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="?attr/colorControlHighlight">
+    <item>
+        <shape android:shape="rectangle">
+            <!-- the toolbar color: it always carries white text, unlike the accent (white in dark themes) -->
+            <solid android:color="?attr/colorPrimary" />
+            <corners android:radius="@dimen/playlist_ctrl_button_radius" />
+        </shape>
+    </item>
+</ripple>

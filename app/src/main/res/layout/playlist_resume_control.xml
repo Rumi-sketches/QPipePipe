@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Play buttons of the playlist headers, with the "continue where you left off" switch.
+     Driven by org.schabi.newpipe.qpipepipe.PlaylistResumeControls. Channels and the feed
+     keep upstream's playlist_control.xml. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/video_item_search_padding"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
+    android:visibility="invisible"
+    tools:visibility="visible">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/playlist_ctrl_play_all_button"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/playlist_ctrl_button_size"
+            android:layout_weight="1"
+            android:background="@drawable/playlist_ctrl_primary_background"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingHorizontal="12dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_play_arrow"
+                app:tint="@color/white" />
+
+            <org.schabi.newpipe.views.NewPipeTextView
+                android:id="@+id/playlist_ctrl_play_all_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/play_all"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                tools:text="Resume from #3" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/playlist_ctrl_play_bg_button"
+            android:layout_width="@dimen/playlist_ctrl_button_size"
+            android:layout_height="@dimen/playlist_ctrl_button_size"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/playlist_ctrl_tonal_background"
+            android:clickable="true"
+            android:contentDescription="@string/controls_background_title"
+            android:focusable="true"
+            android:tooltipText="@string/controls_background_title"
+            tools:targetApi="o">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_gravity="center"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_headset"
+                app:tint="?attr/colorAccent" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/playlist_ctrl_play_popup_button"
+            android:layout_width="@dimen/playlist_ctrl_button_size"
+            android:layout_height="@dimen/playlist_ctrl_button_size"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/playlist_ctrl_tonal_background"
+            android:clickable="true"
+            android:contentDescription="@string/controls_popup_title"
+            android:focusable="true"
+            android:tooltipText="@string/controls_popup_title"
+            tools:targetApi="o">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_gravity="center"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_picture_in_picture"
+                app:tint="?attr/colorAccent" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/playlist_resume_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="?attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:minHeight="52dp"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_history"
+            app:tint="?attr/colorAccent" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <org.schabi.newpipe.views.NewPipeTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/playlist_resume_title"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="14sp" />
+
+            <org.schabi.newpipe.views.NewPipeTextView
+                android:id="@+id/playlist_resume_target"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="@dimen/playlist_detail_subtext_size"
+                tools:text="#3 · Linus: new GPU benchmarks" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/playlist_resume_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/playlist_resume_title" />
+    </LinearLayout>
+</LinearLayout>
