@@ -55,6 +55,9 @@ it. To move your subscriptions, playlists and history, use Settings > Backup >
 Export database in PipePipe, then Import database in QPipePipe.
 
 The app checks this repository for new versions and tells you when one is out.
+Since 5.4.0-q2 you can download and install the update from the notification,
+without a browser. Android asks you once to allow installs from QPipePipe, then
+to confirm each update.
 
 Releases are signed with this certificate. You can check it with
 `apksigner verify --print-certs <apk>`:
@@ -71,10 +74,12 @@ one, and `5.5.0-q1` the first on PipePipe 5.5.0.
 
 ## How it is maintained
 
-QPipePipe follows PipePipe's stable releases; betas are skipped. Each new release
-is merged into the fork mostly with the help of AI, mainly to resolve
-conflicts between upstream changes and the fork's features faster. When upstream fixes
-something the fork had also fixed, upstream's fix is kept.
+QPipePipe follows PipePipe's stable releases; betas are skipped. A daily check
+notices each new release and prepares the merge. The merge is done mostly with
+the help of AI, mainly to resolve conflicts between upstream changes and the
+fork's features faster. When upstream fixes something the fork had also fixed,
+upstream's fix is kept. Releases are built and signed by GitHub Actions and
+published after a check on a test phone.
 
 The merge rules and the list of fork changes are in [FORK.md](FORK.md).
 

@@ -20,6 +20,10 @@ git -C PipePipe rev-parse v5.4.0:PipePipeClient     # client commit to merge
 git -C PipePipe rev-parse v5.4.0:PipePipeExtractor  # extractor commit to check out
 ```
 
+The release QPipePipe is currently based on, and those two commits, are recorded
+in `tools/upstream/pins.properties`. Local builds need `../PipePipeExtractor`
+checked out at the `extractor` commit; CI checks it out from there.
+
 ## Upstream watcher
 
 `.github/workflows/upstream-watcher.yml` runs every day at 06:17 UTC and can be
@@ -28,15 +32,19 @@ which compares PipePipe's latest stable release with `appVersionName` in
 `app/build.gradle` and, for a newer one, merges the pinned client commit into
 `sync/vX.Y.Z`:
 
-- **No conflicts:** it resets `qpipepipeRelease` to 1, builds with the pinned
-  extractor (`assembleDebug testDebugUnitTest`) and opens a pull request to `dev`
-  with the build result and the release checklist. A failed build means the
-  merge needs porting work (merge rule 5).
+- **No conflicts:** it resets `qpipepipeRelease` to 1, updates
+  `tools/upstream/pins.properties`, builds with the pinned extractor
+  (`assembleDebug testDebugUnitTest`) and opens a pull request to `dev` with the
+  build result and the release checklist. A failed build means the merge needs
+  porting work (merge rule 5).
 - **Conflicts:** it pushes `sync/vX.Y.Z` at `dev` and opens an issue listing the
   conflicting files and the commands to merge and resolve them locally.
 
-An existing `sync/vX.Y.Z` on origin means the release is being handled, so the
-watcher does nothing. To test it, run it by hand with `based_on` set to an
+The maintainer hears about it through GitHub's notification for the pull request
+or the issue; on days without a new release nothing happens. An existing
+`sync/vX.Y.Z` on origin means the release is being handled, so the watcher does
+nothing. GitHub pauses scheduled workflows of public repositories after 60 days
+without commits and emails a warning first; re-enable it from the Actions tab. To test it, run it by hand with `based_on` set to an
 older version and `dry_run` on: it merges and builds without pushing or opening
 anything. Locally: `python tools/upstream/check_upstream.py --dry-run`.
 
@@ -95,8 +103,9 @@ announcements and your crash reports reach QPipePipe:
    read them from `BuildConfig`.
 2. `github_url` in `res/values/donottranslate.xml` (the GitHub link in About). It stays
    in upstream's file to avoid a conflict on every merge.
-3. Your own keystore and its secrets, and the certificate fingerprint in
-   `tools/release/certificate-sha256.txt` and `README.md`.
+3. Your own keystore, the `KEYSTORE_BASE64` and `KEYSTORE_PASSWORD` secrets, the
+   key alias (`KEY_ALIAS` in `.github/workflows/release.yml`), and the certificate
+   fingerprint in `tools/release/certificate-sha256.txt` and `README.md`.
 4. `ERROR_EMAIL_SUBJECT` in `ErrorActivity` and the app name in `app/qpipepipe.gradle`
    if you rename the app.
 
@@ -106,20 +115,25 @@ maintainer's: the script has their keystore path, the results come from their ph
 
 ## Publishing a release
 
-After the release checks below:
-
-1. Merge a pull request from `dev` to `main` with a merge commit.
-2. Tag the merge commit and push the tag:
+1. On a `chore/release-<version>` branch from `dev`: bump `qpipepipeRelease`
+   (or keep 1 right after an upstream sync), rewrite `qpipepipe_update_log`,
+   run the release checks below and add their result file. Check the What's New
+   dialog on the test phone. Merge into `dev`.
+2. Merge a pull request from `dev` to `main` with a merge commit.
+3. Tag the merge commit and push the tag:
    `git tag v5.4.0-q2 origin/main && git push origin v5.4.0-q2`.
-3. `.github/workflows/release.yml` builds with the extractor in
+4. `.github/workflows/release.yml` builds with the extractor in
    `tools/upstream/pins.properties`, signs, checks that every APK has the tag's
    version and the certificate in `tools/release/certificate-sha256.txt`, and
    creates a **draft** GitHub Release named after the tag, with notes from
    `tools/release/release_notes.py` (QPipePipe notes, install steps, certificate,
    checksums).
-4. Review the draft on the Releases page and publish it. Publishing is what makes
-   the app offer the update.
-5. Merge `main` back into `dev`.
+5. Review the draft on the Releases page (signature and version of the APKs, a
+   quick install over the previous release) and publish it. Publishing is what
+   makes the app offer the update.
+6. Merge `main` back into `dev`.
+
+v5.4.0-q2 was the first release made this way.
 
 The workflow signs with two repository secrets, set once by the maintainer from
 their own terminal so the password never passes through anyone else:
@@ -164,7 +178,8 @@ off (a check that also passes with the feature off is reported as
 INSENSITIVE), measures app and video start times, compares them with the
 baseline (15% threshold) and collects crashes. It restores the user's
 preferences at the end. Keep the result file of each release in
-`tools/qcheck/results/`.
+`tools/qcheck/results/`, named `<stamp>-<version or commit>-debug-<phone>.json`;
+the baseline is the newest file from the same phone.
 
 The "no crash on reconnect" patch has no automated check: the OS has to kill
 and recreate the player service, which adb cannot trigger reliably.
