@@ -258,6 +258,23 @@ recreates it the fragment can connect before a `Player` exists. The guard
 returns early instead of dereferencing a null player. Upstream `a43bcc346`
 (null intent in `onStartCommand`) fixes a different path; both stay.
 
+### The play queue survives the OS killing the app
+
+File: `VideoDetailFragment` (`onSaveInstanceState`, `onRestoreInstanceState`,
+`StateSaver.WriteRead`).
+
+Upstream saves only the url of the open video, and the navigation stack is
+static, so when the OS kills the app in background the video came back alone,
+in a new single-item queue. The fragment now writes its play queue with
+`StateSaver` (a file in the cache) and, when it is recreated, reuses it if its
+current item is the restored video. It covers any queue: local or remote
+playlist, channel, edited queue. Removing the app from recents still starts
+from scratch, as upstream.
+
+Check: play a playlist, go to the second video, press Home, close the player
+(`am broadcast -a <app id>.player.MainPlayer.CLOSE`), `am kill <app id>`, reopen
+the app: the second video plays and Previous/Next move through the playlist.
+
 ### Bug reports go to QPipePipe
 
 Files: `ErrorActivity` (`ERROR_EMAIL_ADDRESS`, `ERROR_EMAIL_SUBJECT`,
