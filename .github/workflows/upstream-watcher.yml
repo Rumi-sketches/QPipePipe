@@ -1,0 +1,149 @@
+# Looks every day for a new stable PipePipe release. When there is one it merges it into
+# sync/vX.Y.Z (tools/upstream/check_upstream.py) and then:
+# - clean merge: builds with the pinned extractor and opens a pull request to dev;
+# - conflicts: pushes sync/vX.Y.Z at dev and opens an issue to resolve them locally.
+# See FORK.md, "Upstream watcher".
+name: Upstream watcher
+
+on:
+  schedule:
+    # 06:17 UTC: 08:17 in Italy in summer time, 07:17 in winter.
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+    inputs:
+      based_on:
+        description: "Pretend QPipePipe is based on this PipePipe version (testing)"
+        required: false
+        default: ""
+      dry_run:
+        description: "Merge and build, but push nothing and open no pull request or issue"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: upstream-watcher
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Check out dev
+        uses: actions/checkout@v4
+        with:
+          ref: dev
+          path: PipePipeClient
+          fetch-depth: 0
+
+      - name: Look for a new PipePipe release and merge it
+        id: check
+        working-directory: PipePipeClient
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BASED_ON: ${{ inputs.based_on }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          args=()
+          if [ -n "$BASED_ON" ]; then args+=(--based-on "$BASED_ON"); fi
+          if [ "$DRY_RUN" = "true" ]; then args+=(--no-push); fi
+          python3 tools/upstream/check_upstream.py "${args[@]}"
+
+      - name: Check out the extractor pinned by the release
+        if: steps.check.outputs.status == 'clean'
+        uses: actions/checkout@v4
+        with:
+          repository: InfinityLoop1308/PipePipeExtractor
+          ref: ${{ steps.check.outputs.extractor_sha }}
+          path: PipePipeExtractor
+
+      - name: Set up JDK 25
+        if: steps.check.outputs.status == 'clean'
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "25"
+
+      - name: Set up Gradle
+        if: steps.check.outputs.status == 'clean'
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Build and run the fork's unit tests
+        id: build
+        if: steps.check.outputs.status == 'clean'
+        continue-on-error: true
+        working-directory: PipePipeClient
+        run: ./gradlew assembleDebug testDebugUnitTest --no-daemon
+
+      - name: Open the pull request
+        if: steps.check.outputs.status == 'clean' && inputs.dry_run != true
+        working-directory: PipePipeClient
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.check.outputs.version }}
+          BRANCH: ${{ steps.check.outputs.branch }}
+          CLIENT_SHA: ${{ steps.check.outputs.client_sha }}
+          EXTRACTOR_SHA: ${{ steps.check.outputs.extractor_sha }}
+          BUILD: ${{ steps.build.outcome }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          if [ "$BUILD" = "success" ]; then
+            build="passed (\`assembleDebug testDebugUnitTest\`)"
+          else
+            build="**failed**: the merge has no conflicts but does not compile. See [the run]($RUN_URL) and port the fork patches (FORK.md, merge rule 5)."
+          fi
+          cat > ../pr-body.md <<EOF
+          PipePipe v$VERSION is out. It merged into \`$BRANCH\` without conflicts, and \`qpipepipeRelease\` is back to 1.
+
+          - Client: InfinityLoop1308/PipePipeClient@$CLIENT_SHA
+          - Extractor: InfinityLoop1308/PipePipeExtractor@$EXTRACTOR_SHA (check out this commit in \`../PipePipeExtractor\`)
+          - CI build: $build
+
+          Before merging (FORK.md, Release checks):
+          - [ ] Read upstream's changes for anything that touches the fork patches
+          - [ ] qcheck on the test phone, compared with the previous release on the same phone
+          - [ ] QPipePipe notes in \`qpipepipe_update_log\` and a What's New preview
+
+          Merge with a **merge commit**, never Squash and merge: squashing drops upstream's history and brings every conflict back at the next sync.
+          EOF
+          gh pr create --base dev --head "$BRANCH" --title "Merge upstream v$VERSION" --body-file ../pr-body.md
+
+      - name: Open an issue for the conflicts
+        if: steps.check.outputs.status == 'conflict' && inputs.dry_run != true
+        working-directory: PipePipeClient
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.check.outputs.version }}
+          BRANCH: ${{ steps.check.outputs.branch }}
+          CLIENT_SHA: ${{ steps.check.outputs.client_sha }}
+          EXTRACTOR_SHA: ${{ steps.check.outputs.extractor_sha }}
+          CONFLICTS: ${{ steps.check.outputs.conflicts }}
+        run: |
+          files=$(for f in $CONFLICTS; do echo "- \`$f\`"; done)
+          cat > ../issue-body.md <<EOF
+          PipePipe v$VERSION is out, but merging it conflicts with the fork in:
+
+          $files
+
+          \`$BRANCH\` is pushed at \`dev\` to work on. Resolve the conflicts locally following FORK.md (merge rules and known conflicts):
+
+          \`\`\`sh
+          git fetch origin && git checkout $BRANCH
+          git fetch https://github.com/InfinityLoop1308/PipePipeClient.git $CLIENT_SHA
+          git merge --no-ff -m "Merge upstream v$VERSION into dev" $CLIENT_SHA
+          # resolve, then set qpipepipeRelease = 1 in app/qpipepipe.gradle
+          git -C ../PipePipeExtractor fetch origin && git -C ../PipePipeExtractor checkout $EXTRACTOR_SHA
+          ./gradlew assembleDebug testDebugUnitTest
+          git push
+          \`\`\`
+
+          Then open a pull request from \`$BRANCH\` to \`dev\`, run the release checks and merge it with a **merge commit**.
+          EOF
+          gh issue create --title "Upstream v$VERSION: merge conflicts to resolve" --body-file ../issue-body.md
