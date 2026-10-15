@@ -194,7 +194,8 @@ class NewVersionWorker(
         private val TAG = NewVersionWorker::class.java.simpleName
         private val RELEASE_APK_ABIS = listOf("armeabi-v7a", "arm64-v8a", "x86_64", "x86")
         // QPipePipe releases, named "v<upstream version>-q<N>", e.g. v5.4.0-q1.
-        private const val NEWPIPE_API_URL = "https://api.github.com/repos/Rumi-sketches/QPipePipe/releases"
+        private const val NEWPIPE_API_URL =
+            "https://api.github.com/repos/" + BuildConfig.QPIPEPIPE_GITHUB_REPO + "/releases"
         private const val IS_MANUAL = "isManual"
 
         private fun getReleaseApkAbi(name: String): String? {

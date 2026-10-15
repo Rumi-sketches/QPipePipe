@@ -1,7 +1,15 @@
-// QPipePipe identity: app id, name and version. Kept out of build.gradle so upstream
-// merges only touch upstream lines. Applied at the end of build.gradle, so the values set
-// here override upstream's.
+// QPipePipe identity: app id, name, version, and where updates, announcements and bug
+// reports come from and go to. Kept out of build.gradle so upstream merges only touch
+// upstream lines. Applied at the end of build.gradle, so the values set here override
+// upstream's.
 //
+// A fork of QPipePipe changes the three values below (see FORK.md, Forking QPipePipe).
+def qpipepipeApplicationId = "io.github.rumisketches.qpipepipe"
+// GitHub "owner/repo": releases for the update check, wiki announcements, issues.
+def qpipepipeGithubRepo = "Rumi-sketches/QPipePipe"
+// Address of the bug reports sent from the error screen.
+def qpipepipeContactEmail = "rumi.sketches@outlook.com"
+
 // Versions are "<upstream version>-q<N>", e.g. 5.4.0-q1. Bump qpipepipeRelease for every
 // fork release and reset it to 1 when merging a new upstream release.
 def qpipepipeRelease = 1
@@ -16,7 +24,9 @@ def qpipepipeVersionCode = upstreamVersionCode * 1000 + qpipepipeRelease * 10
 
 android {
     defaultConfig {
-        applicationId "io.github.rumisketches.qpipepipe"
+        applicationId qpipepipeApplicationId
+        buildConfigField "String", "QPIPEPIPE_GITHUB_REPO", "\"${qpipepipeGithubRepo}\""
+        buildConfigField "String", "QPIPEPIPE_CONTACT_EMAIL", "\"${qpipepipeContactEmail}\""
         versionName qpipepipeVersionName
         versionCode qpipepipeVersionCode
     }
