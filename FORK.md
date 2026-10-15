@@ -258,6 +258,24 @@ Check: on the error screen (shown after a crash or a failed video) the email
 button addresses the QPipePipe email and the GitHub button opens the
 QPipePipe issues.
 
+### Updates are downloaded and installed in the app
+
+Files: `NewVersionWorker` (QPipePipe releases, `-qN` versions, notification),
+`QPipePipeUpdateActivity`, `QPipePipeInstallReceiver`, `AndroidManifest.xml`
+(`REQUEST_INSTALL_PACKAGES`, the activity and the receiver).
+
+The update notification ("QPipePipe X is available") opens a dialog: download
+and install, release notes, later. The APK for the device's ABI is downloaded
+to the cache and installed with `PackageInstaller`. Android asks the user to
+allow installs from QPipePipe the first time, then to confirm the update, and
+only accepts an APK signed like the installed app. The activity refuses another
+app id (debug builds) or an older version and offers the release page instead.
+
+Check: install a release build with a lower `qpipepipeRelease` (signed, e.g. a
+temporary `v5.4.0-q0` tag built by `release.yml`, then delete the draft and the
+tag), check for updates in Settings > Updates, tap the notification: the app
+updates itself to the latest release.
+
 ### Startup notices say where they come from
 
 Files: `QPipePipeNotices`, `MainActivity` (What's New, donation and

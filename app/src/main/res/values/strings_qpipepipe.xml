@@ -23,4 +23,16 @@
     <string name="enable_swipe_actions_warning_message">Swiping needs full-width rows to work reliably, so list view will be used instead of grid or card view wherever swipe actions are available. You can turn this off again at any time.</string>
     <string name="swipe_actions_force_list_mode_summary">Disabled while swipe actions are enabled, which forces list view</string>
     <string name="remove_from_playlist_swipe_action">Remove from playlist (playlists only)</string>
+    <!-- In-app update (NewVersionWorker notification, QPipePipeUpdateActivity) -->
+    <string name="qpipepipe_update_notification_title">QPipePipe %s is available</string>
+    <string name="qpipepipe_update_notification_text">Tap to download and install</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Download and install this update? Android will ask you to confirm the installation.</string>
+    <string name="qpipepipe_update_install">Download and install</string>
+    <string name="qpipepipe_update_release_notes">Release notes</string>
+    <string name="qpipepipe_update_later">Later</string>
+    <string name="qpipepipe_update_downloading">Downloading QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">The download failed. Check your connection and try again.</string>
+    <string name="qpipepipe_update_wrong_build">This build cannot install the update itself, for example because it is a debug build. Download the APK from the release page instead.</string>
+    <string name="qpipepipe_update_failed">The update could not be installed: %s</string>
 </resources>
