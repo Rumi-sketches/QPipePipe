@@ -34,9 +34,9 @@ git -C PipePipe rev-parse v5.4.0:PipePipeExtractor  # extractor commit to check 
    the new code instead of restoring the old code. If the port is not obvious,
    stop and ask.
 6. Reset `qpipepipeRelease` in `app/qpipepipe.gradle` to 1 (see Versions).
-7. After the merge, `./gradlew assembleDebug` must pass, then run the release
-   checks below. The app has no unit tests (`testDebugUnitTest` reports
-   `NO-SOURCE`), so compiling is the only check that runs without a phone.
+7. After the merge, `./gradlew assembleDebug testDebugUnitTest` must pass, then
+   run the release checks below. Upstream has no unit tests; the fork's are in
+   `app/src/test/.../qpipepipe/`. Everything else needs a phone.
 
 ## Identity and versions
 
@@ -208,8 +208,10 @@ announcement dialogs).
 
 Upstream's announcement and donation dialogs are titled "PipePipe: ...".
 QPipePipe announcements come from the `Announcement` page of the QPipePipe
-wiki, in upstream's format (`## yyMMdd` headings), titled "QPipePipe:
-Announcement". What's New appears after every version change, fork releases
+wiki, in upstream's format (`## yyMMdd` headings, newest first), titled
+"QPipePipe: Announcement". The app reads the page's raw markdown at most every
+6 hours; fetching the HTML page on every start slowed video starts by about
+half a second. What's New appears after every version change, fork releases
 included (upstream only showed it when the version code grew by more than 90).
 
 Check: install over an older build: What's New shows the QPipePipe notes, and
