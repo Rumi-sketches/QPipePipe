@@ -4,7 +4,7 @@
 <resources>
     <!-- What's New notes of the current QPipePipe release, shown above upstream's update_log.
          Rewrite them for every release (see FORK.md, Identity and versions). -->
-    <string name="qpipepipe_update_log">- First QPipePipe release, based on PipePipe 5.4.0\n- Swipe actions on video rows: enqueue, play next, share and more (Settings &gt; QPipePipe)\n- Confirmation before a new video replaces your queue, with Enqueue and Enqueue next\n- Tapping a video always plays it, even when Autoplay is off\n- Updates and bug reports now go to QPipePipe</string>
+    <string name="qpipepipe_update_log">- Updates are now downloaded and installed inside the app: tap the update notification\n- The update notification now says QPipePipe</string>
     <string name="qpipepipe_settings_title">QPipePipe</string>
     <string name="qpipepipe_settings_summary">Queue and swipe features added by this fork</string>
     <string name="qpipepipe_category_playback">Playback</string>
