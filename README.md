@@ -17,12 +17,12 @@ problems here, not to the PipePipe developers.
 I use PipePipe every day and kept a few patches for myself to manage queues the way I
 wanted. They are not planned upstream, and other people asked for the same things
 (see [PipePipe issue #1726](https://github.com/InfinityLoop1308/PipePipe/issues/1726)),
-so I made the fork public. The PipePipe maintainer knows about QPipePipe and agreed
-to its publication.
+so I made the fork public.
 
 ## What QPipePipe adds
 
-All of these are in Settings > QPipePipe:
+All of these have their own screen, Settings > QPipePipe, so they don't mix with
+PipePipe's settings:
 
 - **Swipe actions on video rows.** Swipe a video left or right in the home feed,
   search, history, playlists and channel groups to enqueue it, play it next, open
@@ -35,6 +35,8 @@ All of these are in Settings > QPipePipe:
 - **Tapping a video always plays it.** Playback starts when you open a video, even
   with Autoplay limited to Wi-Fi or turned off. Autoplay still controls automatic
   starts. On by default.
+
+**And more to come!** 🚀
 
 Startup notices say where they come from: "QPipePipe" for this fork's release notes
 and announcements, "PipePipe" for upstream's.
@@ -66,11 +68,9 @@ one, and `5.5.0-q1` the first on PipePipe 5.5.0.
 ## How it is maintained
 
 QPipePipe follows PipePipe's stable releases; betas are skipped. Each new release
-is merged into the fork mostly with the help of AI (Claude), which also resolves
-conflicts between upstream changes and the fork's features. When upstream fixes
-something the fork had also fixed, upstream's fix is kept. Before each release,
-the fork's features and the app and video start times are checked on a real phone
-with [`tools/qcheck`](tools/qcheck/qcheck.py).
+is merged into the fork mostly with the help of AI, mainly to resolve
+conflicts between upstream changes and the fork's features faster. When upstream fixes
+something the fork had also fixed, upstream's fix is kept.
 
 The merge rules and the list of fork changes are in [FORK.md](FORK.md).
 
@@ -81,7 +81,7 @@ QPipePipe exists thanks to:
 - [PipePipe](https://github.com/InfinityLoop1308/PipePipe) by InfinityLoop1308 and
   its contributors, which QPipePipe is built on.
 - [NewPipe](https://github.com/TeamNewPipe/NewPipe) by TeamNewPipe, which PipePipe
-  is built on.
+  was built on.
 
 If you want to support the people who build the app itself, support
 [PipePipe](https://github.com/InfinityLoop1308/PipePipe).
