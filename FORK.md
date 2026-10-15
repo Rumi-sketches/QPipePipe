@@ -208,8 +208,10 @@ announcement dialogs).
 
 Upstream's announcement and donation dialogs are titled "PipePipe: ...".
 QPipePipe announcements come from the `Announcement` page of the QPipePipe
-wiki, in upstream's format (`## yyMMdd` headings), titled "QPipePipe:
-Announcement". What's New appears after every version change, fork releases
+wiki, in upstream's format (`## yyMMdd` headings, newest first), titled
+"QPipePipe: Announcement". The app reads the page's raw markdown at most every
+6 hours; fetching the HTML page on every start slowed video starts by about
+half a second. What's New appears after every version change, fork releases
 included (upstream only showed it when the version code grew by more than 90).
 
 Check: install over an older build: What's New shows the QPipePipe notes, and
