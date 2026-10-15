@@ -62,6 +62,24 @@ as upstream sets them.
   `qpipepipe_launcher_background`, wired in `mipmap-anydpi-v26/ic_launcher.xml`;
   the legacy `mipmap-*/ic_launcher.png` are replaced.
 
+## Forking QPipePipe
+
+To publish your own build, change these, or your users get QPipePipe's updates and
+announcements and your crash reports reach QPipePipe:
+
+1. `app/qpipepipe.gradle`: `qpipepipeApplicationId`, `qpipepipeGithubRepo` and
+   `qpipepipeContactEmail`. The update check, the announcements and the error screen
+   read them from `BuildConfig`.
+2. `github_url` in `res/values/donottranslate.xml` (the GitHub link in About). It stays
+   in upstream's file to avoid a conflict on every merge.
+3. Your own keystore, and the certificate fingerprint in `README.md`.
+4. `ERROR_EMAIL_SUBJECT` in `ErrorActivity` and the app name in `app/qpipepipe.gradle`
+   if you rename the app.
+
+`tools/release/build-release.ps1` and `tools/qcheck/results/` are the QPipePipe
+maintainer's: the script has their keystore path, the results come from their phone.
+`tools/qcheck/qcheck.py` works with any phone (`--package <your debug app id>`).
+
 ## Signed release build
 
 The maintainer builds the signed APKs locally; the keystore and its password never
@@ -171,7 +189,8 @@ returns early instead of dereferencing a null player. Upstream `a43bcc346`
 ### Bug reports go to QPipePipe
 
 Files: `ErrorActivity` (`ERROR_EMAIL_ADDRESS`, `ERROR_EMAIL_SUBJECT`,
-`ERROR_GITHUB_ISSUE_URL`), `donottranslate.xml` (`github_url`).
+`ERROR_GITHUB_ISSUE_URL`, built from `BuildConfig.QPIPEPIPE_CONTACT_EMAIL` and
+`QPIPEPIPE_GITHUB_REPO`), `donottranslate.xml` (`github_url`).
 
 The error screen's email and GitHub buttons and the GitHub link in About
 point to this fork, so upstream does not receive reports caused by fork code.

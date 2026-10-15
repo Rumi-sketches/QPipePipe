@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
 public final class QPipePipeNotices {
 
     private static final String ANNOUNCEMENT_URL =
-            "https://github.com/Rumi-sketches/QPipePipe/wiki/Announcement";
+            "https://github.com/" + BuildConfig.QPIPEPIPE_GITHUB_REPO + "/wiki/Announcement";
     private static final String LAST_ANNOUNCEMENT_ID_KEY = "qpipepipe_last_announcement_id";
     /** Announcement headings are dates in yyMMdd format, as on upstream's page. */
     private static final Pattern ANNOUNCEMENT_ID = Pattern.compile("[0-9]{6}");
