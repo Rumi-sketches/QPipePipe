@@ -2,7 +2,6 @@ package org.schabi.newpipe
 
 import android.app.PendingIntent
 import android.content.Context
-import android.content.Intent
 import android.os.Build
 import android.util.Log
 import android.widget.Toast
@@ -10,7 +9,6 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
-import androidx.core.net.toUri
 import androidx.preference.PreferenceManager
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
@@ -22,6 +20,7 @@ import com.grack.nanojson.JsonParser
 import com.grack.nanojson.JsonParserException
 import org.schabi.newpipe.extractor.downloader.Response
 import org.schabi.newpipe.extractor.exceptions.ReCaptchaException
+import org.schabi.newpipe.qpipepipe.QPipePipeUpdateActivity
 import org.schabi.newpipe.util.ReleaseVersionUtil.coerceUpdateCheckExpiry
 import org.schabi.newpipe.util.ReleaseVersionUtil.isLastUpdateCheckExpired
 import java.io.IOException
@@ -42,11 +41,12 @@ class NewVersionWorker(
      *
      * @param versionName    Name of new version
      * @param apkLocationUrl Url with the new apk
-     * @param versionCode    Code of new version
+     * @param releaseUrl     Url of the release page
      */
     private fun compareAppVersionAndShowNotification(
         versionName: String,
         apkLocationUrl: String?,
+        releaseUrl: String?,
         isManual: Boolean
     ) {
         val currentVersion = parseVersion(BuildConfig.VERSION_NAME)
@@ -63,9 +63,10 @@ class NewVersionWorker(
             return
         }
 
-        // A pending intent to open the apk location url in the browser.
-        val intent = Intent(Intent.ACTION_VIEW, apkLocationUrl?.toUri())
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        // QPipePipe: download and install in the app; the release page if there is no APK.
+        val intent = QPipePipeUpdateActivity.intent(
+            applicationContext, versionName, apkLocationUrl, releaseUrl
+        )
         val pendingIntent = PendingIntent.getActivity(
             applicationContext, 0, intent,
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
@@ -78,11 +79,10 @@ class NewVersionWorker(
             .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
-            .setContentTitle(applicationContext.getString(R.string.app_update_notification_content_title_new))
-            .setContentText(
-                applicationContext.getString(R.string.app_update_notification_content_text) +
-                    " " + versionName
+            .setContentTitle(
+                applicationContext.getString(R.string.qpipepipe_update_notification_title, versionName)
             )
+            .setContentText(applicationContext.getString(R.string.qpipepipe_update_notification_text))
         val notificationManager = NotificationManagerCompat.from(applicationContext)
         notificationManager.notify(2000, notificationBuilder.build())
     }
@@ -142,7 +142,10 @@ class NewVersionWorker(
             selectedRelease?.let { release ->
                 val versionName = release.getString("name").removePrefix("v")
                 val apkUrl = findCompatibleApkUrl(release, Build.SUPPORTED_ABIS)
-                compareAppVersionAndShowNotification(versionName, apkUrl, inputData.getBoolean(IS_MANUAL, false))
+                compareAppVersionAndShowNotification(
+                    versionName, apkUrl, release.getString("html_url"),
+                    inputData.getBoolean(IS_MANUAL, false)
+                )
             }
         } catch (e: JsonParserException) {
             if (DEBUG) Log.w(TAG, "JSON解析错误", e)
