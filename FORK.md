@@ -130,6 +130,27 @@ recreates it the fragment can connect before a `Player` exists. The guard
 returns early instead of dereferencing a null player. Upstream `a43bcc346`
 (null intent in `onStartCommand`) fixes a different path; both stay.
 
+### Bug reports go to QPipePipe
+
+Files: `ErrorActivity` (`ERROR_EMAIL_ADDRESS`, `ERROR_EMAIL_SUBJECT`,
+`ERROR_GITHUB_ISSUE_URL`), `donottranslate.xml` (`github_url`).
+
+The error screen's email and GitHub buttons and the GitHub link in About
+point to this fork, so upstream does not receive reports caused by fork code.
+Email subjects start with `[QPipePipe]`. A merge must not restore the
+upstream addresses.
+
+Check: on the error screen (shown after a crash or a failed video) the email
+button addresses the QPipePipe email and the GitHub button opens the
+QPipePipe issues.
+
+## Upstream services
+
+The extractor falls back to `api.pipepipe.dev` to decode YouTube signatures
+when the local WebView decoder fails. Upstream agreed (October 2026) that
+QPipePipe users may use this fallback, so it stays unchanged. Bug reports and
+support stay in this repository.
+
 ## Dropped patches
 
 - `7729a5383` (null context guard in the decoder error dialog): replaced by
