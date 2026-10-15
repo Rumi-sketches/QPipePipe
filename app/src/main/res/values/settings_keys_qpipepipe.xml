@@ -9,6 +9,7 @@
     <string name="enable_swipe_actions_key">enable_swipe_actions_key</string>
     <string name="swipe_left_action_key">swipe_left_action_key</string>
     <string name="swipe_right_action_key">swipe_right_action_key</string>
+    <string name="playlist_resume_key">playlist_resume_key</string>
     <string-array name="swipe_action_entries">
         <item>@string/enqueue_stream</item>
         <item>@string/enqueue_next_stream</item>
