@@ -12,7 +12,7 @@ def qpipepipeContactEmail = "rumi.sketches@outlook.com"
 
 // Versions are "<upstream version>-q<N>", e.g. 5.4.0-q1. Bump qpipepipeRelease for every
 // fork release and reset it to 1 when merging a new upstream release.
-def qpipepipeRelease = 1
+def qpipepipeRelease = 2
 
 def upstreamVersionName = android.defaultConfig.versionName
 def upstreamVersionCode = android.defaultConfig.versionCode

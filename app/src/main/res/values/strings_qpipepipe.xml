@@ -4,7 +4,7 @@
 <resources>
     <!-- What's New notes of the current QPipePipe release, shown above upstream's update_log.
          Rewrite them for every release (see FORK.md, Identity and versions). -->
-    <string name="qpipepipe_update_log">- First QPipePipe release, based on PipePipe 5.4.0\n- Swipe actions on video rows: enqueue, play next, share and more (Settings &gt; QPipePipe)\n- Confirmation before a new video replaces your queue, with Enqueue and Enqueue next\n- Tapping a video always plays it, even when Autoplay is off\n- Updates and bug reports now go to QPipePipe</string>
+    <string name="qpipepipe_update_log">- Updates are now downloaded and installed inside the app: tap the update notification\n- The update notification now says QPipePipe</string>
     <string name="qpipepipe_settings_title">QPipePipe</string>
     <string name="qpipepipe_settings_summary">Queue and swipe features added by this fork</string>
     <string name="qpipepipe_category_playback">Playback</string>
@@ -23,4 +23,16 @@
     <string name="enable_swipe_actions_warning_message">Swiping needs full-width rows to work reliably, so list view will be used instead of grid or card view wherever swipe actions are available. You can turn this off again at any time.</string>
     <string name="swipe_actions_force_list_mode_summary">Disabled while swipe actions are enabled, which forces list view</string>
     <string name="remove_from_playlist_swipe_action">Remove from playlist (playlists only)</string>
+    <!-- In-app update (NewVersionWorker notification, QPipePipeUpdateActivity) -->
+    <string name="qpipepipe_update_notification_title">QPipePipe %s is available</string>
+    <string name="qpipepipe_update_notification_text">Tap to download and install</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Download and install this update? Android will ask you to confirm the installation.</string>
+    <string name="qpipepipe_update_install">Download and install</string>
+    <string name="qpipepipe_update_release_notes">Release notes</string>
+    <string name="qpipepipe_update_later">Later</string>
+    <string name="qpipepipe_update_downloading">Downloading QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">The download failed. Check your connection and try again.</string>
+    <string name="qpipepipe_update_wrong_build">This build cannot install the update itself, for example because it is a debug build. Download the APK from the release page instead.</string>
+    <string name="qpipepipe_update_failed">The update could not be installed: %s</string>
 </resources>
