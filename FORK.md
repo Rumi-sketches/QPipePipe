@@ -20,6 +20,26 @@ git -C PipePipe rev-parse v5.4.0:PipePipeClient     # client commit to merge
 git -C PipePipe rev-parse v5.4.0:PipePipeExtractor  # extractor commit to check out
 ```
 
+## Upstream watcher
+
+`.github/workflows/upstream-watcher.yml` runs every day at 06:17 UTC and can be
+started by hand from the Actions tab. It calls `tools/upstream/check_upstream.py`,
+which compares PipePipe's latest stable release with `appVersionName` in
+`app/build.gradle` and, for a newer one, merges the pinned client commit into
+`sync/vX.Y.Z`:
+
+- **No conflicts:** it resets `qpipepipeRelease` to 1, builds with the pinned
+  extractor (`assembleDebug testDebugUnitTest`) and opens a pull request to `dev`
+  with the build result and the release checklist. A failed build means the
+  merge needs porting work (merge rule 5).
+- **Conflicts:** it pushes `sync/vX.Y.Z` at `dev` and opens an issue listing the
+  conflicting files and the commands to merge and resolve them locally.
+
+An existing `sync/vX.Y.Z` on origin means the release is being handled, so the
+watcher does nothing. To test it, run it by hand with `based_on` set to an
+older version and `dry_run` on: it merges and builds without pushing or opening
+anything. Locally: `python tools/upstream/check_upstream.py --dry-run`.
+
 ## Merge rules
 
 1. Follow stable upstream releases only. Pre-releases (`-beta`) are skipped.
