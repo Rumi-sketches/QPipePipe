@@ -255,7 +255,8 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
         headerBinding = LocalPlaylistHeaderBinding.inflate(activity.getLayoutInflater(), itemsList,
                 false);
         playlistControlBinding = headerBinding.playlistControl;
-        resumeControls = new PlaylistResumeControls(playlistControlBinding, this::getStreamItems);
+        resumeControls = new PlaylistResumeControls(playlistControlBinding, this::getStreamItems,
+                itemsList);
 
         headerBinding.playlistTitleView.setSelected(true);
 

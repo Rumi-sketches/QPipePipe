@@ -134,7 +134,8 @@ public class PlaylistFragment extends BaseListInfoFragment<StreamInfoItem, Playl
         headerBinding = PlaylistHeaderBinding
                 .inflate(activity.getLayoutInflater(), itemsList, false);
         playlistControlBinding = headerBinding.playlistControl;
-        resumeControls = new PlaylistResumeControls(playlistControlBinding, this::getStreamItems);
+        resumeControls = new PlaylistResumeControls(playlistControlBinding, this::getStreamItems,
+                itemsList);
 
         return headerBinding::getRoot;
     }
@@ -298,10 +299,6 @@ public class PlaylistFragment extends BaseListInfoFragment<StreamInfoItem, Playl
     public void handleNextItems(final ListExtractor.InfoItemsPage result) {
         super.handleNextItems(result);
         setStreamCountAndOverallDuration(result.getItems(), !result.hasNextPage());
-        if (resumeControls != null) {
-            // the resume point may be in the page just loaded
-            resumeControls.refresh();
-        }
     }
 
     @Override

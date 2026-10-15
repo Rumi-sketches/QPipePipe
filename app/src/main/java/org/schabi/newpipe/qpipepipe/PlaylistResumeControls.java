@@ -8,6 +8,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.schabi.newpipe.R;
 import org.schabi.newpipe.databinding.PlaylistResumeControlBinding;
@@ -23,14 +24,45 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 /**
  * Drives the "continue where you left off" switch of the playlist headers
  * ({@code playlist_resume_control.xml}): shows where playback would resume and tells the play
- * buttons which index to start from.
+ * buttons which index to start from. With the switch on, the video to resume from is also
+ * marked in the list ({@link PlaylistResumeDecoration}).
  */
 public final class PlaylistResumeControls {
     private static final String TAG = "PlaylistResumeControls";
+    /** Lets a drag or a burst of loaded items settle before reading the history again. */
+    private static final long LIST_CHANGE_DELAY_MILLIS = 300;
 
     private final PlaylistResumeControlBinding binding;
     private final Supplier<List<StreamInfoItem>> streams;
+    private final RecyclerView list;
+    private final PlaylistResumeDecoration decoration;
     private final CompositeDisposable disposables = new CompositeDisposable();
+    private final Runnable refreshTask = this::refresh;
+    private final RecyclerView.AdapterDataObserver listObserver =
+            new RecyclerView.AdapterDataObserver() {
+                @Override
+                public void onChanged() {
+                    refreshSoon();
+                }
+
+                @Override
+                public void onItemRangeInserted(final int positionStart, final int itemCount) {
+                    refreshSoon();
+                }
+
+                @Override
+                public void onItemRangeRemoved(final int positionStart, final int itemCount) {
+                    refreshSoon();
+                }
+
+                @Override
+                public void onItemRangeMoved(final int fromPosition, final int toPosition,
+                                             final int itemCount) {
+                    refreshSoon();
+                }
+            };
+    @Nullable
+    private RecyclerView.Adapter<?> observedAdapter;
 
     private int resumeIndex = NO_RESUME;
     @Nullable
@@ -38,11 +70,17 @@ public final class PlaylistResumeControls {
 
     /**
      * @param streams the streams in the order the play buttons queue them
+     * @param list     the playlist's list, showing the header (with these controls) first and
+     *                 then the streams in the same order
      */
     public PlaylistResumeControls(@NonNull final PlaylistResumeControlBinding binding,
-                                  @NonNull final Supplier<List<StreamInfoItem>> streams) {
+                                  @NonNull final Supplier<List<StreamInfoItem>> streams,
+                                  @NonNull final RecyclerView list) {
         this.binding = binding;
         this.streams = streams;
+        this.list = list;
+        decoration = new PlaylistResumeDecoration(list.getContext());
+        list.addItemDecoration(decoration);
 
         binding.playlistResumeSwitch.setChecked(
                 QPipePipePreferences.isPlaylistResumeEnabled(context()));
@@ -55,10 +93,12 @@ public final class PlaylistResumeControls {
     }
 
     /**
-     * Reads the resume point again. Call it when the streams change or when the screen comes
-     * back, since the switch is shared by all playlists and the history may have moved on.
+     * Reads the resume point again. Call it when the streams are first shown and when the
+     * screen comes back, since the switch is shared by all playlists and the history may have
+     * moved on. Later changes to the list (loading, sorting, dragging) are followed on their own.
      */
     public void refresh() {
+        observeList();
         final boolean enabled = QPipePipePreferences.isPlaylistResumeEnabled(context());
         if (binding.playlistResumeSwitch.isChecked() != enabled) {
             binding.playlistResumeSwitch.setChecked(enabled); // the listener looks it up
@@ -82,6 +122,29 @@ public final class PlaylistResumeControls {
 
     public void dispose() {
         disposables.clear();
+        list.removeCallbacks(refreshTask);
+        list.removeItemDecoration(decoration);
+        if (observedAdapter != null) {
+            observedAdapter.unregisterAdapterDataObserver(listObserver);
+            observedAdapter = null;
+        }
+    }
+
+    /** The adapter may not be set yet when these controls are created with the header. */
+    private void observeList() {
+        final RecyclerView.Adapter<?> adapter = list.getAdapter();
+        if (adapter != null && adapter != observedAdapter) {
+            if (observedAdapter != null) {
+                observedAdapter.unregisterAdapterDataObserver(listObserver);
+            }
+            adapter.registerAdapterDataObserver(listObserver);
+            observedAdapter = adapter;
+        }
+    }
+
+    private void refreshSoon() {
+        list.removeCallbacks(refreshTask);
+        list.postDelayed(refreshTask, LIST_CHANGE_DELAY_MILLIS);
     }
 
     private void lookUpResumeIndex(@NonNull final IntConsumer then) {
@@ -108,10 +171,12 @@ public final class PlaylistResumeControls {
             binding.playlistResumeTarget.setText(context.getString(
                     R.string.playlist_resume_target, resumeIndex + 1, resumeTitle));
         }
-        binding.playlistCtrlPlayAllText.setText(
-                binding.playlistResumeSwitch.isChecked() && hasResumePoint
-                        ? context.getString(R.string.playlist_resume_play, resumeIndex + 1)
-                        : context.getString(R.string.play_all));
+        final boolean resuming = binding.playlistResumeSwitch.isChecked() && hasResumePoint;
+        binding.playlistCtrlPlayAllText.setText(resuming
+                ? context.getString(R.string.playlist_resume_play, resumeIndex + 1)
+                : context.getString(R.string.play_all));
+        // + 1 for the header, the first row of the list
+        decoration.setTarget(list, resuming ? resumeIndex + 1 : RecyclerView.NO_POSITION);
     }
 
     private Context context() {

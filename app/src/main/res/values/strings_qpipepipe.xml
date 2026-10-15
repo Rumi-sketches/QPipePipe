@@ -38,5 +38,6 @@
     <!-- Playlist header: resume from the last video started (PlaylistResumeControls) -->
     <string name="playlist_resume_title">Continue where you left off</string>
     <string name="playlist_resume_play">Resume from #%d</string>
+    <string name="playlist_resume_here">Resume here</string>
     <string name="playlist_resume_target">#%1$d · %2$s</string>
 </resources>
