@@ -8,6 +8,7 @@ import org.schabi.newpipe.database.playlist.PlaylistDuplicatesEntry;
 import org.schabi.newpipe.database.playlist.PlaylistMetadataEntry;
 import org.schabi.newpipe.local.LocalItemBuilder;
 import org.schabi.newpipe.local.history.HistoryRecordManager;
+import org.schabi.newpipe.qpipepipe.PlaylistProgressLines;
 import org.schabi.newpipe.util.PicassoHelper;
 import org.schabi.newpipe.util.Localization;
 
@@ -38,7 +39,18 @@ public class LocalPlaylistItemHolder extends PlaylistItemHolder {
         itemTitleView.setText(item.name);
         itemStreamCountView.setText(Localization.localizeStreamCountMini(
                 itemStreamCountView.getContext(), item.streamCount));
-        itemUploaderView.setVisibility(View.INVISIBLE);
+        // QPipePipe: count, duration and progress while recent queues are on
+        final String progressLine = PlaylistProgressLines.lineFor(itemView.getContext(),
+                item.uid, item.streamCount);
+        if (progressLine != null) {
+            itemUploaderView.setText(progressLine);
+            // the layouts allow one line, too narrow for the line in the grid
+            itemUploaderView.setMaxLines(2);
+            itemUploaderView.setVisibility(View.VISIBLE);
+        } else {
+            itemUploaderView.setLines(1);
+            itemUploaderView.setVisibility(View.INVISIBLE);
+        }
 
         PicassoHelper.loadPlaylistThumbnail(item.thumbnailUrl).into(itemThumbnailView);
 

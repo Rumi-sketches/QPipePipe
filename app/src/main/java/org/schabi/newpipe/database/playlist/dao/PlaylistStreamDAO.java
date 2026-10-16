@@ -10,6 +10,7 @@ import org.schabi.newpipe.database.playlist.PlaylistDuplicatesEntry;
 import org.schabi.newpipe.database.playlist.PlaylistMetadataEntry;
 import org.schabi.newpipe.database.playlist.PlaylistStreamEntry;
 import org.schabi.newpipe.database.playlist.model.PlaylistStreamEntity;
+import org.schabi.newpipe.qpipepipe.PlaylistProgress;
 
 import java.util.List;
 
@@ -110,4 +111,26 @@ public interface PlaylistStreamDAO extends BasicDAO<PlaylistStreamEntity> {
             + " GROUP BY " + JOIN_PLAYLIST_ID
             + " ORDER BY " + PLAYLIST_DISPLAY_INDEX)
     Flowable<List<PlaylistDuplicatesEntry>> getPlaylistDuplicatesMetadata(String streamUrl);
+
+    /**
+     * QPipePipe: duration and last started video of every local playlist that has videos.
+     * The position comes from the most recent watch history entry among the playlist videos.
+     */
+    @Query("SELECT totals." + JOIN_PLAYLIST_ID + " AS playlist_id, totals.total_duration,"
+            + " latest.last_played_position"
+            + " FROM (SELECT " + JOIN_PLAYLIST_ID + ","
+            + " SUM(CASE WHEN streams.duration > 0 THEN streams.duration ELSE 0 END)"
+            + " AS total_duration"
+            + " FROM " + PLAYLIST_STREAM_JOIN_TABLE
+            + " INNER JOIN " + STREAM_TABLE + " ON " + STREAM_ID + " = " + JOIN_STREAM_ID
+            + " GROUP BY " + JOIN_PLAYLIST_ID + ") AS totals"
+            + " LEFT JOIN (SELECT psj." + JOIN_PLAYLIST_ID + ", MAX(stream_history.access_date),"
+            + " (SELECT COUNT(*) FROM " + PLAYLIST_STREAM_JOIN_TABLE + " AS other"
+            + " WHERE other." + JOIN_PLAYLIST_ID + " = psj." + JOIN_PLAYLIST_ID
+            + " AND other." + JOIN_INDEX + " < psj." + JOIN_INDEX + ") AS last_played_position"
+            + " FROM " + PLAYLIST_STREAM_JOIN_TABLE + " AS psj"
+            + " INNER JOIN stream_history ON stream_history.stream_id = psj." + JOIN_STREAM_ID
+            + " GROUP BY psj." + JOIN_PLAYLIST_ID + ") AS latest"
+            + " ON latest." + JOIN_PLAYLIST_ID + " = totals." + JOIN_PLAYLIST_ID)
+    Flowable<List<PlaylistProgress>> getPlaylistProgress();
 }

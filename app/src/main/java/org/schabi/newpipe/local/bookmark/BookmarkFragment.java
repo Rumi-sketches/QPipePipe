@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
+import org.schabi.newpipe.qpipepipe.recentqueues.RecentQueuesTabs;
 import org.schabi.newpipe.NewPipeDatabase;
 import org.schabi.newpipe.R;
 import org.schabi.newpipe.database.AppDatabase;
@@ -69,6 +70,7 @@ public final class BookmarkFragment extends BaseLocalListFragment<List<PlaylistL
     private AtomicBoolean isLoadingComplete;
 
     private DebounceSaver debounceSaver;
+    private RecentQueuesTabs recentQueuesTabs;
 
     // Map from (uid, local/remote item) to the saved display index in the database.
     private Map<Pair<Long, LocalItem.LocalItemType>, Long> displayIndexInDatabase;
@@ -112,6 +114,9 @@ public final class BookmarkFragment extends BaseLocalListFragment<List<PlaylistL
         if (activity != null) {
             setTitle(activity.getString(R.string.tab_bookmarks));
         }
+        if (recentQueuesTabs != null) {
+            recentQueuesTabs.refresh();
+        }
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -123,6 +128,11 @@ public final class BookmarkFragment extends BaseLocalListFragment<List<PlaylistL
         super.initViews(rootView, savedInstanceState);
 
         itemListAdapter.setUseItemHandle(true);
+        recentQueuesTabs = new RecentQueuesTabs(this, rootView, () -> {
+            if (itemListAdapter != null) {
+                itemListAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
@@ -236,6 +246,10 @@ public final class BookmarkFragment extends BaseLocalListFragment<List<PlaylistL
 
         databaseSubscription = null;
         itemTouchHelper = null;
+        if (recentQueuesTabs != null) {
+            recentQueuesTabs.dispose();
+            recentQueuesTabs = null;
+        }
     }
 
     @Override

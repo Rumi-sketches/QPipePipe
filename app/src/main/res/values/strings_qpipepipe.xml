@@ -40,4 +40,37 @@
     <string name="playlist_resume_play">Resume from #%d</string>
     <string name="playlist_resume_here">Resume here</string>
     <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <!-- Recent queues (qpipepipe/recentqueues) -->
+    <string name="recent_queues_title">Keep recent queues</string>
+    <string name="recent_queues_summary">List the queues you play under Playlists, so you can resume or save them later. Videos you add to a queue started from one of your playlists are added to that playlist. Queues of YouTube playlists and channels are not kept</string>
+    <string name="recent_queues_tab_playlists">Playlists</string>
+    <string name="recent_queues_tab">Recent queues</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d queue</item>
+        <item quantity="other">%d queues, newest first</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Clear all</string>
+    <string name="recent_queues_clear_all_message">Delete all recent queues? Your saved playlists are not touched.</string>
+    <string name="recent_queues_empty">No recent queues. Queues you play appear here.</string>
+    <string name="recent_queue_title">Queue of %s</string>
+    <string name="recent_queue_from_playlist">From: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%d video added to the playlist</item>
+        <item quantity="other">%d videos added to the playlist</item>
+    </plurals>
+    <string name="recent_queue_position">at video %1$d of %2$d</string>
+    <string name="recent_queue_resume">Resume</string>
+    <string name="recent_queue_more">More options</string>
+    <string name="recent_queue_progress">%1$s of %2$s</string>
+    <string name="recent_queue_save_as_playlist">Save as playlist</string>
+    <string name="recent_queue_open_playlist">Open playlist</string>
+    <string name="recent_queue_saved">Saved in Playlists</string>
+    <string name="recent_queue_deleted">Queue deleted</string>
+    <string name="recent_queue_deleted_linked">Queue deleted, the playlist stays</string>
+    <string name="recent_queue_playing_now">Playing</string>
+    <string name="recent_queue_playing_at">Playing · %s</string>
+    <string name="recent_queue_watched">Watched</string>
+    <string name="recent_queue_not_watched">To watch</string>
+    <string name="recent_queue_added">added</string>
+    <string name="playlist_never_played">Never played</string>
 </resources>
