@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Ushbu fork qo\'shgan navbat va surish funksiyalari</string>
+    <string name="qpipepipe_category_playback">Ijro</string>
+    <string name="qpipepipe_category_swipe_actions">Surish amallari</string>
+    <string name="tap_always_plays_title">Videoga bosish uni doim ijro etadi</string>
+    <string name="tap_always_plays_summary">Videoni ochganingizda ijroni boshlash, hatto Avtoplay faqat Wi-Fi bilan cheklangan yoki o\'chirilgan bo\'lsa ham. Avtoplay avtomatik boshlanishlarga qo\'llanilishda davom etadi</string>
+    <string name="clear_queue_confirmation_title">Navbatni tozalashdan oldin tasdiq so\'rash</string>
+    <string name="clear_queue_confirmation_summary">Bir pleyerdan boshqasiga o\'tish navbatingizni almashtirishi mumkin</string>
+    <string name="clear_queue_confirmation_description">Faol pleyer navbati almashtiriladi</string>
+    <string name="clear_queue_confirmation_play_now">Hozir ijro etish</string>
+    <string name="enable_swipe_actions_title">Videolarda surish amallarini yoqish</string>
+    <string name="enable_swipe_actions_summary">Tezkor amal uchun bosh sahifa, qidiruv natijalari, pleylistlar va kanal guruhlarida videoni chapga yoki o\'ngga suring</string>
+    <string name="swipe_left_action_title">Chapga surish amali</string>
+    <string name="swipe_right_action_title">O\'ngga surish amali</string>
+    <string name="enable_swipe_actions_warning_title">Surish amallari yoqildi</string>
+    <string name="enable_swipe_actions_warning_message">Surish ishonchli ishlashi uchun to\'liq kenglikdagi qatorlar kerak, shuning uchun surish amallari mavjud joylarda to\'r yoki karta ko\'rinishi o\'rniga ro\'yxat ko\'rinishi ishlatiladi. Buni istalgan vaqtda yana o\'chirib qo\'yishingiz mumkin.</string>
+    <string name="swipe_actions_force_list_mode_summary">Surish amallari yoqilganda o\'chirilgan, chunki ular ro\'yxat ko\'rinishini majburiy qiladi</string>
+    <string name="remove_from_playlist_swipe_action">Pleylistdan olib tashlash (faqat pleylistlar)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s mavjud</string>
+    <string name="qpipepipe_update_notification_text">Yuklab olish va o\'rnatish uchun bosing</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Ushbu yangilanish yuklab olinib o\'rnatilsinmi? Android o\'rnatishni tasdiqlashingizni so\'raydi.</string>
+    <string name="qpipepipe_update_install">Yuklab olish va o\'rnatish</string>
+    <string name="qpipepipe_update_release_notes">Reliz qaydlari</string>
+    <string name="qpipepipe_update_later">Keyinroq</string>
+    <string name="qpipepipe_update_downloading">QPipePipe %s yuklab olinmoqda</string>
+    <string name="qpipepipe_update_download_failed">Yuklab olib bo\'lmadi. Ulanishingizni tekshiring va qayta urinib ko\'ring.</string>
+    <string name="qpipepipe_update_wrong_build">Bu versiya yangilanishni o\'zi o\'rnata olmaydi, masalan, u debug versiyasi bo\'lgani uchun. Buning o\'rniga APK faylini reliz sahifasidan yuklab oling.</string>
+    <string name="qpipepipe_update_failed">Yangilanishni o\'rnatib bo\'lmadi: %s</string>
+    <string name="playlist_resume_title">Qolgan joyingizdan davom eting</string>
+    <string name="playlist_resume_play">#%d dan davom etish</string>
+    <string name="playlist_resume_here">Shu yerdan davom etish</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">So\'nggi navbatlarni saqlash</string>
+    <string name="recent_queues_summary">Ijro etgan navbatlaringizni Playlistlar bo\'limida ko\'rsatish, shunda keyinroq ularni davom ettirishingiz yoki saqlashingiz mumkin. Pleylistlaringizdan biridan boshlangan navbatga qo\'shgan videolaringiz o\'sha pleylistga ham qo\'shiladi. YouTube pleylistlari va kanallarining navbatlari saqlanmaydi</string>
+    <string name="recent_queues_tab_playlists">Playlistlar</string>
+    <string name="recent_queues_tab">So\'nggi navbatlar</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d ta navbat</item>
+        <item quantity="other">%d ta navbat, eng yangisi birinchi</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Hammasini tozalash</string>
+    <string name="recent_queues_clear_all_message">Barcha so\'nggi navbatlar o\'chirilsinmi? Saqlangan pleylistlaringizga tegilmaydi.</string>
+    <string name="recent_queues_empty">So\'nggi navbatlar yo\'q. Ijro etgan navbatlaringiz shu yerda chiqadi.</string>
+    <string name="recent_queue_title">%s navbati</string>
+    <string name="recent_queue_from_playlist">Manba: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%2$s dan beri %1$d ta video qo\'shildi</item>
+        <item quantity="other">%2$s dan beri %1$d ta video qo\'shildi</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d ta video</item>
+        <item quantity="other">%1$d/%2$d ta video</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d ta video %2$s ga qo\'shildi</item>
+        <item quantity="other">%1$d ta video %2$s ga qo\'shildi</item>
+    </plurals>
+    <string name="recent_queue_resume">Davom etish</string>
+    <string name="recent_queue_more">Boshqa amallar</string>
+    <string name="recent_queue_progress">%1$s / %2$s</string>
+    <string name="recent_queue_save_as_playlist">Pleylist sifatida saqlash</string>
+    <string name="recent_queue_open_playlist">Pleylistni ochish</string>
+    <string name="recent_queue_saved">Playlistlarga saqlandi</string>
+    <string name="recent_queue_deleted">Navbat o\'chirildi</string>
+    <string name="recent_queue_deleted_linked">Navbat o\'chirildi, pleylist qoladi</string>
+    <string name="recent_queue_playing_now">Ijro etilmoqda</string>
+    <string name="recent_queue_playing_at">Ijro etilmoqda · %s</string>
+    <string name="recent_queue_watched">Ko\'rilgan</string>
+    <string name="recent_queue_not_watched">Ko\'rish uchun</string>
+    <string name="recent_queue_added">qo\'shildi</string>
+    <string name="playlist_never_played">Hech qachon ijro etilmagan</string>
+</resources>

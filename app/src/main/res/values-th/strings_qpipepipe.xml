@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">ฟีเจอร์คิวและการปัดที่เพิ่มโดยฟอร์กนี้</string>
+    <string name="qpipepipe_category_playback">การเล่น</string>
+    <string name="qpipepipe_category_swipe_actions">การทำงานเมื่อปัด</string>
+    <string name="tap_always_plays_title">แตะวิดีโอแล้วเล่นทุกครั้ง</string>
+    <string name="tap_always_plays_summary">เริ่มเล่นเมื่อคุณเปิดวิดีโอ แม้ว่าการเล่นอัตโนมัติจะจำกัดไว้เฉพาะ Wi-Fi หรือปิดอยู่ การเล่นอัตโนมัติยังคงใช้กับการเริ่มเล่นโดยอัตโนมัติ</string>
+    <string name="clear_queue_confirmation_title">ขอการยืนยันก่อนล้างคิว</string>
+    <string name="clear_queue_confirmation_summary">การสลับจากเครื่องเล่นหนึ่งไปยังอีกเครื่องเล่นหนึ่งอาจแทนที่คิวของคุณ</string>
+    <string name="clear_queue_confirmation_description">คิวของเครื่องเล่นที่ใช้งานอยู่จะถูกแทนที่</string>
+    <string name="clear_queue_confirmation_play_now">เล่นเลย</string>
+    <string name="enable_swipe_actions_title">เปิดใช้การปัดบนวิดีโอ</string>
+    <string name="enable_swipe_actions_summary">ปัดวิดีโอไปทางซ้ายหรือขวาในหน้าแรก ผลการค้นหา เพลย์ลิสต์ และกลุ่มช่อง เพื่อทำงานด่วน</string>
+    <string name="swipe_left_action_title">การทำงานเมื่อปัดซ้าย</string>
+    <string name="swipe_right_action_title">การทำงานเมื่อปัดขวา</string>
+    <string name="enable_swipe_actions_warning_title">เปิดใช้การปัดแล้ว</string>
+    <string name="enable_swipe_actions_warning_message">การปัดต้องใช้แถวแบบเต็มความกว้างจึงจะทำงานได้อย่างเสถียร ดังนั้นจะใช้มุมมองแบบรายการแทนมุมมองแบบตารางหรือการ์ดในทุกที่ที่ใช้การปัดได้ คุณปิดการตั้งค่านี้ได้ทุกเมื่อ</string>
+    <string name="swipe_actions_force_list_mode_summary">ปิดใช้งานขณะเปิดใช้การปัด ซึ่งบังคับใช้มุมมองแบบรายการ</string>
+    <string name="remove_from_playlist_swipe_action">เอาออกจากเพลย์ลิสต์ (เฉพาะเพลย์ลิสต์)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s พร้อมใช้งานแล้ว</string>
+    <string name="qpipepipe_update_notification_text">แตะเพื่อดาวน์โหลดและติดตั้ง</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">ดาวน์โหลดและติดตั้งอัพเดตนี้หรือไม่ Android จะขอให้คุณยืนยันการติดตั้ง</string>
+    <string name="qpipepipe_update_install">ดาวน์โหลดและติดตั้ง</string>
+    <string name="qpipepipe_update_release_notes">บันทึกประจำรุ่น</string>
+    <string name="qpipepipe_update_later">ภายหลัง</string>
+    <string name="qpipepipe_update_downloading">กำลังดาวน์โหลด QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">ดาวน์โหลดไม่สำเร็จ ตรวจสอบการเชื่อมต่อแล้วลองอีกครั้ง</string>
+    <string name="qpipepipe_update_wrong_build">บิลด์นี้ติดตั้งอัพเดตด้วยตัวเองไม่ได้ เช่น เพราะเป็นบิลด์สำหรับดีบัก โปรดดาวน์โหลด APK จากหน้ารุ่นที่เผยแพร่แทน</string>
+    <string name="qpipepipe_update_failed">ติดตั้งอัพเดตไม่ได้: %s</string>
+    <string name="playlist_resume_title">ดูต่อจากที่ค้างไว้</string>
+    <string name="playlist_resume_play">เล่นต่อจาก #%d</string>
+    <string name="playlist_resume_here">เล่นต่อจากตรงนี้</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">เก็บคิวล่าสุด</string>
+    <string name="recent_queues_summary">แสดงรายการคิวที่คุณเล่นไว้ใต้เพลย์ลิสต์ เพื่อให้เล่นต่อหรือบันทึกในภายหลังได้ วิดีโอที่คุณเพิ่มลงในคิวที่เริ่มจากเพลย์ลิสต์ของคุณจะถูกเพิ่มลงในเพลย์ลิสต์นั้นด้วย จะไม่เก็บคิวของเพลย์ลิสต์และช่อง YouTube</string>
+    <string name="recent_queues_tab_playlists">เพลย์ลิสต์</string>
+    <string name="recent_queues_tab">คิวล่าสุด</string>
+    <plurals name="recent_queues_count">
+        <item quantity="other">%d คิว ใหม่สุดก่อน</item>
+    </plurals>
+    <string name="recent_queues_clear_all">ล้างทั้งหมด</string>
+    <string name="recent_queues_clear_all_message">ลบคิวล่าสุดทั้งหมดหรือไม่ เพลย์ลิสต์ที่บันทึกไว้จะไม่ได้รับผลกระทบ</string>
+    <string name="recent_queues_empty">ไม่มีคิวล่าสุด คิวที่คุณเล่นจะแสดงที่นี่</string>
+    <string name="recent_queue_title">คิวเมื่อ %s</string>
+    <string name="recent_queue_from_playlist">จาก: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="other">เพิ่ม %1$d วิดีโอตั้งแต่ %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="other">%1$d/%2$d วิดีโอ</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="other">เพิ่ม %1$d วิดีโอลงใน %2$s แล้ว</item>
+    </plurals>
+    <string name="recent_queue_resume">เล่นต่อ</string>
+    <string name="recent_queue_more">ตัวเลือกเพิ่มเติม</string>
+    <string name="recent_queue_progress">%1$s / %2$s</string>
+    <string name="recent_queue_save_as_playlist">บันทึกเป็นเพลย์ลิสต์</string>
+    <string name="recent_queue_open_playlist">เปิดเพลย์ลิสต์</string>
+    <string name="recent_queue_saved">บันทึกในเพลย์ลิสต์แล้ว</string>
+    <string name="recent_queue_deleted">ลบคิวแล้ว</string>
+    <string name="recent_queue_deleted_linked">ลบคิวแล้ว เพลย์ลิสต์ยังคงอยู่</string>
+    <string name="recent_queue_playing_now">กำลังเล่น</string>
+    <string name="recent_queue_playing_at">กำลังเล่น · %s</string>
+    <string name="recent_queue_watched">ดูแล้ว</string>
+    <string name="recent_queue_not_watched">ยังไม่ได้ดู</string>
+    <string name="recent_queue_added">เพิ่มแล้ว</string>
+    <string name="playlist_never_played">ไม่เคยเล่น</string>
+</resources>

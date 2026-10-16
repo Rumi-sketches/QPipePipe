@@ -2,7 +2,6 @@ package org.schabi.newpipe.qpipepipe.recentqueues;
 
 import android.content.Context;
 import android.text.InputType;
-import android.text.format.DateUtils;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -16,11 +15,13 @@ import org.schabi.newpipe.databinding.DialogEditTextBinding;
 import org.schabi.newpipe.extractor.stream.StreamInfoItem;
 import org.schabi.newpipe.player.playqueue.PlayQueue;
 import org.schabi.newpipe.player.playqueue.SinglePlayQueue;
+import org.schabi.newpipe.qpipepipe.PlaylistProgressLines;
 import org.schabi.newpipe.util.Localization;
 import org.schabi.newpipe.util.NavigationHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Single;
@@ -48,25 +49,24 @@ final class RecentQueueActions {
 
     @NonNull
     static String dateTime(@NonNull final Context context, final long millis) {
-        return DateUtils.formatDateTime(context, millis, DateUtils.FORMAT_SHOW_DATE
-                | DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_NUMERIC_DATE
-                | DateUtils.FORMAT_SHOW_YEAR);
+        return PlaylistProgressLines.dateTime(context, millis);
     }
 
-    /** "12 videos · 2:12:00". */
+    /** "2/12 videos · 2:12", the duration in hours and minutes. */
     @NonNull
-    static String countAndDuration(@NonNull final Context context, final int count,
-                                   final long durationSeconds) {
-        final String streams = Localization.localizeStreamCount(context, count);
+    static String positionAndDuration(@NonNull final Context context, final int index,
+                                      final int count, final long durationSeconds) {
+        final String position = context.getResources().getQuantityString(
+                R.plurals.recent_queue_position_videos, count, index + 1, count);
         return durationSeconds > 0
-                ? Localization.concatenateStrings(streams,
-                        Localization.getDurationString(durationSeconds))
-                : streams;
+                ? Localization.concatenateStrings(position, hoursAndMinutes(durationSeconds))
+                : position;
     }
 
+    /** "77:23" for 77 hours and 23 minutes: long queues read better without days. */
     @NonNull
-    static String position(@NonNull final Context context, final int index, final int count) {
-        return context.getString(R.string.recent_queue_position, index + 1, count);
+    static String hoursAndMinutes(final long seconds) {
+        return String.format(Locale.ROOT, "%d:%02d", seconds / 3600, seconds % 3600 / 60);
     }
 
     /** Percentage of the queue reached, for the progress bars. */

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Այս ճյուղի ավելացրած հերթի և սահեցման գործառույթներ</string>
+    <string name="qpipepipe_category_playback">Նվագարկում</string>
+    <string name="qpipepipe_category_swipe_actions">Սահեցման գործողություններ</string>
+    <string name="tap_always_plays_title">Տեսանյութին հպելը միշտ նվագարկում է այն</string>
+    <string name="tap_always_plays_summary">Սկսել նվագարկումը տեսանյութը բացելիս, նույնիսկ եթե ինքնանվագարկումը սահմանափակված է Wi-Fi-ով կամ անջատված է։ Ինքնանվագարկումը շարունակում է գործել ավտոմատ մեկնարկների համար</string>
+    <string name="clear_queue_confirmation_title">Հաստատում խնդրել հերթը մաքրելուց առաջ</string>
+    <string name="clear_queue_confirmation_summary">Մի նվագարկիչից մյուսին անցնելը կարող է փոխարինել ձեր հերթը</string>
+    <string name="clear_queue_confirmation_description">Ակտիվ նվագարկիչի հերթը կփոխարինվի</string>
+    <string name="clear_queue_confirmation_play_now">Նվագարկել հիմա</string>
+    <string name="enable_swipe_actions_title">Միացնել սահեցման գործողությունները տեսանյութերի վրա</string>
+    <string name="enable_swipe_actions_summary">Արագ գործողության համար սահեցրեք տեսանյութը ձախ կամ աջ գլխավոր էջում, որոնման արդյունքներում, երգացանկերում և ալիքների խմբերում</string>
+    <string name="swipe_left_action_title">Ձախ սահեցման գործողություն</string>
+    <string name="swipe_right_action_title">Աջ սահեցման գործողություն</string>
+    <string name="enable_swipe_actions_warning_title">Սահեցման գործողությունները միացված են</string>
+    <string name="enable_swipe_actions_warning_message">Սահեցումը հուսալի աշխատելու համար պահանջում է ամբողջ լայնությամբ տողեր, ուստի այնտեղ, որտեղ սահեցման գործողությունները հասանելի են, ցանցի կամ քարտերի տեսքի փոխարեն կօգտագործվի ցանկի տեսքը։ Կարող եք ցանկացած պահի կրկին անջատել սա։</string>
+    <string name="swipe_actions_force_list_mode_summary">Անջատված է, քանի դեռ սահեցման գործողությունները միացված են, քանի որ դրանք պարտադրում են ցանկի տեսքը</string>
+    <string name="remove_from_playlist_swipe_action">Հեռացնել երգացանկից (միայն երգացանկեր)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s-ը հասանելի է</string>
+    <string name="qpipepipe_update_notification_text">Հպեք՝ ներբեռնելու և տեղադրելու համար</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Ներբեռնե՞լ և տեղադրել այս թարմացումը։ Android-ը կխնդրի հաստատել տեղադրումը։</string>
+    <string name="qpipepipe_update_install">Ներբեռնել և տեղադրել</string>
+    <string name="qpipepipe_update_release_notes">Թողարկման նշումներ</string>
+    <string name="qpipepipe_update_later">Ավելի ուշ</string>
+    <string name="qpipepipe_update_downloading">QPipePipe %s-ը ներբեռնվում է</string>
+    <string name="qpipepipe_update_download_failed">Ներբեռնումը ձախողվեց։ Ստուգեք ձեր կապը և նորից փորձեք։</string>
+    <string name="qpipepipe_update_wrong_build">Այս կառուցումը չի կարող ինքնուրույն տեղադրել թարմացումը, օրինակ՝ քանի որ այն վրիպազերծման կառուցում է։ Փոխարենը ներբեռնեք APK-ն թողարկման էջից։</string>
+    <string name="qpipepipe_update_failed">Չհաջողվեց տեղադրել թարմացումը՝ %s</string>
+    <string name="playlist_resume_title">Շարունակել այնտեղից, որտեղ կանգ էիք առել</string>
+    <string name="playlist_resume_play">Շարունակել #%d-ից</string>
+    <string name="playlist_resume_here">Շարունակել այստեղից</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Պահել վերջին հերթերը</string>
+    <string name="recent_queues_summary">Ցուցադրել ձեր նվագարկած հերթերը Երգացանկեր բաժնում, որպեսզի հետո կարողանաք շարունակել կամ պահպանել դրանք։ Ձեր երգացանկերից մեկից սկսված հերթին ավելացված տեսանյութերը ավելացվում են նաև այդ երգացանկին։ YouTube-ի երգացանկերի և ալիքների հերթերը չեն պահվում</string>
+    <string name="recent_queues_tab_playlists">Երգացանկեր</string>
+    <string name="recent_queues_tab">Վերջին հերթեր</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d հերթ</item>
+        <item quantity="other">%d հերթ, նորերը սկզբում</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Մաքրել բոլորը</string>
+    <string name="recent_queues_clear_all_message">Ջնջե՞լ բոլոր վերջին հերթերը։ Ձեր պահված երգացանկերը չեն փոփոխվի։</string>
+    <string name="recent_queues_empty">Վերջին հերթեր չկան։ Ձեր նվագարկած հերթերը կհայտնվեն այստեղ։</string>
+    <string name="recent_queue_title">Հերթ՝ %s</string>
+    <string name="recent_queue_from_playlist">Աղբյուր՝ %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%2$s-ից ի վեր ավելացվել է %1$d տեսանյութ</item>
+        <item quantity="other">%2$s-ից ի վեր ավելացվել է %1$d տեսանյութ</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d տեսանյութ</item>
+        <item quantity="other">%1$d/%2$d տեսանյութ</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d տեսանյութ ավելացվեց %2$s-ին</item>
+        <item quantity="other">%1$d տեսանյութ ավելացվեց %2$s-ին</item>
+    </plurals>
+    <string name="recent_queue_resume">Շարունակել</string>
+    <string name="recent_queue_more">Այլ ընտրանքներ</string>
+    <string name="recent_queue_progress">%1$s / %2$s</string>
+    <string name="recent_queue_save_as_playlist">Պահել որպես երգացանկ</string>
+    <string name="recent_queue_open_playlist">Բացել երգացանկը</string>
+    <string name="recent_queue_saved">Պահվեց Երգացանկերում</string>
+    <string name="recent_queue_deleted">Հերթը ջնջվեց</string>
+    <string name="recent_queue_deleted_linked">Հերթը ջնջվեց, երգացանկը մնում է</string>
+    <string name="recent_queue_playing_now">Նվագարկվում է</string>
+    <string name="recent_queue_playing_at">Նվագարկվում է · %s</string>
+    <string name="recent_queue_watched">Դիտված</string>
+    <string name="recent_queue_not_watched">Դիտելու</string>
+    <string name="recent_queue_added">ավելացված</string>
+    <string name="playlist_never_played">Երբեք չի նվագարկվել</string>
+</resources>

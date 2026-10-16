@@ -41,6 +41,26 @@ public abstract class RecentQueueDAO {
     @Update
     abstract void update(RecentQueueEntity queue);
 
+    @Query("UPDATE " + RecentQueueStreamEntity.TABLE + " SET added_to_playlist = 0"
+            + " WHERE queue_id = :queueId AND url IN (:urls)")
+    abstract void unmarkStreams(long queueId, List<String> urls);
+
+    @Query("SELECT COUNT(*) FROM " + RecentQueueStreamEntity.TABLE
+            + " WHERE queue_id = :queueId AND added_to_playlist = 1")
+    abstract int countAdded(long queueId);
+
+    /** The videos at {@code urls} were taken back out of the playlist of the queue. */
+    @Transaction
+    void unmarkAdded(@NonNull final String queueKey, @NonNull final List<String> urls) {
+        final RecentQueueEntity queue = getByKey(queueKey);
+        if (queue == null) {
+            return;
+        }
+        unmarkStreams(queue.uid, urls);
+        queue.addedCount = countAdded(queue.uid);
+        update(queue);
+    }
+
     @Query("UPDATE " + RecentQueueEntity.TABLE
             + " SET " + RecentQueueEntity.QUEUE_KEY + " = :queueKey,"
             + " source_playlist_id = :playlistId, source_playlist_name = :playlistName"

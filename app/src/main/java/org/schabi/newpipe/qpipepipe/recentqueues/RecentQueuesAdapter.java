@@ -63,9 +63,6 @@ final class RecentQueuesAdapter extends RecyclerView.Adapter<RecentQueuesAdapter
         private final TextView streamCount;
         private final TextView title;
         private final TextView date;
-        private final TextView added;
-        private final TextView meta;
-        private final TextView position;
         private final ProgressBar progress;
         private final ImageButton menu;
 
@@ -75,9 +72,6 @@ final class RecentQueuesAdapter extends RecyclerView.Adapter<RecentQueuesAdapter
             streamCount = itemView.findViewById(R.id.recent_queue_stream_count);
             title = itemView.findViewById(R.id.recent_queue_title);
             date = itemView.findViewById(R.id.recent_queue_date);
-            added = itemView.findViewById(R.id.recent_queue_added);
-            meta = itemView.findViewById(R.id.recent_queue_meta);
-            position = itemView.findViewById(R.id.recent_queue_position);
             progress = itemView.findViewById(R.id.recent_queue_progress);
             menu = itemView.findViewById(R.id.recent_queue_menu);
         }
@@ -91,19 +85,6 @@ final class RecentQueuesAdapter extends RecyclerView.Adapter<RecentQueuesAdapter
             // a linked queue is named after its playlist, so its date goes on its own line
             date.setVisibility(queue.isLinkedToPlaylist() ? View.VISIBLE : View.GONE);
             date.setText(RecentQueueActions.dateTime(context, queue.updatedAt));
-            if (queue.addedCount > 0) {
-                added.setText(context.getResources().getQuantityString(
-                        R.plurals.recent_queue_added_to_playlist, queue.addedCount,
-                        queue.addedCount));
-                added.setVisibility(View.VISIBLE);
-            } else {
-                added.setVisibility(View.GONE);
-            }
-
-            meta.setText(RecentQueueActions.countAndDuration(context, queue.streamCount,
-                    queue.totalDuration));
-            position.setText(RecentQueueActions.position(context, queue.currentIndex,
-                    queue.streamCount));
             progress.setProgress(RecentQueueActions.progressPercent(queue.currentIndex,
                     queue.streamCount));
 

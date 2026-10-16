@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">ⵜⵉⵡⵓⵔⵉⵡⵉⵏ ⵏ ⵜⴰⵍⴳⴰⵎⵜ ⵏ ⵓⵔⴰⵊⵓ ⴷ ⵓⵣⵓⵖⵔ ⵉⵜⵜⵡⴰⵔⵏⴰⵏ ⵙ ⵓⴼⵓⵔⴽ-ⴰ</string>
+    <string name="qpipepipe_category_playback">ⵜⴰⵖⵓⵔⵉ</string>
+    <string name="qpipepipe_category_swipe_actions">ⵜⵉⴳⴰⵡⵉⵏ ⵏ ⵓⵣⵓⵖⵔ</string>
+    <string name="tap_always_plays_title">ⴰⵙⵉⵜⵉ ⵖⴼ ⵓⴼⵉⴷⵢⵓ ⵉⵖⵔⴰ-ⵜ ⴽⵔⴰⵢⴳⴰⵜ ⵜⵉⴽⴽⴰⵍⵜ</string>
+    <string name="tap_always_plays_summary">ⴱⴷⵓ ⵜⴰⵖⵓⵔⵉ ⵎⵍⵍⵉⴷ ⵜⵔⵥⵎⵜ ⴰⴼⵉⴷⵢⵓ, ⵡⴰⵅⵅⴰ ⵜⴰⵖⵓⵔⵉ ⵜⴰⵡⵓⵔⵎⴰⵏⵜ ⵜⵜⵡⴰⵙⴱⴰⴷⵓ ⵉ Wi-Fi ⵖⴰⵙ ⵏⵉⵖ ⵜⵏⵙⴰ. ⵜⴰⵖⵓⵔⵉ ⵜⴰⵡⵓⵔⵎⴰⵏⵜ ⵜⵇⵇⵉⵎ ⵜⵜⴷⴷⵓ ⵉ ⵉⴱⴷⵉⵢⵏ ⵉⵡⵓⵔⵎⴰⵏⵏ</string>
+    <string name="clear_queue_confirmation_title">ⵙⵙⵓⵜⵔ ⴰⵙⵏⵜⵎ ⵓⵇⴱⵍ ⴰⴷ ⵜⵙⴼⴹⵜ ⵜⴰⵍⴳⴰⵎⵜ ⵏ ⵓⵔⴰⵊⵓ</string>
+    <string name="clear_queue_confirmation_summary">ⴰⵙⵏⴼⵍ ⵙⴳ ⵢⴰⵏ ⵓⵎⵖⵔⵉ ⵙ ⵡⴰⵢⴹ ⵉⵣⵎⵔ ⴰⴷ ⵉⵙⵏⴼⵍ ⵜⴰⵍⴳⴰⵎⵜ ⵏⵏⴽ ⵏ ⵓⵔⴰⵊⵓ</string>
+    <string name="clear_queue_confirmation_description">ⵜⴰⵍⴳⴰⵎⵜ ⵏ ⵓⵔⴰⵊⵓ ⵏ ⵓⵎⵖⵔⵉ ⵓⵔⵎⵉⴷ ⴰⴷ ⵜⵜⵓⵙⵏⴼⵍ</string>
+    <string name="clear_queue_confirmation_play_now">ⵖⵔ ⴷⴰⵖ</string>
+    <string name="enable_swipe_actions_title">ⵔⵎⴷ ⵜⵉⴳⴰⵡⵉⵏ ⵏ ⵓⵣⵓⵖⵔ ⵖⴼ ⵉⴼⵉⴷⵢⵓⵜⵏ</string>
+    <string name="enable_swipe_actions_summary">ⵣⵓⵖⵔ ⴰⴼⵉⴷⵢⵓ ⵙ ⵓⵣⵍⵎⴰⴹ ⵏⵉⵖ ⵙ ⵓⴼⴰⵙⵉ ⴳ ⵜⴰⵙⵏⴰ ⵜⴰⵎⵣⵡⴰⵔⵓⵜ, ⵉⴳⵎⴰⴹ ⵏ ⵓⵔⵣⵣⵓ, ⵜⵉⵍⴳⴰⵎⵉⵏ ⵏ ⵜⵖⵓⵔⵉ ⴷ ⵉⴳⵔⴰⵡⵏ ⵏ ⵉⴱⵓⴷⴰⵏ ⵉ ⵓⵙⴽⵔ ⵏ ⵜⵉⴳⴰⵡⵜ ⵜⴰⵎⵣⵔⴰⵔⵜ</string>
+    <string name="swipe_left_action_title">ⵜⵉⴳⴰⵡⵜ ⵏ ⵓⵣⵓⵖⵔ ⵙ ⵓⵣⵍⵎⴰⴹ</string>
+    <string name="swipe_right_action_title">ⵜⵉⴳⴰⵡⵜ ⵏ ⵓⵣⵓⵖⵔ ⵙ ⵓⴼⴰⵙⵉ</string>
+    <string name="enable_swipe_actions_warning_title">ⵜⵜⵡⴰⵔⵎⴷⵏⵜ ⵜⵉⴳⴰⵡⵉⵏ ⵏ ⵓⵣⵓⵖⵔ</string>
+    <string name="enable_swipe_actions_warning_message">ⴰⵣⵓⵖⵔ ⵉⵔⴰ ⵉⵣⵉⵔⵉⴳⵏ ⵙ ⵜⵀⵔⵉ ⴽⵓⵍⵍⵓ ⴱⴰⵛ ⴰⴷ ⵉⵜⴷⴷⵓ ⵎⵣⵢⴰⵏ, ⵖⴼ ⴰⵢⴰ ⴰⵙⴽⴰⵏ ⵏ ⵜⴰⵍⴳⴰⵎⵜ ⴰⴷ ⵉⵜⵜⵓⵙⵇⴷⵛ ⴳ ⵓⵎⴽⴰⵏ ⵏ ⵓⵙⴽⴰⵏ ⵏ ⵓⵥⵟⵟⴰ ⵏⵉⵖ ⵏ ⵜⴽⴰⵔⴹⵉⵡⵉⵏ ⴰⵏⴷⴰ ⵍⵍⴰⵏⵜ ⵜⵉⴳⴰⵡⵉⵏ ⵏ ⵓⵣⵓⵖⵔ. ⵜⵣⴹⴰⵔⵜ ⴰⴷ ⵜ ⵜⵙⵏⵙⴹⵜ ⴷⴰⵖ ⵎⵍⵎⵉ ⵜⵔⵉⵜ.</string>
+    <string name="swipe_actions_force_list_mode_summary">ⵉⵏⵙⴰ ⵎⵍⵍⵉⴷ ⵔⵎⴷⵏⵜ ⵜⵉⴳⴰⵡⵉⵏ ⵏ ⵓⵣⵓⵖⵔ, ⴰⵛⴽⵓ ⵙⵙⵃⵜⵜⵉⵎⵏⵜ ⴰⵙⴽⴰⵏ ⵏ ⵜⴰⵍⴳⴰⵎⵜ</string>
+    <string name="remove_from_playlist_swipe_action">ⴽⴽⵙ ⵙⴳ ⵜⴰⵍⴳⴰⵎⵜ ⵏ ⵜⵖⵓⵔⵉ (ⵜⵉⵍⴳⴰⵎⵉⵏ ⵏ ⵜⵖⵓⵔⵉ ⵖⴰⵙ)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s ⵉⵍⵍⴰ</string>
+    <string name="qpipepipe_update_notification_text">ⵙⵉⵜ ⵉ ⵡⴰⴳⴰⵎ ⴷ ⵓⵙⵔⵙ</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">ⴰⴷ ⵜⴳⵎⵜ ⴷ ⴰⴷ ⵜⵙⵔⵙⵜ ⵜⴰⵙⴷⵖⵉⵜ ⴰ? Android ⴰⴷ ⴰⴽ ⵉⵙⵓⵜⵔ ⴰⴷ ⵜⵙⵏⵜⵎⵜ ⴰⵙⵔⵙ.</string>
+    <string name="qpipepipe_update_install">ⴰⴳⵎ ⴷ ⵙⵔⵙ</string>
+    <string name="qpipepipe_update_release_notes">ⵜⵉⵣⵎⵉⵍⵉⵏ ⵏ ⵜⵓⴼⴼⵖⵓⵜ</string>
+    <string name="qpipepipe_update_later">ⴷⴼⴼⵉⵔ</string>
+    <string name="qpipepipe_update_downloading">ⴰⴳⴰⵎ ⵏ QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">ⵓⵔ ⵉⴷⴷⵉ ⵡⴰⴳⴰⵎ. ⵙⵙⵏⵇⴷ ⵜⵓⵇⵇⵏⴰ ⵏⵏⴽ ⴷ ⵄⴰⵡⴷ ⵄⵔⴹ.</string>
+    <string name="qpipepipe_update_wrong_build">ⵍⵇⵎ ⴰ ⵓⵔ ⵉⵣⵎⵉⵔ ⴰⴷ ⵉⵙⵔⵙ ⵜⴰⵙⴷⵖⵉⵜ ⵙ ⵢⵉⵎⴰⵏ ⵏⵙ, ⵙ ⵓⵎⴷⵢⴰ ⴰⵛⴽⵓ ⴷ ⵍⵇⵎ ⵏ ⵓⵙⵖⵜⵉ. ⴰⴳⵎ APK ⵙⴳ ⵜⴰⵙⵏⴰ ⵏ ⵜⵓⴼⴼⵖⵓⵜ ⴳ ⵓⵎⴽⴰⵏ ⵏⵙ.</string>
+    <string name="qpipepipe_update_failed">ⵓⵔ ⵜⵜⵓⵙⵔⵙ ⵜⴰⵙⴷⵖⵉⵜ: %s</string>
+    <string name="playlist_resume_title">ⴽⵎⵎⵍ ⵙⴳ ⵎⴰⵏⵉ ⵜⵃⴱⵙⴹⵜ</string>
+    <string name="playlist_resume_play">ⴽⵎⵎⵍ ⵙⴳ #%d</string>
+    <string name="playlist_resume_here">ⴽⵎⵎⵍ ⴷⴰ</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">ⵃⴹⵓ ⵜⵉⵍⴳⴰⵎⵉⵏ ⵏ ⵓⵔⴰⵊⵓ ⵜⵉⵎⴳⴳⵓⵔⴰ</string>
+    <string name="recent_queues_summary">ⵙⴽⵏ ⵜⵉⵍⴳⴰⵎⵉⵏ ⵏ ⵓⵔⴰⵊⵓ ⵍⵍⵉ ⵜⵖⵔⵉⵜ ⴷⴷⴰⵡ ⵜⵉⵍⴳⴰⵎⵉⵏ ⵏ ⵜⵖⵓⵔⵉ, ⴱⴰⵛ ⴰⴷ ⵜⴽⵎⵎⵍⵜ ⴼⵍⵍⴰⵙⵏⵜ ⵏⵉⵖ ⴰⴷ ⵜⵏⵜ ⵜⵃⴹⵓⵜ ⴷⴼⴼⵉⵔ. ⵉⴼⵉⴷⵢⵓⵜⵏ ⵍⵍⵉ ⵜⵔⵏⵉⵜ ⵙ ⵜⴰⵍⴳⴰⵎⵜ ⵏ ⵓⵔⴰⵊⵓ ⵍⵍⵉ ⵉⴱⴷⴰⵏ ⵙⴳ ⵢⴰⵜ ⵙⴳ ⵜⵉⵍⴳⴰⵎⵉⵏ ⵏⵏⴽ ⵏ ⵜⵖⵓⵔⵉ ⵜⵜⵡⴰⵔⵏⴰⵏ ⵙ ⵜⴰⵍⴳⴰⵎⵜ ⵏⵏⴰ. ⵜⵉⵍⴳⴰⵎⵉⵏ ⵏ ⵓⵔⴰⵊⵓ ⵏ ⵜⵉⵍⴳⴰⵎⵉⵏ ⵏ ⵜⵖⵓⵔⵉ ⴷ ⵉⴱⵓⴷⴰⵏ ⵏ YouTube ⵓⵔ ⵜⵜⵡⴰⵃⴹⴰⵏⵜ</string>
+    <string name="recent_queues_tab_playlists">ⵜⵉⵍⴳⴰⵎⵉⵏ ⵏ ⵜⵖⵓⵔⵉ</string>
+    <string name="recent_queues_tab">ⵜⵉⵍⴳⴰⵎⵉⵏ ⵏ ⵓⵔⴰⵊⵓ ⵜⵉⵎⴳⴳⵓⵔⴰ</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d ⵏ ⵜⴰⵍⴳⴰⵎⵜ ⵏ ⵓⵔⴰⵊⵓ</item>
+        <item quantity="other">%d ⵏ ⵜⵉⵍⴳⴰⵎⵉⵏ ⵏ ⵓⵔⴰⵊⵓ, ⵜⵉⵎⴰⵢⵏⵓⵜⵉⵏ ⴷ ⵜⵉⵎⵣⵡⵓⵔⴰ</item>
+    </plurals>
+    <string name="recent_queues_clear_all">ⵙⴼⴹ ⵎⴰⵕⵕⴰ</string>
+    <string name="recent_queues_clear_all_message">ⴽⴽⵙ ⵎⴰⵕⵕⴰ ⵜⵉⵍⴳⴰⵎⵉⵏ ⵏ ⵓⵔⴰⵊⵓ ⵜⵉⵎⴳⴳⵓⵔⴰ? ⵜⵉⵍⴳⴰⵎⵉⵏ ⵏⵏⴽ ⵏ ⵜⵖⵓⵔⵉ ⵢⵜⵜⵡⴰⵃⴹⴰⵏ ⵓⵔ ⵜⵜⴱⴷⴷⴰⵍⵏⵜ.</string>
+    <string name="recent_queues_empty">ⵓⵍⴰⵛ ⵜⵉⵍⴳⴰⵎⵉⵏ ⵏ ⵓⵔⴰⵊⵓ ⵜⵉⵎⴳⴳⵓⵔⴰ. ⵜⵉⵍⴳⴰⵎⵉⵏ ⵏ ⵓⵔⴰⵊⵓ ⵍⵍⵉ ⵜⵖⵔⵉⵜ ⴰⴷ ⴷ ⴱⴰⵏⵏⵜ ⴷⴰ.</string>
+    <string name="recent_queue_title">ⵜⴰⵍⴳⴰⵎⵜ ⵏ ⵓⵔⴰⵊⵓ ⵏ %s</string>
+    <string name="recent_queue_from_playlist">ⵙⴳ: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%1$d ⵏ ⵓⴼⵉⴷⵢⵓ ⵉⵜⵜⵡⴰⵔⵏⴰ ⵙⴳ %2$s</item>
+        <item quantity="other">%1$d ⵏ ⵉⴼⵉⴷⵢⵓⵜⵏ ⵜⵜⵡⴰⵔⵏⴰⵏ ⵙⴳ %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d ⵏ ⵓⴼⵉⴷⵢⵓ</item>
+        <item quantity="other">%1$d/%2$d ⵏ ⵉⴼⵉⴷⵢⵓⵜⵏ</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d ⵏ ⵓⴼⵉⴷⵢⵓ ⵉⵜⵜⵡⴰⵔⵏⴰ ⵙ %2$s</item>
+        <item quantity="other">%1$d ⵏ ⵉⴼⵉⴷⵢⵓⵜⵏ ⵜⵜⵡⴰⵔⵏⴰⵏ ⵙ %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">ⴽⵎⵎⵍ</string>
+    <string name="recent_queue_more">ⵓⴳⴰⵔ ⵏ ⵜⵖⴰⵡⵙⵉⵡⵉⵏ</string>
+    <string name="recent_queue_progress">%1$s ⵖⴼ %2$s</string>
+    <string name="recent_queue_save_as_playlist">ⵃⴹⵓ ⴰⵎ ⵜⴰⵍⴳⴰⵎⵜ ⵏ ⵜⵖⵓⵔⵉ</string>
+    <string name="recent_queue_open_playlist">ⵔⵥⵎ ⵜⴰⵍⴳⴰⵎⵜ ⵏ ⵜⵖⵓⵔⵉ</string>
+    <string name="recent_queue_saved">ⵜⵜⵡⴰⵃⴹⴰ ⴳ ⵜⵉⵍⴳⴰⵎⵉⵏ ⵏ ⵜⵖⵓⵔⵉ</string>
+    <string name="recent_queue_deleted">ⵜⵜⵡⴰⴽⴽⵙ ⵜⴰⵍⴳⴰⵎⵜ ⵏ ⵓⵔⴰⵊⵓ</string>
+    <string name="recent_queue_deleted_linked">ⵜⵜⵡⴰⴽⴽⵙ ⵜⴰⵍⴳⴰⵎⵜ ⵏ ⵓⵔⴰⵊⵓ, ⵜⴰⵍⴳⴰⵎⵜ ⵏ ⵜⵖⵓⵔⵉ ⵜⵇⵇⵉⵎ</string>
+    <string name="recent_queue_playing_now">ⴰⵔ ⵜⵜⵡⴰⵖⵔⴰ</string>
+    <string name="recent_queue_playing_at">ⴰⵔ ⵜⵜⵡⴰⵖⵔⴰ · %s</string>
+    <string name="recent_queue_watched">ⵉⵜⵜⵡⴰⵏⵏⴰⵢ</string>
+    <string name="recent_queue_not_watched">ⵉ ⵡⴰⵏⵏⴰⵢ</string>
+    <string name="recent_queue_added">ⵉⵜⵜⵡⴰⵔⵏⴰ</string>
+    <string name="playlist_never_played">ⵓⵔ ⵊⵊⵉⵏ ⵉⵜⵜⵡⴰⵖⵔⴰ</string>
+</resources>

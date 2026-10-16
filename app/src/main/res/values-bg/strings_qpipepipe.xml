@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Функции за опашката и плъзгането, добавени от този форк</string>
+    <string name="qpipepipe_category_playback">Възпроизвеждане</string>
+    <string name="qpipepipe_category_swipe_actions">Действия с плъзгане</string>
+    <string name="tap_always_plays_title">Докосването на видео винаги го пуска</string>
+    <string name="tap_always_plays_summary">Възпроизвеждането започва при отваряне на видео, дори ако автоматичното пускане е ограничено до Wi-Fi или е изключено. Автоматичното пускане продължава да важи за автоматичните стартирания</string>
+    <string name="clear_queue_confirmation_title">Потвърждение преди изчистване на опашка</string>
+    <string name="clear_queue_confirmation_summary">Превключването от един плейър към друг може да замени опашката ви</string>
+    <string name="clear_queue_confirmation_description">Опашката на активния плейър ще бъде заменена</string>
+    <string name="clear_queue_confirmation_play_now">Пусни сега</string>
+    <string name="enable_swipe_actions_title">Действия с плъзгане върху видеа</string>
+    <string name="enable_swipe_actions_summary">Плъзнете видео наляво или надясно на началната страница, в резултатите от търсене, плейлистите и групите канали, за да изпълните бързо действие</string>
+    <string name="swipe_left_action_title">Действие при плъзгане наляво</string>
+    <string name="swipe_right_action_title">Действие при плъзгане надясно</string>
+    <string name="enable_swipe_actions_warning_title">Действията с плъзгане са включени</string>
+    <string name="enable_swipe_actions_warning_message">Плъзгането работи надеждно само с редове на цяла ширина, затова навсякъде, където има действия с плъзгане, ще се използва изглед на списък вместо мрежа или карти. Можете да изключите това по всяко време.</string>
+    <string name="swipe_actions_force_list_mode_summary">Недостъпно, докато действията с плъзгане са включени, защото те налагат изглед на списък</string>
+    <string name="remove_from_playlist_swipe_action">Премахни от плейлиста (само в плейлисти)</string>
+    <string name="qpipepipe_update_notification_title">Налична е QPipePipe %s</string>
+    <string name="qpipepipe_update_notification_text">Докоснете за изтегляне и инсталиране</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Да се изтегли и инсталира ли това обновление? Android ще поиска да потвърдите инсталирането.</string>
+    <string name="qpipepipe_update_install">Изтегли и инсталирай</string>
+    <string name="qpipepipe_update_release_notes">Бележки по версията</string>
+    <string name="qpipepipe_update_later">По-късно</string>
+    <string name="qpipepipe_update_downloading">Изтегляне на QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">Изтеглянето е неуспешно. Проверете връзката си и опитайте отново.</string>
+    <string name="qpipepipe_update_wrong_build">Тази компилация не може сама да инсталира обновлението, например защото е компилация за отстраняване на грешки. Вместо това изтеглете APK файла от страницата на версията.</string>
+    <string name="qpipepipe_update_failed">Обновлението не можа да бъде инсталирано: %s</string>
+    <string name="playlist_resume_title">Продължете откъдето спряхте</string>
+    <string name="playlist_resume_play">Продължи от #%d</string>
+    <string name="playlist_resume_here">Продължи оттук</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Запазване на последните опашки</string>
+    <string name="recent_queues_summary">Показва пусканите опашки в „Плейлисти“, за да можете да ги продължите или запазите по-късно. Видеата, добавени към опашка, пусната от ваш плейлист, се добавят към този плейлист. Опашките на плейлисти и канали в YouTube не се запазват</string>
+    <string name="recent_queues_tab_playlists">Плейлисти</string>
+    <string name="recent_queues_tab">Последни опашки</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d опашка</item>
+        <item quantity="other">%d опашки, първо най-новите</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Изчисти всички</string>
+    <string name="recent_queues_clear_all_message">Изтриване на всички последни опашки? Запазените плейлисти няма да бъдат засегнати.</string>
+    <string name="recent_queues_empty">Няма последни опашки. Тук ще се появяват опашките, които пускате.</string>
+    <string name="recent_queue_title">Опашка от %s</string>
+    <string name="recent_queue_from_playlist">От: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%1$d видео е добавено от %2$s насам</item>
+        <item quantity="other">%1$d видеа са добавени от %2$s насам</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d видео</item>
+        <item quantity="other">%1$d/%2$d видеа</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d видео е добавено към %2$s</item>
+        <item quantity="other">%1$d видеа са добавени към %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Продължи</string>
+    <string name="recent_queue_more">Още опции</string>
+    <string name="recent_queue_progress">%1$s от %2$s</string>
+    <string name="recent_queue_save_as_playlist">Запази като плейлист</string>
+    <string name="recent_queue_open_playlist">Отвори плейлиста</string>
+    <string name="recent_queue_saved">Запазено в „Плейлисти“</string>
+    <string name="recent_queue_deleted">Опашката е изтрита</string>
+    <string name="recent_queue_deleted_linked">Опашката е изтрита, плейлистът остава</string>
+    <string name="recent_queue_playing_now">Пуска се</string>
+    <string name="recent_queue_playing_at">Пуска се · %s</string>
+    <string name="recent_queue_watched">Гледано</string>
+    <string name="recent_queue_not_watched">За гледане</string>
+    <string name="recent_queue_added">добавено</string>
+    <string name="playlist_never_played">Никога не е пускан</string>
+</resources>

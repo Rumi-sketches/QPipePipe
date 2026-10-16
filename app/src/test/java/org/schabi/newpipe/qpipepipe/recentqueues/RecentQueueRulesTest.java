@@ -85,6 +85,12 @@ public class RecentQueueRulesTest {
     }
 
     @Test
+    public void durationIsInHoursAndMinutes() {
+        assertEquals("0:59", RecentQueueActions.hoursAndMinutes(59 * 60 + 30));
+        assertEquals("77:23", RecentQueueActions.hoursAndMinutes(77 * 3600 + 23 * 60 + 28));
+    }
+
+    @Test
     public void streamKeepsWhatIsNeededToPlayIt() {
         final RecentQueueStreamEntity stream =
                 RecentQueueStreamEntity.from(item("https://a"), 1, 0, false);

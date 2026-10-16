@@ -21,7 +21,6 @@ import org.schabi.newpipe.NewPipeDatabase;
 import org.schabi.newpipe.R;
 import org.schabi.newpipe.database.history.dao.StreamHistoryDAO;
 import org.schabi.newpipe.qpipepipe.StreamProgress;
-import org.schabi.newpipe.util.Localization;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -136,16 +135,14 @@ public class RecentQueueFragment extends BaseFragment
 
         ((TextView) header.findViewById(R.id.recent_queue_header_title)).setText(title);
         ((TextView) header.findViewById(R.id.recent_queue_header_meta)).setText(
-                Localization.concatenateStrings(
-                        RecentQueueActions.countAndDuration(context, newQueue.streamCount,
-                                newQueue.totalDuration),
-                        RecentQueueActions.position(context, newQueue.currentIndex,
-                                newQueue.streamCount)));
+                RecentQueueActions.positionAndDuration(context, newQueue.currentIndex,
+                        newQueue.streamCount, newQueue.totalDuration));
         final TextView added = header.findViewById(R.id.recent_queue_header_added);
         if (newQueue.addedCount > 0) {
             added.setText(context.getResources().getQuantityString(
                     R.plurals.recent_queue_added_to_playlist, newQueue.addedCount,
-                    newQueue.addedCount));
+                    newQueue.addedCount,
+                    RecentQueueActions.dateTime(context, newQueue.createdAt)));
             added.setVisibility(View.VISIBLE);
         } else {
             added.setVisibility(View.GONE);

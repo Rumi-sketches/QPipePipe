@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Fitur antrean dan usap yang ditambahkan oleh fork ini</string>
+    <string name="qpipepipe_category_playback">Pemutaran</string>
+    <string name="qpipepipe_category_swipe_actions">Tindakan usap</string>
+    <string name="tap_always_plays_title">Ketuk video selalu memutarnya</string>
+    <string name="tap_always_plays_summary">Mulai pemutaran saat Anda membuka video, meskipun Putar otomatis dibatasi ke Wi-Fi atau dinonaktifkan. Putar otomatis tetap berlaku untuk pemutaran yang dimulai otomatis</string>
+    <string name="clear_queue_confirmation_title">Minta konfirmasi sebelum mengosongkan antrean</string>
+    <string name="clear_queue_confirmation_summary">Beralih dari satu pemutar ke pemutar lain dapat menggantikan antrean Anda</string>
+    <string name="clear_queue_confirmation_description">Antrean pemutar yang aktif akan diganti</string>
+    <string name="clear_queue_confirmation_play_now">Putar sekarang</string>
+    <string name="enable_swipe_actions_title">Aktifkan tindakan usap pada video</string>
+    <string name="enable_swipe_actions_summary">Usap video ke kiri atau kanan di beranda, hasil penelusuran, daftar putar, dan grup saluran untuk menjalankan tindakan cepat</string>
+    <string name="swipe_left_action_title">Tindakan usap ke kiri</string>
+    <string name="swipe_right_action_title">Tindakan usap ke kanan</string>
+    <string name="enable_swipe_actions_warning_title">Tindakan usap diaktifkan</string>
+    <string name="enable_swipe_actions_warning_message">Usapan memerlukan baris selebar layar agar berfungsi dengan andal, jadi tampilan daftar akan digunakan sebagai pengganti tampilan kisi atau kartu di mana pun tindakan usap tersedia. Anda dapat menonaktifkannya lagi kapan saja.</string>
+    <string name="swipe_actions_force_list_mode_summary">Dinonaktifkan selama tindakan usap aktif, yang memaksa tampilan daftar</string>
+    <string name="remove_from_playlist_swipe_action">Hapus dari daftar putar (hanya daftar putar)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s tersedia</string>
+    <string name="qpipepipe_update_notification_text">Ketuk untuk mengunduh dan memasang</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Unduh dan pasang pembaruan ini? Android akan meminta Anda mengonfirmasi pemasangan.</string>
+    <string name="qpipepipe_update_install">Unduh dan pasang</string>
+    <string name="qpipepipe_update_release_notes">Catatan rilis</string>
+    <string name="qpipepipe_update_later">Nanti</string>
+    <string name="qpipepipe_update_downloading">Mengunduh QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">Unduhan gagal. Periksa koneksi Anda dan coba lagi.</string>
+    <string name="qpipepipe_update_wrong_build">Build ini tidak dapat memasang pembaruan sendiri, misalnya karena ini build debug. Unduh APK dari halaman rilis sebagai gantinya.</string>
+    <string name="qpipepipe_update_failed">Pembaruan tidak dapat dipasang: %s</string>
+    <string name="playlist_resume_title">Lanjutkan dari terakhir kali</string>
+    <string name="playlist_resume_play">Lanjutkan dari #%d</string>
+    <string name="playlist_resume_here">Lanjutkan dari sini</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Simpan antrean terbaru</string>
+    <string name="recent_queues_summary">Tampilkan antrean yang Anda putar di bawah Daftar Putar, agar dapat dilanjutkan atau disimpan nanti. Video yang Anda tambahkan ke antrean yang dimulai dari salah satu daftar putar Anda akan ditambahkan ke daftar putar tersebut. Antrean dari daftar putar dan saluran YouTube tidak disimpan</string>
+    <string name="recent_queues_tab_playlists">Daftar Putar</string>
+    <string name="recent_queues_tab">Antrean terbaru</string>
+    <plurals name="recent_queues_count">
+        <item quantity="other">%d antrean, terbaru di atas</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Bersihkan semua</string>
+    <string name="recent_queues_clear_all_message">Hapus semua antrean terbaru? Daftar putar yang Anda simpan tidak terpengaruh.</string>
+    <string name="recent_queues_empty">Tidak ada antrean terbaru. Antrean yang Anda putar akan muncul di sini.</string>
+    <string name="recent_queue_title">Antrean %s</string>
+    <string name="recent_queue_from_playlist">Dari: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="other">%1$d video ditambahkan sejak %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="other">%1$d/%2$d video</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="other">%1$d video ditambahkan ke %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Lanjutkan</string>
+    <string name="recent_queue_more">Opsi lainnya</string>
+    <string name="recent_queue_progress">%1$s dari %2$s</string>
+    <string name="recent_queue_save_as_playlist">Simpan sebagai daftar putar</string>
+    <string name="recent_queue_open_playlist">Buka daftar putar</string>
+    <string name="recent_queue_saved">Disimpan di Daftar Putar</string>
+    <string name="recent_queue_deleted">Antrean dihapus</string>
+    <string name="recent_queue_deleted_linked">Antrean dihapus, daftar putar tetap ada</string>
+    <string name="recent_queue_playing_now">Sedang diputar</string>
+    <string name="recent_queue_playing_at">Sedang diputar · %s</string>
+    <string name="recent_queue_watched">Ditonton</string>
+    <string name="recent_queue_not_watched">Belum ditonton</string>
+    <string name="recent_queue_added">ditambahkan</string>
+    <string name="playlist_never_played">Belum pernah diputar</string>
+</resources>

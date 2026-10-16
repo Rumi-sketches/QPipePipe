@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Funzioni di coda e scorrimento aggiunte da questo fork</string>
+    <string name="qpipepipe_category_playback">Riproduzione</string>
+    <string name="qpipepipe_category_swipe_actions">Azioni di scorrimento</string>
+    <string name="tap_always_plays_title">Toccare un video lo riproduce sempre</string>
+    <string name="tap_always_plays_summary">Avvia la riproduzione quando apri un video, anche se la riproduzione automatica è limitata al Wi-Fi o disattivata. La riproduzione automatica resta valida per gli avvii automatici</string>
+    <string name="clear_queue_confirmation_title">Chiedi conferma prima di svuotare una coda</string>
+    <string name="clear_queue_confirmation_summary">Passare da un lettore all\'altro può sostituire la coda</string>
+    <string name="clear_queue_confirmation_description">La coda del lettore attivo verrà sostituita</string>
+    <string name="clear_queue_confirmation_play_now">Riproduci ora</string>
+    <string name="enable_swipe_actions_title">Attiva le azioni di scorrimento sui video</string>
+    <string name="enable_swipe_actions_summary">Scorri un video a sinistra o a destra nella home, nei risultati di ricerca, nelle playlist e nei gruppi di canali per eseguire un\'azione rapida</string>
+    <string name="swipe_left_action_title">Azione scorrendo a sinistra</string>
+    <string name="swipe_right_action_title">Azione scorrendo a destra</string>
+    <string name="enable_swipe_actions_warning_title">Azioni di scorrimento attivate</string>
+    <string name="enable_swipe_actions_warning_message">Per funzionare bene lo scorrimento richiede righe a tutta larghezza, quindi dove le azioni di scorrimento sono disponibili verrà usata la vista elenco al posto di griglia o schede. Puoi disattivarle in qualsiasi momento.</string>
+    <string name="swipe_actions_force_list_mode_summary">Disattivato mentre le azioni di scorrimento sono attive, perché impongono la vista elenco</string>
+    <string name="remove_from_playlist_swipe_action">Rimuovi dalla playlist (solo playlist)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s è disponibile</string>
+    <string name="qpipepipe_update_notification_text">Tocca per scaricare e installare</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Scaricare e installare questo aggiornamento? Android ti chiederà di confermare l\'installazione.</string>
+    <string name="qpipepipe_update_install">Scarica e installa</string>
+    <string name="qpipepipe_update_release_notes">Note di rilascio</string>
+    <string name="qpipepipe_update_later">Più tardi</string>
+    <string name="qpipepipe_update_downloading">Download di QPipePipe %s in corso</string>
+    <string name="qpipepipe_update_download_failed">Download non riuscito. Controlla la connessione e riprova.</string>
+    <string name="qpipepipe_update_wrong_build">Questa build non può installare l\'aggiornamento da sola, ad esempio perché è una build di debug. Scarica l\'APK dalla pagina della release.</string>
+    <string name="qpipepipe_update_failed">Impossibile installare l\'aggiornamento: %s</string>
+    <string name="playlist_resume_title">Riprendi da dove avevi lasciato</string>
+    <string name="playlist_resume_play">Riprendi dal #%d</string>
+    <string name="playlist_resume_here">Riprendi da qui</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Conserva le code recenti</string>
+    <string name="recent_queues_summary">Elenca le code che riproduci sotto Playlist, così puoi riprenderle o salvarle in seguito. I video che aggiungi a una coda avviata da una tua playlist vengono aggiunti a quella playlist. Le code di playlist e canali YouTube non vengono conservate</string>
+    <string name="recent_queues_tab_playlists">Playlist</string>
+    <string name="recent_queues_tab">Code recenti</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d coda</item>
+        <item quantity="other">%d code, dalla più recente</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Pulisci tutto</string>
+    <string name="recent_queues_clear_all_message">Eliminare tutte le code recenti? Le playlist salvate non vengono toccate.</string>
+    <string name="recent_queues_empty">Nessuna coda recente. Le code che riproduci appaiono qui.</string>
+    <string name="recent_queue_title">Coda del %s</string>
+    <string name="recent_queue_from_playlist">Da: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%1$d video aggiunto dal %2$s</item>
+        <item quantity="other">%1$d video aggiunti dal %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d video</item>
+        <item quantity="other">%1$d/%2$d video</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d video aggiunto a %2$s</item>
+        <item quantity="other">%1$d video aggiunti a %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Riprendi</string>
+    <string name="recent_queue_more">Altre opzioni</string>
+    <string name="recent_queue_progress">%1$s di %2$s</string>
+    <string name="recent_queue_save_as_playlist">Salva come playlist</string>
+    <string name="recent_queue_open_playlist">Apri playlist</string>
+    <string name="recent_queue_saved">Salvata in Playlist</string>
+    <string name="recent_queue_deleted">Coda eliminata</string>
+    <string name="recent_queue_deleted_linked">Coda eliminata, la playlist resta</string>
+    <string name="recent_queue_playing_now">In riproduzione</string>
+    <string name="recent_queue_playing_at">In riproduzione · %s</string>
+    <string name="recent_queue_watched">Visto</string>
+    <string name="recent_queue_not_watched">Da vedere</string>
+    <string name="recent_queue_added">aggiunto</string>
+    <string name="playlist_never_played">Mai riprodotta</string>
+</resources>

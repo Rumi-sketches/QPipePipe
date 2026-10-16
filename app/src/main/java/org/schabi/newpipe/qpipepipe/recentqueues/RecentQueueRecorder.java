@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import org.schabi.newpipe.NewPipeDatabase;
+import org.schabi.newpipe.R;
 import org.schabi.newpipe.database.AppDatabase;
 import org.schabi.newpipe.database.playlist.PlaylistStreamEntry;
 import org.schabi.newpipe.database.playlist.model.PlaylistEntity;
@@ -115,11 +116,54 @@ public final class RecentQueueRecorder {
                 .subscribeOn(WRITES)
                 // save() copies the queue, which the player changes on the main thread
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(added -> {
-                    if (!added.isEmpty()) {
-                        save(appContext, queue, added);
+                .subscribe(appended -> {
+                    if (appended.urls.isEmpty()) {
+                        return;
+                    }
+                    save(appContext, queue, appended.urls);
+                    if (appended.urls.size() > 1) {
+                        offerUndo(appContext, appended);
                     }
                 }, error -> Log.e(TAG, "Append to playlist failed", error));
+    }
+
+    /** Offers to take a batch of appended videos back out of the playlist. */
+    @MainThread
+    private static void offerUndo(@NonNull final Context context,
+                                  @NonNull final Appended appended) {
+        final int count = appended.urls.size();
+        final String name = String.valueOf(appended.playlistName);
+        RecentQueueUndo.offer(context.getResources().getQuantityString(
+                R.plurals.recent_queue_appended, count, count, name), () ->
+                Completable.fromAction(() -> takeBack(context, appended))
+                        .subscribeOn(WRITES)
+                        .subscribe(() -> { }, error -> Log.e(TAG, "Undo failed", error)));
+    }
+
+    /**
+     * Removes the appended videos from the playlist, if they still follow the videos it had
+     * before; if the user edited the playlist meanwhile, it is left as it is.
+     */
+    private static void takeBack(@NonNull final Context context,
+                                 @NonNull final Appended appended) {
+        final AppDatabase db = NewPipeDatabase.getInstance(context);
+        final List<Long> current = new ArrayList<>();
+        for (final PlaylistStreamEntry entry : db.playlistStreamDAO()
+                .getOrderedStreamsOf(appended.playlistId).blockingFirst()) {
+            current.add(entry.getStreamId());
+        }
+        final int before = appended.previousStreamIds.size();
+        final int end = before + appended.urls.size();
+        if (current.size() < end || !current.subList(0, before)
+                .equals(appended.previousStreamIds)) {
+            Log.w(TAG, "Playlist changed, appended videos left in place");
+            return;
+        }
+        final List<Long> kept = new ArrayList<>(current.subList(0, before));
+        kept.addAll(current.subList(end, current.size()));
+        new LocalPlaylistManager(db).updateJoin(appended.playlistId, kept).blockingAwait();
+        RecentQueuesDatabase.getInstance(context).recentQueueDAO().unmarkAdded(
+                RecentQueueEntity.keyForPlaylist(appended.playlistId), appended.urls);
     }
 
     /** Called when the user deletes an entry, so the playing queue does not recreate it. */
@@ -190,20 +234,40 @@ public final class RecentQueueRecorder {
                 && !(queue instanceof ChannelPlayQueue);
     }
 
+    /** Videos appended to a playlist in one go, enough to take them back. */
+    private static final class Appended {
+        final long playlistId;
+        @Nullable
+        final String playlistName;
+        /** The playlist before the append. */
+        @NonNull
+        final List<Long> previousStreamIds;
+        @NonNull
+        final List<String> urls;
+
+        Appended(final long playlistId, @Nullable final String playlistName,
+                 @NonNull final List<Long> previousStreamIds, @NonNull final List<String> urls) {
+            this.playlistId = playlistId;
+            this.playlistName = playlistName;
+            this.previousStreamIds = previousStreamIds;
+            this.urls = urls;
+        }
+    }
+
     /**
      * Appends to the playlist the {@code items} it does not contain yet. Runs on {@link #WRITES}
      * only, so two quick enqueues cannot both see a video as missing.
-     *
-     * @return the urls appended
      */
     @NonNull
-    private static List<String> appendMissing(@NonNull final AppDatabase db, final long playlistId,
-                                              @NonNull final List<PlayerMediaItem> items) {
+    private static Appended appendMissing(@NonNull final AppDatabase db, final long playlistId,
+                                          @NonNull final List<PlayerMediaItem> items) {
         final List<PlaylistStreamEntry> current = db.playlistStreamDAO()
                 .getOrderedStreamsOf(playlistId).blockingFirst();
         final Set<String> urls = new HashSet<>();
+        final List<Long> previousStreamIds = new ArrayList<>(current.size());
         for (final PlaylistStreamEntry entry : current) {
             urls.add(entry.getStreamEntity().getUrl());
+            previousStreamIds.add(entry.getStreamId());
         }
         final List<StreamEntity> missing = new ArrayList<>();
         final List<String> added = new ArrayList<>();
@@ -216,7 +280,10 @@ public final class RecentQueueRecorder {
         if (!missing.isEmpty()) {
             new LocalPlaylistManager(db).appendToPlaylist(playlistId, missing).blockingGet();
         }
-        return added;
+        final List<PlaylistEntity> playlist = db.playlistDAO().getPlaylist(playlistId)
+                .blockingFirst();
+        return new Appended(playlistId, playlist.isEmpty() ? null : playlist.get(0).getName(),
+                previousStreamIds, added);
     }
 
     /** Copies the queue on the main thread and writes it on {@link #WRITES}. */

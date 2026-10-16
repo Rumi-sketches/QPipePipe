@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Funkcije čakalne vrste in potegov, ki jih dodaja ta fork</string>
+    <string name="qpipepipe_category_playback">Predvajanje</string>
+    <string name="qpipepipe_category_swipe_actions">Dejanja s potegom</string>
+    <string name="tap_always_plays_title">Dotik videoposnetka ga vedno predvaja</string>
+    <string name="tap_always_plays_summary">Začni predvajanje, ko odprete videoposnetek, tudi če je samodejno predvajanje omejeno na Wi-Fi ali izklopljeno. Samodejno predvajanje še vedno velja za samodejne zagone</string>
+    <string name="clear_queue_confirmation_title">Zahtevaj potrditev pred praznjenjem čakalne vrste</string>
+    <string name="clear_queue_confirmation_summary">Preklop z enega predvajalnika na drugega lahko zamenja vašo čakalno vrsto</string>
+    <string name="clear_queue_confirmation_description">Čakalna vrsta aktivnega predvajalnika bo zamenjana</string>
+    <string name="clear_queue_confirmation_play_now">Predvajaj zdaj</string>
+    <string name="enable_swipe_actions_title">Omogoči dejanja s potegom na videoposnetkih</string>
+    <string name="enable_swipe_actions_summary">Potegnite videoposnetek levo ali desno na domači strani, v rezultatih iskanja, seznamih predvajanja in skupinah kanalov za hitro dejanje</string>
+    <string name="swipe_left_action_title">Dejanje ob potegu levo</string>
+    <string name="swipe_right_action_title">Dejanje ob potegu desno</string>
+    <string name="enable_swipe_actions_warning_title">Dejanja s potegom so omogočena</string>
+    <string name="enable_swipe_actions_warning_message">Za zanesljivo delovanje potegov so potrebne vrstice čez vso širino, zato bo povsod, kjer so na voljo dejanja s potegom, namesto mreže ali kartic uporabljen seznam. To lahko kadar koli znova izklopite.</string>
+    <string name="swipe_actions_force_list_mode_summary">Onemogočeno, ko so omogočena dejanja s potegom, ki vsilijo prikaz seznama</string>
+    <string name="remove_from_playlist_swipe_action">Odstrani s seznama predvajanja (samo v seznamih predvajanja)</string>
+    <string name="qpipepipe_update_notification_title">Na voljo je QPipePipe %s</string>
+    <string name="qpipepipe_update_notification_text">Tapnite za prenos in namestitev</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Želite prenesti in namestiti to posodobitev? Android vas bo prosil, da potrdite namestitev.</string>
+    <string name="qpipepipe_update_install">Prenesi in namesti</string>
+    <string name="qpipepipe_update_release_notes">Opombe ob izdaji</string>
+    <string name="qpipepipe_update_later">Pozneje</string>
+    <string name="qpipepipe_update_downloading">Prenašanje QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">Prenos ni uspel. Preverite povezavo in poskusite znova.</string>
+    <string name="qpipepipe_update_wrong_build">Ta različica ne more sama namestiti posodobitve, na primer ker gre za razhroščevalno različico. Namesto tega prenesite APK s strani izdaje.</string>
+    <string name="qpipepipe_update_failed">Posodobitve ni bilo mogoče namestiti: %s</string>
+    <string name="playlist_resume_title">Nadaljujte, kjer ste končali</string>
+    <string name="playlist_resume_play">Nadaljuj od #%d</string>
+    <string name="playlist_resume_here">Nadaljuj tukaj</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Hrani nedavne čakalne vrste</string>
+    <string name="recent_queues_summary">Čakalne vrste, ki jih predvajate, so prikazane pod Seznami predvajanja, da jih lahko pozneje nadaljujete ali shranite. Videoposnetki, ki jih dodate v čakalno vrsto, zagnano iz enega od vaših seznamov predvajanja, se dodajo na ta seznam. Čakalne vrste seznamov predvajanja in kanalov YouTube se ne hranijo</string>
+    <string name="recent_queues_tab_playlists">Seznami predvajanja</string>
+    <string name="recent_queues_tab">Nedavne čakalne vrste</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d čakalna vrsta, najnovejše najprej</item>
+        <item quantity="two">%d čakalni vrsti, najnovejše najprej</item>
+        <item quantity="few">%d čakalne vrste, najnovejše najprej</item>
+        <item quantity="other">%d čakalnih vrst, najnovejše najprej</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Počisti vse</string>
+    <string name="recent_queues_clear_all_message">Želite izbrisati vse nedavne čakalne vrste? Shranjeni seznami predvajanja ostanejo nespremenjeni.</string>
+    <string name="recent_queues_empty">Ni nedavnih čakalnih vrst. Tu se prikažejo čakalne vrste, ki jih predvajate.</string>
+    <string name="recent_queue_title">Čakalna vrsta, %s</string>
+    <string name="recent_queue_from_playlist">Iz: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%1$d videoposnetek dodan od %2$s</item>
+        <item quantity="two">%1$d videoposnetka dodana od %2$s</item>
+        <item quantity="few">%1$d videoposnetki dodani od %2$s</item>
+        <item quantity="other">%1$d videoposnetkov dodanih od %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d videoposnetek</item>
+        <item quantity="two">%1$d/%2$d videoposnetka</item>
+        <item quantity="few">%1$d/%2$d videoposnetki</item>
+        <item quantity="other">%1$d/%2$d videoposnetkov</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d videoposnetek dodan v %2$s</item>
+        <item quantity="two">%1$d videoposnetka dodana v %2$s</item>
+        <item quantity="few">%1$d videoposnetki dodani v %2$s</item>
+        <item quantity="other">%1$d videoposnetkov dodanih v %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Nadaljuj</string>
+    <string name="recent_queue_more">Več možnosti</string>
+    <string name="recent_queue_progress">%1$s od %2$s</string>
+    <string name="recent_queue_save_as_playlist">Shrani kot seznam predvajanja</string>
+    <string name="recent_queue_open_playlist">Odpri seznam predvajanja</string>
+    <string name="recent_queue_saved">Shranjeno v Seznamih predvajanja</string>
+    <string name="recent_queue_deleted">Čakalna vrsta izbrisana</string>
+    <string name="recent_queue_deleted_linked">Čakalna vrsta izbrisana, seznam predvajanja ostane</string>
+    <string name="recent_queue_playing_now">Predvajanje</string>
+    <string name="recent_queue_playing_at">Predvajanje · %s</string>
+    <string name="recent_queue_watched">Ogledano</string>
+    <string name="recent_queue_not_watched">Za ogled</string>
+    <string name="recent_queue_added">dodano</string>
+    <string name="playlist_never_played">Še ni bilo predvajano</string>
+</resources>

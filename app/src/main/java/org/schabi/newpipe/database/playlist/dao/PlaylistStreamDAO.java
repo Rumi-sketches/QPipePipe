@@ -114,17 +114,19 @@ public interface PlaylistStreamDAO extends BasicDAO<PlaylistStreamEntity> {
 
     /**
      * QPipePipe: duration and last started video of every local playlist that has videos.
-     * The position comes from the most recent watch history entry among the playlist videos.
+     * The position and date come from the most recent watch history entry among the playlist
+     * videos.
      */
     @Query("SELECT totals." + JOIN_PLAYLIST_ID + " AS playlist_id, totals.total_duration,"
-            + " latest.last_played_position"
+            + " latest.last_played_position, latest.last_played_at"
             + " FROM (SELECT " + JOIN_PLAYLIST_ID + ","
             + " SUM(CASE WHEN streams.duration > 0 THEN streams.duration ELSE 0 END)"
             + " AS total_duration"
             + " FROM " + PLAYLIST_STREAM_JOIN_TABLE
             + " INNER JOIN " + STREAM_TABLE + " ON " + STREAM_ID + " = " + JOIN_STREAM_ID
             + " GROUP BY " + JOIN_PLAYLIST_ID + ") AS totals"
-            + " LEFT JOIN (SELECT psj." + JOIN_PLAYLIST_ID + ", MAX(stream_history.access_date),"
+            + " LEFT JOIN (SELECT psj." + JOIN_PLAYLIST_ID + ", MAX(stream_history.access_date)"
+            + " AS last_played_at,"
             + " (SELECT COUNT(*) FROM " + PLAYLIST_STREAM_JOIN_TABLE + " AS other"
             + " WHERE other." + JOIN_PLAYLIST_ID + " = psj." + JOIN_PLAYLIST_ID
             + " AND other." + JOIN_INDEX + " < psj." + JOIN_INDEX + ") AS last_played_position"

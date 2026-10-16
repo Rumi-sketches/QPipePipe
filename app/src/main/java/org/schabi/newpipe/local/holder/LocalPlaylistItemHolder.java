@@ -39,18 +39,16 @@ public class LocalPlaylistItemHolder extends PlaylistItemHolder {
         itemTitleView.setText(item.name);
         itemStreamCountView.setText(Localization.localizeStreamCountMini(
                 itemStreamCountView.getContext(), item.streamCount));
-        // QPipePipe: count, duration and progress while recent queues are on
+        // QPipePipe: last played date and progress bar while recent queues are on
         final String progressLine = PlaylistProgressLines.lineFor(itemView.getContext(),
                 item.uid, item.streamCount);
         if (progressLine != null) {
             itemUploaderView.setText(progressLine);
-            // the layouts allow one line, too narrow for the line in the grid
-            itemUploaderView.setMaxLines(2);
             itemUploaderView.setVisibility(View.VISIBLE);
         } else {
-            itemUploaderView.setLines(1);
             itemUploaderView.setVisibility(View.INVISIBLE);
         }
+        PlaylistProgressLines.bindBar(itemView, item.uid, item.streamCount);
 
         PicassoHelper.loadPlaylistThumbnail(item.thumbnailUrl).into(itemThumbnailView);
 

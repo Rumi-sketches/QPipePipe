@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- One recent queue (RecentQueuesAdapter). Thumbnail and count overlay as in
-     list_playlist_mini_item.xml. -->
+<!-- One recent queue (RecentQueuesAdapter): title, date and how far into the queue. The
+     video count is on the thumbnail, as in list_playlist_mini_item.xml. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -69,34 +69,6 @@
             tools:text="15/10/2026 09:05"
             tools:visibility="visible" />
 
-        <org.schabi.newpipe.views.NewPipeTextView
-            android:id="@+id/recent_queue_added"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:textColor="?attr/colorAccent"
-            android:textSize="@dimen/video_item_search_uploader_text_size"
-            android:visibility="gone"
-            tools:text="3 videos added to the playlist"
-            tools:visibility="visible" />
-
-        <org.schabi.newpipe.views.NewPipeTextView
-            android:id="@+id/recent_queue_meta"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:textColor="?android:attr/textColorSecondary"
-            android:textSize="@dimen/video_item_search_uploader_text_size"
-            tools:text="12 videos · 2:12:00" />
-
-        <org.schabi.newpipe.views.NewPipeTextView
-            android:id="@+id/recent_queue_position"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:textColor="?android:attr/textColorSecondary"
-            android:textSize="@dimen/video_item_search_uploader_text_size"
-            tools:text="at video 4 of 12" />
 
         <ProgressBar
             android:id="@+id/recent_queue_progress"

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Tämän forkin lisäämät jono- ja pyyhkäisyominaisuudet</string>
+    <string name="qpipepipe_category_playback">Toisto</string>
+    <string name="qpipepipe_category_swipe_actions">Pyyhkäisytoiminnot</string>
+    <string name="tap_always_plays_title">Videon napauttaminen toistaa sen aina</string>
+    <string name="tap_always_plays_summary">Aloita toisto, kun avaat videon, vaikka automaattinen toisto olisi rajattu Wi-Fi-yhteyteen tai pois päältä. Automaattinen toisto koskee edelleen automaattisia aloituksia</string>
+    <string name="clear_queue_confirmation_title">Pyydä vahvistus ennen jonon tyhjentämistä</string>
+    <string name="clear_queue_confirmation_summary">Siirtyminen soittimesta toiseen voi korvata jonosi</string>
+    <string name="clear_queue_confirmation_description">Aktiivisen soittimen jono korvataan</string>
+    <string name="clear_queue_confirmation_play_now">Toista nyt</string>
+    <string name="enable_swipe_actions_title">Ota pyyhkäisytoiminnot käyttöön videoissa</string>
+    <string name="enable_swipe_actions_summary">Pyyhkäise videota vasemmalle tai oikealle etusivulla, hakutuloksissa, soittolistoissa ja kanavaryhmissä suorittaaksesi pikatoiminnon</string>
+    <string name="swipe_left_action_title">Vasemmalle pyyhkäisyn toiminto</string>
+    <string name="swipe_right_action_title">Oikealle pyyhkäisyn toiminto</string>
+    <string name="enable_swipe_actions_warning_title">Pyyhkäisytoiminnot käytössä</string>
+    <string name="enable_swipe_actions_warning_message">Pyyhkäisy toimii luotettavasti vain koko levyisillä riveillä, joten listanäkymää käytetään ruudukko- tai korttinäkymän sijaan kaikkialla, missä pyyhkäisytoiminnot ovat käytettävissä. Voit poistaa tämän käytöstä milloin tahansa.</string>
+    <string name="swipe_actions_force_list_mode_summary">Ei käytössä, kun pyyhkäisytoiminnot ovat käytössä, koska ne pakottavat listanäkymän</string>
+    <string name="remove_from_playlist_swipe_action">Poista soittolistasta (vain soittolistat)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s on saatavilla</string>
+    <string name="qpipepipe_update_notification_text">Lataa ja asenna napauttamalla</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Ladataanko ja asennetaanko tämä päivitys? Android pyytää sinua vahvistamaan asennuksen.</string>
+    <string name="qpipepipe_update_install">Lataa ja asenna</string>
+    <string name="qpipepipe_update_release_notes">Julkaisutiedot</string>
+    <string name="qpipepipe_update_later">Myöhemmin</string>
+    <string name="qpipepipe_update_downloading">Ladataan QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">Lataus epäonnistui. Tarkista yhteys ja yritä uudelleen.</string>
+    <string name="qpipepipe_update_wrong_build">Tämä versio ei voi asentaa päivitystä itse, esimerkiksi koska se on debug-versio. Lataa APK sen sijaan julkaisusivulta.</string>
+    <string name="qpipepipe_update_failed">Päivitystä ei voitu asentaa: %s</string>
+    <string name="playlist_resume_title">Jatka siitä, mihin jäit</string>
+    <string name="playlist_resume_play">Jatka kohdasta #%d</string>
+    <string name="playlist_resume_here">Jatka tästä</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Säilytä viimeisimmät jonot</string>
+    <string name="recent_queues_summary">Näytä toistamasi jonot Soittolistat-kohdassa, jotta voit jatkaa tai tallentaa ne myöhemmin. Videot, jotka lisäät jonoon, joka on aloitettu jostakin soittolistastasi, lisätään kyseiseen soittolistaan. YouTube-soittolistojen ja -kanavien jonoja ei säilytetä</string>
+    <string name="recent_queues_tab_playlists">Soittolistat</string>
+    <string name="recent_queues_tab">Viimeisimmät jonot</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d jono</item>
+        <item quantity="other">%d jonoa, uusin ensin</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Tyhjennä kaikki</string>
+    <string name="recent_queues_clear_all_message">Poistetaanko kaikki viimeisimmät jonot? Tallennettuihin soittolistoihisi ei kosketa.</string>
+    <string name="recent_queues_empty">Ei viimeisimpiä jonoja. Toistamasi jonot näkyvät tässä.</string>
+    <string name="recent_queue_title">Jono: %s</string>
+    <string name="recent_queue_from_playlist">Lähde: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%1$d video lisätty %2$s jälkeen</item>
+        <item quantity="other">%1$d videota lisätty %2$s jälkeen</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d video</item>
+        <item quantity="other">%1$d/%2$d videota</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d video lisätty: %2$s</item>
+        <item quantity="other">%1$d videota lisätty: %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Jatka</string>
+    <string name="recent_queue_more">Lisää vaihtoehtoja</string>
+    <string name="recent_queue_progress">%1$s / %2$s</string>
+    <string name="recent_queue_save_as_playlist">Tallenna soittolistaksi</string>
+    <string name="recent_queue_open_playlist">Avaa soittolista</string>
+    <string name="recent_queue_saved">Tallennettu soittolistoihin</string>
+    <string name="recent_queue_deleted">Jono poistettu</string>
+    <string name="recent_queue_deleted_linked">Jono poistettu, soittolista säilyy</string>
+    <string name="recent_queue_playing_now">Toistetaan</string>
+    <string name="recent_queue_playing_at">Toistetaan · %s</string>
+    <string name="recent_queue_watched">Katsottu</string>
+    <string name="recent_queue_not_watched">Katsomatta</string>
+    <string name="recent_queue_added">lisätty</string>
+    <string name="playlist_never_played">Ei koskaan toistettu</string>
+</resources>
