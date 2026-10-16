@@ -35,7 +35,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Selection mode of one list: intercepts taps to select videos, shows the count and "Select
@@ -63,8 +62,6 @@ final class SelectionController implements RecyclerView.OnItemTouchListener,
      * were picked. Keys, not positions: history and feed reload while selecting.
      */
     private final Map<String, StreamInfoItem> selected = new LinkedHashMap<>();
-    /** Where the last touch started, to select the video whose long-press menu was used. */
-    private int pressedPosition = RecyclerView.NO_POSITION;
     /** Leaves selection mode when the list stops being visible, e.g. a tab swiped away. */
     private final ViewTreeObserver.OnScrollChangedListener visibilityCheck =
             this::finishIfHidden;
@@ -128,32 +125,6 @@ final class SelectionController implements RecyclerView.OnItemTouchListener,
         return mode != null;
     }
 
-    /**
-     * "Multiple selection" in the long-press menu: start with that menu's video selected. The
-     * row is the one touched last, unless the list changed meanwhile or no touch opened the
-     * menu (keyboard, D-pad): then the video is looked up.
-     */
-    void startFromLongPress(@NonNull final StreamInfoItem item) {
-        int position = pressedPosition;
-        if (!sameVideo(resolver.resolve(position), item)) {
-            position = RecyclerView.NO_POSITION;
-            final RecyclerView.Adapter<?> adapter = list.getAdapter();
-            for (int p = 0; adapter != null && p < adapter.getItemCount(); p++) {
-                if (sameVideo(resolver.resolve(p), item)) {
-                    position = p;
-                    break;
-                }
-            }
-        }
-        start(position == RecyclerView.NO_POSITION ? null : position);
-    }
-
-    private static boolean sameVideo(@Nullable final StreamInfoItem a,
-                                     @NonNull final StreamInfoItem b) {
-        return a != null && a.getServiceId() == b.getServiceId()
-                && Objects.equals(a.getUrl(), b.getUrl());
-    }
-
     /** @param position the row to select first, or null to start with nothing selected */
     void start(@Nullable final Integer position) {
         final Activity activity = fragment.getActivity();
@@ -197,9 +168,6 @@ final class SelectionController implements RecyclerView.OnItemTouchListener,
     @Override
     public boolean onInterceptTouchEvent(@NonNull final RecyclerView rv,
                                          @NonNull final MotionEvent e) {
-        if (e.getActionMasked() == MotionEvent.ACTION_DOWN) {
-            pressedPosition = positionAt(e);
-        }
         // only a completed tap is taken from the rows, so scrolling still works
         return isSelecting() && gestures.onTouchEvent(e);
     }

@@ -74,10 +74,8 @@ public final class InfoItemDialog {
         }
 
         // Get the entry's descriptions which are displayed in the dialog
-        // QPipePipe: "Multiple selection" has an icon
-        final CharSequence[] items = entries.stream()
-                .map(entry -> MultiSelect.dialogLabel(activity, entry))
-                .toArray(CharSequence[]::new);
+        final String[] items = entries.stream()
+                .map(entry -> entry.getString(activity)).toArray(String[]::new);
 
         // Call an entry's action / onClick method when the entry is selected.
         final DialogInterface.OnClickListener action = (d, index) -> {
@@ -374,8 +372,6 @@ public final class InfoItemDialog {
             if (addDefaultEntriesAutomatically) {
                 addDefaultEndEntries();
             }
-            // QPipePipe: "Multiple selection" first, in the lists that support it
-            MultiSelect.addDialogEntry(fragment, entries);
             return new InfoItemDialog(this.activity, this.fragment, this.infoItem, this.entries);
         }
 
