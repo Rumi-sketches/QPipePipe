@@ -7,10 +7,13 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.schabi.newpipe.extractor.stream.StreamType;
 import org.schabi.newpipe.player.mediaitem.PlayerMediaItem;
+import org.schabi.newpipe.qpipepipe.StreamProgress;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RecentQueueRulesTest {
     private static final long NO_PLAYLIST = -1;
@@ -82,6 +85,19 @@ public class RecentQueueRulesTest {
         final List<RecentQueueStreamEntity> streams = snapshot.streamsFor(5, snapshot.addedUrls);
         assertTrue(streams.get(1).addedToPlaylist);
         assertFalse(streams.get(2).addedToPlaylist);
+    }
+
+    @Test
+    public void onlyVideosPlayedPastNinetyPercentCountAsWatched() {
+        final Map<String, StreamProgress> progress = new HashMap<>();
+        progress.put("https://a", new StreamProgress("https://a", 100, 90_000));
+        progress.put("https://b", new StreamProgress("https://b", 100, 89_000));
+        progress.put("https://c", new StreamProgress("https://c", 0, 50_000));
+
+        assertEquals(1, RecentQueueProgress.countWatched(Arrays.asList(
+                "https://a", "https://b", "https://c", "https://d"), progress));
+        assertEquals(25, RecentQueueProgress.percent(1, 4));
+        assertEquals(0, RecentQueueProgress.percent(0, 0));
     }
 
     @Test

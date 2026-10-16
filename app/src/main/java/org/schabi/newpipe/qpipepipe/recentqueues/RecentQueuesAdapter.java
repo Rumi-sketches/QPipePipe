@@ -16,7 +16,9 @@ import org.schabi.newpipe.R;
 import org.schabi.newpipe.util.PicassoHelper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /** Rows of the recent queues list. */
 final class RecentQueuesAdapter extends RecyclerView.Adapter<RecentQueuesAdapter.Holder> {
@@ -31,13 +33,18 @@ final class RecentQueuesAdapter extends RecyclerView.Adapter<RecentQueuesAdapter
     private final Listener listener;
     @NonNull
     private List<RecentQueueEntity> queues = new ArrayList<>();
+    /** Watched videos of each queue, by queue id. */
+    @NonNull
+    private Map<Long, Integer> watched = new HashMap<>();
 
     RecentQueuesAdapter(@NonNull final Listener listener) {
         this.listener = listener;
     }
 
-    void setQueues(@NonNull final List<RecentQueueEntity> newQueues) {
+    void setQueues(@NonNull final List<RecentQueueEntity> newQueues,
+                   @NonNull final Map<Long, Integer> newWatched) {
         queues = newQueues;
+        watched = newWatched;
         notifyDataSetChanged();
     }
 
@@ -85,8 +92,9 @@ final class RecentQueuesAdapter extends RecyclerView.Adapter<RecentQueuesAdapter
             // a linked queue is named after its playlist, so its date goes on its own line
             date.setVisibility(queue.isLinkedToPlaylist() ? View.VISIBLE : View.GONE);
             date.setText(RecentQueueActions.dateTime(context, queue.updatedAt));
-            progress.setProgress(RecentQueueActions.progressPercent(queue.currentIndex,
-                    queue.streamCount));
+            final Integer watchedCount = watched.get(queue.uid);
+            progress.setProgress(RecentQueueProgress.percent(
+                    watchedCount == null ? 0 : watchedCount, queue.streamCount));
 
             itemView.setOnClickListener(v -> listener.onQueueClicked(queue));
             menu.setOnClickListener(v -> listener.onQueueMenuClicked(queue, v));

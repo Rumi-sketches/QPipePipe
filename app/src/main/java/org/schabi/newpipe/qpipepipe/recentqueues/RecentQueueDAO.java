@@ -27,6 +27,10 @@ public abstract class RecentQueueDAO {
     public abstract Flowable<List<RecentQueueStreamEntity>> getStreams(long queueId);
 
     @Query("SELECT url FROM " + RecentQueueStreamEntity.TABLE
+            + " WHERE queue_id = :queueId")
+    abstract List<String> getUrls(long queueId);
+
+    @Query("SELECT url FROM " + RecentQueueStreamEntity.TABLE
             + " WHERE queue_id = :queueId AND added_to_playlist = 1")
     abstract List<String> getUrlsAddedToPlaylist(long queueId);
 

@@ -69,11 +69,6 @@ final class RecentQueueActions {
         return String.format(Locale.ROOT, "%d:%02d", seconds / 3600, seconds % 3600 / 60);
     }
 
-    /** Percentage of the queue reached, for the progress bars. */
-    static int progressPercent(final int index, final int count) {
-        return count <= 0 ? 0 : (index + 1) * 100 / count;
-    }
-
     /**
      * Plays {@code streams} from {@code index}, continuing the same recent queue entry instead
      * of creating a new one.

@@ -11,6 +11,7 @@ import org.schabi.newpipe.database.playlist.PlaylistMetadataEntry;
 import org.schabi.newpipe.database.playlist.PlaylistStreamEntry;
 import org.schabi.newpipe.database.playlist.model.PlaylistStreamEntity;
 import org.schabi.newpipe.qpipepipe.PlaylistProgress;
+import org.schabi.newpipe.qpipepipe.PlaylistResume;
 
 import java.util.List;
 
@@ -115,10 +116,11 @@ public interface PlaylistStreamDAO extends BasicDAO<PlaylistStreamEntity> {
     /**
      * QPipePipe: duration and last started video of every local playlist that has videos.
      * The position and date come from the most recent watch history entry among the playlist
-     * videos.
+     * videos; watched videos are those played past {@link PlaylistResume#FINISHED_RATIO}.
      */
     @Query("SELECT totals." + JOIN_PLAYLIST_ID + " AS playlist_id, totals.total_duration,"
-            + " latest.last_played_position, latest.last_played_at"
+            + " latest.last_played_position, latest.last_played_at,"
+            + " COALESCE(watched.watched_count, 0) AS watched_count"
             + " FROM (SELECT " + JOIN_PLAYLIST_ID + ","
             + " SUM(CASE WHEN streams.duration > 0 THEN streams.duration ELSE 0 END)"
             + " AS total_duration"
@@ -133,6 +135,14 @@ public interface PlaylistStreamDAO extends BasicDAO<PlaylistStreamEntity> {
             + " FROM " + PLAYLIST_STREAM_JOIN_TABLE + " AS psj"
             + " INNER JOIN stream_history ON stream_history.stream_id = psj." + JOIN_STREAM_ID
             + " GROUP BY psj." + JOIN_PLAYLIST_ID + ") AS latest"
-            + " ON latest." + JOIN_PLAYLIST_ID + " = totals." + JOIN_PLAYLIST_ID)
+            + " ON latest." + JOIN_PLAYLIST_ID + " = totals." + JOIN_PLAYLIST_ID
+            + " LEFT JOIN (SELECT psj." + JOIN_PLAYLIST_ID + ", COUNT(*) AS watched_count"
+            + " FROM " + PLAYLIST_STREAM_JOIN_TABLE + " AS psj"
+            + " INNER JOIN " + STREAM_TABLE + " ON " + STREAM_ID + " = psj." + JOIN_STREAM_ID
+            + " INNER JOIN stream_state ON stream_state.stream_id = psj." + JOIN_STREAM_ID
+            + " WHERE streams.duration > 0 AND stream_state.progress_time"
+            + " >= streams.duration * 1000 * " + PlaylistResume.FINISHED_RATIO
+            + " GROUP BY psj." + JOIN_PLAYLIST_ID + ") AS watched"
+            + " ON watched." + JOIN_PLAYLIST_ID + " = totals." + JOIN_PLAYLIST_ID)
     Flowable<List<PlaylistProgress>> getPlaylistProgress();
 }

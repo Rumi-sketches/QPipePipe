@@ -112,6 +112,11 @@ public final class RecentQueueRecorder {
         final Context appContext = context.getApplicationContext();
         final AppDatabase db = NewPipeDatabase.getInstance(appContext);
         final List<PlayerMediaItem> items = new ArrayList<>(enqueued.getStreams());
+        // the queue holds these same items, so Undo can find them again
+        final Set<String> itemIds = new HashSet<>();
+        for (final PlayerMediaItem item : items) {
+            itemIds.add(item.getUuid());
+        }
         Single.fromCallable(() -> appendMissing(db, playlistId, items))
                 .subscribeOn(WRITES)
                 // save() copies the queue, which the player changes on the main thread
@@ -122,22 +127,43 @@ public final class RecentQueueRecorder {
                     }
                     save(appContext, queue, appended.urls);
                     if (appended.urls.size() > 1) {
-                        offerUndo(appContext, appended);
+                        offerUndo(appContext, queue, itemIds, appended);
                     }
                 }, error -> Log.e(TAG, "Append to playlist failed", error));
     }
 
-    /** Offers to take a batch of appended videos back out of the playlist. */
+    /**
+     * Offers to undo the whole enqueue: the videos leave the queue as well as the playlist, so
+     * nothing of it stays.
+     */
     @MainThread
-    private static void offerUndo(@NonNull final Context context,
+    private static void offerUndo(@NonNull final Context context, @NonNull final PlayQueue queue,
+                                  @NonNull final Set<String> itemIds,
                                   @NonNull final Appended appended) {
         final int count = appended.urls.size();
         final String name = String.valueOf(appended.playlistName);
         RecentQueueUndo.offer(context.getResources().getQuantityString(
-                R.plurals.recent_queue_appended, count, count, name), () ->
-                Completable.fromAction(() -> takeBack(context, appended))
-                        .subscribeOn(WRITES)
-                        .subscribe(() -> { }, error -> Log.e(TAG, "Undo failed", error)));
+                R.plurals.recent_queue_appended, count, count, name), () -> {
+            removeFromQueue(queue, itemIds);
+            Completable.fromAction(() -> takeBack(context, appended))
+                    .subscribeOn(WRITES)
+                    .subscribe(() -> { }, error -> Log.e(TAG, "Undo failed", error));
+        });
+    }
+
+    /** Removes from {@code queue} the items with the given ids, if the queue still plays. */
+    @MainThread
+    private static void removeFromQueue(@NonNull final PlayQueue queue,
+                                        @NonNull final Set<String> itemIds) {
+        if (queue.isDisposed()) {
+            return;
+        }
+        final List<PlayerMediaItem> streams = queue.getStreams();
+        for (int i = streams.size() - 1; i >= 0; i--) {
+            if (itemIds.contains(streams.get(i).getUuid())) {
+                queue.remove(i);
+            }
+        }
     }
 
     /**

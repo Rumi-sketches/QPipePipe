@@ -20,13 +20,10 @@ import org.schabi.newpipe.BaseFragment;
 import org.schabi.newpipe.NewPipeDatabase;
 import org.schabi.newpipe.R;
 import org.schabi.newpipe.database.history.dao.StreamHistoryDAO;
-import org.schabi.newpipe.qpipepipe.StreamProgress;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Flowable;
@@ -40,7 +37,6 @@ public class RecentQueueFragment extends BaseFragment
         implements RecentQueueStreamsAdapter.Listener {
     private static final String KEY_QUEUE_ID = "queue_id";
     /** Urls per query, under SQLite's limit of 999 bound parameters. */
-    private static final int URLS_PER_QUERY = 500;
 
     private final CompositeDisposable disposables = new CompositeDisposable();
     private long queueId;
@@ -182,16 +178,7 @@ public class RecentQueueFragment extends BaseFragment
         if (progressLoad != null) {
             progressLoad.dispose();
         }
-        progressLoad = Single.fromCallable(() -> {
-                    final Map<String, StreamProgress> progress = new HashMap<>();
-                    for (int from = 0; from < urls.size(); from += URLS_PER_QUERY) {
-                        for (final StreamProgress p : historyDao.getProgressOf(urls.subList(from,
-                                Math.min(from + URLS_PER_QUERY, urls.size())))) {
-                            progress.put(p.getUrl(), p);
-                        }
-                    }
-                    return progress;
-                })
+        progressLoad = Single.fromCallable(() -> RecentQueueProgress.load(historyDao, urls))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(progress -> {

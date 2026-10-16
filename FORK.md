@@ -388,8 +388,8 @@ not in the settings export. Rules:
   enqueues cannot duplicate a video or collide on the playlist index.
 - When one enqueue appends two or more videos, the screen in front shows "N
   videos added to name" with Undo for 4 seconds. Undo takes them back out of
-  the playlist, only if they still follow the videos it had before; they stay
-  in the queue.
+  the playlist, only if they still follow the videos it had before, and out of
+  the queue: all or nothing.
 - Any other queue is one entry per session, kept once the user built it: it
   started with two or more videos, or the user enqueued something. Videos opened
   one by one, with related videos auto-queued, leave no entry. A session
@@ -407,8 +407,8 @@ not in the settings export. Rules:
 
 The Playlists page gets a "Playlists / Recent queues" switch. Rows stay short:
 a local playlist row shows when it was last played (or "Never played") and a
-bar of how far into it the user got; a queue row shows title, date and the same
-bar. The video count is on the thumbnail. Remote playlist rows are unchanged:
+bar of the share of its videos watched (past 90%); a queue row shows title,
+date and the same bar. The video count is on the thumbnail. Remote playlist rows are unchanged:
 their videos are not stored locally. The detail screen shows "2/134 videos ·
 85:23" (position, length, total hours and minutes) and "N videos added since
 date", resumes the queue in the three players, opens the

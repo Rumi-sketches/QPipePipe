@@ -21,5 +21,9 @@ data class PlaylistProgress(
 
     /** When that video was started, in epoch milliseconds; null when none was started. */
     @ColumnInfo(name = "last_played_at")
-    val lastPlayedAt: Long?
+    val lastPlayedAt: Long?,
+
+    /** Videos played past [PlaylistResume.FINISHED_RATIO] of their length. */
+    @ColumnInfo(name = "watched_count")
+    val watchedCount: Int
 )

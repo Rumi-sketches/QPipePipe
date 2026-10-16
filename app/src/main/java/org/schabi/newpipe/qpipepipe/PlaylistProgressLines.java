@@ -16,7 +16,7 @@ import java.util.Map;
 
 /**
  * What a local playlist row in Playlists shows while recent queues are on: when it was last
- * played (or "Never played") and how far into it the user got, as a bar. The video count is
+ * played (or "Never played") and the share of its videos watched, as a bar. The video count is
  * already on the thumbnail. Filled by
  * {@link org.schabi.newpipe.qpipepipe.recentqueues.RecentQueuesTabs}, read by the playlist rows
  * on the main thread.
@@ -53,16 +53,14 @@ public final class PlaylistProgressLines {
     }
 
     /**
-     * @return how far into the playlist the user got, from 0 to 100, or -1 when there is
-     * nothing to show
+     * @return the share of watched videos, from 0 to 100, or -1 when there is nothing to show
      */
     public static int percentFor(final long playlistId, final long streamCount) {
         final PlaylistProgress progress = PROGRESS.get(playlistId);
         if (progress == null || streamCount <= 0) {
             return -1;
         }
-        final Integer position = progress.getLastPlayedPosition();
-        return position == null ? 0 : (int) ((position + 1) * 100 / streamCount);
+        return (int) (Math.min(progress.getWatchedCount(), streamCount) * 100 / streamCount);
     }
 
     /**
