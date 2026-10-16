@@ -2,11 +2,14 @@ package org.schabi.newpipe.qpipepipe;
 
 import android.content.Context;
 import android.text.format.DateUtils;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 
 import org.schabi.newpipe.R;
 
@@ -23,6 +26,7 @@ import java.util.Map;
  */
 public final class PlaylistProgressLines {
     private static final Map<Long, PlaylistProgress> PROGRESS = new HashMap<>();
+    private static final String BAR_TAG = "qpipepipe_playlist_progress";
 
     private PlaylistProgressLines() {
     }
@@ -64,18 +68,53 @@ public final class PlaylistProgressLines {
     }
 
     /**
-     * Shows the progress bar of the row, in the layouts that have one
-     * ({@code qpipepipe_playlist_progress}).
+     * Shows the progress bar under the line of the row. The bar is added from here, below
+     * {@code itemUploaderView}, so the upstream row layouts stay untouched.
      */
     public static void bindBar(@NonNull final View row, final long playlistId,
                                final long streamCount) {
-        final ProgressBar bar = row.findViewById(R.id.qpipepipe_playlist_progress);
-        if (bar == null) {
-            return;
-        }
         final int percent = percentFor(playlistId, streamCount);
+        ProgressBar bar = row.findViewWithTag(BAR_TAG);
+        if (bar == null) {
+            if (percent < 0) {
+                return;
+            }
+            bar = addBar(row);
+            if (bar == null) {
+                return;
+            }
+        }
         bar.setVisibility(percent < 0 ? View.GONE : View.VISIBLE);
         bar.setProgress(Math.max(0, percent));
+    }
+
+    /** @return the new bar, or null when the row has no line to put it under */
+    @Nullable
+    private static ProgressBar addBar(@NonNull final View row) {
+        final View line = row.findViewById(R.id.itemUploaderView);
+        if (line == null || !(line.getParent() instanceof RelativeLayout)) {
+            return null;
+        }
+        final Context context = row.getContext();
+        final ProgressBar bar = new ProgressBar(context, null,
+                android.R.attr.progressBarStyleHorizontal);
+        bar.setTag(BAR_TAG);
+        bar.setMax(100);
+        final TypedValue drawable = new TypedValue();
+        if (context.getTheme().resolveAttribute(R.attr.progress_horizontal_drawable, drawable,
+                true)) {
+            bar.setProgressDrawable(AppCompatResources.getDrawable(context,
+                    drawable.resourceId));
+        }
+        final float density = context.getResources().getDisplayMetrics().density;
+        final RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(0,
+                Math.round(3 * density));
+        params.addRule(RelativeLayout.BELOW, line.getId());
+        params.addRule(RelativeLayout.ALIGN_START, line.getId());
+        params.addRule(RelativeLayout.ALIGN_END, line.getId());
+        params.topMargin = Math.round(4 * density);
+        ((RelativeLayout) line.getParent()).addView(bar, params);
+        return bar;
     }
 
     /** Date and time as shown on the playlist and queue rows. */

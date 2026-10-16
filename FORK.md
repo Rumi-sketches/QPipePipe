@@ -368,8 +368,8 @@ Playlists switch), `qpipepipe/PlaylistProgressLines`, `PlaylistProgress`,
 and source playlist), `PlayerStartController` (three calls to
 `RecentQueueRecorder`), `LocalPlaylistFragment.getPlayQueue` (source
 playlist), `BookmarkFragment` and `fragment_bookmarks.xml` (the switch),
-`LocalPlaylistItemHolder` (date and bar), `list_playlist_bookmark_item.xml` and
-`list_playlist_grid_item.xml` (the bar), `App` (registers `RecentQueueUndo`),
+`LocalPlaylistItemHolder` (date and bar; the bar is added from code so the
+row layouts stay upstream's), `App` (registers `RecentQueueUndo`),
 `PlaylistStreamDAO.getPlaylistProgress`, `StreamHistoryDAO.getProgressOf`.
 Key: `recent_queues_key` (default off, in the QPipePipe settings).
 

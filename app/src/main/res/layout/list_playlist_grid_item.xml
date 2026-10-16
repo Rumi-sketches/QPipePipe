@@ -85,18 +85,4 @@
             android:layout_alignTop="@id/itemUploaderView"
             app:srcCompat="@drawable/ic_drag_handle"
             tools:ignore="RtlHardcoded,RtlSymmetry"/>
-
-    <!-- QPipePipe: how far into the playlist, see PlaylistProgressLines.bindBar -->
-    <ProgressBar
-        android:id="@+id/qpipepipe_playlist_progress"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="0dp"
-        android:layout_height="3dp"
-        android:layout_below="@+id/itemUploaderView"
-        android:layout_alignStart="@+id/itemUploaderView"
-        android:layout_alignEnd="@+id/itemUploaderView"
-        android:layout_marginTop="4dp"
-        android:progressDrawable="?progress_horizontal_drawable"
-        android:visibility="gone"
-        tools:visibility="visible" />
 </RelativeLayout>
