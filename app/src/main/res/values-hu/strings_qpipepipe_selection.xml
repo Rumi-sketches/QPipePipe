@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Többszörös kijelölés</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d kiválasztva</item>
+        <item quantity="other">%d kiválasztva</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Összes kijelölése</string>
+    <string name="qpipepipe_selection_enqueue">Sorba</string>
+    <string name="qpipepipe_selection_enqueue_next">Következő</string>
+    <string name="qpipepipe_selection_background">Háttér</string>
+    <string name="qpipepipe_selection_popup">Felugró</string>
+    <string name="qpipepipe_selection_playlist">Lista</string>
+    <string name="qpipepipe_selection_download">Letöltés</string>
+    <string name="qpipepipe_selection_more">Több</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">%d videó letöltése</item>
+        <item quantity="other">%d videó letöltése</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">A minőség és a mappa a letöltési beállításokból származik. A már letöltött videók kimaradnak.</string>
+    <string name="qpipepipe_selection_share_links">Hivatkozások megosztása</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Eltávolítás a lejátszási listáról</string>
+    <string name="qpipepipe_selection_remove_from_history">Eltávolítás az előzményekből</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d videó eltávolítva</item>
+        <item quantity="other">%d videó eltávolítva</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">A lista közben megváltozott: jelölje ki újra a videókat</string>
+</resources>

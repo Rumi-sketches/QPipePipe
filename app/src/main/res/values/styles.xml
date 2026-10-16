@@ -17,6 +17,8 @@
         <item name="floatingActionButtonStyle">@style/FloatingActionButtonTheme</item>
         <item name="toolbarSearchColor">@color/white</item>
         <item name="colorControlActivated">?attr/colorPrimary</item>
+        <!-- QPipePipe: the multiple selection bar covers the toolbar -->
+        <item name="windowActionModeOverlay">true</item>
     </style>
     <style name="Base" parent="Base.V19"/>
 

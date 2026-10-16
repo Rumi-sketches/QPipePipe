@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Monivalinta</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d valittu</item>
+        <item quantity="other">%d valittua</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Valitse kaikki</string>
+    <string name="qpipepipe_selection_enqueue">Jonoon</string>
+    <string name="qpipepipe_selection_enqueue_next">Seuraava</string>
+    <string name="qpipepipe_selection_background">Tausta</string>
+    <string name="qpipepipe_selection_popup">Ponnahdus</string>
+    <string name="qpipepipe_selection_playlist">Soittolista</string>
+    <string name="qpipepipe_selection_download">Lataa</string>
+    <string name="qpipepipe_selection_more">Lisää</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">Lataa %d video</item>
+        <item quantity="other">Lataa %d videota</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Laatu ja kansio otetaan latausasetuksista. Jo ladatut videot ohitetaan.</string>
+    <string name="qpipepipe_selection_share_links">Jaa linkit</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Poista soittolistalta</string>
+    <string name="qpipepipe_selection_remove_from_history">Poista historiasta</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d video poistettu</item>
+        <item quantity="other">%d videota poistettu</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Lista muuttui sillä välin: valitse videot uudelleen</string>
+</resources>

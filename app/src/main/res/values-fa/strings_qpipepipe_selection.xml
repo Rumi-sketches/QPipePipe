@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">انتخاب چندتایی</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d مورد گزیده</item>
+        <item quantity="other">%d مورد گزیده</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">گزینش همه</string>
+    <string name="qpipepipe_selection_enqueue">صف</string>
+    <string name="qpipepipe_selection_enqueue_next">بعدی</string>
+    <string name="qpipepipe_selection_background">پس‌زمینه</string>
+    <string name="qpipepipe_selection_popup">شناور</string>
+    <string name="qpipepipe_selection_playlist">سیاههٔ پخش</string>
+    <string name="qpipepipe_selection_download">بارگیری</string>
+    <string name="qpipepipe_selection_more">بیشتر</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">بارگیری %d ویدیو</item>
+        <item quantity="other">بارگیری %d ویدیو</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">کیفیت و شاخه از تنظیمات بارگیری گرفته می‌شوند. ویدیوهایی که پیش‌تر بارگیری شده‌اند رد می‌شوند.</string>
+    <string name="qpipepipe_selection_share_links">هم‌رسانی پیوندها</string>
+    <string name="qpipepipe_selection_remove_from_playlist">برداشتن از سیاههٔ پخش</string>
+    <string name="qpipepipe_selection_remove_from_history">برداشتن از تاریخچه</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d ویدیو برداشته شد</item>
+        <item quantity="other">%d ویدیو برداشته شد</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">فهرست در این میان تغییر کرد: ویدیوها را دوباره گزینش کنید</string>
+</resources>

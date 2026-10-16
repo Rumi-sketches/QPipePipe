@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Selección múltiple</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d seleccionado</item>
+        <item quantity="other">%d seleccionados</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Seleccionar todo</string>
+    <string name="qpipepipe_selection_enqueue">Cola</string>
+    <string name="qpipepipe_selection_enqueue_next">Seguinte</string>
+    <string name="qpipepipe_selection_background">2º plano</string>
+    <string name="qpipepipe_selection_popup">Popup</string>
+    <string name="qpipepipe_selection_playlist">Lista</string>
+    <string name="qpipepipe_selection_download">Descarregar</string>
+    <string name="qpipepipe_selection_more">Máis</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">Descarregar %d vídeo</item>
+        <item quantity="other">Descarregar %d vídeos</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">A calidade e o cartafol tómanse da configuración de descargas. Os vídeos xa descargados omítense.</string>
+    <string name="qpipepipe_selection_share_links">Compartillar ligazóns</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Quitar da lista de reprodución</string>
+    <string name="qpipepipe_selection_remove_from_history">Quitar do historial</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d vídeo quitado</item>
+        <item quantity="other">%d vídeos quitados</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">A lista cambiou mentres tanto: volve seleccionar os vídeos</string>
+</resources>

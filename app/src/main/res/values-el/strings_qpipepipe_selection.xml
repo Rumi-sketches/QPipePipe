@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Πολλαπλή επιλογή</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d επιλέχθηκε</item>
+        <item quantity="other">%d επιλέχθηκαν</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Επιλογή όλων</string>
+    <string name="qpipepipe_selection_enqueue">Ουρά</string>
+    <string name="qpipepipe_selection_enqueue_next">Επόμενο</string>
+    <string name="qpipepipe_selection_background">Παρασκήνιο</string>
+    <string name="qpipepipe_selection_popup">Αναδυόμενο</string>
+    <string name="qpipepipe_selection_playlist">Λίστα</string>
+    <string name="qpipepipe_selection_download">Λήψη</string>
+    <string name="qpipepipe_selection_more">Περισσότερα</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">Λήψη %d βίντεο</item>
+        <item quantity="other">Λήψη %d βίντεο</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Η ποιότητα και ο φάκελος προέρχονται από τις ρυθμίσεις λήψης. Τα βίντεο που έχουν ήδη ληφθεί παραλείπονται.</string>
+    <string name="qpipepipe_selection_share_links">Κοινοποίηση συνδέσμων</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Αφαίρεση από τη λίστα αναπαραγωγής</string>
+    <string name="qpipepipe_selection_remove_from_history">Αφαίρεση από το ιστορικό</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">Αφαιρέθηκε %d βίντεο</item>
+        <item quantity="other">Αφαιρέθηκαν %d βίντεο</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Η λίστα άλλαξε στο μεταξύ: επιλέξτε ξανά τα βίντεο</string>
+</resources>

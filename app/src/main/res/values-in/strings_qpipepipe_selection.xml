@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Pilih beberapa</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="other">%d dipilih</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Pilih semua</string>
+    <string name="qpipepipe_selection_enqueue">Antre</string>
+    <string name="qpipepipe_selection_enqueue_next">Berikutnya</string>
+    <string name="qpipepipe_selection_background">Latar</string>
+    <string name="qpipepipe_selection_popup">Popup</string>
+    <string name="qpipepipe_selection_playlist">Daftar putar</string>
+    <string name="qpipepipe_selection_download">Unduh</string>
+    <string name="qpipepipe_selection_more">Lainnya</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="other">Unduh %d video</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Kualitas dan folder mengikuti pengaturan unduhan. Video yang sudah diunduh akan dilewati.</string>
+    <string name="qpipepipe_selection_share_links">Bagikan tautan</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Hapus dari daftar putar</string>
+    <string name="qpipepipe_selection_remove_from_history">Hapus dari riwayat</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="other">%d video dihapus</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Daftar berubah sementara itu: pilih ulang videonya</string>
+</resources>

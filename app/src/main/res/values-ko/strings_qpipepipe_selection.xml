@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">다중 선택</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="other">%d개 선택됨</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">모두 선택</string>
+    <string name="qpipepipe_selection_enqueue">대기열</string>
+    <string name="qpipepipe_selection_enqueue_next">다음 재생</string>
+    <string name="qpipepipe_selection_background">백그라운드</string>
+    <string name="qpipepipe_selection_popup">팝업</string>
+    <string name="qpipepipe_selection_playlist">재생목록</string>
+    <string name="qpipepipe_selection_download">다운로드</string>
+    <string name="qpipepipe_selection_more">더 보기</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="other">비디오 %d개 다운로드</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">화질과 폴더는 다운로드 설정을 따릅니다. 이미 다운로드한 비디오는 건너뜁니다.</string>
+    <string name="qpipepipe_selection_share_links">링크 공유</string>
+    <string name="qpipepipe_selection_remove_from_playlist">재생목록에서 제거</string>
+    <string name="qpipepipe_selection_remove_from_history">기록에서 제거</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="other">비디오 %d개 제거됨</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">그동안 목록이 변경되었습니다. 비디오를 다시 선택하세요</string>
+</resources>

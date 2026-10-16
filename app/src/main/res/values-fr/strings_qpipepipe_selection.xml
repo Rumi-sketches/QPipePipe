@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Sélection multiple</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d sélectionné</item>
+        <item quantity="other">%d sélectionnés</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Tout sélectionner</string>
+    <string name="qpipepipe_selection_enqueue">File</string>
+    <string name="qpipepipe_selection_enqueue_next">Suivant</string>
+    <string name="qpipepipe_selection_background">Fond</string>
+    <string name="qpipepipe_selection_popup">Popup</string>
+    <string name="qpipepipe_selection_playlist">Playlist</string>
+    <string name="qpipepipe_selection_download">Télécharger</string>
+    <string name="qpipepipe_selection_more">Plus</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">Télécharger %d vidéo</item>
+        <item quantity="other">Télécharger %d vidéos</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">La qualité et le dossier proviennent des paramètres de téléchargement. Les vidéos déjà téléchargées sont ignorées.</string>
+    <string name="qpipepipe_selection_share_links">Partager les liens</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Retirer de la liste de lecture</string>
+    <string name="qpipepipe_selection_remove_from_history">Retirer de l\'historique</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d vidéo retirée</item>
+        <item quantity="other">%d vidéos retirées</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">La liste a changé entre-temps : sélectionnez à nouveau les vidéos</string>
+</resources>

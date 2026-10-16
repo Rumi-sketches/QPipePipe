@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">多选</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">已选择 %d 项</item>
+        <item quantity="other">已选择 %d 项</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">全选</string>
+    <string name="qpipepipe_selection_enqueue">加入队列</string>
+    <string name="qpipepipe_selection_enqueue_next">接下来播放</string>
+    <string name="qpipepipe_selection_background">后台</string>
+    <string name="qpipepipe_selection_popup">悬浮窗</string>
+    <string name="qpipepipe_selection_playlist">播放列表</string>
+    <string name="qpipepipe_selection_download">下载</string>
+    <string name="qpipepipe_selection_more">更多</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">下载 %d 个视频</item>
+        <item quantity="other">下载 %d 个视频</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">画质和文件夹沿用下载设置。已下载的视频将被跳过。</string>
+    <string name="qpipepipe_selection_share_links">分享链接</string>
+    <string name="qpipepipe_selection_remove_from_playlist">从播放列表中移除</string>
+    <string name="qpipepipe_selection_remove_from_history">从历史中移除</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">已移除 %d 个视频</item>
+        <item quantity="other">已移除 %d 个视频</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">列表在此期间已更改：请重新选择视频</string>
+</resources>

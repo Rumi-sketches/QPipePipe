@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">ଏକାଧିକ ଚୟନ</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d ଚୟନିତ</item>
+        <item quantity="other">%d ଚୟନିତ</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">ସବୁ ଚୟନ କରନ୍ତୁ</string>
+    <string name="qpipepipe_selection_enqueue">ଧାଡ଼ି</string>
+    <string name="qpipepipe_selection_enqueue_next">ପରବର୍ତ୍ତୀ</string>
+    <string name="qpipepipe_selection_background">ପୃଷ୍ଠଭୂମି</string>
+    <string name="qpipepipe_selection_popup">ପପଅପ୍</string>
+    <string name="qpipepipe_selection_playlist">ପ୍ଲେଲିଷ୍ଟ</string>
+    <string name="qpipepipe_selection_download">ଡାଉନଲୋଡ୍</string>
+    <string name="qpipepipe_selection_more">ଅଧିକ</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">%d ଭିଡିଓ ଡାଉନଲୋଡ୍ କରନ୍ତୁ</item>
+        <item quantity="other">%d ଭିଡିଓ ଡାଉନଲୋଡ୍ କରନ୍ତୁ</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">ଗୁଣବତ୍ତା ଓ ଫୋଲ୍ଡର ଡାଉନଲୋଡ୍ ସେଟିଂସରୁ ନିଆଯାଏ। ପୂର୍ବରୁ ଡାଉନଲୋଡ୍ ହୋଇଥିବା ଭିଡିଓଗୁଡ଼ିକ ଛାଡ଼ି ଦିଆଯାଏ।</string>
+    <string name="qpipepipe_selection_share_links">ଲିଙ୍କ ସେୟାର କରନ୍ତୁ</string>
+    <string name="qpipepipe_selection_remove_from_playlist">ପ୍ଲେଲିଷ୍ଟରୁ ହଟାନ୍ତୁ</string>
+    <string name="qpipepipe_selection_remove_from_history">ଇତିବୃତ୍ତିରୁ ହଟାନ୍ତୁ</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d ଭିଡିଓ ହଟାଗଲା</item>
+        <item quantity="other">%d ଭିଡିଓ ହଟାଗଲା</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">ଏହି ମଧ୍ୟରେ ତାଲିକା ବଦଳିଗଲା: ଭିଡିଓଗୁଡ଼ିକୁ ପୁଣି ଚୟନ କରନ୍ତୁ</string>
+</resources>

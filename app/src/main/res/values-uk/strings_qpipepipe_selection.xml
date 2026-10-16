@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Множинний вибір</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">Вибрано: %d</item>
+        <item quantity="few">Вибрано: %d</item>
+        <item quantity="many">Вибрано: %d</item>
+        <item quantity="other">Вибрано: %d</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Вибрати все</string>
+    <string name="qpipepipe_selection_enqueue">У чергу</string>
+    <string name="qpipepipe_selection_enqueue_next">Наступним</string>
+    <string name="qpipepipe_selection_background">У фоні</string>
+    <string name="qpipepipe_selection_popup">У вікні</string>
+    <string name="qpipepipe_selection_playlist">Добірка</string>
+    <string name="qpipepipe_selection_download">Завантажити</string>
+    <string name="qpipepipe_selection_more">Більше</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">Завантажити %d відео</item>
+        <item quantity="few">Завантажити %d відео</item>
+        <item quantity="many">Завантажити %d відео</item>
+        <item quantity="other">Завантажити %d відео</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Якість і тека беруться з налаштувань завантаження. Уже завантажені відео пропускаються.</string>
+    <string name="qpipepipe_selection_share_links">Поширити посилання</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Видалити з добірки</string>
+    <string name="qpipepipe_selection_remove_from_history">Видалити з історії</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">Видалено відео: %d</item>
+        <item quantity="few">Видалено відео: %d</item>
+        <item quantity="many">Видалено відео: %d</item>
+        <item quantity="other">Видалено відео: %d</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Список тим часом змінився: виберіть відео знову</string>
+</resources>

@@ -25,6 +25,7 @@ import org.schabi.newpipe.error.ErrorUtil;
 import org.schabi.newpipe.error.UserAction;
 import org.schabi.newpipe.extractor.InfoItem;
 import org.schabi.newpipe.extractor.stream.StreamInfoItem;
+import org.schabi.newpipe.qpipepipe.selection.MultiSelect;
 import org.schabi.newpipe.extractor.stream.StreamType;
 import org.schabi.newpipe.player.helper.PlayerHolder;
 import org.schabi.newpipe.util.external_communication.KoreUtils;
@@ -48,11 +49,14 @@ public final class InfoItemDialog {
      * Its result is stored in this class variable to allow access via the {@link #show()} method.
      */
     private final AlertDialog dialog;
+    @NonNull
+    private final Fragment fragment;
 
     private InfoItemDialog(@NonNull final Activity activity,
                            @NonNull final Fragment fragment,
                            @NonNull final StreamInfoItem info,
                            @NonNull final List<StreamDialogEntry> entries) {
+        this.fragment = fragment;
 
         // Create the dialog's title
         final View bannerView = View.inflate(activity, R.layout.dialog_title, null);
@@ -70,8 +74,10 @@ public final class InfoItemDialog {
         }
 
         // Get the entry's descriptions which are displayed in the dialog
-        final String[] items = entries.stream()
-                .map(entry -> entry.getString(activity)).toArray(String[]::new);
+        // QPipePipe: "Multiple selection" has an icon
+        final CharSequence[] items = entries.stream()
+                .map(entry -> MultiSelect.dialogLabel(activity, entry))
+                .toArray(CharSequence[]::new);
 
         // Call an entry's action / onClick method when the entry is selected.
         final DialogInterface.OnClickListener action = (d, index) -> {
@@ -100,6 +106,10 @@ public final class InfoItemDialog {
     }
 
     public void show() {
+        // QPipePipe: in selection mode a long press selects instead
+        if (MultiSelect.isSelecting(fragment)) {
+            return;
+        }
         dialog.show();
     }
 
@@ -364,6 +374,8 @@ public final class InfoItemDialog {
             if (addDefaultEntriesAutomatically) {
                 addDefaultEndEntries();
             }
+            // QPipePipe: "Multiple selection" first, in the lists that support it
+            MultiSelect.addDialogEntry(fragment, entries);
             return new InfoItemDialog(this.activity, this.fragment, this.infoItem, this.entries);
         }
 

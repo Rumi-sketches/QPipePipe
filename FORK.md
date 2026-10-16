@@ -236,6 +236,40 @@ Check: enable swipe actions, swipe left and right on rows in home, search,
 history, a local playlist and a channel group feed; the rows snap back and the
 action runs.
 
+### Multiple selection of videos
+
+Code in `qpipepipe/selection/` (`MultiSelect`, `SelectionController`,
+`SelectionDecoration`, `SelectionActions`), `res/layout/qpipepipe_selection_bar.xml`,
+`res/values/strings_qpipepipe_selection.xml` (translated in every
+`values-*/strings_qpipepipe_selection.xml`), `styles_qpipepipe.xml`,
+`ids_qpipepipe.xml`. Upstream files touched: `InfoItemDialog` (entry with icon,
+no dialog while selecting), `BaseListFragment` and `BaseLocalListFragment`
+(install, toolbar button, `getMultiSelectRemover`), `FeedFragment`,
+`LocalPlaylistFragment` and `StatisticsPlaylistFragment` (remove, no drag or
+swipe while selecting), `LocalItemListAdapter.getLocalItem`, `styles.xml`
+(`windowActionModeOverlay`).
+
+"Multiple selection" is the first entry of the long-press menu, with an icon,
+and a toolbar button. In selection mode taps select videos (headers keep their
+taps), an action mode over the toolbar shows the count and Select all, and a bar
+at the bottom applies one action to the selected videos in the order they were
+picked: queue, play next, background, popup, add to playlist, download (video
+or audio only, through "Download all"'s sequential downloader), and under More
+mark as watched, share links, remove from the playlist or the history. Back or
+the arrow leave selection mode, and so do leaving the screen or the list going
+out of sight (another tab, the player sheet collapsing). Videos are kept by key
+(url, or place in a local playlist), not by row, because history and feed
+reload while selecting. A long press that unselects the last video keeps the
+mode open, so the row's own long press doesn't open the menu. The selection
+state is drawn by an item decoration, so no row layout changes. Comments and
+the playlists list are excluded in `MultiSelect.holdsVideos`.
+
+Check: in search, long-press a video, pick "Multiple selection", tap two more:
+"3 selected" and three check marks. Queue starts or extends the queue with all
+three. Back leaves selection without leaving search. In a local playlist,
+select one video, More > Remove from playlist: it is gone after reopening. In a
+channel, select in Videos and swipe to another tab: selection mode ends.
+
 ### Clear-queue confirmation with enqueue options
 
 Commit `fb4865a17`. Files: `VideoDetailFragment` (`loadVideoIfUserConfirms`

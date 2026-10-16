@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Selectio multiplex</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d selectum</item>
+        <item quantity="other">%d selecta</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Omnia selige</string>
+    <string name="qpipepipe_selection_enqueue">Ordo</string>
+    <string name="qpipepipe_selection_enqueue_next">Deinde</string>
+    <string name="qpipepipe_selection_background">Fundus</string>
+    <string name="qpipepipe_selection_popup">Fenestella</string>
+    <string name="qpipepipe_selection_playlist">Index</string>
+    <string name="qpipepipe_selection_download">Deprome</string>
+    <string name="qpipepipe_selection_more">Plura</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">Deprome %d video</item>
+        <item quantity="other">Deprome %d videa</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Qualitas et capsa ex optionibus depromendi sumuntur. Videa iam deprompta omittuntur.</string>
+    <string name="qpipepipe_selection_share_links">Nexus communica</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Remove ex indice</string>
+    <string name="qpipepipe_selection_remove_from_history">Remove ex historia</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d video remotum</item>
+        <item quantity="other">%d videa remota</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Index interea mutatus est: videa iterum selige</string>
+</resources>

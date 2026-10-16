@@ -81,6 +81,7 @@ import org.schabi.newpipe.local.feed.item.StreamItem
 import org.schabi.newpipe.local.feed.service.FeedLoadService
 import org.schabi.newpipe.local.subscription.SubscriptionManager
 import org.schabi.newpipe.player.PlayerService
+import org.schabi.newpipe.qpipepipe.selection.MultiSelect
 import org.schabi.newpipe.player.playqueue.PlayQueue
 import org.schabi.newpipe.player.playqueue.SinglePlayQueue
 import org.schabi.newpipe.util.DeviceUtils
@@ -231,6 +232,8 @@ class FeedFragment : BaseStateFragment<FeedState>() {
         })
 
         feedBinding.itemsList.adapter = groupAdapter
+        // QPipePipe: multiple selection
+        MultiSelect.install(this, feedBinding.itemsList, ::streamItemAt, null)
         setupListViewMode()
     }
 
@@ -275,6 +278,15 @@ class FeedFragment : BaseStateFragment<FeedState>() {
         refreshSwipeActions()
     }
 
+    /** The video at an adapter position, for swipe actions and multiple selection. */
+    private fun streamItemAt(position: Int): StreamInfoItem? =
+        if (position in 0 until groupAdapter.itemCount) {
+            (groupAdapter.getItem(position) as? StreamItem)
+                ?.streamWithState?.stream?.toStreamInfoItem()
+        } else {
+            null
+        }
+
     /**
      * Attaches or detaches the swipe-actions [ItemTouchHelper] depending on whether the feature
      * is currently enabled in the settings (see [SwipeActionPreferences]).
@@ -283,13 +295,7 @@ class FeedFragment : BaseStateFragment<FeedState>() {
         var helper = swipeActionsTouchHelper
         if (helper == null) {
             val callback = StreamSwipeItemTouchCallback(this) { viewHolder ->
-                val position = viewHolder.bindingAdapterPosition
-                if (position in 0 until groupAdapter.itemCount) {
-                    (groupAdapter.getItem(position) as? StreamItem)
-                        ?.streamWithState?.stream?.toStreamInfoItem()
-                } else {
-                    null
-                }
+                streamItemAt(viewHolder.bindingAdapterPosition)
             }
             helper = ItemTouchHelper(callback)
             swipeActionsTouchHelper = helper
@@ -428,6 +434,7 @@ class FeedFragment : BaseStateFragment<FeedState>() {
 //        activity.supportActionBar?.subtitle = groupName
 
         inflater.inflate(R.menu.menu_feed_fragment, menu)
+        MultiSelect.addMenuItem(this, menu)
         updateTogglePlayedItemsButton(menu.findItem(R.id.menu_item_feed_toggle_played_items))
         menu.findItem(R.id.action_search_feed)?.isVisible =
             menu.isItemVisible(R.id.action_search).not()

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Selecție multiplă</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d selectat</item>
+        <item quantity="few">%d selectate</item>
+        <item quantity="other">%d selectate</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Selectați tot</string>
+    <string name="qpipepipe_selection_enqueue">Coadă</string>
+    <string name="qpipepipe_selection_enqueue_next">Următorul</string>
+    <string name="qpipepipe_selection_background">Fundal</string>
+    <string name="qpipepipe_selection_popup">Pop-up</string>
+    <string name="qpipepipe_selection_playlist">Playlist</string>
+    <string name="qpipepipe_selection_download">Descărcare</string>
+    <string name="qpipepipe_selection_more">Mai mult</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">Descărcați %d videoclip</item>
+        <item quantity="few">Descărcați %d videoclipuri</item>
+        <item quantity="other">Descărcați %d de videoclipuri</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Calitatea și dosarul sunt preluate din setările de descărcare. Videoclipurile deja descărcate sunt omise.</string>
+    <string name="qpipepipe_selection_share_links">Distribuiți linkurile</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Eliminați din playlist</string>
+    <string name="qpipepipe_selection_remove_from_history">Eliminați din istoric</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d videoclip eliminat</item>
+        <item quantity="few">%d videoclipuri eliminate</item>
+        <item quantity="other">%d de videoclipuri eliminate</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Lista s-a modificat între timp: selectați din nou videoclipurile</string>
+</resources>

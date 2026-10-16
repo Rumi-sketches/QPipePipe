@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Afran n waṭas</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d i yettwafren</item>
+        <item quantity="other">%d i yettwafernen</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Fren akk</string>
+    <string name="qpipepipe_selection_enqueue">Rnu</string>
+    <string name="qpipepipe_selection_enqueue_next">Uḍfiṛ</string>
+    <string name="qpipepipe_selection_background">Deffir</string>
+    <string name="qpipepipe_selection_popup">Asfaylu</string>
+    <string name="qpipepipe_selection_playlist">Tabdart</string>
+    <string name="qpipepipe_selection_download">Sider</string>
+    <string name="qpipepipe_selection_more">Ugar</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">Sider %d tvidyut</item>
+        <item quantity="other">Sider %d tvidyutin</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Taɣara d ukaram ttekken-d seg iɣewwaṛen n usider. Tividyutin yettwasdern yakan ad ttwazeglent.</string>
+    <string name="qpipepipe_selection_share_links">Bḍu iseɣwan</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Kkes seg tebdart n tɣuri</string>
+    <string name="qpipepipe_selection_remove_from_history">Kkes seg umazray</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d tvidyut tettwakkes</item>
+        <item quantity="other">%d tvidyutin ttwakksent</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Tabdart tbeddel yakan: fren tividyutin tikkelt-nniḍen</string>
+</resources>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Повеќекратен избор</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">Избрано: %d</item>
+        <item quantity="other">Избрано: %d</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Избери ги сите</string>
+    <string name="qpipepipe_selection_enqueue">Редица</string>
+    <string name="qpipepipe_selection_enqueue_next">Следно</string>
+    <string name="qpipepipe_selection_background">Позадина</string>
+    <string name="qpipepipe_selection_popup">Прозорче</string>
+    <string name="qpipepipe_selection_playlist">Плејлиста</string>
+    <string name="qpipepipe_selection_download">Превземи</string>
+    <string name="qpipepipe_selection_more">Повеќе</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">Превземи %d видео</item>
+        <item quantity="other">Превземи %d видеа</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Квалитетот и папката се земаат од поставките за превземање. Веќе превземените видеа се прескокнуваат.</string>
+    <string name="qpipepipe_selection_share_links">Сподели врски</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Отстрани од плејлиста</string>
+    <string name="qpipepipe_selection_remove_from_history">Отстрани од историјата</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">Отстрането %d видео</item>
+        <item quantity="other">Отстранети %d видеа</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Списокот во меѓувреме се промени: повторно изберете ги видеата</string>
+</resources>

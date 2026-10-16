@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Večkratna izbira</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">Izbrano: %d</item>
+        <item quantity="two">Izbrano: %d</item>
+        <item quantity="few">Izbrano: %d</item>
+        <item quantity="other">Izbrano: %d</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Izberi vse</string>
+    <string name="qpipepipe_selection_enqueue">Uvrsti</string>
+    <string name="qpipepipe_selection_enqueue_next">Naslednje</string>
+    <string name="qpipepipe_selection_background">Ozadje</string>
+    <string name="qpipepipe_selection_popup">Okno</string>
+    <string name="qpipepipe_selection_playlist">Seznam</string>
+    <string name="qpipepipe_selection_download">Prejmi</string>
+    <string name="qpipepipe_selection_more">Več</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">Prejmi %d video posnetek</item>
+        <item quantity="two">Prejmi %d video posnetka</item>
+        <item quantity="few">Prejmi %d video posnetke</item>
+        <item quantity="other">Prejmi %d video posnetkov</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Kakovost in mapa sta določeni v nastavitvah prejemanja. Že prejeti video posnetki se preskočijo.</string>
+    <string name="qpipepipe_selection_share_links">Deli povezave</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Odstrani s seznama predvajanja</string>
+    <string name="qpipepipe_selection_remove_from_history">Odstrani iz zgodovine</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">Odstranjen %d video posnetek</item>
+        <item quantity="two">Odstranjena %d video posnetka</item>
+        <item quantity="few">Odstranjeni %d video posnetki</item>
+        <item quantity="other">Odstranjenih %d video posnetkov</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Seznam se je medtem spremenil: znova izberite video posnetke</string>
+</resources>

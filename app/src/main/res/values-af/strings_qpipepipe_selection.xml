@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Meervoudige keuse</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d gekies</item>
+        <item quantity="other">%d gekies</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Kies alles</string>
+    <string name="qpipepipe_selection_enqueue">Waglys</string>
+    <string name="qpipepipe_selection_enqueue_next">Volgende</string>
+    <string name="qpipepipe_selection_background">Agtergrond</string>
+    <string name="qpipepipe_selection_popup">Opspring</string>
+    <string name="qpipepipe_selection_playlist">Speellys</string>
+    <string name="qpipepipe_selection_download">Laai af</string>
+    <string name="qpipepipe_selection_more">Meer</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">Laai %d video af</item>
+        <item quantity="other">Laai %d video\'s af</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Gehalte en vouer kom uit die aflaai-instellings. Video\'s wat reeds afgelaai is, word oorgeslaan.</string>
+    <string name="qpipepipe_selection_share_links">Deel skakels</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Verwyder uit speellys</string>
+    <string name="qpipepipe_selection_remove_from_history">Verwyder uit geskiedenis</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d video verwyder</item>
+        <item quantity="other">%d video\'s verwyder</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Die lys het intussen verander: kies die video\'s weer</string>
+</resources>

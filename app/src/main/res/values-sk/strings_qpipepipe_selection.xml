@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Viacnásobný výber</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">Vybrané: %d</item>
+        <item quantity="few">Vybrané: %d</item>
+        <item quantity="other">Vybrané: %d</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Vybrať všetko</string>
+    <string name="qpipepipe_selection_enqueue">Do fronty</string>
+    <string name="qpipepipe_selection_enqueue_next">Ďalšie</string>
+    <string name="qpipepipe_selection_background">Na pozadí</string>
+    <string name="qpipepipe_selection_popup">V okne</string>
+    <string name="qpipepipe_selection_playlist">Zoznam</string>
+    <string name="qpipepipe_selection_download">Prevziať</string>
+    <string name="qpipepipe_selection_more">Viac</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">Prevziať %d video</item>
+        <item quantity="few">Prevziať %d videá</item>
+        <item quantity="other">Prevziať %d videí</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Kvalita a priečinok sa preberajú z nastavení preberania. Už prevzaté videá sa preskočia.</string>
+    <string name="qpipepipe_selection_share_links">Zdieľať odkazy</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Odstrániť zo zoznamu skladieb</string>
+    <string name="qpipepipe_selection_remove_from_history">Odstrániť z histórie</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">Odstránené %d video</item>
+        <item quantity="few">Odstránené %d videá</item>
+        <item quantity="other">Odstránených %d videí</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Zoznam sa medzitým zmenil: vyberte videá znova</string>
+</resources>

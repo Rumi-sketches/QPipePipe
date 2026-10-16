@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Flerval</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d vald</item>
+        <item quantity="other">%d valda</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Välj alla</string>
+    <string name="qpipepipe_selection_enqueue">Köa</string>
+    <string name="qpipepipe_selection_enqueue_next">Nästa</string>
+    <string name="qpipepipe_selection_background">Bakgrund</string>
+    <string name="qpipepipe_selection_popup">Popup</string>
+    <string name="qpipepipe_selection_playlist">Spellista</string>
+    <string name="qpipepipe_selection_download">Hämta</string>
+    <string name="qpipepipe_selection_more">Mer</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">Hämta %d video</item>
+        <item quantity="other">Hämta %d videor</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Kvalitet och mapp hämtas från nedladdningsinställningarna. Videor som redan har hämtats hoppas över.</string>
+    <string name="qpipepipe_selection_share_links">Dela länkar</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Ta bort från spellistan</string>
+    <string name="qpipepipe_selection_remove_from_history">Ta bort från historiken</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d video borttagen</item>
+        <item quantity="other">%d videor borttagna</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Listan har ändrats under tiden: välj videorna igen</string>
+</resources>

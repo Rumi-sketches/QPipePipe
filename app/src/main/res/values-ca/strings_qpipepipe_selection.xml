@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Selecció múltiple</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d seleccionat</item>
+        <item quantity="other">%d seleccionats</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Selecciona-ho tot</string>
+    <string name="qpipepipe_selection_enqueue">Cua</string>
+    <string name="qpipepipe_selection_enqueue_next">Següent</string>
+    <string name="qpipepipe_selection_background">Rerefons</string>
+    <string name="qpipepipe_selection_popup">Emergent</string>
+    <string name="qpipepipe_selection_playlist">Llista</string>
+    <string name="qpipepipe_selection_download">Baixa</string>
+    <string name="qpipepipe_selection_more">Més</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">Baixa %d vídeo</item>
+        <item quantity="other">Baixa %d vídeos</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">La qualitat i la carpeta s\'agafen de la configuració de baixades. Els vídeos ja baixats s\'ometen.</string>
+    <string name="qpipepipe_selection_share_links">Comparteix els enllaços</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Treu de la llista de reproducció</string>
+    <string name="qpipepipe_selection_remove_from_history">Treu de l\'historial</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d vídeo eliminat</item>
+        <item quantity="other">%d vídeos eliminats</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">La llista ha canviat mentrestant: torna a seleccionar els vídeos</string>
+</resources>

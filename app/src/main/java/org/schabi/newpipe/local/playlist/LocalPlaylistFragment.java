@@ -53,6 +53,7 @@ import org.schabi.newpipe.info_list.swipe.SwipeAction;
 import org.schabi.newpipe.info_list.swipe.SwipeActionPainter;
 import org.schabi.newpipe.info_list.swipe.SwipeActionPreferences;
 import org.schabi.newpipe.local.BaseLocalListFragment;
+import org.schabi.newpipe.qpipepipe.selection.MultiSelect;
 import org.schabi.newpipe.local.dialog.PlaylistDialog;
 import org.schabi.newpipe.local.history.HistoryRecordManager;
 import org.schabi.newpipe.player.PlayerService.PlayerType;
@@ -302,7 +303,9 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
             @Override
             public void drag(final LocalItem selectedItem,
                              final RecyclerView.ViewHolder viewHolder) {
-                if (itemTouchHelper != null) {
+                // QPipePipe: reordering would move the selected positions
+                if (itemTouchHelper != null
+                        && !MultiSelect.isSelecting(LocalPlaylistFragment.this)) {
                     itemTouchHelper.startDrag(viewHolder);
                 }
             }
@@ -1182,6 +1185,35 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
     }
 
 
+    @Nullable
+    @Override
+    protected MultiSelect.Remover getMultiSelectRemover() {
+        // QPipePipe: "Remove from playlist" of multiple selection
+        return new MultiSelect.Remover() {
+            @Override
+            public int label() {
+                return R.string.qpipepipe_selection_remove_from_playlist;
+            }
+
+            @Override
+            public void remove(@NonNull final List<Integer> adapterPositions) {
+                if (itemListAdapter == null) {
+                    return;
+                }
+                final List<PlaylistStreamEntry> entries = new ArrayList<>();
+                for (final int position : adapterPositions) {
+                    final LocalItem item = itemListAdapter.getLocalItem(position);
+                    if (item instanceof PlaylistStreamEntry) {
+                        entries.add((PlaylistStreamEntry) item);
+                    }
+                }
+                for (final PlaylistStreamEntry entry : entries) {
+                    deleteItem(entry);
+                }
+            }
+        };
+    }
+
     @Override
     protected boolean handlesOwnSwipeGestures() {
         // This fragment already combines drag-to-reorder with its own swipe handling
@@ -1265,6 +1297,9 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
             @Override
             public int getSwipeDirs(@NonNull final RecyclerView recyclerView,
                                    @NonNull final RecyclerView.ViewHolder viewHolder) {
+                if (MultiSelect.isSelecting(LocalPlaylistFragment.this)) {
+                    return 0; // QPipePipe: no swipes while selecting
+                }
                 // Disable swipe for header items (position 0)
                 if (itemListAdapter != null && viewHolder.getBindingAdapterPosition() == 0) {
                     return 0; // No swipe directions allowed for header

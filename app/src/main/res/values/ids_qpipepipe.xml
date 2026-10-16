@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ids of views and menu items created in code by the fork. -->
+<resources>
+    <item name="qpipepipe_menu_multi_select" type="id" />
+    <item name="qpipepipe_menu_select_all" type="id" />
+</resources>

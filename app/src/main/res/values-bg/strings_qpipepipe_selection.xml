@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Множествен избор</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d избран</item>
+        <item quantity="other">%d избрани</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Избери всички</string>
+    <string name="qpipepipe_selection_enqueue">Опашка</string>
+    <string name="qpipepipe_selection_enqueue_next">Следващ</string>
+    <string name="qpipepipe_selection_background">Във фон</string>
+    <string name="qpipepipe_selection_popup">Прозорец</string>
+    <string name="qpipepipe_selection_playlist">Плейлист</string>
+    <string name="qpipepipe_selection_download">Изтегляне</string>
+    <string name="qpipepipe_selection_more">Още</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">Изтегляне на %d клип</item>
+        <item quantity="other">Изтегляне на %d клипа</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Качеството и папката се вземат от настройките за изтегляне. Вече изтеглените клипове се пропускат.</string>
+    <string name="qpipepipe_selection_share_links">Споделяне на връзки</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Премахване от плейлиста</string>
+    <string name="qpipepipe_selection_remove_from_history">Премахване от историята</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">Премахнат е %d клип</item>
+        <item quantity="other">Премахнати са %d клипа</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Списъкът междувременно се промени: изберете клиповете отново</string>
+</resources>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Përzgjedhje e shumëfishtë</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d i zgjedhur</item>
+        <item quantity="other">%d të zgjedhura</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Zgjidhi të gjitha</string>
+    <string name="qpipepipe_selection_enqueue">Radhë</string>
+    <string name="qpipepipe_selection_enqueue_next">Tjetra</string>
+    <string name="qpipepipe_selection_background">Sfond</string>
+    <string name="qpipepipe_selection_popup">Popup</string>
+    <string name="qpipepipe_selection_playlist">Lista</string>
+    <string name="qpipepipe_selection_download">Shkarko</string>
+    <string name="qpipepipe_selection_more">Më shumë</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">Shkarko %d video</item>
+        <item quantity="other">Shkarko %d video</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Cilësia dhe dosja merren nga cilësimet e shkarkimit. Videot e shkarkuara tashmë kapërcehen.</string>
+    <string name="qpipepipe_selection_share_links">Shpërndaj lidhjet</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Hiqe nga lista e luajtjes</string>
+    <string name="qpipepipe_selection_remove_from_history">Hiqe nga historiku</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">U hoq %d video</item>
+        <item quantity="other">U hoqën %d video</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Lista ndryshoi ndërkohë: zgjidhi përsëri videot</string>
+</resources>

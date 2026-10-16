@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Maramihang pagpili</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d ang napili</item>
+        <item quantity="other">%d ang napili</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Piliin lahat</string>
+    <string name="qpipepipe_selection_enqueue">Pila</string>
+    <string name="qpipepipe_selection_enqueue_next">Susunod</string>
+    <string name="qpipepipe_selection_background">Likuran</string>
+    <string name="qpipepipe_selection_popup">Nakalutang</string>
+    <string name="qpipepipe_selection_playlist">Playlist</string>
+    <string name="qpipepipe_selection_download">I-download</string>
+    <string name="qpipepipe_selection_more">Iba pa</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">I-download ang %d video</item>
+        <item quantity="other">I-download ang %d na video</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Ang kalidad at folder ay mula sa mga setting ng download. Nilalaktawan ang mga video na na-download na.</string>
+    <string name="qpipepipe_selection_share_links">Ibahagi ang mga link</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Alisin sa playlist</string>
+    <string name="qpipepipe_selection_remove_from_history">Alisin sa kasaysayan</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d video ang inalis</item>
+        <item quantity="other">%d na video ang inalis</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Nagbago ang listahan habang ginagawa ito: piliin muli ang mga video</string>
+</resources>

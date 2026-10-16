@@ -25,6 +25,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
+import org.schabi.newpipe.App;
 import org.schabi.newpipe.R;
 import org.schabi.newpipe.database.LocalItem;
 import org.schabi.newpipe.database.stream.StreamStatisticsEntry;
@@ -37,6 +38,7 @@ import org.schabi.newpipe.extractor.stream.StreamInfoItem;
 import org.schabi.newpipe.fragments.BackPressable;
 import org.schabi.newpipe.info_list.dialog.InfoItemDialog;
 import org.schabi.newpipe.local.BaseLocalListFragment;
+import org.schabi.newpipe.qpipepipe.selection.MultiSelect;
 import org.schabi.newpipe.player.playqueue.PlayQueue;
 import org.schabi.newpipe.player.playqueue.SinglePlayQueue;
 import org.schabi.newpipe.settings.HistorySettingsFragment;
@@ -51,6 +53,7 @@ import java.util.List;
 import java.util.Objects;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
 
@@ -413,6 +416,43 @@ public class StatisticsPlaylistFragment
         } catch (final IllegalArgumentException e) {
             InfoItemDialog.Builder.reportErrorDuringInitialization(e, infoItem);
         }
+    }
+
+    @Nullable
+    @Override
+    protected MultiSelect.Remover getMultiSelectRemover() {
+        // QPipePipe: "Remove from history" of multiple selection
+        return new MultiSelect.Remover() {
+            @Override
+            public int label() {
+                return R.string.qpipepipe_selection_remove_from_history;
+            }
+
+            @Override
+            public void remove(@NonNull final List<Integer> adapterPositions) {
+                if (itemListAdapter == null || recordManager == null) {
+                    return;
+                }
+                final List<Long> streamIds = new ArrayList<>();
+                for (final int position : adapterPositions) {
+                    final LocalItem item = itemListAdapter.getLocalItem(position);
+                    if (item instanceof StreamStatisticsEntry) {
+                        streamIds.add(((StreamStatisticsEntry) item).getStreamId());
+                    }
+                }
+                final HistoryRecordManager manager = recordManager;
+                final int count = streamIds.size();
+                disposables.add(Observable.fromIterable(streamIds)
+                        .concatMapCompletable(manager::deleteStreamHistoryAndState)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(() -> Toast.makeText(App.getApp(),
+                                        App.getApp().getResources().getQuantityString(
+                                                R.plurals.qpipepipe_selection_removed, count,
+                                                count), Toast.LENGTH_SHORT).show(),
+                                throwable -> showSnackBarError(new ErrorInfo(throwable,
+                                        UserAction.DELETE_FROM_HISTORY, "Deleting items"))));
+            }
+        };
     }
 
     private void deleteEntry(final int index) {

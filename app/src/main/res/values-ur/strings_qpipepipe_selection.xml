@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">متعدد انتخاب</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d منتخب</item>
+        <item quantity="other">%d منتخب</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">سب منتخب کریں</string>
+    <string name="qpipepipe_selection_enqueue">قطار</string>
+    <string name="qpipepipe_selection_enqueue_next">اگلا</string>
+    <string name="qpipepipe_selection_background">پس منظر</string>
+    <string name="qpipepipe_selection_popup">پوپ اپ</string>
+    <string name="qpipepipe_selection_playlist">پلے لسٹ</string>
+    <string name="qpipepipe_selection_download">ڈاؤن لوڈ</string>
+    <string name="qpipepipe_selection_more">مزید</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">%d ویڈیو ڈاؤن لوڈ کریں</item>
+        <item quantity="other">%d ویڈیوز ڈاؤن لوڈ کریں</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">معیار اور فولڈر ڈاؤن لوڈ کی ترتیبات سے لیے جاتے ہیں۔ پہلے سے ڈاؤن لوڈ شدہ ویڈیوز چھوڑ دی جاتی ہیں۔</string>
+    <string name="qpipepipe_selection_share_links">روابط کا اشتراک کریں</string>
+    <string name="qpipepipe_selection_remove_from_playlist">پلے لسٹ سے ہٹائیں</string>
+    <string name="qpipepipe_selection_remove_from_history">سرگزشت سے ہٹائیں</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d ویڈیو ہٹا دی گئی</item>
+        <item quantity="other">%d ویڈیوز ہٹا دی گئیں</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">اس دوران فہرست بدل گئی: ویڈیوز دوبارہ منتخب کریں</string>
+</resources>

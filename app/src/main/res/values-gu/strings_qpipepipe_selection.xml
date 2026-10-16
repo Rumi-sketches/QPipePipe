@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">બહુવિધ પસંદગી</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d પસંદ કર્યું</item>
+        <item quantity="other">%d પસંદ કર્યા</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">બધું પસંદ કરો</string>
+    <string name="qpipepipe_selection_enqueue">કતાર</string>
+    <string name="qpipepipe_selection_enqueue_next">આગલું</string>
+    <string name="qpipepipe_selection_background">બેકગ્રાઉન્ડ</string>
+    <string name="qpipepipe_selection_popup">પૉપઅપ</string>
+    <string name="qpipepipe_selection_playlist">પ્લેલિસ્ટ</string>
+    <string name="qpipepipe_selection_download">ડાઉનલોડ</string>
+    <string name="qpipepipe_selection_more">વધુ</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">%d વીડિયો ડાઉનલોડ કરો</item>
+        <item quantity="other">%d વીડિયો ડાઉનલોડ કરો</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">ગુણવત્તા અને ફોલ્ડર ડાઉનલોડ સેટિંગ્સમાંથી લેવામાં આવે છે. પહેલેથી ડાઉનલોડ થયેલા વીડિયો છોડી દેવાય છે.</string>
+    <string name="qpipepipe_selection_share_links">લિંક શેર કરો</string>
+    <string name="qpipepipe_selection_remove_from_playlist">પ્લેલિસ્ટમાંથી દૂર કરો</string>
+    <string name="qpipepipe_selection_remove_from_history">ઇતિહાસમાંથી દૂર કરો</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d વીડિયો દૂર કર્યો</item>
+        <item quantity="other">%d વીડિયો દૂર કર્યા</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">દરમિયાન સૂચિ બદલાઈ ગઈ: વીડિયો ફરીથી પસંદ કરો</string>
+</resources>

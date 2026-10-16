@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Chagua nyingi</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d imechaguliwa</item>
+        <item quantity="other">%d zimechaguliwa</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Chagua zote</string>
+    <string name="qpipepipe_selection_enqueue">Foleni</string>
+    <string name="qpipepipe_selection_enqueue_next">Inayofuata</string>
+    <string name="qpipepipe_selection_background">Chinichini</string>
+    <string name="qpipepipe_selection_popup">Popup</string>
+    <string name="qpipepipe_selection_playlist">Orodha</string>
+    <string name="qpipepipe_selection_download">Pakua</string>
+    <string name="qpipepipe_selection_more">Zaidi</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">Pakua video %d</item>
+        <item quantity="other">Pakua video %d</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Ubora na folda vinatoka kwenye mipangilio ya upakuaji. Video zilizokwisha pakuliwa zinarukwa.</string>
+    <string name="qpipepipe_selection_share_links">Shiriki viungo</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Ondoa kwenye orodha ya kucheza</string>
+    <string name="qpipepipe_selection_remove_from_history">Ondoa kwenye historia</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">Video %d imeondolewa</item>
+        <item quantity="other">Video %d zimeondolewa</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Orodha imebadilika wakati huo: chagua video tena</string>
+</resources>

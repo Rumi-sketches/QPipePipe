@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">دیاریکردنی فرە</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d دیار کراوه‌</item>
+        <item quantity="other">%d دیار کراون</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">دیاریکردنی هەموو</string>
+    <string name="qpipepipe_selection_enqueue">نۆبه‌ت</string>
+    <string name="qpipepipe_selection_enqueue_next">دواتر</string>
+    <string name="qpipepipe_selection_background">پاشبنەما</string>
+    <string name="qpipepipe_selection_popup">په‌نجه‌ره‌</string>
+    <string name="qpipepipe_selection_playlist">خشتەلێدان</string>
+    <string name="qpipepipe_selection_download">دابه‌زاندن</string>
+    <string name="qpipepipe_selection_more">زیاتر</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">دابەزاندنی %d ڤیدیۆ</item>
+        <item quantity="other">دابەزاندنی %d ڤیدیۆ</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">کوالیتی و فۆڵدەر لە ڕێکخستنەکانی دابەزاندنەوە وەردەگیرێن. ئەو ڤیدیۆیانەی پێشتر دابەزێنراون پشتگوێ دەخرێن.</string>
+    <string name="qpipepipe_selection_share_links">هاوبەشپێکردنی بەستەرەکان</string>
+    <string name="qpipepipe_selection_remove_from_playlist">لادان لە خشتەلێدان</string>
+    <string name="qpipepipe_selection_remove_from_history">لادان لە مێژوو</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d ڤیدیۆ لادرا</item>
+        <item quantity="other">%d ڤیدیۆ لادران</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">لیستەکە لەو ماوەیەدا گۆڕا: دووبارە ڤیدیۆکان دیاری بکەرەوە</string>
+</resources>

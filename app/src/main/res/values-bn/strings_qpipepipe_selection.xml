@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">একাধিক নির্বাচন</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%dটি নির্বাচিত</item>
+        <item quantity="other">%dটি নির্বাচিত</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">সব নির্বাচন করুন</string>
+    <string name="qpipepipe_selection_enqueue">সারি</string>
+    <string name="qpipepipe_selection_enqueue_next">পরবর্তী</string>
+    <string name="qpipepipe_selection_background">পটভূমি</string>
+    <string name="qpipepipe_selection_popup">পপআপ</string>
+    <string name="qpipepipe_selection_playlist">প্লেলিস্ট</string>
+    <string name="qpipepipe_selection_download">ডাউনলোড</string>
+    <string name="qpipepipe_selection_more">আরও</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">%dটি ভিডিও ডাউনলোড করুন</item>
+        <item quantity="other">%dটি ভিডিও ডাউনলোড করুন</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">গুণমান ও ফোল্ডার ডাউনলোড সেটিংস থেকে নেওয়া হয়। আগে থেকে ডাউনলোড করা ভিডিওগুলো বাদ দেওয়া হয়।</string>
+    <string name="qpipepipe_selection_share_links">লিঙ্ক শেয়ার করুন</string>
+    <string name="qpipepipe_selection_remove_from_playlist">প্লেলিস্ট থেকে সরান</string>
+    <string name="qpipepipe_selection_remove_from_history">ইতিহাস থেকে সরান</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%dটি ভিডিও সরানো হয়েছে</item>
+        <item quantity="other">%dটি ভিডিও সরানো হয়েছে</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">এর মধ্যে তালিকা বদলে গেছে: ভিডিওগুলো আবার নির্বাচন করুন</string>
+</resources>

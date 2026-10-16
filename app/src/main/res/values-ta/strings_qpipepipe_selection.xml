@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">பல தேர்வு</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d தேர்ந்தெடுக்கப்பட்டது</item>
+        <item quantity="other">%d தேர்ந்தெடுக்கப்பட்டன</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">அனைத்தையும் தேர்ந்தெடு</string>
+    <string name="qpipepipe_selection_enqueue">சாரை</string>
+    <string name="qpipepipe_selection_enqueue_next">அடுத்து</string>
+    <string name="qpipepipe_selection_background">பின்னணி</string>
+    <string name="qpipepipe_selection_popup">பாப்அப்</string>
+    <string name="qpipepipe_selection_playlist">ஒளிச்சரம்</string>
+    <string name="qpipepipe_selection_download">பதிவிறக்கு</string>
+    <string name="qpipepipe_selection_more">மேலும்</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">%d காணொலியைப் பதிவிறக்கு</item>
+        <item quantity="other">%d காணொலிகளைப் பதிவிறக்கு</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">தரமும் கோப்புறையும் பதிவிறக்க அமைவுகளிலிருந்து எடுக்கப்படும். ஏற்கனவே பதிவிறக்கிய காணொலிகள் தவிர்க்கப்படும்.</string>
+    <string name="qpipepipe_selection_share_links">இணைப்புகளைப் பகிர்</string>
+    <string name="qpipepipe_selection_remove_from_playlist">ஒளிச்சரத்திலிருந்து நீக்கு</string>
+    <string name="qpipepipe_selection_remove_from_history">வரலாற்றிலிருந்து நீக்கு</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d காணொலி நீக்கப்பட்டது</item>
+        <item quantity="other">%d காணொலிகள் நீக்கப்பட்டன</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">இடையில் பட்டியல் மாறியது: காணொலிகளை மீண்டும் தேர்ந்தெடு</string>
+</resources>

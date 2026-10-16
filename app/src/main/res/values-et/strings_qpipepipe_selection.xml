@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Mitmikvalik</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d valitud</item>
+        <item quantity="other">%d valitud</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Vali kõik</string>
+    <string name="qpipepipe_selection_enqueue">Järjekorda</string>
+    <string name="qpipepipe_selection_enqueue_next">Järgmine</string>
+    <string name="qpipepipe_selection_background">Taust</string>
+    <string name="qpipepipe_selection_popup">Hüpikaken</string>
+    <string name="qpipepipe_selection_playlist">Esitusloend</string>
+    <string name="qpipepipe_selection_download">Laadi alla</string>
+    <string name="qpipepipe_selection_more">Veel</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">Laadi alla %d video</item>
+        <item quantity="other">Laadi alla %d videot</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Kvaliteet ja kaust võetakse allalaadimise seadetest. Juba allalaaditud videod jäetakse vahele.</string>
+    <string name="qpipepipe_selection_share_links">Jaga linke</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Eemalda esitusloendist</string>
+    <string name="qpipepipe_selection_remove_from_history">Eemalda ajaloost</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d video eemaldatud</item>
+        <item quantity="other">%d videot eemaldatud</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Loend muutus vahepeal: vali videod uuesti</string>
+</resources>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Chọn nhiều</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">Đã chọn %d</item>
+        <item quantity="other">Đã chọn %d</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Chọn tất cả</string>
+    <string name="qpipepipe_selection_enqueue">Xếp hàng</string>
+    <string name="qpipepipe_selection_enqueue_next">Kế tiếp</string>
+    <string name="qpipepipe_selection_background">Nền</string>
+    <string name="qpipepipe_selection_popup">Bật lên</string>
+    <string name="qpipepipe_selection_playlist">Danh sách</string>
+    <string name="qpipepipe_selection_download">Tải xuống</string>
+    <string name="qpipepipe_selection_more">Khác</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">Tải xuống %d băng hình</item>
+        <item quantity="other">Tải xuống %d băng hình</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Chất lượng và thư mục lấy theo thiết đặt tải xuống. Băng hình đã tải xuống sẽ được bỏ qua.</string>
+    <string name="qpipepipe_selection_share_links">Chia sẻ liên kết</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Xóa khỏi danh sách phát</string>
+    <string name="qpipepipe_selection_remove_from_history">Xóa khỏi lịch sử</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">Đã xóa %d băng hình</item>
+        <item quantity="other">Đã xóa %d băng hình</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Danh sách đã thay đổi trong lúc đó: hãy chọn lại băng hình</string>
+</resources>

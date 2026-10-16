@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Plurobla elekto</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d elektita</item>
+        <item quantity="other">%d elektitaj</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Elekti ĉiujn</string>
+    <string name="qpipepipe_selection_enqueue">Vico</string>
+    <string name="qpipepipe_selection_enqueue_next">Sekva</string>
+    <string name="qpipepipe_selection_background">Fono</string>
+    <string name="qpipepipe_selection_popup">Ŝprucfenestro</string>
+    <string name="qpipepipe_selection_playlist">Ludlisto</string>
+    <string name="qpipepipe_selection_download">Elŝuti</string>
+    <string name="qpipepipe_selection_more">Pli</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">Elŝuti %d filmeton</item>
+        <item quantity="other">Elŝuti %d filmetojn</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Kvalito kaj dosierujo venas el la elŝutaj agordoj. Jam elŝutitaj filmetoj estas preterlasitaj.</string>
+    <string name="qpipepipe_selection_share_links">Konigi ligilojn</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Forigi el ludlisto</string>
+    <string name="qpipepipe_selection_remove_from_history">Forigi el historio</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d filmeto forigita</item>
+        <item quantity="other">%d filmetoj forigitaj</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">La listo dume ŝanĝiĝis: elektu la filmetojn denove</string>
+</resources>

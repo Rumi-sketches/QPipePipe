@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Mehrfachauswoi</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d ausgwäid</item>
+        <item quantity="other">%d ausgwäid</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Ois auswäin</string>
+    <string name="qpipepipe_selection_enqueue">Schlang</string>
+    <string name="qpipepipe_selection_enqueue_next">Nächsts</string>
+    <string name="qpipepipe_selection_background">Hintagrund</string>
+    <string name="qpipepipe_selection_popup">Pop-up</string>
+    <string name="qpipepipe_selection_playlist">Playlist</string>
+    <string name="qpipepipe_selection_download">Obalon</string>
+    <string name="qpipepipe_selection_more">Mehr</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">%d Video obalon</item>
+        <item quantity="other">%d Videos obalon</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Qualität und Oadna kemman aus de Download-Rumdogdan. Scho obaglone Videos wean ausglassn.</string>
+    <string name="qpipepipe_selection_share_links">Links deiln</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Aus da Playlist nehma</string>
+    <string name="qpipepipe_selection_remove_from_history">Ausm Verlauf nehma</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d Video wegdo</item>
+        <item quantity="other">%d Videos wegdo</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">D\'Listn hod se in da Zwischnzeit gändat: wäi de Videos nomoi aus</string>
+</resources>
