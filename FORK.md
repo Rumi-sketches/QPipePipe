@@ -507,6 +507,22 @@ playlist, then enqueue a video: the entry reads "From: <name>" and the new
 playlist grows by one. Enqueue a whole YouTube playlist on a queue from a local
 playlist and tap Undo within 4 seconds: the local playlist is back to its size.
 
+### One media session per player
+
+File: `Player.setupMediaSession`.
+
+Starting a queue creates the player's media session twice: once in
+`initPlayer()` and again in `PlayerStartController.initPlayback` after the
+queue is set. Upstream dropped the first `MediaSessionManager` without
+disposing it, so on the phone (`PlayerService`) every queue left one more
+active `MediaSessionCompat` with no player behind it, which could take the
+media buttons of headphones and car. The fork disposes the previous manager
+before creating the next one.
+
+Check: play three different videos in background, then
+`adb shell dumpsys media_session`: the app has one `MediaSessionManager`
+session, not one per video.
+
 ## Upstream services
 
 The extractor falls back to `api.pipepipe.dev` to decode YouTube signatures
