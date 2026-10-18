@@ -38,6 +38,7 @@ import org.schabi.newpipe.App;
 import org.schabi.newpipe.databinding.PlayerBinding;
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector;
 import org.schabi.newpipe.player.mediasession.PlayerServiceInterface;
+import org.schabi.newpipe.qpipepipe.LastPlayback;
 import org.schabi.newpipe.util.DeviceUtils;
 import org.schabi.newpipe.util.ThemeHelper;
 
@@ -136,11 +137,16 @@ public class PlayerService extends Service implements PlayerServiceInterface {
         }
         if (Intent.ACTION_MEDIA_BUTTON.equals(intent.getAction())
                 && (player == null || player.getPlayQueue() == null)) {
-            // Nothing to play. MediaButtonReceiver starts this service with
-            // startForegroundService(), so it must still post a notification before stopping,
-            // otherwise Android reports the app as not responding.
+            // Nothing loaded. MediaButtonReceiver starts this service with
+            // startForegroundService(), so it must still post a notification, otherwise Android
+            // reports the app as not responding.
             NotificationUtil.getInstance().startForegroundWithDummyNotification(this);
-            stopService();
+            if (LastPlayback.isPlayButton(intent)) {
+                // e.g. the OS killed the app since: play what was playing last
+                LastPlayback.resume(this, this::stopService);
+            } else {
+                stopService();
+            }
             return START_NOT_STICKY;
         }
         // null check

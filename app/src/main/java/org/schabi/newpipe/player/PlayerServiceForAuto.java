@@ -41,10 +41,12 @@ import androidx.core.content.ContextCompat;
 import androidx.media.MediaBrowserServiceCompat;
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector;
 import org.schabi.newpipe.App;
+import org.schabi.newpipe.R;
 import org.schabi.newpipe.databinding.PlayerBinding;
 import org.schabi.newpipe.player.mediabrowser.MediaBrowserImpl;
 import org.schabi.newpipe.player.mediabrowser.MediaBrowserPlaybackPreparer;
 import org.schabi.newpipe.player.mediasession.PlayerServiceInterface;
+import org.schabi.newpipe.qpipepipe.LastPlayback;
 import org.schabi.newpipe.util.DeviceUtils;
 import org.schabi.newpipe.util.ThemeHelper;
 
@@ -139,8 +141,15 @@ public final class PlayerServiceForAuto extends MediaBrowserServiceCompat implem
                 this::setMediaSessionError,
                 () -> setMediaSessionError(null, 0),
                 (playWhenReady) -> {
-                    if (player != null) {
+                    if (player != null && player.getPlayQueue() != null) {
                         player.onPrepare();
+                    } else if (playWhenReady) {
+                        // Play with nothing loaded, e.g. from the car or the system media
+                        // controls after the OS killed the app: play what was playing last
+                        setMediaSessionError(null, 0);
+                        LastPlayback.resume(this, () -> setMediaSessionError(
+                                getString(R.string.no_videos),
+                                PlaybackStateCompat.ERROR_CODE_END_OF_QUEUE));
                     }
                 }
         );
@@ -188,11 +197,16 @@ public final class PlayerServiceForAuto extends MediaBrowserServiceCompat implem
         }
         if (Intent.ACTION_MEDIA_BUTTON.equals(intent.getAction())
                 && (player == null || player.getPlayQueue() == null)) {
-            // Nothing to play. MediaButtonReceiver starts this service with
-            // startForegroundService(), so it must still post a notification before stopping,
-            // otherwise Android reports the app as not responding.
+            // Nothing loaded. MediaButtonReceiver starts this service with
+            // startForegroundService(), so it must still post a notification, otherwise Android
+            // reports the app as not responding.
             NotificationUtil.getInstance().startForegroundWithDummyNotification(this);
-            stopService();
+            if (LastPlayback.isPlayButton(intent)) {
+                // e.g. the OS killed the app since: play what was playing last
+                LastPlayback.resume(this, this::stopService);
+            } else {
+                stopService();
+            }
             return START_NOT_STICKY;
         }
         // null check
@@ -377,6 +391,7 @@ public final class PlayerServiceForAuto extends MediaBrowserServiceCompat implem
     //endregion
 
     //region Media browser
+    @Nullable
     @Override
     public BrowserRoot onGetRoot(@NonNull final String clientPackageName,
                                  final int clientUid,

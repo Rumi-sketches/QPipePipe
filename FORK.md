@@ -507,6 +507,44 @@ playlist, then enqueue a video: the entry reads "From: <name>" and the new
 playlist grows by one. Enqueue a whole YouTube playlist on a queue from a local
 playlist and tap Undo within 4 seconds: the local playlist is back to its size.
 
+### Playback resumes after the OS killed the app
+
+Files: `qpipepipe/LastPlayback`, `PlayerStartController.initPlayback`,
+`PlayerPlaybackStateController.onCompleted`, `PlayerService` and
+`PlayerServiceForAuto` (`onStartCommand`, the playback preparer's `onPrepare`),
+`mediabrowser/MediaBrowserImpl` (`onGetRoot`, `ID_RESUME`) and
+`MediaBrowserPlaybackPreparer`.
+
+Upstream keeps the play queue only in memory. Once the OS killed the app in
+background, pressing play in the car, on the system media controls or on
+headphones did nothing, and Android Auto showed "Could not load your
+selection" after a timeout.
+
+The fork saves the queue the player starts to `files/last_playback.ser`, and
+saves it again whenever the queue changes, wherever it plays: phone or car, so
+the last video started anywhere is the one that comes back. When the last video
+of a queue ends, the file is deleted, so a video finished at home does not
+come back in the car. With nothing loaded:
+
+- play from Android Auto or the system media controls (`onPrepare` of the
+  playback preparer) starts the saved queue in background, from the saved
+  position; with no saved queue the car shows "No videos";
+- the play button of headphones or car (`MEDIA_BUTTON`, key down of play,
+  play/pause or headset hook) does the same;
+- `onGetRoot` with `EXTRA_RECENT` returns a root whose only child is the saved
+  queue's current video, which the system media controls offer to resume, or
+  null when there is none.
+
+Opening the app itself still starts from scratch.
+
+Check: play a local playlist from its second video, pause, then
+`adb shell am kill <app id>` with the app in background (or `am force-stop`
+after moving it to the background). With the Desktop Head Unit connected,
+press play in the car: the same video resumes, and Next goes to the third.
+Let a single video end, kill the app again and press play: the car shows
+"No videos". Without the car, `adb shell cmd media_session dispatch play`
+after the kill resumes the queue too.
+
 ## Upstream services
 
 The extractor falls back to `api.pipepipe.dev` to decode YouTube signatures

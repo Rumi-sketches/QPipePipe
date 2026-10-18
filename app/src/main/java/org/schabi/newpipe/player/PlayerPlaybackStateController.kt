@@ -11,6 +11,7 @@ import org.schabi.newpipe.R
 import org.schabi.newpipe.ktx.AnimationType
 import org.schabi.newpipe.ktx.animate
 import org.schabi.newpipe.player.helper.PlayerHelper
+import org.schabi.newpipe.qpipepipe.LastPlayback
 
 /**
  * Owns the playback state machine of a [Player].
@@ -372,6 +373,9 @@ class PlayerPlaybackStateController(private val player: Player) {
 
         if (playQueue.index < playQueue.size() - 1) {
             playQueue.offsetIndex(+1)
+        } else if (playQueue.isComplete) {
+            // the whole queue was played: don't bring it back on the next resume
+            LastPlayback.onQueueFinished(player.context)
         }
         if (player.progressController.isProgressLoopRunning()) {
             player.progressController.stopProgressLoop()

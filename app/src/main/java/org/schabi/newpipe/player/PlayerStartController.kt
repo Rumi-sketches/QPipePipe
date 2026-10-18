@@ -6,6 +6,7 @@ import com.google.android.exoplayer2.C
 import org.schabi.newpipe.R
 import org.schabi.newpipe.player.helper.PlayerHelper
 import org.schabi.newpipe.player.playqueue.PlayQueue
+import org.schabi.newpipe.qpipepipe.LastPlayback
 import org.schabi.newpipe.qpipepipe.recentqueues.RecentQueueRecorder
 import org.schabi.newpipe.util.NavigationHelper
 import org.schabi.newpipe.util.SerializedCache
@@ -209,6 +210,7 @@ class PlayerStartController(private val player: Player) {
         player.playQueue = queue
         queue.init()
         RecentQueueRecorder.onQueueStarted(player.context, queue)
+        LastPlayback.onQueueStarted(player.context, queue)
         player.reloadPlayQueueManager()
         PlaybackStartupTrace.mark(player.startupTraceId, "media_source_manager_ready")
 
