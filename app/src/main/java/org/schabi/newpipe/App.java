@@ -369,7 +369,7 @@ public class App extends MultiDexApplication {
                 .Builder(getString(R.string.app_update_notification_channel_id),
                         NotificationManagerCompat.IMPORTANCE_LOW)
                 .setName(getString(R.string.app_update_notification_channel_name))
-                .setDescription(getString(R.string.app_update_notification_channel_description_new))
+                .setDescription(getString(R.string.qpipepipe_update_channel_description))
                 .build());
 
         notificationChannelCompats.add(new NotificationChannelCompat

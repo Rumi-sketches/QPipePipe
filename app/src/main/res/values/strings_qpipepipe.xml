@@ -35,6 +35,8 @@
     <string name="qpipepipe_update_download_failed">The download failed. Check your connection and try again.</string>
     <string name="qpipepipe_update_wrong_build">This build cannot install the update itself, for example because it is a debug build. Download the APK from the release page instead.</string>
     <string name="qpipepipe_update_failed">The update could not be installed: %s</string>
+    <string name="qpipepipe_update_channel_description">Notifications for new QPipePipe versions</string>
+    <string name="qpipepipe_update_unavailable">You are running the latest version of QPipePipe</string>
     <!-- Playlist header: resume from the last video started (PlaylistResumeControls) -->
     <string name="playlist_resume_title">Continue where you left off</string>
     <string name="playlist_resume_play">Resume from #%d</string>
