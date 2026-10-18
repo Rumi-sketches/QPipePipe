@@ -22,6 +22,12 @@ def qpipepipeVersionName = "${upstreamVersionName}-q${qpipepipeRelease}"
 // leaves room for 99 fork releases per upstream release and one digit for the ABI.
 def qpipepipeVersionCode = upstreamVersionCode * 1000 + qpipepipeRelease * 10
 
+// Debug builds installed on the user's phone are numbered. src/debug/assets/debug_build.txt,
+// not in git, holds the number on its first line and what to test below it. The number goes in
+// the app name and the APK name; the app shows the notes once (qpipepipe/DebugBuildNotes).
+def debugBuildFile = file("src/debug/assets/debug_build.txt")
+def debugBuildNumber = debugBuildFile.exists() ? (debugBuildFile.readLines()[0]?.trim() ?: "") : ""
+
 android {
     defaultConfig {
         applicationId qpipepipeApplicationId
@@ -33,7 +39,8 @@ android {
 
     buildTypes {
         debug {
-            resValue "string", "app_name", "QPipePipe Debug"
+            resValue "string", "app_name",
+                    debugBuildNumber ? "QPipePipe Debug " + debugBuildNumber : "QPipePipe Debug"
         }
         release {
             if (System.properties.containsKey('packageSuffix')) {
@@ -65,7 +72,8 @@ androidComponents.onVariants(androidComponents.selector().all()) { variant ->
             versionCode += abiCodes[abi]
         }
         output.versionCode.set(versionCode)
+        def debugSuffix = variant.buildType == "debug" && debugBuildNumber ? "-d${debugBuildNumber}" : ""
         output.outputFileName.set(
-                "QPipePipe_${qpipepipeVersionName}-${abi ?: 'universal'}-${variant.name}.apk")
+                "QPipePipe_${qpipepipeVersionName}${debugSuffix}-${abi ?: 'universal'}-${variant.name}.apk")
     }
 }
