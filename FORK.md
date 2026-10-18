@@ -512,8 +512,8 @@ playlist and tap Undo within 4 seconds: the local playlist is back to its size.
 Files: `qpipepipe/LastPlayback`, `PlayerStartController.initPlayback`,
 `PlayerPlaybackStateController.onCompleted`, `PlayerService` and
 `PlayerServiceForAuto` (`onStartCommand`, the playback preparer's `onPrepare`),
-`mediabrowser/MediaBrowserImpl` (`onGetRoot`, `ID_RESUME`) and
-`MediaBrowserPlaybackPreparer`.
+`mediabrowser/MediaBrowserImpl` (`onGetRoot`, `ID_RESUME`),
+`MediaBrowserPlaybackPreparer` and `AndroidManifest.xml`.
 
 Upstream keeps the play queue only in memory. Once the OS killed the app in
 background, pressing play in the car, on the system media controls or on
@@ -530,7 +530,11 @@ come back in the car. With nothing loaded:
   playback preparer) starts the saved queue in background, from the saved
   position; with no saved queue the car shows "No videos";
 - the play button of headphones or car (`MEDIA_BUTTON`, key down of play,
-  play/pause or headset hook) does the same;
+  play/pause or headset hook) does the same. For Android to deliver it, the
+  manifest keeps only `util/MediaButtonReceiver`: upstream also declared
+  androidx's `MediaButtonReceiver`, and with two receivers `MediaSessionCompat`
+  registers none, so Android had nowhere to send the button once the session
+  was gone;
 - `onGetRoot` with `EXTRA_RECENT` returns a root whose only child is the saved
   queue's current video, which the system media controls offer to resume, or
   null when there is none.
