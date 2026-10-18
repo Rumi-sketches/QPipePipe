@@ -93,8 +93,9 @@ public class PlayerMediaSession implements MediaSessionCallback {
 
     @Override
     public void play() {
-        if (player.service instanceof PlayerServiceForAuto && !player.getPlayWhenReady()
-                && ((PlayerServiceForAuto) player.service).takeCarAutoPlay()) {
+        if (player.service instanceof PlayerServiceForAuto
+                && ((PlayerServiceForAuto) player.service).takeCarAutoPlay()
+                && !player.getPlayWhenReady()) {
             // Android Auto resuming by itself on connecting: a paused video waits for the user
             return;
         }

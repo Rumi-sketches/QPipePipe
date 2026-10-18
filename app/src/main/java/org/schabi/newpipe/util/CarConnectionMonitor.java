@@ -94,6 +94,9 @@ public final class CarConnectionMonitor {
                 final PlayerBinderInterface binder = (PlayerBinderInterface) service;
                 final Intent handOver = handOverTo == null
                         ? null : handOverIntent(context, binder.getPlayer(), handOverTo);
+                if (handOver != null) {
+                    PlayerServiceForAuto.setHandOverPending(true);
+                }
                 binder.getService().stopService();
                 context.unbindService(this);
                 if (handOver != null) {
@@ -136,6 +139,7 @@ public final class CarConnectionMonitor {
             // Android refused to start it from the background: the queue is still saved by
             // LastPlayback, so play in the car resumes it
             Log.w(TAG, "Could not hand the player over to the car", e);
+            PlayerServiceForAuto.setHandOverPending(false);
         }
     }
 

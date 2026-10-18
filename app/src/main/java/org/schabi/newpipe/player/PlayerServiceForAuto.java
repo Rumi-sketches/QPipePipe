@@ -81,11 +81,18 @@ public final class PlayerServiceForAuto extends MediaBrowserServiceCompat implem
 
     private final IBinder mBinder = new PlayerServiceForAuto.LocalBinder();
 
-    // Android Auto sends play right after asking for the root, see takeCarAutoPlay()
-    private static final long CAR_AUTO_PLAY_MILLIS = 2000;
+    // With its autoplay setting on, Android Auto sends play to the media app it used last right
+    // after connecting, and once more as soon as there is something to play: see
+    // takeCarAutoPlay(). Only accessed on the main thread.
+    private static final long CAR_FIRST_PLAY_MILLIS = 2000;
+    private static final long CAR_START_MILLIS = 15000;
     // whether the next root request comes from a car that has just connected
     private boolean awaitingCar = true;
-    private long carAutoPlayDeadline = 0;
+    private long carConnectedAt = 0;
+    // the car's automatic plays still expected
+    private int carAutoPlays = 0;
+    // the phone's player is being handed over to this service, see CarConnectionMonitor
+    private static boolean handOverPending = false;
 
     // Lets playback stay on this service after leaving the car, see hasActivePlayer().
     // Only accessed on the main thread.
@@ -119,15 +126,29 @@ public final class PlayerServiceForAuto extends MediaBrowserServiceCompat implem
         }
     }
 
+    /** Called while the phone's player is being handed over to this service, and after. */
+    public static void setHandOverPending(final boolean pending) {
+        handOverPending = pending;
+    }
+
     /**
-     * @return whether a play request is the one Android Auto sends by itself as soon as it
-     * connects, to resume the media app it used last. Only the first request counts, so a play
-     * pressed by the user always plays.
+     * @return whether a play request is one of the two Android Auto sends by itself when it
+     * connects. The first one comes right after connecting: without it (autoplay off) no request
+     * counts as automatic, so a play pressed by the user always plays.
      */
     public boolean takeCarAutoPlay() {
-        final boolean automatic = SystemClock.elapsedRealtime() < carAutoPlayDeadline;
-        carAutoPlayDeadline = 0;
+        final long sinceConnected = SystemClock.elapsedRealtime() - carConnectedAt;
+        final boolean automatic = carAutoPlays == 2
+                ? sinceConnected < CAR_FIRST_PLAY_MILLIS
+                : carAutoPlays == 1 && sinceConnected < CAR_START_MILLIS;
+        carAutoPlays = automatic ? carAutoPlays - 1 : 0;
         return automatic;
+    }
+
+    /** @return whether the car's first automatic play is still expected, without taking it */
+    private boolean isCarFirstPlay() {
+        return carAutoPlays == 2
+                && SystemClock.elapsedRealtime() - carConnectedAt < CAR_FIRST_PLAY_MILLIS;
     }
 
     @Override
@@ -180,19 +201,35 @@ public final class PlayerServiceForAuto extends MediaBrowserServiceCompat implem
     }
 
     /**
+     * A car has just connected: show it what was played last, playing only if it was playing,
+     * otherwise paused, waiting for the user; the car's own plays that follow are ignored (see
+     * PlayerMediaSession.play()). With nothing to resume, e.g. the video ended, the car stays
+     * on its lists.
+     */
+    private void onCarConnected() {
+        awaitingCar = false;
+        carConnectedAt = SystemClock.elapsedRealtime();
+        carAutoPlays = 2;
+        if ((player != null && player.getPlayQueue() != null)
+                || PlayerService.hasActivePlayer() || handOverPending) {
+            // already loaded, or the phone's player is being handed over
+            return;
+        }
+        LastPlayback.resume(this, LastPlayback.wasPlaying(this), () -> { });
+    }
+
+    /**
      * Play with nothing loaded, e.g. from the car or the system media controls after the OS
-     * killed the app: resume what was playing last. When the car asks by itself on connecting,
-     * it plays only if it was playing, otherwise the car shows it paused. With nothing to resume
-     * (e.g. the video ended) the car stays on its lists: no error.
+     * killed the app: resume what was playing last. With nothing to resume nothing happens,
+     * with no error, so the car stays on its lists.
      */
     private void onPlayWithNothingLoaded() {
-        final boolean automatic = takeCarAutoPlay();
-        if (automatic && PlayerService.hasActivePlayer()) {
-            // The phone's player is being handed over, see CarConnectionMonitor
+        if (isCarFirstPlay()) {
+            // the car's own play on connecting: onCarConnected() already loads what to resume
             return;
         }
         setMediaSessionError(null, 0);
-        LastPlayback.resume(this, !automatic || LastPlayback.wasPlaying(this), () -> { });
+        LastPlayback.resume(this, true, () -> { });
     }
 
     private void setMediaSessionError(@Nullable final String message, final int errorCode) {
@@ -248,6 +285,10 @@ public final class PlayerServiceForAuto extends MediaBrowserServiceCompat implem
         // null check
         if (player == null) {
             createView();
+        }
+        if (intent.getStringExtra(PlayerIntentConstants.PLAY_QUEUE_KEY) != null) {
+            // e.g. the queue handed over from the phone's player
+            handOverPending = false;
         }
 
         if (Intent.ACTION_MEDIA_BUTTON.equals(intent.getAction())
@@ -436,9 +477,7 @@ public final class PlayerServiceForAuto extends MediaBrowserServiceCompat implem
         final boolean recent = rootHints != null
                 && rootHints.getBoolean(BrowserRoot.EXTRA_RECENT);
         if (!recent && awaitingCar) {
-            // a car has just connected: its own play request follows, see takeCarAutoPlay()
-            awaitingCar = false;
-            carAutoPlayDeadline = SystemClock.elapsedRealtime() + CAR_AUTO_PLAY_MILLIS;
+            onCarConnected();
         }
         return mediaBrowserImpl.onGetRoot(clientPackageName, clientUid, rootHints);
     }
