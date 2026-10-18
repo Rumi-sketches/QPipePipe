@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">تایبەتمەندییەکانی نۆبەت و ڕاکێشان کە ئەم لقە زیادی کردوون</string>
+    <string name="qpipepipe_category_playback">لێدان</string>
+    <string name="qpipepipe_category_swipe_actions">کردارەکانی ڕاکێشان</string>
+    <string name="tap_always_plays_title">کرتەکردن لە ڤیدیۆ هەمیشە لێی دەدات</string>
+    <string name="tap_always_plays_summary">کاتێک ڤیدیۆیەک دەکەیتەوە لێدان دەست پێ بکات، تەنانەت ئەگەر لێدانی خۆکاری تەنیا بۆ Wi-Fi سنووردار کرابێت یان کوژابێتەوە. لێدانی خۆکاری هێشتا بۆ دەستپێکردنە خۆکارەکان کار دەکات</string>
+    <string name="clear_queue_confirmation_title">پێش سڕینەوەی نۆبەت داوای پشتڕاستکردنەوە بکە</string>
+    <string name="clear_queue_confirmation_summary">گۆڕین لە لێدەرێکەوە بۆ یەکێکی تر لەوانەیە نۆبەتەکەت بگۆڕێت</string>
+    <string name="clear_queue_confirmation_description">نۆبەتی لێدەری چالاک دەگۆڕدرێت</string>
+    <string name="clear_queue_confirmation_play_now">ئێستا لێبدە</string>
+    <string name="enable_swipe_actions_title">چالاککردنی کردارەکانی ڕاکێشان لەسەر ڤیدیۆکان</string>
+    <string name="enable_swipe_actions_summary">ڤیدیۆیەک بەرەو چەپ یان ڕاست ڕابکێشە لە پەڕەی سەرەکی، ئەنجامەکانی گەڕان، خشتەلێدانەکان و گرووپەکانی کەناڵ بۆ ئەنجامدانی کردارێکی خێرا</string>
+    <string name="swipe_left_action_title">کرداری ڕاکێشان بۆ چەپ</string>
+    <string name="swipe_right_action_title">کرداری ڕاکێشان بۆ ڕاست</string>
+    <string name="enable_swipe_actions_warning_title">کردارەکانی ڕاکێشان چالاک کران</string>
+    <string name="enable_swipe_actions_warning_message">ڕاکێشان پێویستی بە ڕیزی پانی تەواو هەیە بۆ ئەوەی بە باشی کار بکات، بۆیە لە هەر شوێنێک کردارەکانی ڕاکێشان بەردەست بن، دیمەنی خشتەیی لە جیاتی دیمەنی هێڵەکی یان کارت بەکاردێت. هەر کاتێک بتەوێت دەتوانیت دووبارە بیکوژێنیتەوە.</string>
+    <string name="swipe_actions_force_list_mode_summary">ناچالاکە تا کردارەکانی ڕاکێشان چالاکن، چونکە دیمەنی خشتەیی دەسەپێنن</string>
+    <string name="remove_from_playlist_swipe_action">لابردن لە خشتەلێدان (تەنیا خشتەلێدانەکان)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s بەردەستە</string>
+    <string name="qpipepipe_update_notification_text">کرتە بکە بۆ دابەزاندن و دامەزراندن</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">ئەم نوێکارییە دابەزێنرێت و دابمەزرێت؟ Android داوات لێ دەکات دامەزراندنەکە پشتڕاست بکەیتەوە.</string>
+    <string name="qpipepipe_update_install">دابەزاندن و دامەزراندن</string>
+    <string name="qpipepipe_update_release_notes">تێبینییەکانی وەشان</string>
+    <string name="qpipepipe_update_later">دواتر</string>
+    <string name="qpipepipe_update_downloading">دابەزاندنی QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">دابەزاندن سەرکەوتوو نەبوو. پەیوەندییەکەت بپشکنە و دووبارە هەوڵ بدەرەوە.</string>
+    <string name="qpipepipe_update_wrong_build">ئەم وەشانە ناتوانێت خۆی نوێکارییەکە دابمەزرێنێت، بۆ نموونە چونکە وەشانێکی هەڵەدۆزینەوەیە. لە جیاتی ئەوە APK لە پەڕەی وەشانەکە دابەزێنە.</string>
+    <string name="qpipepipe_update_failed">نوێکارییەکە دانەمەزرا: %s</string>
+    <string name="playlist_resume_title">لەو شوێنەوە بەردەوام بە کە وەستایت</string>
+    <string name="playlist_resume_play">بەردەوامبوون لە #%d</string>
+    <string name="playlist_resume_here">لێرەوە بەردەوام بە</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">هێشتنەوەی نۆبەتە دواییەکان</string>
+    <string name="recent_queues_summary">ئەو نۆبەتانەی لێیان دەدەیت لە ژێر خشتەلێدانەکان پیشان بدە، بۆ ئەوەی دواتر بەردەوامیان پێ بدەیت یان پاشەکەوتیان بکەیت. ئەو ڤیدیۆیانەی زیادیان دەکەیت بۆ نۆبەتێک کە لە یەکێک لە خشتەلێدانەکانتەوە دەستی پێکردووە، بۆ هەمان خشتەلێدان زیاد دەکرێن. نۆبەتی خشتەلێدان و کەناڵەکانی YouTube ناهێڵدرێنەوە</string>
+    <string name="recent_queues_tab_playlists">خشتەلێدانەکان</string>
+    <string name="recent_queues_tab">نۆبەتە دواییەکان</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d نۆبەت</item>
+        <item quantity="other">%d نۆبەت، نوێترین لە سەرەوە</item>
+    </plurals>
+    <string name="recent_queues_clear_all">سڕینەوەی هەموو</string>
+    <string name="recent_queues_clear_all_message">هەموو نۆبەتە دواییەکان بسڕدرێنەوە؟ خشتەلێدانە پاشەکەوتکراوەکانت دەستیان لێ نادرێت.</string>
+    <string name="recent_queues_empty">هیچ نۆبەتێکی دوایی نییە. ئەو نۆبەتانەی لێیان دەدەیت لێرە دەردەکەون.</string>
+    <string name="recent_queue_title">نۆبەتی %s</string>
+    <string name="recent_queue_from_playlist">لە: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">لە %2$s بەدواوە %1$d ڤیدیۆ زیادکراوە</item>
+        <item quantity="other">لە %2$s بەدواوە %1$d ڤیدیۆ زیادکراون</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d ڤیدیۆ</item>
+        <item quantity="other">%1$d/%2$d ڤیدیۆ</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d ڤیدیۆ زیادکرا بۆ %2$s</item>
+        <item quantity="other">%1$d ڤیدیۆ زیادکران بۆ %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">بەردەوامبوون</string>
+    <string name="recent_queue_more">هەڵبژاردەی زیاتر</string>
+    <string name="recent_queue_progress">%1$s لە %2$s</string>
+    <string name="recent_queue_save_as_playlist">پاشەکەوتکردن وەک خشتەلێدان</string>
+    <string name="recent_queue_open_playlist">کردنەوەی خشتەلێدان</string>
+    <string name="recent_queue_saved">لە خشتەلێدانەکان پاشەکەوت کرا</string>
+    <string name="recent_queue_deleted">نۆبەت سڕایەوە</string>
+    <string name="recent_queue_deleted_linked">نۆبەت سڕایەوە، خشتەلێدانەکە دەمێنێت</string>
+    <string name="recent_queue_playing_now">لێدەدرێت</string>
+    <string name="recent_queue_playing_at">لێدەدرێت · %s</string>
+    <string name="recent_queue_watched">بینراو</string>
+    <string name="recent_queue_not_watched">بۆ بینین</string>
+    <string name="recent_queue_added">زیادکراو</string>
+    <string name="playlist_never_played">هەرگیز لێنەدراوە</string>
+</resources>

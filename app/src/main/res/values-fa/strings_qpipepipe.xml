@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">ویژگی‌های صف و کشیدن که این انشعاب افزوده است</string>
+    <string name="qpipepipe_category_playback">پخش</string>
+    <string name="qpipepipe_category_swipe_actions">کنش‌های کشیدن</string>
+    <string name="tap_always_plays_title">لمس ویدیو همیشه آن را پخش می‌کند</string>
+    <string name="tap_always_plays_summary">هنگام باز کردن ویدیو پخش آغاز شود، حتی اگر پخش خودکار به Wi-Fi محدود یا خاموش باشد. پخش خودکار همچنان برای آغازهای خودکار اعمال می‌شود</string>
+    <string name="clear_queue_confirmation_title">پیش از پاک کردن صف، تأیید خواسته شود</string>
+    <string name="clear_queue_confirmation_summary">جابه‌جایی از یک پخش‌کننده به دیگری ممکن است صف شما را جایگزین کند</string>
+    <string name="clear_queue_confirmation_description">صف پخش‌کنندهٔ فعال جایگزین خواهد شد</string>
+    <string name="clear_queue_confirmation_play_now">اکنون پخش کن</string>
+    <string name="enable_swipe_actions_title">فعال‌سازی کنش‌های کشیدن روی ویدیوها</string>
+    <string name="enable_swipe_actions_summary">برای انجام یک کنش سریع، ویدیو را در صفحهٔ اصلی، نتایج جست‌وجو، سیاهه‌های پخش و گروه‌های کانال به چپ یا راست بکشید</string>
+    <string name="swipe_left_action_title">کنش کشیدن به چپ</string>
+    <string name="swipe_right_action_title">کنش کشیدن به راست</string>
+    <string name="enable_swipe_actions_warning_title">کنش‌های کشیدن فعال شد</string>
+    <string name="enable_swipe_actions_warning_message">کشیدن برای کارکرد مطمئن به ردیف‌های تمام‌عرض نیاز دارد، بنابراین هر جا کنش‌های کشیدن در دسترس باشد، به جای نمای شبکه یا کارت از نمای سیاهه استفاده می‌شود. هر زمان می‌توانید دوباره آن را خاموش کنید.</string>
+    <string name="swipe_actions_force_list_mode_summary">تا وقتی کنش‌های کشیدن فعال است غیرفعال است، چون نمای سیاهه را اجباری می‌کند</string>
+    <string name="remove_from_playlist_swipe_action">برداشتن از سیاههٔ پخش (فقط سیاهه‌های پخش)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s در دسترس است</string>
+    <string name="qpipepipe_update_notification_text">برای بارگیری و نصب لمس کنید</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">این به‌روزرسانی بارگیری و نصب شود؟ Android از شما می‌خواهد نصب را تأیید کنید.</string>
+    <string name="qpipepipe_update_install">بارگیری و نصب</string>
+    <string name="qpipepipe_update_release_notes">یادداشت‌های انتشار</string>
+    <string name="qpipepipe_update_later">بعداً</string>
+    <string name="qpipepipe_update_downloading">در حال بارگیری QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">بارگیری ناموفق بود. اتصال خود را بررسی کنید و دوباره تلاش کنید.</string>
+    <string name="qpipepipe_update_wrong_build">این نسخه نمی‌تواند به‌روزرسانی را خودش نصب کند، مثلاً چون نسخهٔ اشکال‌زدایی است. به جای آن APK را از صفحهٔ انتشار بارگیری کنید.</string>
+    <string name="qpipepipe_update_failed">به‌روزرسانی نصب نشد: %s</string>
+    <string name="playlist_resume_title">از جایی که ماندید ادامه دهید</string>
+    <string name="playlist_resume_play">ادامه از #%d</string>
+    <string name="playlist_resume_here">ادامه از اینجا</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">نگه‌داشتن صف‌های اخیر</string>
+    <string name="recent_queues_summary">صف‌هایی که پخش می‌کنید در بخش سیاهه‌های پخش فهرست می‌شوند تا بعداً بتوانید ادامه‌شان دهید یا ذخیره‌شان کنید. ویدیوهایی که به صفی افزوده می‌شوند که از یکی از سیاهه‌های پخش شما آغاز شده، به همان سیاهه افزوده می‌شوند. صف‌های سیاهه‌های پخش و کانال‌های YouTube نگه‌داشته نمی‌شوند</string>
+    <string name="recent_queues_tab_playlists">سیاهه‌های پخش</string>
+    <string name="recent_queues_tab">صف‌های اخیر</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d صف</item>
+        <item quantity="other">%d صف، جدیدترین در ابتدا</item>
+    </plurals>
+    <string name="recent_queues_clear_all">پاک کردن همه</string>
+    <string name="recent_queues_clear_all_message">همهٔ صف‌های اخیر حذف شوند؟ سیاهه‌های پخش ذخیره‌شدهٔ شما دست نمی‌خورند.</string>
+    <string name="recent_queues_empty">صف اخیری وجود ندارد. صف‌هایی که پخش می‌کنید اینجا نمایش داده می‌شوند.</string>
+    <string name="recent_queue_title">صف %s</string>
+    <string name="recent_queue_from_playlist">از: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%1$d ویدیو از %2$s افزوده شده</item>
+        <item quantity="other">%1$d ویدیو از %2$s افزوده شده</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d ویدیو</item>
+        <item quantity="other">%1$d/%2$d ویدیو</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d ویدیو به %2$s افزوده شد</item>
+        <item quantity="other">%1$d ویدیو به %2$s افزوده شد</item>
+    </plurals>
+    <string name="recent_queue_resume">ادامه</string>
+    <string name="recent_queue_more">گزینه‌های بیشتر</string>
+    <string name="recent_queue_progress">%1$s از %2$s</string>
+    <string name="recent_queue_save_as_playlist">ذخیره به عنوان سیاههٔ پخش</string>
+    <string name="recent_queue_open_playlist">باز کردن سیاههٔ پخش</string>
+    <string name="recent_queue_saved">در سیاهه‌های پخش ذخیره شد</string>
+    <string name="recent_queue_deleted">صف حذف شد</string>
+    <string name="recent_queue_deleted_linked">صف حذف شد، سیاههٔ پخش باقی می‌ماند</string>
+    <string name="recent_queue_playing_now">در حال پخش</string>
+    <string name="recent_queue_playing_at">در حال پخش · %s</string>
+    <string name="recent_queue_watched">دیده شده</string>
+    <string name="recent_queue_not_watched">برای تماشا</string>
+    <string name="recent_queue_added">افزوده‌شده</string>
+    <string name="playlist_never_played">هرگز پخش نشده</string>
+</resources>

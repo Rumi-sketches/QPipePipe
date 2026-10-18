@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Funzione pe ccode e scurrimiento aggiunte da stu fork</string>
+    <string name="qpipepipe_category_playback">Riproduzione</string>
+    <string name="qpipepipe_category_swipe_actions">Aziune \'e scurrimiento</string>
+    <string name="tap_always_plays_title">Si tuocche nu video, parte sempe</string>
+    <string name="tap_always_plays_summary">Fa partì \'a riproduzione quanno arape nu video, pure si \'a riproduzione automatica è limitata ô Wi-Fi o è stutata. \'A riproduzione automatica vale ancora pe ll\'avvie automatice</string>
+    <string name="clear_queue_confirmation_title">Cerca cunferma primma \'e svacantà na coda</string>
+    <string name="clear_queue_confirmation_summary">Passanno \'a nu lettore a n\'ato, \'a coda toja se po\' cagnà</string>
+    <string name="clear_queue_confirmation_description">\'A coda d\'\'o lettore attivo sarrà cagnata</string>
+    <string name="clear_queue_confirmation_play_now">Riproduce mo</string>
+    <string name="enable_swipe_actions_title">Appiccia \'e aziune \'e scurrimiento ncopp\'ê video</string>
+    <string name="enable_swipe_actions_summary">Scorre nu video a mancina o a destra ncopp\'â home, int\'ê risultate \'e ricerca, int\'ê raccolte e int\'ê gruppe \'e canale pe fà n\'azione rapida</string>
+    <string name="swipe_left_action_title">Azione scurrenno a mancina</string>
+    <string name="swipe_right_action_title">Azione scurrenno a destra</string>
+    <string name="enable_swipe_actions_warning_title">Aziune \'e scurrimiento appicciate</string>
+    <string name="enable_swipe_actions_warning_message">Pe funziunà buono, \'o scurrimiento vo\' file a larghezza sana, accussì addò ce stanno \'e aziune \'e scurrimiento se usa \'a vista a lista ammece d\'\'a griglia o d\'\'e schede. \'O può stutà quanno vuò.</string>
+    <string name="swipe_actions_force_list_mode_summary">Stutato quanno \'e aziune \'e scurrimiento so\' appicciate, pecché obbligano \'a vista a lista</string>
+    <string name="remove_from_playlist_swipe_action">Lieva d\'\'a raccolta (sulo raccolte)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s sta pronto</string>
+    <string name="qpipepipe_update_notification_text">Tocca pe scarricà e installà</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Scarricà e installà st\'aggiornamento? Android te cercarrà \'e cunfermà ll\'installazione.</string>
+    <string name="qpipepipe_update_install">Scarica e installa</string>
+    <string name="qpipepipe_update_release_notes">Note d\'\'a versione</string>
+    <string name="qpipepipe_update_later">Doppo</string>
+    <string name="qpipepipe_update_downloading">Sto scarricanno QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">\'O scarricamento nun è ghiuto buono. Cuntrolla \'a cunnessione e prova n\'ata vota.</string>
+    <string name="qpipepipe_update_wrong_build">Sta build nun se po\' installà ll\'aggiornamento da sola, pe esempio pecché è na build \'e debug. Scarica ll\'APK d\'\'a paggena d\'\'a release.</string>
+    <string name="qpipepipe_update_failed">Nun se po\' installà ll\'aggiornamento: %s</string>
+    <string name="playlist_resume_title">Ripiglia addò te si fermato</string>
+    <string name="playlist_resume_play">Ripiglia d\'\'o #%d</string>
+    <string name="playlist_resume_here">Ripiglia ccà</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Astipa \'e code recente</string>
+    <string name="recent_queues_summary">Mette \'e code ca siente sott\'a Raccolte, accussì \'e può ripiglià o astipà doppo. \'E video ca aggiunge a na coda partuta \'a una d\'\'e raccolte toje vanno pure dint\'a chella raccolta. \'E code \'e raccolte e canale \'e YouTube nun s\'astipano</string>
+    <string name="recent_queues_tab_playlists">Raccolte</string>
+    <string name="recent_queues_tab">Code recente</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d coda</item>
+        <item quantity="other">%d code, \'e cchiù nove primma</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Scancella tutto</string>
+    <string name="recent_queues_clear_all_message">Scancellà tutte \'e code recente? \'E raccolte astipate toje nun se toccano.</string>
+    <string name="recent_queues_empty">Nisciuna coda recente. \'E code ca siente comparono ccà.</string>
+    <string name="recent_queue_title">Coda d\'\'o %s</string>
+    <string name="recent_queue_from_playlist">Da: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%1$d video aggiunto d\'\'o %2$s</item>
+        <item quantity="other">%1$d video aggiunte d\'\'o %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d video</item>
+        <item quantity="other">%1$d/%2$d video</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d video aggiunto a %2$s</item>
+        <item quantity="other">%1$d video aggiunte a %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Ripiglia</string>
+    <string name="recent_queue_more">Cchiù opzione</string>
+    <string name="recent_queue_progress">%1$s \'e %2$s</string>
+    <string name="recent_queue_save_as_playlist">Astipa comme raccolta</string>
+    <string name="recent_queue_open_playlist">Arape \'a raccolta</string>
+    <string name="recent_queue_saved">Astipata int\'ê Raccolte</string>
+    <string name="recent_queue_deleted">Coda scancellata</string>
+    <string name="recent_queue_deleted_linked">Coda scancellata, \'a raccolta resta</string>
+    <string name="recent_queue_playing_now">In riproduzione</string>
+    <string name="recent_queue_playing_at">In riproduzione · %s</string>
+    <string name="recent_queue_watched">Visto</string>
+    <string name="recent_queue_not_watched">Da vedé</string>
+    <string name="recent_queue_added">aggiunto</string>
+    <string name="playlist_never_played">Maje sentuta</string>
+</resources>

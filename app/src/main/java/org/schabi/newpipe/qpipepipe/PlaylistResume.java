@@ -25,7 +25,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public final class PlaylistResume {
 
     /** Share of a video that counts as watched, so playback resumes from the next one. */
-    static final double FINISHED_RATIO = 0.9;
+    public static final double FINISHED_RATIO = 0.9;
 
     /** Urls per query, under SQLite's limit of 999 bound parameters. */
     private static final int URLS_PER_QUERY = 500;

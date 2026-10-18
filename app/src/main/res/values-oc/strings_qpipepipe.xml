@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Foncions de coa e de lisament apondudas per aqueste fork</string>
+    <string name="qpipepipe_category_playback">Lectura</string>
+    <string name="qpipepipe_category_swipe_actions">Accions de lisament</string>
+    <string name="tap_always_plays_title">Tocar una vidèo la lança totjorn</string>
+    <string name="tap_always_plays_summary">Aviar la lectura en dobrir una vidèo, quitament se la lectura automatica es limitada al Wi-Fi o desactivada. La lectura automatica s\'aplica totjorn als aviaments automatics</string>
+    <string name="clear_queue_confirmation_title">Demandar una confirmacion abans de voidar una coa</string>
+    <string name="clear_queue_confirmation_summary">Passar d\'un legidor a un autre pòt remplaçar vòstra coa</string>
+    <string name="clear_queue_confirmation_description">La coa del legidor actiu serà remplaçada</string>
+    <string name="clear_queue_confirmation_play_now">Legir ara</string>
+    <string name="enable_swipe_actions_title">Activar las accions de lisament sus las vidèos</string>
+    <string name="enable_swipe_actions_summary">Fasètz lisar una vidèo cap a esquèrra o cap a drecha sus la pagina d\'acuèlh, dins los resultats de recèrca, las listas de lectura e los grops de cadenas per aviar una accion rapida</string>
+    <string name="swipe_left_action_title">Accion del lisament cap a esquèrra</string>
+    <string name="swipe_right_action_title">Accion del lisament cap a drecha</string>
+    <string name="enable_swipe_actions_warning_title">Accions de lisament activadas</string>
+    <string name="enable_swipe_actions_warning_message">Lo lisament a besonh de linhas de largor completa per foncionar plan, doncas l\'afichatge en lista serà utilizat allòc de la grasilha o de las cartas pertot ont las accions de lisament son disponiblas. Podètz o desactivar quand volgatz.</string>
+    <string name="swipe_actions_force_list_mode_summary">Desactivat mentre que las accions de lisament son activadas, que fòrçan l\'afichatge en lista</string>
+    <string name="remove_from_playlist_swipe_action">Levar de la lista de lectura (listas de lectura solament)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s es disponible</string>
+    <string name="qpipepipe_update_notification_text">Tocatz per telecargar e installar</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Telecargar e installar aquesta mesa a jorn ? Android vos demandarà de confirmar l\'installacion.</string>
+    <string name="qpipepipe_update_install">Telecargar e installar</string>
+    <string name="qpipepipe_update_release_notes">Nòtas de version</string>
+    <string name="qpipepipe_update_later">Mai tard</string>
+    <string name="qpipepipe_update_downloading">Telecargament de QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">Lo telecargament a fracassat. Verificatz vòstra connexion e tornatz ensajar.</string>
+    <string name="qpipepipe_update_wrong_build">Aquesta version pòt pas installar la mesa a jorn ela meteissa, per exemple perque es una version de debugatge. Telecargatz puslèu l\'APK de la pagina de publicacion.</string>
+    <string name="qpipepipe_update_failed">Impossible d\'installar la mesa a jorn : %s</string>
+    <string name="playlist_resume_title">Contunhar ont èretz</string>
+    <string name="playlist_resume_play">Reprendre al #%d</string>
+    <string name="playlist_resume_here">Reprendre aquí</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Gardar las coas recentas</string>
+    <string name="recent_queues_summary">Aficha las coas que legissètz jos Listas de lectura, per las reprendre o enregistrar mai tard. Las vidèos qu\'apondètz a una coa aviada a partir d\'una de vòstras listas de lectura son apondudas a aquesta lista. Las coas de listas de lectura e de cadenas YouTube son pas gardadas</string>
+    <string name="recent_queues_tab_playlists">Listas de lectura</string>
+    <string name="recent_queues_tab">Coas recentas</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d coa</item>
+        <item quantity="other">%d coas, las mai recentas en primièr</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Tot escafar</string>
+    <string name="recent_queues_clear_all_message">Suprimir totas las coas recentas ? Vòstras listas de lectura enregistradas son pas tocadas.</string>
+    <string name="recent_queues_empty">Cap de coa recenta. Las coas que legissètz apareisson aquí.</string>
+    <string name="recent_queue_title">Coa del %s</string>
+    <string name="recent_queue_from_playlist">De : %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%1$d vidèo aponduda dempuèi lo %2$s</item>
+        <item quantity="other">%1$d vidèos apondudas dempuèi lo %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d vidèo</item>
+        <item quantity="other">%1$d/%2$d vidèos</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d vidèo aponduda a %2$s</item>
+        <item quantity="other">%1$d vidèos apondudas a %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Reprendre</string>
+    <string name="recent_queue_more">Mai d\'opcions</string>
+    <string name="recent_queue_progress">%1$s sus %2$s</string>
+    <string name="recent_queue_save_as_playlist">Enregistrar coma lista de lectura</string>
+    <string name="recent_queue_open_playlist">Dobrir la lista de lectura</string>
+    <string name="recent_queue_saved">Enregistrada dins Listas de lectura</string>
+    <string name="recent_queue_deleted">Coa suprimida</string>
+    <string name="recent_queue_deleted_linked">Coa suprimida, la lista de lectura demòra</string>
+    <string name="recent_queue_playing_now">En lectura</string>
+    <string name="recent_queue_playing_at">En lectura · %s</string>
+    <string name="recent_queue_watched">Vista</string>
+    <string name="recent_queue_not_watched">De veire</string>
+    <string name="recent_queue_added">aponduda</string>
+    <string name="playlist_never_played">Pas jamai legida</string>
+</resources>

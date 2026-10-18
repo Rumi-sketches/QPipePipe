@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Kø- og sveipefunksjoner lagt til av denne forken</string>
+    <string name="qpipepipe_category_playback">Avspilling</string>
+    <string name="qpipepipe_category_swipe_actions">Sveipehandlinger</string>
+    <string name="tap_always_plays_title">Trykk på en video spiller den alltid av</string>
+    <string name="tap_always_plays_summary">Start avspilling når du åpner en video, selv om automatisk avspilling er begrenset til Wi-Fi eller slått av. Automatisk avspilling gjelder fortsatt for automatiske starter</string>
+    <string name="clear_queue_confirmation_title">Be om bekreftelse før en kø tømmes</string>
+    <string name="clear_queue_confirmation_summary">Bytte fra én avspiller til en annen kan erstatte køen din</string>
+    <string name="clear_queue_confirmation_description">Køen til den aktive avspilleren blir erstattet</string>
+    <string name="clear_queue_confirmation_play_now">Spill av nå</string>
+    <string name="enable_swipe_actions_title">Slå på sveipehandlinger for videoer</string>
+    <string name="enable_swipe_actions_summary">Sveip en video til venstre eller høyre på startsiden, i søkeresultater, spillelister og kanalgrupper for å utføre en hurtighandling</string>
+    <string name="swipe_left_action_title">Handling ved sveip til venstre</string>
+    <string name="swipe_right_action_title">Handling ved sveip til høyre</string>
+    <string name="enable_swipe_actions_warning_title">Sveipehandlinger slått på</string>
+    <string name="enable_swipe_actions_warning_message">Sveiping trenger rader i full bredde for å fungere pålitelig, så listevisning brukes i stedet for rutenett- eller kortvisning overalt der sveipehandlinger er tilgjengelige. Du kan slå dette av igjen når som helst.</string>
+    <string name="swipe_actions_force_list_mode_summary">Deaktivert mens sveipehandlinger er slått på, siden de tvinger frem listevisning</string>
+    <string name="remove_from_playlist_swipe_action">Fjern fra spilleliste (kun spillelister)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s er tilgjengelig</string>
+    <string name="qpipepipe_update_notification_text">Trykk for å laste ned og installere</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Vil du laste ned og installere denne oppdateringen? Android ber deg bekrefte installasjonen.</string>
+    <string name="qpipepipe_update_install">Last ned og installer</string>
+    <string name="qpipepipe_update_release_notes">Utgivelsesnotater</string>
+    <string name="qpipepipe_update_later">Senere</string>
+    <string name="qpipepipe_update_downloading">Laster ned QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">Nedlastingen mislyktes. Sjekk tilkoblingen og prøv igjen.</string>
+    <string name="qpipepipe_update_wrong_build">Denne versjonen kan ikke installere oppdateringen selv, for eksempel fordi det er en feilsøkingsversjon. Last ned APK-en fra utgivelsessiden i stedet.</string>
+    <string name="qpipepipe_update_failed">Oppdateringen kunne ikke installeres: %s</string>
+    <string name="playlist_resume_title">Fortsett der du slapp</string>
+    <string name="playlist_resume_play">Gjenoppta fra #%d</string>
+    <string name="playlist_resume_here">Gjenoppta her</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Behold nylige køer</string>
+    <string name="recent_queues_summary">Vis køene du spiller av under Spillelister, slik at du kan gjenoppta eller lagre dem senere. Videoer du legger til i en kø startet fra en av spillelistene dine, legges til i den spillelisten. Køer fra YouTube-spillelister og -kanaler beholdes ikke</string>
+    <string name="recent_queues_tab_playlists">Spillelister</string>
+    <string name="recent_queues_tab">Nylige køer</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d kø</item>
+        <item quantity="other">%d køer, nyeste først</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Tøm alle</string>
+    <string name="recent_queues_clear_all_message">Slette alle nylige køer? De lagrede spillelistene dine berøres ikke.</string>
+    <string name="recent_queues_empty">Ingen nylige køer. Køer du spiller av, vises her.</string>
+    <string name="recent_queue_title">Kø fra %s</string>
+    <string name="recent_queue_from_playlist">Fra: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%1$d video lagt til siden %2$s</item>
+        <item quantity="other">%1$d videoer lagt til siden %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d video</item>
+        <item quantity="other">%1$d/%2$d videoer</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d video lagt til i %2$s</item>
+        <item quantity="other">%1$d videoer lagt til i %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Gjenoppta</string>
+    <string name="recent_queue_more">Flere valg</string>
+    <string name="recent_queue_progress">%1$s av %2$s</string>
+    <string name="recent_queue_save_as_playlist">Lagre som spilleliste</string>
+    <string name="recent_queue_open_playlist">Åpne spilleliste</string>
+    <string name="recent_queue_saved">Lagret i Spillelister</string>
+    <string name="recent_queue_deleted">Kø slettet</string>
+    <string name="recent_queue_deleted_linked">Kø slettet, spillelisten beholdes</string>
+    <string name="recent_queue_playing_now">Spilles av</string>
+    <string name="recent_queue_playing_at">Spilles av · %s</string>
+    <string name="recent_queue_watched">Sett</string>
+    <string name="recent_queue_not_watched">Skal ses</string>
+    <string name="recent_queue_added">lagt til</string>
+    <string name="playlist_never_played">Aldri avspilt</string>
+</resources>

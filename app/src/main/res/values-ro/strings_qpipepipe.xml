@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Funcții pentru coadă și glisare adăugate de acest fork</string>
+    <string name="qpipepipe_category_playback">Redare</string>
+    <string name="qpipepipe_category_swipe_actions">Acțiuni de glisare</string>
+    <string name="tap_always_plays_title">Atingerea unui videoclip îl redă întotdeauna</string>
+    <string name="tap_always_plays_summary">Pornește redarea când deschideți un videoclip, chiar dacă redarea automată este limitată la Wi-Fi sau dezactivată. Redarea automată se aplică în continuare pornirilor automate</string>
+    <string name="clear_queue_confirmation_title">Cereți confirmare înainte de golirea unei cozi</string>
+    <string name="clear_queue_confirmation_summary">Trecerea de la un player la altul vă poate înlocui coada</string>
+    <string name="clear_queue_confirmation_description">Coada playerului activ va fi înlocuită</string>
+    <string name="clear_queue_confirmation_play_now">Redați acum</string>
+    <string name="enable_swipe_actions_title">Activați acțiunile de glisare pe videoclipuri</string>
+    <string name="enable_swipe_actions_summary">Glisați un videoclip la stânga sau la dreapta pe pagina principală, în rezultatele căutării, în listele de redare și în grupurile de canale pentru a declanșa o acțiune rapidă</string>
+    <string name="swipe_left_action_title">Acțiune la glisare spre stânga</string>
+    <string name="swipe_right_action_title">Acțiune la glisare spre dreapta</string>
+    <string name="enable_swipe_actions_warning_title">Acțiuni de glisare activate</string>
+    <string name="enable_swipe_actions_warning_message">Glisarea are nevoie de rânduri pe toată lățimea pentru a funcționa fiabil, așa că vizualizarea listă va fi folosită în locul grilei sau al cardurilor oriunde sunt disponibile acțiuni de glisare. Puteți dezactiva oricând această opțiune.</string>
+    <string name="swipe_actions_force_list_mode_summary">Dezactivat cât timp acțiunile de glisare sunt activate, deoarece acestea impun vizualizarea listă</string>
+    <string name="remove_from_playlist_swipe_action">Eliminați din lista de redare (doar liste de redare)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s este disponibil</string>
+    <string name="qpipepipe_update_notification_text">Atingeți pentru a descărca și instala</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Descărcați și instalați această actualizare? Android vă va cere să confirmați instalarea.</string>
+    <string name="qpipepipe_update_install">Descărcați și instalați</string>
+    <string name="qpipepipe_update_release_notes">Note de lansare</string>
+    <string name="qpipepipe_update_later">Mai târziu</string>
+    <string name="qpipepipe_update_downloading">Se descarcă QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">Descărcarea a eșuat. Verificați conexiunea și încercați din nou.</string>
+    <string name="qpipepipe_update_wrong_build">Această versiune nu poate instala singură actualizarea, de exemplu pentru că este o versiune de depanare. Descărcați în schimb APK-ul de pe pagina lansării.</string>
+    <string name="qpipepipe_update_failed">Actualizarea nu a putut fi instalată: %s</string>
+    <string name="playlist_resume_title">Continuați de unde ați rămas</string>
+    <string name="playlist_resume_play">Reluați de la #%d</string>
+    <string name="playlist_resume_here">Reluați de aici</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Păstrați cozile recente</string>
+    <string name="recent_queues_summary">Afișează cozile pe care le redați în Liste de redare, ca să le puteți relua sau salva mai târziu. Videoclipurile pe care le adăugați într-o coadă pornită dintr-una dintre listele dvs. de redare sunt adăugate în acea listă. Cozile listelor de redare și ale canalelor YouTube nu sunt păstrate</string>
+    <string name="recent_queues_tab_playlists">Liste de redare</string>
+    <string name="recent_queues_tab">Cozi recente</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d coadă</item>
+        <item quantity="few">%d cozi, cele mai noi primele</item>
+        <item quantity="other">%d de cozi, cele mai noi primele</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Ștergeți tot</string>
+    <string name="recent_queues_clear_all_message">Ștergeți toate cozile recente? Listele de redare salvate nu sunt afectate.</string>
+    <string name="recent_queues_empty">Nicio coadă recentă. Cozile pe care le redați apar aici.</string>
+    <string name="recent_queue_title">Coadă: %s</string>
+    <string name="recent_queue_from_playlist">Din: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%1$d videoclip adăugat din %2$s</item>
+        <item quantity="few">%1$d videoclipuri adăugate din %2$s</item>
+        <item quantity="other">%1$d de videoclipuri adăugate din %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d videoclip</item>
+        <item quantity="few">%1$d/%2$d videoclipuri</item>
+        <item quantity="other">%1$d/%2$d de videoclipuri</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d videoclip adăugat în %2$s</item>
+        <item quantity="few">%1$d videoclipuri adăugate în %2$s</item>
+        <item quantity="other">%1$d de videoclipuri adăugate în %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Reluați</string>
+    <string name="recent_queue_more">Mai multe opțiuni</string>
+    <string name="recent_queue_progress">%1$s din %2$s</string>
+    <string name="recent_queue_save_as_playlist">Salvați ca listă de redare</string>
+    <string name="recent_queue_open_playlist">Deschideți lista de redare</string>
+    <string name="recent_queue_saved">Salvată în Liste de redare</string>
+    <string name="recent_queue_deleted">Coadă ștearsă</string>
+    <string name="recent_queue_deleted_linked">Coadă ștearsă, lista de redare rămâne</string>
+    <string name="recent_queue_playing_now">Se redă</string>
+    <string name="recent_queue_playing_at">Se redă · %s</string>
+    <string name="recent_queue_watched">Vizionat</string>
+    <string name="recent_queue_not_watched">De vizionat</string>
+    <string name="recent_queue_added">adăugat</string>
+    <string name="playlist_never_played">Niciodată redată</string>
+</resources>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Функцыі чаргі і свайпаў, дададзеныя гэтым форкам</string>
+    <string name="qpipepipe_category_playback">Прайграванне</string>
+    <string name="qpipepipe_category_swipe_actions">Дзеянні свайпам</string>
+    <string name="tap_always_plays_title">Націсканне на відэа заўсёды запускае яго</string>
+    <string name="tap_always_plays_summary">Пачынаць прайграванне пры адкрыцці відэа, нават калі аўтазапуск абмежаваны Wi-Fi або выключаны. Аўтазапуск па-ранейшаму дзейнічае для аўтаматычных запускаў</string>
+    <string name="clear_queue_confirmation_title">Пытаць пацвярджэнне перад ачысткай чаргі</string>
+    <string name="clear_queue_confirmation_summary">Пераключэнне з аднаго плэера на іншы можа замяніць вашу чаргу</string>
+    <string name="clear_queue_confirmation_description">Чарга актыўнага плэера будзе заменена</string>
+    <string name="clear_queue_confirmation_play_now">Прайграць зараз</string>
+    <string name="enable_swipe_actions_title">Уключыць дзеянні свайпам для відэа</string>
+    <string name="enable_swipe_actions_summary">Правядзіце па відэа ўлева ці ўправа на галоўнай старонцы, у выніках пошуку, плэйлістах і групах каналаў, каб выканаць хуткае дзеянне</string>
+    <string name="swipe_left_action_title">Свайп улева</string>
+    <string name="swipe_right_action_title">Свайп управа</string>
+    <string name="enable_swipe_actions_warning_title">Дзеянні свайпам уключаны</string>
+    <string name="enable_swipe_actions_warning_message">Для надзейнай працы свайпаў патрэбныя радкі на ўсю шырыню, таму ўсюды, дзе даступныя дзеянні свайпам, замест сеткі або картак будзе выкарыстоўвацца спіс. Гэта можна выключыць у любы час.</string>
+    <string name="swipe_actions_force_list_mode_summary">Недаступна, пакуль уключаны дзеянні свайпам: яны патрабуюць выгляду спісу</string>
+    <string name="remove_from_playlist_swipe_action">Выдаліць з плэйліста (толькі ў плэйлістах)</string>
+    <string name="qpipepipe_update_notification_title">Даступная версія QPipePipe %s</string>
+    <string name="qpipepipe_update_notification_text">Націсніце, каб спампаваць і ўсталяваць</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Спампаваць і ўсталяваць гэта абнаўленне? Android папросіць пацвердзіць усталяванне.</string>
+    <string name="qpipepipe_update_install">Спампаваць і ўсталяваць</string>
+    <string name="qpipepipe_update_release_notes">Нататкі да выпуску</string>
+    <string name="qpipepipe_update_later">Пазней</string>
+    <string name="qpipepipe_update_downloading">Спампоўванне QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">Не атрымалася спампаваць. Праверце злучэнне і паспрабуйце яшчэ раз.</string>
+    <string name="qpipepipe_update_wrong_build">Гэта зборка не можа сама ўсталяваць абнаўленне, напрыклад, таму што гэта адладачная зборка. Спампуйце APK са старонкі выпуску.</string>
+    <string name="qpipepipe_update_failed">Не атрымалася ўсталяваць абнаўленне: %s</string>
+    <string name="playlist_resume_title">Працягнуць з таго ж месца</string>
+    <string name="playlist_resume_play">Працягнуць з #%d</string>
+    <string name="playlist_resume_here">Працягнуць адсюль</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Захоўваць нядаўнія чэргі</string>
+    <string name="recent_queues_summary">Паказваць прайграныя чэргі ў раздзеле «Плэйлісты», каб пазней працягнуць або захаваць іх. Відэа, дададзеныя ў чаргу, запушчаную з вашага плэйліста, дадаюцца ў гэты плэйліст. Чэргі плэйлістоў і каналаў YouTube не захоўваюцца</string>
+    <string name="recent_queues_tab_playlists">Плэйлісты</string>
+    <string name="recent_queues_tab">Нядаўнія чэргі</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d чарга, спачатку новыя</item>
+        <item quantity="few">%d чаргі, спачатку новыя</item>
+        <item quantity="many">%d чэргаў, спачатку новыя</item>
+        <item quantity="other">%d чаргі, спачатку новыя</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Ачысціць усё</string>
+    <string name="recent_queues_clear_all_message">Выдаліць усе нядаўнія чэргі? Захаваныя плэйлісты не зменяцца.</string>
+    <string name="recent_queues_empty">Няма нядаўніх чэргаў. Тут з\'явяцца чэргі, якія вы прайграеце.</string>
+    <string name="recent_queue_title">Чарга ад %s</string>
+    <string name="recent_queue_from_playlist">З: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">Дададзена відэа з %2$s: %1$d</item>
+        <item quantity="few">Дададзена відэа з %2$s: %1$d</item>
+        <item quantity="many">Дададзена відэа з %2$s: %1$d</item>
+        <item quantity="other">Дададзена відэа з %2$s: %1$d</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d відэа</item>
+        <item quantity="few">%1$d/%2$d відэа</item>
+        <item quantity="many">%1$d/%2$d відэа</item>
+        <item quantity="other">%1$d/%2$d відэа</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d відэа дададзена ў %2$s</item>
+        <item quantity="few">%1$d відэа дададзена ў %2$s</item>
+        <item quantity="many">%1$d відэа дададзена ў %2$s</item>
+        <item quantity="other">%1$d відэа дададзена ў %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Працягнуць</string>
+    <string name="recent_queue_more">Іншыя дзеянні</string>
+    <string name="recent_queue_progress">%1$s з %2$s</string>
+    <string name="recent_queue_save_as_playlist">Захаваць як плэйліст</string>
+    <string name="recent_queue_open_playlist">Адкрыць плэйліст</string>
+    <string name="recent_queue_saved">Захавана ў «Плэйлістах»</string>
+    <string name="recent_queue_deleted">Чарга выдалена</string>
+    <string name="recent_queue_deleted_linked">Чарга выдалена, плэйліст застаўся</string>
+    <string name="recent_queue_playing_now">Прайграецца</string>
+    <string name="recent_queue_playing_at">Прайграецца · %s</string>
+    <string name="recent_queue_watched">Прагледжана</string>
+    <string name="recent_queue_not_watched">Не прагледжана</string>
+    <string name="recent_queue_added">дададзена</string>
+    <string name="playlist_never_played">Яшчэ не прайграваўся</string>
+</resources>

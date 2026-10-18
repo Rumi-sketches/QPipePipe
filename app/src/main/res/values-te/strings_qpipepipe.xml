@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">ఈ ఫోర్క్ జోడించిన క్యూ మరియు స్వైప్ ఫీచర్‌లు</string>
+    <string name="qpipepipe_category_playback">ప్లేబ్యాక్</string>
+    <string name="qpipepipe_category_swipe_actions">స్వైప్ చర్యలు</string>
+    <string name="tap_always_plays_title">వీడియోను నొక్కితే ఎల్లప్పుడూ ప్లే అవుతుంది</string>
+    <string name="tap_always_plays_summary">వీడియోను తెరిచిన వెంటనే ప్లేబ్యాక్ ప్రారంభించండి, ఆటోప్లే Wi-Fiకి పరిమితమైనా లేదా ఆఫ్‌లో ఉన్నా సరే. ఆటోమేటిక్ ప్రారంభాలకు ఆటోప్లే వర్తిస్తుంది</string>
+    <string name="clear_queue_confirmation_title">క్యూను క్లియర్ చేసే ముందు నిర్ధారణ అడగండి</string>
+    <string name="clear_queue_confirmation_summary">ఒక ప్లేయర్ నుండి మరొక ప్లేయర్‌కు మారితే మీ క్యూ మారిపోవచ్చు</string>
+    <string name="clear_queue_confirmation_description">యాక్టివ్ ప్లేయర్ క్యూ మార్చబడుతుంది</string>
+    <string name="clear_queue_confirmation_play_now">ఇప్పుడే ప్లే చేయండి</string>
+    <string name="enable_swipe_actions_title">వీడియోలపై స్వైప్ చర్యలను ప్రారంభించండి</string>
+    <string name="enable_swipe_actions_summary">హోమ్‌పేజీ, శోధన ఫలితాలు, ప్లేజాబితాలు మరియు ఛానెల్ సమూహాలలో వీడియోను ఎడమకు లేదా కుడికి స్వైప్ చేసి త్వరిత చర్యను చేయండి</string>
+    <string name="swipe_left_action_title">ఎడమ స్వైప్ చర్య</string>
+    <string name="swipe_right_action_title">కుడి స్వైప్ చర్య</string>
+    <string name="enable_swipe_actions_warning_title">స్వైప్ చర్యలు ప్రారంభించబడ్డాయి</string>
+    <string name="enable_swipe_actions_warning_message">స్వైప్ సరిగ్గా పనిచేయాలంటే పూర్తి వెడల్పు వరుసలు అవసరం, కాబట్టి స్వైప్ చర్యలు ఉన్న చోట గ్రిడ్ లేదా కార్డ్ వీక్షణకు బదులుగా జాబితా వీక్షణ ఉపయోగించబడుతుంది. మీరు దీన్ని ఎప్పుడైనా మళ్లీ ఆఫ్ చేయవచ్చు.</string>
+    <string name="swipe_actions_force_list_mode_summary">స్వైప్ చర్యలు ఆన్‌లో ఉన్నప్పుడు నిలిపివేయబడింది, అవి జాబితా వీక్షణను తప్పనిసరి చేస్తాయి</string>
+    <string name="remove_from_playlist_swipe_action">ప్లేజాబితా నుండి తీసివేయి (ప్లేజాబితాల్లో మాత్రమే)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s అందుబాటులో ఉంది</string>
+    <string name="qpipepipe_update_notification_text">డౌన్‌లోడ్ చేసి ఇన్‌స్టాల్ చేయడానికి నొక్కండి</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">ఈ నవీకరణను డౌన్‌లోడ్ చేసి ఇన్‌స్టాల్ చేయాలా? ఇన్‌స్టాలేషన్‌ను నిర్ధారించమని Android మిమ్మల్ని అడుగుతుంది.</string>
+    <string name="qpipepipe_update_install">డౌన్‌లోడ్ చేసి ఇన్‌స్టాల్ చేయండి</string>
+    <string name="qpipepipe_update_release_notes">విడుదల గమనికలు</string>
+    <string name="qpipepipe_update_later">తర్వాత</string>
+    <string name="qpipepipe_update_downloading">QPipePipe %s డౌన్‌లోడ్ అవుతోంది</string>
+    <string name="qpipepipe_update_download_failed">డౌన్‌లోడ్ విఫలమైంది. మీ కనెక్షన్‌ను తనిఖీ చేసి మళ్లీ ప్రయత్నించండి.</string>
+    <string name="qpipepipe_update_wrong_build">ఈ బిల్డ్ స్వయంగా నవీకరణను ఇన్‌స్టాల్ చేయలేదు, ఉదాహరణకు ఇది డీబగ్ బిల్డ్ కావడం వల్ల. బదులుగా విడుదల పేజీ నుండి APKను డౌన్‌లోడ్ చేయండి.</string>
+    <string name="qpipepipe_update_failed">నవీకరణను ఇన్‌స్టాల్ చేయడం సాధ్యం కాలేదు: %s</string>
+    <string name="playlist_resume_title">ఆపిన చోట నుండి కొనసాగించండి</string>
+    <string name="playlist_resume_play">#%d నుండి కొనసాగించు</string>
+    <string name="playlist_resume_here">ఇక్కడి నుండి కొనసాగించు</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">ఇటీవలి క్యూలను ఉంచండి</string>
+    <string name="recent_queues_summary">మీరు ప్లే చేసిన క్యూలను ప్లేజాబితాల కింద చూపండి, తద్వారా వాటిని తర్వాత కొనసాగించవచ్చు లేదా సేవ్ చేయవచ్చు. మీ ప్లేజాబితాల్లో ఒకదాని నుండి ప్రారంభించిన క్యూకు జోడించిన వీడియోలు ఆ ప్లేజాబితాకు కూడా జోడించబడతాయి. YouTube ప్లేజాబితాలు మరియు ఛానెల్‌ల క్యూలు ఉంచబడవు</string>
+    <string name="recent_queues_tab_playlists">ప్లేజాబితాలు</string>
+    <string name="recent_queues_tab">ఇటీవలి క్యూలు</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d క్యూ</item>
+        <item quantity="other">%d క్యూలు, కొత్తవి ముందు</item>
+    </plurals>
+    <string name="recent_queues_clear_all">అన్నీ క్లియర్ చేయి</string>
+    <string name="recent_queues_clear_all_message">అన్ని ఇటీవలి క్యూలను తొలగించాలా? మీరు సేవ్ చేసిన ప్లేజాబితాలకు ఏమీ కాదు.</string>
+    <string name="recent_queues_empty">ఇటీవలి క్యూలు లేవు. మీరు ప్లే చేసే క్యూలు ఇక్కడ కనిపిస్తాయి.</string>
+    <string name="recent_queue_title">%s క్యూ</string>
+    <string name="recent_queue_from_playlist">నుండి: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%2$s నుండి %1$d వీడియో జోడించబడింది</item>
+        <item quantity="other">%2$s నుండి %1$d వీడియోలు జోడించబడ్డాయి</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d వీడియో</item>
+        <item quantity="other">%1$d/%2$d వీడియోలు</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d వీడియో %2$sకు జోడించబడింది</item>
+        <item quantity="other">%1$d వీడియోలు %2$sకు జోడించబడ్డాయి</item>
+    </plurals>
+    <string name="recent_queue_resume">కొనసాగించు</string>
+    <string name="recent_queue_more">మరిన్ని ఎంపికలు</string>
+    <string name="recent_queue_progress">%2$sలో %1$s</string>
+    <string name="recent_queue_save_as_playlist">ప్లేజాబితాగా సేవ్ చేయి</string>
+    <string name="recent_queue_open_playlist">ప్లేజాబితాను తెరువు</string>
+    <string name="recent_queue_saved">ప్లేజాబితాల్లో సేవ్ చేయబడింది</string>
+    <string name="recent_queue_deleted">క్యూ తొలగించబడింది</string>
+    <string name="recent_queue_deleted_linked">క్యూ తొలగించబడింది, ప్లేజాబితా అలాగే ఉంటుంది</string>
+    <string name="recent_queue_playing_now">ప్లే అవుతోంది</string>
+    <string name="recent_queue_playing_at">ప్లే అవుతోంది · %s</string>
+    <string name="recent_queue_watched">వీక్షించినవి</string>
+    <string name="recent_queue_not_watched">చూడాల్సినవి</string>
+    <string name="recent_queue_added">జోడించబడింది</string>
+    <string name="playlist_never_played">ఎప్పుడూ ప్లే చేయలేదు</string>
+</resources>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Fonctions de file d\'attente et de balayage ajoutées par ce fork</string>
+    <string name="qpipepipe_category_playback">Lecture</string>
+    <string name="qpipepipe_category_swipe_actions">Actions de balayage</string>
+    <string name="tap_always_plays_title">Toucher une vidéo la lance toujours</string>
+    <string name="tap_always_plays_summary">Lance la lecture à l\'ouverture d\'une vidéo, même si la lecture automatique est limitée au Wi-Fi ou désactivée. La lecture automatique s\'applique toujours aux démarrages automatiques</string>
+    <string name="clear_queue_confirmation_title">Demander confirmation avant de vider une file d\'attente</string>
+    <string name="clear_queue_confirmation_summary">Passer d\'un lecteur à un autre peut remplacer votre file d\'attente</string>
+    <string name="clear_queue_confirmation_description">La file d\'attente du lecteur actif sera remplacée</string>
+    <string name="clear_queue_confirmation_play_now">Lire maintenant</string>
+    <string name="enable_swipe_actions_title">Activer les actions de balayage sur les vidéos</string>
+    <string name="enable_swipe_actions_summary">Faites glisser une vidéo vers la gauche ou la droite sur l\'accueil, dans les résultats de recherche, les listes de lecture et les groupes de chaînes pour déclencher une action rapide</string>
+    <string name="swipe_left_action_title">Action du balayage vers la gauche</string>
+    <string name="swipe_right_action_title">Action du balayage vers la droite</string>
+    <string name="enable_swipe_actions_warning_title">Actions de balayage activées</string>
+    <string name="enable_swipe_actions_warning_message">Le balayage a besoin de lignes pleine largeur pour fonctionner correctement : l\'affichage en liste sera donc utilisé à la place de la grille ou des cartes partout où les actions de balayage sont disponibles. Vous pouvez le désactiver à tout moment.</string>
+    <string name="swipe_actions_force_list_mode_summary">Désactivé tant que les actions de balayage sont activées, car elles imposent l\'affichage en liste</string>
+    <string name="remove_from_playlist_swipe_action">Retirer de la liste de lecture (listes de lecture uniquement)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s est disponible</string>
+    <string name="qpipepipe_update_notification_text">Touchez pour télécharger et installer</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Télécharger et installer cette mise à jour ? Android vous demandera de confirmer l\'installation.</string>
+    <string name="qpipepipe_update_install">Télécharger et installer</string>
+    <string name="qpipepipe_update_release_notes">Notes de version</string>
+    <string name="qpipepipe_update_later">Plus tard</string>
+    <string name="qpipepipe_update_downloading">Téléchargement de QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">Le téléchargement a échoué. Vérifiez votre connexion et réessayez.</string>
+    <string name="qpipepipe_update_wrong_build">Cette version ne peut pas installer la mise à jour elle-même, par exemple parce qu\'il s\'agit d\'une version de débogage. Téléchargez plutôt l\'APK depuis la page de publication.</string>
+    <string name="qpipepipe_update_failed">La mise à jour n\'a pas pu être installée : %s</string>
+    <string name="playlist_resume_title">Reprendre là où vous en étiez</string>
+    <string name="playlist_resume_play">Reprendre au #%d</string>
+    <string name="playlist_resume_here">Reprendre ici</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Conserver les files d\'attente récentes</string>
+    <string name="recent_queues_summary">Affiche les files d\'attente que vous lisez sous Listes de lecture, pour les reprendre ou les enregistrer plus tard. Les vidéos ajoutées à une file lancée depuis l\'une de vos listes de lecture sont ajoutées à cette liste. Les files des listes de lecture et chaînes YouTube ne sont pas conservées</string>
+    <string name="recent_queues_tab_playlists">Listes de lecture</string>
+    <string name="recent_queues_tab">Files récentes</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d file d\'attente</item>
+        <item quantity="other">%d files d\'attente, les plus récentes d\'abord</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Tout effacer</string>
+    <string name="recent_queues_clear_all_message">Supprimer toutes les files récentes ? Vos listes de lecture enregistrées ne sont pas modifiées.</string>
+    <string name="recent_queues_empty">Aucune file récente. Les files d\'attente que vous lisez apparaissent ici.</string>
+    <string name="recent_queue_title">File du %s</string>
+    <string name="recent_queue_from_playlist">Depuis : %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%1$d vidéo ajoutée depuis le %2$s</item>
+        <item quantity="other">%1$d vidéos ajoutées depuis le %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d vidéo</item>
+        <item quantity="other">%1$d/%2$d vidéos</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d vidéo ajoutée à %2$s</item>
+        <item quantity="other">%1$d vidéos ajoutées à %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Reprendre</string>
+    <string name="recent_queue_more">Plus d\'options</string>
+    <string name="recent_queue_progress">%1$s sur %2$s</string>
+    <string name="recent_queue_save_as_playlist">Enregistrer comme liste de lecture</string>
+    <string name="recent_queue_open_playlist">Ouvrir la liste de lecture</string>
+    <string name="recent_queue_saved">Enregistrée dans Listes de lecture</string>
+    <string name="recent_queue_deleted">File supprimée</string>
+    <string name="recent_queue_deleted_linked">File supprimée, la liste de lecture est conservée</string>
+    <string name="recent_queue_playing_now">En lecture</string>
+    <string name="recent_queue_playing_at">En lecture · %s</string>
+    <string name="recent_queue_watched">Regardée</string>
+    <string name="recent_queue_not_watched">À regarder</string>
+    <string name="recent_queue_added">ajoutée</string>
+    <string name="playlist_never_played">Jamais lue</string>
+</resources>

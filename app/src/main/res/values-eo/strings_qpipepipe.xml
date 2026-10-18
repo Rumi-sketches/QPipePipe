@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Atendovicaj kaj ŝovaj funkcioj aldonitaj de ĉi tiu forko</string>
+    <string name="qpipepipe_category_playback">Ludado</string>
+    <string name="qpipepipe_category_swipe_actions">Ŝovaj agoj</string>
+    <string name="tap_always_plays_title">Tuŝi filmeton ĉiam ludas ĝin</string>
+    <string name="tap_always_plays_summary">Komenci ludadon kiam vi malfermas filmeton, eĉ se aŭtoludo estas limigita al Wi-Fi aŭ malŝaltita. Aŭtoludo ankoraŭ validas por aŭtomataj komencoj</string>
+    <string name="clear_queue_confirmation_title">Peti konfirmon antaŭ ol malplenigi atendovicon</string>
+    <string name="clear_queue_confirmation_summary">Ŝanĝi de unu ludilo al alia povas anstataŭigi vian atendovicon</string>
+    <string name="clear_queue_confirmation_description">La atendovico de la aktiva ludilo estos anstataŭigita</string>
+    <string name="clear_queue_confirmation_play_now">Ludi nun</string>
+    <string name="enable_swipe_actions_title">Ŝalti ŝovajn agojn sur filmetoj</string>
+    <string name="enable_swipe_actions_summary">Ŝovu filmeton maldekstren aŭ dekstren en la ĉefpaĝo, serĉrezultoj, ludlistoj kaj kanalgrupoj por plenumi rapidan agon</string>
+    <string name="swipe_left_action_title">Ago por ŝovo maldekstren</string>
+    <string name="swipe_right_action_title">Ago por ŝovo dekstren</string>
+    <string name="enable_swipe_actions_warning_title">Ŝovaj agoj ŝaltitaj</string>
+    <string name="enable_swipe_actions_warning_message">Ŝovado bezonas plenlarĝajn vicojn por fidinde funkcii, do lista vido estos uzata anstataŭ krada aŭ karta vido ĉie, kie ŝovaj agoj disponeblas. Vi povas malŝalti tion iam ajn.</string>
+    <string name="swipe_actions_force_list_mode_summary">Malŝaltita dum ŝovaj agoj estas ŝaltitaj, ĉar ili devigas listan vidon</string>
+    <string name="remove_from_playlist_swipe_action">Forigi el ludlisto (nur ludlistoj)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s disponeblas</string>
+    <string name="qpipepipe_update_notification_text">Tuŝu por elŝuti kaj instali</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Ĉu elŝuti kaj instali ĉi tiun ĝisdatigon? Android petos vin konfirmi la instaladon.</string>
+    <string name="qpipepipe_update_install">Elŝuti kaj instali</string>
+    <string name="qpipepipe_update_release_notes">Eldonaj notoj</string>
+    <string name="qpipepipe_update_later">Poste</string>
+    <string name="qpipepipe_update_downloading">Elŝutante QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">La elŝuto malsukcesis. Kontrolu vian konekton kaj reprovu.</string>
+    <string name="qpipepipe_update_wrong_build">Ĉi tiu versio ne povas mem instali la ĝisdatigon, ekzemple ĉar ĝi estas sencimiga versio. Elŝutu la APK-on de la eldona paĝo anstataŭe.</string>
+    <string name="qpipepipe_update_failed">La ĝisdatigo ne povis esti instalita: %s</string>
+    <string name="playlist_resume_title">Daŭrigi de kie vi haltis</string>
+    <string name="playlist_resume_play">Rekomenci de #%d</string>
+    <string name="playlist_resume_here">Rekomenci ĉi tie</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Konservi lastajn atendovicojn</string>
+    <string name="recent_queues_summary">Listigas la atendovicojn, kiujn vi ludas, sub Ludlistoj, por ke vi povu rekomenci aŭ konservi ilin poste. Filmetoj, kiujn vi aldonas al atendovico komencita el unu el viaj ludlistoj, aldoniĝas al tiu ludlisto. Atendovicoj de YouTube-ludlistoj kaj -kanaloj ne estas konservataj</string>
+    <string name="recent_queues_tab_playlists">Ludlistoj</string>
+    <string name="recent_queues_tab">Lastaj atendovicoj</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d atendovico</item>
+        <item quantity="other">%d atendovicoj, plej novaj unue</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Forviŝi ĉiujn</string>
+    <string name="recent_queues_clear_all_message">Ĉu forviŝi ĉiujn lastajn atendovicojn? Viaj konservitaj ludlistoj ne estas tuŝataj.</string>
+    <string name="recent_queues_empty">Neniuj lastaj atendovicoj. Atendovicoj, kiujn vi ludas, aperas ĉi tie.</string>
+    <string name="recent_queue_title">Atendovico de %s</string>
+    <string name="recent_queue_from_playlist">El: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%1$d filmeto aldonita ekde %2$s</item>
+        <item quantity="other">%1$d filmetoj aldonitaj ekde %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d filmeto</item>
+        <item quantity="other">%1$d/%2$d filmetoj</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d filmeto aldonita al %2$s</item>
+        <item quantity="other">%1$d filmetoj aldonitaj al %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Rekomenci</string>
+    <string name="recent_queue_more">Pliaj opcioj</string>
+    <string name="recent_queue_progress">%1$s el %2$s</string>
+    <string name="recent_queue_save_as_playlist">Konservi kiel ludliston</string>
+    <string name="recent_queue_open_playlist">Malfermi ludliston</string>
+    <string name="recent_queue_saved">Konservita en Ludlistoj</string>
+    <string name="recent_queue_deleted">Atendovico forviŝita</string>
+    <string name="recent_queue_deleted_linked">Atendovico forviŝita, la ludlisto restas</string>
+    <string name="recent_queue_playing_now">Ludata</string>
+    <string name="recent_queue_playing_at">Ludata · %s</string>
+    <string name="recent_queue_watched">Spektita</string>
+    <string name="recent_queue_not_watched">Spektota</string>
+    <string name="recent_queue_added">aldonita</string>
+    <string name="playlist_never_played">Neniam ludita</string>
+</resources>

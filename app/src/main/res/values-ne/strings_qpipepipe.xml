@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">यो फोर्कले थपेका लाम र स्वाइप सुविधाहरू</string>
+    <string name="qpipepipe_category_playback">प्लेब्याक</string>
+    <string name="qpipepipe_category_swipe_actions">स्वाइप कार्यहरू</string>
+    <string name="tap_always_plays_title">भिडियोमा ट्याप गर्दा सधैं प्ले हुन्छ</string>
+    <string name="tap_always_plays_summary">भिडियो खोल्नेबित्तिकै प्लेब्याक सुरु गर्नुहोस्, अटोप्ले Wi-Fi मा मात्र सीमित वा बन्द भए पनि। स्वतः सुरु हुँदा अटोप्ले लागू रहन्छ</string>
+    <string name="clear_queue_confirmation_title">लाम खाली गर्नुअघि पुष्टि सोध्नुहोस्</string>
+    <string name="clear_queue_confirmation_summary">एउटा प्लेयरबाट अर्को प्लेयरमा जाँदा तपाईंको लाम बदलिन सक्छ</string>
+    <string name="clear_queue_confirmation_description">सक्रिय प्लेयरको लाम बदलिनेछ</string>
+    <string name="clear_queue_confirmation_play_now">अहिले प्ले गर्नुहोस्</string>
+    <string name="enable_swipe_actions_title">भिडियोमा स्वाइप कार्यहरू सक्षम गर्नुहोस्</string>
+    <string name="enable_swipe_actions_summary">गृहपृष्ठ, खोज नतिजा, प्लेसूची र च्यानल समूहहरूमा भिडियोलाई बायाँ वा दायाँ स्वाइप गरेर छिटो कार्य गर्नुहोस्</string>
+    <string name="swipe_left_action_title">बायाँ स्वाइपको कार्य</string>
+    <string name="swipe_right_action_title">दायाँ स्वाइपको कार्य</string>
+    <string name="enable_swipe_actions_warning_title">स्वाइप कार्यहरू सक्षम भए</string>
+    <string name="enable_swipe_actions_warning_message">स्वाइप राम्ररी काम गर्न पूरा चौडाइका पङ्क्तिहरू चाहिन्छ, त्यसैले स्वाइप कार्यहरू उपलब्ध भएका ठाउँमा ग्रिड वा कार्ड दृश्यको सट्टा सूची दृश्य प्रयोग हुनेछ। तपाईं जुनसुकै बेला यसलाई फेरि बन्द गर्न सक्नुहुन्छ।</string>
+    <string name="swipe_actions_force_list_mode_summary">स्वाइप कार्यहरू सक्षम हुँदा निष्क्रिय, किनकि तिनले सूची दृश्य लागू गर्छन्</string>
+    <string name="remove_from_playlist_swipe_action">प्लेसूचीबाट हटाउनुहोस् (प्लेसूचीमा मात्र)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s उपलब्ध छ</string>
+    <string name="qpipepipe_update_notification_text">डाउनलोड र इन्स्टल गर्न ट्याप गर्नुहोस्</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">यो अपडेट डाउनलोड र इन्स्टल गर्ने? Android ले तपाईंलाई इन्स्टलेसन पुष्टि गर्न भन्नेछ।</string>
+    <string name="qpipepipe_update_install">डाउनलोड र इन्स्टल गर्नुहोस्</string>
+    <string name="qpipepipe_update_release_notes">रिलिज नोटहरू</string>
+    <string name="qpipepipe_update_later">पछि</string>
+    <string name="qpipepipe_update_downloading">QPipePipe %s डाउनलोड हुँदैछ</string>
+    <string name="qpipepipe_update_download_failed">डाउनलोड असफल भयो। आफ्नो जडान जाँच गरेर फेरि प्रयास गर्नुहोस्।</string>
+    <string name="qpipepipe_update_wrong_build">यो बिल्डले आफैं अपडेट इन्स्टल गर्न सक्दैन, उदाहरणका लागि यो डिबग बिल्ड भएकाले। यसको सट्टा रिलिज पृष्ठबाट APK डाउनलोड गर्नुहोस्।</string>
+    <string name="qpipepipe_update_failed">अपडेट इन्स्टल गर्न सकिएन: %s</string>
+    <string name="playlist_resume_title">जहाँ छोड्नुभएको थियो त्यहीँबाट जारी राख्नुहोस्</string>
+    <string name="playlist_resume_play">#%d बाट पुनः सुरु गर्नुहोस्</string>
+    <string name="playlist_resume_here">यहाँबाट पुनः सुरु गर्नुहोस्</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">हालका लामहरू राख्नुहोस्</string>
+    <string name="recent_queues_summary">तपाईंले प्ले गरेका लामहरू प्लेसूचीहरूमुनि देखाउनुहोस्, ताकि पछि पुनः सुरु वा सेभ गर्न सकियोस्। तपाईंको कुनै प्लेसूचीबाट सुरु भएको लाममा थपिएका भिडियोहरू त्यही प्लेसूचीमा पनि थपिन्छन्। YouTube प्लेसूची र च्यानलका लामहरू राखिँदैनन्</string>
+    <string name="recent_queues_tab_playlists">प्लेसूचीहरू</string>
+    <string name="recent_queues_tab">हालका लामहरू</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d लाम</item>
+        <item quantity="other">%d लामहरू, नयाँ पहिले</item>
+    </plurals>
+    <string name="recent_queues_clear_all">सबै खाली गर्नुहोस्</string>
+    <string name="recent_queues_clear_all_message">सबै हालका लामहरू मेटाउने? तपाईंका सेभ गरिएका प्लेसूचीहरूमा केही असर पर्दैन।</string>
+    <string name="recent_queues_empty">कुनै हालको लाम छैन। तपाईंले प्ले गरेका लामहरू यहाँ देखिन्छन्।</string>
+    <string name="recent_queue_title">%s को लाम</string>
+    <string name="recent_queue_from_playlist">बाट: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%2$s देखि %1$d भिडियो थपियो</item>
+        <item quantity="other">%2$s देखि %1$d भिडियोहरू थपिए</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d भिडियो</item>
+        <item quantity="other">%1$d/%2$d भिडियोहरू</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d भिडियो %2$s मा थपियो</item>
+        <item quantity="other">%1$d भिडियोहरू %2$s मा थपिए</item>
+    </plurals>
+    <string name="recent_queue_resume">पुनः सुरु</string>
+    <string name="recent_queue_more">थप विकल्पहरू</string>
+    <string name="recent_queue_progress">%2$s मध्ये %1$s</string>
+    <string name="recent_queue_save_as_playlist">प्लेसूचीको रूपमा सेभ गर्नुहोस्</string>
+    <string name="recent_queue_open_playlist">प्लेसूची खोल्नुहोस्</string>
+    <string name="recent_queue_saved">प्लेसूचीहरूमा सेभ गरियो</string>
+    <string name="recent_queue_deleted">लाम मेटाइयो</string>
+    <string name="recent_queue_deleted_linked">लाम मेटाइयो, प्लेसूची रहन्छ</string>
+    <string name="recent_queue_playing_now">प्ले हुँदैछ</string>
+    <string name="recent_queue_playing_at">प्ले हुँदैछ · %s</string>
+    <string name="recent_queue_watched">हेरिसकेको</string>
+    <string name="recent_queue_not_watched">हेर्न बाँकी</string>
+    <string name="recent_queue_added">थपिएको</string>
+    <string name="playlist_never_played">कहिल्यै प्ले नगरिएको</string>
+</resources>

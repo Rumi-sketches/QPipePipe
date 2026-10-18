@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Timahilin n tebdart n uraǧu d uzuɣer yernan deg lqem-a</string>
+    <string name="qpipepipe_category_playback">Taɣuri</string>
+    <string name="qpipepipe_category_swipe_actions">Tigawin n uzuɣer</string>
+    <string name="tap_always_plays_title">Asiti ɣef tmwalit yesseɣray-itt yal tikkelt</string>
+    <string name="tap_always_plays_summary">Bdu taɣuri mi ara teldiḍ tamwalit, ula ma taɣuri tawurmant tettwasbadu i Wi-Fi kan neɣ tensa. Taɣuri tawurmant tettkemmil ad tettwasnes ɣef yibdayen iwurmanen</string>
+    <string name="clear_queue_confirmation_title">Suter asentem send ad tsefḍeḍ tabdart n uraǧu</string>
+    <string name="clear_queue_confirmation_summary">Aɛeddi seg yiwen umeɣri ɣer wayeḍ yezmer ad ibeddel tabdart-ik n uraǧu</string>
+    <string name="clear_queue_confirmation_description">Tabdart n uraǧu n umeɣri urmid ad tettwabeddel</string>
+    <string name="clear_queue_confirmation_play_now">Ɣer tura</string>
+    <string name="enable_swipe_actions_title">Rmed tigawin n uzuɣer ɣef tmwaliyin</string>
+    <string name="enable_swipe_actions_summary">Zuɣer tamwalit ɣer zelmeḍ neɣ ɣer yefus deg usebter agejdan, igmaḍ n unadi, tibdarin n tɣuri d trebbaɛ n yibuda i usekker n tigawt tarurant</string>
+    <string name="swipe_left_action_title">Tigawt n uzuɣer ɣer zelmeḍ</string>
+    <string name="swipe_right_action_title">Tigawt n uzuɣer ɣer yefus</string>
+    <string name="enable_swipe_actions_warning_title">Tigawin n uzuɣer ttwaremdent</string>
+    <string name="enable_swipe_actions_warning_message">Azuɣer yesra izirigen s tehri merra akken ad iteddu akken iwata, ihi askan n tebdart ad yettwaseqdec deg wadeg n uskan n yiẓiki neɣ n tkarḍiwin anda llant tigawin n uzuɣer. Tzemreḍ ad t-tsenseḍ tikkelt nniḍen melmi tebɣiḍ.</string>
+    <string name="swipe_actions_force_list_mode_summary">Yensa mi ara rmedent tigawin n uzuɣer, acku ḥettment askan n tebdart</string>
+    <string name="remove_from_playlist_swipe_action">Kkes seg tebdart n tɣuri (tibdarin n tɣuri kan)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s yella</string>
+    <string name="qpipepipe_update_notification_text">Sit i usider d usebded</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Ad tessidreḍ syin ad tesbeddeḍ aleqqem-a? Android ad ak-d-yessuter ad tesnetmeḍ asebded.</string>
+    <string name="qpipepipe_update_install">Sider syin sbedd</string>
+    <string name="qpipepipe_update_release_notes">Tizmilin n lqem</string>
+    <string name="qpipepipe_update_later">Ticki</string>
+    <string name="qpipepipe_update_downloading">Asider n QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">Asider ur yeddi ara. Senqed tuqqna-k syin ɛreḍ tikkelt nniḍen.</string>
+    <string name="qpipepipe_update_wrong_build">Lqem-a ur yezmir ara ad isbedd aleqqem s yiman-is, amedya acku d lqem n tseɣtayt. Sider APK seg usebter n lqem deg wadeg-is.</string>
+    <string name="qpipepipe_update_failed">Aleqqem ur yezmir ara ad yettwasbedd: %s</string>
+    <string name="playlist_resume_title">Kemmel seg wanda i tḥebseḍ</string>
+    <string name="playlist_resume_play">Kemmel seg #%d</string>
+    <string name="playlist_resume_here">Kemmel da</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Eǧǧ tibdarin n uraǧu tineggura</string>
+    <string name="recent_queues_summary">Sken tibdarin n uraǧu i tesseɣraḍ ddaw Tibdarin n tɣuri, akken ad tkemmleḍ fell-asent neɣ ad tent-tsekklseḍ ticki. Timwaliyin i ternuḍ ɣer tebdart n uraǧu i yebdan seg yiwet seg tebdarin-ik n tɣuri ad ttwarnunt ɣer tebdart-nni. Tibdarin n uraǧu n tebdarin n tɣuri d yibuda n YouTube ur ttwaḥerzent ara</string>
+    <string name="recent_queues_tab_playlists">Tibdarin n tɣuri</string>
+    <string name="recent_queues_tab">Tibdarin n uraǧu tineggura</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d n tebdart n uraǧu</item>
+        <item quantity="other">%d n tebdarin n uraǧu, tineggura d timezwura</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Sfeḍ akk</string>
+    <string name="recent_queues_clear_all_message">Kkes akk tibdarin n uraǧu tineggura? Tibdarin-ik n tɣuri yettwaskelsen ur ttbeddilent ara.</string>
+    <string name="recent_queues_empty">Ulac tibdarin n uraǧu tineggura. Tibdarin n uraǧu i tesseɣraḍ ad d-banent da.</string>
+    <string name="recent_queue_title">Tabdart n uraǧu n %s</string>
+    <string name="recent_queue_from_playlist">Seg: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%1$d n tmwalit tettwarna seg %2$s</item>
+        <item quantity="other">%1$d n tmwaliyin ttwarnant seg %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d n tmwalit</item>
+        <item quantity="other">%1$d/%2$d n tmwaliyin</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d n tmwalit tettwarna ɣer %2$s</item>
+        <item quantity="other">%1$d n tmwaliyin ttwarnant ɣer %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Kemmel</string>
+    <string name="recent_queue_more">Ugar n yixtiṛen</string>
+    <string name="recent_queue_progress">%1$s ɣef %2$s</string>
+    <string name="recent_queue_save_as_playlist">Sekles am tebdart n tɣuri</string>
+    <string name="recent_queue_open_playlist">Ldi tabdart n tɣuri</string>
+    <string name="recent_queue_saved">Tettwasekles deg Tibdarin n tɣuri</string>
+    <string name="recent_queue_deleted">Tabdart n uraǧu tettwakkes</string>
+    <string name="recent_queue_deleted_linked">Tabdart n uraǧu tettwakkes, tabdart n tɣuri teqqim</string>
+    <string name="recent_queue_playing_now">Tetteddu</string>
+    <string name="recent_queue_playing_at">Tetteddu · %s</string>
+    <string name="recent_queue_watched">Tettwali</string>
+    <string name="recent_queue_not_watched">Ad tettwali</string>
+    <string name="recent_queue_added">tettwarna</string>
+    <string name="playlist_never_played">Werǧin tettwaɣra</string>
+</resources>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">ميزات قائمة الانتظار والسحب المضافة في هذه النسخة</string>
+    <string name="qpipepipe_category_playback">التشغيل</string>
+    <string name="qpipepipe_category_swipe_actions">إجراءات السحب</string>
+    <string name="tap_always_plays_title">النقر على فيديو يشغّله دائمًا</string>
+    <string name="tap_always_plays_summary">بدء التشغيل عند فتح فيديو، حتى لو كان التشغيل التلقائي مقتصرًا على Wi-Fi أو متوقفًا. يبقى التشغيل التلقائي ساريًا على البدء التلقائي</string>
+    <string name="clear_queue_confirmation_title">طلب التأكيد قبل مسح قائمة الانتظار</string>
+    <string name="clear_queue_confirmation_summary">قد يؤدي التبديل من مشغل إلى آخر إلى استبدال قائمة الانتظار</string>
+    <string name="clear_queue_confirmation_description">سيتم استبدال قائمة انتظار المشغل النشط</string>
+    <string name="clear_queue_confirmation_play_now">تشغيل الآن</string>
+    <string name="enable_swipe_actions_title">تفعيل إجراءات السحب على الفيديوهات</string>
+    <string name="enable_swipe_actions_summary">اسحب فيديو لليسار أو لليمين في الصفحة الرئيسية ونتائج البحث وقوائم التشغيل ومجموعات القنوات لتنفيذ إجراء سريع</string>
+    <string name="swipe_left_action_title">إجراء السحب لليسار</string>
+    <string name="swipe_right_action_title">إجراء السحب لليمين</string>
+    <string name="enable_swipe_actions_warning_title">تم تفعيل إجراءات السحب</string>
+    <string name="enable_swipe_actions_warning_message">يحتاج السحب إلى صفوف بعرض الشاشة كاملًا ليعمل بشكل موثوق، لذا سيُستخدم عرض القائمة بدلًا من عرض الشبكة أو البطاقات حيثما تتوفر إجراءات السحب. يمكنك إيقاف ذلك مجددًا في أي وقت.</string>
+    <string name="swipe_actions_force_list_mode_summary">معطّل أثناء تفعيل إجراءات السحب، لأنها تفرض عرض القائمة</string>
+    <string name="remove_from_playlist_swipe_action">إزالة من قائمة التشغيل (قوائم التشغيل فقط)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s متاح</string>
+    <string name="qpipepipe_update_notification_text">انقر للتحميل والتثبيت</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">هل تريد تحميل هذا التحديث وتثبيته؟ سيطلب منك Android تأكيد التثبيت.</string>
+    <string name="qpipepipe_update_install">تحميل وتثبيت</string>
+    <string name="qpipepipe_update_release_notes">ملاحظات الإصدار</string>
+    <string name="qpipepipe_update_later">لاحقًا</string>
+    <string name="qpipepipe_update_downloading">جارٍ تحميل QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">فشل التحميل. تحقق من اتصالك وحاول مرة أخرى.</string>
+    <string name="qpipepipe_update_wrong_build">لا يمكن لهذا الإصدار تثبيت التحديث بنفسه، مثلًا لأنه إصدار تصحيح أخطاء. حمّل ملف APK من صفحة الإصدار بدلًا من ذلك.</string>
+    <string name="qpipepipe_update_failed">تعذّر تثبيت التحديث: %s</string>
+    <string name="playlist_resume_title">تابع من حيث توقفت</string>
+    <string name="playlist_resume_play">استئناف من #%d</string>
+    <string name="playlist_resume_here">استئناف من هنا</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">الاحتفاظ بقوائم الانتظار الأخيرة</string>
+    <string name="recent_queues_summary">عرض قوائم الانتظار التي تشغّلها ضمن قوائم التشغيل، لتتمكن من استئنافها أو حفظها لاحقًا. الفيديوهات التي تضيفها إلى قائمة انتظار بدأت من إحدى قوائم التشغيل الخاصة بك تُضاف إلى تلك القائمة. لا يتم الاحتفاظ بقوائم انتظار قوائم تشغيل YouTube وقنواته</string>
+    <string name="recent_queues_tab_playlists">قوائم التشغيل</string>
+    <string name="recent_queues_tab">قوائم الانتظار الأخيرة</string>
+    <plurals name="recent_queues_count">
+        <item quantity="zero">%d قائمة انتظار، الأحدث أولًا</item>
+        <item quantity="one">%d قائمة انتظار</item>
+        <item quantity="two">%d قائمتا انتظار، الأحدث أولًا</item>
+        <item quantity="few">%d قوائم انتظار، الأحدث أولًا</item>
+        <item quantity="many">%d قائمة انتظار، الأحدث أولًا</item>
+        <item quantity="other">%d قائمة انتظار، الأحدث أولًا</item>
+    </plurals>
+    <string name="recent_queues_clear_all">مسح الكل</string>
+    <string name="recent_queues_clear_all_message">حذف كل قوائم الانتظار الأخيرة؟ لن تتأثر قوائم التشغيل المحفوظة.</string>
+    <string name="recent_queues_empty">لا توجد قوائم انتظار حديثة. ستظهر هنا قوائم الانتظار التي تشغّلها.</string>
+    <string name="recent_queue_title">قائمة انتظار %s</string>
+    <string name="recent_queue_from_playlist">من: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="zero">تمت إضافة %1$d فيديو منذ %2$s</item>
+        <item quantity="one">تمت إضافة %1$d فيديو منذ %2$s</item>
+        <item quantity="two">تمت إضافة %1$d فيديو منذ %2$s</item>
+        <item quantity="few">تمت إضافة %1$d فيديوهات منذ %2$s</item>
+        <item quantity="many">تمت إضافة %1$d فيديو منذ %2$s</item>
+        <item quantity="other">تمت إضافة %1$d فيديو منذ %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="zero">%1$d/%2$d فيديو</item>
+        <item quantity="one">%1$d/%2$d فيديو</item>
+        <item quantity="two">%1$d/%2$d فيديو</item>
+        <item quantity="few">%1$d/%2$d فيديوهات</item>
+        <item quantity="many">%1$d/%2$d فيديو</item>
+        <item quantity="other">%1$d/%2$d فيديو</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="zero">تمت إضافة %1$d فيديو إلى %2$s</item>
+        <item quantity="one">تمت إضافة %1$d فيديو إلى %2$s</item>
+        <item quantity="two">تمت إضافة %1$d فيديو إلى %2$s</item>
+        <item quantity="few">تمت إضافة %1$d فيديوهات إلى %2$s</item>
+        <item quantity="many">تمت إضافة %1$d فيديو إلى %2$s</item>
+        <item quantity="other">تمت إضافة %1$d فيديو إلى %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">استئناف</string>
+    <string name="recent_queue_more">خيارات أخرى</string>
+    <string name="recent_queue_progress">%1$s من %2$s</string>
+    <string name="recent_queue_save_as_playlist">حفظ كقائمة تشغيل</string>
+    <string name="recent_queue_open_playlist">فتح قائمة التشغيل</string>
+    <string name="recent_queue_saved">حُفظت في قوائم التشغيل</string>
+    <string name="recent_queue_deleted">حُذفت قائمة الانتظار</string>
+    <string name="recent_queue_deleted_linked">حُذفت قائمة الانتظار، وبقيت قائمة التشغيل</string>
+    <string name="recent_queue_playing_now">قيد التشغيل</string>
+    <string name="recent_queue_playing_at">قيد التشغيل · %s</string>
+    <string name="recent_queue_watched">تمت مشاهدته</string>
+    <string name="recent_queue_not_watched">للمشاهدة</string>
+    <string name="recent_queue_added">مُضاف</string>
+    <string name="playlist_never_played">لم يُشغَّل قط</string>
+</resources>

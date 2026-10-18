@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Veçori të radhës dhe të rrëshqitjes të shtuara nga ky fork</string>
+    <string name="qpipepipe_category_playback">Luajtja</string>
+    <string name="qpipepipe_category_swipe_actions">Veprimet me rrëshqitje</string>
+    <string name="tap_always_plays_title">Prekja e një videoje e luan gjithmonë</string>
+    <string name="tap_always_plays_summary">Nis luajtjen kur hapni një video, edhe nëse luajtja automatike është kufizuar në Wi-Fi ose është e çaktivizuar. Luajtja automatike vlen ende për nisjet automatike</string>
+    <string name="clear_queue_confirmation_title">Kërko konfirmim para pastrimit të një radhe</string>
+    <string name="clear_queue_confirmation_summary">Kalimi nga një luajtës te një tjetër mund ta zëvendësojë radhën tuaj</string>
+    <string name="clear_queue_confirmation_description">Radha e luajtësit aktiv do të zëvendësohet</string>
+    <string name="clear_queue_confirmation_play_now">Luaje tani</string>
+    <string name="enable_swipe_actions_title">Aktivizo veprimet me rrëshqitje te videot</string>
+    <string name="enable_swipe_actions_summary">Rrëshqitni një video majtas ose djathtas në faqen kryesore, rezultatet e kërkimit, listat e luajtjes dhe grupet e kanaleve për të kryer një veprim të shpejtë</string>
+    <string name="swipe_left_action_title">Veprimi me rrëshqitje majtas</string>
+    <string name="swipe_right_action_title">Veprimi me rrëshqitje djathtas</string>
+    <string name="enable_swipe_actions_warning_title">Veprimet me rrëshqitje u aktivizuan</string>
+    <string name="enable_swipe_actions_warning_message">Rrëshqitja ka nevojë për rreshta me gjerësi të plotë që të funksionojë mirë, prandaj kudo ku ka veprime me rrëshqitje do të përdoret pamja e listës në vend të pamjes rrjet ose kartë. Mund ta çaktivizoni sërish në çdo kohë.</string>
+    <string name="swipe_actions_force_list_mode_summary">Çaktivizuar ndërsa veprimet me rrëshqitje janë aktive, sepse ato detyrojnë pamjen e listës</string>
+    <string name="remove_from_playlist_swipe_action">Hiq nga lista e luajtjes (vetëm listat e luajtjes)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s është në dispozicion</string>
+    <string name="qpipepipe_update_notification_text">Prekni për ta shkarkuar dhe instaluar</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Ta shkarkoni dhe instaloni këtë përditësim? Android do t\'ju kërkojë të konfirmoni instalimin.</string>
+    <string name="qpipepipe_update_install">Shkarko dhe instalo</string>
+    <string name="qpipepipe_update_release_notes">Shënimet e versionit</string>
+    <string name="qpipepipe_update_later">Më vonë</string>
+    <string name="qpipepipe_update_downloading">Po shkarkohet QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">Shkarkimi dështoi. Kontrolloni lidhjen dhe provoni përsëri.</string>
+    <string name="qpipepipe_update_wrong_build">Ky version nuk mund ta instalojë vetë përditësimin, për shembull sepse është version korrigjimi. Shkarkoni APK-në nga faqja e publikimit.</string>
+    <string name="qpipepipe_update_failed">Përditësimi nuk u instalua: %s</string>
+    <string name="playlist_resume_title">Vazhdoni aty ku e latë</string>
+    <string name="playlist_resume_play">Vazhdo nga #%d</string>
+    <string name="playlist_resume_here">Vazhdo këtu</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Mbaj radhët e fundit</string>
+    <string name="recent_queues_summary">Shfaq radhët që luani te Listat e videove, që t\'i vazhdoni ose t\'i ruani më vonë. Videot që shtoni në një radhë të nisur nga një prej listave tuaja të luajtjes shtohen në atë listë. Radhët e listave dhe të kanaleve të YouTube nuk mbahen</string>
+    <string name="recent_queues_tab_playlists">Listat e videove</string>
+    <string name="recent_queues_tab">Radhët e fundit</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d radhë</item>
+        <item quantity="other">%d radhë, më e reja e para</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Pastroji të gjitha</string>
+    <string name="recent_queues_clear_all_message">Të fshihen të gjitha radhët e fundit? Listat tuaja të ruajtura nuk preken.</string>
+    <string name="recent_queues_empty">Nuk ka radhë të fundit. Radhët që luani shfaqen këtu.</string>
+    <string name="recent_queue_title">Radha e %s</string>
+    <string name="recent_queue_from_playlist">Nga: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%1$d video u shtua që nga %2$s</item>
+        <item quantity="other">%1$d video u shtuan që nga %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d video</item>
+        <item quantity="other">%1$d/%2$d video</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d video u shtua te %2$s</item>
+        <item quantity="other">%1$d video u shtuan te %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Vazhdo</string>
+    <string name="recent_queue_more">Më shumë opsione</string>
+    <string name="recent_queue_progress">%1$s nga %2$s</string>
+    <string name="recent_queue_save_as_playlist">Ruaje si listë luajtjeje</string>
+    <string name="recent_queue_open_playlist">Hap listën e luajtjes</string>
+    <string name="recent_queue_saved">U ruajt te Listat e videove</string>
+    <string name="recent_queue_deleted">Radha u fshi</string>
+    <string name="recent_queue_deleted_linked">Radha u fshi, lista e luajtjes mbetet</string>
+    <string name="recent_queue_playing_now">Po luhet</string>
+    <string name="recent_queue_playing_at">Po luhet · %s</string>
+    <string name="recent_queue_watched">Parë</string>
+    <string name="recent_queue_not_watched">Për t\'u parë</string>
+    <string name="recent_queue_added">shtuar</string>
+    <string name="playlist_never_played">Nuk është luajtur kurrë</string>
+</resources>

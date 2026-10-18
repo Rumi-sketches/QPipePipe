@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">اس فورک میں شامل کی گئی قطار اور سوائپ کی خصوصیات</string>
+    <string name="qpipepipe_category_playback">پلے بیک</string>
+    <string name="qpipepipe_category_swipe_actions">سوائپ ایکشنز</string>
+    <string name="tap_always_plays_title">ویڈیو پر ٹیپ کرنے سے وہ ہمیشہ چلتی ہے</string>
+    <string name="tap_always_plays_summary">ویڈیو کھولنے پر پلے بیک شروع کریں، چاہے آٹوپلے Wi-Fi تک محدود ہو یا بند ہو۔ خودکار آغاز پر آٹوپلے بدستور لاگو رہتا ہے</string>
+    <string name="clear_queue_confirmation_title">قطار صاف کرنے سے پہلے تصدیق طلب کریں</string>
+    <string name="clear_queue_confirmation_summary">ایک پلیئر سے دوسرے پر جانے سے آپ کی قطار تبدیل ہو سکتی ہے</string>
+    <string name="clear_queue_confirmation_description">فعال پلیئر کی قطار تبدیل کر دی جائے گی</string>
+    <string name="clear_queue_confirmation_play_now">ابھی چلائیں</string>
+    <string name="enable_swipe_actions_title">ویڈیوز پر سوائپ ایکشنز فعال کریں</string>
+    <string name="enable_swipe_actions_summary">فوری ایکشن کے لیے ہوم پیج، تلاش کے نتائج، پلے لسٹس اور چینل گروپس میں ویڈیو کو بائیں یا دائیں سوائپ کریں</string>
+    <string name="swipe_left_action_title">بائیں سوائپ کا ایکشن</string>
+    <string name="swipe_right_action_title">دائیں سوائپ کا ایکشن</string>
+    <string name="enable_swipe_actions_warning_title">سوائپ ایکشنز فعال ہو گئے</string>
+    <string name="enable_swipe_actions_warning_message">سوائپ کو قابلِ اعتماد طریقے سے کام کرنے کے لیے پوری چوڑائی والی سطریں درکار ہیں، اس لیے جہاں سوائپ ایکشنز دستیاب ہیں وہاں گرڈ یا کارڈ ویو کے بجائے لسٹ ویو استعمال ہوگا۔ آپ اسے کسی بھی وقت دوبارہ بند کر سکتے ہیں۔</string>
+    <string name="swipe_actions_force_list_mode_summary">سوائپ ایکشنز فعال ہونے تک غیر فعال، کیونکہ وہ لسٹ ویو لازمی کر دیتے ہیں</string>
+    <string name="remove_from_playlist_swipe_action">پلے لسٹ سے ہٹائیں (صرف پلے لسٹس)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s دستیاب ہے</string>
+    <string name="qpipepipe_update_notification_text">ڈاؤن لوڈ اور انسٹال کرنے کے لیے ٹیپ کریں</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">یہ اپ ڈیٹ ڈاؤن لوڈ اور انسٹال کریں؟ Android آپ سے انسٹالیشن کی تصدیق کرنے کو کہے گا۔</string>
+    <string name="qpipepipe_update_install">ڈاؤن لوڈ اور انسٹال کریں</string>
+    <string name="qpipepipe_update_release_notes">ریلیز نوٹس</string>
+    <string name="qpipepipe_update_later">بعد میں</string>
+    <string name="qpipepipe_update_downloading">QPipePipe %s ڈاؤن لوڈ ہو رہا ہے</string>
+    <string name="qpipepipe_update_download_failed">ڈاؤن لوڈ ناکام ہو گیا۔ اپنا کنکشن چیک کریں اور دوبارہ کوشش کریں۔</string>
+    <string name="qpipepipe_update_wrong_build">یہ بلڈ خود اپ ڈیٹ انسٹال نہیں کر سکتا، مثلاً اس لیے کہ یہ ڈیبگ بلڈ ہے۔ اس کے بجائے ریلیز صفحے سے APK ڈاؤن لوڈ کریں۔</string>
+    <string name="qpipepipe_update_failed">اپ ڈیٹ انسٹال نہیں ہو سکا: %s</string>
+    <string name="playlist_resume_title">جہاں چھوڑا تھا وہیں سے جاری رکھیں</string>
+    <string name="playlist_resume_play">#%d سے دوبارہ شروع کریں</string>
+    <string name="playlist_resume_here">یہاں سے دوبارہ شروع کریں</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">حالیہ قطاریں محفوظ رکھیں</string>
+    <string name="recent_queues_summary">آپ جو قطاریں چلاتے ہیں انہیں پلے لسٹس کے تحت دکھائیں، تاکہ آپ بعد میں انہیں دوبارہ شروع یا محفوظ کر سکیں۔ آپ کی کسی پلے لسٹ سے شروع ہونے والی قطار میں شامل کی گئی ویڈیوز اسی پلے لسٹ میں بھی شامل ہو جاتی ہیں۔ YouTube پلے لسٹس اور چینلز کی قطاریں محفوظ نہیں رکھی جاتیں</string>
+    <string name="recent_queues_tab_playlists">پلے لسٹس</string>
+    <string name="recent_queues_tab">حالیہ قطاریں</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d قطار</item>
+        <item quantity="other">%d قطاریں، نئی پہلے</item>
+    </plurals>
+    <string name="recent_queues_clear_all">سب صاف کریں</string>
+    <string name="recent_queues_clear_all_message">تمام حالیہ قطاریں حذف کریں؟ آپ کی محفوظ پلے لسٹس متاثر نہیں ہوں گی۔</string>
+    <string name="recent_queues_empty">کوئی حالیہ قطار نہیں۔ آپ جو قطاریں چلاتے ہیں وہ یہاں نظر آئیں گی۔</string>
+    <string name="recent_queue_title">%s کی قطار</string>
+    <string name="recent_queue_from_playlist">ماخذ: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%2$s سے اب تک %1$d ویڈیو شامل کی گئی</item>
+        <item quantity="other">%2$s سے اب تک %1$d ویڈیوز شامل کی گئیں</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d ویڈیو</item>
+        <item quantity="other">%1$d/%2$d ویڈیوز</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d ویڈیو %2$s میں شامل کی گئی</item>
+        <item quantity="other">%1$d ویڈیوز %2$s میں شامل کی گئیں</item>
+    </plurals>
+    <string name="recent_queue_resume">دوبارہ شروع کریں</string>
+    <string name="recent_queue_more">مزید اختیارات</string>
+    <string name="recent_queue_progress">%2$s میں سے %1$s</string>
+    <string name="recent_queue_save_as_playlist">پلے لسٹ کے طور پر محفوظ کریں</string>
+    <string name="recent_queue_open_playlist">پلے لسٹ کھولیں</string>
+    <string name="recent_queue_saved">پلے لسٹس میں محفوظ ہو گئی</string>
+    <string name="recent_queue_deleted">قطار حذف ہو گئی</string>
+    <string name="recent_queue_deleted_linked">قطار حذف ہو گئی، پلے لسٹ برقرار ہے</string>
+    <string name="recent_queue_playing_now">چل رہی ہے</string>
+    <string name="recent_queue_playing_at">چل رہی ہے · %s</string>
+    <string name="recent_queue_watched">دیکھی گئی</string>
+    <string name="recent_queue_not_watched">دیکھنی ہے</string>
+    <string name="recent_queue_added">شامل کی گئیں</string>
+    <string name="playlist_never_played">کبھی نہیں چلائی گئی</string>
+</resources>

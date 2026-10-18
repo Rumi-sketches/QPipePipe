@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">A fork által hozzáadott lejátszási sor- és húzásfunkciók</string>
+    <string name="qpipepipe_category_playback">Lejátszás</string>
+    <string name="qpipepipe_category_swipe_actions">Húzási műveletek</string>
+    <string name="tap_always_plays_title">Videóra koppintva mindig elindul a lejátszás</string>
+    <string name="tap_always_plays_summary">A lejátszás elindul, amikor megnyit egy videót, akkor is, ha az automatikus lejátszás Wi-Fi-re van korlátozva vagy ki van kapcsolva. Az automatikus indításokra továbbra is az automatikus lejátszás vonatkozik</string>
+    <string name="clear_queue_confirmation_title">Megerősítés kérése a lejátszási sor törlése előtt</string>
+    <string name="clear_queue_confirmation_summary">Ha egyik lejátszóról a másikra vált, a lejátszási sor lecserélődhet</string>
+    <string name="clear_queue_confirmation_description">Az aktív lejátszó sora le lesz cserélve</string>
+    <string name="clear_queue_confirmation_play_now">Lejátszás most</string>
+    <string name="enable_swipe_actions_title">Húzási műveletek engedélyezése a videókon</string>
+    <string name="enable_swipe_actions_summary">Húzzon el egy videót balra vagy jobbra a kezdőlapon, a keresési találatok között, a lejátszási listákban és a csatornacsoportokban egy gyors művelet indításához</string>
+    <string name="swipe_left_action_title">Balra húzás művelete</string>
+    <string name="swipe_right_action_title">Jobbra húzás művelete</string>
+    <string name="enable_swipe_actions_warning_title">Húzási műveletek engedélyezve</string>
+    <string name="enable_swipe_actions_warning_message">A húzás csak teljes szélességű sorokkal működik megbízhatóan, ezért ahol húzási műveletek érhetők el, ott a rács- vagy kártyanézet helyett listanézet lesz használva. Ezt bármikor újra kikapcsolhatja.</string>
+    <string name="swipe_actions_force_list_mode_summary">Letiltva, amíg a húzási műveletek engedélyezve vannak, mert azok listanézetet kényszerítenek</string>
+    <string name="remove_from_playlist_swipe_action">Eltávolítás a lejátszási listából (csak lejátszási listák)</string>
+    <string name="qpipepipe_update_notification_title">Elérhető a QPipePipe %s</string>
+    <string name="qpipepipe_update_notification_text">Koppintson a letöltéshez és telepítéshez</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Letölti és telepíti ezt a frissítést? Az Android meg fogja kérni a telepítés megerősítésére.</string>
+    <string name="qpipepipe_update_install">Letöltés és telepítés</string>
+    <string name="qpipepipe_update_release_notes">Kiadási megjegyzések</string>
+    <string name="qpipepipe_update_later">Később</string>
+    <string name="qpipepipe_update_downloading">QPipePipe %s letöltése</string>
+    <string name="qpipepipe_update_download_failed">A letöltés sikertelen. Ellenőrizze a kapcsolatot, és próbálja újra.</string>
+    <string name="qpipepipe_update_wrong_build">Ez a build nem tudja saját maga telepíteni a frissítést, például mert hibakeresési build. Töltse le inkább az APK-t a kiadási oldalról.</string>
+    <string name="qpipepipe_update_failed">A frissítést nem sikerült telepíteni: %s</string>
+    <string name="playlist_resume_title">Folytatás ott, ahol abbahagyta</string>
+    <string name="playlist_resume_play">Folytatás innen: #%d</string>
+    <string name="playlist_resume_here">Folytatás innen</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Legutóbbi lejátszási sorok megőrzése</string>
+    <string name="recent_queues_summary">A lejátszott sorok megjelennek a Lejátszási listák alatt, így később folytathatja vagy mentheti őket. Az egyik lejátszási listájából indított sorhoz hozzáadott videók abba a lejátszási listába is bekerülnek. A YouTube-lejátszási listák és -csatornák sorai nem lesznek megőrizve</string>
+    <string name="recent_queues_tab_playlists">Lejátszási listák</string>
+    <string name="recent_queues_tab">Legutóbbi sorok</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d sor</item>
+        <item quantity="other">%d sor, a legújabb elöl</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Összes törlése</string>
+    <string name="recent_queues_clear_all_message">Törli az összes legutóbbi sort? A mentett lejátszási listák nem változnak.</string>
+    <string name="recent_queues_empty">Nincsenek legutóbbi sorok. A lejátszott sorok itt jelennek meg.</string>
+    <string name="recent_queue_title">Sor: %s</string>
+    <string name="recent_queue_from_playlist">Forrás: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%1$d videó hozzáadva %2$s óta</item>
+        <item quantity="other">%1$d videó hozzáadva %2$s óta</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d videó</item>
+        <item quantity="other">%1$d/%2$d videó</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d videó hozzáadva: %2$s</item>
+        <item quantity="other">%1$d videó hozzáadva: %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Folytatás</string>
+    <string name="recent_queue_more">További lehetőségek</string>
+    <string name="recent_queue_progress">%1$s / %2$s</string>
+    <string name="recent_queue_save_as_playlist">Mentés lejátszási listaként</string>
+    <string name="recent_queue_open_playlist">Lejátszási lista megnyitása</string>
+    <string name="recent_queue_saved">Mentve a Lejátszási listák közé</string>
+    <string name="recent_queue_deleted">Sor törölve</string>
+    <string name="recent_queue_deleted_linked">Sor törölve, a lejátszási lista megmarad</string>
+    <string name="recent_queue_playing_now">Lejátszás folyamatban</string>
+    <string name="recent_queue_playing_at">Lejátszás · %s</string>
+    <string name="recent_queue_watched">Megnézve</string>
+    <string name="recent_queue_not_watched">Megnézendő</string>
+    <string name="recent_queue_added">hozzáadva</string>
+    <string name="playlist_never_played">Még nem volt lejátszva</string>
+</resources>

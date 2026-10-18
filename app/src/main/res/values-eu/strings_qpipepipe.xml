@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Fork honek gehitutako ilara eta lerratze funtzioak</string>
+    <string name="qpipepipe_category_playback">Erreprodukzioa</string>
+    <string name="qpipepipe_category_swipe_actions">Lerratze-ekintzak</string>
+    <string name="tap_always_plays_title">Bideo bat sakatzean beti erreproduzitzen da</string>
+    <string name="tap_always_plays_summary">Hasi erreprodukzioa bideo bat irekitzean, erreprodukzio automatikoa Wi-Fira mugatuta edo desaktibatuta badago ere. Hasiera automatikoetan erreprodukzio automatikoaren ezarpenak aplikatzen jarraitzen du</string>
+    <string name="clear_queue_confirmation_title">Eskatu berrespena ilara bat garbitu aurretik</string>
+    <string name="clear_queue_confirmation_summary">Erreproduzigailu batetik bestera aldatzeak zure ilara ordeztu dezake</string>
+    <string name="clear_queue_confirmation_description">Erreproduzigailu aktiboaren ilara ordeztuko da</string>
+    <string name="clear_queue_confirmation_play_now">Erreproduzitu orain</string>
+    <string name="enable_swipe_actions_title">Gaitu lerratze-ekintzak bideoetan</string>
+    <string name="enable_swipe_actions_summary">Lerratu bideo bat ezkerrera edo eskuinera hasierako orrian, bilaketa-emaitzetan, erreprodukzio-zerrendetan eta kanal taldeetan ekintza azkar bat abiarazteko</string>
+    <string name="swipe_left_action_title">Ezkerrera lerratzearen ekintza</string>
+    <string name="swipe_right_action_title">Eskuinera lerratzearen ekintza</string>
+    <string name="enable_swipe_actions_warning_title">Lerratze-ekintzak gaituta</string>
+    <string name="enable_swipe_actions_warning_message">Lerratzeak zabalera osoko errenkadak behar ditu ondo funtzionatzeko; beraz, lerratze-ekintzak erabilgarri dauden lekuetan zerrenda ikuspegia erabiliko da sareta edo txartel ikuspegiaren ordez. Edozein unetan desgaitu dezakezu berriro.</string>
+    <string name="swipe_actions_force_list_mode_summary">Desgaituta lerratze-ekintzak gaituta dauden bitartean, zerrenda ikuspegia behartzen baitute</string>
+    <string name="remove_from_playlist_swipe_action">Kendu erreprodukzio-zerrendatik (erreprodukzio-zerrendetan soilik)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s eskuragarri dago</string>
+    <string name="qpipepipe_update_notification_text">Sakatu deskargatu eta instalatzeko</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Eguneraketa hau deskargatu eta instalatu? Android-ek instalazioa berresteko eskatuko dizu.</string>
+    <string name="qpipepipe_update_install">Deskargatu eta instalatu</string>
+    <string name="qpipepipe_update_release_notes">Bertsio-oharrak</string>
+    <string name="qpipepipe_update_later">Geroago</string>
+    <string name="qpipepipe_update_downloading">QPipePipe %s deskargatzen</string>
+    <string name="qpipepipe_update_download_failed">Deskargak huts egin du. Egiaztatu konexioa eta saiatu berriro.</string>
+    <string name="qpipepipe_update_wrong_build">Bertsio honek ezin du eguneraketa bere kabuz instalatu, adibidez arazketa-bertsioa delako. Deskargatu APKa argitalpen-orritik.</string>
+    <string name="qpipepipe_update_failed">Ezin izan da eguneraketa instalatu: %s</string>
+    <string name="playlist_resume_title">Jarraitu utzi zenuen lekutik</string>
+    <string name="playlist_resume_play">Berrekin #%d-tik</string>
+    <string name="playlist_resume_here">Berrekin hemendik</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Gorde azken ilarak</string>
+    <string name="recent_queues_summary">Erakutsi erreproduzitzen dituzun ilarak Erreprodukzio-zerrendak atalean, geroago berrekin edo gorde ahal izateko. Zure erreprodukzio-zerrenda batetik hasitako ilara batera gehitzen dituzun bideoak zerrenda horretara gehitzen dira. YouTube-ko erreprodukzio-zerrenden eta kanalen ilarak ez dira gordetzen</string>
+    <string name="recent_queues_tab_playlists">Erreprodukzio-zerrendak</string>
+    <string name="recent_queues_tab">Azken ilarak</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d ilara</item>
+        <item quantity="other">%d ilara, berrienak lehenik</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Garbitu dena</string>
+    <string name="recent_queues_clear_all_message">Azken ilara guztiak ezabatu? Gordetako erreprodukzio-zerrendak ez dira ukitzen.</string>
+    <string name="recent_queues_empty">Ez dago azken ilararik. Erreproduzitzen dituzun ilarak hemen agertuko dira.</string>
+    <string name="recent_queue_title">Ilara: %s</string>
+    <string name="recent_queue_from_playlist">Jatorria: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%1$d bideo gehitu da %2$s geroztik</item>
+        <item quantity="other">%1$d bideo gehitu dira %2$s geroztik</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d bideo</item>
+        <item quantity="other">%1$d/%2$d bideo</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d bideo gehitu da hona: %2$s</item>
+        <item quantity="other">%1$d bideo gehitu dira hona: %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Berrekin</string>
+    <string name="recent_queue_more">Aukera gehiago</string>
+    <string name="recent_queue_progress">%1$s / %2$s</string>
+    <string name="recent_queue_save_as_playlist">Gorde erreprodukzio-zerrenda gisa</string>
+    <string name="recent_queue_open_playlist">Ireki erreprodukzio-zerrenda</string>
+    <string name="recent_queue_saved">Erreprodukzio-zerrendetan gordeta</string>
+    <string name="recent_queue_deleted">Ilara ezabatu da</string>
+    <string name="recent_queue_deleted_linked">Ilara ezabatu da, erreprodukzio-zerrendak bere horretan dirau</string>
+    <string name="recent_queue_playing_now">Erreproduzitzen</string>
+    <string name="recent_queue_playing_at">Erreproduzitzen · %s</string>
+    <string name="recent_queue_watched">Ikusita</string>
+    <string name="recent_queue_not_watched">Ikusteko</string>
+    <string name="recent_queue_added">gehituta</string>
+    <string name="playlist_never_played">Inoiz erreproduzitu gabea</string>
+</resources>

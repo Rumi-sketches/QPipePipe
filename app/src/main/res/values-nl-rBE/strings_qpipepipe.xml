@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Wachtrij- en veegfuncties toegevoegd door deze fork</string>
+    <string name="qpipepipe_category_playback">Afspelen</string>
+    <string name="qpipepipe_category_swipe_actions">Veegacties</string>
+    <string name="tap_always_plays_title">Tikken op een video speelt hem altijd af</string>
+    <string name="tap_always_plays_summary">Start het afspelen wanneer u een video opent, ook als automatisch afspelen beperkt is tot Wi-Fi of uitgeschakeld is. Automatisch afspelen blijft gelden voor automatische starts</string>
+    <string name="clear_queue_confirmation_title">Om bevestiging vragen voordat een wachtrij wordt gewist</string>
+    <string name="clear_queue_confirmation_summary">Overschakelen van de ene speler naar de andere kan uw wachtrij vervangen</string>
+    <string name="clear_queue_confirmation_description">De wachtrij van de actieve speler wordt vervangen</string>
+    <string name="clear_queue_confirmation_play_now">Nu afspelen</string>
+    <string name="enable_swipe_actions_title">Veegacties op video\'s inschakelen</string>
+    <string name="enable_swipe_actions_summary">Veeg een video naar links of rechts op de startpagina, in zoekresultaten, afspeellijsten en kanaalgroepen om een snelle actie uit te voeren</string>
+    <string name="swipe_left_action_title">Actie bij naar links vegen</string>
+    <string name="swipe_right_action_title">Actie bij naar rechts vegen</string>
+    <string name="enable_swipe_actions_warning_title">Veegacties ingeschakeld</string>
+    <string name="enable_swipe_actions_warning_message">Vegen werkt alleen betrouwbaar met rijen over de volle breedte, dus overal waar veegacties beschikbaar zijn, wordt de lijstweergave gebruikt in plaats van raster- of kaartweergave. U kunt dit op elk moment weer uitschakelen.</string>
+    <string name="swipe_actions_force_list_mode_summary">Uitgeschakeld zolang veegacties zijn ingeschakeld, want die dwingen de lijstweergave af</string>
+    <string name="remove_from_playlist_swipe_action">Verwijderen uit afspeellijst (alleen afspeellijsten)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s is beschikbaar</string>
+    <string name="qpipepipe_update_notification_text">Tik om te downloaden en te installeren</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Deze update downloaden en installeren? Android vraagt u de installatie te bevestigen.</string>
+    <string name="qpipepipe_update_install">Downloaden en installeren</string>
+    <string name="qpipepipe_update_release_notes">Releasenotes</string>
+    <string name="qpipepipe_update_later">Later</string>
+    <string name="qpipepipe_update_downloading">QPipePipe %s downloaden</string>
+    <string name="qpipepipe_update_download_failed">Het downloaden is mislukt. Controleer uw verbinding en probeer het opnieuw.</string>
+    <string name="qpipepipe_update_wrong_build">Deze build kan de update niet zelf installeren, bijvoorbeeld omdat het een debug-build is. Download de APK in plaats daarvan van de releasepagina.</string>
+    <string name="qpipepipe_update_failed">De update kon niet worden geïnstalleerd: %s</string>
+    <string name="playlist_resume_title">Ga verder waar u gebleven was</string>
+    <string name="playlist_resume_play">Hervatten vanaf #%d</string>
+    <string name="playlist_resume_here">Hier hervatten</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Recente wachtrijen bewaren</string>
+    <string name="recent_queues_summary">Toon de wachtrijen die u afspeelt onder Afspeellijsten, zodat u ze later kunt hervatten of opslaan. Video\'s die u toevoegt aan een wachtrij die vanuit een van uw afspeellijsten is gestart, worden aan die afspeellijst toegevoegd. Wachtrijen van YouTube-afspeellijsten en -kanalen worden niet bewaard</string>
+    <string name="recent_queues_tab_playlists">Afspeellijsten</string>
+    <string name="recent_queues_tab">Recente wachtrijen</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d wachtrij</item>
+        <item quantity="other">%d wachtrijen, nieuwste eerst</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Alles wissen</string>
+    <string name="recent_queues_clear_all_message">Alle recente wachtrijen verwijderen? Uw opgeslagen afspeellijsten blijven ongewijzigd.</string>
+    <string name="recent_queues_empty">Geen recente wachtrijen. Wachtrijen die u afspeelt, verschijnen hier.</string>
+    <string name="recent_queue_title">Wachtrij van %s</string>
+    <string name="recent_queue_from_playlist">Van: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%1$d video toegevoegd sinds %2$s</item>
+        <item quantity="other">%1$d video\'s toegevoegd sinds %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d video</item>
+        <item quantity="other">%1$d/%2$d video\'s</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d video toegevoegd aan %2$s</item>
+        <item quantity="other">%1$d video\'s toegevoegd aan %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Hervatten</string>
+    <string name="recent_queue_more">Meer opties</string>
+    <string name="recent_queue_progress">%1$s van %2$s</string>
+    <string name="recent_queue_save_as_playlist">Opslaan als afspeellijst</string>
+    <string name="recent_queue_open_playlist">Afspeellijst openen</string>
+    <string name="recent_queue_saved">Opgeslagen in Afspeellijsten</string>
+    <string name="recent_queue_deleted">Wachtrij verwijderd</string>
+    <string name="recent_queue_deleted_linked">Wachtrij verwijderd, de afspeellijst blijft</string>
+    <string name="recent_queue_playing_now">Speelt af</string>
+    <string name="recent_queue_playing_at">Speelt af · %s</string>
+    <string name="recent_queue_watched">Bekeken</string>
+    <string name="recent_queue_not_watched">Te bekijken</string>
+    <string name="recent_queue_added">toegevoegd</string>
+    <string name="playlist_never_played">Nooit afgespeeld</string>
+</resources>

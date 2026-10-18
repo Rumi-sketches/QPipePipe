@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Bu fork tərəfindən əlavə edilmiş növbə və sürüşdürmə xüsusiyyətləri</string>
+    <string name="qpipepipe_category_playback">Oxutma</string>
+    <string name="qpipepipe_category_swipe_actions">Sürüşdürmə əməliyyatları</string>
+    <string name="tap_always_plays_title">Videoya toxunmaq onu həmişə oxudur</string>
+    <string name="tap_always_plays_summary">Videonu açdığınızda, avto-oxutma Wi-Fi ilə məhdudlaşdırılsa və ya söndürülsə belə, oxutmanı başlat. Avto-oxutma avtomatik başlamalara tətbiq olunmağa davam edir</string>
+    <string name="clear_queue_confirmation_title">Növbəni təmizləməzdən əvvəl təsdiq soruş</string>
+    <string name="clear_queue_confirmation_summary">Bir oxuducudan digərinə keçid növbənizi əvəz edə bilər</string>
+    <string name="clear_queue_confirmation_description">Aktiv oxuducunun növbəsi əvəz ediləcək</string>
+    <string name="clear_queue_confirmation_play_now">İndi oxut</string>
+    <string name="enable_swipe_actions_title">Videolarda sürüşdürmə əməliyyatlarını aktivləşdir</string>
+    <string name="enable_swipe_actions_summary">Sürətli əməliyyat üçün ana səhifədə, axtarış nəticələrində, oxutma siyahılarında və kanal qruplarında videonu sola və ya sağa sürüşdürün</string>
+    <string name="swipe_left_action_title">Sola sürüşdürmə əməliyyatı</string>
+    <string name="swipe_right_action_title">Sağa sürüşdürmə əməliyyatı</string>
+    <string name="enable_swipe_actions_warning_title">Sürüşdürmə əməliyyatları aktivləşdirildi</string>
+    <string name="enable_swipe_actions_warning_message">Sürüşdürmənin etibarlı işləməsi üçün tam enli sətirlər lazımdır, buna görə sürüşdürmə əməliyyatlarının olduğu hər yerdə tor və ya kart görünüşü əvəzinə siyahı görünüşü istifadə olunacaq. Bunu istənilən vaxt yenidən söndürə bilərsiniz.</string>
+    <string name="swipe_actions_force_list_mode_summary">Sürüşdürmə əməliyyatları aktiv olduqda deaktivdir, çünki onlar siyahı görünüşünü məcburi edir</string>
+    <string name="remove_from_playlist_swipe_action">Oxutma siyahısından sil (yalnız oxutma siyahıları)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s mövcuddur</string>
+    <string name="qpipepipe_update_notification_text">Endirib quraşdırmaq üçün toxunun</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Bu yeniləmə endirilib quraşdırılsın? Android sizdən quraşdırmanı təsdiqləməyi istəyəcək.</string>
+    <string name="qpipepipe_update_install">Endir və quraşdır</string>
+    <string name="qpipepipe_update_release_notes">Buraxılış qeydləri</string>
+    <string name="qpipepipe_update_later">Sonra</string>
+    <string name="qpipepipe_update_downloading">QPipePipe %s endirilir</string>
+    <string name="qpipepipe_update_download_failed">Endirmə uğursuz oldu. Bağlantınızı yoxlayın və yenidən cəhd edin.</string>
+    <string name="qpipepipe_update_wrong_build">Bu versiya yeniləməni özü quraşdıra bilmir, məsələn, sazlama (debug) versiyası olduğu üçün. Bunun əvəzinə APK faylını buraxılış səhifəsindən endirin.</string>
+    <string name="qpipepipe_update_failed">Yeniləmə quraşdırıla bilmədi: %s</string>
+    <string name="playlist_resume_title">Qaldığınız yerdən davam edin</string>
+    <string name="playlist_resume_play">Davam et: #%d</string>
+    <string name="playlist_resume_here">Buradan davam et</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Son növbələri saxla</string>
+    <string name="recent_queues_summary">Oxutduğunuz növbələri Oxutma siyahıları bölməsində göstər ki, sonra onlara davam edə və ya saxlaya biləsiniz. Oxutma siyahılarınızdan birindən başladılan növbəyə əlavə etdiyiniz videolar həmin siyahıya da əlavə olunur. YouTube oxutma siyahılarının və kanallarının növbələri saxlanılmır</string>
+    <string name="recent_queues_tab_playlists">Oxutma siyahıları</string>
+    <string name="recent_queues_tab">Son növbələr</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d növbə</item>
+        <item quantity="other">%d növbə, ən yenisi əvvəldə</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Hamısını təmizlə</string>
+    <string name="recent_queues_clear_all_message">Bütün son növbələr silinsin? Saxlanmış oxutma siyahılarınıza toxunulmur.</string>
+    <string name="recent_queues_empty">Son növbə yoxdur. Oxutduğunuz növbələr burada görünür.</string>
+    <string name="recent_queue_title">Növbə: %s</string>
+    <string name="recent_queue_from_playlist">Mənbə: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%2$s tarixindən bəri %1$d video əlavə edilib</item>
+        <item quantity="other">%2$s tarixindən bəri %1$d video əlavə edilib</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d video</item>
+        <item quantity="other">%1$d/%2$d video</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d video %2$s siyahısına əlavə edildi</item>
+        <item quantity="other">%1$d video %2$s siyahısına əlavə edildi</item>
+    </plurals>
+    <string name="recent_queue_resume">Davam et</string>
+    <string name="recent_queue_more">Digər seçimlər</string>
+    <string name="recent_queue_progress">%1$s / %2$s</string>
+    <string name="recent_queue_save_as_playlist">Oxutma siyahısı kimi saxla</string>
+    <string name="recent_queue_open_playlist">Oxutma siyahısını aç</string>
+    <string name="recent_queue_saved">Oxutma siyahılarında saxlanıldı</string>
+    <string name="recent_queue_deleted">Növbə silindi</string>
+    <string name="recent_queue_deleted_linked">Növbə silindi, oxutma siyahısı qalır</string>
+    <string name="recent_queue_playing_now">Oxudulur</string>
+    <string name="recent_queue_playing_at">Oxudulur · %s</string>
+    <string name="recent_queue_watched">İzlənib</string>
+    <string name="recent_queue_not_watched">İzlənəcək</string>
+    <string name="recent_queue_added">əlavə edildi</string>
+    <string name="playlist_never_played">Heç oxudulmayıb</string>
+</resources>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Hormada iyo jiidista ee uu ku daray nuqulkan</string>
+    <string name="qpipepipe_category_playback">Daarid</string>
+    <string name="qpipepipe_category_swipe_actions">Ficillada jiidista</string>
+    <string name="tap_always_plays_title">Taabashada muuqaal had iyo jeer waa daartaa</string>
+    <string name="tap_always_plays_summary">Bilow daarida markaad furto muuqaal, xitaa haddii isdaaridu ku eg tahay Wi-Fi ama ay dansan tahay. Isdaaridu weli way khusaysaa bilowga tooska ah</string>
+    <string name="clear_queue_confirmation_title">Weydii xaqiijin ka hor intaadan nadiifin hormada</string>
+    <string name="clear_queue_confirmation_summary">U wareegidda hal daare oo kale waxay beddeli kartaa hormadaada</string>
+    <string name="clear_queue_confirmation_description">Hormada daaraha hadda shaqaynaya waa la beddeli doonaa</string>
+    <string name="clear_queue_confirmation_play_now">Hadda daar</string>
+    <string name="enable_swipe_actions_title">Shid ficillada jiidista ee muuqaalada</string>
+    <string name="enable_swipe_actions_summary">Muuqaal u jiid bidix ama midig bogga hore, natiijooyinka raadinta, xulalka iyo kooxaha kanaalada si aad u samayso fal degdeg ah</string>
+    <string name="swipe_left_action_title">Falka jiidista bidix</string>
+    <string name="swipe_right_action_title">Falka jiidista midig</string>
+    <string name="enable_swipe_actions_warning_title">Ficillada jiidista waa la shiday</string>
+    <string name="enable_swipe_actions_warning_message">Jiidistu waxay u baahan tahay safaf ballac buuxa leh si ay si fiican u shaqayso, sidaa darteed muuqaalka liiska ayaa la isticmaali doonaa halkii shaxda ama kaararka meel kasta oo ficillada jiidista laga heli karo. Waad dami kartaa mar kasta.</string>
+    <string name="swipe_actions_force_list_mode_summary">Waa la joojiyay inta ficillada jiidista ay shidan yihiin, maadaama ay qasbaan muuqaalka liiska</string>
+    <string name="remove_from_playlist_swipe_action">Ka saar xulka (xulalka oo keliya)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s waa la heli karaa</string>
+    <string name="qpipepipe_update_notification_text">Taabo si aad u dajiso oo u shubto</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Ma dajinaysaa oo ma shubaysaa cusboonaysiintan? Android ayaa ku weydiin doonta inaad xaqiijiso shubidda.</string>
+    <string name="qpipepipe_update_install">Daji oo ku shub</string>
+    <string name="qpipepipe_update_release_notes">Faahfaahinta nuqulka</string>
+    <string name="qpipepipe_update_later">Mar dambe</string>
+    <string name="qpipepipe_update_downloading">Waa la dajinayaa QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">Dajintu way fashilantay. Hubi xiriirkaaga oo isku day mar kale.</string>
+    <string name="qpipepipe_update_wrong_build">Nuqulkan ma shubi karo cusboonaysiinta laftiisa, tusaale ahaan sababtoo ah waa nuqul tijaabo (debug). Taa beddelkeeda APK ka daji bogga nuqulada.</string>
+    <string name="qpipepipe_update_failed">Cusboonaysiinta lama shubi karin: %s</string>
+    <string name="playlist_resume_title">Ka sii wad meeshii aad joogtay</string>
+    <string name="playlist_resume_play">Ka sii wad #%d</string>
+    <string name="playlist_resume_here">Halkan ka sii wad</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Hay hormooyinkii u dambeeyay</string>
+    <string name="recent_queues_summary">Ku tax hormooyinka aad daarto hoostooda Xul, si aad mar dambe u sii wadato ama u kaydiso. Muuqaalada aad ku darto hormo laga bilaabay mid ka mid ah xulalkaaga waxaa lagu daraa xulkaas. Hormooyinka xulalka iyo kanaalada YouTube lama hayo</string>
+    <string name="recent_queues_tab_playlists">Xul</string>
+    <string name="recent_queues_tab">Hormooyinkii dambe</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d hormo</item>
+        <item quantity="other">%d hormo, kan ugu cusub ayaa hore</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Nadiifi dhammaan</string>
+    <string name="recent_queues_clear_all_message">Tirtir dhammaan hormooyinkii u dambeeyay? Xulalkaaga la kaydiyay lama taabanayo.</string>
+    <string name="recent_queues_empty">Ma jiraan hormooyin dhowaan ah. Hormooyinka aad daarto halkan ayay ka muuqdaan.</string>
+    <string name="recent_queue_title">Hormada %s</string>
+    <string name="recent_queue_from_playlist">Laga keenay: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%1$d muuqaal ayaa lagu daray tan iyo %2$s</item>
+        <item quantity="other">%1$d muuqaal ayaa lagu daray tan iyo %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d muuqaal</item>
+        <item quantity="other">%1$d/%2$d muuqaal</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d muuqaal ayaa lagu daray %2$s</item>
+        <item quantity="other">%1$d muuqaal ayaa lagu daray %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Sii wad</string>
+    <string name="recent_queue_more">Doorashooyin kale</string>
+    <string name="recent_queue_progress">%1$s ee %2$s</string>
+    <string name="recent_queue_save_as_playlist">U kaydi xul ahaan</string>
+    <string name="recent_queue_open_playlist">Fur xulka</string>
+    <string name="recent_queue_saved">Waxaa lagu kaydiyay Xul</string>
+    <string name="recent_queue_deleted">Hormada waa la tirtiray</string>
+    <string name="recent_queue_deleted_linked">Hormada waa la tirtiray, xulku wuu harayaa</string>
+    <string name="recent_queue_playing_now">Waa daaran yahay</string>
+    <string name="recent_queue_playing_at">Waa daaran yahay · %s</string>
+    <string name="recent_queue_watched">Waan daawaday</string>
+    <string name="recent_queue_not_watched">In la daawado</string>
+    <string name="recent_queue_added">lagu daray</string>
+    <string name="playlist_never_played">Weligii lama daarin</string>
+</resources>

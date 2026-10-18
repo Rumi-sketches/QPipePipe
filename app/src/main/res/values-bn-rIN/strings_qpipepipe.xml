@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">এই ফর্কে যোগ করা সারি ও সোয়াইপ ফিচার</string>
+    <string name="qpipepipe_category_playback">প্লেব্যাক</string>
+    <string name="qpipepipe_category_swipe_actions">সোয়াইপ অ্যাকশন</string>
+    <string name="tap_always_plays_title">ভিডিওতে ট্যাপ করলে সবসময় চালু হবে</string>
+    <string name="tap_always_plays_summary">ভিডিও খুললেই প্লেব্যাক শুরু করুন, এমনকি স্বয়ংক্রিয় চালু শুধু Wi-Fi-তে সীমিত বা বন্ধ থাকলেও। নিজে থেকে শুরু হওয়ার ক্ষেত্রে স্বয়ংক্রিয় চালুর সেটিং প্রযোজ্য থাকে</string>
+    <string name="clear_queue_confirmation_title">সারি মোছার আগে নিশ্চিত করতে বলুন</string>
+    <string name="clear_queue_confirmation_summary">এক প্লেয়ার থেকে অন্য প্লেয়ারে গেলে আপনার সারি বদলে যেতে পারে</string>
+    <string name="clear_queue_confirmation_description">চালু প্লেয়ারের সারি বদলে যাবে</string>
+    <string name="clear_queue_confirmation_play_now">এখনই চালান</string>
+    <string name="enable_swipe_actions_title">ভিডিওতে সোয়াইপ অ্যাকশন চালু করুন</string>
+    <string name="enable_swipe_actions_summary">হোমপেজ, সার্চ ফলাফল, প্লেলিস্ট ও চ্যানেল গ্রুপে কোনো ভিডিও বাঁয়ে বা ডানে সোয়াইপ করে দ্রুত একটি অ্যাকশন চালান</string>
+    <string name="swipe_left_action_title">বাঁয়ে সোয়াইপের অ্যাকশন</string>
+    <string name="swipe_right_action_title">ডানে সোয়াইপের অ্যাকশন</string>
+    <string name="enable_swipe_actions_warning_title">সোয়াইপ অ্যাকশন চালু হয়েছে</string>
+    <string name="enable_swipe_actions_warning_message">সোয়াইপ ঠিকমতো কাজ করতে পুরো প্রস্থের সারি দরকার, তাই যেখানে সোয়াইপ অ্যাকশন আছে সেখানে গ্রিড বা কার্ড ভিউয়ের বদলে লিস্ট ভিউ ব্যবহার হবে। আপনি যেকোনো সময় এটি আবার বন্ধ করতে পারেন।</string>
+    <string name="swipe_actions_force_list_mode_summary">সোয়াইপ অ্যাকশন চালু থাকলে বন্ধ থাকে, কারণ তখন লিস্ট ভিউ বাধ্যতামূলক</string>
+    <string name="remove_from_playlist_swipe_action">প্লেলিস্ট থেকে সরান (শুধু প্লেলিস্টে)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s পাওয়া যাচ্ছে</string>
+    <string name="qpipepipe_update_notification_text">ডাউনলোড ও ইনস্টল করতে ট্যাপ করুন</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">এই আপডেট ডাউনলোড ও ইনস্টল করবেন? Android আপনাকে ইনস্টলেশন নিশ্চিত করতে বলবে।</string>
+    <string name="qpipepipe_update_install">ডাউনলোড ও ইনস্টল করুন</string>
+    <string name="qpipepipe_update_release_notes">রিলিজ নোট</string>
+    <string name="qpipepipe_update_later">পরে</string>
+    <string name="qpipepipe_update_downloading">QPipePipe %s ডাউনলোড হচ্ছে</string>
+    <string name="qpipepipe_update_download_failed">ডাউনলোড ব্যর্থ হয়েছে। আপনার সংযোগ দেখে আবার চেষ্টা করুন।</string>
+    <string name="qpipepipe_update_wrong_build">এই বিল্ড নিজে আপডেট ইনস্টল করতে পারে না, যেমন এটি একটি ডিবাগ বিল্ড বলে। এর বদলে রিলিজ পেজ থেকে APK ডাউনলোড করুন।</string>
+    <string name="qpipepipe_update_failed">আপডেট ইনস্টল করা যায়নি: %s</string>
+    <string name="playlist_resume_title">যেখানে থেমেছিলেন সেখান থেকে চালিয়ে যান</string>
+    <string name="playlist_resume_play">#%d থেকে আবার চালান</string>
+    <string name="playlist_resume_here">এখান থেকে আবার চালান</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">সাম্প্রতিক সারি রাখুন</string>
+    <string name="recent_queues_summary">আপনার চালানো সারিগুলো প্লেলিস্টের মধ্যে দেখান, যাতে পরে আবার চালাতে বা সেভ করতে পারেন। আপনার কোনো প্লেলিস্ট থেকে শুরু হওয়া সারিতে যোগ করা ভিডিও সেই প্লেলিস্টেও যোগ হয়। YouTube প্লেলিস্ট ও চ্যানেলের সারি রাখা হয় না</string>
+    <string name="recent_queues_tab_playlists">প্লেলিস্ট</string>
+    <string name="recent_queues_tab">সাম্প্রতিক সারি</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%dটি সারি</item>
+        <item quantity="other">%dটি সারি, নতুনগুলো আগে</item>
+    </plurals>
+    <string name="recent_queues_clear_all">সব মুছুন</string>
+    <string name="recent_queues_clear_all_message">সব সাম্প্রতিক সারি মুছবেন? আপনার সেভ করা প্লেলিস্টে কোনো পরিবর্তন হবে না।</string>
+    <string name="recent_queues_empty">কোনো সাম্প্রতিক সারি নেই। আপনার চালানো সারি এখানে দেখা যাবে।</string>
+    <string name="recent_queue_title">%s-এর সারি</string>
+    <string name="recent_queue_from_playlist">থেকে: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%2$s থেকে %1$dটি ভিডিও যোগ হয়েছে</item>
+        <item quantity="other">%2$s থেকে %1$dটি ভিডিও যোগ হয়েছে</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d ভিডিও</item>
+        <item quantity="other">%1$d/%2$d ভিডিও</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$dটি ভিডিও %2$s-এ যোগ হয়েছে</item>
+        <item quantity="other">%1$dটি ভিডিও %2$s-এ যোগ হয়েছে</item>
+    </plurals>
+    <string name="recent_queue_resume">আবার চালান</string>
+    <string name="recent_queue_more">আরও বিকল্প</string>
+    <string name="recent_queue_progress">%2$s-এর মধ্যে %1$s</string>
+    <string name="recent_queue_save_as_playlist">প্লেলিস্ট হিসেবে সেভ করুন</string>
+    <string name="recent_queue_open_playlist">প্লেলিস্ট খুলুন</string>
+    <string name="recent_queue_saved">প্লেলিস্টে সেভ হয়েছে</string>
+    <string name="recent_queue_deleted">সারি মোছা হয়েছে</string>
+    <string name="recent_queue_deleted_linked">সারি মোছা হয়েছে, প্লেলিস্ট থেকে যাবে</string>
+    <string name="recent_queue_playing_now">চলছে</string>
+    <string name="recent_queue_playing_at">চলছে · %s</string>
+    <string name="recent_queue_watched">দেখা হয়েছে</string>
+    <string name="recent_queue_not_watched">দেখা বাকি</string>
+    <string name="recent_queue_added">যোগ করা</string>
+    <string name="playlist_never_played">কখনো চালানো হয়নি</string>
+</resources>

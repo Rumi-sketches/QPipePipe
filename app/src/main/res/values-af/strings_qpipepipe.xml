@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Waglys- en swiepfunksies wat hierdie fork bygevoeg het</string>
+    <string name="qpipepipe_category_playback">Afspeel</string>
+    <string name="qpipepipe_category_swipe_actions">Swiepaksies</string>
+    <string name="tap_always_plays_title">\'n Video speel altyd wanneer jy daarop tik</string>
+    <string name="tap_always_plays_summary">Begin afspeel wanneer jy \'n video oopmaak, selfs as outomatiese afspeel tot Wi-Fi beperk of afgeskakel is. Outomatiese afspeel geld steeds vir outomatiese begin</string>
+    <string name="clear_queue_confirmation_title">Vra vir bevestiging voordat \'n waglys skoongemaak word</string>
+    <string name="clear_queue_confirmation_summary">As jy van een speler na \'n ander oorskakel, kan jou waglys vervang word</string>
+    <string name="clear_queue_confirmation_description">Die waglys van die aktiewe speler sal vervang word</string>
+    <string name="clear_queue_confirmation_play_now">Speel nou</string>
+    <string name="enable_swipe_actions_title">Aktiveer swiepaksies op video\'s</string>
+    <string name="enable_swipe_actions_summary">Swiep \'n video links of regs op die tuisblad, in soekresultate, snitlyste en kanaalgroepe om \'n vinnige aksie uit te voer</string>
+    <string name="swipe_left_action_title">Aksie vir links swiep</string>
+    <string name="swipe_right_action_title">Aksie vir regs swiep</string>
+    <string name="enable_swipe_actions_warning_title">Swiepaksies geaktiveer</string>
+    <string name="enable_swipe_actions_warning_message">Swiep werk net betroubaar met rye oor die volle breedte, dus word lysaansig gebruik in plaas van rooster- of kaartaansig oral waar swiepaksies beskikbaar is. Jy kan dit enige tyd weer afskakel.</string>
+    <string name="swipe_actions_force_list_mode_summary">Gedeaktiveer terwyl swiepaksies aan is, want hulle dwing lysaansig af</string>
+    <string name="remove_from_playlist_swipe_action">Verwyder uit snitlys (net snitlyste)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s is beskikbaar</string>
+    <string name="qpipepipe_update_notification_text">Tik om af te laai en te installeer</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Laai hierdie opdatering af en installeer dit? Android sal jou vra om die installasie te bevestig.</string>
+    <string name="qpipepipe_update_install">Laai af en installeer</string>
+    <string name="qpipepipe_update_release_notes">Vrystellingsnotas</string>
+    <string name="qpipepipe_update_later">Later</string>
+    <string name="qpipepipe_update_downloading">Laai QPipePipe %s af</string>
+    <string name="qpipepipe_update_download_failed">Die aflaai het misluk. Kontroleer jou verbinding en probeer weer.</string>
+    <string name="qpipepipe_update_wrong_build">Hierdie weergawe kan nie self die opdatering installeer nie, byvoorbeeld omdat dit \'n ontfoutweergawe is. Laai eerder die APK van die vrystellingsbladsy af.</string>
+    <string name="qpipepipe_update_failed">Die opdatering kon nie geïnstalleer word nie: %s</string>
+    <string name="playlist_resume_title">Gaan voort waar jy opgehou het</string>
+    <string name="playlist_resume_play">Hervat vanaf #%d</string>
+    <string name="playlist_resume_here">Hervat hier</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Hou onlangse waglyste</string>
+    <string name="recent_queues_summary">Wys die waglyste wat jy speel onder Snitlyste, sodat jy hulle later kan hervat of stoor. Video\'s wat jy byvoeg tot \'n waglys wat uit een van jou snitlyste begin is, word by daardie snitlys gevoeg. Waglyste van YouTube-snitlyste en -kanale word nie gehou nie</string>
+    <string name="recent_queues_tab_playlists">Snitlyste</string>
+    <string name="recent_queues_tab">Onlangse waglyste</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d waglys</item>
+        <item quantity="other">%d waglyste, nuutste eerste</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Maak alles skoon</string>
+    <string name="recent_queues_clear_all_message">Vee alle onlangse waglyste uit? Jou gestoorde snitlyste bly onaangeraak.</string>
+    <string name="recent_queues_empty">Geen onlangse waglyste nie. Waglyste wat jy speel, verskyn hier.</string>
+    <string name="recent_queue_title">Waglys van %s</string>
+    <string name="recent_queue_from_playlist">Van: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%1$d video bygevoeg sedert %2$s</item>
+        <item quantity="other">%1$d video\'s bygevoeg sedert %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d video</item>
+        <item quantity="other">%1$d/%2$d video\'s</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d video by %2$s gevoeg</item>
+        <item quantity="other">%1$d video\'s by %2$s gevoeg</item>
+    </plurals>
+    <string name="recent_queue_resume">Hervat</string>
+    <string name="recent_queue_more">Meer opsies</string>
+    <string name="recent_queue_progress">%1$s van %2$s</string>
+    <string name="recent_queue_save_as_playlist">Stoor as snitlys</string>
+    <string name="recent_queue_open_playlist">Maak snitlys oop</string>
+    <string name="recent_queue_saved">Gestoor in Snitlyste</string>
+    <string name="recent_queue_deleted">Waglys uitgevee</string>
+    <string name="recent_queue_deleted_linked">Waglys uitgevee, die snitlys bly</string>
+    <string name="recent_queue_playing_now">Speel tans</string>
+    <string name="recent_queue_playing_at">Speel tans · %s</string>
+    <string name="recent_queue_watched">Gekyk</string>
+    <string name="recent_queue_not_watched">Om te kyk</string>
+    <string name="recent_queue_added">bygevoeg</string>
+    <string name="playlist_never_played">Nog nooit gespeel nie</string>
+</resources>
