@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Rindas un pavilkšanas funkcijas, ko pievienojis šis atzars</string>
+    <string name="qpipepipe_category_playback">Atskaņošana</string>
+    <string name="qpipepipe_category_swipe_actions">Pavilkšanas darbības</string>
+    <string name="tap_always_plays_title">Pieskaroties videoklipam, tas vienmēr tiek atskaņots</string>
+    <string name="tap_always_plays_summary">Sākt atskaņošanu, atverot videoklipu, pat ja automātiskā atskaņošana ir ierobežota līdz Wi-Fi vai izslēgta. Automātiskā atskaņošana joprojām attiecas uz automātiskiem palaidieniem</string>
+    <string name="clear_queue_confirmation_title">Prasīt apstiprinājumu pirms rindas notīrīšanas</string>
+    <string name="clear_queue_confirmation_summary">Pārslēdzoties no viena atskaņotāja uz citu, jūsu rinda var tikt aizstāta</string>
+    <string name="clear_queue_confirmation_description">Aktīvā atskaņotāja rinda tiks aizstāta</string>
+    <string name="clear_queue_confirmation_play_now">Atskaņot tagad</string>
+    <string name="enable_swipe_actions_title">Iespējot pavilkšanas darbības videoklipiem</string>
+    <string name="enable_swipe_actions_summary">Pavelciet videoklipu pa kreisi vai pa labi sākumlapā, meklēšanas rezultātos, atskaņošanas sarakstos un kanālu grupās, lai veiktu ātro darbību</string>
+    <string name="swipe_left_action_title">Pavilkšanas pa kreisi darbība</string>
+    <string name="swipe_right_action_title">Pavilkšanas pa labi darbība</string>
+    <string name="enable_swipe_actions_warning_title">Pavilkšanas darbības iespējotas</string>
+    <string name="enable_swipe_actions_warning_message">Lai pavilkšana darbotos uzticami, nepieciešamas pilna platuma rindiņas, tāpēc visur, kur pieejamas pavilkšanas darbības, režģa vai kartīšu vietā tiks izmantots saraksta skats. To jebkurā laikā var atkal izslēgt.</string>
+    <string name="swipe_actions_force_list_mode_summary">Atspējots, kamēr iespējotas pavilkšanas darbības, kas piespiedu kārtā izmanto saraksta skatu</string>
+    <string name="remove_from_playlist_swipe_action">Noņemt no atskaņošanas saraksta (tikai atskaņošanas sarakstos)</string>
+    <string name="qpipepipe_update_notification_title">Pieejama QPipePipe %s</string>
+    <string name="qpipepipe_update_notification_text">Pieskarieties, lai lejupielādētu un instalētu</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Lejupielādēt un instalēt šo atjauninājumu? Android lūgs apstiprināt instalēšanu.</string>
+    <string name="qpipepipe_update_install">Lejupielādēt un instalēt</string>
+    <string name="qpipepipe_update_release_notes">Laidiena piezīmes</string>
+    <string name="qpipepipe_update_later">Vēlāk</string>
+    <string name="qpipepipe_update_downloading">Lejupielādē QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">Lejupielāde neizdevās. Pārbaudiet savienojumu un mēģiniet vēlreiz.</string>
+    <string name="qpipepipe_update_wrong_build">Šī versija nevar pati instalēt atjauninājumu, piemēram, tāpēc, ka tā ir atkļūdošanas versija. Tā vietā lejupielādējiet APK no laidiena lapas.</string>
+    <string name="qpipepipe_update_failed">Atjauninājumu neizdevās instalēt: %s</string>
+    <string name="playlist_resume_title">Turpiniet no vietas, kur pārtraucāt</string>
+    <string name="playlist_resume_play">Turpināt no #%d</string>
+    <string name="playlist_resume_here">Turpināt no šejienes</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Saglabāt nesenās rindas</string>
+    <string name="recent_queues_summary">Rādīt atskaņotās rindas sadaļā “Atskaņošanas saraksti”, lai vēlāk varētu tās turpināt vai saglabāt. Videoklipi, ko pievienojat rindai, kas palaista no jūsu atskaņošanas saraksta, tiek pievienoti šim sarakstam. YouTube atskaņošanas sarakstu un kanālu rindas netiek saglabātas</string>
+    <string name="recent_queues_tab_playlists">Atskaņošanas saraksti</string>
+    <string name="recent_queues_tab">Nesenās rindas</string>
+    <plurals name="recent_queues_count">
+        <item quantity="zero">%d rindu, jaunākās vispirms</item>
+        <item quantity="one">%d rinda, jaunākās vispirms</item>
+        <item quantity="other">%d rindas, jaunākās vispirms</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Notīrīt visu</string>
+    <string name="recent_queues_clear_all_message">Dzēst visas nesenās rindas? Saglabātie atskaņošanas saraksti netiek ietekmēti.</string>
+    <string name="recent_queues_empty">Nav nesenu rindu. Šeit parādīsies jūsu atskaņotās rindas.</string>
+    <string name="recent_queue_title">Rinda no %s</string>
+    <string name="recent_queue_from_playlist">No: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="zero">Kopš %2$s pievienoti videoklipi: %1$d</item>
+        <item quantity="one">Kopš %2$s pievienoti videoklipi: %1$d</item>
+        <item quantity="other">Kopš %2$s pievienoti videoklipi: %1$d</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="zero">%1$d/%2$d videoklipu</item>
+        <item quantity="one">%1$d/%2$d videoklips</item>
+        <item quantity="other">%1$d/%2$d videoklipi</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="zero">Sarakstam %2$s pievienoti videoklipi: %1$d</item>
+        <item quantity="one">Sarakstam %2$s pievienoti videoklipi: %1$d</item>
+        <item quantity="other">Sarakstam %2$s pievienoti videoklipi: %1$d</item>
+    </plurals>
+    <string name="recent_queue_resume">Turpināt</string>
+    <string name="recent_queue_more">Citas iespējas</string>
+    <string name="recent_queue_progress">%1$s no %2$s</string>
+    <string name="recent_queue_save_as_playlist">Saglabāt kā atskaņošanas sarakstu</string>
+    <string name="recent_queue_open_playlist">Atvērt atskaņošanas sarakstu</string>
+    <string name="recent_queue_saved">Saglabāts atskaņošanas sarakstos</string>
+    <string name="recent_queue_deleted">Rinda izdzēsta</string>
+    <string name="recent_queue_deleted_linked">Rinda izdzēsta, atskaņošanas saraksts paliek</string>
+    <string name="recent_queue_playing_now">Atskaņo</string>
+    <string name="recent_queue_playing_at">Atskaņo · %s</string>
+    <string name="recent_queue_watched">Skatīts</string>
+    <string name="recent_queue_not_watched">Neskatīts</string>
+    <string name="recent_queue_added">pievienots</string>
+    <string name="playlist_never_played">Nekad nav atskaņots</string>
+</resources>

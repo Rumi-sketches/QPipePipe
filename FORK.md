@@ -199,6 +199,13 @@ Upstream files touched only to plug the layer in: one entry in
 go in this screen, not in the upstream screens. Preference keys predate the
 screen and must not be renamed, or users lose their choices.
 
+Fork strings are translated in `res/values-*/strings_qpipepipe.xml`, one file
+per locale that has an upstream `strings.xml` with content (87). They are not
+on Weblate: when a fork string is added or changed, translate it in every one
+of those files, keeping the plural quantities of the upstream file of that
+locale. `qpipepipe_update_log` and `qpipepipe_settings_title` stay English
+only.
+
 ## Fork patches
 
 ### Tapping a video always plays it
@@ -388,6 +395,71 @@ beginning. Channels and the feed keep upstream's `playlist_control.xml`.
 Check: in a local playlist, play the second video to the end and the third for
 a few seconds, turn the switch on: the main button says "Resume from #3" and
 Background starts from the third video. Turn it off: it starts from the first.
+
+### Recent queues
+
+Files: `qpipepipe/recentqueues/` (database, recorder, list and detail screens,
+Playlists switch), `qpipepipe/PlaylistProgressLines`, `PlaylistProgress`,
+`StreamProgress`, `res/layout/qpipepipe_recent_queue*.xml`,
+`qpipepipe_bookmarks_tabs.xml`. Upstream files touched: `PlayQueue` (session id
+and source playlist), `PlayerStartController` (three calls to
+`RecentQueueRecorder`), `LocalPlaylistFragment.getPlayQueue` (source
+playlist), `BookmarkFragment` and `fragment_bookmarks.xml` (the switch),
+`LocalPlaylistItemHolder` (date and bar; the bar is added from code so the
+row layouts stay upstream's), `App` (registers `RecentQueueUndo`),
+`PlaylistStreamDAO.getPlaylistProgress`, `StreamHistoryDAO.getProgressOf`.
+Key: `recent_queues_key` (default off, in the QPipePipe settings).
+
+While the setting is on, the queue of the player is written to a separate
+database, `qpipepipe_recent_queues.db`, two seconds after it last changed.
+Keeping it apart from `newpipe.db` means upstream's schema versions and
+migrations never collide with the fork's; the price is that recent queues are
+not in the settings export. Rules:
+
+- A queue started from a local playlist is one entry per playlist ("From:
+  name"). Videos the user enqueues on it are appended to that playlist, except
+  those already in it, and are marked "added". This holds for single videos and
+  for a whole playlist or channel; of a remote playlist only the videos already
+  loaded join the queue, so only those are appended. Auto-queued related videos
+  are never appended. Appends and saves run on one background thread, so quick
+  enqueues cannot duplicate a video or collide on the playlist index.
+- When one enqueue appends two or more videos, the screen in front shows "N
+  videos added to name" with Undo for 4 seconds. Undo takes them back out of
+  the playlist, only if they still follow the videos it had before, and out of
+  the queue: all or nothing.
+- Any other queue is one entry per session, kept once the user built it: it
+  started with two or more videos, or the user enqueued something. Videos opened
+  one by one, with related videos auto-queued, leave no entry. A session
+  survives player switches and process death, and resuming an entry continues it
+  instead of creating a new one.
+- Queues of remote playlists and channels are not recorded.
+- Nothing is deleted automatically: the user deletes one entry or uses Clear
+  all. Deleting the entry of the queue playing now does not bring it back while
+  that queue plays. Deleting an entry linked to a playlist leaves the playlist.
+- Resuming a linked entry links the queue again only if the playlist with that
+  id still has the saved name, since a backup import can renumber playlists.
+- "Save as playlist" links the entry to the new playlist, and the queue too if
+  it is still playing: later enqueues go to that playlist and the entry no
+  longer offers saving, so one queue never makes two playlists.
+
+The Playlists page gets a "Playlists / Recent queues" switch. Rows stay short:
+a local playlist row shows when it was last played (or "Never played") and a
+bar of the share of its videos watched (past 90%); a queue row shows title,
+date and the same bar. The video count is on the thumbnail. Remote playlist rows are unchanged:
+their videos are not stored locally. The detail screen shows "2/134 videos ·
+85:23" (position, length, total hours and minutes) and "N videos added since
+date", resumes the queue in the three players, opens the
+linked playlist or saves the queue as a new playlist, and marks each video as
+playing, watched (past 90%), partly watched or to watch.
+
+Check: turn the setting on. Open a video, enqueue a second one: "Recent queues"
+lists one queue with 2 videos. Play a local playlist and enqueue a video that is
+not in it: the playlist grows by one, and its queue entry says "1 video added to
+the playlist". Enqueue a video already in it: nothing is added and the count
+stays at 1. Play a YouTube playlist: no entry appears. Save a playing queue as a
+playlist, then enqueue a video: the entry reads "From: <name>" and the new
+playlist grows by one. Enqueue a whole YouTube playlist on a queue from a local
+playlist and tap Undo within 4 seconds: the local playlist is back to its size.
 
 ## Upstream services
 

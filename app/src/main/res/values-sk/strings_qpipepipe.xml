@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Funkcie poradia a potiahnutí pridané týmto forkom</string>
+    <string name="qpipepipe_category_playback">Prehrávanie</string>
+    <string name="qpipepipe_category_swipe_actions">Akcie potiahnutím</string>
+    <string name="tap_always_plays_title">Ťuknutie na video ho vždy prehrá</string>
+    <string name="tap_always_plays_summary">Spustiť prehrávanie pri otvorení videa, aj keď je automatické prehrávanie obmedzené na Wi-Fi alebo vypnuté. Automatické prehrávanie naďalej platí pre automatické spustenia</string>
+    <string name="clear_queue_confirmation_title">Pýtať potvrdenie pred vymazaním poradia</string>
+    <string name="clear_queue_confirmation_summary">Prepnutie z jedného prehrávača na iný môže nahradiť vaše poradie</string>
+    <string name="clear_queue_confirmation_description">Poradie aktívneho prehrávača bude nahradené</string>
+    <string name="clear_queue_confirmation_play_now">Prehrať teraz</string>
+    <string name="enable_swipe_actions_title">Povoliť akcie potiahnutím na videách</string>
+    <string name="enable_swipe_actions_summary">Potiahnite video doľava alebo doprava na domovskej stránke, vo výsledkoch vyhľadávania, zoznamoch skladieb a skupinách kanálov a vykonajte rýchlu akciu</string>
+    <string name="swipe_left_action_title">Akcia potiahnutím doľava</string>
+    <string name="swipe_right_action_title">Akcia potiahnutím doprava</string>
+    <string name="enable_swipe_actions_warning_title">Akcie potiahnutím sú povolené</string>
+    <string name="enable_swipe_actions_warning_message">Potiahnutie spoľahlivo funguje len s riadkami na celú šírku, preto sa všade, kde sú dostupné akcie potiahnutím, použije zobrazenie zoznamu namiesto mriežky alebo kariet. Kedykoľvek to môžete znova vypnúť.</string>
+    <string name="swipe_actions_force_list_mode_summary">Nedostupné, kým sú povolené akcie potiahnutím, ktoré vynucujú zobrazenie zoznamu</string>
+    <string name="remove_from_playlist_swipe_action">Odstrániť zo zoznamu skladieb (len v zoznamoch skladieb)</string>
+    <string name="qpipepipe_update_notification_title">Je dostupná verzia QPipePipe %s</string>
+    <string name="qpipepipe_update_notification_text">Ťuknutím stiahnete a nainštalujete</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Stiahnuť a nainštalovať túto aktualizáciu? Android vás požiada o potvrdenie inštalácie.</string>
+    <string name="qpipepipe_update_install">Stiahnuť a nainštalovať</string>
+    <string name="qpipepipe_update_release_notes">Poznámky k vydaniu</string>
+    <string name="qpipepipe_update_later">Neskôr</string>
+    <string name="qpipepipe_update_downloading">Sťahuje sa QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">Sťahovanie zlyhalo. Skontrolujte pripojenie a skúste to znova.</string>
+    <string name="qpipepipe_update_wrong_build">Táto zostava nemôže sama nainštalovať aktualizáciu, napríklad preto, že ide o ladiacu zostavu. Namiesto toho stiahnite APK zo stránky vydania.</string>
+    <string name="qpipepipe_update_failed">Aktualizáciu sa nepodarilo nainštalovať: %s</string>
+    <string name="playlist_resume_title">Pokračujte tam, kde ste skončili</string>
+    <string name="playlist_resume_play">Pokračovať od #%d</string>
+    <string name="playlist_resume_here">Pokračovať odtiaľto</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Uchovávať nedávne poradia</string>
+    <string name="recent_queues_summary">Zobrazuje prehrávané poradia v časti Zoznamy skladieb, aby ste v nich mohli neskôr pokračovať alebo ich uložiť. Videá, ktoré pridáte do poradia spusteného z vášho zoznamu skladieb, sa pridajú do tohto zoznamu. Poradia zoznamov skladieb a kanálov YouTube sa neuchovávajú</string>
+    <string name="recent_queues_tab_playlists">Zoznamy skladieb</string>
+    <string name="recent_queues_tab">Nedávne poradia</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d poradie</item>
+        <item quantity="few">%d poradia, najnovšie prvé</item>
+        <item quantity="other">%d poradí, najnovšie prvé</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Vymazať všetko</string>
+    <string name="recent_queues_clear_all_message">Odstrániť všetky nedávne poradia? Vaše uložené zoznamy skladieb zostanú nedotknuté.</string>
+    <string name="recent_queues_empty">Žiadne nedávne poradia. Zobrazia sa tu poradia, ktoré prehráte.</string>
+    <string name="recent_queue_title">Poradie z %s</string>
+    <string name="recent_queue_from_playlist">Zo zoznamu: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%1$d video pridané od %2$s</item>
+        <item quantity="few">%1$d videá pridané od %2$s</item>
+        <item quantity="other">%1$d videí pridaných od %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d video</item>
+        <item quantity="few">%1$d/%2$d videá</item>
+        <item quantity="other">%1$d/%2$d videí</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d video pridané do %2$s</item>
+        <item quantity="few">%1$d videá pridané do %2$s</item>
+        <item quantity="other">%1$d videí pridaných do %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Pokračovať</string>
+    <string name="recent_queue_more">Ďalšie možnosti</string>
+    <string name="recent_queue_progress">%1$s z %2$s</string>
+    <string name="recent_queue_save_as_playlist">Uložiť ako zoznam skladieb</string>
+    <string name="recent_queue_open_playlist">Otvoriť zoznam skladieb</string>
+    <string name="recent_queue_saved">Uložené v Zoznamoch skladieb</string>
+    <string name="recent_queue_deleted">Poradie odstránené</string>
+    <string name="recent_queue_deleted_linked">Poradie odstránené, zoznam skladieb zostáva</string>
+    <string name="recent_queue_playing_now">Prehráva sa</string>
+    <string name="recent_queue_playing_at">Prehráva sa · %s</string>
+    <string name="recent_queue_watched">Pozreté</string>
+    <string name="recent_queue_not_watched">Na pozretie</string>
+    <string name="recent_queue_added">pridané</string>
+    <string name="playlist_never_played">Nikdy neprehrané</string>
+</resources>

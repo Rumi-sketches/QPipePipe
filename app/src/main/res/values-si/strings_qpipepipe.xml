@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">මෙම ෆෝර්ක් එක් කළ පෝලිම් සහ ස්වයිප් විශේෂාංග</string>
+    <string name="qpipepipe_category_playback">ධාවනය</string>
+    <string name="qpipepipe_category_swipe_actions">ස්වයිප් ක්‍රියා</string>
+    <string name="tap_always_plays_title">වීඩියෝවක් තට්ටු කළ විට එය සැමවිටම ධාවනය වේ</string>
+    <string name="tap_always_plays_summary">වීඩියෝවක් විවෘත කළ විගස ධාවනය අරඹන්න, ස්වයං ධාවනය Wi-Fi වලට පමණක් සීමා කර හෝ අක්‍රිය කර තිබුණත්. ස්වයංක්‍රීය ආරම්භයන්ට ස්වයං ධාවනය තවමත් අදාළ වේ</string>
+    <string name="clear_queue_confirmation_title">පෝලිමක් හිස් කිරීමට පෙර තහවුරු කිරීම ඉල්ලන්න</string>
+    <string name="clear_queue_confirmation_summary">එක් වාදකයකින් තවත් වාදකයකට මාරු වීමෙන් ඔබේ පෝලිම ප්‍රතිස්ථාපනය විය හැක</string>
+    <string name="clear_queue_confirmation_description">සක්‍රිය වාදකයේ පෝලිම ප්‍රතිස්ථාපනය වේ</string>
+    <string name="clear_queue_confirmation_play_now">දැන් ධාවනය කරන්න</string>
+    <string name="enable_swipe_actions_title">වීඩියෝ මත ස්වයිප් ක්‍රියා සබල කරන්න</string>
+    <string name="enable_swipe_actions_summary">මුල් පිටුව, සෙවුම් ප්‍රතිඵල, ධාවන ලැයිස්තු සහ නාලිකා කණ්ඩායම්වල වීඩියෝවක් වමට හෝ දකුණට ස්වයිප් කර ඉක්මන් ක්‍රියාවක් කරන්න</string>
+    <string name="swipe_left_action_title">වමට ස්වයිප් ක්‍රියාව</string>
+    <string name="swipe_right_action_title">දකුණට ස්වයිප් ක්‍රියාව</string>
+    <string name="enable_swipe_actions_warning_title">ස්වයිප් ක්‍රියා සබල කළා</string>
+    <string name="enable_swipe_actions_warning_message">ස්වයිප් කිරීම නිසි ලෙස ක්‍රියා කිරීමට සම්පූර්ණ පළලේ පේළි අවශ්‍ය නිසා, ස්වයිප් ක්‍රියා ඇති සෑම තැනකම ජාලක හෝ කාඩ්පත් දසුන වෙනුවට ලැයිස්තු දසුන භාවිත වේ. ඔබට ඕනෑම වේලාවක මෙය නැවත අක්‍රිය කළ හැක.</string>
+    <string name="swipe_actions_force_list_mode_summary">ස්වයිප් ක්‍රියා සබල ව ඇති විට අබල කර ඇත, ඒවා ලැයිස්තු දසුන බල කරයි</string>
+    <string name="remove_from_playlist_swipe_action">ධාවන ලැයිස්තුවෙන් ඉවත් කරන්න (ධාවන ලැයිස්තුවල පමණි)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s ලබා ගත හැක</string>
+    <string name="qpipepipe_update_notification_text">බාගැනීමට සහ ස්ථාපනය කිරීමට තට්ටු කරන්න</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">මෙම යාවත්කාලීනය බාගෙන ස්ථාපනය කරන්නද? ස්ථාපනය තහවුරු කරන ලෙස Android ඔබෙන් ඉල්ලනු ඇත.</string>
+    <string name="qpipepipe_update_install">බාගෙන ස්ථාපනය කරන්න</string>
+    <string name="qpipepipe_update_release_notes">නිකුතු සටහන්</string>
+    <string name="qpipepipe_update_later">පසුව</string>
+    <string name="qpipepipe_update_downloading">QPipePipe %s බාගනිමින්</string>
+    <string name="qpipepipe_update_download_failed">බාගැනීම අසාර්ථක විය. ඔබේ සම්බන්ධතාවය පරීක්ෂා කර නැවත උත්සාහ කරන්න.</string>
+    <string name="qpipepipe_update_wrong_build">මෙම බිල්ඩ් එකට යාවත්කාලීනය තනිවම ස්ථාපනය කළ නොහැක, උදාහරණයක් ලෙස එය දෝෂ නිරාකරණ බිල්ඩ් එකක් නිසා. ඒ වෙනුවට නිකුතු පිටුවෙන් APK එක බාගන්න.</string>
+    <string name="qpipepipe_update_failed">යාවත්කාලීනය ස්ථාපනය කළ නොහැකි විය: %s</string>
+    <string name="playlist_resume_title">නැවැත්වූ තැන සිට දිගටම කරගෙන යන්න</string>
+    <string name="playlist_resume_play">#%d සිට නැවත අරඹන්න</string>
+    <string name="playlist_resume_here">මෙතැන් සිට නැවත අරඹන්න</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">මෑත පෝලිම් තබා ගන්න</string>
+    <string name="recent_queues_summary">ඔබ ධාවනය කරන පෝලිම් ධාවන ලැයිස්තු යටතේ පෙන්වන්න, එවිට පසුව ඒවා නැවත ඇරඹීමට හෝ සුරැකීමට හැක. ඔබේ ධාවන ලැයිස්තුවකින් ඇරඹූ පෝලිමකට එක් කරන වීඩියෝ එම ධාවන ලැයිස්තුවටද එක් වේ. YouTube ධාවන ලැයිස්තු සහ නාලිකාවල පෝලිම් තබා නොගනී</string>
+    <string name="recent_queues_tab_playlists">ධාවන ලැයිස්තු</string>
+    <string name="recent_queues_tab">මෑත පෝලිම්</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">පෝලිම් %d</item>
+        <item quantity="other">පෝලිම් %d, නවතම ඒවා මුලින්</item>
+    </plurals>
+    <string name="recent_queues_clear_all">සියල්ල හිස් කරන්න</string>
+    <string name="recent_queues_clear_all_message">සියලු මෑත පෝලිම් මකන්නද? ඔබ සුරැකි ධාවන ලැයිස්තුවලට බලපෑමක් නැත.</string>
+    <string name="recent_queues_empty">මෑත පෝලිම් නැත. ඔබ ධාවනය කරන පෝලිම් මෙහි දිස් වේ.</string>
+    <string name="recent_queue_title">%s හි පෝලිම</string>
+    <string name="recent_queue_from_playlist">සිට: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%2$s සිට වීඩියෝ %1$d ක් එක් කළා</item>
+        <item quantity="other">%2$s සිට වීඩියෝ %1$d ක් එක් කළා</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">වීඩියෝ %1$d/%2$d</item>
+        <item quantity="other">වීඩියෝ %1$d/%2$d</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">වීඩියෝ %1$d ක් %2$s වෙත එක් කළා</item>
+        <item quantity="other">වීඩියෝ %1$d ක් %2$s වෙත එක් කළා</item>
+    </plurals>
+    <string name="recent_queue_resume">නැවත අරඹන්න</string>
+    <string name="recent_queue_more">තවත් විකල්ප</string>
+    <string name="recent_queue_progress">%2$s න් %1$s</string>
+    <string name="recent_queue_save_as_playlist">ධාවන ලැයිස්තුවක් ලෙස සුරකින්න</string>
+    <string name="recent_queue_open_playlist">ධාවන ලැයිස්තුව විවෘත කරන්න</string>
+    <string name="recent_queue_saved">ධාවන ලැයිස්තුවල සුරැකිණි</string>
+    <string name="recent_queue_deleted">පෝලිම මැකිණි</string>
+    <string name="recent_queue_deleted_linked">පෝලිම මැකිණි, ධාවන ලැයිස්තුව ඉතිරි වේ</string>
+    <string name="recent_queue_playing_now">ධාවනය වෙමින්</string>
+    <string name="recent_queue_playing_at">ධාවනය වෙමින් · %s</string>
+    <string name="recent_queue_watched">නැරඹූ</string>
+    <string name="recent_queue_not_watched">නැරඹීමට ඇති</string>
+    <string name="recent_queue_added">එක් කළ</string>
+    <string name="playlist_never_played">කිසිදා ධාවනය කර නැත</string>
+</resources>

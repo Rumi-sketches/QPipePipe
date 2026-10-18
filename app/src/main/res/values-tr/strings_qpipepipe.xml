@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Bu çatallamanın eklediği sıra ve kaydırma özellikleri</string>
+    <string name="qpipepipe_category_playback">Oynatma</string>
+    <string name="qpipepipe_category_swipe_actions">Kaydırma eylemleri</string>
+    <string name="tap_always_plays_title">Videoya dokunmak onu her zaman oynatır</string>
+    <string name="tap_always_plays_summary">Bir videoyu açtığınızda, otomatik oynatma Wi-Fi ile sınırlı veya kapalı olsa bile oynatmayı başlat. Otomatik oynatma, otomatik başlatmalar için geçerli olmaya devam eder</string>
+    <string name="clear_queue_confirmation_title">Sırayı temizlemeden önce onay iste</string>
+    <string name="clear_queue_confirmation_summary">Bir oynatıcıdan diğerine geçmek sıranızı değiştirebilir</string>
+    <string name="clear_queue_confirmation_description">Etkin oynatıcının sırası değiştirilecek</string>
+    <string name="clear_queue_confirmation_play_now">Şimdi oynat</string>
+    <string name="enable_swipe_actions_title">Videolarda kaydırma eylemlerini etkinleştir</string>
+    <string name="enable_swipe_actions_summary">Hızlı bir eylem için ana sayfada, arama sonuçlarında, oynatma listelerinde ve kanal gruplarında bir videoyu sola veya sağa kaydırın</string>
+    <string name="swipe_left_action_title">Sola kaydırma eylemi</string>
+    <string name="swipe_right_action_title">Sağa kaydırma eylemi</string>
+    <string name="enable_swipe_actions_warning_title">Kaydırma eylemleri etkinleştirildi</string>
+    <string name="enable_swipe_actions_warning_message">Kaydırmanın güvenilir çalışması için tam genişlikte satırlar gerekir, bu nedenle kaydırma eylemlerinin bulunduğu her yerde ızgara veya kart görünümü yerine liste görünümü kullanılacak. Bunu istediğiniz zaman tekrar kapatabilirsiniz.</string>
+    <string name="swipe_actions_force_list_mode_summary">Kaydırma eylemleri etkinken devre dışı, çünkü liste görünümünü zorunlu kılarlar</string>
+    <string name="remove_from_playlist_swipe_action">Oynatma listesinden kaldır (yalnızca oynatma listeleri)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s kullanılabilir</string>
+    <string name="qpipepipe_update_notification_text">İndirip yüklemek için dokunun</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Bu güncelleme indirilip yüklensin mi? Android yüklemeyi onaylamanızı isteyecek.</string>
+    <string name="qpipepipe_update_install">İndir ve yükle</string>
+    <string name="qpipepipe_update_release_notes">Sürüm notları</string>
+    <string name="qpipepipe_update_later">Daha sonra</string>
+    <string name="qpipepipe_update_downloading">QPipePipe %s indiriliyor</string>
+    <string name="qpipepipe_update_download_failed">İndirme başarısız oldu. Bağlantınızı kontrol edip tekrar deneyin.</string>
+    <string name="qpipepipe_update_wrong_build">Bu derleme güncellemeyi kendisi yükleyemiyor, örneğin bir hata ayıklama derlemesi olduğu için. Bunun yerine APK dosyasını sürüm sayfasından indirin.</string>
+    <string name="qpipepipe_update_failed">Güncelleme yüklenemedi: %s</string>
+    <string name="playlist_resume_title">Kaldığınız yerden devam edin</string>
+    <string name="playlist_resume_play">#%d konumundan devam et</string>
+    <string name="playlist_resume_here">Buradan devam et</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Son sıraları sakla</string>
+    <string name="recent_queues_summary">Oynattığınız sıraları Oynatma listeleri altında listeler, böylece onlara daha sonra devam edebilir veya kaydedebilirsiniz. Oynatma listelerinizden birinden başlatılan bir sıraya eklediğiniz videolar o oynatma listesine de eklenir. YouTube oynatma listelerinin ve kanallarının sıraları saklanmaz</string>
+    <string name="recent_queues_tab_playlists">Oynatma listeleri</string>
+    <string name="recent_queues_tab">Son sıralar</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d sıra</item>
+        <item quantity="other">%d sıra, en yeni önce</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Tümünü temizle</string>
+    <string name="recent_queues_clear_all_message">Tüm son sıralar silinsin mi? Kayıtlı oynatma listelerinize dokunulmaz.</string>
+    <string name="recent_queues_empty">Son sıra yok. Oynattığınız sıralar burada görünür.</string>
+    <string name="recent_queue_title">%s sırası</string>
+    <string name="recent_queue_from_playlist">Kaynak: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%2$s tarihinden beri %1$d video eklendi</item>
+        <item quantity="other">%2$s tarihinden beri %1$d video eklendi</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d video</item>
+        <item quantity="other">%1$d/%2$d video</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%2$s listesine %1$d video eklendi</item>
+        <item quantity="other">%2$s listesine %1$d video eklendi</item>
+    </plurals>
+    <string name="recent_queue_resume">Devam et</string>
+    <string name="recent_queue_more">Diğer seçenekler</string>
+    <string name="recent_queue_progress">%1$s / %2$s</string>
+    <string name="recent_queue_save_as_playlist">Oynatma listesi olarak kaydet</string>
+    <string name="recent_queue_open_playlist">Oynatma listesini aç</string>
+    <string name="recent_queue_saved">Oynatma listelerine kaydedildi</string>
+    <string name="recent_queue_deleted">Sıra silindi</string>
+    <string name="recent_queue_deleted_linked">Sıra silindi, oynatma listesi korunuyor</string>
+    <string name="recent_queue_playing_now">Oynatılıyor</string>
+    <string name="recent_queue_playing_at">Oynatılıyor · %s</string>
+    <string name="recent_queue_watched">İzlendi</string>
+    <string name="recent_queue_not_watched">İzlenecek</string>
+    <string name="recent_queue_added">eklendi</string>
+    <string name="playlist_never_played">Hiç oynatılmadı</string>
+</resources>

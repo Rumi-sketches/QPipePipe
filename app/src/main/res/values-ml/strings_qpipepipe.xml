@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">ഈ ഫോർക്ക് ചേർത്ത ക്യൂ, സ്വൈപ്പ് സവിശേഷതകൾ</string>
+    <string name="qpipepipe_category_playback">പ്ലേബാക്ക്</string>
+    <string name="qpipepipe_category_swipe_actions">സ്വൈപ്പ് പ്രവർത്തനങ്ങൾ</string>
+    <string name="tap_always_plays_title">വീഡിയോയിൽ ടാപ്പ് ചെയ്താൽ എപ്പോഴും പ്ലേ ചെയ്യും</string>
+    <string name="tap_always_plays_summary">വീഡിയോ തുറക്കുമ്പോൾ തന്നെ പ്ലേബാക്ക് ആരംഭിക്കുക, ഓട്ടോപ്ലേ Wi-Fi-ൽ മാത്രമായി പരിമിതപ്പെടുത്തിയാലും ഓഫാക്കിയാലും. സ്വയമേവയുള്ള തുടക്കങ്ങൾക്ക് ഓട്ടോപ്ലേ ബാധകമാണ്</string>
+    <string name="clear_queue_confirmation_title">ക്യൂ മായ്ക്കുന്നതിന് മുമ്പ് സ്ഥിരീകരണം ചോദിക്കുക</string>
+    <string name="clear_queue_confirmation_summary">ഒരു പ്ലെയറിൽ നിന്ന് മറ്റൊന്നിലേക്ക് മാറുമ്പോൾ നിങ്ങളുടെ ക്യൂ മാറ്റിസ്ഥാപിക്കപ്പെട്ടേക്കാം</string>
+    <string name="clear_queue_confirmation_description">സജീവ പ്ലെയറിന്റെ ക്യൂ മാറ്റിസ്ഥാപിക്കും</string>
+    <string name="clear_queue_confirmation_play_now">ഇപ്പോൾ പ്ലേ ചെയ്യുക</string>
+    <string name="enable_swipe_actions_title">വീഡിയോകളിൽ സ്വൈപ്പ് പ്രവർത്തനങ്ങൾ ഓണാക്കുക</string>
+    <string name="enable_swipe_actions_summary">ഹോംപേജ്, തിരയൽ ഫലങ്ങൾ, പ്ലേലിസ്റ്റുകൾ, ചാനൽ ഗ്രൂപ്പുകൾ എന്നിവയിൽ ഒരു വീഡിയോ ഇടത്തോട്ടോ വലത്തോട്ടോ സ്വൈപ്പ് ചെയ്ത് പെട്ടെന്നുള്ള പ്രവർത്തനം നടത്തുക</string>
+    <string name="swipe_left_action_title">ഇടത് സ്വൈപ്പ് പ്രവർത്തനം</string>
+    <string name="swipe_right_action_title">വലത് സ്വൈപ്പ് പ്രവർത്തനം</string>
+    <string name="enable_swipe_actions_warning_title">സ്വൈപ്പ് പ്രവർത്തനങ്ങൾ ഓണാക്കി</string>
+    <string name="enable_swipe_actions_warning_message">സ്വൈപ്പ് ശരിയായി പ്രവർത്തിക്കാൻ മുഴുവൻ വീതിയുള്ള വരികൾ വേണം, അതിനാൽ സ്വൈപ്പ് പ്രവർത്തനങ്ങൾ ലഭ്യമായ ഇടങ്ങളിൽ ഗ്രിഡ് അല്ലെങ്കിൽ കാർഡ് കാഴ്ചയ്ക്ക് പകരം ലിസ്റ്റ് കാഴ്ച ഉപയോഗിക്കും. ഇത് എപ്പോൾ വേണമെങ്കിലും വീണ്ടും ഓഫാക്കാം.</string>
+    <string name="swipe_actions_force_list_mode_summary">സ്വൈപ്പ് പ്രവർത്തനങ്ങൾ ഓണായിരിക്കുമ്പോൾ പ്രവർത്തനരഹിതം, അവ ലിസ്റ്റ് കാഴ്ച നിർബന്ധമാക്കുന്നു</string>
+    <string name="remove_from_playlist_swipe_action">പ്ലേലിസ്റ്റിൽ നിന്ന് നീക്കം ചെയ്യുക (പ്ലേലിസ്റ്റുകളിൽ മാത്രം)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s ലഭ്യമാണ്</string>
+    <string name="qpipepipe_update_notification_text">ഡൗൺലോഡ് ചെയ്ത് ഇൻസ്റ്റാൾ ചെയ്യാൻ ടാപ്പ് ചെയ്യുക</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">ഈ അപ്ഡേറ്റ് ഡൗൺലോഡ് ചെയ്ത് ഇൻസ്റ്റാൾ ചെയ്യണോ? ഇൻസ്റ്റാളേഷൻ സ്ഥിരീകരിക്കാൻ Android ആവശ്യപ്പെടും.</string>
+    <string name="qpipepipe_update_install">ഡൗൺലോഡ് ചെയ്ത് ഇൻസ്റ്റാൾ ചെയ്യുക</string>
+    <string name="qpipepipe_update_release_notes">റിലീസ് കുറിപ്പുകൾ</string>
+    <string name="qpipepipe_update_later">പിന്നീട്</string>
+    <string name="qpipepipe_update_downloading">QPipePipe %s ഡൗൺലോഡ് ചെയ്യുന്നു</string>
+    <string name="qpipepipe_update_download_failed">ഡൗൺലോഡ് പരാജയപ്പെട്ടു. കണക്ഷൻ പരിശോധിച്ച് വീണ്ടും ശ്രമിക്കുക.</string>
+    <string name="qpipepipe_update_wrong_build">ഈ ബിൽഡിന് സ്വയം അപ്ഡേറ്റ് ഇൻസ്റ്റാൾ ചെയ്യാനാവില്ല, ഉദാഹരണത്തിന് ഇതൊരു ഡീബഗ് ബിൽഡ് ആയതിനാൽ. പകരം റിലീസ് പേജിൽ നിന്ന് APK ഡൗൺലോഡ് ചെയ്യുക.</string>
+    <string name="qpipepipe_update_failed">അപ്ഡേറ്റ് ഇൻസ്റ്റാൾ ചെയ്യാനായില്ല: %s</string>
+    <string name="playlist_resume_title">നിർത്തിയിടത്ത് നിന്ന് തുടരുക</string>
+    <string name="playlist_resume_play">#%d മുതൽ തുടരുക</string>
+    <string name="playlist_resume_here">ഇവിടെ നിന്ന് തുടരുക</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">സമീപകാല ക്യൂകൾ സൂക്ഷിക്കുക</string>
+    <string name="recent_queues_summary">നിങ്ങൾ പ്ലേ ചെയ്യുന്ന ക്യൂകൾ പ്ലേലിസ്റ്റുകൾക്ക് കീഴിൽ കാണിക്കുക, പിന്നീട് തുടരാനോ സേവ് ചെയ്യാനോ കഴിയും. നിങ്ങളുടെ ഒരു പ്ലേലിസ്റ്റിൽ നിന്ന് ആരംഭിച്ച ക്യൂവിൽ ചേർക്കുന്ന വീഡിയോകൾ ആ പ്ലേലിസ്റ്റിലും ചേർക്കും. YouTube പ്ലേലിസ്റ്റുകളുടെയും ചാനലുകളുടെയും ക്യൂകൾ സൂക്ഷിക്കില്ല</string>
+    <string name="recent_queues_tab_playlists">പ്ലേലിസ്റ്റുകൾ</string>
+    <string name="recent_queues_tab">സമീപകാല ക്യൂകൾ</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d ക്യൂ</item>
+        <item quantity="other">%d ക്യൂകൾ, പുതിയവ ആദ്യം</item>
+    </plurals>
+    <string name="recent_queues_clear_all">എല്ലാം മായ്ക്കുക</string>
+    <string name="recent_queues_clear_all_message">എല്ലാ സമീപകാല ക്യൂകളും ഡിലീറ്റ് ചെയ്യണോ? സേവ് ചെയ്ത പ്ലേലിസ്റ്റുകളെ ഇത് ബാധിക്കില്ല.</string>
+    <string name="recent_queues_empty">സമീപകാല ക്യൂകളൊന്നുമില്ല. നിങ്ങൾ പ്ലേ ചെയ്യുന്ന ക്യൂകൾ ഇവിടെ കാണാം.</string>
+    <string name="recent_queue_title">%s ന്റെ ക്യൂ</string>
+    <string name="recent_queue_from_playlist">ഇതിൽ നിന്ന്: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%2$s മുതൽ %1$d വീഡിയോ ചേർത്തു</item>
+        <item quantity="other">%2$s മുതൽ %1$d വീഡിയോകൾ ചേർത്തു</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d വീഡിയോ</item>
+        <item quantity="other">%1$d/%2$d വീഡിയോകൾ</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d വീഡിയോ %2$s ലേക്ക് ചേർത്തു</item>
+        <item quantity="other">%1$d വീഡിയോകൾ %2$s ലേക്ക് ചേർത്തു</item>
+    </plurals>
+    <string name="recent_queue_resume">തുടരുക</string>
+    <string name="recent_queue_more">കൂടുതൽ ഓപ്ഷനുകൾ</string>
+    <string name="recent_queue_progress">%2$s ൽ %1$s</string>
+    <string name="recent_queue_save_as_playlist">പ്ലേലിസ്റ്റായി സേവ് ചെയ്യുക</string>
+    <string name="recent_queue_open_playlist">പ്ലേലിസ്റ്റ് തുറക്കുക</string>
+    <string name="recent_queue_saved">പ്ലേലിസ്റ്റുകളിൽ സേവ് ചെയ്തു</string>
+    <string name="recent_queue_deleted">ക്യൂ ഡിലീറ്റ് ചെയ്തു</string>
+    <string name="recent_queue_deleted_linked">ക്യൂ ഡിലീറ്റ് ചെയ്തു, പ്ലേലിസ്റ്റ് നിലനിൽക്കും</string>
+    <string name="recent_queue_playing_now">പ്ലേ ചെയ്യുന്നു</string>
+    <string name="recent_queue_playing_at">പ്ലേ ചെയ്യുന്നു · %s</string>
+    <string name="recent_queue_watched">കണ്ടത്</string>
+    <string name="recent_queue_not_watched">കാണാനുള്ളത്</string>
+    <string name="recent_queue_added">ചേർത്തത്</string>
+    <string name="playlist_never_played">ഒരിക്കലും പ്ലേ ചെയ്തിട്ടില്ല</string>
+</resources>

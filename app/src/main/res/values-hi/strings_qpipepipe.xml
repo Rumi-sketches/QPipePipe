@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">इस फ़ोर्क में जोड़ी गई कतार और स्वाइप सुविधाएँ</string>
+    <string name="qpipepipe_category_playback">प्लेबैक</string>
+    <string name="qpipepipe_category_swipe_actions">स्वाइप क्रियाएँ</string>
+    <string name="tap_always_plays_title">वीडियो पर टैप करने से वह हमेशा चलेगा</string>
+    <string name="tap_always_plays_summary">वीडियो खोलते ही प्लेबैक शुरू करें, भले ही ऑटोप्ले Wi-Fi तक सीमित हो या बंद हो। अपने-आप शुरू होने पर ऑटोप्ले लागू रहता है</string>
+    <string name="clear_queue_confirmation_title">कतार साफ़ करने से पहले पुष्टि माँगें</string>
+    <string name="clear_queue_confirmation_summary">एक प्लेयर से दूसरे प्लेयर पर जाने से आपकी कतार बदल सकती है</string>
+    <string name="clear_queue_confirmation_description">सक्रिय प्लेयर की कतार बदल दी जाएगी</string>
+    <string name="clear_queue_confirmation_play_now">अभी प्ले करें</string>
+    <string name="enable_swipe_actions_title">वीडियो पर स्वाइप क्रियाएँ चालू करें</string>
+    <string name="enable_swipe_actions_summary">होमपेज, खोज परिणामों, प्लेलिस्ट और चैनल समूहों में किसी वीडियो को बाएँ या दाएँ स्वाइप करके तुरंत कोई क्रिया करें</string>
+    <string name="swipe_left_action_title">बाएँ स्वाइप की क्रिया</string>
+    <string name="swipe_right_action_title">दाएँ स्वाइप की क्रिया</string>
+    <string name="enable_swipe_actions_warning_title">स्वाइप क्रियाएँ चालू हैं</string>
+    <string name="enable_swipe_actions_warning_message">स्वाइप ठीक से काम करे, इसके लिए पूरी चौड़ाई वाली पंक्तियाँ चाहिए, इसलिए जहाँ भी स्वाइप क्रियाएँ उपलब्ध हैं वहाँ ग्रिड या कार्ड व्यू की जगह लिस्ट व्यू इस्तेमाल होगा। आप इसे कभी भी फिर से बंद कर सकते हैं।</string>
+    <string name="swipe_actions_force_list_mode_summary">स्वाइप क्रियाएँ चालू रहने तक बंद है, क्योंकि वे लिस्ट व्यू लागू करती हैं</string>
+    <string name="remove_from_playlist_swipe_action">प्लेलिस्ट से हटाएँ (सिर्फ़ प्लेलिस्ट में)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s उपलब्ध है</string>
+    <string name="qpipepipe_update_notification_text">डाउनलोड और इंस्टॉल करने के लिए टैप करें</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">यह अपडेट डाउनलोड और इंस्टॉल करें? Android आपसे इंस्टॉलेशन की पुष्टि करने को कहेगा।</string>
+    <string name="qpipepipe_update_install">डाउनलोड और इंस्टॉल करें</string>
+    <string name="qpipepipe_update_release_notes">रिलीज़ नोट्स</string>
+    <string name="qpipepipe_update_later">बाद में</string>
+    <string name="qpipepipe_update_downloading">QPipePipe %s डाउनलोड हो रहा है</string>
+    <string name="qpipepipe_update_download_failed">डाउनलोड विफल रहा। अपना कनेक्शन जाँचें और फिर से कोशिश करें।</string>
+    <string name="qpipepipe_update_wrong_build">यह बिल्ड खुद अपडेट इंस्टॉल नहीं कर सकता, उदाहरण के लिए क्योंकि यह डीबग बिल्ड है। इसकी जगह रिलीज़ पेज से APK डाउनलोड करें।</string>
+    <string name="qpipepipe_update_failed">अपडेट इंस्टॉल नहीं हो सका: %s</string>
+    <string name="playlist_resume_title">जहाँ छोड़ा था वहीं से जारी रखें</string>
+    <string name="playlist_resume_play">#%d से जारी रखें</string>
+    <string name="playlist_resume_here">यहाँ से जारी रखें</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">हाल की कतारें रखें</string>
+    <string name="recent_queues_summary">आपकी चलाई गई कतारें प्लेलिस्ट में दिखाएँ, ताकि आप उन्हें बाद में जारी रख सकें या सेव कर सकें। आपकी किसी प्लेलिस्ट से शुरू हुई कतार में जोड़े गए वीडियो उसी प्लेलिस्ट में जुड़ जाते हैं। YouTube प्लेलिस्ट और चैनलों की कतारें नहीं रखी जातीं</string>
+    <string name="recent_queues_tab_playlists">प्लेलिस्ट</string>
+    <string name="recent_queues_tab">हाल की कतारें</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d कतार</item>
+        <item quantity="other">%d कतारें, नई पहले</item>
+    </plurals>
+    <string name="recent_queues_clear_all">सब साफ़ करें</string>
+    <string name="recent_queues_clear_all_message">सभी हाल की कतारें मिटाएँ? आपकी सेव की गई प्लेलिस्ट पर कोई असर नहीं होगा।</string>
+    <string name="recent_queues_empty">कोई हाल की कतार नहीं। आपकी चलाई गई कतारें यहाँ दिखेंगी।</string>
+    <string name="recent_queue_title">%s की कतार</string>
+    <string name="recent_queue_from_playlist">से: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%2$s से %1$d वीडियो जोड़ा गया</item>
+        <item quantity="other">%2$s से %1$d वीडियो जोड़े गए</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d वीडियो</item>
+        <item quantity="other">%1$d/%2$d वीडियो</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d वीडियो %2$s में जोड़ा गया</item>
+        <item quantity="other">%1$d वीडियो %2$s में जोड़े गए</item>
+    </plurals>
+    <string name="recent_queue_resume">जारी रखें</string>
+    <string name="recent_queue_more">और विकल्प</string>
+    <string name="recent_queue_progress">%2$s में से %1$s</string>
+    <string name="recent_queue_save_as_playlist">प्लेलिस्ट के रूप में सेव करें</string>
+    <string name="recent_queue_open_playlist">प्लेलिस्ट खोलें</string>
+    <string name="recent_queue_saved">प्लेलिस्ट में सेव किया गया</string>
+    <string name="recent_queue_deleted">कतार मिटा दी गई</string>
+    <string name="recent_queue_deleted_linked">कतार मिटा दी गई, प्लेलिस्ट बनी रहेगी</string>
+    <string name="recent_queue_playing_now">चल रहा है</string>
+    <string name="recent_queue_playing_at">चल रहा है · %s</string>
+    <string name="recent_queue_watched">देखा गया</string>
+    <string name="recent_queue_not_watched">देखना है</string>
+    <string name="recent_queue_added">जोड़ा गया</string>
+    <string name="playlist_never_played">कभी नहीं चलाया गया</string>
+</resources>

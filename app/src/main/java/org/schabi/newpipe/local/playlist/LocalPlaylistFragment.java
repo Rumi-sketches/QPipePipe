@@ -1491,7 +1491,12 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
     }
 
     private PlayQueue getPlayQueue(final int index) {
-        return new SinglePlayQueue(getStreamItems(), index);
+        final PlayQueue queue = new SinglePlayQueue(getStreamItems(), index);
+        // QPipePipe recent queues: videos enqueued later are appended to this playlist
+        if (playlistId != null) {
+            queue.setSourcePlaylistId(playlistId);
+        }
+        return queue;
     }
 
     /** The streams in the order they are shown, which is the order they are queued in. */

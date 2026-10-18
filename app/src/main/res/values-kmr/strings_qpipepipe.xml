@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Taybetmendiyên rêz û xişandinê yên ku vê forkê lê zêde kirine</string>
+    <string name="qpipepipe_category_playback">Lîstin</string>
+    <string name="qpipepipe_category_swipe_actions">Çalakiyên xişandinê</string>
+    <string name="tap_always_plays_title">Lêxistina vîdyoyekê her tim wê dilîze</string>
+    <string name="tap_always_plays_summary">Dema ku tu vîdyoyekê vedikî lîstinê dest pê bike, heta ku lîstina bixweber bi Wi-Fi ve sînorkirî be an jî girtî be. Lîstina bixweber hîn jî ji bo destpêkên bixweber derbas dibe</string>
+    <string name="clear_queue_confirmation_title">Berî paqijkirina rêzekê piştrastkirinê bipirse</string>
+    <string name="clear_queue_confirmation_summary">Derbasbûna ji lîstikvanekî bo yekî din dikare rêza te biguherîne</string>
+    <string name="clear_queue_confirmation_description">Rêza lîstikvanê çalak dê were guhertin</string>
+    <string name="clear_queue_confirmation_play_now">Niha bilîze</string>
+    <string name="enable_swipe_actions_title">Çalakiyên xişandinê li ser vîdyoyan çalak bike</string>
+    <string name="enable_swipe_actions_summary">Ji bo çalakiyeke bilez, vîdyoyekê li rûpela sereke, encamên lêgerînê, lîsteyên lîstinê û komên kanalan ber bi çep an rast ve bixişîne</string>
+    <string name="swipe_left_action_title">Çalakiya xişandina çep</string>
+    <string name="swipe_right_action_title">Çalakiya xişandina rast</string>
+    <string name="enable_swipe_actions_warning_title">Çalakiyên xişandinê çalak bûn</string>
+    <string name="enable_swipe_actions_warning_message">Ji bo ku xişandin bi pêbawerî bixebite rêzikên bi firehiya tevahî hewce ne, ji ber vê yekê li her derê ku çalakiyên xişandinê hene dîtina lîsteyê li şûna dîtina qefes an kartê tê bikaranîn. Tu dikarî vê her dem dîsa bigirî.</string>
+    <string name="swipe_actions_force_list_mode_summary">Dema çalakiyên xişandinê çalak in neçalak e, ji ber ku ew dîtina lîsteyê ferz dikin</string>
+    <string name="remove_from_playlist_swipe_action">Ji lîsteyê rake (tenê lîsteyên lîstinê)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s berdest e</string>
+    <string name="qpipepipe_update_notification_text">Ji bo dakêşandin û sazkirinê bitikîne</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Vê nûvekirinê dakêşî û saz bikî? Android dê ji te bixwaze ku sazkirinê piştrast bikî.</string>
+    <string name="qpipepipe_update_install">Dakêşîne û saz bike</string>
+    <string name="qpipepipe_update_release_notes">Notên weşanê</string>
+    <string name="qpipepipe_update_later">Paşê</string>
+    <string name="qpipepipe_update_downloading">QPipePipe %s tê dakêşandin</string>
+    <string name="qpipepipe_update_download_failed">Dakêşandin bi ser neket. Girêdana xwe kontrol bike û dîsa biceribîne.</string>
+    <string name="qpipepipe_update_wrong_build">Ev avakirin nikare nûvekirinê bi xwe saz bike, mînak ji ber ku avakirineke debugê ye. Li şûna wê APK-ê ji rûpela weşanê dakêşîne.</string>
+    <string name="qpipepipe_update_failed">Nûvekirin nehat sazkirin: %s</string>
+    <string name="playlist_resume_title">Ji cihê ku tu lê mayî bidomîne</string>
+    <string name="playlist_resume_play">Ji #%d bidomîne</string>
+    <string name="playlist_resume_here">Ji vir bidomîne</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Rêzên dawî biparêze</string>
+    <string name="recent_queues_summary">Rêzên ku tu dilîzî di bin Lîsteya lîstinê de nîşan bide, da ku tu paşê wan bidomînî an tomar bikî. Vîdyoyên ku tu li rêzeke ku ji yek ji lîsteyên te dest pê kiriye zêde dikî, li wê lîsteyê jî tên zêdekirin. Rêzên lîste û kanalên YouTube nayên parastin</string>
+    <string name="recent_queues_tab_playlists">Lîsteya lîstinê</string>
+    <string name="recent_queues_tab">Rêzên dawî</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d rêz</item>
+        <item quantity="other">%d rêz, ya herî nû pêşî</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Hemûyan paqij bike</string>
+    <string name="recent_queues_clear_all_message">Hemû rêzên dawî jê bibî? Lîsteyên te yên tomarkirî nayên guhertin.</string>
+    <string name="recent_queues_empty">Rêzên dawî tune. Rêzên ku tu dilîzî li vir xuya dibin.</string>
+    <string name="recent_queue_title">Rêza %s</string>
+    <string name="recent_queue_from_playlist">Ji: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">Ji %2$s ve %1$d vîdyo hat zêdekirin</item>
+        <item quantity="other">Ji %2$s ve %1$d vîdyo hatin zêdekirin</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d vîdyo</item>
+        <item quantity="other">%1$d/%2$d vîdyo</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d vîdyo li %2$s hat zêdekirin</item>
+        <item quantity="other">%1$d vîdyo li %2$s hatin zêdekirin</item>
+    </plurals>
+    <string name="recent_queue_resume">Bidomîne</string>
+    <string name="recent_queue_more">Vebijarkên din</string>
+    <string name="recent_queue_progress">%1$s ji %2$s</string>
+    <string name="recent_queue_save_as_playlist">Wek lîsteya lîstinê tomar bike</string>
+    <string name="recent_queue_open_playlist">Lîsteyê veke</string>
+    <string name="recent_queue_saved">Di Lîsteya lîstinê de hat tomarkirin</string>
+    <string name="recent_queue_deleted">Rêz hat jêbirin</string>
+    <string name="recent_queue_deleted_linked">Rêz hat jêbirin, lîste dimîne</string>
+    <string name="recent_queue_playing_now">Tê lîstin</string>
+    <string name="recent_queue_playing_at">Tê lîstin · %s</string>
+    <string name="recent_queue_watched">Temaşekirî</string>
+    <string name="recent_queue_not_watched">Ji bo temaşekirinê</string>
+    <string name="recent_queue_added">zêdekirî</string>
+    <string name="playlist_never_played">Qet nehatiye lîstin</string>
+</resources>

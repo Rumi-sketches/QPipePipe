@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Funcions de cua i de lliscament afegides per aquest fork</string>
+    <string name="qpipepipe_category_playback">Reproducció</string>
+    <string name="qpipepipe_category_swipe_actions">Accions de lliscament</string>
+    <string name="tap_always_plays_title">Tocar un vídeo sempre el reprodueix</string>
+    <string name="tap_always_plays_summary">Comença la reproducció quan obriu un vídeo, encara que la reproducció automàtica estigui limitada a Wi-Fi o desactivada. La reproducció automàtica continua aplicant-se als inicis automàtics</string>
+    <string name="clear_queue_confirmation_title">Demana confirmació abans de buidar una cua</string>
+    <string name="clear_queue_confirmation_summary">Canviar d\'un reproductor a un altre pot substituir la cua</string>
+    <string name="clear_queue_confirmation_description">Se substituirà la cua del reproductor actiu</string>
+    <string name="clear_queue_confirmation_play_now">Reprodueix ara</string>
+    <string name="enable_swipe_actions_title">Activa les accions de lliscament als vídeos</string>
+    <string name="enable_swipe_actions_summary">Llisqueu un vídeo cap a l\'esquerra o la dreta a la pàgina d\'inici, als resultats de cerca, a les llistes de reproducció i als grups de canals per executar una acció ràpida</string>
+    <string name="swipe_left_action_title">Acció en lliscar a l\'esquerra</string>
+    <string name="swipe_right_action_title">Acció en lliscar a la dreta</string>
+    <string name="enable_swipe_actions_warning_title">Accions de lliscament activades</string>
+    <string name="enable_swipe_actions_warning_message">El lliscament necessita files d\'amplada completa per funcionar bé, de manera que s\'utilitzarà la vista de llista en lloc de quadrícula o targetes allà on hi hagi accions de lliscament. Podeu desactivar-ho en qualsevol moment.</string>
+    <string name="swipe_actions_force_list_mode_summary">Desactivat mentre les accions de lliscament estiguin activades, ja que forcen la vista de llista</string>
+    <string name="remove_from_playlist_swipe_action">Elimina de la llista de reproducció (només llistes de reproducció)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s està disponible</string>
+    <string name="qpipepipe_update_notification_text">Toqueu per baixar i instal·lar</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Voleu baixar i instal·lar aquesta actualització? Android us demanarà que confirmeu la instal·lació.</string>
+    <string name="qpipepipe_update_install">Baixa i instal·la</string>
+    <string name="qpipepipe_update_release_notes">Notes de la versió</string>
+    <string name="qpipepipe_update_later">Més tard</string>
+    <string name="qpipepipe_update_downloading">S\'està baixant QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">La baixada ha fallat. Comproveu la connexió i torneu-ho a provar.</string>
+    <string name="qpipepipe_update_wrong_build">Aquesta compilació no pot instal·lar l\'actualització per si mateixa, per exemple perquè és una compilació de depuració. Baixeu l\'APK des de la pàgina de la versió.</string>
+    <string name="qpipepipe_update_failed">No s\'ha pogut instal·lar l\'actualització: %s</string>
+    <string name="playlist_resume_title">Continua on ho vau deixar</string>
+    <string name="playlist_resume_play">Reprèn des del #%d</string>
+    <string name="playlist_resume_here">Reprèn aquí</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Conserva les cues recents</string>
+    <string name="recent_queues_summary">Mostra les cues que reproduïu a Llistes de reproducció, perquè les pugueu reprendre o desar més tard. Els vídeos que afegiu a una cua iniciada des d\'una de les vostres llistes de reproducció s\'afegeixen a aquesta llista. No es conserven les cues de llistes de reproducció ni de canals de YouTube</string>
+    <string name="recent_queues_tab_playlists">Llistes de reproducció</string>
+    <string name="recent_queues_tab">Cues recents</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d cua</item>
+        <item quantity="other">%d cues, les més recents primer</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Esborra-ho tot</string>
+    <string name="recent_queues_clear_all_message">Voleu eliminar totes les cues recents? Les llistes de reproducció desades no es modifiquen.</string>
+    <string name="recent_queues_empty">No hi ha cues recents. Les cues que reproduïu apareixen aquí.</string>
+    <string name="recent_queue_title">Cua del %s</string>
+    <string name="recent_queue_from_playlist">De: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%1$d vídeo afegit des del %2$s</item>
+        <item quantity="other">%1$d vídeos afegits des del %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d vídeo</item>
+        <item quantity="other">%1$d/%2$d vídeos</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d vídeo afegit a %2$s</item>
+        <item quantity="other">%1$d vídeos afegits a %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Reprèn</string>
+    <string name="recent_queue_more">Més opcions</string>
+    <string name="recent_queue_progress">%1$s de %2$s</string>
+    <string name="recent_queue_save_as_playlist">Desa com a llista de reproducció</string>
+    <string name="recent_queue_open_playlist">Obre la llista de reproducció</string>
+    <string name="recent_queue_saved">Desada a Llistes de reproducció</string>
+    <string name="recent_queue_deleted">S\'ha eliminat la cua</string>
+    <string name="recent_queue_deleted_linked">S\'ha eliminat la cua; la llista de reproducció es manté</string>
+    <string name="recent_queue_playing_now">Reproduint</string>
+    <string name="recent_queue_playing_at">Reproduint · %s</string>
+    <string name="recent_queue_watched">Vist</string>
+    <string name="recent_queue_not_watched">Per veure</string>
+    <string name="recent_queue_added">afegit</string>
+    <string name="playlist_never_played">Mai reproduïda</string>
+</resources>

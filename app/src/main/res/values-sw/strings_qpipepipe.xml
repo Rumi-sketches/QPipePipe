@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Vipengele vya foleni na kutelezesha vilivyoongezwa na fork hii</string>
+    <string name="qpipepipe_category_playback">Uchezaji</string>
+    <string name="qpipepipe_category_swipe_actions">Vitendo vya kutelezesha</string>
+    <string name="tap_always_plays_title">Kugusa video huicheza kila mara</string>
+    <string name="tap_always_plays_summary">Anza kucheza unapofungua video, hata kama Kucheza kiotomatiki kumewekwa kwa Wi-Fi pekee au kumezimwa. Kucheza kiotomatiki bado kunatumika kwa uanzishaji wa kiotomatiki</string>
+    <string name="clear_queue_confirmation_title">Omba uthibitisho kabla ya kufuta foleni</string>
+    <string name="clear_queue_confirmation_summary">Kubadili kutoka kicheza kimoja hadi kingine kunaweza kubadilisha foleni yako</string>
+    <string name="clear_queue_confirmation_description">Foleni ya kicheza kinachotumika itabadilishwa</string>
+    <string name="clear_queue_confirmation_play_now">Cheza sasa</string>
+    <string name="enable_swipe_actions_title">Washa vitendo vya kutelezesha kwenye video</string>
+    <string name="enable_swipe_actions_summary">Telezesha video kushoto au kulia kwenye ukurasa wa mwanzo, matokeo ya utafutaji, orodha za kucheza na vikundi vya chaneli ili kufanya kitendo cha haraka</string>
+    <string name="swipe_left_action_title">Kitendo cha kutelezesha kushoto</string>
+    <string name="swipe_right_action_title">Kitendo cha kutelezesha kulia</string>
+    <string name="enable_swipe_actions_warning_title">Vitendo vya kutelezesha vimewashwa</string>
+    <string name="enable_swipe_actions_warning_message">Kutelezesha kunahitaji safu za upana kamili ili kufanya kazi vizuri, kwa hiyo mwonekano wa orodha utatumika badala ya mwonekano wa gridi au kadi popote vitendo vya kutelezesha vinapopatikana. Unaweza kuzima hili tena wakati wowote.</string>
+    <string name="swipe_actions_force_list_mode_summary">Imezimwa wakati vitendo vya kutelezesha vimewashwa, kwa kuwa vinalazimisha mwonekano wa orodha</string>
+    <string name="remove_from_playlist_swipe_action">Ondoa kwenye orodha ya kucheza (orodha za kucheza pekee)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s inapatikana</string>
+    <string name="qpipepipe_update_notification_text">Gusa ili kupakua na kusakinisha</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Ungependa kupakua na kusakinisha sasisho hili? Android itakuomba uthibitishe usakinishaji.</string>
+    <string name="qpipepipe_update_install">Pakua na usakinishe</string>
+    <string name="qpipepipe_update_release_notes">Maelezo ya toleo</string>
+    <string name="qpipepipe_update_later">Baadaye</string>
+    <string name="qpipepipe_update_downloading">Inapakua QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">Upakuaji umeshindikana. Angalia muunganisho wako kisha ujaribu tena.</string>
+    <string name="qpipepipe_update_wrong_build">Muundo huu hauwezi kusakinisha sasisho wenyewe, kwa mfano kwa sababu ni muundo wa majaribio (debug). Badala yake pakua APK kutoka ukurasa wa matoleo.</string>
+    <string name="qpipepipe_update_failed">Sasisho halikuweza kusakinishwa: %s</string>
+    <string name="playlist_resume_title">Endelea ulipoachia</string>
+    <string name="playlist_resume_play">Endelea kutoka #%d</string>
+    <string name="playlist_resume_here">Endelea hapa</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Hifadhi foleni za hivi karibuni</string>
+    <string name="recent_queues_summary">Orodhesha foleni unazocheza chini ya Orodha za kucheza, ili uweze kuziendeleza au kuzihifadhi baadaye. Video unazoongeza kwenye foleni iliyoanzishwa kutoka kwenye mojawapo ya orodha zako za kucheza huongezwa kwenye orodha hiyo. Foleni za orodha za kucheza na chaneli za YouTube hazihifadhiwi</string>
+    <string name="recent_queues_tab_playlists">Orodha za kucheza</string>
+    <string name="recent_queues_tab">Foleni za karibuni</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">Foleni %d</item>
+        <item quantity="other">Foleni %d, mpya kwanza</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Futa zote</string>
+    <string name="recent_queues_clear_all_message">Ungependa kufuta foleni zote za hivi karibuni? Orodha zako za kucheza zilizohifadhiwa haziguswi.</string>
+    <string name="recent_queues_empty">Hakuna foleni za hivi karibuni. Foleni unazocheza huonekana hapa.</string>
+    <string name="recent_queue_title">Foleni ya %s</string>
+    <string name="recent_queue_from_playlist">Kutoka: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">Video %1$d imeongezwa tangu %2$s</item>
+        <item quantity="other">Video %1$d zimeongezwa tangu %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">Video %1$d/%2$d</item>
+        <item quantity="other">Video %1$d/%2$d</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">Video %1$d imeongezwa kwenye %2$s</item>
+        <item quantity="other">Video %1$d zimeongezwa kwenye %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Endelea</string>
+    <string name="recent_queue_more">Chaguo zaidi</string>
+    <string name="recent_queue_progress">%1$s kati ya %2$s</string>
+    <string name="recent_queue_save_as_playlist">Hifadhi kama orodha ya kucheza</string>
+    <string name="recent_queue_open_playlist">Fungua orodha ya kucheza</string>
+    <string name="recent_queue_saved">Imehifadhiwa kwenye Orodha za kucheza</string>
+    <string name="recent_queue_deleted">Foleni imefutwa</string>
+    <string name="recent_queue_deleted_linked">Foleni imefutwa, orodha ya kucheza inabaki</string>
+    <string name="recent_queue_playing_now">Inacheza</string>
+    <string name="recent_queue_playing_at">Inacheza · %s</string>
+    <string name="recent_queue_watched">Imetazamwa</string>
+    <string name="recent_queue_not_watched">Ya kutazama</string>
+    <string name="recent_queue_added">imeongezwa</string>
+    <string name="playlist_never_played">Haijawahi kuchezwa</string>
+</resources>

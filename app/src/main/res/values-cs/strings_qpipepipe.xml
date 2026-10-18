@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Funkce fronty a přejetí přidané tímto forkem</string>
+    <string name="qpipepipe_category_playback">Přehrávání</string>
+    <string name="qpipepipe_category_swipe_actions">Akce přejetím</string>
+    <string name="tap_always_plays_title">Klepnutí na video ho vždy přehraje</string>
+    <string name="tap_always_plays_summary">Spustit přehrávání při otevření videa, i když je automatické přehrávání omezeno na Wi-Fi nebo vypnuto. Automatické přehrávání nadále platí pro automatická spuštění</string>
+    <string name="clear_queue_confirmation_title">Vyžádat potvrzení před vymazáním fronty</string>
+    <string name="clear_queue_confirmation_summary">Přepnutí z jednoho přehrávače na jiný může nahradit vaši frontu</string>
+    <string name="clear_queue_confirmation_description">Fronta aktivního přehrávače bude nahrazena</string>
+    <string name="clear_queue_confirmation_play_now">Přehrát nyní</string>
+    <string name="enable_swipe_actions_title">Povolit akce přejetím na videích</string>
+    <string name="enable_swipe_actions_summary">Přejeďte videem doleva nebo doprava na domovské stránce, ve výsledcích vyhledávání, playlistech a skupinách kanálů a proveďte rychlou akci</string>
+    <string name="swipe_left_action_title">Akce přejetím doleva</string>
+    <string name="swipe_right_action_title">Akce přejetím doprava</string>
+    <string name="enable_swipe_actions_warning_title">Akce přejetím povoleny</string>
+    <string name="enable_swipe_actions_warning_message">Přejetí spolehlivě funguje jen s řádky přes celou šířku, proto se všude, kde jsou akce přejetím k dispozici, použije zobrazení seznamu místo mřížky nebo karet. Kdykoli to můžete znovu vypnout.</string>
+    <string name="swipe_actions_force_list_mode_summary">Nedostupné, dokud jsou povoleny akce přejetím, které vynucují zobrazení seznamu</string>
+    <string name="remove_from_playlist_swipe_action">Odebrat z playlistu (jen v playlistech)</string>
+    <string name="qpipepipe_update_notification_title">Je k dispozici QPipePipe %s</string>
+    <string name="qpipepipe_update_notification_text">Klepněte pro stažení a instalaci</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Stáhnout a nainstalovat tuto aktualizaci? Android vás požádá o potvrzení instalace.</string>
+    <string name="qpipepipe_update_install">Stáhnout a nainstalovat</string>
+    <string name="qpipepipe_update_release_notes">Poznámky k vydání</string>
+    <string name="qpipepipe_update_later">Později</string>
+    <string name="qpipepipe_update_downloading">Stahování QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">Stahování selhalo. Zkontrolujte připojení a zkuste to znovu.</string>
+    <string name="qpipepipe_update_wrong_build">Toto sestavení nemůže aktualizaci nainstalovat samo, například protože jde o ladicí sestavení. Stáhněte si místo toho APK ze stránky vydání.</string>
+    <string name="qpipepipe_update_failed">Aktualizaci se nepodařilo nainstalovat: %s</string>
+    <string name="playlist_resume_title">Pokračujte tam, kde jste skončili</string>
+    <string name="playlist_resume_play">Pokračovat od #%d</string>
+    <string name="playlist_resume_here">Pokračovat odsud</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Uchovávat nedávné fronty</string>
+    <string name="recent_queues_summary">Zobrazuje přehrávané fronty v části Playlisty, abyste v nich mohli později pokračovat nebo je uložit. Videa, která přidáte do fronty spuštěné z vašeho playlistu, se přidají do tohoto playlistu. Fronty playlistů a kanálů YouTube se neuchovávají</string>
+    <string name="recent_queues_tab_playlists">Playlisty</string>
+    <string name="recent_queues_tab">Nedávné fronty</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d fronta</item>
+        <item quantity="few">%d fronty, nejnovější první</item>
+        <item quantity="other">%d front, nejnovější první</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Vymazat vše</string>
+    <string name="recent_queues_clear_all_message">Smazat všechny nedávné fronty? Uložené playlisty zůstanou nedotčeny.</string>
+    <string name="recent_queues_empty">Žádné nedávné fronty. Zobrazí se zde fronty, které přehrajete.</string>
+    <string name="recent_queue_title">Fronta z %s</string>
+    <string name="recent_queue_from_playlist">Z: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%1$d video přidáno od %2$s</item>
+        <item quantity="few">%1$d videa přidána od %2$s</item>
+        <item quantity="other">%1$d videí přidáno od %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d video</item>
+        <item quantity="few">%1$d/%2$d videa</item>
+        <item quantity="other">%1$d/%2$d videí</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d video přidáno do %2$s</item>
+        <item quantity="few">%1$d videa přidána do %2$s</item>
+        <item quantity="other">%1$d videí přidáno do %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Pokračovat</string>
+    <string name="recent_queue_more">Další možnosti</string>
+    <string name="recent_queue_progress">%1$s z %2$s</string>
+    <string name="recent_queue_save_as_playlist">Uložit jako playlist</string>
+    <string name="recent_queue_open_playlist">Otevřít playlist</string>
+    <string name="recent_queue_saved">Uloženo v Playlistech</string>
+    <string name="recent_queue_deleted">Fronta smazána</string>
+    <string name="recent_queue_deleted_linked">Fronta smazána, playlist zůstává</string>
+    <string name="recent_queue_playing_now">Přehrává se</string>
+    <string name="recent_queue_playing_at">Přehrává se · %s</string>
+    <string name="recent_queue_watched">Zhlédnuto</string>
+    <string name="recent_queue_not_watched">Ke zhlédnutí</string>
+    <string name="recent_queue_added">přidáno</string>
+    <string name="playlist_never_played">Nikdy nepřehráno</string>
+</resources>

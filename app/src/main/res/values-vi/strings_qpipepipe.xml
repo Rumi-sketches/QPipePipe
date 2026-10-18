@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Các tính năng hàng chờ và vuốt do bản fork này bổ sung</string>
+    <string name="qpipepipe_category_playback">Phát lại</string>
+    <string name="qpipepipe_category_swipe_actions">Thao tác vuốt</string>
+    <string name="tap_always_plays_title">Chạm vào video luôn phát video</string>
+    <string name="tap_always_plays_summary">Bắt đầu phát khi bạn mở video, kể cả khi Tự động phát bị giới hạn ở Wi-Fi hoặc đã tắt. Tự động phát vẫn áp dụng cho các lần tự bắt đầu phát</string>
+    <string name="clear_queue_confirmation_title">Yêu cầu xác nhận trước khi xóa hàng chờ</string>
+    <string name="clear_queue_confirmation_summary">Chuyển từ trình phát này sang trình phát khác có thể thay thế hàng chờ của bạn</string>
+    <string name="clear_queue_confirmation_description">Hàng chờ của trình phát hiện tại sẽ bị thay thế</string>
+    <string name="clear_queue_confirmation_play_now">Phát ngay</string>
+    <string name="enable_swipe_actions_title">Bật thao tác vuốt trên video</string>
+    <string name="enable_swipe_actions_summary">Vuốt video sang trái hoặc phải trên trang chủ, kết quả tìm kiếm, danh sách phát và nhóm kênh để thực hiện thao tác nhanh</string>
+    <string name="swipe_left_action_title">Thao tác khi vuốt sang trái</string>
+    <string name="swipe_right_action_title">Thao tác khi vuốt sang phải</string>
+    <string name="enable_swipe_actions_warning_title">Đã bật thao tác vuốt</string>
+    <string name="enable_swipe_actions_warning_message">Thao tác vuốt cần các hàng có chiều rộng đầy đủ để hoạt động ổn định, vì vậy chế độ xem danh sách sẽ được dùng thay cho chế độ lưới hoặc thẻ ở những nơi có thao tác vuốt. Bạn có thể tắt lại bất cứ lúc nào.</string>
+    <string name="swipe_actions_force_list_mode_summary">Bị tắt khi thao tác vuốt đang bật, vì khi đó luôn dùng chế độ xem danh sách</string>
+    <string name="remove_from_playlist_swipe_action">Xóa khỏi danh sách phát (chỉ trong danh sách phát)</string>
+    <string name="qpipepipe_update_notification_title">Đã có QPipePipe %s</string>
+    <string name="qpipepipe_update_notification_text">Chạm để tải xuống và cài đặt</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Tải xuống và cài đặt bản cập nhật này? Android sẽ yêu cầu bạn xác nhận việc cài đặt.</string>
+    <string name="qpipepipe_update_install">Tải xuống và cài đặt</string>
+    <string name="qpipepipe_update_release_notes">Ghi chú phát hành</string>
+    <string name="qpipepipe_update_later">Để sau</string>
+    <string name="qpipepipe_update_downloading">Đang tải xuống QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">Tải xuống thất bại. Hãy kiểm tra kết nối và thử lại.</string>
+    <string name="qpipepipe_update_wrong_build">Bản dựng này không thể tự cài đặt bản cập nhật, ví dụ vì đây là bản dựng gỡ lỗi. Hãy tải APK từ trang phát hành.</string>
+    <string name="qpipepipe_update_failed">Không thể cài đặt bản cập nhật: %s</string>
+    <string name="playlist_resume_title">Tiếp tục từ chỗ bạn dừng lại</string>
+    <string name="playlist_resume_play">Tiếp tục từ #%d</string>
+    <string name="playlist_resume_here">Tiếp tục từ đây</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Giữ các hàng chờ gần đây</string>
+    <string name="recent_queues_summary">Liệt kê các hàng chờ bạn đã phát trong Danh sách phát để có thể tiếp tục hoặc lưu lại sau. Video bạn thêm vào hàng chờ bắt đầu từ một danh sách phát của bạn sẽ được thêm vào danh sách phát đó. Hàng chờ của danh sách phát và kênh YouTube không được giữ lại</string>
+    <string name="recent_queues_tab_playlists">Danh sách phát</string>
+    <string name="recent_queues_tab">Hàng chờ gần đây</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d hàng chờ</item>
+        <item quantity="other">%d hàng chờ, mới nhất trước</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Xóa tất cả</string>
+    <string name="recent_queues_clear_all_message">Xóa tất cả hàng chờ gần đây? Các danh sách phát đã lưu không bị ảnh hưởng.</string>
+    <string name="recent_queues_empty">Không có hàng chờ gần đây. Các hàng chờ bạn phát sẽ xuất hiện ở đây.</string>
+    <string name="recent_queue_title">Hàng chờ lúc %s</string>
+    <string name="recent_queue_from_playlist">Từ: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">Đã thêm %1$d video kể từ %2$s</item>
+        <item quantity="other">Đã thêm %1$d video kể từ %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d video</item>
+        <item quantity="other">%1$d/%2$d video</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">Đã thêm %1$d video vào %2$s</item>
+        <item quantity="other">Đã thêm %1$d video vào %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Tiếp tục</string>
+    <string name="recent_queue_more">Tùy chọn khác</string>
+    <string name="recent_queue_progress">%1$s / %2$s</string>
+    <string name="recent_queue_save_as_playlist">Lưu thành danh sách phát</string>
+    <string name="recent_queue_open_playlist">Mở danh sách phát</string>
+    <string name="recent_queue_saved">Đã lưu vào Danh sách phát</string>
+    <string name="recent_queue_deleted">Đã xóa hàng chờ</string>
+    <string name="recent_queue_deleted_linked">Đã xóa hàng chờ, danh sách phát vẫn được giữ</string>
+    <string name="recent_queue_playing_now">Đang phát</string>
+    <string name="recent_queue_playing_at">Đang phát · %s</string>
+    <string name="recent_queue_watched">Đã xem</string>
+    <string name="recent_queue_not_watched">Chưa xem</string>
+    <string name="recent_queue_added">đã thêm</string>
+    <string name="playlist_never_played">Chưa từng phát</string>
+</resources>

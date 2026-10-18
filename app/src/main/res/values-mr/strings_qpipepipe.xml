@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">या फोर्कमध्ये जोडलेली रांग आणि स्वाइप वैशिष्ट्ये</string>
+    <string name="qpipepipe_category_playback">प्लेबॅक</string>
+    <string name="qpipepipe_category_swipe_actions">स्वाइप क्रिया</string>
+    <string name="tap_always_plays_title">व्हिडिओवर टॅप केल्यास तो नेहमी सुरू होतो</string>
+    <string name="tap_always_plays_summary">व्हिडिओ उघडताच प्लेबॅक सुरू करा, ऑटोप्ले Wi-Fi पुरता मर्यादित किंवा बंद असला तरी. आपोआप सुरू होण्यासाठी ऑटोप्ले लागू राहतो</string>
+    <string name="clear_queue_confirmation_title">रांग साफ करण्यापूर्वी पुष्टी विचारा</string>
+    <string name="clear_queue_confirmation_summary">एका प्लेयरवरून दुसऱ्या प्लेयरवर गेल्यास तुमची रांग बदलू शकते</string>
+    <string name="clear_queue_confirmation_description">सक्रिय प्लेयरची रांग बदलली जाईल</string>
+    <string name="clear_queue_confirmation_play_now">आता प्ले करा</string>
+    <string name="enable_swipe_actions_title">व्हिडिओवर स्वाइप क्रिया सुरू करा</string>
+    <string name="enable_swipe_actions_summary">मुख्यपृष्ठ, शोध परिणाम, प्लेलिस्ट आणि चॅनेल गटांमध्ये व्हिडिओ डावीकडे किंवा उजवीकडे स्वाइप करून झटपट क्रिया करा</string>
+    <string name="swipe_left_action_title">डावीकडे स्वाइपची क्रिया</string>
+    <string name="swipe_right_action_title">उजवीकडे स्वाइपची क्रिया</string>
+    <string name="enable_swipe_actions_warning_title">स्वाइप क्रिया सुरू केल्या</string>
+    <string name="enable_swipe_actions_warning_message">स्वाइप नीट चालण्यासाठी पूर्ण रुंदीच्या ओळी लागतात, म्हणून जिथे स्वाइप क्रिया उपलब्ध आहेत तिथे ग्रिड किंवा कार्ड दृश्याऐवजी यादी दृश्य वापरले जाईल. तुम्ही हे कधीही पुन्हा बंद करू शकता.</string>
+    <string name="swipe_actions_force_list_mode_summary">स्वाइप क्रिया सुरू असताना बंद, कारण त्या यादी दृश्य लागू करतात</string>
+    <string name="remove_from_playlist_swipe_action">प्लेलिस्टमधून काढा (फक्त प्लेलिस्टमध्ये)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s उपलब्ध आहे</string>
+    <string name="qpipepipe_update_notification_text">डाउनलोड आणि इंस्टॉल करण्यासाठी टॅप करा</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">हे अपडेट डाउनलोड आणि इंस्टॉल करायचे? Android तुम्हाला इंस्टॉलेशनची पुष्टी करण्यास सांगेल.</string>
+    <string name="qpipepipe_update_install">डाउनलोड आणि इंस्टॉल करा</string>
+    <string name="qpipepipe_update_release_notes">रिलीज नोट्स</string>
+    <string name="qpipepipe_update_later">नंतर</string>
+    <string name="qpipepipe_update_downloading">QPipePipe %s डाउनलोड होत आहे</string>
+    <string name="qpipepipe_update_download_failed">डाउनलोड अयशस्वी झाले. तुमचे कनेक्शन तपासा आणि पुन्हा प्रयत्न करा.</string>
+    <string name="qpipepipe_update_wrong_build">हा बिल्ड स्वतः अपडेट इंस्टॉल करू शकत नाही, उदाहरणार्थ तो डीबग बिल्ड असल्यामुळे. त्याऐवजी रिलीज पेजवरून APK डाउनलोड करा.</string>
+    <string name="qpipepipe_update_failed">अपडेट इंस्टॉल करता आले नाही: %s</string>
+    <string name="playlist_resume_title">जिथे थांबला होता तिथून पुढे सुरू ठेवा</string>
+    <string name="playlist_resume_play">#%d पासून पुन्हा सुरू करा</string>
+    <string name="playlist_resume_here">येथून पुन्हा सुरू करा</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">अलीकडील रांगा ठेवा</string>
+    <string name="recent_queues_summary">तुम्ही प्ले केलेल्या रांगा प्लेलिस्टखाली दाखवा, म्हणजे त्या नंतर पुन्हा सुरू किंवा सेव्ह करता येतील. तुमच्या एखाद्या प्लेलिस्टमधून सुरू झालेल्या रांगेत जोडलेले व्हिडिओ त्या प्लेलिस्टमध्येही जोडले जातात. YouTube प्लेलिस्ट आणि चॅनेलच्या रांगा ठेवल्या जात नाहीत</string>
+    <string name="recent_queues_tab_playlists">प्लेलिस्ट</string>
+    <string name="recent_queues_tab">अलीकडील रांगा</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d रांग</item>
+        <item quantity="other">%d रांगा, नवीन आधी</item>
+    </plurals>
+    <string name="recent_queues_clear_all">सर्व साफ करा</string>
+    <string name="recent_queues_clear_all_message">सर्व अलीकडील रांगा हटवायच्या? तुमच्या सेव्ह केलेल्या प्लेलिस्टना धक्का लागणार नाही.</string>
+    <string name="recent_queues_empty">अलीकडील रांगा नाहीत. तुम्ही प्ले केलेल्या रांगा येथे दिसतील.</string>
+    <string name="recent_queue_title">%s ची रांग</string>
+    <string name="recent_queue_from_playlist">येथून: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%2$s पासून %1$d व्हिडिओ जोडला</item>
+        <item quantity="other">%2$s पासून %1$d व्हिडिओ जोडले</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d व्हिडिओ</item>
+        <item quantity="other">%1$d/%2$d व्हिडिओ</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d व्हिडिओ %2$s मध्ये जोडला</item>
+        <item quantity="other">%1$d व्हिडिओ %2$s मध्ये जोडले</item>
+    </plurals>
+    <string name="recent_queue_resume">पुन्हा सुरू करा</string>
+    <string name="recent_queue_more">आणखी पर्याय</string>
+    <string name="recent_queue_progress">%2$s पैकी %1$s</string>
+    <string name="recent_queue_save_as_playlist">प्लेलिस्ट म्हणून सेव्ह करा</string>
+    <string name="recent_queue_open_playlist">प्लेलिस्ट उघडा</string>
+    <string name="recent_queue_saved">प्लेलिस्टमध्ये सेव्ह केले</string>
+    <string name="recent_queue_deleted">रांग हटवली</string>
+    <string name="recent_queue_deleted_linked">रांग हटवली, प्लेलिस्ट राहील</string>
+    <string name="recent_queue_playing_now">प्ले होत आहे</string>
+    <string name="recent_queue_playing_at">प्ले होत आहे · %s</string>
+    <string name="recent_queue_watched">पाहिलेले</string>
+    <string name="recent_queue_not_watched">पाहायचे आहे</string>
+    <string name="recent_queue_added">जोडलेले</string>
+    <string name="playlist_never_played">कधीही प्ले केले नाही</string>
+</resources>

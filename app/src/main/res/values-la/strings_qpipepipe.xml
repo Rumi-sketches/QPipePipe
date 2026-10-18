@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Facultates ordinum et tractuum ab hac versione derivata additae</string>
+    <string name="qpipepipe_category_playback">Lusus</string>
+    <string name="qpipepipe_category_swipe_actions">Actiones tractus</string>
+    <string name="tap_always_plays_title">Tactus videi semper id ludit</string>
+    <string name="tap_always_plays_summary">Ludum incipit cum videum aperis, etiam si lusus automaticus ad Wi-Fi limitatur aut exstinctus est. Lusus automaticus tamen ad initia automatica pertinet</string>
+    <string name="clear_queue_confirmation_title">Confirmationem pete antequam ordinem vacuas</string>
+    <string name="clear_queue_confirmation_summary">Transitus ab uno lusore ad alium ordinem tuum substituere potest</string>
+    <string name="clear_queue_confirmation_description">Ordo lusoris activi substituetur</string>
+    <string name="clear_queue_confirmation_play_now">Lude nunc</string>
+    <string name="enable_swipe_actions_title">Actiones tractus in videis activa</string>
+    <string name="enable_swipe_actions_summary">Videum sinistrorsum aut dextrorsum trahe in pagina principali, in eventibus quaerendi, in indicibus et in gregibus canalium ut actionem celerem efficias</string>
+    <string name="swipe_left_action_title">Actio tractus sinistrorsum</string>
+    <string name="swipe_right_action_title">Actio tractus dextrorsum</string>
+    <string name="enable_swipe_actions_warning_title">Actiones tractus activatae</string>
+    <string name="enable_swipe_actions_warning_message">Tractus ordines plenae latitudinis requirit ut bene operetur, itaque species catalogi pro craticula aut chartis adhibebitur ubicumque actiones tractus praesto sunt. Hoc quandocumque iterum exstinguere potes.</string>
+    <string name="swipe_actions_force_list_mode_summary">Inactivum dum actiones tractus activae sunt, quae speciem catalogi imponunt</string>
+    <string name="remove_from_playlist_swipe_action">Ex indice remove (indices tantum)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s praesto est</string>
+    <string name="qpipepipe_update_notification_text">Tange ut demittas et instituas</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Hanc renovationem demittere et instituere? Android te rogabit ut institutionem confirmes.</string>
+    <string name="qpipepipe_update_install">Demitte et institue</string>
+    <string name="qpipepipe_update_release_notes">Notae editionis</string>
+    <string name="qpipepipe_update_later">Postea</string>
+    <string name="qpipepipe_update_downloading">QPipePipe %s demittitur</string>
+    <string name="qpipepipe_update_download_failed">Demissio defecit. Conexionem tuam inspice et iterum conare.</string>
+    <string name="qpipepipe_update_wrong_build">Haec aedificatio renovationem ipsa instituere non potest, exempli gratia quia aedificatio ad vitia quaerenda est. APK ex pagina editionis potius demitte.</string>
+    <string name="qpipepipe_update_failed">Renovatio institui non potuit: %s</string>
+    <string name="playlist_resume_title">Perge unde desiisti</string>
+    <string name="playlist_resume_play">Resume a #%d</string>
+    <string name="playlist_resume_here">Hic resume</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Ordines recentes serva</string>
+    <string name="recent_queues_summary">Ordines quos ludis sub Indicibus enumerat, ut eos postea resumere aut servare possis. Videa quae ordini ex uno indicum tuorum incepto addis, illi indici adduntur. Ordines indicum et canalium YouTube non servantur</string>
+    <string name="recent_queues_tab_playlists">Indices</string>
+    <string name="recent_queues_tab">Ordines recentes</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d ordo</item>
+        <item quantity="other">%d ordines, novissimi primum</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Omnia dele</string>
+    <string name="recent_queues_clear_all_message">Omnesne ordines recentes delere? Indices tui servati non tanguntur.</string>
+    <string name="recent_queues_empty">Nulli ordines recentes. Ordines quos ludis hic apparent.</string>
+    <string name="recent_queue_title">Ordo de %s</string>
+    <string name="recent_queue_from_playlist">Ex: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%1$d videum additum ab %2$s</item>
+        <item quantity="other">%1$d videa addita ab %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d videum</item>
+        <item quantity="other">%1$d/%2$d videa</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d videum ad %2$s additum</item>
+        <item quantity="other">%1$d videa ad %2$s addita</item>
+    </plurals>
+    <string name="recent_queue_resume">Resume</string>
+    <string name="recent_queue_more">Plures optiones</string>
+    <string name="recent_queue_progress">%1$s ex %2$s</string>
+    <string name="recent_queue_save_as_playlist">Ut indicem serva</string>
+    <string name="recent_queue_open_playlist">Indicem aperi</string>
+    <string name="recent_queue_saved">In Indicibus servatum</string>
+    <string name="recent_queue_deleted">Ordo deletus</string>
+    <string name="recent_queue_deleted_linked">Ordo deletus, index manet</string>
+    <string name="recent_queue_playing_now">Luditur</string>
+    <string name="recent_queue_playing_at">Luditur · %s</string>
+    <string name="recent_queue_watched">Visum</string>
+    <string name="recent_queue_not_watched">Videndum</string>
+    <string name="recent_queue_added">additum</string>
+    <string name="playlist_never_played">Numquam lusum</string>
+</resources>

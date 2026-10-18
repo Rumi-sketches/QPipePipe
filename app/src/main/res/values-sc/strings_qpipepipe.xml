@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Funtziones de lista e de trìsinu annànghidas dae custu fork</string>
+    <string name="qpipepipe_category_playback">Riprodutzione</string>
+    <string name="qpipepipe_category_swipe_actions">Atziones de trìsinu</string>
+    <string name="tap_always_plays_title">Tochende unu vìdeu, si riproduit semper</string>
+    <string name="tap_always_plays_summary">Incumintza sa riprodutzione cando aberis unu vìdeu, fintzas si sa riprodutzione automàtica est limitada a su Wi-Fi o disativada. Sa riprodutzione automàtica abarrat vàlida pro sos aviamentos automàticos</string>
+    <string name="clear_queue_confirmation_title">Pedi una cunfirma in antis de isbuidare una lista</string>
+    <string name="clear_queue_confirmation_summary">Passende dae unu riproduidore a un àteru, sa lista tua si podet sostituire</string>
+    <string name="clear_queue_confirmation_description">Sa lista de su riproduidore ativu at a èssere sostituida</string>
+    <string name="clear_queue_confirmation_play_now">Riprodui immoe</string>
+    <string name="enable_swipe_actions_title">Ativa sas atziones de trìsinu in sos vìdeos</string>
+    <string name="enable_swipe_actions_summary">Trìsina unu vìdeu a manca o a dereta in sa pàgina printzipale, in sos resurtados de chirca, in sas iscalitas e in sos grupos de canales pro faghere un\'atzione lestra</string>
+    <string name="swipe_left_action_title">Atzione trisinende a manca</string>
+    <string name="swipe_right_action_title">Atzione trisinende a dereta</string>
+    <string name="enable_swipe_actions_warning_title">Atziones de trìsinu ativadas</string>
+    <string name="enable_swipe_actions_warning_message">Pro funtzionare bene, su trìsinu tenet bisòngiu de rigas a largària intrea, duncas at a èssere impreada sa vista de lista imbetze de sa grìllia o de sas ischedas in ue sas atziones de trìsinu sunt a disponimentu. Lu podes disativare cando boles.</string>
+    <string name="swipe_actions_force_list_mode_summary">Disativadu cando sas atziones de trìsinu sunt ativas, ca impònent sa vista de lista</string>
+    <string name="remove_from_playlist_swipe_action">Boga dae s\'iscalita (isceti iscalitas)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s est a disponimentu</string>
+    <string name="qpipepipe_update_notification_text">Toca pro iscarrigare e installare</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Cheres iscarrigare e installare custu agiornamentu? Android t\'at a pedire de cunfirmare s\'installatzione.</string>
+    <string name="qpipepipe_update_install">Iscàrriga e installa</string>
+    <string name="qpipepipe_update_release_notes">Notas de sa versione</string>
+    <string name="qpipepipe_update_later">Prus a tardu</string>
+    <string name="qpipepipe_update_downloading">Iscarrighende QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">S\'iscarrigamentu no est andadu bene. Controlla sa connessione e torra a proare.</string>
+    <string name="qpipepipe_update_wrong_build">Custa build non podet installare s\'agiornamentu a sa sola, pro esempru ca est una build de debug. Iscàrriga s\'APK dae sa pàgina de sa versione.</string>
+    <string name="qpipepipe_update_failed">Impossìbile installare s\'agiornamentu: %s</string>
+    <string name="playlist_resume_title">Sighi dae ue ti fias firmadu</string>
+    <string name="playlist_resume_play">Sighi dae su #%d</string>
+    <string name="playlist_resume_here">Sighi dae inoghe</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Mantene sas listas reghentes</string>
+    <string name="recent_queues_summary">Elencat sas listas chi riproduis in Iscalitas, gai las podes sighire o sarvare a pustis. Sos vìdeos chi annanghes a una lista aviada dae una de sas iscalitas tuas benint annànghidos a cudda iscalita. Sas listas de iscalitas e canales de YouTube non benint mantentas</string>
+    <string name="recent_queues_tab_playlists">Iscalitas</string>
+    <string name="recent_queues_tab">Listas reghentes</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d lista</item>
+        <item quantity="other">%d listas, dae sa prus reghente</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Iscantzella totu</string>
+    <string name="recent_queues_clear_all_message">Iscantzellare totu sas listas reghentes? Sas iscalitas sarvadas tuas no benint tocadas.</string>
+    <string name="recent_queues_empty">Peruna lista reghente. Sas listas chi riproduis aparent inoghe.</string>
+    <string name="recent_queue_title">Lista de su %s</string>
+    <string name="recent_queue_from_playlist">Dae: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%1$d vìdeu annànghidu dae su %2$s</item>
+        <item quantity="other">%1$d vìdeos annànghidos dae su %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d vìdeu</item>
+        <item quantity="other">%1$d/%2$d vìdeos</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d vìdeu annànghidu a %2$s</item>
+        <item quantity="other">%1$d vìdeos annànghidos a %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Sighi</string>
+    <string name="recent_queue_more">Àteras optziones</string>
+    <string name="recent_queue_progress">%1$s de %2$s</string>
+    <string name="recent_queue_save_as_playlist">Sarva comente iscalita</string>
+    <string name="recent_queue_open_playlist">Aberi s\'iscalita</string>
+    <string name="recent_queue_saved">Sarvada in Iscalitas</string>
+    <string name="recent_queue_deleted">Lista iscantzellada</string>
+    <string name="recent_queue_deleted_linked">Lista iscantzellada, s\'iscalita abarrat</string>
+    <string name="recent_queue_playing_now">In riprodutzione</string>
+    <string name="recent_queue_playing_at">In riprodutzione · %s</string>
+    <string name="recent_queue_watched">Pompiadu</string>
+    <string name="recent_queue_not_watched">De pompiare</string>
+    <string name="recent_queue_added">annànghidu</string>
+    <string name="playlist_never_played">Mai riproduida</string>
+</resources>

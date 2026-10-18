@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Ciri giliran dan leret yang ditambah oleh fork ini</string>
+    <string name="qpipepipe_category_playback">Main balik</string>
+    <string name="qpipepipe_category_swipe_actions">Tindakan leret</string>
+    <string name="tap_always_plays_title">Ketik video sentiasa memainkannya</string>
+    <string name="tap_always_plays_summary">Mula memain apabila anda membuka video, walaupun Auto main dihadkan kepada Wi-Fi atau dimatikan. Auto main masih digunakan untuk permulaan automatik</string>
+    <string name="clear_queue_confirmation_title">Minta pengesahan sebelum mengosongkan giliran</string>
+    <string name="clear_queue_confirmation_summary">Bertukar dari satu pemain ke pemain lain mungkin menggantikan giliran anda</string>
+    <string name="clear_queue_confirmation_description">Giliran pemain yang aktif akan diganti</string>
+    <string name="clear_queue_confirmation_play_now">Main sekarang</string>
+    <string name="enable_swipe_actions_title">Dayakan tindakan leret pada video</string>
+    <string name="enable_swipe_actions_summary">Leret video ke kiri atau kanan di halaman utama, hasil carian, senarai main dan kumpulan saluran untuk mencetuskan tindakan pantas</string>
+    <string name="swipe_left_action_title">Tindakan leret ke kiri</string>
+    <string name="swipe_right_action_title">Tindakan leret ke kanan</string>
+    <string name="enable_swipe_actions_warning_title">Tindakan leret didayakan</string>
+    <string name="enable_swipe_actions_warning_message">Leretan memerlukan baris selebar skrin untuk berfungsi dengan baik, jadi paparan senarai akan digunakan dan bukannya paparan grid atau kad di mana-mana tindakan leret tersedia. Anda boleh mematikannya semula pada bila-bila masa.</string>
+    <string name="swipe_actions_force_list_mode_summary">Dilumpuhkan semasa tindakan leret didayakan, kerana paparan senarai dipaksa</string>
+    <string name="remove_from_playlist_swipe_action">Alih keluar daripada senarai main (senarai main sahaja)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s tersedia</string>
+    <string name="qpipepipe_update_notification_text">Ketik untuk muat turun dan pasang</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Muat turun dan pasang kemas kini ini? Android akan meminta anda mengesahkan pemasangan.</string>
+    <string name="qpipepipe_update_install">Muat turun dan pasang</string>
+    <string name="qpipepipe_update_release_notes">Nota keluaran</string>
+    <string name="qpipepipe_update_later">Kemudian</string>
+    <string name="qpipepipe_update_downloading">Memuat turun QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">Muat turun gagal. Semak sambungan anda dan cuba lagi.</string>
+    <string name="qpipepipe_update_wrong_build">Binaan ini tidak boleh memasang kemas kini sendiri, contohnya kerana ia binaan nyahpepijat. Muat turun APK daripada halaman keluaran.</string>
+    <string name="qpipepipe_update_failed">Kemas kini tidak dapat dipasang: %s</string>
+    <string name="playlist_resume_title">Teruskan dari tempat anda berhenti</string>
+    <string name="playlist_resume_play">Sambung dari #%d</string>
+    <string name="playlist_resume_here">Sambung di sini</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Simpan giliran terkini</string>
+    <string name="recent_queues_summary">Senaraikan giliran yang anda mainkan di bawah Senarai main, supaya anda boleh menyambung atau menyimpannya kemudian. Video yang anda tambah ke giliran yang dimulakan daripada salah satu senarai main anda akan ditambah ke senarai main itu. Giliran senarai main dan saluran YouTube tidak disimpan</string>
+    <string name="recent_queues_tab_playlists">Senarai main</string>
+    <string name="recent_queues_tab">Giliran terkini</string>
+    <plurals name="recent_queues_count">
+        <item quantity="other">%d giliran, terbaharu dahulu</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Kosongkan semua</string>
+    <string name="recent_queues_clear_all_message">Padam semua giliran terkini? Senarai main yang disimpan tidak terjejas.</string>
+    <string name="recent_queues_empty">Tiada giliran terkini. Giliran yang anda mainkan muncul di sini.</string>
+    <string name="recent_queue_title">Giliran %s</string>
+    <string name="recent_queue_from_playlist">Daripada: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="other">%1$d video ditambah sejak %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="other">%1$d/%2$d video</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="other">%1$d video ditambah ke %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Sambung</string>
+    <string name="recent_queue_more">Lagi pilihan</string>
+    <string name="recent_queue_progress">%1$s daripada %2$s</string>
+    <string name="recent_queue_save_as_playlist">Simpan sebagai senarai main</string>
+    <string name="recent_queue_open_playlist">Buka senarai main</string>
+    <string name="recent_queue_saved">Disimpan dalam Senarai main</string>
+    <string name="recent_queue_deleted">Giliran dipadam</string>
+    <string name="recent_queue_deleted_linked">Giliran dipadam, senarai main kekal</string>
+    <string name="recent_queue_playing_now">Sedang dimainkan</string>
+    <string name="recent_queue_playing_at">Sedang dimainkan · %s</string>
+    <string name="recent_queue_watched">Ditonton</string>
+    <string name="recent_queue_not_watched">Untuk ditonton</string>
+    <string name="recent_queue_added">ditambah</string>
+    <string name="playlist_never_played">Tidak pernah dimainkan</string>
+</resources>

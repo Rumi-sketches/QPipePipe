@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Header of a recent queue (RecentQueueFragment). The play buttons look like the playlist
+     header ones in playlist_resume_control.xml. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/contrast_background_color"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/video_item_search_padding"
+    android:paddingTop="12dp"
+    android:paddingBottom="8dp">
+
+    <org.schabi.newpipe.views.NewPipeTextView
+        android:id="@+id/recent_queue_header_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="@dimen/playlist_detail_title_text_size"
+        tools:text="Queue of 15/10/2026 14:32" />
+
+    <org.schabi.newpipe.views.NewPipeTextView
+        android:id="@+id/recent_queue_header_meta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:textColor="?android:attr/textColorSecondary"
+        android:textSize="@dimen/playlist_detail_subtext_size"
+        tools:text="12 videos · 2:12:00 · at video 4 of 12" />
+
+    <org.schabi.newpipe.views.NewPipeTextView
+        android:id="@+id/recent_queue_header_added"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:textColor="?attr/colorAccent"
+        android:textSize="@dimen/playlist_detail_subtext_size"
+        android:visibility="gone"
+        tools:text="3 videos added to the playlist"
+        tools:visibility="visible" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/recent_queue_play"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/playlist_ctrl_button_size"
+            android:layout_weight="1"
+            android:background="@drawable/playlist_ctrl_primary_background"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingHorizontal="12dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_play_arrow"
+                app:tint="@color/white" />
+
+            <org.schabi.newpipe.views.NewPipeTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:maxLines="1"
+                android:text="@string/recent_queue_resume"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/recent_queue_play_background"
+            android:layout_width="@dimen/playlist_ctrl_button_size"
+            android:layout_height="@dimen/playlist_ctrl_button_size"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/playlist_ctrl_tonal_background"
+            android:clickable="true"
+            android:contentDescription="@string/controls_background_title"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_gravity="center"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_headset"
+                app:tint="?attr/colorAccent" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/recent_queue_play_popup"
+            android:layout_width="@dimen/playlist_ctrl_button_size"
+            android:layout_height="@dimen/playlist_ctrl_button_size"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/playlist_ctrl_tonal_background"
+            android:clickable="true"
+            android:contentDescription="@string/controls_popup_title"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_gravity="center"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_picture_in_picture"
+                app:tint="?attr/colorAccent" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/recent_queue_secondary_action"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:drawablePadding="8dp"
+        android:textAllCaps="false"
+        tools:text="Save as playlist" />
+</LinearLayout>

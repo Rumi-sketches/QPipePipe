@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Functiones de cauda e de glissamento addite per iste fork</string>
+    <string name="qpipepipe_category_playback">Reproduction</string>
+    <string name="qpipepipe_category_swipe_actions">Actiones de glissamento</string>
+    <string name="tap_always_plays_title">Toccar un video sempre lo reproduce</string>
+    <string name="tap_always_plays_summary">Comenciar le reproduction quando tu aperi un video, mesmo si le reproduction automatic es limitate al Wi-Fi o disactivate. Le reproduction automatic ancora se applica al initios automatic</string>
+    <string name="clear_queue_confirmation_title">Demandar confirmation ante de vacuar un cauda</string>
+    <string name="clear_queue_confirmation_summary">Cambiar de un reproductor a un altere pote reimplaciar tu cauda</string>
+    <string name="clear_queue_confirmation_description">Le cauda del reproductor active essera reimplaciate</string>
+    <string name="clear_queue_confirmation_play_now">Reproducer ora</string>
+    <string name="enable_swipe_actions_title">Activar le actiones de glissamento sur le videos</string>
+    <string name="enable_swipe_actions_summary">Glissa un video a sinistra o a dextra in le pagina principal, in le resultatos de cerca, in le listas de reproduction e in le gruppos de canales pro executar un action rapide</string>
+    <string name="swipe_left_action_title">Action de glissar a sinistra</string>
+    <string name="swipe_right_action_title">Action de glissar a dextra</string>
+    <string name="enable_swipe_actions_warning_title">Actiones de glissamento activate</string>
+    <string name="enable_swipe_actions_warning_message">Le glissamento require lineas de largor complete pro functionar ben, dunque le vista in lista essera usate in loco de grillia o cartas ubi le actiones de glissamento es disponibile. Tu pote disactivar isto a omne momento.</string>
+    <string name="swipe_actions_force_list_mode_summary">Disactivate durante que le actiones de glissamento es activate, perque illos fortia le vista in lista</string>
+    <string name="remove_from_playlist_swipe_action">Remover del lista de reproduction (solmente listas de reproduction)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s es disponibile</string>
+    <string name="qpipepipe_update_notification_text">Tocca pro discargar e installar</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Discargar e installar iste actualisation? Android te demandara de confirmar le installation.</string>
+    <string name="qpipepipe_update_install">Discargar e installar</string>
+    <string name="qpipepipe_update_release_notes">Notas de version</string>
+    <string name="qpipepipe_update_later">Plus tarde</string>
+    <string name="qpipepipe_update_downloading">Discargamento de QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">Le discargamento ha fallite. Verifica tu connexion e retenta.</string>
+    <string name="qpipepipe_update_wrong_build">Iste version non pote installar le actualisation per se mesme, per exemplo perque illo es un version de depuration. Discarga le APK ab le pagina del version.</string>
+    <string name="qpipepipe_update_failed">Le actualisation non poteva esser installate: %s</string>
+    <string name="playlist_resume_title">Continuar ubi tu lassava</string>
+    <string name="playlist_resume_play">Reprender ab #%d</string>
+    <string name="playlist_resume_here">Reprender hic</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Conservar le caudas recente</string>
+    <string name="recent_queues_summary">Lista le caudas que tu reproduce sub Listas de reproduction, de maniera que tu pote reprender o salvar los plus tarde. Le videos que tu adde a un cauda comenciate ab un de tu listas de reproduction es addite a ille lista. Le caudas de listas de reproduction e canales de YouTube non es conservate</string>
+    <string name="recent_queues_tab_playlists">Listas de reproduction</string>
+    <string name="recent_queues_tab">Caudas recente</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d cauda</item>
+        <item quantity="other">%d caudas, le plus recente primo</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Vacuar toto</string>
+    <string name="recent_queues_clear_all_message">Deler tote le caudas recente? Tu listas de reproduction salvate non es tangite.</string>
+    <string name="recent_queues_empty">Nulle caudas recente. Le caudas que tu reproduce appare hic.</string>
+    <string name="recent_queue_title">Cauda del %s</string>
+    <string name="recent_queue_from_playlist">De: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%1$d video addite desde %2$s</item>
+        <item quantity="other">%1$d videos addite desde %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d video</item>
+        <item quantity="other">%1$d/%2$d videos</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d video addite a %2$s</item>
+        <item quantity="other">%1$d videos addite a %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Reprender</string>
+    <string name="recent_queue_more">Altere optiones</string>
+    <string name="recent_queue_progress">%1$s de %2$s</string>
+    <string name="recent_queue_save_as_playlist">Salvar como lista de reproduction</string>
+    <string name="recent_queue_open_playlist">Aperir le lista de reproduction</string>
+    <string name="recent_queue_saved">Salvate in Listas de reproduction</string>
+    <string name="recent_queue_deleted">Cauda delite</string>
+    <string name="recent_queue_deleted_linked">Cauda delite, le lista de reproduction resta</string>
+    <string name="recent_queue_playing_now">In reproduction</string>
+    <string name="recent_queue_playing_at">In reproduction · %s</string>
+    <string name="recent_queue_watched">Observate</string>
+    <string name="recent_queue_not_watched">A observar</string>
+    <string name="recent_queue_added">addite</string>
+    <string name="playlist_never_played">Nunquam reproducite</string>
+</resources>
