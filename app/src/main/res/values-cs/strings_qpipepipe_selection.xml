@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Vícenásobný výběr</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">Vybráno: %d</item>
+        <item quantity="few">Vybráno: %d</item>
+        <item quantity="other">Vybráno: %d</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Vybrat vše</string>
+    <string name="qpipepipe_selection_enqueue">Do fronty</string>
+    <string name="qpipepipe_selection_enqueue_next">Další</string>
+    <string name="qpipepipe_selection_background">Na pozadí</string>
+    <string name="qpipepipe_selection_popup">V okně</string>
+    <string name="qpipepipe_selection_playlist">Playlist</string>
+    <string name="qpipepipe_selection_download">Stáhnout</string>
+    <string name="qpipepipe_selection_more">Více</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">Stáhnout %d video</item>
+        <item quantity="few">Stáhnout %d videa</item>
+        <item quantity="other">Stáhnout %d videí</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Kvalita a složka se řídí nastavením stahování. Již stažená videa se přeskočí.</string>
+    <string name="qpipepipe_selection_share_links">Sdílet odkazy</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Odebrat z playlistu</string>
+    <string name="qpipepipe_selection_remove_from_history">Odebrat z historie</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">Odebráno %d video</item>
+        <item quantity="few">Odebrána %d videa</item>
+        <item quantity="other">Odebráno %d videí</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Seznam se mezitím změnil: vyberte videa znovu</string>
+</resources>

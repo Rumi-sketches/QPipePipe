@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">బహుళ ఎంపిక</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d ఎంచుకోబడింది</item>
+        <item quantity="other">%d ఎంచుకోబడ్డాయి</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">అన్నీ ఎంచుకో</string>
+    <string name="qpipepipe_selection_enqueue">క్యూ</string>
+    <string name="qpipepipe_selection_enqueue_next">తదుపరి</string>
+    <string name="qpipepipe_selection_background">నేపథ్యం</string>
+    <string name="qpipepipe_selection_popup">తేలియాడే</string>
+    <string name="qpipepipe_selection_playlist">ప్లేజాబితా</string>
+    <string name="qpipepipe_selection_download">డౌన్లోడ్</string>
+    <string name="qpipepipe_selection_more">మరిన్ని</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">%d వీడియోను డౌన్లోడ్ చేయి</item>
+        <item quantity="other">%d వీడియోలను డౌన్లోడ్ చేయి</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">నాణ్యత మరియు ఫోల్డర్ డౌన్లోడ్ అమరికల నుండి తీసుకోబడతాయి. ఇప్పటికే డౌన్లోడ్ చేసిన వీడియోలు దాటవేయబడతాయి.</string>
+    <string name="qpipepipe_selection_share_links">లింక్‌లను షేర్ చేయి</string>
+    <string name="qpipepipe_selection_remove_from_playlist">ప్లేజాబితా నుండి తొలగించు</string>
+    <string name="qpipepipe_selection_remove_from_history">చరిత్ర నుండి తొలగించు</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d వీడియో తొలగించబడింది</item>
+        <item quantity="other">%d వీడియోలు తొలగించబడ్డాయి</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">ఈలోగా జాబితా మారింది: వీడియోలను మళ్లీ ఎంచుకో</string>
+</resources>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Esbilla múltiple</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d na esbilla</item>
+        <item quantity="other">%d na esbilla</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Esbillar too</string>
+    <string name="qpipepipe_selection_enqueue">Cola</string>
+    <string name="qpipepipe_selection_enqueue_next">Siguiente</string>
+    <string name="qpipepipe_selection_background">Fondu</string>
+    <string name="qpipepipe_selection_popup">Ventanu</string>
+    <string name="qpipepipe_selection_playlist">Llista</string>
+    <string name="qpipepipe_selection_download">Baxar</string>
+    <string name="qpipepipe_selection_more">Más</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">Baxar %d videu</item>
+        <item quantity="other">Baxar %d vídeos</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">La calidá y la carpeta vienen de los axustes de descarga. Los vídeos que yá se baxaron sáltense.</string>
+    <string name="qpipepipe_selection_share_links">Compartir enllaces</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Quitar de la llista de reproducción</string>
+    <string name="qpipepipe_selection_remove_from_history">Quitar del historial</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">Quitóse %d videu</item>
+        <item quantity="other">Quitáronse %d vídeos</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">La llista camudó entrementes: vuelvi esbillar los vídeos</string>
+</resources>

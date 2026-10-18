@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">複数選択</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="other">%d件選択中</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">すべて選択</string>
+    <string name="qpipepipe_selection_enqueue">キュー</string>
+    <string name="qpipepipe_selection_enqueue_next">次に再生</string>
+    <string name="qpipepipe_selection_background">バックグラウンド</string>
+    <string name="qpipepipe_selection_popup">ポップアップ</string>
+    <string name="qpipepipe_selection_playlist">プレイリスト</string>
+    <string name="qpipepipe_selection_download">ダウンロード</string>
+    <string name="qpipepipe_selection_more">その他</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="other">%d本の動画をダウンロード</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">画質と保存先はダウンロード設定に従います。ダウンロード済みの動画はスキップされます。</string>
+    <string name="qpipepipe_selection_share_links">リンクを共有</string>
+    <string name="qpipepipe_selection_remove_from_playlist">プレイリストから削除</string>
+    <string name="qpipepipe_selection_remove_from_history">履歴から削除</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="other">%d本の動画を削除しました</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">その間にリストが変更されました。動画を選択し直してください</string>
+</resources>

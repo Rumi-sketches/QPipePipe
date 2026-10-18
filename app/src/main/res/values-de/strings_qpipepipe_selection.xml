@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Mehrfachauswahl</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d ausgewählt</item>
+        <item quantity="other">%d ausgewählt</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Alle auswählen</string>
+    <string name="qpipepipe_selection_enqueue">Einreihen</string>
+    <string name="qpipepipe_selection_enqueue_next">Nächstes</string>
+    <string name="qpipepipe_selection_background">Hintergrund</string>
+    <string name="qpipepipe_selection_popup">Popup</string>
+    <string name="qpipepipe_selection_playlist">Playlist</string>
+    <string name="qpipepipe_selection_download">Download</string>
+    <string name="qpipepipe_selection_more">Mehr</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">%d Video herunterladen</item>
+        <item quantity="other">%d Videos herunterladen</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Qualität und Ordner stammen aus den Download-Einstellungen. Bereits heruntergeladene Videos werden übersprungen.</string>
+    <string name="qpipepipe_selection_share_links">Links teilen</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Aus Wiedergabeliste entfernen</string>
+    <string name="qpipepipe_selection_remove_from_history">Aus dem Verlauf entfernen</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d Video entfernt</item>
+        <item quantity="other">%d Videos entfernt</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Die Liste hat sich inzwischen geändert: Wählen Sie die Videos erneut aus</string>
+</resources>

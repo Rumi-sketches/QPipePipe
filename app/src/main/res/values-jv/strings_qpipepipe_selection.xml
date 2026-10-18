@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Pilih akeh</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="other">%d dipilih</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Pilih kabeh</string>
+    <string name="qpipepipe_selection_enqueue">Antri</string>
+    <string name="qpipepipe_selection_enqueue_next">Sabanjure</string>
+    <string name="qpipepipe_selection_background">Latar mburi</string>
+    <string name="qpipepipe_selection_popup">Ngambang</string>
+    <string name="qpipepipe_selection_playlist">Daftar puter</string>
+    <string name="qpipepipe_selection_download">Unduh</string>
+    <string name="qpipepipe_selection_more">Liyane</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="other">Unduh %d video</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Kualitas lan folder miturut setelan unduhan. Video sing wis diunduh dilewati.</string>
+    <string name="qpipepipe_selection_share_links">Bagi pranala</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Busak saka daftar puter</string>
+    <string name="qpipepipe_selection_remove_from_history">Busak saka riwayat</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="other">%d video dibusak</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Daftar wis owah sauntara iki: pilih maneh videone</string>
+</resources>

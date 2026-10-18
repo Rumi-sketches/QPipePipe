@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Множественный выбор</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">Выбрано: %d</item>
+        <item quantity="few">Выбрано: %d</item>
+        <item quantity="many">Выбрано: %d</item>
+        <item quantity="other">Выбрано: %d</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Выбрать все</string>
+    <string name="qpipepipe_selection_enqueue">В очередь</string>
+    <string name="qpipepipe_selection_enqueue_next">Следующим</string>
+    <string name="qpipepipe_selection_background">В фоне</string>
+    <string name="qpipepipe_selection_popup">В окне</string>
+    <string name="qpipepipe_selection_playlist">Плейлист</string>
+    <string name="qpipepipe_selection_download">Скачать</string>
+    <string name="qpipepipe_selection_more">Ещё</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">Скачать %d видео</item>
+        <item quantity="few">Скачать %d видео</item>
+        <item quantity="many">Скачать %d видео</item>
+        <item quantity="other">Скачать %d видео</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Качество и папка берутся из настроек загрузки. Уже скачанные видео пропускаются.</string>
+    <string name="qpipepipe_selection_share_links">Поделиться ссылками</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Удалить из плейлиста</string>
+    <string name="qpipepipe_selection_remove_from_history">Удалить из истории</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">Удалено видео: %d</item>
+        <item quantity="few">Удалено видео: %d</item>
+        <item quantity="many">Удалено видео: %d</item>
+        <item quantity="other">Удалено видео: %d</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Список тем временем изменился: выберите видео снова</string>
+</resources>

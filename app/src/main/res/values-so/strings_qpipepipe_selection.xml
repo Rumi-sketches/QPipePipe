@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Doorasho badan</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d la doortay</item>
+        <item quantity="other">%d la doortay</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Dooro dhammaan</string>
+    <string name="qpipepipe_selection_enqueue">Hormo</string>
+    <string name="qpipepipe_selection_enqueue_next">Xiga</string>
+    <string name="qpipepipe_selection_background">Xaga Dambe</string>
+    <string name="qpipepipe_selection_popup">Daaqad</string>
+    <string name="qpipepipe_selection_playlist">Xul</string>
+    <string name="qpipepipe_selection_download">Daji</string>
+    <string name="qpipepipe_selection_more">Kale</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">Daji %d muuqaal</item>
+        <item quantity="other">Daji %d muuqaal</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Tayada iyo khaanadu waxay ka yimaadaan fadhiga dajinta. Muuqaalada horay loo dajiyay waa laga boodayaa.</string>
+    <string name="qpipepipe_selection_share_links">La wadaag xiriirada</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Ka saar xulka</string>
+    <string name="qpipepipe_selection_remove_from_history">Ka saar wixii hore</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d muuqaal ayaa la saaray</item>
+        <item quantity="other">%d muuqaal ayaa la saaray</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Liiska ayaa isbeddelay inta lagu jiray: dooro muuqaalada mar kale</string>
+</resources>

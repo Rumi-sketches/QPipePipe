@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Vairāku atlase</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="zero">Atlasīti %d</item>
+        <item quantity="one">Atlasīts %d</item>
+        <item quantity="other">Atlasīti %d</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Atlasīt visu</string>
+    <string name="qpipepipe_selection_enqueue">Rindā</string>
+    <string name="qpipepipe_selection_enqueue_next">Nākamais</string>
+    <string name="qpipepipe_selection_background">Fonā</string>
+    <string name="qpipepipe_selection_popup">Popup</string>
+    <string name="qpipepipe_selection_playlist">Saraksts</string>
+    <string name="qpipepipe_selection_download">Lejupielāde</string>
+    <string name="qpipepipe_selection_more">Vairāk</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="zero">Lejupielādēt %d videoklipus</item>
+        <item quantity="one">Lejupielādēt %d videoklipu</item>
+        <item quantity="other">Lejupielādēt %d videoklipus</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Kvalitāte un mape tiek ņemta no lejupielādes iestatījumiem. Jau lejupielādētie videoklipi tiek izlaisti.</string>
+    <string name="qpipepipe_selection_share_links">Kopīgot saites</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Noņemt no atskaņošanas saraksta</string>
+    <string name="qpipepipe_selection_remove_from_history">Noņemt no vēstures</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="zero">Noņemti %d videoklipi</item>
+        <item quantity="one">Noņemts %d videoklips</item>
+        <item quantity="other">Noņemti %d videoklipi</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Saraksts pa to laiku mainījās: atlasiet videoklipus vēlreiz</string>
+</resources>

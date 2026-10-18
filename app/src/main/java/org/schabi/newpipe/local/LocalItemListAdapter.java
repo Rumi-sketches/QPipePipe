@@ -258,18 +258,24 @@ public class LocalItemListAdapter extends RecyclerView.Adapter<RecyclerView.View
      */
     @Nullable
     public StreamInfoItem getStreamItem(final int adapterPosition) {
-        final List<LocalItem> items = getCurrentItemsList();
-        final int index = adapterOffsetWithoutHeader(adapterPosition);
-        if (index < 0 || index >= items.size()) {
-            return null;
-        }
-        final LocalItem item = items.get(index);
+        final LocalItem item = getLocalItem(adapterPosition);
         if (item instanceof PlaylistStreamEntry) {
             return ((PlaylistStreamEntry) item).toStreamInfoItem();
         } else if (item instanceof StreamStatisticsEntry) {
             return ((StreamStatisticsEntry) item).toStreamInfoItem();
         }
         return null;
+    }
+
+    /**
+     * The item bound at the given adapter position, accounting for the header and the filter;
+     * {@code null} for the header, the footer or a position out of range.
+     */
+    @Nullable
+    public LocalItem getLocalItem(final int adapterPosition) {
+        final List<LocalItem> items = getCurrentItemsList();
+        final int index = adapterOffsetWithoutHeader(adapterPosition);
+        return index < 0 || index >= items.size() ? null : items.get(index);
     }
 
     @Override

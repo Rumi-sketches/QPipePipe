@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">בחירה מרובה</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d נבחר</item>
+        <item quantity="two">%d נבחרו</item>
+        <item quantity="many">%d נבחרו</item>
+        <item quantity="other">%d נבחרו</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">בחירת הכול</string>
+    <string name="qpipepipe_selection_enqueue">לתור</string>
+    <string name="qpipepipe_selection_enqueue_next">הבא</string>
+    <string name="qpipepipe_selection_background">רקע</string>
+    <string name="qpipepipe_selection_popup">חלון צף</string>
+    <string name="qpipepipe_selection_playlist">רשימת נגינה</string>
+    <string name="qpipepipe_selection_download">הורדה</string>
+    <string name="qpipepipe_selection_more">עוד</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">הורדת %d סרטון</item>
+        <item quantity="two">הורדת %d סרטונים</item>
+        <item quantity="many">הורדת %d סרטונים</item>
+        <item quantity="other">הורדת %d סרטונים</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">האיכות והתיקייה נלקחות מהגדרות ההורדה. סרטונים שכבר הורדו ידולגו.</string>
+    <string name="qpipepipe_selection_share_links">שיתוף קישורים</string>
+    <string name="qpipepipe_selection_remove_from_playlist">הסרה מרשימת הנגינה</string>
+    <string name="qpipepipe_selection_remove_from_history">הסרה מההיסטוריה</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d סרטון הוסר</item>
+        <item quantity="two">%d סרטונים הוסרו</item>
+        <item quantity="many">%d סרטונים הוסרו</item>
+        <item quantity="other">%d סרטונים הוסרו</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">הרשימה השתנתה בינתיים: יש לבחור את הסרטונים מחדש</string>
+</resources>

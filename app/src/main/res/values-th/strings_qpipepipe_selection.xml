@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">เลือกหลายรายการ</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="other">เลือกแล้ว %d รายการ</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">เลือกทั้งหมด</string>
+    <string name="qpipepipe_selection_enqueue">คิว</string>
+    <string name="qpipepipe_selection_enqueue_next">ถัดไป</string>
+    <string name="qpipepipe_selection_background">พื้นหลัง</string>
+    <string name="qpipepipe_selection_popup">ป๊อปอัพ</string>
+    <string name="qpipepipe_selection_playlist">เพลย์ลิสต์</string>
+    <string name="qpipepipe_selection_download">ดาวน์โหลด</string>
+    <string name="qpipepipe_selection_more">เพิ่มเติม</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="other">ดาวน์โหลดวิดีโอ %d รายการ</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">คุณภาพและโฟลเดอร์ใช้ตามการตั้งค่าการดาวน์โหลด วิดีโอที่ดาวน์โหลดแล้วจะถูกข้าม</string>
+    <string name="qpipepipe_selection_share_links">แชร์ลิงก์</string>
+    <string name="qpipepipe_selection_remove_from_playlist">ลบออกจากเพลย์ลิสต์</string>
+    <string name="qpipepipe_selection_remove_from_history">ลบออกจากประวัติ</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="other">ลบวิดีโอ %d รายการแล้ว</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">รายการเปลี่ยนแปลงไปในระหว่างนี้ โปรดเลือกวิดีโออีกครั้ง</string>
+</resources>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Çoklu seçim</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d seçildi</item>
+        <item quantity="other">%d seçildi</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Tümünü seç</string>
+    <string name="qpipepipe_selection_enqueue">Sıraya al</string>
+    <string name="qpipepipe_selection_enqueue_next">Sonraki</string>
+    <string name="qpipepipe_selection_background">Arka plan</string>
+    <string name="qpipepipe_selection_popup">Açılır</string>
+    <string name="qpipepipe_selection_playlist">Liste</string>
+    <string name="qpipepipe_selection_download">İndir</string>
+    <string name="qpipepipe_selection_more">Daha fazla</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">%d videoyu indir</item>
+        <item quantity="other">%d videoyu indir</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Kalite ve klasör indirme ayarlarından alınır. Önceden indirilmiş videolar atlanır.</string>
+    <string name="qpipepipe_selection_share_links">Bağlantıları paylaş</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Oynatma listesinden kaldır</string>
+    <string name="qpipepipe_selection_remove_from_history">Geçmişten kaldır</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d video kaldırıldı</item>
+        <item quantity="other">%d video kaldırıldı</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Bu arada liste değişti: videoları yeniden seçin</string>
+</resources>

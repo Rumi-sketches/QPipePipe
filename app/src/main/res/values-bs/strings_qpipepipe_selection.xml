@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Višestruki odabir</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">Odabrano: %d</item>
+        <item quantity="few">Odabrano: %d</item>
+        <item quantity="other">Odabrano: %d</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Odaberi sve</string>
+    <string name="qpipepipe_selection_enqueue">U red</string>
+    <string name="qpipepipe_selection_enqueue_next">Sljedeće</string>
+    <string name="qpipepipe_selection_background">Pozadina</string>
+    <string name="qpipepipe_selection_popup">Prozor</string>
+    <string name="qpipepipe_selection_playlist">Plejlista</string>
+    <string name="qpipepipe_selection_download">Preuzmi</string>
+    <string name="qpipepipe_selection_more">Više</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">Preuzmi %d video</item>
+        <item quantity="few">Preuzmi %d videa</item>
+        <item quantity="other">Preuzmi %d videa</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Kvalitet i fascikla dolaze iz postavki preuzimanja. Već preuzeti videozapisi se preskaču.</string>
+    <string name="qpipepipe_selection_share_links">Podijeli linkove</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Ukloni s plejliste</string>
+    <string name="qpipepipe_selection_remove_from_history">Ukloni iz historije</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">Uklonjen %d video</item>
+        <item quantity="few">Uklonjena %d videa</item>
+        <item quantity="other">Uklonjeno %d videa</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Lista se u međuvremenu promijenila: ponovo odaberite videozapise</string>
+</resources>

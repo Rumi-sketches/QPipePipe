@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Seleccion multipla</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d seleccionat</item>
+        <item quantity="other">%d seleccionats</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Tot seleccionar</string>
+    <string name="qpipepipe_selection_enqueue">Coa</string>
+    <string name="qpipepipe_selection_enqueue_next">Seguent</string>
+    <string name="qpipepipe_selection_background">Rèireplan</string>
+    <string name="qpipepipe_selection_popup">Fenestron</string>
+    <string name="qpipepipe_selection_playlist">Lista</string>
+    <string name="qpipepipe_selection_download">Telecargar</string>
+    <string name="qpipepipe_selection_more">Mai</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">Telecargar %d vidèo</item>
+        <item quantity="other">Telecargar %d vidèos</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">La qualitat e lo dossièr venon dels paramètres de telecargament. Las vidèos ja telecargadas son ignoradas.</string>
+    <string name="qpipepipe_selection_share_links">Partejar los ligams</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Levar de la lista de lectura</string>
+    <string name="qpipepipe_selection_remove_from_history">Levar de l\'istoric</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d vidèo levada</item>
+        <item quantity="other">%d vidèos levadas</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">La lista a cambiat d\'aquel temps: tornatz seleccionar las vidèos</string>
+</resources>

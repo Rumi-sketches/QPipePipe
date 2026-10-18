@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Selezzione murtepla</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d selezziunato</item>
+        <item quantity="other">%d selezziunate</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Selezziona tutto</string>
+    <string name="qpipepipe_selection_enqueue">Coda</string>
+    <string name="qpipepipe_selection_enqueue_next">Doppo</string>
+    <string name="qpipepipe_selection_background">Sfundo</string>
+    <string name="qpipepipe_selection_popup">Popup</string>
+    <string name="qpipepipe_selection_playlist">Playlist</string>
+    <string name="qpipepipe_selection_download">Scarica</string>
+    <string name="qpipepipe_selection_more">Cchiù</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">Scarica %d video</item>
+        <item quantity="other">Scarica %d video</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">\'A qualità e \'a cartella veneno d\'\'e mpostaziune d\'\'o download. \'E video già scarecate so\' zumpate.</string>
+    <string name="qpipepipe_selection_share_links">Condividi \'e link</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Leva d\'\'a playlist</string>
+    <string name="qpipepipe_selection_remove_from_history">Leva d\'\'a cronologia</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d video luvato</item>
+        <item quantity="other">%d video luvate</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">\'A lista è cagnata int\'\'o frattiempo: selezziona n\'ata vota \'e video</string>
+</resources>

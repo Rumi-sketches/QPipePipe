@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Çoxlu seçim</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d seçildi</item>
+        <item quantity="other">%d seçildi</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Hamısını seç</string>
+    <string name="qpipepipe_selection_enqueue">Növbəyə</string>
+    <string name="qpipepipe_selection_enqueue_next">Növbəti</string>
+    <string name="qpipepipe_selection_background">Fon</string>
+    <string name="qpipepipe_selection_popup">Ani pəncərə</string>
+    <string name="qpipepipe_selection_playlist">Siyahı</string>
+    <string name="qpipepipe_selection_download">Yüklə</string>
+    <string name="qpipepipe_selection_more">Daha çox</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">%d videonu yüklə</item>
+        <item quantity="other">%d videonu yüklə</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Keyfiyyət və qovluq yükləmə ayarlarından götürülür. Artıq yüklənmiş videolar ötürülür.</string>
+    <string name="qpipepipe_selection_share_links">Keçidləri paylaş</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Oxutma siyahısından sil</string>
+    <string name="qpipepipe_selection_remove_from_history">Tarixçədən sil</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d video silindi</item>
+        <item quantity="other">%d video silindi</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Bu arada siyahı dəyişdi: videoları yenidən seçin</string>
+</resources>

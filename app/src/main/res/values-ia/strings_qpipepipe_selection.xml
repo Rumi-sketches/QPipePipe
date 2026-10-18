@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Selection multiple</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d seligite</item>
+        <item quantity="other">%d seligite</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Seliger toto</string>
+    <string name="qpipepipe_selection_enqueue">Cauda</string>
+    <string name="qpipepipe_selection_enqueue_next">Sequente</string>
+    <string name="qpipepipe_selection_background">Fundo</string>
+    <string name="qpipepipe_selection_popup">Emergente</string>
+    <string name="qpipepipe_selection_playlist">Lista</string>
+    <string name="qpipepipe_selection_download">Discargar</string>
+    <string name="qpipepipe_selection_more">Plus</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">Discargar %d video</item>
+        <item quantity="other">Discargar %d videos</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Le qualitate e le dossier proveni del configurationes de discarga. Le videos jam discargate es saltate.</string>
+    <string name="qpipepipe_selection_share_links">Compartir ligamines</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Remover del lista de reproduction</string>
+    <string name="qpipepipe_selection_remove_from_history">Remover del chronologia</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d video removite</item>
+        <item quantity="other">%d videos removite</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Le lista ha cambiate interim: selige de novo le videos</string>
+</resources>

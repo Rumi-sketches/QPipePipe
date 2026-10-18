@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Bir nechtasini tanlash</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d tanlangan</item>
+        <item quantity="other">%d tanlanganlar</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Hammasini tanlash</string>
+    <string name="qpipepipe_selection_enqueue">Navbat</string>
+    <string name="qpipepipe_selection_enqueue_next">Keyingi</string>
+    <string name="qpipepipe_selection_background">Fon</string>
+    <string name="qpipepipe_selection_popup">Pop-up</string>
+    <string name="qpipepipe_selection_playlist">Playlist</string>
+    <string name="qpipepipe_selection_download">Yuklash</string>
+    <string name="qpipepipe_selection_more">Yana</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">%d ta videoni yuklab olish</item>
+        <item quantity="other">%d ta videoni yuklab olish</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Sifat va jild yuklab olish sozlamalaridan olinadi. Avval yuklab olingan videolar o\'tkazib yuboriladi.</string>
+    <string name="qpipepipe_selection_share_links">Havolalarni baham ko\'rish</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Playlistdan olib tashlash</string>
+    <string name="qpipepipe_selection_remove_from_history">Tarixdan olib tashlash</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d ta video olib tashlandi</item>
+        <item quantity="other">%d ta video olib tashlandi</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Bu orada ro\'yxat o\'zgardi: videolarni qayta tanlang</string>
+</resources>
