@@ -210,7 +210,7 @@ class PlayerStartController(private val player: Player) {
         player.playQueue = queue
         queue.init()
         RecentQueueRecorder.onQueueStarted(player.context, queue)
-        LastPlayback.onQueueStarted(player.context, queue)
+        LastPlayback.onQueueStarted(player.context, queue, playOnReady)
         player.reloadPlayQueueManager()
         PlaybackStartupTrace.mark(player.startupTraceId, "media_source_manager_ready")
 

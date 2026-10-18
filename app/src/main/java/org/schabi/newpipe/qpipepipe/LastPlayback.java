@@ -2,6 +2,7 @@ package org.schabi.newpipe.qpipepipe;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.KeyEvent;
 
@@ -9,9 +10,13 @@ import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.core.content.ContextCompat;
 
+import org.schabi.newpipe.player.PlayerIntentConstants;
+import org.schabi.newpipe.player.PlayerService;
 import org.schabi.newpipe.player.playqueue.PlayQueue;
 import org.schabi.newpipe.player.playqueue.events.RecoveryEvent;
+import org.schabi.newpipe.util.DeviceUtils;
 import org.schabi.newpipe.util.NavigationHelper;
 
 import java.io.BufferedInputStream;
@@ -37,13 +42,16 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
  * The queue played last, on the phone or in the car, kept on disk so that playback can resume
  * after the OS killed the app: from Android Auto, the system media controls, or the play button
  * of headphones and car. Every queue the player starts replaces it, and a queue played to its end
- * is forgotten, so a video finished at home does not come back in the car.
+ * is forgotten, so a video finished at home does not come back in the car. Whether it was playing
+ * or paused is kept too, so that the car resumes on its own only what was playing.
  * <p>
  * The player calls it on the main thread; the file is written on one background thread.
  */
 public final class LastPlayback {
     private static final String TAG = "LastPlayback";
     private static final String FILE_NAME = "last_playback.ser";
+    private static final String PREFS_NAME = "last_playback";
+    private static final String KEY_PLAYING = "playing";
     private static final long SAVE_DELAY_MILLIS = 1000;
     private static final Scheduler WRITES = Schedulers.from(Executors.newSingleThreadExecutor());
 
@@ -51,6 +59,9 @@ public final class LastPlayback {
     private static Disposable queueEvents;
     @Nullable
     private static Disposable resuming;
+    /** The queue the player started last, the only one whose play/pause is recorded. */
+    @NonNull
+    private static WeakReference<PlayQueue> startedQueue = new WeakReference<>(null);
     /** The queue whose last video ended, until the user changes it. */
     @NonNull
     private static WeakReference<PlayQueue> finishedQueue = new WeakReference<>(null);
@@ -58,15 +69,22 @@ public final class LastPlayback {
     private LastPlayback() {
     }
 
-    /** Called when the player starts a queue: from now on that queue is the one to resume. */
+    /**
+     * Called when the player starts a queue: from now on that queue is the one to resume.
+     *
+     * @param playing whether the player starts it playing or paused
+     */
     @MainThread
     public static void onQueueStarted(@NonNull final Context context,
-                                      @NonNull final PlayQueue queue) {
+                                      @NonNull final PlayQueue queue,
+                                      final boolean playing) {
         final File file = fileOf(context);
         if (queueEvents != null) {
             queueEvents.dispose();
         }
+        startedQueue = new WeakReference<>(queue);
         finishedQueue = new WeakReference<>(null);
+        onPlayingChanged(context, queue, playing);
         // Every queue event (index moved, items added or removed, position recorded) saves it
         // again. The subscription ends by itself when the player disposes the queue.
         queueEvents = queue.getBroadcastReceiver()
@@ -95,6 +113,22 @@ public final class LastPlayback {
                 .subscribe(() -> { }, error -> Log.e(TAG, "Clearing failed", error));
     }
 
+    /** Called when the player starts or stops playing, by the user or e.g. a phone call. */
+    @MainThread
+    public static void onPlayingChanged(@NonNull final Context context,
+                                        @Nullable final PlayQueue queue,
+                                        final boolean playing) {
+        if (queue == null || queue != startedQueue.get()) {
+            return;
+        }
+        prefsOf(context).edit().putBoolean(KEY_PLAYING, playing).apply();
+    }
+
+    /** @return whether the queue to resume was playing when the app last saw it */
+    public static boolean wasPlaying(@NonNull final Context context) {
+        return prefsOf(context).getBoolean(KEY_PLAYING, false);
+    }
+
     /** @return whether there is a queue to resume, without reading it */
     public static boolean exists(@NonNull final Context context) {
         return fileOf(context).exists();
@@ -108,13 +142,16 @@ public final class LastPlayback {
     }
 
     /**
-     * Plays the queue to resume in background, from where it was left. A request made while
-     * another one is loading is ignored, so a repeated play button starts it only once.
+     * Loads the queue to resume in the background player, from where it was left. A request
+     * made while another one is loading is ignored, so a repeated play button starts it only
+     * once.
      *
-     * @param onNothing called on the main thread when there is nothing to resume
+     * @param playWhenReady whether to play it, or to show it paused
+     * @param onNothing     called on the main thread when there is nothing to resume
      */
     @MainThread
-    public static void resume(@NonNull final Context context, @NonNull final Runnable onNothing) {
+    public static void resume(@NonNull final Context context, final boolean playWhenReady,
+                              @NonNull final Runnable onNothing) {
         if (resuming != null && !resuming.isDisposed()) {
             return;
         }
@@ -122,7 +159,12 @@ public final class LastPlayback {
         resuming = load(appContext)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        queue -> NavigationHelper.playOnBackgroundPlayer(appContext, queue, true),
+                        queue -> ContextCompat.startForegroundService(appContext,
+                                NavigationHelper.getPlayerIntent(appContext,
+                                                DeviceUtils.getPlayerServiceClass(), queue,
+                                                true, playWhenReady)
+                                        .putExtra(PlayerIntentConstants.PLAYER_TYPE,
+                                                PlayerService.PlayerType.AUDIO.ordinal())),
                         error -> {
                             Log.e(TAG, "Resuming failed", error);
                             onNothing.run();
@@ -149,6 +191,12 @@ public final class LastPlayback {
     @NonNull
     private static File fileOf(@NonNull final Context context) {
         return new File(context.getApplicationContext().getFilesDir(), FILE_NAME);
+    }
+
+    @NonNull
+    private static SharedPreferences prefsOf(@NonNull final Context context) {
+        return context.getApplicationContext()
+                .getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
     }
 
     @MainThread

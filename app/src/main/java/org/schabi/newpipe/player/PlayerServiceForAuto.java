@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.SystemClock;
 import android.support.v4.media.MediaBrowserCompat;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
@@ -41,7 +42,6 @@ import androidx.core.content.ContextCompat;
 import androidx.media.MediaBrowserServiceCompat;
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector;
 import org.schabi.newpipe.App;
-import org.schabi.newpipe.R;
 import org.schabi.newpipe.databinding.PlayerBinding;
 import org.schabi.newpipe.player.mediabrowser.MediaBrowserImpl;
 import org.schabi.newpipe.player.mediabrowser.MediaBrowserPlaybackPreparer;
@@ -81,6 +81,12 @@ public final class PlayerServiceForAuto extends MediaBrowserServiceCompat implem
 
     private final IBinder mBinder = new PlayerServiceForAuto.LocalBinder();
 
+    // Android Auto sends play right after asking for the root, see takeCarAutoPlay()
+    private static final long CAR_AUTO_PLAY_MILLIS = 2000;
+    // whether the next root request comes from a car that has just connected
+    private boolean awaitingCar = true;
+    private long carAutoPlayDeadline = 0;
+
     // Lets playback stay on this service after leaving the car, see hasActivePlayer().
     // Only accessed on the main thread.
     @Nullable
@@ -103,6 +109,25 @@ public final class PlayerServiceForAuto extends MediaBrowserServiceCompat implem
         if (service != null && service.player != null) {
             service.player.pause();
         }
+    }
+
+    /** Called when the phone leaves the car: the next connection is a new car start. */
+    public static void onCarDisconnected() {
+        final PlayerServiceForAuto service = runningInstance;
+        if (service != null) {
+            service.awaitingCar = true;
+        }
+    }
+
+    /**
+     * @return whether a play request is the one Android Auto sends by itself as soon as it
+     * connects, to resume the media app it used last. Only the first request counts, so a play
+     * pressed by the user always plays.
+     */
+    public boolean takeCarAutoPlay() {
+        final boolean automatic = SystemClock.elapsedRealtime() < carAutoPlayDeadline;
+        carAutoPlayDeadline = 0;
+        return automatic;
     }
 
     @Override
@@ -144,12 +169,7 @@ public final class PlayerServiceForAuto extends MediaBrowserServiceCompat implem
                     if (player != null && player.getPlayQueue() != null) {
                         player.onPrepare();
                     } else if (playWhenReady) {
-                        // Play with nothing loaded, e.g. from the car or the system media
-                        // controls after the OS killed the app: play what was playing last
-                        setMediaSessionError(null, 0);
-                        LastPlayback.resume(this, () -> setMediaSessionError(
-                                getString(R.string.no_videos),
-                                PlaybackStateCompat.ERROR_CODE_END_OF_QUEUE));
+                        onPlayWithNothingLoaded();
                     }
                 }
         );
@@ -157,6 +177,22 @@ public final class PlayerServiceForAuto extends MediaBrowserServiceCompat implem
 
         // after the session, which the player attaches to instead of creating its own
         createView();
+    }
+
+    /**
+     * Play with nothing loaded, e.g. from the car or the system media controls after the OS
+     * killed the app: resume what was playing last. When the car asks by itself on connecting,
+     * it plays only if it was playing, otherwise the car shows it paused. With nothing to resume
+     * (e.g. the video ended) the car stays on its lists: no error.
+     */
+    private void onPlayWithNothingLoaded() {
+        final boolean automatic = takeCarAutoPlay();
+        if (automatic && PlayerService.hasActivePlayer()) {
+            // The phone's player is being handed over, see CarConnectionMonitor
+            return;
+        }
+        setMediaSessionError(null, 0);
+        LastPlayback.resume(this, !automatic || LastPlayback.wasPlaying(this), () -> { });
     }
 
     private void setMediaSessionError(@Nullable final String message, final int errorCode) {
@@ -203,7 +239,7 @@ public final class PlayerServiceForAuto extends MediaBrowserServiceCompat implem
             NotificationUtil.getInstance().startForegroundWithDummyNotification(this);
             if (LastPlayback.isPlayButton(intent)) {
                 // e.g. the OS killed the app since: play what was playing last
-                LastPlayback.resume(this, this::stopService);
+                LastPlayback.resume(this, true, this::stopService);
             } else {
                 stopService();
             }
@@ -397,6 +433,13 @@ public final class PlayerServiceForAuto extends MediaBrowserServiceCompat implem
                                  final int clientUid,
                                  @Nullable final Bundle rootHints) {
         // TODO check if the accessing package has permission to view data
+        final boolean recent = rootHints != null
+                && rootHints.getBoolean(BrowserRoot.EXTRA_RECENT);
+        if (!recent && awaitingCar) {
+            // a car has just connected: its own play request follows, see takeCarAutoPlay()
+            awaitingCar = false;
+            carAutoPlayDeadline = SystemClock.elapsedRealtime() + CAR_AUTO_PLAY_MILLIS;
+        }
         return mediaBrowserImpl.onGetRoot(clientPackageName, clientUid, rootHints);
     }
 

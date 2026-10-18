@@ -36,6 +36,7 @@ class PlayerPlaybackStateController(private val player: Player) {
         } else {
             player.simpleExoPlayer.playbackState
         }
+        LastPlayback.onPlayingChanged(player.context, player.playQueue, playWhenReady)
         updatePlaybackState(playWhenReady, playbackState)
     }
 

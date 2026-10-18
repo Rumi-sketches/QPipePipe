@@ -59,6 +59,21 @@ public class PlayerService extends Service implements PlayerServiceInterface {
 
     private final IBinder mBinder = new PlayerService.LocalBinder();
 
+    // Lets the car's player wait for this one to be handed over, see hasActivePlayer().
+    // Only accessed on the main thread.
+    @Nullable
+    private static PlayerService runningInstance;
+
+    /**
+     * @return whether this service holds a player with a queue, even paused, which is handed
+     * over to the car's player when the phone connects to the car
+     */
+    public static boolean hasActivePlayer() {
+        final PlayerService service = runningInstance;
+        return service != null && service.player != null
+                && service.player.getPlayQueue() != null;
+    }
+
     public enum PlayerType {
         VIDEO,
         AUDIO,
@@ -104,6 +119,7 @@ public class PlayerService extends Service implements PlayerServiceInterface {
         if (DEBUG) {
             Log.d(TAG, "onCreate() called");
         }
+        runningInstance = this;
         assureCorrectAppLanguage(this);
         windowManager = ContextCompat.getSystemService(this, WindowManager.class);
 
@@ -143,7 +159,7 @@ public class PlayerService extends Service implements PlayerServiceInterface {
             NotificationUtil.getInstance().startForegroundWithDummyNotification(this);
             if (LastPlayback.isPlayButton(intent)) {
                 // e.g. the OS killed the app since: play what was playing last
-                LastPlayback.resume(this, this::stopService);
+                LastPlayback.resume(this, true, this::stopService);
             } else {
                 stopService();
             }
@@ -208,6 +224,9 @@ public class PlayerService extends Service implements PlayerServiceInterface {
     public void onDestroy() {
         if (DEBUG) {
             Log.d(TAG, "destroy() called");
+        }
+        if (runningInstance == this) {
+            runningInstance = null;
         }
         cleanup();
     }
