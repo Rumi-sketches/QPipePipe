@@ -249,11 +249,20 @@ public final class DeviceUtils {
     }
 
     public static boolean isUsingFromAndroidAuto() {
-        return CarConnectionStateReceiver.isCarConnected();
+        // With "Disable Android Auto" on, PlayerServiceForAuto is a disabled component that
+        // cannot be started, so playback must stay on PlayerService even in the car
+        return CarConnectionMonitor.isCarConnected() && isAndroidAutoServiceEnabled(App.getApp());
+    }
+
+    private static boolean isAndroidAutoServiceEnabled(final Context context) {
+        return context.getPackageManager().getComponentEnabledSetting(
+                new ComponentName(context, PlayerServiceForAuto.class))
+                != PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
     }
 
     public static Class<? extends Service> getPlayerServiceClass() {
-        return isUsingFromAndroidAuto()? PlayerServiceForAuto.class: PlayerService.class;
+        return isUsingFromAndroidAuto() || PlayerServiceForAuto.hasActivePlayer()
+                ? PlayerServiceForAuto.class : PlayerService.class;
     }
 
     public static void updateAndroidAutoComponentState(final Context context) {

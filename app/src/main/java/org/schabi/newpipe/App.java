@@ -10,7 +10,6 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.car.app.connection.CarConnection;
 import androidx.core.app.NotificationChannelCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.multidex.MultiDexApplication;
@@ -71,8 +70,6 @@ public class App extends MultiDexApplication {
     private static final String TAG = App.class.toString();
     private static App app;
 
-    private CarConnectionStateReceiver carConnectionReceiver;
-
     @NonNull
     public static App getApp() {
         return app;
@@ -105,19 +102,7 @@ public class App extends MultiDexApplication {
             return;
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            registerCarConnectionReceiver();
-            CarConnection carConnection = new CarConnection(this);
-            carConnection.getType().observeForever(new androidx.lifecycle.Observer<Integer>() {
-                @Override
-                public void onChanged(Integer connectionState) {
-                    boolean isConnected = (connectionState != null && connectionState != CarConnection.CONNECTION_TYPE_NOT_CONNECTED);
-                    Log.d(TAG, "Initial check: Is car connected? " + isConnected);
-                    CarConnectionStateReceiver.setCarConnectionState(isConnected);
-                    carConnection.getType().removeObserver(this);
-                }
-            });
-        }
+        CarConnectionMonitor.start(this);
 
         // Initialize settings first because others inits can use its values
         NewPipeSettings.initSettings(this);
@@ -226,25 +211,6 @@ public class App extends MultiDexApplication {
     public void onTerminate() {
         super.onTerminate();
         PicassoHelper.terminate();
-        if (carConnectionReceiver != null) {
-            unregisterReceiver(carConnectionReceiver);
-        }
-    }
-
-    private void registerCarConnectionReceiver() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            carConnectionReceiver = new CarConnectionStateReceiver();
-            IntentFilter filter = new IntentFilter(
-                    "androidx.car.app.connection.action.CAR_CONNECTION_UPDATED"
-            );
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                // Android 13+ requires explicit export flag
-                registerReceiver(carConnectionReceiver, filter, Context.RECEIVER_EXPORTED);
-            } else {
-                registerReceiver(carConnectionReceiver, filter);
-            }
-            Log.d("CarConnectionReceiver", "Receiver registered dynamically");
-        }
     }
 
 

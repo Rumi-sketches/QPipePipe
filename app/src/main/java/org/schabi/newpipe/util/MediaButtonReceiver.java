@@ -3,9 +3,13 @@ package org.schabi.newpipe.util;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.KeyEvent;
 
+import androidx.core.content.ContextCompat;
+
 public class MediaButtonReceiver extends BroadcastReceiver {
+    private static final String TAG = "MediaButtonReceiver";
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -16,14 +20,16 @@ public class MediaButtonReceiver extends BroadcastReceiver {
                 return;
             }
 
-            Class<?> serviceClass = DeviceUtils.getPlayerServiceClass();
-            Intent serviceIntent = new Intent(context, serviceClass);
-            serviceIntent.putExtras(intent.getExtras());
-
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                context.startForegroundService(serviceIntent);
-            } else {
-                context.startService(serviceIntent);
+            // The service recognises media buttons by the action, so it has to be kept
+            final Intent serviceIntent = new Intent(Intent.ACTION_MEDIA_BUTTON)
+                    .setClass(context, DeviceUtils.getPlayerServiceClass())
+                    .putExtras(intent.getExtras());
+            try {
+                ContextCompat.startForegroundService(context, serviceIntent);
+            } catch (final IllegalStateException e) {
+                // Android 12+ may refuse to start a foreground service from the background
+                // (ForegroundServiceStartNotAllowedException): drop the key press, don't crash
+                Log.w(TAG, "Could not start the player service for a media button", e);
             }
         }
     }
