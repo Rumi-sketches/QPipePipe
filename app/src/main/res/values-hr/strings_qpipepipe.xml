@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Funkcije popisa izvođenja i povlačenja koje dodaje ovaj fork</string>
+    <string name="qpipepipe_category_playback">Reprodukcija</string>
+    <string name="qpipepipe_category_swipe_actions">Radnje povlačenjem</string>
+    <string name="tap_always_plays_title">Dodir na video uvijek ga reproducira</string>
+    <string name="tap_always_plays_summary">Pokreni reprodukciju kad otvorite video, čak i ako je automatska reprodukcija ograničena na Wi-Fi ili isključena. Automatska reprodukcija i dalje vrijedi za automatska pokretanja</string>
+    <string name="clear_queue_confirmation_title">Traži potvrdu prije brisanja popisa izvođenja</string>
+    <string name="clear_queue_confirmation_summary">Prebacivanje s jednog reproduktora na drugi može zamijeniti vaš popis izvođenja</string>
+    <string name="clear_queue_confirmation_description">Popis izvođenja aktivnog reproduktora bit će zamijenjen</string>
+    <string name="clear_queue_confirmation_play_now">Reproduciraj sada</string>
+    <string name="enable_swipe_actions_title">Omogući radnje povlačenjem na videozapisima</string>
+    <string name="enable_swipe_actions_summary">Povucite video ulijevo ili udesno na početnoj stranici, u rezultatima pretraživanja, playlistama i grupama kanala za brzu radnju</string>
+    <string name="swipe_left_action_title">Radnja povlačenja ulijevo</string>
+    <string name="swipe_right_action_title">Radnja povlačenja udesno</string>
+    <string name="enable_swipe_actions_warning_title">Radnje povlačenjem omogućene</string>
+    <string name="enable_swipe_actions_warning_message">Za pouzdano povlačenje potrebni su retci pune širine, pa će se svugdje gdje su dostupne radnje povlačenjem koristiti prikaz popisa umjesto mreže ili kartica. Ovo možete isključiti u bilo kojem trenutku.</string>
+    <string name="swipe_actions_force_list_mode_summary">Onemogućeno dok su radnje povlačenjem omogućene jer one nameću prikaz popisa</string>
+    <string name="remove_from_playlist_swipe_action">Ukloni iz playliste (samo u playlistama)</string>
+    <string name="qpipepipe_update_notification_title">Dostupna je verzija QPipePipe %s</string>
+    <string name="qpipepipe_update_notification_text">Dodirnite za preuzimanje i instalaciju</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Preuzeti i instalirati ovo ažuriranje? Android će zatražiti da potvrdite instalaciju.</string>
+    <string name="qpipepipe_update_install">Preuzmi i instaliraj</string>
+    <string name="qpipepipe_update_release_notes">Bilješke o izdanju</string>
+    <string name="qpipepipe_update_later">Kasnije</string>
+    <string name="qpipepipe_update_downloading">Preuzimanje QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">Preuzimanje nije uspjelo. Provjerite vezu i pokušajte ponovno.</string>
+    <string name="qpipepipe_update_wrong_build">Ova verzija ne može sama instalirati ažuriranje, primjerice zato što je verzija za otklanjanje pogrešaka. Umjesto toga preuzmite APK sa stranice izdanja.</string>
+    <string name="qpipepipe_update_failed">Ažuriranje nije moguće instalirati: %s</string>
+    <string name="playlist_resume_title">Nastavite gdje ste stali</string>
+    <string name="playlist_resume_play">Nastavi od #%d</string>
+    <string name="playlist_resume_here">Nastavi odavde</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Čuvaj nedavne popise izvođenja</string>
+    <string name="recent_queues_summary">Prikazuje popise izvođenja koje reproducirate u odjeljku „Playliste“ kako biste ih kasnije mogli nastaviti ili spremiti. Videozapisi koje dodate u popis izvođenja pokrenut iz vaše playliste dodaju se u tu playlistu. Popisi izvođenja YouTube playlista i kanala ne čuvaju se</string>
+    <string name="recent_queues_tab_playlists">Playliste</string>
+    <string name="recent_queues_tab">Nedavni popisi izvođenja</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d popis izvođenja, najnoviji prvi</item>
+        <item quantity="few">%d popisa izvođenja, najnoviji prvi</item>
+        <item quantity="other">%d popisa izvođenja, najnoviji prvi</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Očisti sve</string>
+    <string name="recent_queues_clear_all_message">Izbrisati sve nedavne popise izvođenja? Vaše spremljene playliste ostaju netaknute.</string>
+    <string name="recent_queues_empty">Nema nedavnih popisa izvođenja. Ovdje se prikazuju popisi izvođenja koje reproducirate.</string>
+    <string name="recent_queue_title">Popis izvođenja od %s</string>
+    <string name="recent_queue_from_playlist">Iz: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%1$d videozapis dodan od %2$s</item>
+        <item quantity="few">%1$d videozapisa dodana od %2$s</item>
+        <item quantity="other">%1$d videozapisa dodano od %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d videozapis</item>
+        <item quantity="few">%1$d/%2$d videozapisa</item>
+        <item quantity="other">%1$d/%2$d videozapisa</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d videozapis dodan je u %2$s</item>
+        <item quantity="few">%1$d videozapisa dodana su u %2$s</item>
+        <item quantity="other">%1$d videozapisa dodano je u %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Nastavi</string>
+    <string name="recent_queue_more">Više opcija</string>
+    <string name="recent_queue_progress">%1$s od %2$s</string>
+    <string name="recent_queue_save_as_playlist">Spremi kao playlistu</string>
+    <string name="recent_queue_open_playlist">Otvori playlistu</string>
+    <string name="recent_queue_saved">Spremljeno u „Playliste“</string>
+    <string name="recent_queue_deleted">Popis izvođenja izbrisan</string>
+    <string name="recent_queue_deleted_linked">Popis izvođenja izbrisan, playlista ostaje</string>
+    <string name="recent_queue_playing_now">Reproducira se</string>
+    <string name="recent_queue_playing_at">Reproducira se · %s</string>
+    <string name="recent_queue_watched">Pogledano</string>
+    <string name="recent_queue_not_watched">Za gledanje</string>
+    <string name="recent_queue_added">dodano</string>
+    <string name="playlist_never_played">Nikad reproducirano</string>
+</resources>

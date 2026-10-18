@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Funciones de cola y deslizamiento añadidas por este fork</string>
+    <string name="qpipepipe_category_playback">Reproducción</string>
+    <string name="qpipepipe_category_swipe_actions">Acciones al deslizar</string>
+    <string name="tap_always_plays_title">Tocar un video siempre lo reproduce</string>
+    <string name="tap_always_plays_summary">Inicia la reproducción al abrir un video, aunque la reproducción automática esté limitada al Wi-Fi o desactivada. La reproducción automática sigue aplicándose a los inicios automáticos</string>
+    <string name="clear_queue_confirmation_title">Pedir confirmación antes de vaciar una cola</string>
+    <string name="clear_queue_confirmation_summary">Cambiar de un reproductor a otro puede reemplazar tu cola</string>
+    <string name="clear_queue_confirmation_description">Se reemplazará la cola del reproductor activo</string>
+    <string name="clear_queue_confirmation_play_now">Reproducir ahora</string>
+    <string name="enable_swipe_actions_title">Activar acciones al deslizar en los videos</string>
+    <string name="enable_swipe_actions_summary">Desliza un video a la izquierda o a la derecha en la página de inicio, los resultados de búsqueda, las listas de reproducción y los grupos de canales para realizar una acción rápida</string>
+    <string name="swipe_left_action_title">Acción al deslizar a la izquierda</string>
+    <string name="swipe_right_action_title">Acción al deslizar a la derecha</string>
+    <string name="enable_swipe_actions_warning_title">Acciones al deslizar activadas</string>
+    <string name="enable_swipe_actions_warning_message">Deslizar necesita filas de ancho completo para funcionar bien, así que se usará la vista en lista en lugar de cuadrícula o tarjetas donde estén disponibles las acciones al deslizar. Puedes desactivarlo en cualquier momento.</string>
+    <string name="swipe_actions_force_list_mode_summary">Desactivado mientras las acciones al deslizar estén activadas, ya que obligan a usar la vista en lista</string>
+    <string name="remove_from_playlist_swipe_action">Quitar de la lista de reproducción (solo listas de reproducción)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s está disponible</string>
+    <string name="qpipepipe_update_notification_text">Toca para descargar e instalar</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">¿Descargar e instalar esta actualización? Android te pedirá que confirmes la instalación.</string>
+    <string name="qpipepipe_update_install">Descargar e instalar</string>
+    <string name="qpipepipe_update_release_notes">Notas de la versión</string>
+    <string name="qpipepipe_update_later">Más tarde</string>
+    <string name="qpipepipe_update_downloading">Descargando QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">La descarga falló. Revisa tu conexión e inténtalo de nuevo.</string>
+    <string name="qpipepipe_update_wrong_build">Esta compilación no puede instalar la actualización por sí misma, por ejemplo porque es una compilación de depuración. Descarga el APK desde la página de la versión.</string>
+    <string name="qpipepipe_update_failed">No se pudo instalar la actualización: %s</string>
+    <string name="playlist_resume_title">Continuar donde lo dejaste</string>
+    <string name="playlist_resume_play">Reanudar desde el #%d</string>
+    <string name="playlist_resume_here">Reanudar aquí</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Guardar colas recientes</string>
+    <string name="recent_queues_summary">Muestra las colas que reproduces en Listas de reproducción, para reanudarlas o guardarlas más tarde. Los videos que agregues a una cola iniciada desde una de tus listas de reproducción se agregan a esa lista. No se guardan las colas de listas de reproducción ni de canales de YouTube</string>
+    <string name="recent_queues_tab_playlists">Listas de reproducción</string>
+    <string name="recent_queues_tab">Colas recientes</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d cola</item>
+        <item quantity="other">%d colas, la más reciente primero</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Borrar todo</string>
+    <string name="recent_queues_clear_all_message">¿Eliminar todas las colas recientes? Tus listas de reproducción guardadas no se modifican.</string>
+    <string name="recent_queues_empty">No hay colas recientes. Las colas que reproduces aparecen aquí.</string>
+    <string name="recent_queue_title">Cola del %s</string>
+    <string name="recent_queue_from_playlist">De: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%1$d video agregado desde el %2$s</item>
+        <item quantity="other">%1$d videos agregados desde el %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d video</item>
+        <item quantity="other">%1$d/%2$d videos</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d video agregado a %2$s</item>
+        <item quantity="other">%1$d videos agregados a %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Reanudar</string>
+    <string name="recent_queue_more">Más opciones</string>
+    <string name="recent_queue_progress">%1$s de %2$s</string>
+    <string name="recent_queue_save_as_playlist">Guardar como lista de reproducción</string>
+    <string name="recent_queue_open_playlist">Abrir lista de reproducción</string>
+    <string name="recent_queue_saved">Guardada en Listas de reproducción</string>
+    <string name="recent_queue_deleted">Cola eliminada</string>
+    <string name="recent_queue_deleted_linked">Cola eliminada, la lista de reproducción se conserva</string>
+    <string name="recent_queue_playing_now">Reproduciendo</string>
+    <string name="recent_queue_playing_at">Reproduciendo · %s</string>
+    <string name="recent_queue_watched">Visto</string>
+    <string name="recent_queue_not_watched">Por ver</string>
+    <string name="recent_queue_added">agregado</string>
+    <string name="playlist_never_played">Nunca reproducida</string>
+</resources>

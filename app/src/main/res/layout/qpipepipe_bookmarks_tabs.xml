@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- "Playlists / Recent queues" switch at the top of the Playlists page, shown while recent
+     queues are on. Driven by org.schabi.newpipe.qpipepipe.recentqueues.RecentQueuesTabs.
+     MaterialButton needs a Material theme, otherwise it crashes: see chip.xml. -->
+<com.google.android.material.button.MaterialButtonToggleGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/recent_queues_tabs"
+    android:theme="@style/Theme.MaterialComponents.DayNight.Bridge"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="@dimen/video_item_search_padding"
+    android:paddingTop="8dp"
+    android:paddingBottom="4dp"
+    android:visibility="gone"
+    app:checkedButton="@+id/recent_queues_tab_playlists"
+    app:selectionRequired="true"
+    app:singleSelection="true">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/recent_queues_tab_playlists"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/recent_queues_tab_playlists"
+        android:textAllCaps="false"
+        android:textColor="?android:attr/textColorPrimary" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/recent_queues_tab_queues"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/recent_queues_tab"
+        android:textAllCaps="false"
+        android:textColor="?android:attr/textColorPrimary" />
+
+</com.google.android.material.button.MaterialButtonToggleGroup>

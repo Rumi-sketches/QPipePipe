@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">تحديد متعدد</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="zero">%d محدد</item>
+        <item quantity="one">%d محدد</item>
+        <item quantity="two">%d محدد</item>
+        <item quantity="few">%d محدد</item>
+        <item quantity="many">%d محدد</item>
+        <item quantity="other">%d محدد</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">تحديد الكل</string>
+    <string name="qpipepipe_selection_enqueue">الانتظار</string>
+    <string name="qpipepipe_selection_enqueue_next">التالي</string>
+    <string name="qpipepipe_selection_background">الخلفية</string>
+    <string name="qpipepipe_selection_popup">منبثق</string>
+    <string name="qpipepipe_selection_playlist">قائمة تشغيل</string>
+    <string name="qpipepipe_selection_download">تحميل</string>
+    <string name="qpipepipe_selection_more">المزيد</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="zero">تحميل %d فيديو</item>
+        <item quantity="one">تحميل %d فيديو</item>
+        <item quantity="two">تحميل %d فيديو</item>
+        <item quantity="few">تحميل %d فيديوهات</item>
+        <item quantity="many">تحميل %d فيديو</item>
+        <item quantity="other">تحميل %d فيديو</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">تؤخذ الجودة والمجلد من إعدادات التحميل. يتم تخطي الفيديوهات التي سبق تحميلها.</string>
+    <string name="qpipepipe_selection_share_links">مشاركة الروابط</string>
+    <string name="qpipepipe_selection_remove_from_playlist">إزالة من قائمة التشغيل</string>
+    <string name="qpipepipe_selection_remove_from_history">إزالة من السجل</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="zero">تمت إزالة %d فيديو</item>
+        <item quantity="one">تمت إزالة %d فيديو</item>
+        <item quantity="two">تمت إزالة %d فيديو</item>
+        <item quantity="few">تمت إزالة %d فيديوهات</item>
+        <item quantity="many">تمت إزالة %d فيديو</item>
+        <item quantity="other">تمت إزالة %d فيديو</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">تغيّرت القائمة في هذه الأثناء: حدّد الفيديوهات مرة أخرى</string>
+</resources>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Функции за редицата и повлекувањето, додадени од овој форк</string>
+    <string name="qpipepipe_category_playback">Репродукција</string>
+    <string name="qpipepipe_category_swipe_actions">Дејства со повлекување</string>
+    <string name="tap_always_plays_title">Допирот на видео секогаш го пушта</string>
+    <string name="tap_always_plays_summary">Пуштај кога ќе отвориш видео, дури и ако автоматското пуштање е ограничено на Wi-Fi или е исклучено. Автоматското пуштање и понатаму важи за автоматските стартувања</string>
+    <string name="clear_queue_confirmation_title">Барај потврда пред бришење на редица</string>
+    <string name="clear_queue_confirmation_summary">Префрлањето од еден плеер на друг може да ја замени твојата редица</string>
+    <string name="clear_queue_confirmation_description">Редицата на активниот плеер ќе биде заменета</string>
+    <string name="clear_queue_confirmation_play_now">Пушти сега</string>
+    <string name="enable_swipe_actions_title">Овозможи дејства со повлекување на видеата</string>
+    <string name="enable_swipe_actions_summary">Повлечи видео лево или десно на почетната страница, во резултатите од пребарување, плејлистите и групите канали за да извршиш брзо дејство</string>
+    <string name="swipe_left_action_title">Дејство при повлекување лево</string>
+    <string name="swipe_right_action_title">Дејство при повлекување десно</string>
+    <string name="enable_swipe_actions_warning_title">Дејствата со повлекување се овозможени</string>
+    <string name="enable_swipe_actions_warning_message">За повлекувањето да работи сигурно, потребни се редови на цела ширина, па секаде каде што има дејства со повлекување ќе се користи приказ во список наместо решетка или картички. Ова можеш да го исклучиш во секое време.</string>
+    <string name="swipe_actions_force_list_mode_summary">Оневозможено додека се вклучени дејствата со повлекување, кои наметнуваат приказ во список</string>
+    <string name="remove_from_playlist_swipe_action">Отстрани од плејлистата (само во плејлисти)</string>
+    <string name="qpipepipe_update_notification_title">Достапна е QPipePipe %s</string>
+    <string name="qpipepipe_update_notification_text">Допри за преземање и инсталирање</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Да се преземе и инсталира ова ажурирање? Android ќе побара да ја потврдиш инсталацијата.</string>
+    <string name="qpipepipe_update_install">Преземи и инсталирај</string>
+    <string name="qpipepipe_update_release_notes">Белешки за изданието</string>
+    <string name="qpipepipe_update_later">Подоцна</string>
+    <string name="qpipepipe_update_downloading">Се презема QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">Преземањето не успеа. Провери ја врската и обиди се повторно.</string>
+    <string name="qpipepipe_update_wrong_build">Оваа верзија не може сама да го инсталира ажурирањето, на пример затоа што е верзија за дебагирање. Наместо тоа, преземи го APK-то од страницата на изданието.</string>
+    <string name="qpipepipe_update_failed">Ажурирањето не може да се инсталира: %s</string>
+    <string name="playlist_resume_title">Продолжи каде што застана</string>
+    <string name="playlist_resume_play">Продолжи од #%d</string>
+    <string name="playlist_resume_here">Продолжи од тука</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Чувај ги неодамнешните редици</string>
+    <string name="recent_queues_summary">Ги прикажува редиците што ги пушташ во „Плејлисти“, за да можеш подоцна да ги продолжиш или зачуваш. Видеата што ги додаваш во редица пуштена од твоја плејлиста се додаваат во таа плејлиста. Редиците од плејлисти и канали на YouTube не се чуваат</string>
+    <string name="recent_queues_tab_playlists">Плејлисти</string>
+    <string name="recent_queues_tab">Неодамнешни редици</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d редица, прво најновите</item>
+        <item quantity="other">%d редици, прво најновите</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Избриши ги сите</string>
+    <string name="recent_queues_clear_all_message">Да се избришат сите неодамнешни редици? Зачуваните плејлисти остануваат недопрени.</string>
+    <string name="recent_queues_empty">Нема неодамнешни редици. Тука ќе се појават редиците што ги пушташ.</string>
+    <string name="recent_queue_title">Редица од %s</string>
+    <string name="recent_queue_from_playlist">Од: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%1$d видео е додадено од %2$s</item>
+        <item quantity="other">%1$d видеа се додадени од %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d видео</item>
+        <item quantity="other">%1$d/%2$d видеа</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d видео е додадено во %2$s</item>
+        <item quantity="other">%1$d видеа се додадени во %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Продолжи</string>
+    <string name="recent_queue_more">Повеќе опции</string>
+    <string name="recent_queue_progress">%1$s од %2$s</string>
+    <string name="recent_queue_save_as_playlist">Зачувај како плејлиста</string>
+    <string name="recent_queue_open_playlist">Отвори ја плејлистата</string>
+    <string name="recent_queue_saved">Зачувано во „Плејлисти“</string>
+    <string name="recent_queue_deleted">Редицата е избришана</string>
+    <string name="recent_queue_deleted_linked">Редицата е избришана, плејлистата останува</string>
+    <string name="recent_queue_playing_now">Се пушта</string>
+    <string name="recent_queue_playing_at">Се пушта · %s</string>
+    <string name="recent_queue_watched">Изгледано</string>
+    <string name="recent_queue_not_watched">За гледање</string>
+    <string name="recent_queue_added">додадено</string>
+    <string name="playlist_never_played">Никогаш не е пуштена</string>
+</resources>

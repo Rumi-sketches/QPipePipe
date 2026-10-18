@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">இந்த ஃபோர்க் சேர்த்த சாரை மற்றும் ஸ்வைப் வசதிகள்</string>
+    <string name="qpipepipe_category_playback">இயக்கம்</string>
+    <string name="qpipepipe_category_swipe_actions">ஸ்வைப் செயல்கள்</string>
+    <string name="tap_always_plays_title">காணொலியைத் தட்டினால் எப்போதும் இயங்கும்</string>
+    <string name="tap_always_plays_summary">காணொலியைத் திறந்ததும் இயக்கத் தொடங்கு, தானாக ஓட்டு Wi-Fi-க்கு மட்டும் வரம்பிடப்பட்டிருந்தாலும் அணைக்கப்பட்டிருந்தாலும் கூட. தானியங்கு தொடக்கங்களுக்கு தானாக ஓட்டு அமைப்பு பொருந்தும்</string>
+    <string name="clear_queue_confirmation_title">சாரையை அழிக்கும் முன் உறுதிப்படுத்தக் கேள்</string>
+    <string name="clear_queue_confirmation_summary">ஒரு இயக்கியிலிருந்து மற்றொன்றுக்கு மாறினால் உங்கள் சாரை மாற்றப்படலாம்</string>
+    <string name="clear_queue_confirmation_description">செயலில் உள்ள இயக்கியின் சாரை மாற்றப்படும்</string>
+    <string name="clear_queue_confirmation_play_now">இப்போது இயக்கு</string>
+    <string name="enable_swipe_actions_title">காணொலிகளில் ஸ்வைப் செயல்களை இயக்கு</string>
+    <string name="enable_swipe_actions_summary">முகப்புப் பக்கம், தேடல் முடிவுகள், ஒளிச்சரங்கள், அலைவரிசைக் குழுக்களில் ஒரு காணொலியை இடம் அல்லது வலம் ஸ்வைப் செய்து விரைவுச் செயலைச் செய்</string>
+    <string name="swipe_left_action_title">இடது ஸ்வைப் செயல்</string>
+    <string name="swipe_right_action_title">வலது ஸ்வைப் செயல்</string>
+    <string name="enable_swipe_actions_warning_title">ஸ்வைப் செயல்கள் இயக்கப்பட்டன</string>
+    <string name="enable_swipe_actions_warning_message">ஸ்வைப் சரியாக வேலை செய்ய முழு அகல வரிசைகள் தேவை, எனவே ஸ்வைப் செயல்கள் உள்ள இடங்களில் கட்டம் அல்லது அட்டைக் காட்சிக்குப் பதிலாகப் பட்டியல் காட்சி பயன்படுத்தப்படும். இதை எப்போது வேண்டுமானாலும் மீண்டும் அணைக்கலாம்.</string>
+    <string name="swipe_actions_force_list_mode_summary">ஸ்வைப் செயல்கள் இயக்கத்தில் இருக்கும்போது முடக்கப்பட்டுள்ளது, அவை பட்டியல் காட்சியைக் கட்டாயமாக்குகின்றன</string>
+    <string name="remove_from_playlist_swipe_action">ஒளிச்சரத்திலிருந்து நீக்கு (ஒளிச்சரங்களில் மட்டும்)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s கிடைக்கிறது</string>
+    <string name="qpipepipe_update_notification_text">பதிவிறக்கி நிறுவ தட்டவும்</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">இந்தப் புதுப்பிப்பைப் பதிவிறக்கி நிறுவவா? நிறுவலை உறுதிப்படுத்த Android கேட்கும்.</string>
+    <string name="qpipepipe_update_install">பதிவிறக்கி நிறுவு</string>
+    <string name="qpipepipe_update_release_notes">வெளியீட்டுக் குறிப்புகள்</string>
+    <string name="qpipepipe_update_later">பிறகு</string>
+    <string name="qpipepipe_update_downloading">QPipePipe %s பதிவிறக்கப்படுகிறது</string>
+    <string name="qpipepipe_update_download_failed">பதிவிறக்கம் தோல்வியடைந்தது. இணைப்பைச் சரிபார்த்து மீண்டும் முயலவும்.</string>
+    <string name="qpipepipe_update_wrong_build">இந்தக் கட்டமைப்பால் தானே புதுப்பிப்பை நிறுவ முடியாது, எடுத்துக்காட்டாக இது ஒரு பிழைத்திருத்தக் கட்டமைப்பு என்பதால். அதற்குப் பதிலாக வெளியீட்டுப் பக்கத்திலிருந்து APK-ஐப் பதிவிறக்கவும்.</string>
+    <string name="qpipepipe_update_failed">புதுப்பிப்பை நிறுவ முடியவில்லை: %s</string>
+    <string name="playlist_resume_title">விட்ட இடத்திலிருந்து தொடர்</string>
+    <string name="playlist_resume_play">#%d இலிருந்து தொடர்</string>
+    <string name="playlist_resume_here">இங்கிருந்து தொடர்</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">சமீபத்திய சாரைகளை வைத்திரு</string>
+    <string name="recent_queues_summary">நீங்கள் இயக்கிய சாரைகளை ஒளிச்சரங்களின் கீழ் காட்டு, பின்னர் தொடரவோ சேமிக்கவோ முடியும். உங்கள் ஒளிச்சரம் ஒன்றிலிருந்து தொடங்கிய சாரையில் சேர்க்கும் காணொலிகள் அந்த ஒளிச்சரத்திலும் சேர்க்கப்படும். YouTube ஒளிச்சரங்கள் மற்றும் அலைவரிசைகளின் சாரைகள் வைக்கப்படாது</string>
+    <string name="recent_queues_tab_playlists">ஒளிச்சரங்கள்</string>
+    <string name="recent_queues_tab">சமீபத்திய சாரைகள்</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d சாரை</item>
+        <item quantity="other">%d சாரைகள், புதியவை முதலில்</item>
+    </plurals>
+    <string name="recent_queues_clear_all">அனைத்தையும் அழி</string>
+    <string name="recent_queues_clear_all_message">அனைத்து சமீபத்திய சாரைகளையும் நீக்கவா? சேமித்த ஒளிச்சரங்கள் பாதிக்கப்படாது.</string>
+    <string name="recent_queues_empty">சமீபத்திய சாரைகள் இல்லை. நீங்கள் இயக்கும் சாரைகள் இங்கே தோன்றும்.</string>
+    <string name="recent_queue_title">%s இன் சாரை</string>
+    <string name="recent_queue_from_playlist">இருந்து: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%2$s முதல் %1$d காணொலி சேர்க்கப்பட்டது</item>
+        <item quantity="other">%2$s முதல் %1$d காணொலிகள் சேர்க்கப்பட்டன</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d காணொலி</item>
+        <item quantity="other">%1$d/%2$d காணொலிகள்</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d காணொலி %2$s இல் சேர்க்கப்பட்டது</item>
+        <item quantity="other">%1$d காணொலிகள் %2$s இல் சேர்க்கப்பட்டன</item>
+    </plurals>
+    <string name="recent_queue_resume">தொடர்</string>
+    <string name="recent_queue_more">மேலும் விருப்பங்கள்</string>
+    <string name="recent_queue_progress">%2$s இல் %1$s</string>
+    <string name="recent_queue_save_as_playlist">ஒளிச்சரமாகச் சேமி</string>
+    <string name="recent_queue_open_playlist">ஒளிச்சரத்தைத் திற</string>
+    <string name="recent_queue_saved">ஒளிச்சரங்களில் சேமிக்கப்பட்டது</string>
+    <string name="recent_queue_deleted">சாரை நீக்கப்பட்டது</string>
+    <string name="recent_queue_deleted_linked">சாரை நீக்கப்பட்டது, ஒளிச்சரம் அப்படியே இருக்கும்</string>
+    <string name="recent_queue_playing_now">இயங்குகிறது</string>
+    <string name="recent_queue_playing_at">இயங்குகிறது · %s</string>
+    <string name="recent_queue_watched">பார்த்தது</string>
+    <string name="recent_queue_not_watched">பார்க்க வேண்டியது</string>
+    <string name="recent_queue_added">சேர்க்கப்பட்டது</string>
+    <string name="playlist_never_played">ஒருபோதும் இயக்கப்படவில்லை</string>
+</resources>

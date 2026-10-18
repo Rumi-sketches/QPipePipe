@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Meerdere selecteren</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d geselecteerd</item>
+        <item quantity="other">%d geselecteerd</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Alles selecteren</string>
+    <string name="qpipepipe_selection_enqueue">Wachtrij</string>
+    <string name="qpipepipe_selection_enqueue_next">Volgende</string>
+    <string name="qpipepipe_selection_background">Achtergrond</string>
+    <string name="qpipepipe_selection_popup">Pop-up</string>
+    <string name="qpipepipe_selection_playlist">Afspeellijst</string>
+    <string name="qpipepipe_selection_download">Downloaden</string>
+    <string name="qpipepipe_selection_more">Meer</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">%d video downloaden</item>
+        <item quantity="other">%d video’s downloaden</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Kwaliteit en map komen uit de downloadinstellingen. Reeds gedownloade video’s worden overgeslagen.</string>
+    <string name="qpipepipe_selection_share_links">Links delen</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Uit afspeellijst verwijderen</string>
+    <string name="qpipepipe_selection_remove_from_history">Uit geschiedenis verwijderen</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d video verwijderd</item>
+        <item quantity="other">%d video’s verwijderd</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">De lijst is ondertussen gewijzigd: selecteer de video’s opnieuw</string>
+</resources>

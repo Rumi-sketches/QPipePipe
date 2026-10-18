@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">ഒന്നിലധികം തിരഞ്ഞെടുക്കൽ</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d തിരഞ്ഞെടുത്തു</item>
+        <item quantity="other">%d തിരഞ്ഞെടുത്തു</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">എല്ലാം തിരഞ്ഞെടുക്കുക</string>
+    <string name="qpipepipe_selection_enqueue">ക്യൂ</string>
+    <string name="qpipepipe_selection_enqueue_next">അടുത്തത്</string>
+    <string name="qpipepipe_selection_background">പശ്ചാത്തലം</string>
+    <string name="qpipepipe_selection_popup">പോപ്പ്അപ്പ്</string>
+    <string name="qpipepipe_selection_playlist">പ്ലേലിസ്റ്റ്</string>
+    <string name="qpipepipe_selection_download">ഡൗൺലോഡ്</string>
+    <string name="qpipepipe_selection_more">കൂടുതൽ</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">%d വീഡിയോ ഡൗൺലോഡ് ചെയ്യുക</item>
+        <item quantity="other">%d വീഡിയോകൾ ഡൗൺലോഡ് ചെയ്യുക</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">ഗുണനിലവാരവും ഫോൾഡറും ഡൗൺലോഡ് ക്രമീകരണങ്ങളിൽ നിന്നാണ് എടുക്കുന്നത്. ഇതിനകം ഡൗൺലോഡ് ചെയ്ത വീഡിയോകൾ ഒഴിവാക്കും.</string>
+    <string name="qpipepipe_selection_share_links">ലിങ്കുകൾ പങ്കുവെയ്ക്കുക</string>
+    <string name="qpipepipe_selection_remove_from_playlist">പ്ലേലിസ്റ്റിൽ നിന്ന് നീക്കം ചെയ്യുക</string>
+    <string name="qpipepipe_selection_remove_from_history">ചരിത്രത്തിൽ നിന്ന് നീക്കം ചെയ്യുക</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d വീഡിയോ നീക്കം ചെയ്തു</item>
+        <item quantity="other">%d വീഡിയോകൾ നീക്കം ചെയ്തു</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">ഇതിനിടെ ലിസ്റ്റ് മാറി: വീഡിയോകൾ വീണ്ടും തിരഞ്ഞെടുക്കുക</string>
+</resources>

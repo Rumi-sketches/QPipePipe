@@ -55,7 +55,7 @@ class NewVersionWorker(
             if (isManual) {
                 ContextCompat.getMainExecutor(applicationContext).execute {
                     Toast.makeText(
-                        applicationContext, R.string.app_update_unavailable_toast,
+                        applicationContext, R.string.qpipepipe_update_unavailable,
                         Toast.LENGTH_SHORT
                     ).show()
                 }

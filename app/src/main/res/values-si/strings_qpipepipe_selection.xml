@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">බහු තේරීම</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d ක් තෝරා ඇත</item>
+        <item quantity="other">%d ක් තෝරා ඇත</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">සියල්ල තෝරන්න</string>
+    <string name="qpipepipe_selection_enqueue">පෝලිම</string>
+    <string name="qpipepipe_selection_enqueue_next">ඊළඟ</string>
+    <string name="qpipepipe_selection_background">පසුබිම</string>
+    <string name="qpipepipe_selection_popup">උත්පතන</string>
+    <string name="qpipepipe_selection_playlist">ප්ලේලිස්ට්</string>
+    <string name="qpipepipe_selection_download">බාගන්න</string>
+    <string name="qpipepipe_selection_more">තවත්</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">වීඩියෝ %d ක් බාගන්න</item>
+        <item quantity="other">වීඩියෝ %d ක් බාගන්න</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">ගුණත්වය සහ ෆෝල්ඩරය බාගැනීම් සැකසුම් වලින් ගනු ලැබේ. දැනටමත් බාගත් වීඩියෝ මඟ හරිනු ලැබේ.</string>
+    <string name="qpipepipe_selection_share_links">සබැඳි බෙදාගන්න</string>
+    <string name="qpipepipe_selection_remove_from_playlist">ප්ලේලිස්ට් එකෙන් ඉවත් කරන්න</string>
+    <string name="qpipepipe_selection_remove_from_history">ඉතිහාසයෙන් ඉවත් කරන්න</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">වීඩියෝ %d ක් ඉවත් කළා</item>
+        <item quantity="other">වීඩියෝ %d ක් ඉවත් කළා</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">මේ අතරතුර ලැයිස්තුව වෙනස් විය: වීඩියෝ නැවත තෝරන්න</string>
+</resources>

@@ -199,6 +199,13 @@ Upstream files touched only to plug the layer in: one entry in
 go in this screen, not in the upstream screens. Preference keys predate the
 screen and must not be renamed, or users lose their choices.
 
+Fork strings are translated in `res/values-*/strings_qpipepipe.xml` and
+`strings_qpipepipe_selection.xml`, one file each per locale that has an
+upstream `strings.xml` with content (87). They are not on Weblate: when a fork
+string is added or changed, translate it in every one of those files, keeping
+the plural quantities of the upstream file of that locale. `qpipepipe_update_log` and `qpipepipe_settings_title` stay English
+only.
+
 ## Fork patches
 
 ### Tapping a video always plays it
@@ -236,6 +243,43 @@ Check: enable swipe actions, swipe left and right on rows in home, search,
 history, a local playlist and a channel group feed; the rows snap back and the
 action runs.
 
+### Multiple selection of videos
+
+Code in `qpipepipe/selection/` (`MultiSelect`, `SelectionController`,
+`SelectionDecoration`, `SelectionActions`), `res/layout/qpipepipe_selection_bar.xml`,
+`res/values/strings_qpipepipe_selection.xml` (translated in every
+`values-*/strings_qpipepipe_selection.xml`), `styles_qpipepipe.xml`,
+`ids_qpipepipe.xml`. Upstream files touched: `InfoItemDialog` (no dialog while
+selecting), `BaseListFragment` and `BaseLocalListFragment`
+(install, toolbar button, `getMultiSelectRemover`), `FeedFragment`,
+`LocalPlaylistFragment` and `StatisticsPlaylistFragment` (remove, no drag or
+swipe while selecting), `LocalItemListAdapter.getLocalItem`, `styles.xml`
+(`windowActionModeOverlay`, `actionModeBackground`).
+
+A toolbar button, placed after upstream's icons so it never pushes one of them
+into the overflow menu (where there is no room, it is in the overflow menu
+itself, e.g. local and remote playlists), starts selection mode. The long-press
+menu is unchanged. In selection mode taps select videos (headers keep their
+taps), an action mode over the toolbar, in the toolbar's color, shows the count and Select all, and a bar
+at the bottom applies one action to the selected videos in the order they were
+picked: queue, play next, background, popup, add to playlist, download (video
+or audio only, through "Download all"'s sequential downloader), and under More
+mark as watched, share links, remove from the playlist or the history. Back or
+the arrow leave selection mode, and so do leaving the screen or the list going
+out of sight (another tab, the player sheet collapsing). Videos are kept by key
+(url, or place in a local playlist), not by row, because history and feed
+reload while selecting. A long press selects too, and one that unselects the last
+video keeps the mode open, so the row's own long press doesn't open the menu. The selection
+state is drawn by an item decoration, so no row layout changes. Comments and
+the playlists list are excluded in `MultiSelect.holdsVideos`.
+
+Check: compare the toolbars with upstream's on home tabs, playlists, a local
+playlist, history, search and a channel: only "Multiple selection" is added. In
+search, tap it and select three videos: "3 selected" and three check marks. Queue starts or extends the queue with all
+three. Back leaves selection without leaving search. In a local playlist,
+select one video, More > Remove from playlist: it is gone after reopening. In a
+channel, select in Videos and swipe to another tab: selection mode ends.
+
 ### Clear-queue confirmation with enqueue options
 
 Commit `fb4865a17`. Files: `VideoDetailFragment` (`loadVideoIfUserConfirms`
@@ -258,6 +302,23 @@ recreates it the fragment can connect before a `Player` exists. The guard
 returns early instead of dereferencing a null player. Upstream `a43bcc346`
 (null intent in `onStartCommand`) fixes a different path; both stay.
 
+### The play queue survives the OS killing the app
+
+File: `VideoDetailFragment` (`onSaveInstanceState`, `onRestoreInstanceState`,
+`StateSaver.WriteRead`).
+
+Upstream saves only the url of the open video, and the navigation stack is
+static, so when the OS kills the app in background the video came back alone,
+in a new single-item queue. The fragment now writes its play queue with
+`StateSaver` (a file in the cache) and, when it is recreated, reuses it if its
+current item is the restored video. It covers any queue: local or remote
+playlist, channel, edited queue. Removing the app from recents still starts
+from scratch, as upstream.
+
+Check: play a playlist, go to the second video, press Home, close the player
+(`am broadcast -a <app id>.player.MainPlayer.CLOSE`), `am kill <app id>`, reopen
+the app: the second video plays and Previous/Next move through the playlist.
+
 ### Bug reports go to QPipePipe
 
 Files: `ErrorActivity` (`ERROR_EMAIL_ADDRESS`, `ERROR_EMAIL_SUBJECT`,
@@ -275,9 +336,11 @@ QPipePipe issues.
 
 ### Updates are downloaded and installed in the app
 
-Files: `NewVersionWorker` (QPipePipe releases, `-qN` versions, notification),
+Files: `NewVersionWorker` (QPipePipe releases, `-qN` versions, notification,
+"latest version" toast), `App` (update channel description),
 `QPipePipeUpdateActivity`, `QPipePipeInstallReceiver`, `AndroidManifest.xml`
-(`REQUEST_INSTALL_PACKAGES`, the activity and the receiver).
+(`REQUEST_INSTALL_PACKAGES`, the activity and the receiver). Their texts are the
+`qpipepipe_update_*` strings, so they say QPipePipe and are English only.
 
 The update notification ("QPipePipe X is available") opens a dialog: download
 and install, release notes, later. The APK for the device's ABI is downloaded
@@ -378,6 +441,71 @@ paused and keeps the new video; close it and play again: `MainPlayer` handles
 it; reconnect: only `PlayerServiceForAuto` runs. With the app idle,
 `adb shell am start-foreground-service -a android.intent.action.MEDIA_BUTTON -n
 <app id>/org.schabi.newpipe.player.PlayerServiceForAuto` gives no ANR.
+
+### Recent queues
+
+Files: `qpipepipe/recentqueues/` (database, recorder, list and detail screens,
+Playlists switch), `qpipepipe/PlaylistProgressLines`, `PlaylistProgress`,
+`StreamProgress`, `res/layout/qpipepipe_recent_queue*.xml`,
+`qpipepipe_bookmarks_tabs.xml`. Upstream files touched: `PlayQueue` (session id
+and source playlist), `PlayerStartController` (three calls to
+`RecentQueueRecorder`), `LocalPlaylistFragment.getPlayQueue` (source
+playlist), `BookmarkFragment` and `fragment_bookmarks.xml` (the switch),
+`LocalPlaylistItemHolder` (date and bar; the bar is added from code so the
+row layouts stay upstream's), `App` (registers `RecentQueueUndo`),
+`PlaylistStreamDAO.getPlaylistProgress`, `StreamHistoryDAO.getProgressOf`.
+Key: `recent_queues_key` (default off, in the QPipePipe settings).
+
+While the setting is on, the queue of the player is written to a separate
+database, `qpipepipe_recent_queues.db`, two seconds after it last changed.
+Keeping it apart from `newpipe.db` means upstream's schema versions and
+migrations never collide with the fork's; the price is that recent queues are
+not in the settings export. Rules:
+
+- A queue started from a local playlist is one entry per playlist ("From:
+  name"). Videos the user enqueues on it are appended to that playlist, except
+  those already in it, and are marked "added". This holds for single videos and
+  for a whole playlist or channel; of a remote playlist only the videos already
+  loaded join the queue, so only those are appended. Auto-queued related videos
+  are never appended. Appends and saves run on one background thread, so quick
+  enqueues cannot duplicate a video or collide on the playlist index.
+- When one enqueue appends two or more videos, the screen in front shows "N
+  videos added to name" with Undo for 4 seconds. Undo takes them back out of
+  the playlist, only if they still follow the videos it had before, and out of
+  the queue: all or nothing.
+- Any other queue is one entry per session, kept once the user built it: it
+  started with two or more videos, or the user enqueued something. Videos opened
+  one by one, with related videos auto-queued, leave no entry. A session
+  survives player switches and process death, and resuming an entry continues it
+  instead of creating a new one.
+- Queues of remote playlists and channels are not recorded.
+- Nothing is deleted automatically: the user deletes one entry or uses Clear
+  all. Deleting the entry of the queue playing now does not bring it back while
+  that queue plays. Deleting an entry linked to a playlist leaves the playlist.
+- Resuming a linked entry links the queue again only if the playlist with that
+  id still has the saved name, since a backup import can renumber playlists.
+- "Save as playlist" links the entry to the new playlist, and the queue too if
+  it is still playing: later enqueues go to that playlist and the entry no
+  longer offers saving, so one queue never makes two playlists.
+
+The Playlists page gets a "Playlists / Recent queues" switch. Rows stay short:
+a local playlist row shows when it was last played (or "Never played") and a
+bar of the share of its videos watched (past 90%); a queue row shows title,
+date and the same bar. The video count is on the thumbnail. Remote playlist rows are unchanged:
+their videos are not stored locally. The detail screen shows "2/134 videos ·
+85:23" (position, length, total hours and minutes) and "N videos added since
+date", resumes the queue in the three players, opens the
+linked playlist or saves the queue as a new playlist, and marks each video as
+playing, watched (past 90%), partly watched or to watch.
+
+Check: turn the setting on. Open a video, enqueue a second one: "Recent queues"
+lists one queue with 2 videos. Play a local playlist and enqueue a video that is
+not in it: the playlist grows by one, and its queue entry says "1 video added to
+the playlist". Enqueue a video already in it: nothing is added and the count
+stays at 1. Play a YouTube playlist: no entry appears. Save a playing queue as a
+playlist, then enqueue a video: the entry reads "From: <name>" and the new
+playlist grows by one. Enqueue a whole YouTube playlist on a queue from a local
+playlist and tap Undo within 4 seconds: the local playlist is back to its size.
 
 ## Upstream services
 

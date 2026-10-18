@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">एकाधिक निवड</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d निवडले</item>
+        <item quantity="other">%d निवडले</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">सर्व निवडा</string>
+    <string name="qpipepipe_selection_enqueue">रांग</string>
+    <string name="qpipepipe_selection_enqueue_next">पुढील</string>
+    <string name="qpipepipe_selection_background">पार्श्वभूमी</string>
+    <string name="qpipepipe_selection_popup">पॉपअप</string>
+    <string name="qpipepipe_selection_playlist">प्लेलिस्ट</string>
+    <string name="qpipepipe_selection_download">डाउनलोड</string>
+    <string name="qpipepipe_selection_more">अधिक</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">%d व्हिडिओ डाउनलोड करा</item>
+        <item quantity="other">%d व्हिडिओ डाउनलोड करा</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">गुणवत्ता आणि फोल्डर डाउनलोड सेटिंगमधून घेतले जातात. आधीच डाउनलोड केलेले व्हिडिओ वगळले जातात.</string>
+    <string name="qpipepipe_selection_share_links">लिंक शेअर करा</string>
+    <string name="qpipepipe_selection_remove_from_playlist">प्लेलिस्टमधून काढा</string>
+    <string name="qpipepipe_selection_remove_from_history">इतिहासातून काढा</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d व्हिडिओ काढला</item>
+        <item quantity="other">%d व्हिडिओ काढले</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">दरम्यान यादी बदलली: व्हिडिओ पुन्हा निवडा</string>
+</resources>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Astay n waṭṭas</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d ittustay</item>
+        <item quantity="other">%d ittustayn</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Sty akk</string>
+    <string name="qpipepipe_selection_enqueue">Rnu</string>
+    <string name="qpipepipe_selection_enqueue_next">Ameḍfaṛ</string>
+    <string name="qpipepipe_selection_background">Deffir</string>
+    <string name="qpipepipe_selection_popup">Asfaylu</string>
+    <string name="qpipepipe_selection_playlist">Talgamt</string>
+    <string name="qpipepipe_selection_download">Agem</string>
+    <string name="qpipepipe_selection_more">Ugar</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">Agem %d uvidyu</item>
+        <item quantity="other">Agem %d ividyuten</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Taɣara d usedaw kkan-d zeg tisɣal n ugem. Ividyuten yettwagmen yad ad ttwazeglen.</string>
+    <string name="qpipepipe_selection_share_links">Bḍu iseɣwan</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Kkes zeg telgamt n tɣuri</string>
+    <string name="qpipepipe_selection_remove_from_history">Kkes zeg umezray</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d uvidyu ittwakkes</item>
+        <item quantity="other">%d ividyuten ttwakksen</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Talgamt tbeddel: sty ividyuten tikkelt yaḍnin</string>
+</resources>

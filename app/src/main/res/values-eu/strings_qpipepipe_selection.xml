@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Hautapen anitza</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d hautatuta</item>
+        <item quantity="other">%d hautatuta</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Hautatu guztiak</string>
+    <string name="qpipepipe_selection_enqueue">Ilara</string>
+    <string name="qpipepipe_selection_enqueue_next">Hurrengoa</string>
+    <string name="qpipepipe_selection_background">Atzealdea</string>
+    <string name="qpipepipe_selection_popup">Leihoa</string>
+    <string name="qpipepipe_selection_playlist">Zerrenda</string>
+    <string name="qpipepipe_selection_download">Deskargatu</string>
+    <string name="qpipepipe_selection_more">Gehiago</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">Deskargatu bideo %d</item>
+        <item quantity="other">Deskargatu %d bideo</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Kalitatea eta karpeta deskarga-ezarpenetatik hartzen dira. Dagoeneko deskargatutako bideoak saltatu egiten dira.</string>
+    <string name="qpipepipe_selection_share_links">Partekatu estekak</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Kendu erreprodukzio-zerrendatik</string>
+    <string name="qpipepipe_selection_remove_from_history">Kendu historialetik</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">Bideo %d kendu da</item>
+        <item quantity="other">%d bideo kendu dira</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Zerrenda aldatu egin da bitartean: hautatu bideoak berriro</string>
+</resources>

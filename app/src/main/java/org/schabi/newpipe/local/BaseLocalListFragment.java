@@ -25,6 +25,7 @@ import org.schabi.newpipe.fragments.list.ListViewContract;
 import org.schabi.newpipe.info_list.ItemViewMode;
 import org.schabi.newpipe.info_list.swipe.StreamSwipeItemTouchCallback;
 import org.schabi.newpipe.info_list.swipe.SwipeActionPreferences;
+import org.schabi.newpipe.qpipepipe.selection.MultiSelect;
 import org.schabi.newpipe.util.ThemeHelper;
 
 import static org.schabi.newpipe.ktx.ViewUtils.animate;
@@ -114,6 +115,15 @@ public abstract class BaseLocalListFragment<I, N> extends BaseStateFragment<I>
         itemListAdapter.setItemViewMode(appliedItemViewMode);
         itemListAdapter.notifyDataSetChanged();
         refreshSwipeActions();
+        // QPipePipe: multiple selection
+        MultiSelect.install(this, itemsList, MultiSelect.localResolver(itemListAdapter),
+                getMultiSelectRemover());
+    }
+
+    /** QPipePipe: how selected videos are removed from this list, if they can be. */
+    @Nullable
+    protected MultiSelect.Remover getMultiSelectRemover() {
+        return null;
     }
 
     /**
@@ -196,6 +206,7 @@ public abstract class BaseLocalListFragment<I, N> extends BaseStateFragment<I>
                     + "menu = [" + menu + "], inflater = [" + inflater + "]");
         }
 
+        MultiSelect.addMenuItem(this, menu);
         final ActionBar supportActionBar = activity.getSupportActionBar();
         if (supportActionBar == null) {
             return;

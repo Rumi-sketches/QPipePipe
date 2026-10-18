@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Hilbijartina pirjimar</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d hilbijart</item>
+        <item quantity="other">%d hilbijartî</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Hemûyan hilbijêre</string>
+    <string name="qpipepipe_selection_enqueue">Sira</string>
+    <string name="qpipepipe_selection_enqueue_next">Piştre</string>
+    <string name="qpipepipe_selection_background">Paşî</string>
+    <string name="qpipepipe_selection_popup">Popup</string>
+    <string name="qpipepipe_selection_playlist">Lîste</string>
+    <string name="qpipepipe_selection_download">Dakêşîn</string>
+    <string name="qpipepipe_selection_more">Bêtir</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">%d vîdyoyê dakêşîne</item>
+        <item quantity="other">%d vîdyoyan dakêşîne</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Kalîte û peldank ji mîhengên dakêşanê tên. Vîdyoyên ku berê hatine dakêşan tên derbaskirin.</string>
+    <string name="qpipepipe_selection_share_links">Girêdanan parve bike</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Ji lîsteya lîstinê rake</string>
+    <string name="qpipepipe_selection_remove_from_history">Ji dîrokê rake</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d vîdyo hate rakirin</item>
+        <item quantity="other">%d vîdyo hatin rakirin</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Di vê navberê de lîste guherî: vîdyoyan dîsa hilbijêre</string>
+</resources>

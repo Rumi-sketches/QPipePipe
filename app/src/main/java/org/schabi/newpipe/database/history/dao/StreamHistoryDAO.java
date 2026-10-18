@@ -9,6 +9,7 @@ import org.schabi.newpipe.database.history.model.LatestPlayedStream;
 import org.schabi.newpipe.database.history.model.StreamHistoryEntity;
 import org.schabi.newpipe.database.history.model.StreamHistoryEntry;
 import org.schabi.newpipe.database.stream.StreamStatisticsEntry;
+import org.schabi.newpipe.qpipepipe.StreamProgress;
 
 import java.util.List;
 
@@ -102,4 +103,10 @@ public abstract class StreamHistoryDAO implements HistoryDAO<StreamHistoryEntity
             + " FROM " + STREAM_STATE_TABLE + " )"
             + " ON " + STREAM_ID + " = " + JOIN_STREAM_ID_ALIAS)
     public abstract Flowable<List<StreamStatisticsEntry>> getStatistics();
+
+    /** QPipePipe: saved progress of the streams in {@code urls} that have one (under 999). */
+    @Query("SELECT streams.url, streams.duration, stream_state.progress_time"
+            + " FROM streams INNER JOIN stream_state ON streams.uid = stream_state.stream_id"
+            + " WHERE streams.url IN (:urls)")
+    public abstract List<StreamProgress> getProgressOf(List<String> urls);
 }

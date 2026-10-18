@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">ᱟᱭᱢᱟ ᱵᱟᱪᱷᱟᱣ</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d ᱵᱟᱪᱷᱟᱣ ᱮᱱᱟ</item>
+        <item quantity="two">%d ᱵᱟᱪᱷᱟᱣ ᱮᱱᱟ</item>
+        <item quantity="other">%d ᱵᱟᱪᱷᱟᱣ ᱮᱱᱟ</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">ᱡᱷᱚᱛᱚ ᱵᱟᱪᱷᱟᱣ ᱢᱮ</string>
+    <string name="qpipepipe_selection_enqueue">ᱠᱭᱩ</string>
+    <string name="qpipepipe_selection_enqueue_next">ᱛᱟᱭᱚᱢ</string>
+    <string name="qpipepipe_selection_background">ᱵᱮᱠᱜᱨᱟᱩᱸᱰ</string>
+    <string name="qpipepipe_selection_popup">ᱯᱳᱯᱟᱹᱯ</string>
+    <string name="qpipepipe_selection_playlist">ᱯᱞᱮᱞᱤᱥᱴ</string>
+    <string name="qpipepipe_selection_download">ᱰᱟᱩᱱᱞᱚᱰ</string>
+    <string name="qpipepipe_selection_more">ᱟᱨᱦᱚᱸ</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">%d ᱣᱤᱰᱤᱭᱚ ᱰᱟᱩᱱᱞᱳᱰ ᱢᱮ</item>
+        <item quantity="two">%d ᱣᱤᱰᱤᱭᱚ ᱰᱟᱩᱱᱞᱳᱰ ᱢᱮ</item>
+        <item quantity="other">%d ᱣᱤᱰᱤᱭᱚ ᱰᱟᱩᱱᱞᱳᱰ ᱢᱮ</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">ᱠᱣᱟᱞᱤᱴᱤ ᱟᱨ ᱯᱚᱴᱚᱢ ᱰᱟᱩᱱᱞᱳᱰ ᱥᱟᱡᱟᱣᱠᱚ ᱠᱷᱚᱱ ᱦᱟᱛᱟᱣᱜᱼᱟ ᱾ ᱢᱟᱲᱟᱝ ᱠᱷᱚᱱ ᱰᱟᱩᱱᱞᱳᱰ ᱟᱠᱟᱱ ᱣᱤᱰᱤᱭᱚ ᱠᱚ ᱵᱟᱹᱜᱤ ᱦᱩᱭᱩᱜᱼᱟ ᱾</string>
+    <string name="qpipepipe_selection_share_links">ᱞᱤᱝᱠ ᱠᱚ ᱦᱟᱹᱴᱤᱧ ᱢᱮ</string>
+    <string name="qpipepipe_selection_remove_from_playlist">ᱯᱞᱮᱞᱤᱥᱴ ᱠᱷᱚᱱ ᱚᱪᱚᱜ ᱢᱮ</string>
+    <string name="qpipepipe_selection_remove_from_history">ᱱᱟᱜᱟᱢ ᱠᱷᱚᱱ ᱚᱪᱚᱜ ᱢᱮ</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d ᱣᱤᱰᱤᱭᱚ ᱚᱪᱚᱜ ᱮᱱᱟ</item>
+        <item quantity="two">%d ᱣᱤᱰᱤᱭᱚ ᱚᱪᱚᱜ ᱮᱱᱟ</item>
+        <item quantity="other">%d ᱣᱤᱰᱤᱭᱚ ᱚᱪᱚᱜ ᱮᱱᱟ</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">ᱚᱱᱟ ᱵᱷᱤᱛᱨᱤ ᱛᱟᱹᱞᱠᱟᱹ ᱵᱚᱫᱚᱞ ᱮᱱᱟ: ᱣᱤᱰᱤᱭᱚ ᱠᱚ ᱫᱚᱦᱲᱟ ᱵᱟᱪᱷᱟᱣ ᱢᱮ</string>
+</resources>

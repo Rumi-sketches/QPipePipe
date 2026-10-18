@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Warteschlangen- und Wischfunktionen dieses Forks</string>
+    <string name="qpipepipe_category_playback">Wiedergabe</string>
+    <string name="qpipepipe_category_swipe_actions">Wischaktionen</string>
+    <string name="tap_always_plays_title">Antippen eines Videos startet immer die Wiedergabe</string>
+    <string name="tap_always_plays_summary">Startet die Wiedergabe beim Öffnen eines Videos, auch wenn die automatische Wiedergabe auf Wi-Fi beschränkt oder ausgeschaltet ist. Für automatische Starts gilt weiterhin die automatische Wiedergabe</string>
+    <string name="clear_queue_confirmation_title">Vor dem Leeren einer Warteschlange nachfragen</string>
+    <string name="clear_queue_confirmation_summary">Beim Wechsel zu einem anderen Player kann Ihre Warteschlange ersetzt werden</string>
+    <string name="clear_queue_confirmation_description">Die Warteschlange des aktiven Players wird ersetzt</string>
+    <string name="clear_queue_confirmation_play_now">Jetzt abspielen</string>
+    <string name="enable_swipe_actions_title">Wischaktionen für Videos aktivieren</string>
+    <string name="enable_swipe_actions_summary">Wischen Sie ein Video auf der Startseite, in Suchergebnissen, Wiedergabelisten und Kanalgruppen nach links oder rechts, um eine Schnellaktion auszulösen</string>
+    <string name="swipe_left_action_title">Aktion beim Wischen nach links</string>
+    <string name="swipe_right_action_title">Aktion beim Wischen nach rechts</string>
+    <string name="enable_swipe_actions_warning_title">Wischaktionen aktiviert</string>
+    <string name="enable_swipe_actions_warning_message">Wischen funktioniert nur mit Zeilen in voller Breite zuverlässig. Daher wird überall, wo Wischaktionen verfügbar sind, die Listenansicht statt Raster- oder Kartenansicht verwendet. Sie können dies jederzeit wieder ausschalten.</string>
+    <string name="swipe_actions_force_list_mode_summary">Deaktiviert, solange Wischaktionen aktiv sind, da diese die Listenansicht erzwingen</string>
+    <string name="remove_from_playlist_swipe_action">Aus Wiedergabeliste entfernen (nur Wiedergabelisten)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s ist verfügbar</string>
+    <string name="qpipepipe_update_notification_text">Zum Herunterladen und Installieren antippen</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Dieses Update herunterladen und installieren? Android wird Sie bitten, die Installation zu bestätigen.</string>
+    <string name="qpipepipe_update_install">Herunterladen und installieren</string>
+    <string name="qpipepipe_update_release_notes">Versionshinweise</string>
+    <string name="qpipepipe_update_later">Später</string>
+    <string name="qpipepipe_update_downloading">QPipePipe %s wird heruntergeladen</string>
+    <string name="qpipepipe_update_download_failed">Der Download ist fehlgeschlagen. Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.</string>
+    <string name="qpipepipe_update_wrong_build">Dieser Build kann das Update nicht selbst installieren, z. B. weil es ein Debug-Build ist. Laden Sie die APK stattdessen von der Release-Seite herunter.</string>
+    <string name="qpipepipe_update_failed">Das Update konnte nicht installiert werden: %s</string>
+    <string name="playlist_resume_title">Dort weitermachen, wo Sie aufgehört haben</string>
+    <string name="playlist_resume_play">Ab #%d fortsetzen</string>
+    <string name="playlist_resume_here">Hier fortsetzen</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Letzte Warteschlangen behalten</string>
+    <string name="recent_queues_summary">Listet die abgespielten Warteschlangen unter Wiedergabelisten auf, damit Sie sie später fortsetzen oder speichern können. Videos, die Sie einer aus Ihrer Wiedergabeliste gestarteten Warteschlange hinzufügen, werden auch dieser Wiedergabeliste hinzugefügt. Warteschlangen von YouTube-Wiedergabelisten und -Kanälen werden nicht behalten</string>
+    <string name="recent_queues_tab_playlists">Wiedergabelisten</string>
+    <string name="recent_queues_tab">Letzte Warteschlangen</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d Warteschlange</item>
+        <item quantity="other">%d Warteschlangen, neueste zuerst</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Alle löschen</string>
+    <string name="recent_queues_clear_all_message">Alle letzten Warteschlangen löschen? Ihre gespeicherten Wiedergabelisten bleiben unverändert.</string>
+    <string name="recent_queues_empty">Keine letzten Warteschlangen. Abgespielte Warteschlangen erscheinen hier.</string>
+    <string name="recent_queue_title">Warteschlange vom %s</string>
+    <string name="recent_queue_from_playlist">Aus: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%1$d Video seit %2$s hinzugefügt</item>
+        <item quantity="other">%1$d Videos seit %2$s hinzugefügt</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d Video</item>
+        <item quantity="other">%1$d/%2$d Videos</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d Video zu %2$s hinzugefügt</item>
+        <item quantity="other">%1$d Videos zu %2$s hinzugefügt</item>
+    </plurals>
+    <string name="recent_queue_resume">Fortsetzen</string>
+    <string name="recent_queue_more">Weitere Optionen</string>
+    <string name="recent_queue_progress">%1$s von %2$s</string>
+    <string name="recent_queue_save_as_playlist">Als Wiedergabeliste speichern</string>
+    <string name="recent_queue_open_playlist">Wiedergabeliste öffnen</string>
+    <string name="recent_queue_saved">In Wiedergabelisten gespeichert</string>
+    <string name="recent_queue_deleted">Warteschlange gelöscht</string>
+    <string name="recent_queue_deleted_linked">Warteschlange gelöscht, die Wiedergabeliste bleibt</string>
+    <string name="recent_queue_playing_now">Wird abgespielt</string>
+    <string name="recent_queue_playing_at">Wird abgespielt · %s</string>
+    <string name="recent_queue_watched">Gesehen</string>
+    <string name="recent_queue_not_watched">Noch ansehen</string>
+    <string name="recent_queue_added">hinzugefügt</string>
+    <string name="playlist_never_played">Nie abgespielt</string>
+</resources>

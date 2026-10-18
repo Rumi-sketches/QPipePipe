@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Множны выбар</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">Выбрана: %d</item>
+        <item quantity="few">Выбрана: %d</item>
+        <item quantity="many">Выбрана: %d</item>
+        <item quantity="other">Выбрана: %d</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Выбраць усё</string>
+    <string name="qpipepipe_selection_enqueue">У чаргу</string>
+    <string name="qpipepipe_selection_enqueue_next">Наступным</string>
+    <string name="qpipepipe_selection_background">У фоне</string>
+    <string name="qpipepipe_selection_popup">У акне</string>
+    <string name="qpipepipe_selection_playlist">Плэйліст</string>
+    <string name="qpipepipe_selection_download">Спампаваць</string>
+    <string name="qpipepipe_selection_more">Яшчэ</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">Спампаваць %d відэа</item>
+        <item quantity="few">Спампаваць %d відэа</item>
+        <item quantity="many">Спампаваць %d відэа</item>
+        <item quantity="other">Спампаваць %d відэа</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Якасць і каталог бяруцца з налад спампоўвання. Ужо спампаваныя відэа прапускаюцца.</string>
+    <string name="qpipepipe_selection_share_links">Падзяліцца спасылкамі</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Выдаліць з плэйліста</string>
+    <string name="qpipepipe_selection_remove_from_history">Выдаліць з гісторыі</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">Выдалена відэа: %d</item>
+        <item quantity="few">Выдалена відэа: %d</item>
+        <item quantity="many">Выдалена відэа: %d</item>
+        <item quantity="other">Выдалена відэа: %d</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Спіс тым часам змяніўся: выберыце відэа зноў</string>
+</resources>

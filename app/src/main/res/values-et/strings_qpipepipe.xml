@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Selle haru lisatud järjekorra- ja viipefunktsioonid</string>
+    <string name="qpipepipe_category_playback">Taasesitus</string>
+    <string name="qpipepipe_category_swipe_actions">Viipetoimingud</string>
+    <string name="tap_always_plays_title">Video puudutamine alustab alati esitust</string>
+    <string name="tap_always_plays_summary">Alusta esitamist video avamisel ka siis, kui automaatesitus on piiratud Wi-Fi-ga või välja lülitatud. Automaatesitus kehtib endiselt automaatsetele käivitustele</string>
+    <string name="clear_queue_confirmation_title">Küsi enne järjekorra tühjendamist kinnitust</string>
+    <string name="clear_queue_confirmation_summary">Ühelt pleierilt teisele lülitumine võib su järjekorra asendada</string>
+    <string name="clear_queue_confirmation_description">Aktiivse pleieri järjekord asendatakse</string>
+    <string name="clear_queue_confirmation_play_now">Esita kohe</string>
+    <string name="enable_swipe_actions_title">Luba videotel viipetoimingud</string>
+    <string name="enable_swipe_actions_summary">Viipa videot avalehel, otsingutulemustes, esitusloendites ja kanalite rühmades vasakule või paremale, et teha kiirtoiming</string>
+    <string name="swipe_left_action_title">Vasakule viipamise toiming</string>
+    <string name="swipe_right_action_title">Paremale viipamise toiming</string>
+    <string name="enable_swipe_actions_warning_title">Viipetoimingud on lubatud</string>
+    <string name="enable_swipe_actions_warning_message">Viipamine töötab usaldusväärselt ainult täislaiusega ridadega, seega kasutatakse kõikjal, kus viipetoimingud on saadaval, ruudustiku või kaardivaate asemel loendivaadet. Saad selle igal ajal uuesti välja lülitada.</string>
+    <string name="swipe_actions_force_list_mode_summary">Keelatud, kuni viipetoimingud on lubatud, sest need nõuavad loendivaadet</string>
+    <string name="remove_from_playlist_swipe_action">Eemalda esitusloendist (ainult esitusloendites)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s on saadaval</string>
+    <string name="qpipepipe_update_notification_text">Allalaadimiseks ja paigaldamiseks puuduta</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Kas laadida see uuendus alla ja paigaldada? Android palub sul paigaldamise kinnitada.</string>
+    <string name="qpipepipe_update_install">Laadi alla ja paigalda</string>
+    <string name="qpipepipe_update_release_notes">Väljalaske märkmed</string>
+    <string name="qpipepipe_update_later">Hiljem</string>
+    <string name="qpipepipe_update_downloading">QPipePipe %s allalaadimine</string>
+    <string name="qpipepipe_update_download_failed">Allalaadimine nurjus. Kontrolli ühendust ja proovi uuesti.</string>
+    <string name="qpipepipe_update_wrong_build">See versioon ei saa uuendust ise paigaldada, näiteks kuna see on silumisversioon. Laadi APK hoopis väljalaske lehelt alla.</string>
+    <string name="qpipepipe_update_failed">Uuendust ei saanud paigaldada: %s</string>
+    <string name="playlist_resume_title">Jätka sealt, kus pooleli jäi</string>
+    <string name="playlist_resume_play">Jätka alates #%d</string>
+    <string name="playlist_resume_here">Jätka siit</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Hoia viimaseid järjekordi</string>
+    <string name="recent_queues_summary">Näita esitatud järjekordi jaotises Esitusloendid, et saaksid neid hiljem jätkata või salvestada. Videod, mille lisad mõnest sinu esitusloendist alustatud järjekorda, lisatakse sellesse esitusloendisse. YouTube\'i esitusloendite ja kanalite järjekordi ei hoita</string>
+    <string name="recent_queues_tab_playlists">Esitusloendid</string>
+    <string name="recent_queues_tab">Viimased järjekorrad</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d järjekord</item>
+        <item quantity="other">%d järjekorda, uusimad eespool</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Tühjenda kõik</string>
+    <string name="recent_queues_clear_all_message">Kas kustutada kõik viimased järjekorrad? Salvestatud esitusloendeid see ei mõjuta.</string>
+    <string name="recent_queues_empty">Viimaseid järjekordi pole. Siia ilmuvad järjekorrad, mida esitad.</string>
+    <string name="recent_queue_title">Järjekord %s</string>
+    <string name="recent_queue_from_playlist">Allikas: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%1$d video lisatud alates %2$s</item>
+        <item quantity="other">%1$d videot lisatud alates %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d video</item>
+        <item quantity="other">%1$d/%2$d videot</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d video lisati loendisse %2$s</item>
+        <item quantity="other">%1$d videot lisati loendisse %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Jätka</string>
+    <string name="recent_queue_more">Rohkem valikuid</string>
+    <string name="recent_queue_progress">%1$s / %2$s</string>
+    <string name="recent_queue_save_as_playlist">Salvesta esitusloendina</string>
+    <string name="recent_queue_open_playlist">Ava esitusloend</string>
+    <string name="recent_queue_saved">Salvestatud esitusloenditesse</string>
+    <string name="recent_queue_deleted">Järjekord kustutatud</string>
+    <string name="recent_queue_deleted_linked">Järjekord kustutatud, esitusloend jääb alles</string>
+    <string name="recent_queue_playing_now">Esitamisel</string>
+    <string name="recent_queue_playing_at">Esitamisel · %s</string>
+    <string name="recent_queue_watched">Vaadatud</string>
+    <string name="recent_queue_not_watched">Vaatamata</string>
+    <string name="recent_queue_added">lisatud</string>
+    <string name="playlist_never_played">Pole kunagi esitatud</string>
+</resources>

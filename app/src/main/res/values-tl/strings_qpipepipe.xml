@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Mga tampok sa pila at pag-swipe na idinagdag ng fork na ito</string>
+    <string name="qpipepipe_category_playback">Pagpapalabas</string>
+    <string name="qpipepipe_category_swipe_actions">Mga aksyon sa pag-swipe</string>
+    <string name="tap_always_plays_title">Laging ipalabas ang video kapag tinapik</string>
+    <string name="tap_always_plays_summary">Simulan ang pagpapalabas kapag nagbukas ka ng video, kahit limitado sa Wi-Fi o nakapatay ang Kusang pagpapalabas. Nalalapat pa rin ang Kusang pagpapalabas sa mga kusang pagsisimula</string>
+    <string name="clear_queue_confirmation_title">Humingi ng kumpirmasyon bago burahin ang pila</string>
+    <string name="clear_queue_confirmation_summary">Maaaring mapalitan ang iyong pila kapag lumipat ka mula sa isang player papunta sa iba</string>
+    <string name="clear_queue_confirmation_description">Papalitan ang pila ng kasalukuyang player</string>
+    <string name="clear_queue_confirmation_play_now">Ipalabas ngayon</string>
+    <string name="enable_swipe_actions_title">Paganahin ang pag-swipe sa mga video</string>
+    <string name="enable_swipe_actions_summary">I-swipe pakaliwa o pakanan ang isang video sa pangunahing pahina, mga resulta ng paghahanap, mga listahan ng ipapalabas at mga grupo ng channel para gumawa ng mabilisang aksyon</string>
+    <string name="swipe_left_action_title">Aksyon sa pag-swipe pakaliwa</string>
+    <string name="swipe_right_action_title">Aksyon sa pag-swipe pakanan</string>
+    <string name="enable_swipe_actions_warning_title">Pinagana ang pag-swipe</string>
+    <string name="enable_swipe_actions_warning_message">Kailangan ng pag-swipe ang mga hanay na buong lapad para gumana nang maayos, kaya listahan ang gagamiting tanaw sa halip na grid o card saanman may pag-swipe. Maaari mo itong patayin muli anumang oras.</string>
+    <string name="swipe_actions_force_list_mode_summary">Hindi magagamit habang pinagana ang pag-swipe, na pumipilit sa tanaw na listahan</string>
+    <string name="remove_from_playlist_swipe_action">Alisin sa listahan ng ipapalabas (sa mga listahan lang)</string>
+    <string name="qpipepipe_update_notification_title">Mayroon nang QPipePipe %s</string>
+    <string name="qpipepipe_update_notification_text">Tapikin para i-download at i-install</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">I-download at i-install ang update na ito? Hihilingin ng Android na kumpirmahin mo ang pag-install.</string>
+    <string name="qpipepipe_update_install">I-download at i-install</string>
+    <string name="qpipepipe_update_release_notes">Mga tala ng release</string>
+    <string name="qpipepipe_update_later">Mamaya</string>
+    <string name="qpipepipe_update_downloading">Dina-download ang QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">Nabigo ang pag-download. Suriin ang iyong koneksyon at subukang muli.</string>
+    <string name="qpipepipe_update_wrong_build">Hindi kayang i-install ng build na ito ang update nang mag-isa, halimbawa dahil debug build ito. I-download na lang ang APK mula sa pahina ng release.</string>
+    <string name="qpipepipe_update_failed">Hindi ma-install ang update: %s</string>
+    <string name="playlist_resume_title">Ituloy kung saan ka huminto</string>
+    <string name="playlist_resume_play">Ituloy mula #%d</string>
+    <string name="playlist_resume_here">Ituloy dito</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Itago ang mga kamakailang pila</string>
+    <string name="recent_queues_summary">Ilista sa ilalim ng Mga Listahan ng Ipapalabas ang mga pilang ipinapalabas mo, para maituloy o mai-save mo ang mga ito mamaya. Ang mga video na idinagdag mo sa pilang sinimulan mula sa isa sa iyong mga listahan ay idaragdag din sa listahang iyon. Hindi itinatago ang mga pila ng mga listahan at channel sa YouTube</string>
+    <string name="recent_queues_tab_playlists">Mga Playlist</string>
+    <string name="recent_queues_tab">Mga kamakailang pila</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d pila</item>
+        <item quantity="other">Mga %d pila, pinakabago muna</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Burahin lahat</string>
+    <string name="recent_queues_clear_all_message">Burahin ang lahat ng kamakailang pila? Hindi magagalaw ang iyong mga naka-save na listahan.</string>
+    <string name="recent_queues_empty">Walang kamakailang pila. Lalabas dito ang mga pilang ipinapalabas mo.</string>
+    <string name="recent_queue_title">Pila noong %s</string>
+    <string name="recent_queue_from_playlist">Mula sa: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%1$d video ang idinagdag mula %2$s</item>
+        <item quantity="other">Mga %1$d video ang idinagdag mula %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d video</item>
+        <item quantity="other">%1$d/%2$d na video</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d video ang idinagdag sa %2$s</item>
+        <item quantity="other">Mga %1$d video ang idinagdag sa %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Ituloy</string>
+    <string name="recent_queue_more">Iba pang pagpipilian</string>
+    <string name="recent_queue_progress">%1$s sa %2$s</string>
+    <string name="recent_queue_save_as_playlist">I-save bilang listahan</string>
+    <string name="recent_queue_open_playlist">Buksan ang listahan</string>
+    <string name="recent_queue_saved">Na-save sa Mga Listahan ng Ipapalabas</string>
+    <string name="recent_queue_deleted">Binura ang pila</string>
+    <string name="recent_queue_deleted_linked">Binura ang pila, nananatili ang listahan</string>
+    <string name="recent_queue_playing_now">Ipinapalabas</string>
+    <string name="recent_queue_playing_at">Ipinapalabas · %s</string>
+    <string name="recent_queue_watched">Napanood na</string>
+    <string name="recent_queue_not_watched">Panonoorin</string>
+    <string name="recent_queue_added">idinagdag</string>
+    <string name="playlist_never_played">Hindi pa naipalabas</string>
+</resources>

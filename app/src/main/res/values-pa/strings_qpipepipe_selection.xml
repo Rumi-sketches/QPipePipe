@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">ਬਹੁ-ਚੋਣ</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d ਚੁਣੀ</item>
+        <item quantity="other">%d ਚੁਣੀਆਂ</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">ਸਭ ਚੁਣੋ</string>
+    <string name="qpipepipe_selection_enqueue">ਕਤਾਰ</string>
+    <string name="qpipepipe_selection_enqueue_next">ਅਗਲਾ</string>
+    <string name="qpipepipe_selection_background">ਬੈਕਗ੍ਰਾਊਂਡ</string>
+    <string name="qpipepipe_selection_popup">ਪੌਪ-ਅਪ</string>
+    <string name="qpipepipe_selection_playlist">ਪਲੇ-ਸੂਚੀ</string>
+    <string name="qpipepipe_selection_download">ਡਾਊਨਲੋਡ</string>
+    <string name="qpipepipe_selection_more">ਹੋਰ</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">%d ਵੀਡੀਓ ਡਾਊਨਲੋਡ ਕਰੋ</item>
+        <item quantity="other">%d ਵੀਡੀਓਜ਼ ਡਾਊਨਲੋਡ ਕਰੋ</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">ਕੁਆਲਿਟੀ ਅਤੇ ਫੋਲਡਰ ਡਾਊਨਲੋਡ ਸੈਟਿੰਗਾਂ ਤੋਂ ਲਏ ਜਾਂਦੇ ਹਨ। ਪਹਿਲਾਂ ਤੋਂ ਡਾਊਨਲੋਡ ਕੀਤੀਆਂ ਵੀਡੀਓਜ਼ ਛੱਡ ਦਿੱਤੀਆਂ ਜਾਂਦੀਆਂ ਹਨ।</string>
+    <string name="qpipepipe_selection_share_links">ਲਿੰਕ ਸਾਂਝੇ ਕਰੋ</string>
+    <string name="qpipepipe_selection_remove_from_playlist">ਪਲੇ-ਸੂਚੀ ਵਿੱਚੋਂ ਹਟਾਓ</string>
+    <string name="qpipepipe_selection_remove_from_history">ਹਿਸਟਰੀ ਵਿੱਚੋਂ ਹਟਾਓ</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d ਵੀਡੀਓ ਹਟਾਈ ਗਈ</item>
+        <item quantity="other">%d ਵੀਡੀਓਜ਼ ਹਟਾਈਆਂ ਗਈਆਂ</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">ਇਸ ਦੌਰਾਨ ਸੂਚੀ ਬਦਲ ਗਈ: ਵੀਡੀਓਜ਼ ਦੁਬਾਰਾ ਚੁਣੋ</string>
+</resources>

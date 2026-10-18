@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Wielokrotny wybór</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">Zaznaczono: %d</item>
+        <item quantity="few">Zaznaczono: %d</item>
+        <item quantity="many">Zaznaczono: %d</item>
+        <item quantity="other">Zaznaczono: %d</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Zaznacz wszystko</string>
+    <string name="qpipepipe_selection_enqueue">Kolejka</string>
+    <string name="qpipepipe_selection_enqueue_next">Następny</string>
+    <string name="qpipepipe_selection_background">W tle</string>
+    <string name="qpipepipe_selection_popup">Okienko</string>
+    <string name="qpipepipe_selection_playlist">Playlista</string>
+    <string name="qpipepipe_selection_download">Pobierz</string>
+    <string name="qpipepipe_selection_more">Więcej</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">Pobierz %d wideo</item>
+        <item quantity="few">Pobierz %d wideo</item>
+        <item quantity="many">Pobierz %d wideo</item>
+        <item quantity="other">Pobierz %d wideo</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Jakość i folder są brane z ustawień pobierania. Filmy już pobrane zostaną pominięte.</string>
+    <string name="qpipepipe_selection_share_links">Udostępnij linki</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Usuń z playlisty</string>
+    <string name="qpipepipe_selection_remove_from_history">Usuń z historii</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">Usunięto wideo: %d</item>
+        <item quantity="few">Usunięto wideo: %d</item>
+        <item quantity="many">Usunięto wideo: %d</item>
+        <item quantity="other">Usunięto wideo: %d</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Lista zmieniła się w międzyczasie: zaznacz filmy ponownie</string>
+</resources>

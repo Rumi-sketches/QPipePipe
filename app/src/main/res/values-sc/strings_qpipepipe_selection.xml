@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Seletzione mùltipla</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d seletzionadu</item>
+        <item quantity="other">%d seletzionados</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Seletziona totu</string>
+    <string name="qpipepipe_selection_enqueue">Lista</string>
+    <string name="qpipepipe_selection_enqueue_next">Imbeniente</string>
+    <string name="qpipepipe_selection_background">Isfundu</string>
+    <string name="qpipepipe_selection_popup">Ventanedda</string>
+    <string name="qpipepipe_selection_playlist">Iscalita</string>
+    <string name="qpipepipe_selection_download">Iscarriga</string>
+    <string name="qpipepipe_selection_more">Àteru</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">Iscarriga %d vìdeu</item>
+        <item quantity="other">Iscarriga %d vìdeos</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Sa calidade e sa cartella benint dae sas impostatziones de iscarrigamentu. Sos vìdeos giai iscarrigados non benint cunsiderados.</string>
+    <string name="qpipepipe_selection_share_links">Cumpartzi ligòngios</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Boga dae s\'iscalita</string>
+    <string name="qpipepipe_selection_remove_from_history">Boga dae sa cronologia</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d vìdeu bogadu</item>
+        <item quantity="other">%d vìdeos bogados</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Sa lista est cambiada in s\'interis: torra a seletzionare sos vìdeos</string>
+</resources>

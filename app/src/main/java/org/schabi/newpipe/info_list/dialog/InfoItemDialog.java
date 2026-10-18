@@ -25,6 +25,7 @@ import org.schabi.newpipe.error.ErrorUtil;
 import org.schabi.newpipe.error.UserAction;
 import org.schabi.newpipe.extractor.InfoItem;
 import org.schabi.newpipe.extractor.stream.StreamInfoItem;
+import org.schabi.newpipe.qpipepipe.selection.MultiSelect;
 import org.schabi.newpipe.extractor.stream.StreamType;
 import org.schabi.newpipe.player.helper.PlayerHolder;
 import org.schabi.newpipe.util.external_communication.KoreUtils;
@@ -48,11 +49,14 @@ public final class InfoItemDialog {
      * Its result is stored in this class variable to allow access via the {@link #show()} method.
      */
     private final AlertDialog dialog;
+    @NonNull
+    private final Fragment fragment;
 
     private InfoItemDialog(@NonNull final Activity activity,
                            @NonNull final Fragment fragment,
                            @NonNull final StreamInfoItem info,
                            @NonNull final List<StreamDialogEntry> entries) {
+        this.fragment = fragment;
 
         // Create the dialog's title
         final View bannerView = View.inflate(activity, R.layout.dialog_title, null);
@@ -100,6 +104,10 @@ public final class InfoItemDialog {
     }
 
     public void show() {
+        // QPipePipe: in selection mode a long press selects instead
+        if (MultiSelect.isSelecting(fragment)) {
+            return;
+        }
         dialog.show();
     }
 

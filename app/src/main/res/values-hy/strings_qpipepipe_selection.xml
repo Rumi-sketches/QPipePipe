@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Բազմակի ընտրություն</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d նշված</item>
+        <item quantity="other">%d նշված</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Նշել բոլորը</string>
+    <string name="qpipepipe_selection_enqueue">Հերթ</string>
+    <string name="qpipepipe_selection_enqueue_next">Հաջորդը</string>
+    <string name="qpipepipe_selection_background">Ետին պլան</string>
+    <string name="qpipepipe_selection_popup">Թռուցիկ</string>
+    <string name="qpipepipe_selection_playlist">Երգացանկ</string>
+    <string name="qpipepipe_selection_download">Բեռնել</string>
+    <string name="qpipepipe_selection_more">Ավելին</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">Բեռնել %d տեսանյութ</item>
+        <item quantity="other">Բեռնել %d տեսանյութ</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Որակը և պանակը վերցվում են ներբեռնման կարգավորումներից։ Արդեն ներբեռնված տեսանյութերը բաց են թողնվում։</string>
+    <string name="qpipepipe_selection_share_links">Կիսվել հղումներով</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Հեռացնել երգացանկից</string>
+    <string name="qpipepipe_selection_remove_from_history">Հեռացնել պատմությունից</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d տեսանյութ հեռացվեց</item>
+        <item quantity="other">%d տեսանյութ հեռացվեց</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Այդ ընթացքում ցանկը փոխվել է․ կրկին ընտրեք տեսանյութերը</string>
+</resources>

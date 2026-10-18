@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Pažymėti kelis</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">Pasirinktas %d</item>
+        <item quantity="few">Pasirinkti %d</item>
+        <item quantity="other">Pasirinkta %d</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Pasirinkti viską</string>
+    <string name="qpipepipe_selection_enqueue">Į eilę</string>
+    <string name="qpipepipe_selection_enqueue_next">Kitas</string>
+    <string name="qpipepipe_selection_background">Fone</string>
+    <string name="qpipepipe_selection_popup">Lange</string>
+    <string name="qpipepipe_selection_playlist">Grojaraštis</string>
+    <string name="qpipepipe_selection_download">Atsisiųsti</string>
+    <string name="qpipepipe_selection_more">Daugiau</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">Atsisiųsti %d vaizdo įrašą</item>
+        <item quantity="few">Atsisiųsti %d vaizdo įrašus</item>
+        <item quantity="other">Atsisiųsti %d vaizdo įrašų</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Kokybė ir aplankas imami iš atsisiuntimo nustatymų. Jau atsisiųsti vaizdo įrašai praleidžiami.</string>
+    <string name="qpipepipe_selection_share_links">Dalintis nuorodomis</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Pašalinti iš grojaraščio</string>
+    <string name="qpipepipe_selection_remove_from_history">Pašalinti iš istorijos</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">Pašalintas %d vaizdo įrašas</item>
+        <item quantity="few">Pašalinti %d vaizdo įrašai</item>
+        <item quantity="other">Pašalinta %d vaizdo įrašų</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Sąrašas tuo metu pasikeitė: pasirinkite vaizdo įrašus iš naujo</string>
+</resources>

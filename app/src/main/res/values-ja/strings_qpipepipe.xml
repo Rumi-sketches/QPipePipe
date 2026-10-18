@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">このフォークで追加されたキューとスワイプの機能</string>
+    <string name="qpipepipe_category_playback">再生</string>
+    <string name="qpipepipe_category_swipe_actions">スワイプ操作</string>
+    <string name="tap_always_plays_title">動画をタップすると常に再生する</string>
+    <string name="tap_always_plays_summary">自動再生が Wi-Fi のみに制限されているかオフの場合でも、動画を開いたときに再生を開始します。自動での再生開始には引き続き自動再生の設定が適用されます</string>
+    <string name="clear_queue_confirmation_title">キューを消去する前に確認する</string>
+    <string name="clear_queue_confirmation_summary">プレーヤーを切り替えると、キューが置き換えられることがあります</string>
+    <string name="clear_queue_confirmation_description">現在のプレーヤーのキューが置き換えられます</string>
+    <string name="clear_queue_confirmation_play_now">今すぐ再生</string>
+    <string name="enable_swipe_actions_title">動画のスワイプ操作を有効にする</string>
+    <string name="enable_swipe_actions_summary">ホーム、検索結果、プレイリスト、チャンネルグループで動画を左右にスワイプしてクイック操作を実行します</string>
+    <string name="swipe_left_action_title">左スワイプの操作</string>
+    <string name="swipe_right_action_title">右スワイプの操作</string>
+    <string name="enable_swipe_actions_warning_title">スワイプ操作を有効にしました</string>
+    <string name="enable_swipe_actions_warning_message">スワイプを確実に動作させるには全幅の行が必要なため、スワイプ操作が使える場所ではグリッド表示やカード表示の代わりにリスト表示が使われます。この設定はいつでもオフに戻せます。</string>
+    <string name="swipe_actions_force_list_mode_summary">スワイプ操作が有効な間は無効です (リスト表示に固定されます)</string>
+    <string name="remove_from_playlist_swipe_action">プレイリストから削除 (プレイリストのみ)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s が利用可能です</string>
+    <string name="qpipepipe_update_notification_text">タップしてダウンロードとインストール</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">このアップデートをダウンロードしてインストールしますか？インストールの確認を Android から求められます。</string>
+    <string name="qpipepipe_update_install">ダウンロードしてインストール</string>
+    <string name="qpipepipe_update_release_notes">リリースノート</string>
+    <string name="qpipepipe_update_later">後で</string>
+    <string name="qpipepipe_update_downloading">QPipePipe %s をダウンロード中</string>
+    <string name="qpipepipe_update_download_failed">ダウンロードに失敗しました。接続を確認してもう一度お試しください。</string>
+    <string name="qpipepipe_update_wrong_build">このビルドは (デバッグビルドなどのため) 自身でアップデートをインストールできません。代わりにリリースページから APK をダウンロードしてください。</string>
+    <string name="qpipepipe_update_failed">アップデートをインストールできませんでした: %s</string>
+    <string name="playlist_resume_title">前回の続きから再生</string>
+    <string name="playlist_resume_play">#%d から再開</string>
+    <string name="playlist_resume_here">ここから再開</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">最近のキューを保存する</string>
+    <string name="recent_queues_summary">再生したキューをプレイリストの下に一覧表示し、後で再開したり保存したりできるようにします。自分のプレイリストから始めたキューに追加した動画は、そのプレイリストにも追加されます。YouTube のプレイリストやチャンネルのキューは保存されません</string>
+    <string name="recent_queues_tab_playlists">プレイリスト</string>
+    <string name="recent_queues_tab">最近のキュー</string>
+    <plurals name="recent_queues_count">
+        <item quantity="other">%d 件のキュー (新しい順)</item>
+    </plurals>
+    <string name="recent_queues_clear_all">すべて消去</string>
+    <string name="recent_queues_clear_all_message">最近のキューをすべて削除しますか？保存済みのプレイリストはそのまま残ります。</string>
+    <string name="recent_queues_empty">最近のキューはありません。再生したキューがここに表示されます。</string>
+    <string name="recent_queue_title">%s のキュー</string>
+    <string name="recent_queue_from_playlist">元: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="other">%2$s 以降に %1$d 本の動画を追加しました</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="other">%1$d/%2$d 本の動画</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="other">%1$d 本の動画を %2$s に追加しました</item>
+    </plurals>
+    <string name="recent_queue_resume">再開</string>
+    <string name="recent_queue_more">その他のオプション</string>
+    <string name="recent_queue_progress">%1$s / %2$s</string>
+    <string name="recent_queue_save_as_playlist">プレイリストとして保存</string>
+    <string name="recent_queue_open_playlist">プレイリストを開く</string>
+    <string name="recent_queue_saved">プレイリストに保存しました</string>
+    <string name="recent_queue_deleted">キューを削除しました</string>
+    <string name="recent_queue_deleted_linked">キューを削除しました (プレイリストは残ります)</string>
+    <string name="recent_queue_playing_now">再生中</string>
+    <string name="recent_queue_playing_at">再生中 · %s</string>
+    <string name="recent_queue_watched">視聴済み</string>
+    <string name="recent_queue_not_watched">未視聴</string>
+    <string name="recent_queue_added">追加済み</string>
+    <string name="playlist_never_played">未再生</string>
+</resources>

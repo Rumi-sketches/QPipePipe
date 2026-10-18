@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Actions of selection mode, added at the bottom of the screen by
+     org.schabi.newpipe.qpipepipe.selection.SelectionController. Clickable so taps don't reach
+     the views below. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/card_item_background_color"
+    android:clickable="true"
+    android:elevation="8dp"
+    android:focusable="false"
+    android:orientation="horizontal"
+    android:paddingHorizontal="4dp"
+    android:paddingTop="6dp"
+    android:paddingBottom="10dp">
+
+    <TextView
+        android:id="@+id/qpipepipe_selection_enqueue"
+        style="@style/QPipePipeSelectionAction"
+        android:text="@string/qpipepipe_selection_enqueue"
+        app:drawableTopCompat="@drawable/qpipepipe_ic_enqueue" />
+
+    <TextView
+        android:id="@+id/qpipepipe_selection_enqueue_next"
+        style="@style/QPipePipeSelectionAction"
+        android:text="@string/qpipepipe_selection_enqueue_next"
+        app:drawableTopCompat="@drawable/qpipepipe_ic_enqueue_next" />
+
+    <TextView
+        android:id="@+id/qpipepipe_selection_background"
+        style="@style/QPipePipeSelectionAction"
+        android:text="@string/qpipepipe_selection_background"
+        app:drawableTopCompat="@drawable/ic_headset" />
+
+    <TextView
+        android:id="@+id/qpipepipe_selection_popup"
+        style="@style/QPipePipeSelectionAction"
+        android:text="@string/qpipepipe_selection_popup"
+        app:drawableTopCompat="@drawable/ic_picture_in_picture" />
+
+    <TextView
+        android:id="@+id/qpipepipe_selection_playlist"
+        style="@style/QPipePipeSelectionAction"
+        android:text="@string/qpipepipe_selection_playlist"
+        app:drawableTopCompat="@drawable/ic_playlist_add" />
+
+    <TextView
+        android:id="@+id/qpipepipe_selection_download"
+        style="@style/QPipePipeSelectionAction"
+        android:text="@string/qpipepipe_selection_download"
+        app:drawableTopCompat="@drawable/ic_file_download" />
+
+    <TextView
+        android:id="@+id/qpipepipe_selection_more"
+        style="@style/QPipePipeSelectionAction"
+        android:text="@string/qpipepipe_selection_more"
+        app:drawableTopCompat="@drawable/ic_more_vert" />
+
+</LinearLayout>

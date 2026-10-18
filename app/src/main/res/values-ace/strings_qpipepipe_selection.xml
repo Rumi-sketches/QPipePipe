@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">Pileh le</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="other">%d ka geupileh</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">Pileh mandum</string>
+    <string name="qpipepipe_selection_enqueue">Antre</string>
+    <string name="qpipepipe_selection_enqueue_next">Lanjut</string>
+    <string name="qpipepipe_selection_background">Latar</string>
+    <string name="qpipepipe_selection_popup">Popup</string>
+    <string name="qpipepipe_selection_playlist">Daftar puta</string>
+    <string name="qpipepipe_selection_download">Peutren</string>
+    <string name="qpipepipe_selection_more">Laen</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="other">Peutren %d video</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">Kualitas ngen folder ikot peuato peutren. Video nyang ka geupeutren hana geupeutren le.</string>
+    <string name="qpipepipe_selection_share_links">Bagi link</string>
+    <string name="qpipepipe_selection_remove_from_playlist">Peugadoh nibak daftar puta</string>
+    <string name="qpipepipe_selection_remove_from_history">Peugadoh nibak riwayat</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="other">%d video ka geupeugadoh</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">Daftar ka meuubah: pileh lom video</string>
+</resources>

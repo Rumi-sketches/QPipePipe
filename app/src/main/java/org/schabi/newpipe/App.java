@@ -28,6 +28,7 @@ import org.schabi.newpipe.ktx.ExceptionUtils;
 import org.schabi.newpipe.settings.NewPipeSettings;
 import org.schabi.newpipe.util.*;
 import org.schabi.newpipe.youtube.LocalDomPoTokenProvider;
+import org.schabi.newpipe.qpipepipe.recentqueues.RecentQueueUndo;
 
 import java.io.IOException;
 import java.io.InterruptedIOException;
@@ -83,6 +84,8 @@ public class App extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        // QPipePipe: lets the player offer Undo on the screen in front
+        RecentQueueUndo.register(this);
         app = this;
 
         if (ACRA.isACRASenderServiceProcess()) {
@@ -332,7 +335,7 @@ public class App extends MultiDexApplication {
                 .Builder(getString(R.string.app_update_notification_channel_id),
                         NotificationManagerCompat.IMPORTANCE_LOW)
                 .setName(getString(R.string.app_update_notification_channel_name))
-                .setDescription(getString(R.string.app_update_notification_channel_description_new))
+                .setDescription(getString(R.string.qpipepipe_update_channel_description))
                 .build());
 
         notificationChannelCompats.add(new NotificationChannelCompat

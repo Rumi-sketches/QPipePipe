@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">ଏହି ଫର୍କରେ ଯୋଡ଼ାଯାଇଥିବା ଧାଡ଼ି ଓ ସ୍ୱାଇପ୍ ସୁବିଧା</string>
+    <string name="qpipepipe_category_playback">ପ୍ଲେବ୍ୟାକ୍</string>
+    <string name="qpipepipe_category_swipe_actions">ସ୍ୱାଇପ୍ କାର୍ଯ୍ୟ</string>
+    <string name="tap_always_plays_title">ଭିଡିଓରେ ଟାପ୍ କଲେ ତାହା ସର୍ବଦା ଚାଲିବ</string>
+    <string name="tap_always_plays_summary">ଭିଡିଓ ଖୋଲିବା ମାତ୍ରେ ପ୍ଲେବ୍ୟାକ୍ ଆରମ୍ଭ କରନ୍ତୁ, ଅଟୋପ୍ଲେ କେବଳ Wi-Fiରେ ସୀମିତ କିମ୍ବା ବନ୍ଦ ଥିଲେ ମଧ୍ୟ। ସ୍ୱୟଂଚାଳିତ ଆରମ୍ଭ ପାଇଁ ଅଟୋପ୍ଲେ ଲାଗୁ ରହେ</string>
+    <string name="clear_queue_confirmation_title">ଧାଡ଼ି ସଫା କରିବା ପୂର୍ବରୁ ନିଶ୍ଚିତକରଣ ମାଗନ୍ତୁ</string>
+    <string name="clear_queue_confirmation_summary">ଗୋଟିଏ ପ୍ଲେୟାରରୁ ଅନ୍ୟ ପ୍ଲେୟାରକୁ ଗଲେ ଆପଣଙ୍କ ଧାଡ଼ି ବଦଳିପାରେ</string>
+    <string name="clear_queue_confirmation_description">ସକ୍ରିୟ ପ୍ଲେୟାରର ଧାଡ଼ି ବଦଳିଯିବ</string>
+    <string name="clear_queue_confirmation_play_now">ଏବେ ଚଲାନ୍ତୁ</string>
+    <string name="enable_swipe_actions_title">ଭିଡିଓରେ ସ୍ୱାଇପ୍ କାର୍ଯ୍ୟ ସକ୍ଷମ କରନ୍ତୁ</string>
+    <string name="enable_swipe_actions_summary">ମୁଖ୍ୟପୃଷ୍ଠା, ସନ୍ଧାନ ଫଳାଫଳ, ପ୍ଲେଲିଷ୍ଟ ଓ ଚ୍ୟାନେଲ ଗୋଷ୍ଠୀରେ ଏକ ଭିଡିଓକୁ ବାମ କିମ୍ବା ଡାହାଣକୁ ସ୍ୱାଇପ୍ କରି ଶୀଘ୍ର କାର୍ଯ୍ୟ କରନ୍ତୁ</string>
+    <string name="swipe_left_action_title">ବାମ ସ୍ୱାଇପ୍ କାର୍ଯ୍ୟ</string>
+    <string name="swipe_right_action_title">ଡାହାଣ ସ୍ୱାଇପ୍ କାର୍ଯ୍ୟ</string>
+    <string name="enable_swipe_actions_warning_title">ସ୍ୱାଇପ୍ କାର୍ଯ୍ୟ ସକ୍ଷମ ହେଲା</string>
+    <string name="enable_swipe_actions_warning_message">ସ୍ୱାଇପ୍ ଠିକ୍ ଭାବେ କାମ କରିବା ପାଇଁ ପୂରା ଓସାରର ଧାଡ଼ି ଦରକାର, ତେଣୁ ଯେଉଁଠି ସ୍ୱାଇପ୍ କାର୍ଯ୍ୟ ଉପଲବ୍ଧ ସେଠାରେ ଗ୍ରିଡ୍ କିମ୍ବା କାର୍ଡ ଭ୍ୟୁ ବଦଳରେ ତାଲିକା ଭ୍ୟୁ ବ୍ୟବହାର ହେବ। ଆପଣ ଏହାକୁ ଯେକୌଣସି ସମୟରେ ପୁଣି ବନ୍ଦ କରିପାରିବେ।</string>
+    <string name="swipe_actions_force_list_mode_summary">ସ୍ୱାଇପ୍ କାର୍ଯ୍ୟ ସକ୍ଷମ ଥିବା ବେଳେ ଅକ୍ଷମ, କାରଣ ସେଗୁଡ଼ିକ ତାଲିକା ଭ୍ୟୁ ବାଧ୍ୟତାମୂଳକ କରନ୍ତି</string>
+    <string name="remove_from_playlist_swipe_action">ପ୍ଲେଲିଷ୍ଟରୁ ହଟାନ୍ତୁ (କେବଳ ପ୍ଲେଲିଷ୍ଟରେ)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s ଉପଲବ୍ଧ</string>
+    <string name="qpipepipe_update_notification_text">ଡାଉନଲୋଡ୍ ଓ ଇନଷ୍ଟଲ୍ କରିବାକୁ ଟାପ୍ କରନ୍ତୁ</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">ଏହି ଅପଡେଟ୍ ଡାଉନଲୋଡ୍ ଓ ଇନଷ୍ଟଲ୍ କରିବେ? Android ଆପଣଙ୍କୁ ଇନଷ୍ଟଲେସନ୍ ନିଶ୍ଚିତ କରିବାକୁ କହିବ।</string>
+    <string name="qpipepipe_update_install">ଡାଉନଲୋଡ୍ ଓ ଇନଷ୍ଟଲ୍ କରନ୍ତୁ</string>
+    <string name="qpipepipe_update_release_notes">ରିଲିଜ୍ ନୋଟ୍ସ</string>
+    <string name="qpipepipe_update_later">ପରେ</string>
+    <string name="qpipepipe_update_downloading">QPipePipe %s ଡାଉନଲୋଡ୍ ହେଉଛି</string>
+    <string name="qpipepipe_update_download_failed">ଡାଉନଲୋଡ୍ ବିଫଳ ହେଲା। ଆପଣଙ୍କ ସଂଯୋଗ ଯାଞ୍ଚ କରି ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ।</string>
+    <string name="qpipepipe_update_wrong_build">ଏହି ବିଲ୍ଡ ନିଜେ ଅପଡେଟ୍ ଇନଷ୍ଟଲ୍ କରିପାରିବ ନାହିଁ, ଉଦାହରଣ ସ୍ୱରୂପ ଏହା ଏକ ଡିବଗ୍ ବିଲ୍ଡ ହୋଇଥିବାରୁ। ଏହା ବଦଳରେ ରିଲିଜ୍ ପୃଷ୍ଠାରୁ APK ଡାଉନଲୋଡ୍ କରନ୍ତୁ।</string>
+    <string name="qpipepipe_update_failed">ଅପଡେଟ୍ ଇନଷ୍ଟଲ୍ ହୋଇପାରିଲା ନାହିଁ: %s</string>
+    <string name="playlist_resume_title">ଯେଉଁଠି ଛାଡ଼ିଥିଲେ ସେଠାରୁ ଜାରି ରଖନ୍ତୁ</string>
+    <string name="playlist_resume_play">#%d ରୁ ପୁଣି ଆରମ୍ଭ କରନ୍ତୁ</string>
+    <string name="playlist_resume_here">ଏଠାରୁ ପୁଣି ଆରମ୍ଭ କରନ୍ତୁ</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">ସାମ୍ପ୍ରତିକ ଧାଡ଼ି ରଖନ୍ତୁ</string>
+    <string name="recent_queues_summary">ଆପଣ ଚଲାଇଥିବା ଧାଡ଼ିଗୁଡ଼ିକ ପ୍ଲେଲିଷ୍ଟ ତଳେ ଦେଖାନ୍ତୁ, ଯାହାଦ୍ୱାରା ପରେ ପୁଣି ଆରମ୍ଭ କିମ୍ବା ସେଭ୍ କରିପାରିବେ। ଆପଣଙ୍କ କୌଣସି ପ୍ଲେଲିଷ୍ଟରୁ ଆରମ୍ଭ ହୋଇଥିବା ଧାଡ଼ିରେ ଯୋଡ଼ାଯାଇଥିବା ଭିଡିଓ ସେହି ପ୍ଲେଲିଷ୍ଟରେ ମଧ୍ୟ ଯୋଡ଼ାଯାଏ। YouTube ପ୍ଲେଲିଷ୍ଟ ଓ ଚ୍ୟାନେଲର ଧାଡ଼ି ରଖାଯାଏ ନାହିଁ</string>
+    <string name="recent_queues_tab_playlists">ପ୍ଲେଲିଷ୍ଟ</string>
+    <string name="recent_queues_tab">ସାମ୍ପ୍ରତିକ ଧାଡ଼ି</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d ଧାଡ଼ି</item>
+        <item quantity="other">%d ଧାଡ଼ି, ନୂଆ ପ୍ରଥମେ</item>
+    </plurals>
+    <string name="recent_queues_clear_all">ସବୁ ସଫା କରନ୍ତୁ</string>
+    <string name="recent_queues_clear_all_message">ସମସ୍ତ ସାମ୍ପ୍ରତିକ ଧାଡ଼ି ଡିଲିଟ୍ କରିବେ? ଆପଣଙ୍କ ସେଭ୍ ହୋଇଥିବା ପ୍ଲେଲିଷ୍ଟ ଉପରେ କିଛି ପ୍ରଭାବ ପଡ଼ିବ ନାହିଁ।</string>
+    <string name="recent_queues_empty">କୌଣସି ସାମ୍ପ୍ରତିକ ଧାଡ଼ି ନାହିଁ। ଆପଣ ଚଲାଇଥିବା ଧାଡ଼ି ଏଠାରେ ଦେଖାଯିବ।</string>
+    <string name="recent_queue_title">%s ର ଧାଡ଼ି</string>
+    <string name="recent_queue_from_playlist">ଠାରୁ: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%2$s ଠାରୁ %1$d ଭିଡିଓ ଯୋଡ଼ାଗଲା</item>
+        <item quantity="other">%2$s ଠାରୁ %1$d ଭିଡିଓ ଯୋଡ଼ାଗଲା</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d ଭିଡିଓ</item>
+        <item quantity="other">%1$d/%2$d ଭିଡିଓ</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d ଭିଡିଓ %2$s ରେ ଯୋଡ଼ାଗଲା</item>
+        <item quantity="other">%1$d ଭିଡିଓ %2$s ରେ ଯୋଡ଼ାଗଲା</item>
+    </plurals>
+    <string name="recent_queue_resume">ପୁଣି ଆରମ୍ଭ</string>
+    <string name="recent_queue_more">ଅଧିକ ବିକଳ୍ପ</string>
+    <string name="recent_queue_progress">%2$s ମଧ୍ୟରୁ %1$s</string>
+    <string name="recent_queue_save_as_playlist">ପ୍ଲେଲିଷ୍ଟ ଭାବେ ସେଭ୍ କରନ୍ତୁ</string>
+    <string name="recent_queue_open_playlist">ପ୍ଲେଲିଷ୍ଟ ଖୋଲନ୍ତୁ</string>
+    <string name="recent_queue_saved">ପ୍ଲେଲିଷ୍ଟରେ ସେଭ୍ ହେଲା</string>
+    <string name="recent_queue_deleted">ଧାଡ଼ି ଡିଲିଟ୍ ହେଲା</string>
+    <string name="recent_queue_deleted_linked">ଧାଡ଼ି ଡିଲିଟ୍ ହେଲା, ପ୍ଲେଲିଷ୍ଟ ରହିବ</string>
+    <string name="recent_queue_playing_now">ଚାଲୁଛି</string>
+    <string name="recent_queue_playing_at">ଚାଲୁଛି · %s</string>
+    <string name="recent_queue_watched">ଦେଖାହୋଇଛି</string>
+    <string name="recent_queue_not_watched">ଦେଖିବାକୁ ବାକି</string>
+    <string name="recent_queue_added">ଯୋଡ଼ାଯାଇଛି</string>
+    <string name="playlist_never_played">କେବେ ଚଲାଯାଇନାହିଁ</string>
+</resources>

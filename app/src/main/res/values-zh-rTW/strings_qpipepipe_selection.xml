@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">多重選取</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="other">已選取 %d 項</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">全選</string>
+    <string name="qpipepipe_selection_enqueue">加入佇列</string>
+    <string name="qpipepipe_selection_enqueue_next">接著播放</string>
+    <string name="qpipepipe_selection_background">背景播放</string>
+    <string name="qpipepipe_selection_popup">懸浮視窗</string>
+    <string name="qpipepipe_selection_playlist">播放清單</string>
+    <string name="qpipepipe_selection_download">下載</string>
+    <string name="qpipepipe_selection_more">更多</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="other">下載 %d 部影片</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">畫質與資料夾依照下載設定。已下載的影片會略過。</string>
+    <string name="qpipepipe_selection_share_links">分享連結</string>
+    <string name="qpipepipe_selection_remove_from_playlist">從播放清單移除</string>
+    <string name="qpipepipe_selection_remove_from_history">從歷史紀錄移除</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="other">已移除 %d 部影片</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">清單在此期間已變更：請重新選取影片</string>
+</resources>

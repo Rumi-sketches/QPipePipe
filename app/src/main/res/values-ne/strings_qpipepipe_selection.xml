@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe_selection.xml. -->
+<resources>
+    <string name="qpipepipe_multi_select">बहु चयन</string>
+    <plurals name="qpipepipe_selection_count">
+        <item quantity="one">%d चयन गरियो</item>
+        <item quantity="other">%d चयन गरियो</item>
+    </plurals>
+    <string name="qpipepipe_selection_select_all">सबै चयन गर्नुहोस्</string>
+    <string name="qpipepipe_selection_enqueue">लाम</string>
+    <string name="qpipepipe_selection_enqueue_next">अर्को</string>
+    <string name="qpipepipe_selection_background">पृष्ठभूमि</string>
+    <string name="qpipepipe_selection_popup">पपअप</string>
+    <string name="qpipepipe_selection_playlist">प्लेसूची</string>
+    <string name="qpipepipe_selection_download">डाउनलोड</string>
+    <string name="qpipepipe_selection_more">थप</string>
+    <plurals name="qpipepipe_selection_download_title">
+        <item quantity="one">%d भिडियो डाउनलोड गर्नुहोस्</item>
+        <item quantity="other">%d भिडियोहरू डाउनलोड गर्नुहोस्</item>
+    </plurals>
+    <string name="qpipepipe_selection_download_message">गुणस्तर र फोल्डर डाउनलोड सेटिङ्गहरूबाट लिइन्छ। पहिले नै डाउनलोड गरिएका भिडियोहरू छोडिन्छन्।</string>
+    <string name="qpipepipe_selection_share_links">लिङ्कहरू साझा गर्नुहोस्</string>
+    <string name="qpipepipe_selection_remove_from_playlist">प्लेसूचीबाट हटाउनुहोस्</string>
+    <string name="qpipepipe_selection_remove_from_history">इतिहासबाट हटाउनुहोस्</string>
+    <plurals name="qpipepipe_selection_removed">
+        <item quantity="one">%d भिडियो हटाइयो</item>
+        <item quantity="other">%d भिडियोहरू हटाइए</item>
+    </plurals>
+    <string name="qpipepipe_selection_list_changed">यसबीच सूची परिवर्तन भयो: भिडियोहरू फेरि चयन गर्नुहोस्</string>
+</resources>
