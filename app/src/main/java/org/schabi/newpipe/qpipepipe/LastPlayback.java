@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
 import org.schabi.newpipe.player.playqueue.PlayQueue;
+import org.schabi.newpipe.player.playqueue.events.RecoveryEvent;
 import org.schabi.newpipe.util.NavigationHelper;
 
 import java.io.BufferedInputStream;
@@ -21,6 +22,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.lang.ref.WeakReference;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
@@ -49,6 +51,9 @@ public final class LastPlayback {
     private static Disposable queueEvents;
     @Nullable
     private static Disposable resuming;
+    /** The queue whose last video ended, until the user changes it. */
+    @NonNull
+    private static WeakReference<PlayQueue> finishedQueue = new WeakReference<>(null);
 
     private LastPlayback() {
     }
@@ -61,18 +66,29 @@ public final class LastPlayback {
         if (queueEvents != null) {
             queueEvents.dispose();
         }
-        // Every queue event (index moved, items added or removed) saves it again. The
-        // subscription ends by itself when the player disposes the queue.
+        finishedQueue = new WeakReference<>(null);
+        // Every queue event (index moved, items added or removed, position recorded) saves it
+        // again. The subscription ends by itself when the player disposes the queue.
         queueEvents = queue.getBroadcastReceiver()
+                .doOnNext(event -> {
+                    // A finished queue counts again only once the user changes it: closing the
+                    // player still records its final position, which must not bring it back
+                    if (!(event instanceof RecoveryEvent)) {
+                        finishedQueue = new WeakReference<>(null);
+                    }
+                })
                 .debounce(SAVE_DELAY_MILLIS, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
+                .filter(event -> finishedQueue.get() != queue)
                 .subscribe(event -> save(file, queue),
                         error -> Log.e(TAG, "Queue events failed", error));
     }
 
     /** Called when the last video of the queue ended: there is nothing left to resume. */
     @MainThread
-    public static void onQueueFinished(@NonNull final Context context) {
+    public static void onQueueFinished(@NonNull final Context context,
+                                       @NonNull final PlayQueue queue) {
+        finishedQueue = new WeakReference<>(queue);
         final File file = fileOf(context);
         Completable.fromAction(() -> clear(file))
                 .subscribeOn(WRITES)

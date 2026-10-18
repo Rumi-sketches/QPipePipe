@@ -375,7 +375,7 @@ class PlayerPlaybackStateController(private val player: Player) {
             playQueue.offsetIndex(+1)
         } else if (playQueue.isComplete) {
             // the whole queue was played: don't bring it back on the next resume
-            LastPlayback.onQueueFinished(player.context)
+            LastPlayback.onQueueFinished(player.context, playQueue)
         }
         if (player.progressController.isProgressLoopRunning()) {
             player.progressController.stopProgressLoop()
