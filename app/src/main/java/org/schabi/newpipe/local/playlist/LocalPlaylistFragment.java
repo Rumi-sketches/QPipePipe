@@ -42,7 +42,7 @@ import org.schabi.newpipe.database.stream.model.StreamEntity;
 import org.schabi.newpipe.database.stream.model.StreamStateEntity;
 import org.schabi.newpipe.databinding.DialogEditTextBinding;
 import org.schabi.newpipe.databinding.LocalPlaylistHeaderBinding;
-import org.schabi.newpipe.databinding.PlaylistControlBinding;
+import org.schabi.newpipe.databinding.PlaylistResumeControlBinding;
 import org.schabi.newpipe.error.ErrorInfo;
 import org.schabi.newpipe.error.UserAction;
 import org.schabi.newpipe.extractor.stream.StreamInfoItem;
@@ -58,6 +58,7 @@ import org.schabi.newpipe.local.history.HistoryRecordManager;
 import org.schabi.newpipe.player.PlayerService.PlayerType;
 import org.schabi.newpipe.player.playqueue.PlayQueue;
 import org.schabi.newpipe.player.playqueue.SinglePlayQueue;
+import org.schabi.newpipe.qpipepipe.PlaylistResumeControls;
 import org.schabi.newpipe.util.*;
 import org.schabi.newpipe.util.external_communication.ShareUtils;
 import org.schabi.newpipe.util.StreamProcessor;
@@ -90,7 +91,8 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
     Parcelable itemsListState;
 
     private LocalPlaylistHeaderBinding headerBinding;
-    private PlaylistControlBinding playlistControlBinding;
+    private PlaylistResumeControlBinding playlistControlBinding;
+    private PlaylistResumeControls resumeControls;
 
     private ItemTouchHelper itemTouchHelper;
 
@@ -253,6 +255,8 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
         headerBinding = LocalPlaylistHeaderBinding.inflate(activity.getLayoutInflater(), itemsList,
                 false);
         playlistControlBinding = headerBinding.playlistControl;
+        resumeControls = new PlaylistResumeControls(playlistControlBinding, this::getStreamItems,
+                itemsList);
 
         headerBinding.playlistTitleView.setSelected(true);
 
@@ -350,6 +354,14 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
     ///////////////////////////////////////////////////////////////////////////
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if (resumeControls != null) {
+            resumeControls.refresh();
+        }
+    }
+
+    @Override
     public void onPause() {
         super.onPause();
         itemsListState = itemsList.getLayoutManager().onSaveInstanceState();
@@ -405,8 +417,10 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
             playlistControlBinding.playlistCtrlPlayBgButton.setOnClickListener(null);
             playlistControlBinding.playlistCtrlPlayAllButton.setOnClickListener(null);
             playlistControlBinding.playlistCtrlPlayPopupButton.setOnClickListener(null);
+            resumeControls.dispose();
 
             headerBinding = null;
+            resumeControls = null;
             playlistControlBinding = null;
         }
 
@@ -888,10 +902,13 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
         }
         setStreamCountAndOverallDuration(itemListAdapter.getItemsList());
 
+        resumeControls.refresh();
         playlistControlBinding.playlistCtrlPlayAllButton.setOnClickListener(view ->
-                NavigationHelper.playOnMainPlayer(activity, getPlayQueue()));
+                resumeControls.startFromResumePoint(index ->
+                        NavigationHelper.playOnMainPlayer(activity, getPlayQueue(index))));
         playlistControlBinding.playlistCtrlPlayPopupButton.setOnClickListener(view ->
-                NavigationHelper.playOnPopupPlayer(activity, getPlayQueue(), false));
+                resumeControls.startFromResumePoint(index ->
+                        NavigationHelper.playOnPopupPlayer(activity, getPlayQueue(index), false)));
 
 
 
@@ -901,7 +918,8 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
             if (prefs.getBoolean(getString(R.string.random_music_play_mode_key), false)) {
                 NavigationHelper.playOnBackgroundPlayerShuffled(activity, getPlayQueue(), false);
             } else {
-                NavigationHelper.playOnBackgroundPlayer(activity, getPlayQueue(), false);
+                resumeControls.startFromResumePoint(index -> NavigationHelper
+                        .playOnBackgroundPlayer(activity, getPlayQueue(index), false));
             }
 
         });
@@ -1438,8 +1456,18 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
     }
 
     private PlayQueue getPlayQueue(final int index) {
+        final PlayQueue queue = new SinglePlayQueue(getStreamItems(), index);
+        // QPipePipe recent queues: videos enqueued later are appended to this playlist
+        if (playlistId != null) {
+            queue.setSourcePlaylistId(playlistId);
+        }
+        return queue;
+    }
+
+    /** The streams in the order they are shown, which is the order they are queued in. */
+    private List<StreamInfoItem> getStreamItems() {
         if (itemListAdapter == null) {
-            return new SinglePlayQueue(Collections.emptyList(), 0);
+            return Collections.emptyList();
         }
 
         final List<LocalItem> infoItems = itemListAdapter.getItemsList();
@@ -1449,7 +1477,7 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
                 streamInfoItems.add(((PlaylistStreamEntry) item).toStreamInfoItem());
             }
         }
-        return new SinglePlayQueue(streamInfoItems, index);
+        return streamInfoItems;
     }
 
     @Override

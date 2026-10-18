@@ -134,7 +134,8 @@ public final class VideoDetailFragment
         View.OnLongClickListener,
         PlayerServiceExtendedEventListener,
         OnKeyDownListener,
-        SponsorBlockFragmentListener {
+        SponsorBlockFragmentListener,
+        StateSaver.WriteRead {
     public static final String KEY_SWITCHING_PLAYERS = "switching_players";
 
     private static final float MAX_OVERLAY_ALPHA = 0.9f;
@@ -216,6 +217,9 @@ public final class VideoDetailFragment
     int bottomSheetState = BottomSheetBehavior.STATE_EXPANDED;
     protected boolean autoPlayEnabled = true;
     SponsorBlockMode currentSponsorBlockMode = null;
+    /** The play queue written to disk, so it survives the OS killing the app in background. */
+    @Nullable
+    private org.schabi.newpipe.util.SavedState savedQueueState = null;
 
     @Nullable
     private StreamInfo currentInfo = null;
@@ -363,6 +367,11 @@ public final class VideoDetailFragment
         outState.putInt("bottomSheetState", sanitizeBottomSheetState(bottomSheetState));
         outState.putBoolean("autoPlayEnabled", autoPlayEnabled);
         outState.putString("currentSponsorBlockMode", currentSponsorBlockMode != null ? currentSponsorBlockMode.name() : null);
+        // StateSaver keeps an existing file as it is, so drop the old snapshot and write the
+        // queue as it is now (current video, added or removed items)
+        StateSaver.onDestroy(savedQueueState);
+        savedQueueState = StateSaver.tryToSave(
+                activity.isChangingConfigurations(), null, outState, this);
     }
 
     @Override
@@ -376,6 +385,34 @@ public final class VideoDetailFragment
         autoPlayEnabled = savedInstanceState.getBoolean("autoPlayEnabled", true);
         String modeStr = savedInstanceState.getString("currentSponsorBlockMode");
         currentSponsorBlockMode = modeStr != null ? SponsorBlockMode.valueOf(modeStr) : null;
+        savedQueueState = StateSaver.tryToRestore(savedInstanceState, this);
+    }
+
+    @Override
+    public String generateSuffix() {
+        return ".queue";
+    }
+
+    @Override
+    public void writeTo(final Queue<Object> objectsToSave) {
+        if (playQueue != null && !playQueue.isEmpty()) {
+            objectsToSave.add(playQueue);
+        }
+    }
+
+    @Override
+    public void readFrom(@NonNull final Queue<Object> savedObjects) {
+        final Object saved = savedObjects.poll();
+        if (!(saved instanceof PlayQueue)) {
+            return;
+        }
+        final PlayQueue savedQueue = (PlayQueue) saved;
+        // Only a queue that was playing the restored video belongs to it
+        if (playQueue == null && savedQueue.getItem() != null
+                && savedQueue.getItem().getServiceId() == serviceId
+                && savedQueue.getItem().getUrl().equals(url)) {
+            playQueue = savedQueue;
+        }
     }
 
     @Override

@@ -5,9 +5,11 @@ import androidx.room.Dao;
 import androidx.room.Query;
 import androidx.room.RewriteQueriesToDropUnusedColumns;
 
+import org.schabi.newpipe.database.history.model.LatestPlayedStream;
 import org.schabi.newpipe.database.history.model.StreamHistoryEntity;
 import org.schabi.newpipe.database.history.model.StreamHistoryEntry;
 import org.schabi.newpipe.database.stream.StreamStatisticsEntry;
+import org.schabi.newpipe.qpipepipe.StreamProgress;
 
 import java.util.List;
 
@@ -65,6 +67,21 @@ public abstract class StreamHistoryDAO implements HistoryDAO<StreamHistoryEntity
     @Nullable
     public abstract StreamHistoryEntity getLatestEntry(long streamId);
 
+    /**
+     * The most recently started stream whose url is in {@code urls}, or null if none of them
+     * is in the history. Keep {@code urls} under SQLite's limit of bound parameters (999).
+     */
+    @Query("SELECT streams.service_id, streams.url, streams.duration, "
+            + "stream_history.access_date, "
+            + "IFNULL(stream_state.progress_time, 0) AS progress_time"
+            + " FROM streams"
+            + " INNER JOIN stream_history ON streams.uid = stream_history.stream_id"
+            + " LEFT JOIN stream_state ON streams.uid = stream_state.stream_id"
+            + " WHERE streams.url IN (:urls)"
+            + " ORDER BY stream_history.access_date DESC LIMIT 1")
+    @Nullable
+    public abstract LatestPlayedStream getLatestPlayedAmong(List<String> urls);
+
     @Query("DELETE FROM " + STREAM_HISTORY_TABLE + " WHERE " + JOIN_STREAM_ID + " = :streamId")
     public abstract int deleteStreamHistory(long streamId);
 
@@ -86,4 +103,10 @@ public abstract class StreamHistoryDAO implements HistoryDAO<StreamHistoryEntity
             + " FROM " + STREAM_STATE_TABLE + " )"
             + " ON " + STREAM_ID + " = " + JOIN_STREAM_ID_ALIAS)
     public abstract Flowable<List<StreamStatisticsEntry>> getStatistics();
+
+    /** QPipePipe: saved progress of the streams in {@code urls} that have one (under 999). */
+    @Query("SELECT streams.url, streams.duration, stream_state.progress_time"
+            + " FROM streams INNER JOIN stream_state ON streams.uid = stream_state.stream_id"
+            + " WHERE streams.url IN (:urls)")
+    public abstract List<StreamProgress> getProgressOf(List<String> urls);
 }

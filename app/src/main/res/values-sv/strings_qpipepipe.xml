@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Kö- och svepfunktioner som lagts till av denna fork</string>
+    <string name="qpipepipe_category_playback">Uppspelning</string>
+    <string name="qpipepipe_category_swipe_actions">Svepåtgärder</string>
+    <string name="tap_always_plays_title">Ett tryck på en video spelar alltid upp den</string>
+    <string name="tap_always_plays_summary">Starta uppspelningen när du öppnar en video, även om automatisk uppspelning är begränsad till Wi-Fi eller avstängd. Automatisk uppspelning gäller fortfarande för automatiska starter</string>
+    <string name="clear_queue_confirmation_title">Be om bekräftelse innan en kö rensas</string>
+    <string name="clear_queue_confirmation_summary">Att byta från en spelare till en annan kan ersätta din kö</string>
+    <string name="clear_queue_confirmation_description">Den aktiva spelarens kö kommer att ersättas</string>
+    <string name="clear_queue_confirmation_play_now">Spela nu</string>
+    <string name="enable_swipe_actions_title">Aktivera svepåtgärder på videor</string>
+    <string name="enable_swipe_actions_summary">Svep en video åt vänster eller höger på startsidan, i sökresultat, spellistor och kanalgrupper för att utföra en snabbåtgärd</string>
+    <string name="swipe_left_action_title">Åtgärd vid svep åt vänster</string>
+    <string name="swipe_right_action_title">Åtgärd vid svep åt höger</string>
+    <string name="enable_swipe_actions_warning_title">Svepåtgärder aktiverade</string>
+    <string name="enable_swipe_actions_warning_message">Svep kräver rader i full bredd för att fungera tillförlitligt, så listvy används i stället för rutnäts- eller kortvy överallt där svepåtgärder finns. Du kan stänga av detta igen när som helst.</string>
+    <string name="swipe_actions_force_list_mode_summary">Inaktiverad medan svepåtgärder är aktiverade, eftersom de tvingar fram listvy</string>
+    <string name="remove_from_playlist_swipe_action">Ta bort från spellista (endast spellistor)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s är tillgänglig</string>
+    <string name="qpipepipe_update_notification_text">Tryck för att hämta och installera</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Hämta och installera denna uppdatering? Android ber dig bekräfta installationen.</string>
+    <string name="qpipepipe_update_install">Hämta och installera</string>
+    <string name="qpipepipe_update_release_notes">Versionsinformation</string>
+    <string name="qpipepipe_update_later">Senare</string>
+    <string name="qpipepipe_update_downloading">Hämtar QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">Hämtningen misslyckades. Kontrollera din anslutning och försök igen.</string>
+    <string name="qpipepipe_update_wrong_build">Denna version kan inte installera uppdateringen själv, till exempel för att det är en felsökningsversion. Hämta APK-filen från versionssidan i stället.</string>
+    <string name="qpipepipe_update_failed">Uppdateringen kunde inte installeras: %s</string>
+    <string name="playlist_resume_title">Fortsätt där du slutade</string>
+    <string name="playlist_resume_play">Återuppta från #%d</string>
+    <string name="playlist_resume_here">Återuppta här</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Spara senaste köer</string>
+    <string name="recent_queues_summary">Visa köerna du spelar under Spellistor, så att du kan återuppta eller spara dem senare. Videor som du lägger till i en kö som startats från en av dina spellistor läggs till i den spellistan. Köer från YouTube-spellistor och -kanaler sparas inte</string>
+    <string name="recent_queues_tab_playlists">Spellistor</string>
+    <string name="recent_queues_tab">Senaste köer</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d kö</item>
+        <item quantity="other">%d köer, nyast först</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Rensa alla</string>
+    <string name="recent_queues_clear_all_message">Ta bort alla senaste köer? Dina sparade spellistor påverkas inte.</string>
+    <string name="recent_queues_empty">Inga senaste köer. Köer du spelar visas här.</string>
+    <string name="recent_queue_title">Kö från %s</string>
+    <string name="recent_queue_from_playlist">Från: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%1$d video tillagd sedan %2$s</item>
+        <item quantity="other">%1$d videor tillagda sedan %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d video</item>
+        <item quantity="other">%1$d/%2$d videor</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d video tillagd i %2$s</item>
+        <item quantity="other">%1$d videor tillagda i %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Återuppta</string>
+    <string name="recent_queue_more">Fler alternativ</string>
+    <string name="recent_queue_progress">%1$s av %2$s</string>
+    <string name="recent_queue_save_as_playlist">Spara som spellista</string>
+    <string name="recent_queue_open_playlist">Öppna spellista</string>
+    <string name="recent_queue_saved">Sparad i Spellistor</string>
+    <string name="recent_queue_deleted">Kö borttagen</string>
+    <string name="recent_queue_deleted_linked">Kö borttagen, spellistan finns kvar</string>
+    <string name="recent_queue_playing_now">Spelas</string>
+    <string name="recent_queue_playing_at">Spelas · %s</string>
+    <string name="recent_queue_watched">Sedd</string>
+    <string name="recent_queue_not_watched">Att se</string>
+    <string name="recent_queue_added">tillagd</string>
+    <string name="playlist_never_played">Aldrig spelad</string>
+</resources>

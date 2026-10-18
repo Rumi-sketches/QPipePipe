@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Funciones de cola y d\'eslizamientu qu\'amestó esti fork</string>
+    <string name="qpipepipe_category_playback">Reproducción</string>
+    <string name="qpipepipe_category_swipe_actions">Aiciones al eslizar</string>
+    <string name="tap_always_plays_title">Tocar un videu reprodúcelu siempres</string>
+    <string name="tap_always_plays_summary">Anicia la reproducción al abrir un videu, magar que la reproducción automática tea llendada a la Wi-Fi o desactivada. La reproducción automática sigue aplicándose a los anicios automáticos</string>
+    <string name="clear_queue_confirmation_title">Entrugar enantes de llimpiar una cola</string>
+    <string name="clear_queue_confirmation_summary">Cambiar d\'un reproductor a otru pue trocar la to cola</string>
+    <string name="clear_queue_confirmation_description">Va trocase la cola del reproductor activu</string>
+    <string name="clear_queue_confirmation_play_now">Reproducir agora</string>
+    <string name="enable_swipe_actions_title">Activar les aiciones al eslizar nos vídeos</string>
+    <string name="enable_swipe_actions_summary">Esliza un videu a la esquierda o a la drecha na páxina d\'aniciu, nos resultaos de busca, nes llistes de reproducción y nos grupos de canales pa facer una aición rápida</string>
+    <string name="swipe_left_action_title">Aición al eslizar a la esquierda</string>
+    <string name="swipe_right_action_title">Aición al eslizar a la drecha</string>
+    <string name="enable_swipe_actions_warning_title">Activáronse les aiciones al eslizar</string>
+    <string name="enable_swipe_actions_warning_message">L\'eslizamientu precisa fileres d\'anchor completu pa funcionar bien, polo que va usase la vista de llista en cuenta de la de rexáu o tarxetes onde tean disponibles les aiciones al eslizar. Pues volver desactivalo en cualesquier momentu.</string>
+    <string name="swipe_actions_force_list_mode_summary">Desactivóse mentanto les aiciones al eslizar tean activaes, yá que obliguen a usar la vista de llista</string>
+    <string name="remove_from_playlist_swipe_action">Quitar de la llista de reproducción (namás llistes de reproducción)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s ta disponible</string>
+    <string name="qpipepipe_update_notification_text">Toca pa baxar ya instalar</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">¿Baxar ya instalar esti anovamientu? Android va pidite que confirmes la instalación.</string>
+    <string name="qpipepipe_update_install">Baxar ya instalar</string>
+    <string name="qpipepipe_update_release_notes">Notes de la versión</string>
+    <string name="qpipepipe_update_later">Más sero</string>
+    <string name="qpipepipe_update_downloading">Baxando QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">Falló la descarga. Comprueba la conexón y volvi tentalo.</string>
+    <string name="qpipepipe_update_wrong_build">Esta compilación nun pue instalar sola l\'anovamientu, por exemplu porque ye una compilación de depuración. Baxa l\'APK de la páxina de la versión.</string>
+    <string name="qpipepipe_update_failed">Nun se pudo instalar l\'anovamientu: %s</string>
+    <string name="playlist_resume_title">Sigui onde lo dexares</string>
+    <string name="playlist_resume_play">Siguir dende #%d</string>
+    <string name="playlist_resume_here">Siguir equí</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Caltener les coles recientes</string>
+    <string name="recent_queues_summary">Amuesa les coles que reproduces en Llistes de reproducción, pa poder siguiles o guardales más sero. Los vídeos qu\'amiestes a una cola aniciada dende una de les tos llistes de reproducción amiéstense a esa llista. Les coles de llistes de reproducción y canales de YouTube nun se caltienen</string>
+    <string name="recent_queues_tab_playlists">Llistes de reproducción</string>
+    <string name="recent_queues_tab">Coles recientes</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d cola</item>
+        <item quantity="other">%d coles, les más nueves primero</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Llimpiar too</string>
+    <string name="recent_queues_clear_all_message">¿Desaniciar toles coles recientes? Les llistes de reproducción guardaes nun se toquen.</string>
+    <string name="recent_queues_empty">Nun hai coles recientes. Equí apaecen les coles que reproduces.</string>
+    <string name="recent_queue_title">Cola de %s</string>
+    <string name="recent_queue_from_playlist">De: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">Amestóse %1$d videu dende %2$s</item>
+        <item quantity="other">Amestáronse %1$d vídeos dende %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d videu</item>
+        <item quantity="other">%1$d/%2$d vídeos</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">Amestóse %1$d videu a %2$s</item>
+        <item quantity="other">Amestáronse %1$d vídeos a %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Siguir</string>
+    <string name="recent_queue_more">Más opciones</string>
+    <string name="recent_queue_progress">%1$s de %2$s</string>
+    <string name="recent_queue_save_as_playlist">Guardar como llista de reproducción</string>
+    <string name="recent_queue_open_playlist">Abrir la llista de reproducción</string>
+    <string name="recent_queue_saved">Guardóse en Llistes de reproducción</string>
+    <string name="recent_queue_deleted">Desanicióse la cola</string>
+    <string name="recent_queue_deleted_linked">Desanicióse la cola, la llista de reproducción caltiénse</string>
+    <string name="recent_queue_playing_now">Reproduciendo</string>
+    <string name="recent_queue_playing_at">Reproduciendo · %s</string>
+    <string name="recent_queue_watched">Vistu</string>
+    <string name="recent_queue_not_watched">Por ver</string>
+    <string name="recent_queue_added">amestáu</string>
+    <string name="playlist_never_played">Enxamás se reprodució</string>
+</resources>

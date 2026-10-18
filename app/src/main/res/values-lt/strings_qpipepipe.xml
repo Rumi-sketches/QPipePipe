@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Eilės ir perbraukimo funkcijos, pridėtos šioje atšakoje</string>
+    <string name="qpipepipe_category_playback">Atkūrimas</string>
+    <string name="qpipepipe_category_swipe_actions">Perbraukimo veiksmai</string>
+    <string name="tap_always_plays_title">Bakstelėjus vaizdo įrašą jis visada paleidžiamas</string>
+    <string name="tap_always_plays_summary">Pradėti atkūrimą atidarius vaizdo įrašą, net jei automatinis atkūrimas apribotas Wi-Fi arba išjungtas. Automatinis atkūrimas vis tiek taikomas automatiniams paleidimams</string>
+    <string name="clear_queue_confirmation_title">Prašyti patvirtinimo prieš išvalant eilę</string>
+    <string name="clear_queue_confirmation_summary">Perjungus iš vieno grotuvo į kitą, jūsų eilė gali būti pakeista</string>
+    <string name="clear_queue_confirmation_description">Aktyvaus grotuvo eilė bus pakeista</string>
+    <string name="clear_queue_confirmation_play_now">Groti dabar</string>
+    <string name="enable_swipe_actions_title">Įjungti perbraukimo veiksmus vaizdo įrašams</string>
+    <string name="enable_swipe_actions_summary">Perbraukite vaizdo įrašą į kairę arba į dešinę pagrindiniame puslapyje, paieškos rezultatuose, grojaraščiuose ir kanalų grupėse, kad atliktumėte greitąjį veiksmą</string>
+    <string name="swipe_left_action_title">Perbraukimo į kairę veiksmas</string>
+    <string name="swipe_right_action_title">Perbraukimo į dešinę veiksmas</string>
+    <string name="enable_swipe_actions_warning_title">Perbraukimo veiksmai įjungti</string>
+    <string name="enable_swipe_actions_warning_message">Kad perbraukimas veiktų patikimai, reikia viso pločio eilučių, todėl visur, kur yra perbraukimo veiksmai, vietoj tinklelio ar kortelių bus naudojamas sąrašo rodinys. Tai galite bet kada vėl išjungti.</string>
+    <string name="swipe_actions_force_list_mode_summary">Išjungta, kol įjungti perbraukimo veiksmai, nes jie priverčia naudoti sąrašo rodinį</string>
+    <string name="remove_from_playlist_swipe_action">Pašalinti iš grojaraščio (tik grojaraščiuose)</string>
+    <string name="qpipepipe_update_notification_title">Yra QPipePipe %s</string>
+    <string name="qpipepipe_update_notification_text">Bakstelėkite, kad atsisiųstumėte ir įdiegtumėte</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Atsisiųsti ir įdiegti šį naujinį? Android paprašys patvirtinti diegimą.</string>
+    <string name="qpipepipe_update_install">Atsisiųsti ir įdiegti</string>
+    <string name="qpipepipe_update_release_notes">Laidos informacija</string>
+    <string name="qpipepipe_update_later">Vėliau</string>
+    <string name="qpipepipe_update_downloading">Atsisiunčiama QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">Atsisiųsti nepavyko. Patikrinkite ryšį ir bandykite dar kartą.</string>
+    <string name="qpipepipe_update_wrong_build">Ši versija negali pati įdiegti naujinio, pavyzdžiui, nes tai derinimo versija. Vietoj to atsisiųskite APK iš laidos puslapio.</string>
+    <string name="qpipepipe_update_failed">Nepavyko įdiegti naujinio: %s</string>
+    <string name="playlist_resume_title">Tęskite nuo ten, kur baigėte</string>
+    <string name="playlist_resume_play">Tęsti nuo #%d</string>
+    <string name="playlist_resume_here">Tęsti nuo čia</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Išsaugoti naujausias eiles</string>
+    <string name="recent_queues_summary">Rodyti grojamas eiles skiltyje „Grojaraščiai“, kad vėliau galėtumėte jas tęsti arba išsaugoti. Vaizdo įrašai, kuriuos pridedate į eilę, paleistą iš vieno iš jūsų grojaraščių, pridedami į tą grojaraštį. YouTube grojaraščių ir kanalų eilės neišsaugomos</string>
+    <string name="recent_queues_tab_playlists">Grojaraščiai</string>
+    <string name="recent_queues_tab">Naujausios eilės</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d eilė, naujausios pirmiau</item>
+        <item quantity="few">%d eilės, naujausios pirmiau</item>
+        <item quantity="other">%d eilių, naujausios pirmiau</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Išvalyti viską</string>
+    <string name="recent_queues_clear_all_message">Ištrinti visas naujausias eiles? Išsaugoti grojaraščiai nepaliečiami.</string>
+    <string name="recent_queues_empty">Naujausių eilių nėra. Čia bus rodomos eilės, kurias grojate.</string>
+    <string name="recent_queue_title">Eilė (%s)</string>
+    <string name="recent_queue_from_playlist">Iš: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%1$d vaizdo įrašas pridėtas nuo %2$s</item>
+        <item quantity="few">%1$d vaizdo įrašai pridėti nuo %2$s</item>
+        <item quantity="other">%1$d vaizdo įrašų pridėta nuo %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d vaizdo įrašas</item>
+        <item quantity="few">%1$d/%2$d vaizdo įrašai</item>
+        <item quantity="other">%1$d/%2$d vaizdo įrašų</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d vaizdo įrašas pridėtas į %2$s</item>
+        <item quantity="few">%1$d vaizdo įrašai pridėti į %2$s</item>
+        <item quantity="other">%1$d vaizdo įrašų pridėta į %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Tęsti</string>
+    <string name="recent_queue_more">Daugiau parinkčių</string>
+    <string name="recent_queue_progress">%1$s iš %2$s</string>
+    <string name="recent_queue_save_as_playlist">Išsaugoti kaip grojaraštį</string>
+    <string name="recent_queue_open_playlist">Atidaryti grojaraštį</string>
+    <string name="recent_queue_saved">Išsaugota „Grojaraščiuose“</string>
+    <string name="recent_queue_deleted">Eilė ištrinta</string>
+    <string name="recent_queue_deleted_linked">Eilė ištrinta, grojaraštis lieka</string>
+    <string name="recent_queue_playing_now">Grojama</string>
+    <string name="recent_queue_playing_at">Grojama · %s</string>
+    <string name="recent_queue_watched">Peržiūrėta</string>
+    <string name="recent_queue_not_watched">Neperžiūrėta</string>
+    <string name="recent_queue_added">pridėta</string>
+    <string name="playlist_never_played">Niekada negrota</string>
+</resources>

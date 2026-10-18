@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Λειτουργίες ουράς και σύρσιμου που προστέθηκαν από αυτό το fork</string>
+    <string name="qpipepipe_category_playback">Αναπαραγωγή</string>
+    <string name="qpipepipe_category_swipe_actions">Ενέργειες σύρσιμου</string>
+    <string name="tap_always_plays_title">Το πάτημα σε βίντεο το αναπαράγει πάντα</string>
+    <string name="tap_always_plays_summary">Έναρξη αναπαραγωγής όταν ανοίγετε ένα βίντεο, ακόμη κι αν η αυτόματη αναπαραγωγή είναι περιορισμένη σε Wi-Fi ή απενεργοποιημένη. Η αυτόματη αναπαραγωγή εξακολουθεί να ισχύει για τις αυτόματες εκκινήσεις</string>
+    <string name="clear_queue_confirmation_title">Επιβεβαίωση πριν από την εκκαθάριση μιας ουράς</string>
+    <string name="clear_queue_confirmation_summary">Η εναλλαγή από έναν αναπαραγωγό σε άλλον μπορεί να αντικαταστήσει την ουρά σας</string>
+    <string name="clear_queue_confirmation_description">Η ουρά του ενεργού αναπαραγωγού θα αντικατασταθεί</string>
+    <string name="clear_queue_confirmation_play_now">Αναπαραγωγή τώρα</string>
+    <string name="enable_swipe_actions_title">Ενεργοποίηση ενεργειών σύρσιμου στα βίντεο</string>
+    <string name="enable_swipe_actions_summary">Σύρετε ένα βίντεο αριστερά ή δεξιά στην αρχική σελίδα, στα αποτελέσματα αναζήτησης, στις λίστες αναπαραγωγής και στις ομάδες καναλιών για να εκτελέσετε μια γρήγορη ενέργεια</string>
+    <string name="swipe_left_action_title">Ενέργεια σύρσιμου αριστερά</string>
+    <string name="swipe_right_action_title">Ενέργεια σύρσιμου δεξιά</string>
+    <string name="enable_swipe_actions_warning_title">Οι ενέργειες σύρσιμου ενεργοποιήθηκαν</string>
+    <string name="enable_swipe_actions_warning_message">Το σύρσιμο χρειάζεται γραμμές πλήρους πλάτους για να λειτουργεί αξιόπιστα, οπότε θα χρησιμοποιείται προβολή λίστας αντί για πλέγμα ή κάρτες όπου υπάρχουν ενέργειες σύρσιμου. Μπορείτε να το απενεργοποιήσετε ξανά οποιαδήποτε στιγμή.</string>
+    <string name="swipe_actions_force_list_mode_summary">Απενεργοποιημένο όσο είναι ενεργές οι ενέργειες σύρσιμου, που επιβάλλουν την προβολή λίστας</string>
+    <string name="remove_from_playlist_swipe_action">Αφαίρεση από τη λίστα αναπαραγωγής (μόνο σε λίστες αναπαραγωγής)</string>
+    <string name="qpipepipe_update_notification_title">Το QPipePipe %s είναι διαθέσιμο</string>
+    <string name="qpipepipe_update_notification_text">Πατήστε για λήψη και εγκατάσταση</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Λήψη και εγκατάσταση αυτής της ενημέρωσης; Το Android θα σας ζητήσει να επιβεβαιώσετε την εγκατάσταση.</string>
+    <string name="qpipepipe_update_install">Λήψη και εγκατάσταση</string>
+    <string name="qpipepipe_update_release_notes">Σημειώσεις έκδοσης</string>
+    <string name="qpipepipe_update_later">Αργότερα</string>
+    <string name="qpipepipe_update_downloading">Λήψη του QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">Η λήψη απέτυχε. Ελέγξτε τη σύνδεσή σας και δοκιμάστε ξανά.</string>
+    <string name="qpipepipe_update_wrong_build">Αυτή η έκδοση δεν μπορεί να εγκαταστήσει μόνη της την ενημέρωση, για παράδειγμα επειδή είναι έκδοση αποσφαλμάτωσης. Κατεβάστε το APK από τη σελίδα της έκδοσης.</string>
+    <string name="qpipepipe_update_failed">Δεν ήταν δυνατή η εγκατάσταση της ενημέρωσης: %s</string>
+    <string name="playlist_resume_title">Συνεχίστε από εκεί που σταματήσατε</string>
+    <string name="playlist_resume_play">Συνέχεια από #%d</string>
+    <string name="playlist_resume_here">Συνέχεια από εδώ</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Διατήρηση πρόσφατων ουρών</string>
+    <string name="recent_queues_summary">Εμφάνιση των ουρών που αναπαράγετε στις Λίστες αναπαραγωγής, ώστε να τις συνεχίσετε ή να τις αποθηκεύσετε αργότερα. Τα βίντεο που προσθέτετε σε μια ουρά που ξεκίνησε από μία από τις λίστες αναπαραγωγής σας προστίθενται σε εκείνη τη λίστα. Οι ουρές από λίστες αναπαραγωγής και κανάλια του YouTube δεν διατηρούνται</string>
+    <string name="recent_queues_tab_playlists">Λίστες αναπαραγωγής</string>
+    <string name="recent_queues_tab">Πρόσφατες ουρές</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d ουρά</item>
+        <item quantity="other">%d ουρές, οι νεότερες πρώτα</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Εκκαθάριση όλων</string>
+    <string name="recent_queues_clear_all_message">Διαγραφή όλων των πρόσφατων ουρών; Οι αποθηκευμένες λίστες αναπαραγωγής σας δεν επηρεάζονται.</string>
+    <string name="recent_queues_empty">Δεν υπάρχουν πρόσφατες ουρές. Οι ουρές που αναπαράγετε εμφανίζονται εδώ.</string>
+    <string name="recent_queue_title">Ουρά: %s</string>
+    <string name="recent_queue_from_playlist">Από: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%1$d βίντεο προστέθηκε από %2$s</item>
+        <item quantity="other">%1$d βίντεο προστέθηκαν από %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d βίντεο</item>
+        <item quantity="other">%1$d/%2$d βίντεο</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d βίντεο προστέθηκε σε «%2$s»</item>
+        <item quantity="other">%1$d βίντεο προστέθηκαν σε «%2$s»</item>
+    </plurals>
+    <string name="recent_queue_resume">Συνέχεια</string>
+    <string name="recent_queue_more">Περισσότερες επιλογές</string>
+    <string name="recent_queue_progress">%1$s από %2$s</string>
+    <string name="recent_queue_save_as_playlist">Αποθήκευση ως λίστα αναπαραγωγής</string>
+    <string name="recent_queue_open_playlist">Άνοιγμα λίστας αναπαραγωγής</string>
+    <string name="recent_queue_saved">Αποθηκεύτηκε στις Λίστες αναπαραγωγής</string>
+    <string name="recent_queue_deleted">Η ουρά διαγράφηκε</string>
+    <string name="recent_queue_deleted_linked">Η ουρά διαγράφηκε, η λίστα αναπαραγωγής παραμένει</string>
+    <string name="recent_queue_playing_now">Αναπαράγεται</string>
+    <string name="recent_queue_playing_at">Αναπαράγεται · %s</string>
+    <string name="recent_queue_watched">Προβλήθηκε</string>
+    <string name="recent_queue_not_watched">Προς προβολή</string>
+    <string name="recent_queue_added">προστέθηκε</string>
+    <string name="playlist_never_played">Δεν έχει αναπαραχθεί ποτέ</string>
+</resources>

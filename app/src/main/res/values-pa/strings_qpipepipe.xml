@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">ਇਸ ਫੋਰਕ ਵੱਲੋਂ ਜੋੜੀਆਂ ਕਤਾਰ ਅਤੇ ਸਵਾਈਪ ਸਹੂਲਤਾਂ</string>
+    <string name="qpipepipe_category_playback">ਪਲੇਬੈਕ</string>
+    <string name="qpipepipe_category_swipe_actions">ਸਵਾਈਪ ਕਾਰਵਾਈਆਂ</string>
+    <string name="tap_always_plays_title">ਵੀਡੀਓ \'ਤੇ ਟੈਪ ਕਰਨ ਨਾਲ ਉਹ ਹਮੇਸ਼ਾ ਚੱਲੇਗੀ</string>
+    <string name="tap_always_plays_summary">ਵੀਡੀਓ ਖੋਲ੍ਹਦੇ ਹੀ ਚਲਾਉਣਾ ਸ਼ੁਰੂ ਕਰੋ, ਭਾਵੇਂ ਆਟੋ-ਪਲੇ ਸਿਰਫ਼ Wi-Fi ਤੱਕ ਸੀਮਤ ਹੋਵੇ ਜਾਂ ਬੰਦ ਹੋਵੇ। ਆਪਣੇ-ਆਪ ਸ਼ੁਰੂ ਹੋਣ \'ਤੇ ਆਟੋ-ਪਲੇ ਲਾਗੂ ਰਹਿੰਦਾ ਹੈ</string>
+    <string name="clear_queue_confirmation_title">ਕਤਾਰ ਸਾਫ਼ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਪੁਸ਼ਟੀ ਮੰਗੋ</string>
+    <string name="clear_queue_confirmation_summary">ਇੱਕ ਪਲੇਅਰ ਤੋਂ ਦੂਜੇ ਪਲੇਅਰ \'ਤੇ ਜਾਣ ਨਾਲ ਤੁਹਾਡੀ ਕਤਾਰ ਬਦਲ ਸਕਦੀ ਹੈ</string>
+    <string name="clear_queue_confirmation_description">ਚਾਲੂ ਪਲੇਅਰ ਦੀ ਕਤਾਰ ਬਦਲ ਦਿੱਤੀ ਜਾਵੇਗੀ</string>
+    <string name="clear_queue_confirmation_play_now">ਹੁਣੇ ਚਲਾਓ</string>
+    <string name="enable_swipe_actions_title">ਵੀਡੀਓ \'ਤੇ ਸਵਾਈਪ ਕਾਰਵਾਈਆਂ ਚਾਲੂ ਕਰੋ</string>
+    <string name="enable_swipe_actions_summary">ਮੁੱਖ ਪੰਨੇ, ਖੋਜ ਨਤੀਜਿਆਂ, ਪਲੇ-ਸੂਚੀਆਂ ਅਤੇ ਚੈਨਲ ਸਮੂਹਾਂ ਵਿੱਚ ਕਿਸੇ ਵੀਡੀਓ ਨੂੰ ਖੱਬੇ ਜਾਂ ਸੱਜੇ ਸਵਾਈਪ ਕਰਕੇ ਝੱਟਪੱਟ ਕਾਰਵਾਈ ਕਰੋ</string>
+    <string name="swipe_left_action_title">ਖੱਬੇ ਸਵਾਈਪ ਦੀ ਕਾਰਵਾਈ</string>
+    <string name="swipe_right_action_title">ਸੱਜੇ ਸਵਾਈਪ ਦੀ ਕਾਰਵਾਈ</string>
+    <string name="enable_swipe_actions_warning_title">ਸਵਾਈਪ ਕਾਰਵਾਈਆਂ ਚਾਲੂ ਹਨ</string>
+    <string name="enable_swipe_actions_warning_message">ਸਵਾਈਪ ਠੀਕ ਤਰ੍ਹਾਂ ਕੰਮ ਕਰੇ, ਇਸ ਲਈ ਪੂਰੀ ਚੌੜਾਈ ਵਾਲੀਆਂ ਕਤਾਰਾਂ ਚਾਹੀਦੀਆਂ ਹਨ, ਇਸ ਲਈ ਜਿੱਥੇ ਵੀ ਸਵਾਈਪ ਕਾਰਵਾਈਆਂ ਉਪਲਬਧ ਹਨ ਉੱਥੇ ਗ੍ਰਿਡ ਜਾਂ ਕਾਰਡ ਦ੍ਰਿਸ਼ ਦੀ ਥਾਂ ਸੂਚੀ ਦ੍ਰਿਸ਼ ਵਰਤਿਆ ਜਾਵੇਗਾ। ਤੁਸੀਂ ਇਸਨੂੰ ਕਦੇ ਵੀ ਮੁੜ ਬੰਦ ਕਰ ਸਕਦੇ ਹੋ।</string>
+    <string name="swipe_actions_force_list_mode_summary">ਸਵਾਈਪ ਕਾਰਵਾਈਆਂ ਚਾਲੂ ਹੋਣ ਤੱਕ ਬੰਦ ਹੈ, ਕਿਉਂਕਿ ਉਹ ਸੂਚੀ ਦ੍ਰਿਸ਼ ਲਾਗੂ ਕਰਦੀਆਂ ਹਨ</string>
+    <string name="remove_from_playlist_swipe_action">ਪਲੇ-ਸੂਚੀ ਵਿੱਚੋਂ ਹਟਾਓ (ਸਿਰਫ਼ ਪਲੇ-ਸੂਚੀਆਂ ਵਿੱਚ)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s ਉਪਲਬਧ ਹੈ</string>
+    <string name="qpipepipe_update_notification_text">ਡਾਊਨਲੋਡ ਅਤੇ ਸਥਾਪਤ ਕਰਨ ਲਈ ਟੈਪ ਕਰੋ</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">ਕੀ ਇਹ ਅੱਪਡੇਟ ਡਾਊਨਲੋਡ ਅਤੇ ਸਥਾਪਤ ਕਰਨਾ ਹੈ? Android ਤੁਹਾਨੂੰ ਸਥਾਪਨਾ ਦੀ ਪੁਸ਼ਟੀ ਕਰਨ ਲਈ ਕਹੇਗਾ।</string>
+    <string name="qpipepipe_update_install">ਡਾਊਨਲੋਡ ਅਤੇ ਸਥਾਪਤ ਕਰੋ</string>
+    <string name="qpipepipe_update_release_notes">ਰਿਲੀਜ਼ ਨੋਟਸ</string>
+    <string name="qpipepipe_update_later">ਬਾਅਦ ਵਿੱਚ</string>
+    <string name="qpipepipe_update_downloading">QPipePipe %s ਡਾਊਨਲੋਡ ਹੋ ਰਿਹਾ ਹੈ</string>
+    <string name="qpipepipe_update_download_failed">ਡਾਊਨਲੋਡ ਨਾਕਾਮ ਰਿਹਾ। ਆਪਣਾ ਕਨੈਕਸ਼ਨ ਜਾਂਚੋ ਅਤੇ ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕਰੋ।</string>
+    <string name="qpipepipe_update_wrong_build">ਇਹ ਬਿਲਡ ਆਪਣੇ ਆਪ ਅੱਪਡੇਟ ਸਥਾਪਤ ਨਹੀਂ ਕਰ ਸਕਦਾ, ਉਦਾਹਰਨ ਲਈ ਕਿਉਂਕਿ ਇਹ ਡੀਬੱਗ ਬਿਲਡ ਹੈ। ਇਸਦੀ ਬਜਾਏ ਰਿਲੀਜ਼ ਪੰਨੇ ਤੋਂ APK ਡਾਊਨਲੋਡ ਕਰੋ।</string>
+    <string name="qpipepipe_update_failed">ਅੱਪਡੇਟ ਸਥਾਪਤ ਨਹੀਂ ਹੋ ਸਕਿਆ: %s</string>
+    <string name="playlist_resume_title">ਜਿੱਥੇ ਛੱਡਿਆ ਸੀ ਉੱਥੋਂ ਜਾਰੀ ਰੱਖੋ</string>
+    <string name="playlist_resume_play">#%d ਤੋਂ ਮੁੜ ਚਲਾਓ</string>
+    <string name="playlist_resume_here">ਇੱਥੋਂ ਮੁੜ ਚਲਾਓ</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">ਹਾਲੀਆ ਕਤਾਰਾਂ ਰੱਖੋ</string>
+    <string name="recent_queues_summary">ਤੁਹਾਡੀਆਂ ਚਲਾਈਆਂ ਕਤਾਰਾਂ ਨੂੰ ਪਲੇ-ਸੂਚੀਆਂ ਹੇਠ ਦਿਖਾਓ, ਤਾਂ ਜੋ ਤੁਸੀਂ ਉਹਨਾਂ ਨੂੰ ਬਾਅਦ ਵਿੱਚ ਮੁੜ ਚਲਾ ਜਾਂ ਸੰਭਾਲ ਸਕੋ। ਤੁਹਾਡੀ ਕਿਸੇ ਪਲੇ-ਸੂਚੀ ਤੋਂ ਸ਼ੁਰੂ ਹੋਈ ਕਤਾਰ ਵਿੱਚ ਜੋੜੀਆਂ ਵੀਡੀਓ ਉਸ ਪਲੇ-ਸੂਚੀ ਵਿੱਚ ਵੀ ਜੁੜ ਜਾਂਦੀਆਂ ਹਨ। YouTube ਪਲੇ-ਸੂਚੀਆਂ ਅਤੇ ਚੈਨਲਾਂ ਦੀਆਂ ਕਤਾਰਾਂ ਨਹੀਂ ਰੱਖੀਆਂ ਜਾਂਦੀਆਂ</string>
+    <string name="recent_queues_tab_playlists">ਪਲੇ ਸੂਚੀਆਂ</string>
+    <string name="recent_queues_tab">ਹਾਲੀਆ ਕਤਾਰਾਂ</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d ਕਤਾਰ</item>
+        <item quantity="other">%d ਕਤਾਰਾਂ, ਨਵੀਆਂ ਪਹਿਲਾਂ</item>
+    </plurals>
+    <string name="recent_queues_clear_all">ਸਭ ਸਾਫ਼ ਕਰੋ</string>
+    <string name="recent_queues_clear_all_message">ਕੀ ਸਾਰੀਆਂ ਹਾਲੀਆ ਕਤਾਰਾਂ ਮਿਟਾਉਣੀਆਂ ਹਨ? ਤੁਹਾਡੀਆਂ ਸੰਭਾਲੀਆਂ ਪਲੇ-ਸੂਚੀਆਂ ਨੂੰ ਕੁਝ ਨਹੀਂ ਹੋਵੇਗਾ।</string>
+    <string name="recent_queues_empty">ਕੋਈ ਹਾਲੀਆ ਕਤਾਰ ਨਹੀਂ। ਤੁਹਾਡੀਆਂ ਚਲਾਈਆਂ ਕਤਾਰਾਂ ਇੱਥੇ ਦਿਖਾਈ ਦੇਣਗੀਆਂ।</string>
+    <string name="recent_queue_title">%s ਦੀ ਕਤਾਰ</string>
+    <string name="recent_queue_from_playlist">ਤੋਂ: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%2$s ਤੋਂ ਬਾਅਦ %1$d ਵੀਡੀਓ ਜੋੜੀ ਗਈ</item>
+        <item quantity="other">%2$s ਤੋਂ ਬਾਅਦ %1$d ਵੀਡੀਓ ਜੋੜੀਆਂ ਗਈਆਂ</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d ਵੀਡੀਓ</item>
+        <item quantity="other">%1$d/%2$d ਵੀਡੀਓ</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d ਵੀਡੀਓ %2$s ਵਿੱਚ ਜੋੜੀ ਗਈ</item>
+        <item quantity="other">%1$d ਵੀਡੀਓ %2$s ਵਿੱਚ ਜੋੜੀਆਂ ਗਈਆਂ</item>
+    </plurals>
+    <string name="recent_queue_resume">ਮੁੜ ਚਲਾਓ</string>
+    <string name="recent_queue_more">ਹੋਰ ਵਿਕਲਪ</string>
+    <string name="recent_queue_progress">%2$s ਵਿੱਚੋਂ %1$s</string>
+    <string name="recent_queue_save_as_playlist">ਪਲੇ-ਸੂਚੀ ਵਜੋਂ ਸੰਭਾਲੋ</string>
+    <string name="recent_queue_open_playlist">ਪਲੇ-ਸੂਚੀ ਖੋਲ੍ਹੋ</string>
+    <string name="recent_queue_saved">ਪਲੇ-ਸੂਚੀਆਂ ਵਿੱਚ ਸੰਭਾਲੀ ਗਈ</string>
+    <string name="recent_queue_deleted">ਕਤਾਰ ਮਿਟਾਈ ਗਈ</string>
+    <string name="recent_queue_deleted_linked">ਕਤਾਰ ਮਿਟਾਈ ਗਈ, ਪਲੇ-ਸੂਚੀ ਬਣੀ ਰਹੇਗੀ</string>
+    <string name="recent_queue_playing_now">ਚੱਲ ਰਹੀ ਹੈ</string>
+    <string name="recent_queue_playing_at">ਚੱਲ ਰਹੀ ਹੈ · %s</string>
+    <string name="recent_queue_watched">ਵੇਖੀ ਗਈ</string>
+    <string name="recent_queue_not_watched">ਵੇਖਣੀ ਹੈ</string>
+    <string name="recent_queue_added">ਜੋੜੀ ਗਈ</string>
+    <string name="playlist_never_played">ਕਦੇ ਨਹੀਂ ਚਲਾਈ</string>
+</resources>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Warteschlang- und Wisch-Sachan, de wo dea Fork dazuadoa hod</string>
+    <string name="qpipepipe_category_playback">Obspuin</string>
+    <string name="qpipepipe_category_swipe_actions">Wisch-Aktionen</string>
+    <string name="tap_always_plays_title">A Video ontippn spuid\'s oiwei o</string>
+    <string name="tap_always_plays_summary">Fangt mim Obspuin o, wennsd a Video aufmachst, a wenn\'s automatische Obspuin aufs Wi-Fi beschränkt oda ausgschoit is. Fürs automatische Ofanga gilt\'s automatische Obspuin weidahi</string>
+    <string name="clear_queue_confirmation_title">Nochfrong, bevor a Warteschlang ausgleert wiad</string>
+    <string name="clear_queue_confirmation_summary">Wennsd vo oam Playa zum andan wechselst, kannt dei Warteschlang ersetzt wean</string>
+    <string name="clear_queue_confirmation_description">De Warteschlang vom aktivn Playa wiad ersetzt</string>
+    <string name="clear_queue_confirmation_play_now">Jetzad obspuin</string>
+    <string name="enable_swipe_actions_title">Wisch-Aktionen bei de Videos eischoitn</string>
+    <string name="enable_swipe_actions_summary">Wisch a Video noch links oda rechts auf da Startseitn, in de Suachergebnis, Playlists und Kanalgruppn, dann passiad schnoi wos</string>
+    <string name="swipe_left_action_title">Aktion beim Noch-links-Wischn</string>
+    <string name="swipe_right_action_title">Aktion beim Noch-rechts-Wischn</string>
+    <string name="enable_swipe_actions_warning_title">Wisch-Aktionen san eigschoit</string>
+    <string name="enable_swipe_actions_warning_message">Zum Wischn brauchts Zeiln üba de ganze Breitn, sunst gähd\'s ned gscheid. Drum wiad überoi, wo\'s Wisch-Aktionen gibt, d\'Listnansicht gnumma statt Gitta- oda Kartnansicht. Des kannst jederzeit wieda ausschoitn.</string>
+    <string name="swipe_actions_force_list_mode_summary">Ausgschoit, solang de Wisch-Aktionen o san, weil de d\'Listnansicht erzwinga</string>
+    <string name="remove_from_playlist_swipe_action">Aus da Playlist aussadoa (nur bei Playlists)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s is do</string>
+    <string name="qpipepipe_update_notification_text">Drug drauf zum Obalon und Drauf doa</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Des Update obalon und drauf doa? Android frogt di dann no, obsd\'s wirkli installiern mogst.</string>
+    <string name="qpipepipe_update_install">Obalon und drauf doa</string>
+    <string name="qpipepipe_update_release_notes">Wos is nei</string>
+    <string name="qpipepipe_update_later">Spaada</string>
+    <string name="qpipepipe_update_downloading">QPipePipe %s wiad obaglon</string>
+    <string name="qpipepipe_update_download_failed">Des Obalon hod ned highaut. Schau, obsd a Vabindung host, und probier\'s no amoi.</string>
+    <string name="qpipepipe_update_wrong_build">De Version ko des Update ned söiwa drauf doa, zum Beispiel weil\'s a Debug-Build is. Lod da d\'APK liawa vo da Release-Seitn oba.</string>
+    <string name="qpipepipe_update_failed">Des Update hod se ned installiern lassn: %s</string>
+    <string name="playlist_resume_title">Mach weida, wosd aufghört host</string>
+    <string name="playlist_resume_play">Ab #%d weidamacha</string>
+    <string name="playlist_resume_here">Do weidamacha</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Letzte Warteschlangan aufhebn</string>
+    <string name="recent_queues_summary">Zoagt de Warteschlangan, de wosd obspuist, unta Playlists o, damitsd\'as spaada weidamacha oda speichan kannst. Videos, de wosd zu ana Warteschlang dazuadoast, de vo oana vo deine Playlists gstart is, kemman a in de Playlist. Warteschlangan vo YouTube-Playlists und -Kanäi wean ned aufghobn</string>
+    <string name="recent_queues_tab_playlists">Playlists</string>
+    <string name="recent_queues_tab">Letzte Warteschlangan</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d Warteschlang</item>
+        <item quantity="other">%d Warteschlangan, de neiste zerscht</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Ois weg</string>
+    <string name="recent_queues_clear_all_message">Olle letztn Warteschlangan löschn? Deine gspeichatn Playlists bleibn, wia\'s san.</string>
+    <string name="recent_queues_empty">Koane letztn Warteschlangan. Warteschlangan, de wosd obspuist, kemman do her.</string>
+    <string name="recent_queue_title">Warteschlang vo %s</string>
+    <string name="recent_queue_from_playlist">Vo: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%1$d Video dazuadoa seit %2$s</item>
+        <item quantity="other">%1$d Videos dazuadoa seit %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d Video</item>
+        <item quantity="other">%1$d/%2$d Videos</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d Video zu %2$s dazuadoa</item>
+        <item quantity="other">%1$d Videos zu %2$s dazuadoa</item>
+    </plurals>
+    <string name="recent_queue_resume">Weidamacha</string>
+    <string name="recent_queue_more">Mehr Optionen</string>
+    <string name="recent_queue_progress">%1$s vo %2$s</string>
+    <string name="recent_queue_save_as_playlist">Ois Playlist speichan</string>
+    <string name="recent_queue_open_playlist">Playlist aufmacha</string>
+    <string name="recent_queue_saved">In Playlists gspeichat</string>
+    <string name="recent_queue_deleted">Warteschlang glöscht</string>
+    <string name="recent_queue_deleted_linked">Warteschlang glöscht, de Playlist bleibt</string>
+    <string name="recent_queue_playing_now">Lafft grod</string>
+    <string name="recent_queue_playing_at">Lafft grod · %s</string>
+    <string name="recent_queue_watched">Ogschaut</string>
+    <string name="recent_queue_not_watched">No zum Oschaun</string>
+    <string name="recent_queue_added">dazuadoa</string>
+    <string name="playlist_never_played">No nia obgspuit</string>
+</resources>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Функции очереди и свайпов, добавленные этим форком</string>
+    <string name="qpipepipe_category_playback">Воспроизведение</string>
+    <string name="qpipepipe_category_swipe_actions">Действия по свайпу</string>
+    <string name="tap_always_plays_title">Нажатие на видео всегда запускает его</string>
+    <string name="tap_always_plays_summary">Начинать воспроизведение при открытии видео, даже если автовоспроизведение ограничено Wi-Fi или выключено. Автовоспроизведение по-прежнему действует для автоматических запусков</string>
+    <string name="clear_queue_confirmation_title">Запрашивать подтверждение перед очисткой очереди</string>
+    <string name="clear_queue_confirmation_summary">Переключение с одного плеера на другой может заменить вашу очередь</string>
+    <string name="clear_queue_confirmation_description">Очередь активного плеера будет заменена</string>
+    <string name="clear_queue_confirmation_play_now">Воспроизвести сейчас</string>
+    <string name="enable_swipe_actions_title">Включить свайпы по видео</string>
+    <string name="enable_swipe_actions_summary">Смахните видео влево или вправо на главной странице, в результатах поиска, плейлистах и группах каналов, чтобы выполнить быстрое действие</string>
+    <string name="swipe_left_action_title">Свайп влево</string>
+    <string name="swipe_right_action_title">Свайп вправо</string>
+    <string name="enable_swipe_actions_warning_title">Свайпы включены</string>
+    <string name="enable_swipe_actions_warning_message">Для надёжной работы свайпов нужны строки на всю ширину, поэтому везде, где доступны действия по свайпу, вместо сетки или карточек будет использоваться список. Это можно отключить в любой момент.</string>
+    <string name="swipe_actions_force_list_mode_summary">Недоступно, пока включены свайпы: они требуют вида списка</string>
+    <string name="remove_from_playlist_swipe_action">Удалить из плейлиста (только в плейлистах)</string>
+    <string name="qpipepipe_update_notification_title">Доступна версия QPipePipe %s</string>
+    <string name="qpipepipe_update_notification_text">Нажмите, чтобы скачать и установить</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Скачать и установить это обновление? Android попросит подтвердить установку.</string>
+    <string name="qpipepipe_update_install">Скачать и установить</string>
+    <string name="qpipepipe_update_release_notes">Список изменений</string>
+    <string name="qpipepipe_update_later">Потом</string>
+    <string name="qpipepipe_update_downloading">Загрузка QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">Не удалось скачать. Проверьте подключение и повторите попытку.</string>
+    <string name="qpipepipe_update_wrong_build">Эта сборка не может сама установить обновление, например потому что это отладочная сборка. Скачайте APK со страницы релиза.</string>
+    <string name="qpipepipe_update_failed">Не удалось установить обновление: %s</string>
+    <string name="playlist_resume_title">Продолжить с того же места</string>
+    <string name="playlist_resume_play">Продолжить с #%d</string>
+    <string name="playlist_resume_here">Продолжить отсюда</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Сохранять недавние очереди</string>
+    <string name="recent_queues_summary">Показывать воспроизводимые очереди в разделе «Плейлисты», чтобы их можно было продолжить или сохранить позже. Видео, добавленные в очередь, запущенную из вашего плейлиста, добавляются в этот плейлист. Очереди плейлистов и каналов YouTube не сохраняются</string>
+    <string name="recent_queues_tab_playlists">Плейлисты</string>
+    <string name="recent_queues_tab">Недавние очереди</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d очередь, сначала новые</item>
+        <item quantity="few">%d очереди, сначала новые</item>
+        <item quantity="many">%d очередей, сначала новые</item>
+        <item quantity="other">%d очереди, сначала новые</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Очистить всё</string>
+    <string name="recent_queues_clear_all_message">Удалить все недавние очереди? Сохранённые плейлисты не будут затронуты.</string>
+    <string name="recent_queues_empty">Нет недавних очередей. Здесь появятся воспроизводимые очереди.</string>
+    <string name="recent_queue_title">Очередь от %s</string>
+    <string name="recent_queue_from_playlist">Из: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">Добавлено видео с %2$s: %1$d</item>
+        <item quantity="few">Добавлено видео с %2$s: %1$d</item>
+        <item quantity="many">Добавлено видео с %2$s: %1$d</item>
+        <item quantity="other">Добавлено видео с %2$s: %1$d</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d видео</item>
+        <item quantity="few">%1$d/%2$d видео</item>
+        <item quantity="many">%1$d/%2$d видео</item>
+        <item quantity="other">%1$d/%2$d видео</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d видео добавлено в %2$s</item>
+        <item quantity="few">%1$d видео добавлены в %2$s</item>
+        <item quantity="many">%1$d видео добавлено в %2$s</item>
+        <item quantity="other">%1$d видео добавлено в %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Продолжить</string>
+    <string name="recent_queue_more">Другие действия</string>
+    <string name="recent_queue_progress">%1$s из %2$s</string>
+    <string name="recent_queue_save_as_playlist">Сохранить как плейлист</string>
+    <string name="recent_queue_open_playlist">Открыть плейлист</string>
+    <string name="recent_queue_saved">Сохранено в «Плейлистах»</string>
+    <string name="recent_queue_deleted">Очередь удалена</string>
+    <string name="recent_queue_deleted_linked">Очередь удалена, плейлист остался</string>
+    <string name="recent_queue_playing_now">Воспроизводится</string>
+    <string name="recent_queue_playing_at">Воспроизводится · %s</string>
+    <string name="recent_queue_watched">Просмотрено</string>
+    <string name="recent_queue_not_watched">Не просмотрено</string>
+    <string name="recent_queue_added">добавлено</string>
+    <string name="playlist_never_played">Не воспроизводился</string>
+</resources>

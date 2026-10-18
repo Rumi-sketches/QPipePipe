@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Fitur antre ngen usap nyang geutamah lé fork nyoe</string>
+    <string name="qpipepipe_category_playback">Puta</string>
+    <string name="qpipepipe_category_swipe_actions">Buet usap</string>
+    <string name="tap_always_plays_title">Theun video sabe jiputa</string>
+    <string name="tap_always_plays_summary">Peuphon puta watée droe peuhah video, meuskipun puta otomatis meuteubateh bak Wi-Fi mantong atawa ka geupeumate. Puta otomatis teutap meulaku keu peuphon otomatis</string>
+    <string name="clear_queue_confirmation_title">Lakée konfirmasi yoh goh lom peugléh antre</string>
+    <string name="clear_queue_confirmation_summary">Meugantoe nibak saboh player u player laen jeut geugantoe antre droe</string>
+    <string name="clear_queue_confirmation_description">Antre player nyang aktif teuma geugantoe</string>
+    <string name="clear_queue_confirmation_play_now">Puta jinoe</string>
+    <string name="enable_swipe_actions_title">Udeep buet usap bak video</string>
+    <string name="enable_swipe_actions_summary">Usap video u wie atawa u uneun bak beranda, hasé seutot, daftar puta ngen grup saluran keu peujak buet cepat</string>
+    <string name="swipe_left_action_title">Buet usap u wie</string>
+    <string name="swipe_right_action_title">Buet usap u uneun</string>
+    <string name="enable_swipe_actions_warning_title">Buet usap ka udeep</string>
+    <string name="enable_swipe_actions_warning_message">Usap peureulee baréh nyang luah peunoh mangat jeut jibuet ngon got, nyan sebab tampilan daftar teuma geunguy keu ganto tampilan kisi atawa kartu bak tiep teumpat nyang na buet usap. Droe jeut peumate lom bak watée pajan mantong.</string>
+    <string name="swipe_actions_force_list_mode_summary">Geupeumate selama buet usap udeep, sabab jipeuwajéb tampilan daftar</string>
+    <string name="remove_from_playlist_swipe_action">Hapuh nibak daftar puta (daftar puta mantong)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s ka na</string>
+    <string name="qpipepipe_update_notification_text">Theun keu peutren ngen pasang</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Peutren ngen pasang pembaruan nyoe? Android teuma jilakée droe keu konfirmasi pemasangan.</string>
+    <string name="qpipepipe_update_install">Peutren ngen pasang</string>
+    <string name="qpipepipe_update_release_notes">Catatan rilis</string>
+    <string name="qpipepipe_update_later">Enteuk</string>
+    <string name="qpipepipe_update_downloading">Teungoh peutren QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">Peutren gagai. Peureksa sambungan droe ngen cuba lom.</string>
+    <string name="qpipepipe_update_wrong_build">Build nyoe hana jeut pasang pembaruan keudroe, misai jih sabab nyoe build debug. Peutren APK nibak halaman rilis.</string>
+    <string name="qpipepipe_update_failed">Pembaruan hana jeut geupasang: %s</string>
+    <string name="playlist_resume_title">Sambông nibak teumpat droe piyôh</string>
+    <string name="playlist_resume_play">Sambông nibak #%d</string>
+    <string name="playlist_resume_here">Sambông sinoe</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Keubah antre barô</string>
+    <string name="recent_queues_summary">Peuleumah antre nyang droe puta di yup Daftar puta, mangat jeut droe sambông atawa keubah enteuk. Video nyang droe tamah u antre nyang geupeuphon nibak saboh daftar puta droe geutamah cit u daftar puta nyan. Antre nibak daftar puta ngen saluran YouTube hana geukeubah</string>
+    <string name="recent_queues_tab_playlists">Daftar puta</string>
+    <string name="recent_queues_tab">Antre barô</string>
+    <plurals name="recent_queues_count">
+        <item quantity="other">%d antre, nyang paléng barô di keue</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Peugléh mandum</string>
+    <string name="recent_queues_clear_all_message">Hapuh mandum antre barô? Daftar puta droe nyang ka geukeubah hana meuubah.</string>
+    <string name="recent_queues_empty">Hana antre barô. Antre nyang droe puta teuma leumah sinoe.</string>
+    <string name="recent_queue_title">Antre %s</string>
+    <string name="recent_queue_from_playlist">Nibak: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="other">%1$d video geutamah yoh %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="other">%1$d/%2$d video</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="other">%1$d video geutamah u %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Sambông</string>
+    <string name="recent_queue_more">Pilihan laen</string>
+    <string name="recent_queue_progress">%1$s nibak %2$s</string>
+    <string name="recent_queue_save_as_playlist">Keubah keu daftar puta</string>
+    <string name="recent_queue_open_playlist">Peuhah daftar puta</string>
+    <string name="recent_queue_saved">Ka geukeubah bak Daftar puta</string>
+    <string name="recent_queue_deleted">Antre ka geuhapuh</string>
+    <string name="recent_queue_deleted_linked">Antre ka geuhapuh, daftar puta teutap na</string>
+    <string name="recent_queue_playing_now">Teungoh puta</string>
+    <string name="recent_queue_playing_at">Teungoh puta · %s</string>
+    <string name="recent_queue_watched">Ka geukalon</string>
+    <string name="recent_queue_not_watched">Goh lom geukalon</string>
+    <string name="recent_queue_added">geutamah</string>
+    <string name="playlist_never_played">Goh tom geuputa</string>
+</resources>

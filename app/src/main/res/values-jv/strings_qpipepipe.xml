@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Fitur antrian lan geser sing ditambahke fork iki</string>
+    <string name="qpipepipe_category_playback">Muter</string>
+    <string name="qpipepipe_category_swipe_actions">Tumindak geser</string>
+    <string name="tap_always_plays_title">Pencet video mesthi muter</string>
+    <string name="tap_always_plays_summary">Muter video nalika sampeyan mbukak, sanajan puter otomatis mung nganggo Wi-Fi utawa dipateni. Puter otomatis tetep kanggo muter sing diwiwiti otomatis</string>
+    <string name="clear_queue_confirmation_title">Takon dhisik sakdurunge ngresiki antrian</string>
+    <string name="clear_queue_confirmation_summary">Ganti saka siji pamuter menyang pamuter liyane iso ngganti antrianmu</string>
+    <string name="clear_queue_confirmation_description">Antrian pamuter sing aktif bakal diganti</string>
+    <string name="clear_queue_confirmation_play_now">Puter saiki</string>
+    <string name="enable_swipe_actions_title">Uripke geser nang video</string>
+    <string name="enable_swipe_actions_summary">Geser video ngiwa utawa nengen nang beranda, asil goleki, daftar puter lan grup saluran kanggo nglakoni tumindak cepet</string>
+    <string name="swipe_left_action_title">Tumindak geser ngiwa</string>
+    <string name="swipe_right_action_title">Tumindak geser nengen</string>
+    <string name="enable_swipe_actions_warning_title">Geser wis diuripke</string>
+    <string name="enable_swipe_actions_warning_message">Geser butuh baris sing ambane kebak ben iso mlaku apik, mula tampilan daftar bakal dienggo tinimbang tampilan kisi utawa kartu nang endi wae geser iso dienggo. Sampeyan iso mateni maneh kapan wae.</string>
+    <string name="swipe_actions_force_list_mode_summary">Dipateni sak suwene geser urip, amarga geser meksa tampilan daftar</string>
+    <string name="remove_from_playlist_swipe_action">Busak saka daftar puter (mung daftar puter)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s wis ono</string>
+    <string name="qpipepipe_update_notification_text">Pencet kanggo unduh lan pasang</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Unduh lan pasang pembaruan iki? Android bakal njaluk sampeyan ngonfirmasi pemasangan.</string>
+    <string name="qpipepipe_update_install">Unduh lan pasang</string>
+    <string name="qpipepipe_update_release_notes">Cathetan rilis</string>
+    <string name="qpipepipe_update_later">Mengko</string>
+    <string name="qpipepipe_update_downloading">Ngunduh QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">Unduhan gagal. Priksa sambunganmu lan jajal maneh.</string>
+    <string name="qpipepipe_update_wrong_build">Build iki ora iso masang pembaruan dhewe, contone amarga iki build debug. Unduh APK saka kaca rilis wae.</string>
+    <string name="qpipepipe_update_failed">Pembaruan ora iso dipasang: %s</string>
+    <string name="playlist_resume_title">Terusno saka sing pungkasan</string>
+    <string name="playlist_resume_play">Terusno saka #%d</string>
+    <string name="playlist_resume_here">Terusno saka kene</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Simpen antrian anyar</string>
+    <string name="recent_queues_summary">Tampilke antrian sing sampeyan puter nang ngisor Daftar puter, ben iso diterusno utawa disimpen mengko. Video sing ditambahke menyang antrian sing diwiwiti saka salah siji daftar puter sampeyan uga ditambahke menyang daftar puter kuwi. Antrian saka daftar puter lan saluran YouTube ora disimpen</string>
+    <string name="recent_queues_tab_playlists">Daftar puter</string>
+    <string name="recent_queues_tab">Antrian anyar</string>
+    <plurals name="recent_queues_count">
+        <item quantity="other">%d antrian, sing paling anyar dhisik</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Resiki kabeh</string>
+    <string name="recent_queues_clear_all_message">Busak kabeh antrian anyar? Daftar puter sing wis disimpen ora diowahi.</string>
+    <string name="recent_queues_empty">Durung ono antrian anyar. Antrian sing sampeyan puter bakal ketok nang kene.</string>
+    <string name="recent_queue_title">Antrian %s</string>
+    <string name="recent_queue_from_playlist">Saka: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="other">%1$d video ditambahke wiwit %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="other">%1$d/%2$d video</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="other">%1$d video ditambahke nang %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Terusno</string>
+    <string name="recent_queue_more">Pilihan liyane</string>
+    <string name="recent_queue_progress">%1$s saka %2$s</string>
+    <string name="recent_queue_save_as_playlist">Simpen dadi daftar puter</string>
+    <string name="recent_queue_open_playlist">Buka daftar puter</string>
+    <string name="recent_queue_saved">Disimpen nang Daftar puter</string>
+    <string name="recent_queue_deleted">Antrian dibusak</string>
+    <string name="recent_queue_deleted_linked">Antrian dibusak, daftar puter tetep ono</string>
+    <string name="recent_queue_playing_now">Lagi muter</string>
+    <string name="recent_queue_playing_at">Lagi muter · %s</string>
+    <string name="recent_queue_watched">Wis didelok</string>
+    <string name="recent_queue_not_watched">Kanggo didelok</string>
+    <string name="recent_queue_added">ditambahke</string>
+    <string name="playlist_never_played">Durung tau diputer</string>
+</resources>

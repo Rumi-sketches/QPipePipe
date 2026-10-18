@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">תכונות תור והחלקה שנוספו בגרסה המפוצלת הזו</string>
+    <string name="qpipepipe_category_playback">ניגון</string>
+    <string name="qpipepipe_category_swipe_actions">פעולות החלקה</string>
+    <string name="tap_always_plays_title">נגיעה בסרטון תמיד מנגנת אותו</string>
+    <string name="tap_always_plays_summary">התחלת ניגון בפתיחת סרטון, גם אם הניגון האוטומטי מוגבל ל־Wi-Fi או כבוי. הניגון האוטומטי עדיין חל על התחלות אוטומטיות</string>
+    <string name="clear_queue_confirmation_title">לבקש אישור לפני פינוי תור</string>
+    <string name="clear_queue_confirmation_summary">מעבר מנגן אחד לאחר עשוי להחליף את התור שלך</string>
+    <string name="clear_queue_confirmation_description">התור של הנגן הפעיל יוחלף</string>
+    <string name="clear_queue_confirmation_play_now">לנגן עכשיו</string>
+    <string name="enable_swipe_actions_title">הפעלת פעולות החלקה על סרטונים</string>
+    <string name="enable_swipe_actions_summary">אפשר להחליק סרטון שמאלה או ימינה בעמוד הבית, בתוצאות החיפוש, ברשימות נגינה ובקבוצות ערוצים כדי להפעיל פעולה מהירה</string>
+    <string name="swipe_left_action_title">פעולת החלקה שמאלה</string>
+    <string name="swipe_right_action_title">פעולת החלקה ימינה</string>
+    <string name="enable_swipe_actions_warning_title">פעולות ההחלקה הופעלו</string>
+    <string name="enable_swipe_actions_warning_message">החלקה דורשת שורות ברוחב מלא כדי לעבוד באופן אמין, לכן בכל מקום שבו פעולות החלקה זמינות תשמש תצוגת רשימה במקום תצוגת טבלה או כרטיסים. אפשר לכבות זאת שוב בכל עת.</string>
+    <string name="swipe_actions_force_list_mode_summary">מושבת כשפעולות ההחלקה פעילות, כי הן מאלצות תצוגת רשימה</string>
+    <string name="remove_from_playlist_swipe_action">הסרה מרשימת הנגינה (רשימות נגינה בלבד)</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s זמינה</string>
+    <string name="qpipepipe_update_notification_text">יש לגעת כדי להוריד ולהתקין</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">להוריד ולהתקין את העדכון הזה? Android יבקש ממך לאשר את ההתקנה.</string>
+    <string name="qpipepipe_update_install">הורדה והתקנה</string>
+    <string name="qpipepipe_update_release_notes">הערות שחרור</string>
+    <string name="qpipepipe_update_later">אחר כך</string>
+    <string name="qpipepipe_update_downloading">QPipePipe %s בהורדה</string>
+    <string name="qpipepipe_update_download_failed">ההורדה נכשלה. נא לבדוק את החיבור ולנסות שוב.</string>
+    <string name="qpipepipe_update_wrong_build">גרסה זו לא יכולה להתקין את העדכון בעצמה, למשל כי זו גרסת ניפוי שגיאות. יש להוריד את ה־APK מעמוד השחרור במקום זאת.</string>
+    <string name="qpipepipe_update_failed">לא ניתן היה להתקין את העדכון: %s</string>
+    <string name="playlist_resume_title">להמשיך מאיפה שהפסקת</string>
+    <string name="playlist_resume_play">להמשיך מ־#%d</string>
+    <string name="playlist_resume_here">להמשיך מכאן</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">שמירת תורים אחרונים</string>
+    <string name="recent_queues_summary">התורים שמנוגנים יופיעו תחת רשימות נגינה, כדי שאפשר יהיה להמשיך אותם או לשמור אותם מאוחר יותר. סרטונים שנוספים לתור שהתחיל מאחת מרשימות הנגינה שלך נוספים גם לאותה רשימת נגינה. תורים של רשימות נגינה וערוצים ב־YouTube לא נשמרים</string>
+    <string name="recent_queues_tab_playlists">רשימות נגינה</string>
+    <string name="recent_queues_tab">תורים אחרונים</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d תור</item>
+        <item quantity="two">%d תורים, החדש ביותר ראשון</item>
+        <item quantity="many">%d תורים, החדש ביותר ראשון</item>
+        <item quantity="other">%d תורים, החדש ביותר ראשון</item>
+    </plurals>
+    <string name="recent_queues_clear_all">ניקוי הכול</string>
+    <string name="recent_queues_clear_all_message">למחוק את כל התורים האחרונים? רשימות הנגינה השמורות שלך לא יושפעו.</string>
+    <string name="recent_queues_empty">אין תורים אחרונים. תורים שמנגנים יופיעו כאן.</string>
+    <string name="recent_queue_title">תור מ־%s</string>
+    <string name="recent_queue_from_playlist">מתוך: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">%1$d סרטון נוסף מאז %2$s</item>
+        <item quantity="two">%1$d סרטונים נוספו מאז %2$s</item>
+        <item quantity="many">%1$d סרטונים נוספו מאז %2$s</item>
+        <item quantity="other">%1$d סרטונים נוספו מאז %2$s</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d סרטון</item>
+        <item quantity="two">%1$d/%2$d סרטונים</item>
+        <item quantity="many">%1$d/%2$d סרטונים</item>
+        <item quantity="other">%1$d/%2$d סרטונים</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d סרטון נוסף אל %2$s</item>
+        <item quantity="two">%1$d סרטונים נוספו אל %2$s</item>
+        <item quantity="many">%1$d סרטונים נוספו אל %2$s</item>
+        <item quantity="other">%1$d סרטונים נוספו אל %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">המשך</string>
+    <string name="recent_queue_more">אפשרויות נוספות</string>
+    <string name="recent_queue_progress">%1$s מתוך %2$s</string>
+    <string name="recent_queue_save_as_playlist">שמירה כרשימת נגינה</string>
+    <string name="recent_queue_open_playlist">פתיחת רשימת הנגינה</string>
+    <string name="recent_queue_saved">נשמר ברשימות נגינה</string>
+    <string name="recent_queue_deleted">התור נמחק</string>
+    <string name="recent_queue_deleted_linked">התור נמחק, רשימת הנגינה נשארת</string>
+    <string name="recent_queue_playing_now">מתנגן</string>
+    <string name="recent_queue_playing_at">מתנגן · %s</string>
+    <string name="recent_queue_watched">נצפה</string>
+    <string name="recent_queue_not_watched">לצפייה</string>
+    <string name="recent_queue_added">נוסף</string>
+    <string name="playlist_never_played">לא נוגן מעולם</string>
+</resources>

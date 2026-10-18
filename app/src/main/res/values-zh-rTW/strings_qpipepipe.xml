@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">此分支新增的佇列與滑動功能</string>
+    <string name="qpipepipe_category_playback">播放</string>
+    <string name="qpipepipe_category_swipe_actions">滑動動作</string>
+    <string name="tap_always_plays_title">輕觸影片時一律播放</string>
+    <string name="tap_always_plays_summary">開啟影片時開始播放，即使自動播放僅限 Wi-Fi 或已關閉。自動開始的播放仍會套用自動播放設定</string>
+    <string name="clear_queue_confirmation_title">清除佇列前要求確認</string>
+    <string name="clear_queue_confirmation_summary">從一個播放器切換到另一個播放器可能會取代您的佇列</string>
+    <string name="clear_queue_confirmation_description">目前播放器的佇列將被取代</string>
+    <string name="clear_queue_confirmation_play_now">立即播放</string>
+    <string name="enable_swipe_actions_title">啟用影片滑動動作</string>
+    <string name="enable_swipe_actions_summary">在首頁、搜尋結果、播放清單和頻道群組中向左或向右滑動影片，即可觸發快速動作</string>
+    <string name="swipe_left_action_title">向左滑動動作</string>
+    <string name="swipe_right_action_title">向右滑動動作</string>
+    <string name="enable_swipe_actions_warning_title">已啟用滑動動作</string>
+    <string name="enable_swipe_actions_warning_message">滑動需要全寬的列才能穩定運作，因此在可使用滑動動作的地方會改用清單檢視，而非網格或卡片檢視。您可以隨時再次關閉此功能。</string>
+    <string name="swipe_actions_force_list_mode_summary">啟用滑動動作時無法使用，此時會強制使用清單檢視</string>
+    <string name="remove_from_playlist_swipe_action">從播放清單中移除（僅限播放清單）</string>
+    <string name="qpipepipe_update_notification_title">QPipePipe %s 已推出</string>
+    <string name="qpipepipe_update_notification_text">輕觸即可下載並安裝</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">要下載並安裝此更新嗎？Android 會要求您確認安裝。</string>
+    <string name="qpipepipe_update_install">下載並安裝</string>
+    <string name="qpipepipe_update_release_notes">版本資訊</string>
+    <string name="qpipepipe_update_later">稍後</string>
+    <string name="qpipepipe_update_downloading">正在下載 QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">下載失敗。請檢查網路連線後再試一次。</string>
+    <string name="qpipepipe_update_wrong_build">此版本無法自行安裝更新（例如因為它是偵錯版本）。請改從發布頁面下載 APK。</string>
+    <string name="qpipepipe_update_failed">無法安裝更新：%s</string>
+    <string name="playlist_resume_title">從上次停止的地方繼續</string>
+    <string name="playlist_resume_play">從 #%d 繼續</string>
+    <string name="playlist_resume_here">從這裡繼續</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">保留最近的佇列</string>
+    <string name="recent_queues_summary">在播放清單下列出您播放過的佇列，方便稍後繼續播放或儲存。加入由您的某個播放清單開始的佇列的影片，也會加入該播放清單。不會保留 YouTube 播放清單和頻道的佇列</string>
+    <string name="recent_queues_tab_playlists">播放清單</string>
+    <string name="recent_queues_tab">最近的佇列</string>
+    <plurals name="recent_queues_count">
+        <item quantity="other">%d 個佇列，最新的在前</item>
+    </plurals>
+    <string name="recent_queues_clear_all">全部清除</string>
+    <string name="recent_queues_clear_all_message">要刪除所有最近的佇列嗎？已儲存的播放清單不受影響。</string>
+    <string name="recent_queues_empty">沒有最近的佇列。您播放的佇列會顯示在這裡。</string>
+    <string name="recent_queue_title">%s 的佇列</string>
+    <string name="recent_queue_from_playlist">來自：%s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="other">自 %2$s 以來已新增 %1$d 部影片</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="other">%1$d/%2$d 部影片</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="other">已將 %1$d 部影片新增至 %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">繼續</string>
+    <string name="recent_queue_more">更多選項</string>
+    <string name="recent_queue_progress">%1$s / %2$s</string>
+    <string name="recent_queue_save_as_playlist">儲存為播放清單</string>
+    <string name="recent_queue_open_playlist">開啟播放清單</string>
+    <string name="recent_queue_saved">已儲存至播放清單</string>
+    <string name="recent_queue_deleted">已刪除佇列</string>
+    <string name="recent_queue_deleted_linked">已刪除佇列，播放清單仍保留</string>
+    <string name="recent_queue_playing_now">正在播放</string>
+    <string name="recent_queue_playing_at">正在播放 · %s</string>
+    <string name="recent_queue_watched">已看過</string>
+    <string name="recent_queue_not_watched">待觀看</string>
+    <string name="recent_queue_added">已新增</string>
+    <string name="playlist_never_played">從未播放</string>
+</resources>

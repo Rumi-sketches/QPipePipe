@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
+<resources>
+    <string name="qpipepipe_settings_summary">Функції черги та свайпів, додані цим форком</string>
+    <string name="qpipepipe_category_playback">Відтворення</string>
+    <string name="qpipepipe_category_swipe_actions">Дії свайпом</string>
+    <string name="tap_always_plays_title">Натискання на відео завжди запускає його</string>
+    <string name="tap_always_plays_summary">Починати відтворення під час відкриття відео, навіть якщо автовідтворення обмежене Wi-Fi або вимкнене. Автовідтворення й надалі діє для автоматичних запусків</string>
+    <string name="clear_queue_confirmation_title">Запитувати підтвердження перед очищенням черги</string>
+    <string name="clear_queue_confirmation_summary">Перемикання з одного програвача на інший може замінити вашу чергу</string>
+    <string name="clear_queue_confirmation_description">Черга активного програвача буде замінена</string>
+    <string name="clear_queue_confirmation_play_now">Відтворити зараз</string>
+    <string name="enable_swipe_actions_title">Увімкнути дії свайпом для відео</string>
+    <string name="enable_swipe_actions_summary">Проведіть по відео вліво чи вправо на головній сторінці, у результатах пошуку, добірках і групах каналів, щоб виконати швидку дію</string>
+    <string name="swipe_left_action_title">Дія свайпом уліво</string>
+    <string name="swipe_right_action_title">Дія свайпом управо</string>
+    <string name="enable_swipe_actions_warning_title">Дії свайпом увімкнено</string>
+    <string name="enable_swipe_actions_warning_message">Для надійної роботи свайпів потрібні рядки на всю ширину, тож скрізь, де доступні дії свайпом, замість сітки чи карток буде використано список. Це можна будь-коли вимкнути.</string>
+    <string name="swipe_actions_force_list_mode_summary">Недоступно, поки ввімкнені дії свайпом, які примусово вмикають список</string>
+    <string name="remove_from_playlist_swipe_action">Вилучити з добірки (лише в добірках)</string>
+    <string name="qpipepipe_update_notification_title">Доступна версія QPipePipe %s</string>
+    <string name="qpipepipe_update_notification_text">Натисніть, щоб завантажити й установити</string>
+    <string name="qpipepipe_update_title">QPipePipe %s</string>
+    <string name="qpipepipe_update_message">Завантажити й установити це оновлення? Android попросить підтвердити встановлення.</string>
+    <string name="qpipepipe_update_install">Завантажити й установити</string>
+    <string name="qpipepipe_update_release_notes">Примітки до випуску</string>
+    <string name="qpipepipe_update_later">Пізніше</string>
+    <string name="qpipepipe_update_downloading">Завантаження QPipePipe %s</string>
+    <string name="qpipepipe_update_download_failed">Не вдалося завантажити. Перевірте з\'єднання та спробуйте ще раз.</string>
+    <string name="qpipepipe_update_wrong_build">Ця збірка не може сама встановити оновлення, наприклад, тому що це налагоджувальна збірка. Завантажте APK зі сторінки випуску.</string>
+    <string name="qpipepipe_update_failed">Не вдалося встановити оновлення: %s</string>
+    <string name="playlist_resume_title">Продовжити з того ж місця</string>
+    <string name="playlist_resume_play">Продовжити з #%d</string>
+    <string name="playlist_resume_here">Продовжити звідси</string>
+    <string name="playlist_resume_target">#%1$d · %2$s</string>
+    <string name="recent_queues_title">Зберігати недавні черги</string>
+    <string name="recent_queues_summary">Показувати відтворені черги в розділі «Добірки», щоб пізніше продовжити або зберегти їх. Відео, додані до черги, запущеної з вашої добірки, додаються до цієї добірки. Черги добірок і каналів YouTube не зберігаються</string>
+    <string name="recent_queues_tab_playlists">Добірки</string>
+    <string name="recent_queues_tab">Недавні черги</string>
+    <plurals name="recent_queues_count">
+        <item quantity="one">%d черга, спочатку нові</item>
+        <item quantity="few">%d черги, спочатку нові</item>
+        <item quantity="many">%d черг, спочатку нові</item>
+        <item quantity="other">%d черги, спочатку нові</item>
+    </plurals>
+    <string name="recent_queues_clear_all">Очистити все</string>
+    <string name="recent_queues_clear_all_message">Видалити всі недавні черги? Збережені добірки не зміняться.</string>
+    <string name="recent_queues_empty">Немає недавніх черг. Тут з\'являться черги, які ви відтворюєте.</string>
+    <string name="recent_queue_title">Черга від %s</string>
+    <string name="recent_queue_from_playlist">З: %s</string>
+    <plurals name="recent_queue_added_to_playlist">
+        <item quantity="one">Додано відео з %2$s: %1$d</item>
+        <item quantity="few">Додано відео з %2$s: %1$d</item>
+        <item quantity="many">Додано відео з %2$s: %1$d</item>
+        <item quantity="other">Додано відео з %2$s: %1$d</item>
+    </plurals>
+    <plurals name="recent_queue_position_videos">
+        <item quantity="one">%1$d/%2$d відео</item>
+        <item quantity="few">%1$d/%2$d відео</item>
+        <item quantity="many">%1$d/%2$d відео</item>
+        <item quantity="other">%1$d/%2$d відео</item>
+    </plurals>
+    <plurals name="recent_queue_appended">
+        <item quantity="one">%1$d відео додано до %2$s</item>
+        <item quantity="few">%1$d відео додано до %2$s</item>
+        <item quantity="many">%1$d відео додано до %2$s</item>
+        <item quantity="other">%1$d відео додано до %2$s</item>
+    </plurals>
+    <string name="recent_queue_resume">Продовжити</string>
+    <string name="recent_queue_more">Інші дії</string>
+    <string name="recent_queue_progress">%1$s з %2$s</string>
+    <string name="recent_queue_save_as_playlist">Зберегти як добірку</string>
+    <string name="recent_queue_open_playlist">Відкрити добірку</string>
+    <string name="recent_queue_saved">Збережено в «Добірках»</string>
+    <string name="recent_queue_deleted">Чергу видалено</string>
+    <string name="recent_queue_deleted_linked">Чергу видалено, добірка залишилася</string>
+    <string name="recent_queue_playing_now">Відтворюється</string>
+    <string name="recent_queue_playing_at">Відтворюється · %s</string>
+    <string name="recent_queue_watched">Переглянуто</string>
+    <string name="recent_queue_not_watched">Не переглянуто</string>
+    <string name="recent_queue_added">додано</string>
+    <string name="playlist_never_played">Ще не відтворювалася</string>
+</resources>
