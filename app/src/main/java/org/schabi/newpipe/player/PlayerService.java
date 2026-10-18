@@ -36,7 +36,7 @@ import androidx.core.content.ContextCompat;
 
 import org.schabi.newpipe.App;
 import org.schabi.newpipe.databinding.PlayerBinding;
-import org.schabi.newpipe.player.mediabrowser.MediaBrowserPlaybackPreparer;
+import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector;
 import org.schabi.newpipe.player.mediasession.PlayerServiceInterface;
 import org.schabi.newpipe.util.DeviceUtils;
 import org.schabi.newpipe.util.ThemeHelper;
@@ -135,8 +135,12 @@ public class PlayerService extends Service implements PlayerServiceInterface {
             return START_NOT_STICKY;
         }
         if (Intent.ACTION_MEDIA_BUTTON.equals(intent.getAction())
-                && player.getPlayQueue() == null) {
-            // Player is not working, no need to process media button's action
+                && (player == null || player.getPlayQueue() == null)) {
+            // Nothing to play. MediaButtonReceiver starts this service with
+            // startForegroundService(), so it must still post a notification before stopping,
+            // otherwise Android reports the app as not responding.
+            NotificationUtil.getInstance().startForegroundWithDummyNotification(this);
+            stopService();
             return START_NOT_STICKY;
         }
         // null check
@@ -275,7 +279,7 @@ public class PlayerService extends Service implements PlayerServiceInterface {
     }
 
     @Override
-    public MediaBrowserPlaybackPreparer getMediaBrowserPlaybackPreparer() {
+    public MediaSessionConnector getMediaSessionConnector() {
         return null;
     }
 

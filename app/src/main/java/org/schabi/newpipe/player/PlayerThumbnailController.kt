@@ -21,11 +21,17 @@ import org.schabi.newpipe.util.PicassoHelper
 class PlayerThumbnailController(private val player: Player) {
 
     private var currentThumbnail: Bitmap? = null
+    private var currentThumbnailUrl: String? = null
 
     fun initThumbnail(url: String?) {
         if (Player.DEBUG) {
             Log.d(Player.TAG, "Thumbnail - initThumbnail() called with url = ["
                 + (url ?: "null") + "]")
+        }
+        if (url != currentThumbnailUrl) {
+            // the previous stream's thumbnail must not be shown for this one while it loads
+            currentThumbnail = null
+            currentThumbnailUrl = url
         }
         if (isNullOrEmpty(url)) {
             return
@@ -34,6 +40,9 @@ class PlayerThumbnailController(private val player: Player) {
         // scale down the notification thumbnail for performance
         PicassoHelper.loadScaledDownThumbnail(player.context, url, true).into(object : Target {
             override fun onBitmapLoaded(bitmap: Bitmap, from: Picasso.LoadedFrom) {
+                if (url != currentThumbnailUrl) {
+                    return // a later stream started loading its own thumbnail meanwhile
+                }
                 if (Player.DEBUG) {
                     Log.d(
                         Player.TAG, "Thumbnail - onLoadingComplete() called with: url = [$url"
@@ -53,15 +62,21 @@ class PlayerThumbnailController(private val player: Player) {
                 }
                 NotificationUtil.getInstance()
                     .createNotificationIfNeededAndUpdate(player, false)
+                // the media session (e.g. Android Auto) only reads it when rebuilding metadata
+                player.mediaSessionManager?.invalidateMetadata()
                 // there is a new thumbnail, so changed the end screen thumbnail, too.
                 updateEndScreenThumbnail()
             }
 
             override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {
                 Log.e(Player.TAG, "Thumbnail - onBitmapFailed() called with: url = [$url]", e)
+                if (url != currentThumbnailUrl) {
+                    return
+                }
                 currentThumbnail = null
                 NotificationUtil.getInstance()
                     .createNotificationIfNeededAndUpdate(player, false)
+                player.mediaSessionManager?.invalidateMetadata()
             }
 
             override fun onPrepareLoad(placeHolderDrawable: Drawable?) {

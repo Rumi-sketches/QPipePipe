@@ -51,40 +51,65 @@ class MediaBrowserImpl(
     private val database = NewPipeDatabase.getInstance(context)
     private var disposables = CompositeDisposable()
 
+    // the last contents seen by the listeners below, to notify only the playlists that changed
+    private var localPlaylistContents = emptyMap<Long, List<Pair<Long, Int>>>()
+    private var remotePlaylistContents = emptyMap<Long, List<Any?>>()
+
     init {
-        // this will listen to changes in the bookmarks until this MediaBrowserImpl is dispose()d
+        // these listen to database changes until this MediaBrowserImpl is dispose()d
         disposables.add(
-            getMergedPlaylists().subscribe { notifyChildrenChanged.accept(ID_BOOKMARKS) }
+            getMergedPlaylists().subscribe(
+                { notifyChildrenChanged.accept(ID_BOOKMARKS) }, ::logListenerError
+            )
         )
-        
-        // listen to changes in history
+
         disposables.add(
-            database.streamHistoryDAO().getHistory().subscribe {
-                notifyChildrenChanged.accept(ID_HISTORY) 
-            }
+            database.streamHistoryDAO().getHistory().subscribe(
+                { notifyChildrenChanged.accept(ID_HISTORY) }, ::logListenerError
+            )
         )
-        
-        // listen to changes in local playlist contents
+
+        // local playlist contents: stream and position of each entry
         disposables.add(
-            database.playlistStreamDAO().getAll().subscribe { playlistStreams ->
-                // group by playlist ID and notify each playlist's content has changed
-                playlistStreams.groupBy { it.playlistUid }.keys.forEach { playlistId ->
-                    val mediaId = buildLocalPlaylistItemMediaId(false, playlistId).build().toString()
-                    notifyChildrenChanged.accept(mediaId)
-                }
-            }
+            database.playlistStreamDAO().getAll().subscribe(
+                { playlistStreams ->
+                    val contents = playlistStreams.groupBy(
+                        { it.playlistUid }, { it.streamUid to it.index }
+                    )
+                    changedKeys(localPlaylistContents, contents).forEach { playlistId ->
+                        notifyChildrenChanged.accept(
+                            buildLocalPlaylistItemMediaId(false, playlistId).build().toString()
+                        )
+                    }
+                    localPlaylistContents = contents
+                },
+                ::logListenerError
+            )
         )
-        
-        // listen to changes in remote playlist metadata (content changes require re-fetching)
+
+        // remote playlist metadata: a change means the contents should be fetched again
         disposables.add(
-            database.playlistDAO().getAll().subscribe { remotePlaylists ->
-                // notify that remote playlist contents might have changed
-                remotePlaylists.forEach { playlist ->
-                    val mediaId = buildLocalPlaylistItemMediaId(true, playlist.uid).build().toString()
-                    notifyChildrenChanged.accept(mediaId)
-                }
-            }
+            database.playlistRemoteDAO().getAll().subscribe(
+                { remotePlaylists ->
+                    val contents = remotePlaylists.associate {
+                        it.uid to listOf(
+                            it.name, it.url, it.thumbnailUrl, it.uploader, it.streamCount
+                        )
+                    }
+                    changedKeys(remotePlaylistContents, contents).forEach { playlistId ->
+                        notifyChildrenChanged.accept(
+                            buildLocalPlaylistItemMediaId(true, playlistId).build().toString()
+                        )
+                    }
+                    remotePlaylistContents = contents
+                },
+                ::logListenerError
+            )
         )
+    }
+
+    private fun logListenerError(throwable: Throwable) {
+        Log.e(TAG, "Database listener failed, Android Auto lists may be stale", throwable)
     }
 
     //region Cleanup

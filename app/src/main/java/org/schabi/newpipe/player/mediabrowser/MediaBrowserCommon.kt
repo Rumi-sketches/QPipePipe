@@ -35,6 +35,11 @@ internal fun infoItemTypeFromString(type: String): InfoType {
     }
 }
 
+/** @return the keys whose value differs between [old] and [new], including added and removed */
+internal fun <K, V> changedKeys(old: Map<K, V>, new: Map<K, V>): Set<K> {
+    return (old.keys + new.keys).filterTo(HashSet()) { old[it] != new[it] }
+}
+
 internal fun parseError(mediaId: String): ContentNotAvailableException {
     return ContentNotAvailableException("Failed to parse media ID $mediaId")
 }

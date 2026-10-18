@@ -19,7 +19,6 @@ import androidx.media.session.MediaButtonReceiver;
 import com.google.android.exoplayer2.ForwardingPlayer;
 import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector;
-import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector.PlaybackPreparer;
 
 import org.schabi.newpipe.MainActivity;
 import org.schabi.newpipe.R;
@@ -67,7 +66,7 @@ public class MediaSessionManager {
                                @NonNull final Player player,
                                @NonNull final MediaSessionCallback callback,
                                @Nullable final MediaSessionCompat existingSession,
-                               @Nullable final PlaybackPreparer playbackPreparer) {
+                               @Nullable final MediaSessionConnector existingConnector) {
         if (DEBUG) {
             Log.d(TAG, "MediaSessionManager called");
         }
@@ -86,7 +85,9 @@ public class MediaSessionManager {
                         | PlaybackStateCompat.ACTION_PLAY_FROM_MEDIA_ID)
                 .build());
 
-        sessionConnector = new MediaSessionConnector(mediaSession);
+        // An external session comes with its own connector: a second one would fight over it
+        sessionConnector = existingConnector != null
+                ? existingConnector : new MediaSessionConnector(mediaSession);
         sessionConnector.setQueueNavigator(new PlayQueueNavigator(mediaSession, callback));
         sessionConnector.setPlayer(new ForwardingPlayer(player) {
             @Override
@@ -147,17 +148,20 @@ public class MediaSessionManager {
         sessionConnector.setCustomActionProviders(providers);
         sessionConnector.setMetadataDeduplicationEnabled(true);
         sessionConnector.setMediaMetadataProvider(exoPlayer -> buildMediaMetadata());
-
-        // Set PlaybackPreparer if provided (for Android Auto support)
-        if (playbackPreparer != null) {
-            sessionConnector.setPlaybackPreparer(playbackPreparer);
-        }
     }
 
     @Nullable
     @SuppressWarnings("UnusedReturnValue")
     public KeyEvent handleMediaButtonIntent(final Intent intent) {
         return MediaButtonReceiver.handleIntent(mediaSession, intent);
+    }
+
+    /**
+     * Republishes the metadata, e.g. after the thumbnail finished loading: the connector
+     * otherwise only rebuilds it on player events.
+     */
+    public void invalidateMetadata() {
+        sessionConnector.invalidateMediaSessionMetadata();
     }
 
     public MediaSessionCompat.Token getSessionToken() {

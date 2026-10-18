@@ -335,6 +335,50 @@ Check: in a local playlist, play the second video to the end and the third for
 a few seconds, turn the switch on: the main button says "Resume from #3" and
 Background starts from the third video. Turn it off: it starts from the first.
 
+### Android Auto follows the car connection
+
+Files: `util/CarConnectionMonitor` (replaces upstream's
+`CarConnectionStateReceiver`), `App`, `DeviceUtils.isUsingFromAndroidAuto`,
+`util/MediaButtonReceiver`, `PlayerService` and `PlayerServiceForAuto`
+(`onStartCommand`, `onCreate`), `PlayerServiceInterface.getMediaSessionConnector`,
+`MediaSessionManager`, `PlayerThumbnailController`,
+`mediabrowser/MediaBrowserImpl` and `MediaBrowserCommon.changedKeys`.
+
+Upstream keeps two player services and picks one from the car connection state.
+The fork fixes how that state and the Android Auto session are handled:
+
+- The state comes from `CarConnection.getType()` for the whole process.
+  Upstream read it from the `CAR_CONNECTION_UPDATED` intent, which carries no
+  state, so every broadcast meant "connected" and leaving the car was never
+  noticed. Connecting stops `PlayerService` only if it runs, and unbinds it
+  (upstream created it to stop it and kept it bound). Leaving the car pauses
+  the car's player, which keeps serving the phone until it is closed
+  (`PlayerServiceForAuto.hasActivePlayer`), so there are never two players.
+  With "Disable Android Auto" on, playback always uses `PlayerService`.
+- `MediaButtonReceiver` keeps the `MEDIA_BUTTON` action, and a media button
+  with nothing to play posts a placeholder notification before stopping the
+  service. Upstream dropped the action, so the button did nothing and Android
+  reported an ANR ("startForegroundService() did not then call
+  startForeground()").
+- `PlayerServiceForAuto` owns the only `MediaSessionConnector` of its session
+  and creates it before the player, which reuses it. Upstream had a second
+  connector that overwrote the playback state, and the first player created a
+  separate session.
+- The session metadata is rebuilt when the thumbnail loads, and the previous
+  stream's thumbnail is dropped, so the car no longer shows the old cover.
+- The media browser listeners log their errors and notify only the playlists
+  that changed; remote playlists are watched through `playlistRemoteDAO`
+  (upstream watched the local table with remote ids).
+
+Check: with the Desktop Head Unit (`extras;google;auto`, Android Auto
+developer settings: unknown sources, head unit server), connect and play from
+the car's History; close the DHU and play in background from the phone: the
+log shows `CarConnectionMonitor: Car connected: false`, the car's player is
+paused and keeps the new video; close it and play again: `MainPlayer` handles
+it; reconnect: only `PlayerServiceForAuto` runs. With the app idle,
+`adb shell am start-foreground-service -a android.intent.action.MEDIA_BUTTON -n
+<app id>/org.schabi.newpipe.player.PlayerServiceForAuto` gives no ANR.
+
 ## Upstream services
 
 The extractor falls back to `api.pipepipe.dev` to decode YouTube signatures

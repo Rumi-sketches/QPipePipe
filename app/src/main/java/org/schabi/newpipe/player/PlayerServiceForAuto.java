@@ -27,6 +27,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.media.MediaBrowserCompat;
 import android.support.v4.media.session.MediaSessionCompat;
+import android.support.v4.media.session.PlaybackStateCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -78,6 +79,30 @@ public final class PlayerServiceForAuto extends MediaBrowserServiceCompat implem
 
     private final IBinder mBinder = new PlayerServiceForAuto.LocalBinder();
 
+    // Lets playback stay on this service after leaving the car, see hasActivePlayer().
+    // Only accessed on the main thread.
+    @Nullable
+    private static PlayerServiceForAuto runningInstance;
+
+    /**
+     * @return whether this service holds a player with a queue, even paused. After leaving the
+     * car such a player keeps serving the phone until it is closed, so that the phone never
+     * ends up with two players.
+     */
+    public static boolean hasActivePlayer() {
+        final PlayerServiceForAuto service = runningInstance;
+        return service != null && service.player != null
+                && service.player.getPlayQueue() != null;
+    }
+
+    /** Pauses the player, if any, e.g. when the phone leaves the car. */
+    public static void pausePlayer() {
+        final PlayerServiceForAuto service = runningInstance;
+        if (service != null && service.player != null) {
+            service.player.pause();
+        }
+    }
+
     @Override
     public Service getInstance() {
         return this;
@@ -93,14 +118,17 @@ public final class PlayerServiceForAuto extends MediaBrowserServiceCompat implem
         if (DEBUG) {
             Log.d(TAG, "onCreate() called");
         }
+        runningInstance = this;
         assureCorrectAppLanguage(this);
         windowManager = ContextCompat.getSystemService(this, WindowManager.class);
 
         ThemeHelper.setTheme(this);
-        createView();
         mediaBrowserImpl = new MediaBrowserImpl(this, this::notifyChildrenChanged);
 
         // see https://developer.android.com/training/cars/media#browser_workflow
+        // This is the only connector of the session: the player's MediaSessionManager reuses
+        // it (see getMediaSessionConnector()), since a second connector would overwrite the
+        // playback state published by this one.
         mediaSession = new MediaSessionCompat(this, "MediaSessionPlayerServ");
         setSessionToken(mediaSession.getSessionToken());
         sessionConnector = new MediaSessionConnector(mediaSession);
@@ -108,8 +136,8 @@ public final class PlayerServiceForAuto extends MediaBrowserServiceCompat implem
 
         mediaBrowserPlaybackPreparer = new MediaBrowserPlaybackPreparer(
                 this,
-                sessionConnector::setCustomErrorMessage,
-                () -> sessionConnector.setCustomErrorMessage(null),
+                this::setMediaSessionError,
+                () -> setMediaSessionError(null, 0),
                 (playWhenReady) -> {
                     if (player != null) {
                         player.onPrepare();
@@ -117,6 +145,21 @@ public final class PlayerServiceForAuto extends MediaBrowserServiceCompat implem
                 }
         );
         sessionConnector.setPlaybackPreparer(mediaBrowserPlaybackPreparer);
+
+        // after the session, which the player attaches to instead of creating its own
+        createView();
+    }
+
+    private void setMediaSessionError(@Nullable final String message, final int errorCode) {
+        sessionConnector.setCustomErrorMessage(message, errorCode);
+        if (message != null && (player == null || player.getMediaSessionManager() == null)) {
+            // Without a player the connector only publishes STATE_NONE: show the error here
+            mediaSession.setPlaybackState(new PlaybackStateCompat.Builder()
+                    .setState(PlaybackStateCompat.STATE_ERROR, 0, 0)
+                    .setErrorMessage(errorCode, message)
+                    .setActions(PlaybackStateCompat.ACTION_PLAY_FROM_MEDIA_ID)
+                    .build());
+        }
     }
 
     private void createView() {
@@ -144,16 +187,17 @@ public final class PlayerServiceForAuto extends MediaBrowserServiceCompat implem
             return START_NOT_STICKY;
         }
         if (Intent.ACTION_MEDIA_BUTTON.equals(intent.getAction())
-                && player.getPlayQueue() == null) {
-            // Player is not working, no need to process media button's action
+                && (player == null || player.getPlayQueue() == null)) {
+            // Nothing to play. MediaButtonReceiver starts this service with
+            // startForegroundService(), so it must still post a notification before stopping,
+            // otherwise Android reports the app as not responding.
+            NotificationUtil.getInstance().startForegroundWithDummyNotification(this);
+            stopService();
             return START_NOT_STICKY;
         }
         // null check
         if (player == null) {
-            final PlayerBinding binding = PlayerBinding.inflate(LayoutInflater.from(this));
-
-            player = new Player(this);
-            player.setupFromView(binding);
+            createView();
         }
 
         if (Intent.ACTION_MEDIA_BUTTON.equals(intent.getAction())
@@ -211,6 +255,9 @@ public final class PlayerServiceForAuto extends MediaBrowserServiceCompat implem
             Log.d(TAG, "destroy() called");
         }
         super.onDestroy();
+        if (runningInstance == this) {
+            runningInstance = null;
+        }
 
         cleanup();
 
@@ -321,12 +368,10 @@ public final class PlayerServiceForAuto extends MediaBrowserServiceCompat implem
         return mediaSession;
     }
 
-    /**
-     * @return the media browser playback preparer for Android Auto compatibility
-     */
     @NonNull
-    public MediaBrowserPlaybackPreparer getMediaBrowserPlaybackPreparer() {
-        return mediaBrowserPlaybackPreparer;
+    @Override
+    public MediaSessionConnector getMediaSessionConnector() {
+        return sessionConnector;
     }
 
     //endregion

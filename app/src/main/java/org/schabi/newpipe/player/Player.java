@@ -378,7 +378,7 @@ public final class Player {
         playerMediaSession = new PlayerMediaSession(this, simpleExoPlayer);
         mediaSessionManager = new MediaSessionManager(context, simpleExoPlayer,
                 playerMediaSession, service.getMediaSession(),
-                service.getMediaBrowserPlaybackPreparer());
+                service.getMediaSessionConnector());
     }
 
     private void initListeners() {
