@@ -18,6 +18,7 @@ import androidx.preference.PreferenceManager;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.analytics.AnalyticsListener;
 import org.schabi.newpipe.R;
+import org.schabi.newpipe.qpipepipe.LastPlayback;
 
 public class AudioReactor implements AudioManager.OnAudioFocusChangeListener, AnalyticsListener {
 
@@ -116,6 +117,9 @@ public class AudioReactor implements AudioManager.OnAudioFocusChangeListener, An
 
     private void onAudioFocusLoss() {
         Log.d(TAG, "onAudioFocusLoss() called");
+        if (player.getPlayWhenReady()) {
+            LastPlayback.onPausedByAudioFocusLoss();
+        }
         player.pause();
     }
 

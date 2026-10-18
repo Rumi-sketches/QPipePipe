@@ -19,6 +19,7 @@ import org.schabi.newpipe.player.PlayerBinderInterface;
 import org.schabi.newpipe.player.PlayerIntentConstants;
 import org.schabi.newpipe.player.PlayerService;
 import org.schabi.newpipe.player.PlayerServiceForAuto;
+import org.schabi.newpipe.qpipepipe.LastPlayback;
 
 /**
  * Tracks whether the phone is connected to a car, so that playback is routed to the player
@@ -125,8 +126,9 @@ public final class CarConnectionMonitor {
         }
         // the queue records the position only on demand
         player.setRecovery();
+        // Android Auto taking the audio already paused it: LastPlayback knows if it was playing
         return NavigationHelper.getPlayerIntent(context, serviceClass, player.getPlayQueue(),
-                        false, player.getPlayWhenReady())
+                        false, player.getPlayWhenReady() || LastPlayback.wasPlaying(context))
                 .putExtra(PlayerIntentConstants.PLAYER_TYPE,
                         PlayerService.PlayerType.AUDIO.ordinal());
     }

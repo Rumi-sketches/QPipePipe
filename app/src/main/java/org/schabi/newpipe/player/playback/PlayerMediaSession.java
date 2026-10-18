@@ -10,6 +10,7 @@ import org.schabi.newpipe.player.PlayerServiceForAuto;
 import org.schabi.newpipe.player.RepeatMode;
 import org.schabi.newpipe.player.mediaitem.PlayerMediaItem;
 import org.schabi.newpipe.player.mediasession.MediaSessionCallback;
+import org.schabi.newpipe.qpipepipe.LastPlayback;
 
 public class PlayerMediaSession implements MediaSessionCallback {
     public final Player player;
@@ -95,7 +96,7 @@ public class PlayerMediaSession implements MediaSessionCallback {
     public void play() {
         if (player.service instanceof PlayerServiceForAuto
                 && ((PlayerServiceForAuto) player.service).takeCarAutoPlay()
-                && !player.getPlayWhenReady()) {
+                && !player.getPlayWhenReady() && !LastPlayback.wasPlaying(player.getContext())) {
             // Android Auto resuming by itself on connecting: a paused video waits for the user
             return;
         }

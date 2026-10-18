@@ -3,6 +3,7 @@ package org.schabi.newpipe.qpipepipe;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.KeyEvent;
 
@@ -53,6 +54,8 @@ public final class LastPlayback {
     private static final String PREFS_NAME = "last_playback";
     private static final String KEY_PLAYING = "playing";
     private static final long SAVE_DELAY_MILLIS = 1000;
+    // Android Auto takes the audio as soon as it connects, seconds before the app notices the car
+    private static final long CAR_FOCUS_PAUSE_MILLIS = 10000;
     private static final Scheduler WRITES = Schedulers.from(Executors.newSingleThreadExecutor());
 
     @Nullable
@@ -62,6 +65,8 @@ public final class LastPlayback {
     /** The queue the player started last, the only one whose play/pause is recorded. */
     @NonNull
     private static WeakReference<PlayQueue> startedQueue = new WeakReference<>(null);
+    /** When another app taking the audio paused the playing queue, or 0. */
+    private static long focusPauseAt = 0;
     /** The queue whose last video ended, until the user changes it. */
     @NonNull
     private static WeakReference<PlayQueue> finishedQueue = new WeakReference<>(null);
@@ -121,12 +126,25 @@ public final class LastPlayback {
         if (queue == null || queue != startedQueue.get()) {
             return;
         }
+        if (playing) {
+            focusPauseAt = 0;
+        }
         prefsOf(context).edit().putBoolean(KEY_PLAYING, playing).apply();
     }
 
-    /** @return whether the queue to resume was playing when the app last saw it */
+    /** Called when another app taking the audio pauses a playing player. */
+    @MainThread
+    public static void onPausedByAudioFocusLoss() {
+        focusPauseAt = SystemClock.elapsedRealtime();
+    }
+
+    /**
+     * @return whether the queue to resume was playing when the app last saw it, as the car sees
+     * it on connecting: the pause caused by Android Auto taking the audio does not count
+     */
     public static boolean wasPlaying(@NonNull final Context context) {
-        return prefsOf(context).getBoolean(KEY_PLAYING, false);
+        return prefsOf(context).getBoolean(KEY_PLAYING, false) || (focusPauseAt != 0
+                && SystemClock.elapsedRealtime() - focusPauseAt < CAR_FOCUS_PAUSE_MILLIS);
     }
 
     /** @return whether there is a queue to resume, without reading it */
