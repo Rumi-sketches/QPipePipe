@@ -199,11 +199,11 @@ Upstream files touched only to plug the layer in: one entry in
 go in this screen, not in the upstream screens. Preference keys predate the
 screen and must not be renamed, or users lose their choices.
 
-Fork strings are translated in `res/values-*/strings_qpipepipe.xml`, one file
-per locale that has an upstream `strings.xml` with content (87). They are not
-on Weblate: when a fork string is added or changed, translate it in every one
-of those files, keeping the plural quantities of the upstream file of that
-locale. `qpipepipe_update_log` and `qpipepipe_settings_title` stay English
+Fork strings are translated in `res/values-*/strings_qpipepipe.xml` and
+`strings_qpipepipe_selection.xml`, one file each per locale that has an
+upstream `strings.xml` with content (87). They are not on Weblate: when a fork
+string is added or changed, translate it in every one of those files, keeping
+the plural quantities of the upstream file of that locale. `qpipepipe_update_log` and `qpipepipe_settings_title` stay English
 only.
 
 ## Fork patches
