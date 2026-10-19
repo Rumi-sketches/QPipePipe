@@ -510,8 +510,10 @@ playlist and tap Undo within 4 seconds: the local playlist is back to its size.
 ### Playback resumes after the OS killed the app
 
 Files: `qpipepipe/LastPlayback`, `PlayerStartController.initPlayback`,
-`PlayerPlaybackStateController.onCompleted`, `PlayerService` and
-`PlayerServiceForAuto` (`onStartCommand`, the playback preparer's `onPrepare`),
+`PlayerPlaybackStateController` (`onCompleted`, `onPlayWhenReadyChanged`),
+`Player.destroy`, `PlayerService` and `PlayerServiceForAuto` (`onStartCommand`,
+`onGetRoot`, the playback preparer's `onPrepare`), `playback/PlayerMediaSession.play`,
+`helper/AudioReactor.onAudioFocusLoss`, `util/CarConnectionMonitor`,
 `mediabrowser/MediaBrowserImpl` (`onGetRoot`, `ID_RESUME`),
 `MediaBrowserPlaybackPreparer` and `AndroidManifest.xml`.
 
@@ -524,11 +526,13 @@ The fork saves the queue the player starts to `files/last_playback.ser`, and
 saves it again whenever the queue changes, wherever it plays: phone or car, so
 the last video started anywhere is the one that comes back. When the last video
 of a queue ends, the file is deleted, so a video finished at home does not
-come back in the car. With nothing loaded:
+come back in the car. Whether the queue was playing or paused is kept too, in
+the `last_playback` preferences. With nothing loaded:
 
 - play from Android Auto or the system media controls (`onPrepare` of the
   playback preparer) starts the saved queue in background, from the saved
-  position; with no saved queue the car shows "No videos";
+  position; with no saved queue nothing happens, with no error, and the car
+  stays on its lists;
 - the play button of headphones or car (`MEDIA_BUTTON`, key down of play,
   play/pause or headset hook) does the same. For Android to deliver it, the
   manifest keeps only `util/MediaButtonReceiver`: upstream also declared
@@ -541,13 +545,45 @@ come back in the car. With nothing loaded:
 
 Opening the app itself still starts from scratch.
 
-Check: play a local playlist from its second video, pause, then
-`adb shell am kill <app id>` with the app in background (or `am force-stop`
-after moving it to the background). With the Desktop Head Unit connected,
-press play in the car: the same video resumes, and Next goes to the third.
-Let a single video end, kill the app again and press play: the car shows
-"No videos". Without the car, `adb shell cmd media_session dispatch play`
-after the kill resumes the queue too.
+When a car connects (the first `onGetRoot` without `EXTRA_RECENT` since the
+car last disconnected), Android Auto with its autoplay setting on sends play by
+itself twice: right after asking for the root, and again a few seconds later,
+once the session has something to play. The car must resume on its own only
+what was playing:
+
+- the car's player loads the saved queue as the car connects: playing if it
+  was playing, otherwise paused, so the car shows cover and controls and waits
+  for the user. With nothing saved it loads nothing;
+- `PlayerServiceForAuto.takeCarAutoPlay` recognises the two automatic plays,
+  which `PlayerMediaSession.play` ignores while the player is paused and was
+  not playing: the first counts only within 2 seconds of connecting, the second
+  within 15. Without the first one (autoplay off) none counts, so a play the
+  user presses always plays;
+- if the phone's player is running, `CarConnectionMonitor` hands its queue,
+  position and play state over to the car's player instead of only stopping
+  it;
+- Android Auto takes the audio focus as it connects, a couple of seconds
+  before the app notices the car, and that pauses the phone's player.
+  `AudioReactor` records the pause, and for 10 seconds `LastPlayback.wasPlaying`
+  still answers true.
+
+Check, with the Desktop Head Unit and the app's media source last used in the
+car:
+
+- play a video on the phone and connect: it goes on in the car from the same
+  point;
+- pause it and connect: the car shows cover and controls, paused, and plays
+  only when play is pressed. The same after `adb shell am kill <app id>` with
+  the app in background (or `am force-stop` after moving it to the
+  background);
+- play a local playlist from its second video, pause, kill the app and
+  connect: play resumes the same video, and Next goes to the third;
+- let a single video end, kill the app and connect: nothing plays and no
+  message appears; play does nothing, and opening the app in the car shows its
+  lists.
+
+Without the car, `adb shell cmd media_session dispatch play` after the kill
+resumes the queue too.
 
 ## Upstream services
 
