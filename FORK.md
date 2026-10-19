@@ -507,6 +507,24 @@ playlist, then enqueue a video: the entry reads "From: <name>" and the new
 playlist grows by one. Enqueue a whole YouTube playlist on a queue from a local
 playlist and tap Undo within 4 seconds: the local playlist is back to its size.
 
+### Debug builds keep every error trace
+
+Files: `DebugErrorLog` (new), `ErrorUtil` (`openActivity`, `showSnackbar`,
+`createNotification`), `ErrorPanelHelper.showError`.
+
+Debug builds append each reported error (time, version and debug number,
+action, service, request, message, all stack traces) to
+`Android/data/<app id>/files/errors/errors-YYYY-MM-DD.log`. Nothing rotates or
+deletes the files; only uninstalling the app or clearing its data does.
+Release builds skip it (`BuildConfig.DEBUG`). An error shown in several ways
+(snackbar, then the error screen) is written once. The point is to keep traces
+when the error notification never appears, for example when the debug app has
+no notification permission.
+
+Check: in the debug app open a video that does not exist, then
+`adb pull /sdcard/Android/data/<app id>/files/errors/` holds an entry with the
+url and the trace.
+
 ## Upstream services
 
 The extractor falls back to `api.pipepipe.dev` to decode YouTube signatures
