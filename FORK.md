@@ -510,7 +510,10 @@ playlist and tap Undo within 4 seconds: the local playlist is back to its size.
 ### Debug builds keep every error trace
 
 Files: `DebugErrorLog` (new), `ErrorUtil` (`openActivity`, `showSnackbar`,
-`createNotification`), `ErrorPanelHelper.showError`.
+`createNotification`), `ErrorPanelHelper.showError`; `PlayerDebugTrace` (new),
+called from `Player` (`reloadPlayQueueManager`, `onPositionDiscontinuity`),
+`PlayerErrorHandler.onPlayerError` and
+`PlayerTransportController.onPlaybackSynchronize`.
 
 Debug builds append each reported error (time, version and debug number,
 action, service, request, message, all stack traces) to
@@ -521,9 +524,19 @@ Release builds skip it (`BuildConfig.DEBUG`). An error shown in several ways
 when the error notification never appears, for example when the debug app has
 no notification permission.
 
+The same file also gets playback events that move the position without an
+error on screen (`PlayerDebugTrace`, entries starting with `Playback:`): every
+player error, silent or not, with the position it happened at; every reload of
+the current video (`Player.reloadPlayQueueManager`); every jump back of 30 s or
+more inside a video; a video starting over after a reload because no recovery
+position was saved. Each entry has the video, queue position, playback
+position, recovery position, player state and the calling code path, so a video
+that starts over can be traced to its cause. Release builds skip all of it.
+
 Check: in the debug app open a video that does not exist, then
 `adb pull /sdcard/Android/data/<app id>/files/errors/` holds an entry with the
-url and the trace.
+url and the trace. Play a video, seek past 1:00 and back to 0:10: the file holds
+a `Playback: jump back` entry.
 
 ## Upstream services
 

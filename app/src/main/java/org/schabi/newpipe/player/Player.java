@@ -498,6 +498,7 @@ public final class Player {
     }
 
     void reloadPlayQueueManager() {
+        PlayerDebugTrace.onReload(this);
         if (playQueueManager != null) {
             playQueueManager.dispose();
         }
@@ -965,6 +966,9 @@ public final class Player {
                     + "newPositionMs = [" + newPosition.positionMs + "], "
                     + "discontinuityReason = [" + discontinuityReason + "]");
         }
+        PlayerDebugTrace.onPositionDiscontinuity(this, oldPosition.mediaItemIndex,
+                oldPosition.positionMs, newPosition.mediaItemIndex, newPosition.positionMs,
+                discontinuityReason);
         if (playQueue == null) {
             return;
         }

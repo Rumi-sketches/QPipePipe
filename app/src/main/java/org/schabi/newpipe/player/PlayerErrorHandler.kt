@@ -74,6 +74,8 @@ class PlayerErrorHandler(private val player: Player) {
      */
     fun onPlayerError(error: PlaybackException) {
         Log.e(Player.TAG, "ExoPlayer - onPlayerError() called with:", error)
+        val positionMs = player.simpleExoPlayer.currentPosition
+        val durationMs = player.simpleExoPlayer.duration
 
         player.saveStreamProgressState()
         var isCatchableException = false
@@ -171,6 +173,8 @@ class PlayerErrorHandler(private val player: Player) {
                 else -> player.onPlaybackShutdown()
             }
         }
+
+        PlayerDebugTrace.onPlayerError(player, error, positionMs, durationMs, isCatchableException)
 
         val playerError = toPlayerError(error)
         if (!isCatchableException) {
