@@ -93,6 +93,7 @@ class ErrorPanelHelper(
             return
         }
 
+        DebugErrorLog.record(context, errorInfo)
         ensureDefaultVisibility()
 
         if (errorInfo.throwable is ReCaptchaException) {
