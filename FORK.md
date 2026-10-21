@@ -319,6 +319,24 @@ Check: play a playlist, go to the second video, press Home, close the player
 (`am broadcast -a <app id>.player.MainPlayer.CLOSE`), `am kill <app id>`, reopen
 the app: the second video plays and Previous/Next move through the playlist.
 
+### A reload never restarts the video
+
+File: `Player` (`setRecovery`, `recoveryPositionOf`, `reloadPlayQueueManager`).
+
+The player rebuilds the current source after a network error, a track or
+quality change, or when the video track is switched on or off, and resumes from
+the recovery position saved in the play queue. Upstream saves it only in some
+callers (track changes and the video toggle do not), and drops it when the
+duration is unknown (`C.TIME_UNSET`, e.g. a second error while the source is
+still being rebuilt): the video then started over from 0. Now
+`reloadPlayQueueManager` saves the position itself for every caller, except for
+live streams, which resume at the live edge, and an unknown duration no longer
+caps the position.
+
+Check: `PlayerRecoveryPositionTest`. In the debug app the playback log
+(see "Debug builds keep every error trace") shows each reload with its
+recovery position.
+
 ### Bug reports go to QPipePipe
 
 Files: `ErrorActivity` (`ERROR_EMAIL_ADDRESS`, `ERROR_EMAIL_SUBJECT`,
@@ -546,6 +564,116 @@ url and the trace. Play a video, seek past 1:00 and back to 0:10: the file holds
 a `Playback: jump back` entry. Turn off Wi-Fi and data while a video plays: once
 the buffer runs out the file gets one reload and one network error per minute,
 with the counts of the repeats skipped in between.
+
+### One media session per player
+
+File: `Player.setupMediaSession`.
+
+Starting a queue creates the player's media session twice: once in
+`initPlayer()` and again in `PlayerStartController.initPlayback` after the
+queue is set. Upstream dropped the first `MediaSessionManager` without
+disposing it, so on the phone (`PlayerService`) every queue left one more
+active `MediaSessionCompat` with no player behind it, which could take the
+media buttons of headphones and car. The fork disposes the previous manager
+before creating the next one.
+
+Check: play three different videos in background, then
+`adb shell dumpsys media_session`: the app has one `MediaSessionManager`
+session, not one per video.
+
+### Numbered debug builds
+
+Files: `app/qpipepipe.gradle`, `qpipepipe/DebugBuildNotes`, `MainActivity`
+(one call after the announcements), `tools/qcheck/qcheck.py`.
+
+A debug build installed on the user's phone gets a sequential number and says
+what to test with it. `app/src/debug/assets/debug_build.txt`, which git
+ignores, holds the number on its first line and the notes below it. With the
+file present, the app is named "QPipePipe Debug <n>", the APK
+`QPipePipe_<version>-d<n>-<abi>-debug.apk`, and the first start of that
+number shows the notes in a dialog. Without the file nothing changes. qcheck
+marks the notes as seen, like What's New.
+
+Check: write `5` and a line of notes to the file, build and install the debug
+APK: the launcher shows "QPipePipe Debug 5" and the dialog appears once.
+
+### Playback resumes after the OS killed the app
+
+Files: `qpipepipe/LastPlayback`, `PlayerStartController.initPlayback`,
+`PlayerPlaybackStateController` (`onCompleted`, `onPlayWhenReadyChanged`),
+`Player.destroy`, `PlayerService` and `PlayerServiceForAuto` (`onStartCommand`,
+`onGetRoot`, the playback preparer's `onPrepare`), `playback/PlayerMediaSession.play`,
+`helper/AudioReactor.onAudioFocusLoss`, `util/CarConnectionMonitor`,
+`mediabrowser/MediaBrowserImpl` (`onGetRoot`, `ID_RESUME`),
+`MediaBrowserPlaybackPreparer` and `AndroidManifest.xml`.
+
+Upstream keeps the play queue only in memory. Once the OS killed the app in
+background, pressing play in the car, on the system media controls or on
+headphones did nothing, and Android Auto showed "Could not load your
+selection" after a timeout.
+
+The fork saves the queue the player starts to `files/last_playback.ser`, and
+saves it again whenever the queue changes, wherever it plays: phone or car, so
+the last video started anywhere is the one that comes back. When the last video
+of a queue ends, the file is deleted, so a video finished at home does not
+come back in the car. Whether the queue was playing or paused is kept too, in
+the `last_playback` preferences. With nothing loaded:
+
+- play from Android Auto or the system media controls (`onPrepare` of the
+  playback preparer) starts the saved queue in background, from the saved
+  position; with no saved queue nothing happens, with no error, and the car
+  stays on its lists;
+- the play button of headphones or car (`MEDIA_BUTTON`, key down of play,
+  play/pause or headset hook) does the same. For Android to deliver it, the
+  manifest keeps only `util/MediaButtonReceiver`: upstream also declared
+  androidx's `MediaButtonReceiver`, and with two receivers `MediaSessionCompat`
+  registers none, so Android had nowhere to send the button once the session
+  was gone;
+- `onGetRoot` with `EXTRA_RECENT` returns a root whose only child is the saved
+  queue's current video, which the system media controls offer to resume, or
+  null when there is none.
+
+Opening the app itself still starts from scratch.
+
+When a car connects (the first `onGetRoot` without `EXTRA_RECENT` since the
+car last disconnected), Android Auto with its autoplay setting on sends play by
+itself twice: right after asking for the root, and again a few seconds later,
+once the session has something to play. The car must resume on its own only
+what was playing:
+
+- the car's player loads the saved queue as the car connects: playing if it
+  was playing, otherwise paused, so the car shows cover and controls and waits
+  for the user. With nothing saved it loads nothing;
+- `PlayerServiceForAuto.takeCarAutoPlay` recognises the two automatic plays,
+  which `PlayerMediaSession.play` ignores while the player is paused and was
+  not playing: the first counts only within 2 seconds of connecting, the second
+  within 15. Without the first one (autoplay off) none counts, so a play the
+  user presses always plays;
+- if the phone's player is running, `CarConnectionMonitor` hands its queue,
+  position and play state over to the car's player instead of only stopping
+  it;
+- Android Auto takes the audio focus as it connects, a couple of seconds
+  before the app notices the car, and that pauses the phone's player.
+  `AudioReactor` records the pause, and for 10 seconds `LastPlayback.wasPlaying`
+  still answers true.
+
+Check, with the Desktop Head Unit and the app's media source last used in the
+car:
+
+- play a video on the phone and connect: it goes on in the car from the same
+  point;
+- pause it and connect: the car shows cover and controls, paused, and plays
+  only when play is pressed. The same after `adb shell am kill <app id>` with
+  the app in background (or `am force-stop` after moving it to the
+  background);
+- play a local playlist from its second video, pause, kill the app and
+  connect: play resumes the same video, and Next goes to the third;
+- let a single video end, kill the app and connect: nothing plays and no
+  message appears; play does nothing, and opening the app in the car shows its
+  lists.
+
+Without the car, `adb shell cmd media_session dispatch play` after the kill
+resumes the queue too.
 
 ## Upstream services
 
