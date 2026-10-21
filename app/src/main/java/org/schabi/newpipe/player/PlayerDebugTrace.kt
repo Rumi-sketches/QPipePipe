@@ -1,5 +1,6 @@
 package org.schabi.newpipe.player
 
+import android.content.Context
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.Player.DISCONTINUITY_REASON_AUTO_TRANSITION
 import com.google.android.exoplayer2.Player.DISCONTINUITY_REASON_INTERNAL
@@ -99,6 +100,28 @@ object PlayerDebugTrace {
             player.simpleExoPlayer.currentPosition, player.simpleExoPlayer.duration
         )
     }
+
+    /**
+     * The video screen takes the player's queue in place of the one it was showing (it does on
+     * every connection to the player): what the user plays from the screen afterwards is the
+     * player's queue.
+     */
+    @JvmStatic
+    fun onScreenQueueReplaced(context: Context, shown: PlayQueue?, playerQueue: PlayQueue) {
+        // The same videos at another index: the player has moved on while the screen was away
+        if (!BuildConfig.DEBUG || shown == null
+            || shown.streams.map { it.url } == playerQueue.streams.map { it.url }
+        ) {
+            return
+        }
+        DebugErrorLog.recordPlayback(
+            context, "video screen queue replaced by the player's",
+            listOf("Screen: " + describe(shown), "Player: " + describe(playerQueue))
+        )
+    }
+
+    private fun describe(queue: PlayQueue): String =
+        "${queue.index + 1}/${queue.size()} " + (queue.item?.let { "${it.title} (${it.url})" } ?: "none")
 
     private fun record(player: Player, event: String, positionMs: Long, durationMs: Long) {
         val playQueue = player.playQueue

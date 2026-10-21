@@ -512,8 +512,9 @@ playlist and tap Undo within 4 seconds: the local playlist is back to its size.
 Files: `DebugErrorLog` and `RepeatFilter` (new), `ErrorUtil` (`openActivity`, `showSnackbar`,
 `createNotification`), `ErrorPanelHelper.showError`; `PlayerDebugTrace` (new),
 called from `Player` (`reloadPlayQueueManager`, `onPositionDiscontinuity`),
-`PlayerErrorHandler.onPlayerError` and
-`PlayerTransportController.onPlaybackSynchronize`.
+`PlayerErrorHandler.onPlayerError`,
+`PlayerTransportController.onPlaybackSynchronize` and
+`VideoDetailFragment.onQueueUpdate`.
 
 Debug builds append each reported error (time, version and debug number,
 action, service, request, message, all stack traces) to
@@ -533,7 +534,9 @@ player error, silent or not, with the position it happened at; every reload of
 the current video (`Player.reloadPlayQueueManager`); every jump back of 30 s or
 more inside a video, except when a video that has ended starts again; the video
 that was already playing starting over after a reload because no recovery
-position was saved (a video just opened is not reported). Each entry has the video, queue position, playback
+position was saved (a video just opened is not reported); the video screen
+taking the player's queue in place of a different one it was showing, which
+is the queue its play buttons then start. Each entry has the video, queue position, playback
 position, recovery position, player state and the calling code path, so a video
 that starts over can be traced to its cause. Release builds skip all of it.
 
