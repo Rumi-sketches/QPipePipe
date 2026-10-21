@@ -31,7 +31,8 @@ PipePipe's settings:
   per direction. Off by default; turning it on switches those lists to list view.
 - **Queue protection.** When a queue is playing and you open another video, a
   dialog asks whether to play it now, enqueue it next or enqueue it at the end,
-  instead of replacing the queue. Off by default.
+  instead of replacing the queue. Play now starts it in the player you were
+  using (background, popup or main). Off by default.
 - **Tapping a video always plays it.** Playback starts when you open a video, even
   with Autoplay limited to Wi-Fi or turned off. Autoplay still controls automatic
   starts. On by default.

@@ -49,4 +49,32 @@ class DebugErrorLogTest {
             lines.drop(1)
         )
     }
+
+    @Test
+    fun playbackEntryHasDetailsAndCaller() {
+        val entry = DebugErrorLog.formatPlaybackEntry(
+            "reload of the current video",
+            listOf("Video: Title (https://www.youtube.com/watch?v=abc)", "Recovery: unset"),
+            listOf("a.B.c(B.kt:1)", "d.E.f(E.java:2)"),
+            time,
+            "5.4.0-q2 (1109024), debug 5"
+        )
+        val lines = entry.lines()
+
+        assertTrue(lines[0].matches(Regex("""===== 2026-10-19 17:42:13\.512 [+-]\d{4} =====""")))
+        assertEquals(
+            listOf(
+                "Build: 5.4.0-q2 (1109024), debug 5",
+                "Playback: reload of the current video",
+                "Video: Title (https://www.youtube.com/watch?v=abc)",
+                "Recovery: unset",
+                "--- caller ---",
+                "\tat a.B.c(B.kt:1)",
+                "\tat d.E.f(E.java:2)",
+                "",
+                ""
+            ),
+            lines.drop(1)
+        )
+    }
 }

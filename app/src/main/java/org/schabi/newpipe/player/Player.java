@@ -68,6 +68,7 @@ import org.schabi.newpipe.player.playqueue.PlayQueue;
 import org.schabi.newpipe.player.playqueue.PlayQueueAdapter;
 import org.schabi.newpipe.player.resolver.PlayerQualityResolver;
 import org.schabi.newpipe.player.resolver.SourceResolver;
+import org.schabi.newpipe.qpipepipe.LastPlayback;
 import org.schabi.newpipe.util.*;
 import org.schabi.newpipe.views.ExpandableSurfaceView;
 import android.widget.TextView;
@@ -375,6 +376,11 @@ public final class Player {
     }
 
     void setupMediaSession() {
+        // Called again once a queue is set: release the previous session, otherwise it stays
+        // active with no player behind it and can take the media buttons
+        if (mediaSessionManager != null) {
+            mediaSessionManager.dispose();
+        }
         playerMediaSession = new PlayerMediaSession(this, simpleExoPlayer);
         mediaSessionManager = new MediaSessionManager(context, simpleExoPlayer,
                 playerMediaSession, service.getMediaSession(),
@@ -457,6 +463,8 @@ public final class Player {
         // Close popup menus before destroying to prevent crash
         closeAllPopupMenus();
         
+        // A closed player is not playing anymore, whatever it was doing
+        LastPlayback.onPlayingChanged(context, playQueue, false);
         destroyPlayer();
         broadcastReceiverController.unregister();
         sponsorBlockController.destroy();
@@ -477,13 +485,22 @@ public final class Player {
         }
 
         final int queuePos = playQueue.getIndex();
-        final long windowPos = simpleExoPlayer.getCurrentPosition();
-        final long duration = simpleExoPlayer.getDuration();
-
-        final long newPos =  Math.max(0, Math.min(windowPos, duration));
-        if(newPos > 0) {
+        final long newPos = recoveryPositionOf(simpleExoPlayer.getCurrentPosition(),
+                simpleExoPlayer.getDuration());
+        if (newPos > 0) {
             setRecovery(queuePos, newPos);
         }
+    }
+
+    /**
+     * The position to resume from after a reload, or 0 when there is nothing to resume. The
+     * duration only caps the position when it is known: while a source is being rebuilt or has
+     * failed it is {@link com.google.android.exoplayer2.C#TIME_UNSET}, and capping by it would
+     * drop the position and restart the video from the beginning.
+     */
+    static long recoveryPositionOf(final long windowPos, final long duration) {
+        final long position = Math.max(0, windowPos);
+        return duration < 0 ? position : Math.min(position, duration);
     }
 
     private void setRecovery(final int queuePos, final long windowPos) {
@@ -498,6 +515,12 @@ public final class Player {
     }
 
     void reloadPlayQueueManager() {
+        // Every rebuild of the current source resumes where it was, whichever caller asked for it.
+        // A live stream resumes at its live edge instead.
+        if (!isCurrentStreamLive()) {
+            setRecovery();
+        }
+        PlayerDebugTrace.onReload(this);
         if (playQueueManager != null) {
             playQueueManager.dispose();
         }
@@ -978,6 +1001,9 @@ public final class Player {
                     + "newPositionMs = [" + newPosition.positionMs + "], "
                     + "discontinuityReason = [" + discontinuityReason + "]");
         }
+        PlayerDebugTrace.onPositionDiscontinuity(this, oldPosition.mediaItemIndex,
+                oldPosition.positionMs, newPosition.mediaItemIndex, newPosition.positionMs,
+                discontinuityReason);
         if (playQueue == null) {
             return;
         }

@@ -21,6 +21,7 @@ import org.schabi.newpipe.extractor.stream.StreamInfo;
 import org.schabi.newpipe.fragments.list.BaseListInfoFragment;
 import org.schabi.newpipe.info_list.ItemViewMode;
 import org.schabi.newpipe.ktx.ViewUtils;
+import org.schabi.newpipe.util.ExtractorHelper;
 import org.schabi.newpipe.util.RelatedItemInfo;
 
 import java.util.Queue;
@@ -96,7 +97,13 @@ public class RelatedItemsFragment extends BaseListInfoFragment<InfoItem, Related
 
     @Override
     protected Single<RelatedItemInfo> loadResult(final boolean forceLoad) {
-        return Single.fromCallable(() -> relatedItemInfo);
+        if (relatedItemInfo != null) {
+            return Single.just(relatedItemInfo);
+        }
+        // Recreated without its saved objects: MainActivity deletes the state files when Android
+        // destroys it, while the fragment state (service and url) survives
+        return Single.defer(() -> ExtractorHelper.getStreamInfo(serviceId, url, forceLoad))
+                .map(RelatedItemInfo::getInfo);
     }
 
     @Override
@@ -109,6 +116,7 @@ public class RelatedItemsFragment extends BaseListInfoFragment<InfoItem, Related
 
     @Override
     public void handleResult(@NonNull final RelatedItemInfo result) {
+        relatedItemInfo = result;
         super.handleResult(result);
 
         if (headerBinding != null) {
