@@ -540,6 +540,16 @@ public class MediaSourceManager {
         playlist.invalidate(currentIndex, removeMediaSourceHandler, this::loadImmediate);
     }
 
+    /**
+     * Whether the source of the current item has outlived its expiration timestamp, so its stream
+     * URLs may no longer be served (e.g. a video left paused for hours).
+     */
+    public boolean isCurrentSourceExpired() {
+        final ManagedMediaSource currentSource = playlist.get(playQueue.getIndex());
+        return currentSource instanceof LoadedMediaSource
+                && ((LoadedMediaSource) currentSource).isExpired();
+    }
+
     private void maybeClearLoaders() {
         if (DEBUG) {
             Log.d(TAG, "MediaSource - maybeClearLoaders() called.");

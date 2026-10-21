@@ -23,12 +23,15 @@ import com.google.android.exoplayer2.PlaybackException.ERROR_CODE_PARSING_MANIFE
 import com.google.android.exoplayer2.PlaybackException.ERROR_CODE_PARSING_MANIFEST_UNSUPPORTED
 import com.google.android.exoplayer2.PlaybackException.ERROR_CODE_TIMEOUT
 import com.google.android.exoplayer2.PlaybackException.ERROR_CODE_UNSPECIFIED
+import com.google.android.exoplayer2.upstream.HttpDataSource.InvalidResponseCodeException
 import org.schabi.newpipe.R
 import org.schabi.newpipe.error.ErrorInfo
 import org.schabi.newpipe.error.ErrorUtil
 import org.schabi.newpipe.error.UserAction
+import org.schabi.newpipe.extractor.InfoItem
 import org.schabi.newpipe.extractor.services.youtube.sabr.exception.SabrAttestationException
 import org.schabi.newpipe.player.datasource.SabrLogicException
+import org.schabi.newpipe.util.InfoCache
 import java.util.Locale
 
 /**
@@ -46,6 +49,11 @@ class PlayerErrorHandler(private val player: Player) {
     // Cooldown between automatic recoveries from a surface-released decoder-init failure, so a
     // genuinely broken surface can't loop recover->fail forever.
     private var lastSurfaceErrorRecoveryMs = 0L
+
+    // The queue item and time of the last recovery from a 403, so fresh URLs that are refused too
+    // stop playback instead of looping reload->403.
+    private var lastForbiddenItemUuid: String? = null
+    private var lastForbiddenRecoveryMs = 0L
 
     /**
      * Process exceptions produced by [com.google.android.exoplayer2.ExoPlayer].
@@ -113,26 +121,25 @@ class PlayerErrorHandler(private val player: Player) {
                 ERROR_CODE_IO_UNSPECIFIED -> {
                     val causeMessage = error.cause?.message
                     if (causeMessage != null && causeMessage.contains("Response code: 403")) {
-                        try {
-                            AlertDialog.Builder(player.getParentActivity())
-                                .setTitle(R.string.network_error)
-                                .setMessage(R.string.ip_blocked_summary)
-                                .setPositiveButton(R.string.ok) { _, _ ->
-                                    // Handle "Yes" click
-                                }
-                                .show()
-                        } catch (e: Exception) {
-                            // when there is no context, e.g. background playing
-                            e.printStackTrace()
-                        }
+                        showIpBlocked()
                         player.onPlaybackShutdown()
                     } else {
                         recoverFromNetworkError()
                     }
                 }
 
+                ERROR_CODE_IO_BAD_HTTP_STATUS -> if (!isForbidden(error)) {
+                    recoverFromNetworkError()
+                } else if (recoverFromForbidden()) {
+                    // Expected after a long pause or a network change: reload quietly, without
+                    // the error notification and without the detail page closing the player.
+                    isCatchableException = true
+                } else {
+                    showIpBlocked()
+                    player.onPlaybackShutdown()
+                }
+
                 ERROR_CODE_IO_INVALID_HTTP_CONTENT_TYPE,
-                ERROR_CODE_IO_BAD_HTTP_STATUS,
                 ERROR_CODE_TIMEOUT,
                 ERROR_CODE_IO_NETWORK_CONNECTION_FAILED,
                 ERROR_CODE_IO_NETWORK_CONNECTION_TIMEOUT,
@@ -188,6 +195,44 @@ class PlayerErrorHandler(private val player: Player) {
     private fun recoverFromNetworkError() {
         player.setRecovery()
         player.reloadPlayQueueManager()
+    }
+
+    /**
+     * YouTube answers 403 when the stream URLs are no longer valid for this client: they expired,
+     * or the network (and so the IP they are bound to) changed. Drop the cached stream info so the
+     * reload extracts fresh URLs instead of rebuilding the source from the same stale ones. A
+     * second 403 on the same item right after that means fresh URLs are refused too.
+     *
+     * @return whether a recovery was started
+     */
+    private fun recoverFromForbidden(): Boolean {
+        val item = player.currentItem ?: player.playQueue?.item
+        val now = System.currentTimeMillis()
+        if (item != null && item.uuid == lastForbiddenItemUuid
+            && now - lastForbiddenRecoveryMs < FORBIDDEN_RETRY_WINDOW_MS
+        ) {
+            return false
+        }
+        lastForbiddenItemUuid = item?.uuid
+        lastForbiddenRecoveryMs = now
+        if (item != null) {
+            InfoCache.getInstance().removeInfo(item.serviceId, item.url, InfoItem.InfoType.STREAM)
+        }
+        recoverFromNetworkError()
+        return true
+    }
+
+    private fun showIpBlocked() {
+        try {
+            AlertDialog.Builder(player.getParentActivity())
+                .setTitle(R.string.network_error)
+                .setMessage(R.string.ip_blocked_summary)
+                .setPositiveButton(R.string.ok) { _, _ -> }
+                .show()
+        } catch (e: Exception) {
+            // when there is no context, e.g. background playing
+            e.printStackTrace()
+        }
     }
 
     private fun containsTerminalSabrException(error: Throwable): Boolean {
@@ -298,5 +343,21 @@ class PlayerErrorHandler(private val player: Player) {
 
     companion object {
         private const val SURFACE_ERROR_RECOVERY_COOLDOWN_MS = 10_000L
+
+        // Fresh URLs fail within seconds of the reload; a 403 later than this is a new expiry.
+        private const val FORBIDDEN_RETRY_WINDOW_MS = 60_000L
+
+        /** Whether the server refused the media request with 403 Forbidden. */
+        @JvmStatic
+        fun isForbidden(error: Throwable): Boolean {
+            var current: Throwable? = error
+            while (current != null) {
+                if (current is InvalidResponseCodeException && current.responseCode == 403) {
+                    return true
+                }
+                current = current.cause
+            }
+            return false
+        }
     }
 }

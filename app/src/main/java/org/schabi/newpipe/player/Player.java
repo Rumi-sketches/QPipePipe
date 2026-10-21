@@ -531,6 +531,18 @@ public final class Player {
     }
 
     /**
+     * Rebuilds the current source at the current position if it has expired while it sat
+     * prepared, e.g. a video left paused for hours. Its stream URLs are past their lifetime (and
+     * bound to the IP they were extracted from), so resuming on them would fail with a 403.
+     */
+    void renewExpiredSource() {
+        if (playQueueManager == null || !playQueueManager.isCurrentSourceExpired()) {
+            return;
+        }
+        reloadPlayQueueManager();
+    }
+
+    /**
      * Whether the source of a live stream was released because it is not actually playing.
      *
      * <p>A live stream is stateless: while it is paused there is no position worth preserving, so
