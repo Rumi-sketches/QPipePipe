@@ -59,7 +59,10 @@ object PlayerDebugTrace {
         )
     }
 
-    /** A jump back of at least [REWIND_THRESHOLD_MS] inside the same video. */
+    /**
+     * A jump back of at least [REWIND_THRESHOLD_MS] inside the same video. A video that has ended
+     * goes back to its start on replay: not worth an entry.
+     */
     @JvmStatic
     fun onPositionDiscontinuity(
         player: Player,
@@ -71,6 +74,7 @@ object PlayerDebugTrace {
     ) {
         if (!BuildConfig.DEBUG || oldIndex != newIndex
             || oldPositionMs - newPositionMs < REWIND_THRESHOLD_MS
+            || player.currentState.isCompleted
         ) {
             return
         }
@@ -81,7 +85,10 @@ object PlayerDebugTrace {
         )
     }
 
-    /** After a reload the current video starts from its default position (0 for a video). */
+    /**
+     * After a reload the video that was already playing starts again from its default position (0
+     * for a video). A video just opened starts there too: callers skip that case.
+     */
     @JvmStatic
     fun onStartFromDefault(player: Player) {
         if (!BuildConfig.DEBUG || player.exoPlayerIsNull()) {

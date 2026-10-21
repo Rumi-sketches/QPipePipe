@@ -276,7 +276,7 @@ class PlayerTransportController(private val player: Player) {
                 )
                 playQueue.unsetRecovery(currentPlayQueueIndex)
             } else {
-                if (wasBlocked) {
+                if (wasBlocked && currentItem?.url == item.url) {
                     PlayerDebugTrace.onStartFromDefault(player)
                 }
                 player.simpleExoPlayer.seekToDefaultPosition(currentPlayQueueIndex)

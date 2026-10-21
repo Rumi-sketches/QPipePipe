@@ -509,7 +509,7 @@ playlist and tap Undo within 4 seconds: the local playlist is back to its size.
 
 ### Debug builds keep every error trace
 
-Files: `DebugErrorLog` (new), `ErrorUtil` (`openActivity`, `showSnackbar`,
+Files: `DebugErrorLog` and `RepeatFilter` (new), `ErrorUtil` (`openActivity`, `showSnackbar`,
 `createNotification`), `ErrorPanelHelper.showError`; `PlayerDebugTrace` (new),
 called from `Player` (`reloadPlayQueueManager`, `onPositionDiscontinuity`),
 `PlayerErrorHandler.onPlayerError` and
@@ -520,7 +520,10 @@ action, service, request, message, all stack traces) to
 `Android/data/<app id>/files/errors/errors-YYYY-MM-DD.log`. Nothing rotates or
 deletes the files; only uninstalling the app or clearing its data does.
 Release builds skip it (`BuildConfig.DEBUG`). An error shown in several ways
-(snackbar, then the error screen) is written once. The point is to keep traces
+(snackbar, then the error screen) is written once. An entry identical to one
+written less than a minute earlier (a failure that loops, e.g. a reload every
+3 s while offline) is not written again but counted, and the count goes out
+with the next entry (`Repeated N more times until <time>: <entry>`). The point is to keep traces
 when the error notification never appears, for example when the debug app has
 no notification permission.
 
@@ -528,15 +531,18 @@ The same file also gets playback events that move the position without an
 error on screen (`PlayerDebugTrace`, entries starting with `Playback:`): every
 player error, silent or not, with the position it happened at; every reload of
 the current video (`Player.reloadPlayQueueManager`); every jump back of 30 s or
-more inside a video; a video starting over after a reload because no recovery
-position was saved. Each entry has the video, queue position, playback
+more inside a video, except when a video that has ended starts again; the video
+that was already playing starting over after a reload because no recovery
+position was saved (a video just opened is not reported). Each entry has the video, queue position, playback
 position, recovery position, player state and the calling code path, so a video
 that starts over can be traced to its cause. Release builds skip all of it.
 
 Check: in the debug app open a video that does not exist, then
 `adb pull /sdcard/Android/data/<app id>/files/errors/` holds an entry with the
 url and the trace. Play a video, seek past 1:00 and back to 0:10: the file holds
-a `Playback: jump back` entry.
+a `Playback: jump back` entry. Turn off Wi-Fi and data while a video plays: once
+the buffer runs out the file gets one reload and one network error per minute,
+with the counts of the repeats skipped in between.
 
 ## Upstream services
 
