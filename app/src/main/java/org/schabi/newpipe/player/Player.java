@@ -485,13 +485,22 @@ public final class Player {
         }
 
         final int queuePos = playQueue.getIndex();
-        final long windowPos = simpleExoPlayer.getCurrentPosition();
-        final long duration = simpleExoPlayer.getDuration();
-
-        final long newPos =  Math.max(0, Math.min(windowPos, duration));
-        if(newPos > 0) {
+        final long newPos = recoveryPositionOf(simpleExoPlayer.getCurrentPosition(),
+                simpleExoPlayer.getDuration());
+        if (newPos > 0) {
             setRecovery(queuePos, newPos);
         }
+    }
+
+    /**
+     * The position to resume from after a reload, or 0 when there is nothing to resume. The
+     * duration only caps the position when it is known: while a source is being rebuilt or has
+     * failed it is {@link com.google.android.exoplayer2.C#TIME_UNSET}, and capping by it would
+     * drop the position and restart the video from the beginning.
+     */
+    static long recoveryPositionOf(final long windowPos, final long duration) {
+        final long position = Math.max(0, windowPos);
+        return duration < 0 ? position : Math.min(position, duration);
     }
 
     private void setRecovery(final int queuePos, final long windowPos) {
@@ -506,6 +515,11 @@ public final class Player {
     }
 
     void reloadPlayQueueManager() {
+        // Every rebuild of the current source resumes where it was, whichever caller asked for it.
+        // A live stream resumes at its live edge instead.
+        if (!isCurrentStreamLive()) {
+            setRecovery();
+        }
         if (playQueueManager != null) {
             playQueueManager.dispose();
         }

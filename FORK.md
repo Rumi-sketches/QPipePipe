@@ -319,6 +319,24 @@ Check: play a playlist, go to the second video, press Home, close the player
 (`am broadcast -a <app id>.player.MainPlayer.CLOSE`), `am kill <app id>`, reopen
 the app: the second video plays and Previous/Next move through the playlist.
 
+### A reload never restarts the video
+
+File: `Player` (`setRecovery`, `recoveryPositionOf`, `reloadPlayQueueManager`).
+
+The player rebuilds the current source after a network error, a track or
+quality change, or when the video track is switched on or off, and resumes from
+the recovery position saved in the play queue. Upstream saves it only in some
+callers (track changes and the video toggle do not), and drops it when the
+duration is unknown (`C.TIME_UNSET`, e.g. a second error while the source is
+still being rebuilt): the video then started over from 0. Now
+`reloadPlayQueueManager` saves the position itself for every caller, except for
+live streams, which resume at the live edge, and an unknown duration no longer
+caps the position.
+
+Check: `PlayerRecoveryPositionTest`. In the debug app the playback log
+(see "Debug builds keep every error trace") shows each reload with its
+recovery position.
+
 ### Bug reports go to QPipePipe
 
 Files: `ErrorActivity` (`ERROR_EMAIL_ADDRESS`, `ERROR_EMAIL_SUBJECT`,
