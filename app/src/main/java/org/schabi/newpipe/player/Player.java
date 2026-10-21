@@ -68,6 +68,7 @@ import org.schabi.newpipe.player.playqueue.PlayQueue;
 import org.schabi.newpipe.player.playqueue.PlayQueueAdapter;
 import org.schabi.newpipe.player.resolver.PlayerQualityResolver;
 import org.schabi.newpipe.player.resolver.SourceResolver;
+import org.schabi.newpipe.qpipepipe.LastPlayback;
 import org.schabi.newpipe.util.*;
 import org.schabi.newpipe.views.ExpandableSurfaceView;
 import android.widget.TextView;
@@ -375,6 +376,11 @@ public final class Player {
     }
 
     void setupMediaSession() {
+        // Called again once a queue is set: release the previous session, otherwise it stays
+        // active with no player behind it and can take the media buttons
+        if (mediaSessionManager != null) {
+            mediaSessionManager.dispose();
+        }
         playerMediaSession = new PlayerMediaSession(this, simpleExoPlayer);
         mediaSessionManager = new MediaSessionManager(context, simpleExoPlayer,
                 playerMediaSession, service.getMediaSession(),
@@ -457,6 +463,8 @@ public final class Player {
         // Close popup menus before destroying to prevent crash
         closeAllPopupMenus();
         
+        // A closed player is not playing anymore, whatever it was doing
+        LastPlayback.onPlayingChanged(context, playQueue, false);
         destroyPlayer();
         broadcastReceiverController.unregister();
         sponsorBlockController.destroy();

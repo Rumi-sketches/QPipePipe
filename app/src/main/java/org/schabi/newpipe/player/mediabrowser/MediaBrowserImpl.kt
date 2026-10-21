@@ -34,6 +34,7 @@ import org.schabi.newpipe.extractor.search.filter.FilterItem
 import org.schabi.newpipe.extractor.stream.StreamInfoItem
 import org.schabi.newpipe.local.playlist.LocalPlaylistManager
 import org.schabi.newpipe.local.playlist.RemotePlaylistManager
+import org.schabi.newpipe.qpipepipe.LastPlayback
 import org.schabi.newpipe.util.ExtractorHelper
 import org.schabi.newpipe.util.ServiceHelper
 import java.util.function.Consumer
@@ -123,9 +124,18 @@ class MediaBrowserImpl(
         clientPackageName: String,
         clientUid: Int,
         rootHints: Bundle?
-    ): MediaBrowserServiceCompat.BrowserRoot {
+    ): MediaBrowserServiceCompat.BrowserRoot? {
         if (DEBUG) {
             Log.d(TAG, "onGetRoot($clientPackageName, $clientUid, $rootHints)")
+        }
+
+        if (rootHints?.getBoolean(MediaBrowserServiceCompat.BrowserRoot.EXTRA_RECENT) == true) {
+            // The system media controls ask what they can offer to resume: the queue played
+            // last, or nothing (null) when there is none
+            return if (LastPlayback.exists(context))
+                MediaBrowserServiceCompat.BrowserRoot(resumeMediaId(), null)
+            else
+                null
         }
 
         val extras = Bundle()
@@ -197,6 +207,8 @@ class MediaBrowserImpl(
                 }
 
                 ID_HISTORY -> return populateHistory()
+
+                ID_RESUME -> return populateResume()
 
                 else -> throw parseError(parentId)
             }
@@ -360,6 +372,30 @@ class MediaBrowserImpl(
         return history.map { items ->
             items.map { this.createHistoryMediaItem(it) }
         }
+    }
+
+    private fun resumeMediaId(): String {
+        return buildMediaId().appendPath(ID_RESUME).build().toString()
+    }
+
+    /** The current item of the queue played last, as a playable item that resumes that queue */
+    private fun populateResume(): Single<List<MediaBrowserCompat.MediaItem>> {
+        return LastPlayback.load(context)
+            .map { queue ->
+                val item = queue.item ?: return@map emptyList()
+                val builder = MediaDescriptionCompat.Builder()
+                    .setMediaId(resumeMediaId())
+                    .setTitle(item.title)
+                    .setSubtitle(item.uploader)
+                item.thumbnailUrl?.let { builder.setIconUri(Uri.parse(it)) }
+                listOf(
+                    MediaBrowserCompat.MediaItem(
+                        builder.build(),
+                        MediaBrowserCompat.MediaItem.FLAG_PLAYABLE
+                    )
+                )
+            }
+            .defaultIfEmpty(emptyList())
     }
 
     private fun createHistoryMediaItem(streamHistoryEntry: StreamHistoryEntry): MediaBrowserCompat.MediaItem {
