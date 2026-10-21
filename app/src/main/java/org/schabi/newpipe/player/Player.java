@@ -539,7 +539,6 @@ public final class Player {
         if (playQueueManager == null || !playQueueManager.isCurrentSourceExpired()) {
             return;
         }
-        setRecovery();
         reloadPlayQueueManager();
     }
 
