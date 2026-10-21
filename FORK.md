@@ -525,6 +525,23 @@ Check: in the debug app open a video that does not exist, then
 `adb pull /sdcard/Android/data/<app id>/files/errors/` holds an entry with the
 url and the trace.
 
+### A long pause or a network change does not end in a 403
+
+Files: `PlayerErrorHandler` (`ERROR_CODE_IO_BAD_HTTP_STATUS`,
+`recoverFromForbidden`), `Player.renewExpiredSource`, `PlayerTransportController.play`,
+`MediaSourceManager.isCurrentSourceExpired`, `LoadedMediaSource.isExpired`.
+
+YouTube stream URLs expire and are bound to the IP they were extracted from.
+Upstream resumed a video paused for hours, or played on after a Wi-Fi/data
+switch, on the same URLs and stopped with a 403. Now play() rebuilds an expired
+source at the same position first, and a 403 drops the cached stream info and
+reloads quietly, without the error notification. A second 403 on the same item
+within a minute still stops playback with the IP-blocked message, so refused
+fresh URLs don't loop.
+
+Check: pause a video for more than its URL lifetime (hours), or switch between
+Wi-Fi and mobile data while it plays: it resumes at the same position.
+
 ## Upstream services
 
 The extractor falls back to `api.pipepipe.dev` to decode YouTube signatures

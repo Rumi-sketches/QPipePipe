@@ -47,7 +47,7 @@ public class LoadedMediaSource extends CompositeMediaSource<Integer> implements 
         return stream;
     }
 
-    private boolean isExpired() {
+    public boolean isExpired() {
         return System.currentTimeMillis() >= expireTimestamp;
     }
 

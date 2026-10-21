@@ -1,0 +1,29 @@
+package org.schabi.newpipe.player
+
+import android.net.Uri
+import com.google.android.exoplayer2.upstream.DataSpec
+import com.google.android.exoplayer2.upstream.HttpDataSource.InvalidResponseCodeException
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
+class PlayerErrorHandlerTest {
+    private fun responseCode(code: Int) = InvalidResponseCodeException(
+        code, null, null, emptyMap(), DataSpec(Uri.EMPTY), ByteArray(0)
+    )
+
+    // Same nesting as the player reports it (playback exception -> source error -> HTTP error),
+    // built from plain exceptions because ExoPlaybackException needs the Android framework.
+    private fun sourceError(cause: Exception) = RuntimeException(java.io.IOException(cause))
+
+    @Test
+    fun forbiddenIsFoundBehindThePlaybackException() {
+        assertTrue(PlayerErrorHandler.isForbidden(sourceError(responseCode(403))))
+    }
+
+    @Test
+    fun otherHttpStatusesAreNotForbidden() {
+        assertFalse(PlayerErrorHandler.isForbidden(sourceError(responseCode(404))))
+        assertFalse(PlayerErrorHandler.isForbidden(sourceError(RuntimeException("403"))))
+    }
+}

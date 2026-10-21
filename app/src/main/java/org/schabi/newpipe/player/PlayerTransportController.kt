@@ -41,6 +41,10 @@ class PlayerTransportController(private val player: Player) {
             return
         }
 
+        // A video paused for a long time holds stream URLs that are no longer served: reload it
+        // at the same position instead of resuming into a 403.
+        player.renewExpiredSource()
+
         val item = playQueue.getItem()
         if (player.currentState.isCompleted && item != null
             && playQueue.getRecoveryPosition(item) / 1000 >= item.duration - 5
