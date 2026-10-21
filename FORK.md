@@ -293,6 +293,19 @@ and Enqueue.
 Check: enable the setting, play a playlist, tap another video from search: the
 dialog appears and each choice behaves as labelled.
 
+The queue that plays is the one on screen when the user acts (`openVideoPlayer`,
+`openNormalBackgroundPlayer`, `openPopupPlayer`, `replaceQueueIfUserConfirms`).
+Upstream read `playQueue` again after connecting to the player and after the
+dialog, but every connection pushes the player's queue into it
+(`onQueueUpdate`): on 21/10/2026 at 00:25 Play now on a new video resumed the
+16-video queue that was paused in the background instead.
+
+Play now on a video tapped while a queue plays (`loadVideoIfUserConfirms`)
+starts it once loaded, in the player that was playing (background, popup or
+main), without asking again (`queueReplacementConfirmed`, `playInActivePlayer`).
+Before, it only loaded it on screen when the open player was not the main one,
+and pressing play then showed the same dialog a second time.
+
 ### No crash when the service reconnects without a player
 
 Commit `55fec9953`. File: `VideoDetailFragment.onServiceConnected`.
