@@ -1407,6 +1407,9 @@ public final class VideoDetailFragment
             return;
         }
 
+        // Before connecting to the player, which pushes its own queue (see onQueueUpdate)
+        final PlayQueue queue = setupPlayQueueForIntent(append);
+
         // See UI changes while remote playQueue changes
         if (!isPlayerAvailable()) {
             playerHolder.startService(false, this);
@@ -1419,11 +1422,10 @@ public final class VideoDetailFragment
             player.changeFullscreen(false);
         }
 
-        final PlayQueue queue = setupPlayQueueForIntent(append);
         if (append) { //resumePlayback: false
             NavigationHelper.enqueueOnPlayer(activity, queue, PlayerType.POPUP);
         } else {
-            replaceQueueIfUserConfirms(() -> NavigationHelper
+            replaceQueueIfUserConfirms(queue, () -> NavigationHelper
                     .playOnPopupPlayer(activity, queue, true));
         }
     }
@@ -1451,7 +1453,10 @@ public final class VideoDetailFragment
             }
         }
 
-        replaceQueueIfUserConfirms(this::openMainPlayer);
+        // The queue on screen now is the one that plays: the player can push its own queue to
+        // this screen (see onQueueUpdate) while the user is still answering the confirmation
+        final PlayQueue queue = currentInfo == null ? null : setupPlayQueueForIntent(false);
+        replaceQueueIfUserConfirms(queue, () -> openMainPlayer(queue));
     }
 
     /**
@@ -1462,31 +1467,32 @@ public final class VideoDetailFragment
     }
 
     private void openNormalBackgroundPlayer(final boolean append) {
+        // Before connecting to the player, which pushes its own queue (see onQueueUpdate)
+        final PlayQueue queue = setupPlayQueueForIntent(append);
+
         // See UI changes while remote playQueue changes
         if (!isPlayerAvailable()) {
             playerHolder.startService(false, this);
         }
 
-        final PlayQueue queue = setupPlayQueueForIntent(append);
         if (append) {
             NavigationHelper.enqueueOnPlayer(activity, queue, PlayerType.AUDIO);
         } else {
-            replaceQueueIfUserConfirms(() -> NavigationHelper
+            replaceQueueIfUserConfirms(queue, () -> NavigationHelper
                     .playOnBackgroundPlayer(activity, queue, true));
         }
     }
 
-    private void openMainPlayer() {
+    private void openMainPlayer(@Nullable final PlayQueue queue) {
         if (!(isPlayerServiceAvailable() && playerHolder.getListener() != null)) {
             PlaybackStartupTrace.mark(pendingStartupTraceId, "waiting_for_player_service");
             playerHolder.startService(autoPlayEnabled, this);
             return;
         }
-        if (currentInfo == null) {
+        if (queue == null) {
             return;
         }
 
-        final PlayQueue queue = setupPlayQueueForIntent(false);
         PlaybackStartupTrace.mark(pendingStartupTraceId, "play_queue_ready");
 
         // Video view can have elements visible from popup,
@@ -2463,7 +2469,13 @@ public final class VideoDetailFragment
         return item;
     }
 
-    private void replaceQueueIfUserConfirms(final Runnable onAllow) {
+    /**
+     * @param queue   the queue about to replace the active one, taken when the user acted: the
+     *                player can change {@link #playQueue} while the confirmation is open
+     * @param onAllow plays {@code queue}
+     */
+    private void replaceQueueIfUserConfirms(@Nullable final PlayQueue queue,
+                                            final Runnable onAllow) {
         @Nullable final PlayQueue activeQueue = isPlayerAvailable() ? player.getPlayQueue() : null;
         final boolean hasMultiItemQueue = activeQueue != null && activeQueue.size() > 1;
 
@@ -2472,15 +2484,15 @@ public final class VideoDetailFragment
                 && playerIsNotStopped()
                 && hasMultiItemQueue
                 && activeQueue != null
-                && !activeQueue.equals(playQueue)) {
-            showClearingQueueConfirmation(serviceId, url, playQueue, onAllow);
+                && !activeQueue.equals(queue)) {
+            showClearingQueueConfirmation(serviceId, url, queue, onAllow);
         } else {
             onAllow.run();
         }
     }
 
     /**
-     * Same purpose as {@link #replaceQueueIfUserConfirms(Runnable)}, but meant to be called
+     * Same purpose as {@link #replaceQueueIfUserConfirms(PlayQueue, Runnable)}, but meant to be called
      * before the new stream's data has been loaded (e.g. from {@link #selectAndLoadVideo}),
      * i.e. before {@link #playQueue} has been updated to reflect the new target. Since
      * {@link #playQueue} cannot be used for comparison yet, the queue currently playing in the
