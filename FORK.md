@@ -300,6 +300,12 @@ dialog, but every connection pushes the player's queue into it
 (`onQueueUpdate`): on 21/10/2026 at 00:25 Play now on a new video resumed the
 16-video queue that was paused in the background instead.
 
+Play now on a video tapped while a queue plays (`loadVideoIfUserConfirms`)
+starts it once loaded, in the player that was playing (background, popup or
+main), without asking again (`queueReplacementConfirmed`, `playInActivePlayer`).
+Upstream only loaded it on screen when the open player was not the main one,
+and pressing play then showed the same dialog a second time.
+
 ### No crash when the service reconnects without a player
 
 Commit `55fec9953`. File: `VideoDetailFragment.onServiceConnected`.

@@ -216,6 +216,11 @@ public final class VideoDetailFragment
     protected PlayQueue playQueue = null;
     int bottomSheetState = BottomSheetBehavior.STATE_EXPANDED;
     protected boolean autoPlayEnabled = true;
+    /**
+     * The user chose Play now for the video being loaded: it starts once loaded, in the player that
+     * was playing the replaced queue, without asking again (see loadVideoIfUserConfirms).
+     */
+    private boolean queueReplacementConfirmed = false;
     SponsorBlockMode currentSponsorBlockMode = null;
     /** The play queue written to disk, so it survives the OS killing the app in background. */
     @Nullable
@@ -1028,6 +1033,7 @@ public final class VideoDetailFragment
                                    @Nullable final String newUrl,
                                    @NonNull final String newTitle,
                                    @Nullable final PlayQueue newQueue) {
+        queueReplacementConfirmed = false;
         loadVideoIfUserConfirms(newServiceId, newUrl, newQueue, () -> {
             if (isPlayerAvailable() && newQueue != null && playQueue != null
                     && playQueue.getItem() != null
@@ -1123,11 +1129,16 @@ public final class VideoDetailFragment
                         }
                     }
 
-                    if (isAutoplayEnabled()) {
+                    if (queueReplacementConfirmed) {
+                        playInActivePlayer();
+                    } else if (isAutoplayEnabled()) {
                         openVideoPlayerAutoFullscreen();
                     }
-                }, throwable -> showError(new ErrorInfo(throwable, UserAction.REQUESTED_STREAM,
-                        url == null ? "no url" : url, serviceId)));
+                }, throwable -> {
+                    queueReplacementConfirmed = false;
+                    showError(new ErrorInfo(throwable, UserAction.REQUESTED_STREAM,
+                            url == null ? "no url" : url, serviceId));
+                });
     }
 
     /*//////////////////////////////////////////////////////////////////////////
@@ -1480,6 +1491,18 @@ public final class VideoDetailFragment
         } else {
             replaceQueueIfUserConfirms(queue, () -> NavigationHelper
                     .playOnBackgroundPlayer(activity, queue, true));
+        }
+    }
+
+    /** Plays the loaded video in the player that is open, the main player if none is. */
+    private void playInActivePlayer() {
+        if (isPlayerAvailable() && player.audioPlayerSelected()) {
+            openNormalBackgroundPlayer(false);
+        } else if (isPlayerAvailable() && player.popupPlayerSelected()) {
+            openPopupPlayer(false);
+        } else {
+            autoPlayEnabled = true; // forcefully start playing
+            openVideoPlayerAutoFullscreen();
         }
     }
 
@@ -2478,9 +2501,13 @@ public final class VideoDetailFragment
                                             final Runnable onAllow) {
         @Nullable final PlayQueue activeQueue = isPlayerAvailable() ? player.getPlayQueue() : null;
         final boolean hasMultiItemQueue = activeQueue != null && activeQueue.size() > 1;
+        // Already confirmed with Play now when the video was chosen
+        final boolean confirmed = queueReplacementConfirmed;
+        queueReplacementConfirmed = false;
 
         // Player will have STATE_IDLE when a user pressed back button
-        if (isClearingQueueConfirmationRequired(activity)
+        if (!confirmed
+                && isClearingQueueConfirmationRequired(activity)
                 && playerIsNotStopped()
                 && hasMultiItemQueue
                 && activeQueue != null
@@ -2518,7 +2545,10 @@ public final class VideoDetailFragment
                 && hasMultiItemQueue
                 && activeItem != null
                 && !activeItem.getUrl().equals(newUrl)) {
-            showClearingQueueConfirmation(newServiceId, newUrl, newQueue, onAllow);
+            showClearingQueueConfirmation(newServiceId, newUrl, newQueue, () -> {
+                queueReplacementConfirmed = true;
+                onAllow.run();
+            });
         } else {
             onAllow.run();
         }
