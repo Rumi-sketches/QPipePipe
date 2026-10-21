@@ -376,6 +376,11 @@ public final class Player {
     }
 
     void setupMediaSession() {
+        // Called again once a queue is set: release the previous session, otherwise it stays
+        // active with no player behind it and can take the media buttons
+        if (mediaSessionManager != null) {
+            mediaSessionManager.dispose();
+        }
         playerMediaSession = new PlayerMediaSession(this, simpleExoPlayer);
         mediaSessionManager = new MediaSessionManager(context, simpleExoPlayer,
                 playerMediaSession, service.getMediaSession(),

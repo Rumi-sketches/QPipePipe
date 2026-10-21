@@ -507,6 +507,56 @@ playlist, then enqueue a video: the entry reads "From: <name>" and the new
 playlist grows by one. Enqueue a whole YouTube playlist on a queue from a local
 playlist and tap Undo within 4 seconds: the local playlist is back to its size.
 
+### Debug builds keep every error trace
+
+Files: `DebugErrorLog` (new), `ErrorUtil` (`openActivity`, `showSnackbar`,
+`createNotification`), `ErrorPanelHelper.showError`.
+
+Debug builds append each reported error (time, version and debug number,
+action, service, request, message, all stack traces) to
+`Android/data/<app id>/files/errors/errors-YYYY-MM-DD.log`. Nothing rotates or
+deletes the files; only uninstalling the app or clearing its data does.
+Release builds skip it (`BuildConfig.DEBUG`). An error shown in several ways
+(snackbar, then the error screen) is written once. The point is to keep traces
+when the error notification never appears, for example when the debug app has
+no notification permission.
+
+Check: in the debug app open a video that does not exist, then
+`adb pull /sdcard/Android/data/<app id>/files/errors/` holds an entry with the
+url and the trace.
+
+### One media session per player
+
+File: `Player.setupMediaSession`.
+
+Starting a queue creates the player's media session twice: once in
+`initPlayer()` and again in `PlayerStartController.initPlayback` after the
+queue is set. Upstream dropped the first `MediaSessionManager` without
+disposing it, so on the phone (`PlayerService`) every queue left one more
+active `MediaSessionCompat` with no player behind it, which could take the
+media buttons of headphones and car. The fork disposes the previous manager
+before creating the next one.
+
+Check: play three different videos in background, then
+`adb shell dumpsys media_session`: the app has one `MediaSessionManager`
+session, not one per video.
+
+### Numbered debug builds
+
+Files: `app/qpipepipe.gradle`, `qpipepipe/DebugBuildNotes`, `MainActivity`
+(one call after the announcements), `tools/qcheck/qcheck.py`.
+
+A debug build installed on the user's phone gets a sequential number and says
+what to test with it. `app/src/debug/assets/debug_build.txt`, which git
+ignores, holds the number on its first line and the notes below it. With the
+file present, the app is named "QPipePipe Debug <n>", the APK
+`QPipePipe_<version>-d<n>-<abi>-debug.apk`, and the first start of that
+number shows the notes in a dialog. Without the file nothing changes. qcheck
+marks the notes as seen, like What's New.
+
+Check: write `5` and a line of notes to the file, build and install the debug
+APK: the launcher shows "QPipePipe Debug 5" and the dialog appears once.
+
 ### Playback resumes after the OS killed the app
 
 Files: `qpipepipe/LastPlayback`, `PlayerStartController.initPlayback`,
