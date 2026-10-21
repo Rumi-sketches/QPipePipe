@@ -10,6 +10,9 @@ internal const val ID_BOOKMARKS = "playlists"
 internal const val ID_HISTORY = "history"
 internal const val ID_INFO_ITEM = "item"
 
+/** The queue played last, see [org.schabi.newpipe.qpipepipe.LastPlayback] */
+internal const val ID_RESUME = "resume"
+
 internal const val ID_LOCAL = "local"
 internal const val ID_REMOTE = "remote"
 internal const val ID_URL = "url"

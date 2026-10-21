@@ -75,6 +75,7 @@ import org.schabi.newpipe.player.PlayerIntentConstants;
 import org.schabi.newpipe.player.event.OnKeyDownListener;
 import org.schabi.newpipe.player.helper.PlayerHolder;
 import org.schabi.newpipe.player.playqueue.PlayQueue;
+import org.schabi.newpipe.qpipepipe.DebugBuildNotes;
 import org.schabi.newpipe.qpipepipe.QPipePipeNotices;
 import org.schabi.newpipe.util.*;
 import org.schabi.newpipe.util.external_communication.ShareUtils;
@@ -249,6 +250,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception ignore) {
         }
         QPipePipeNotices.showAnnouncements(this);
+        DebugBuildNotes.showIfNew(this);
 
 
         int isFirstRun = prefs.getInt("isFirstRun", 0);
