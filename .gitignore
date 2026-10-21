@@ -30,3 +30,6 @@ __pycache__
 /AGENTS.md
 /PROGRESS.md
 .claude/
+
+# Number and test notes of the debug build installed on the phone (see app/qpipepipe.gradle)
+/app/src/debug/assets/debug_build.txt

@@ -541,6 +541,22 @@ Check: play three different videos in background, then
 `adb shell dumpsys media_session`: the app has one `MediaSessionManager`
 session, not one per video.
 
+### Numbered debug builds
+
+Files: `app/qpipepipe.gradle`, `qpipepipe/DebugBuildNotes`, `MainActivity`
+(one call after the announcements), `tools/qcheck/qcheck.py`.
+
+A debug build installed on the user's phone gets a sequential number and says
+what to test with it. `app/src/debug/assets/debug_build.txt`, which git
+ignores, holds the number on its first line and the notes below it. With the
+file present, the app is named "QPipePipe Debug <n>", the APK
+`QPipePipe_<version>-d<n>-<abi>-debug.apk`, and the first start of that
+number shows the notes in a dialog. Without the file nothing changes. qcheck
+marks the notes as seen, like What's New.
+
+Check: write `5` and a line of notes to the file, build and install the debug
+APK: the launcher shows "QPipePipe Debug 5" and the dialog appears once.
+
 ## Upstream services
 
 The extractor falls back to `api.pipepipe.dev` to decode YouTube signatures
