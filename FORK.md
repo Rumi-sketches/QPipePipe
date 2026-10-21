@@ -302,6 +302,22 @@ recreates it the fragment can connect before a `Player` exists. The guard
 returns early instead of dereferencing a null player. Upstream `a43bcc346`
 (null intent in `onStartCommand`) fixes a different path; both stay.
 
+### Related videos load after Android recreates the screen
+
+File: `RelatedItemsFragment` (`loadResult`, `handleResult`).
+
+Upstream `a4b44e259` moved the related videos into the `StateSaver` files, and
+`MainActivity.onDestroy` deletes those files whenever Android destroys the
+activity. The fragment then came back with its url but no related videos, and
+loading them failed with `NullPointerException: The callable returned a null
+value`. It now rebuilds them from the stream info of its url (cached, or
+fetched). The list header (the auto-enqueue switch) only appears when the
+fragment is created with its data.
+
+Check: turn on Developer options > Don't keep activities, open a video, press
+Home, reopen the app: the Next tab lists the related videos. Turn the option
+off again.
+
 ### The play queue survives the OS killing the app
 
 File: `VideoDetailFragment` (`onSaveInstanceState`, `onRestoreInstanceState`,
