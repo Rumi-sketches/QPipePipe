@@ -91,6 +91,7 @@ import org.schabi.newpipe.player.PlayerPlaybackState;
 import org.schabi.newpipe.player.PlayerPlaybackParameters;
 import org.schabi.newpipe.player.RepeatMode;
 import org.schabi.newpipe.player.PlaybackStartupTrace;
+import org.schabi.newpipe.player.PlayerDebugTrace;
 import org.schabi.newpipe.player.PlayerUiModeController;
 import org.schabi.newpipe.player.event.OnKeyDownListener;
 import org.schabi.newpipe.player.event.PlayerServiceExtendedEventListener;
@@ -2172,6 +2173,7 @@ public final class VideoDetailFragment
 
     @Override
     public void onQueueUpdate(final PlayQueue queue) {
+        PlayerDebugTrace.onScreenQueueReplaced(activity, playQueue, queue);
         playQueue = queue;
         if (DEBUG) {
             Log.d(TAG, "onQueueUpdate() called with: serviceId = ["
