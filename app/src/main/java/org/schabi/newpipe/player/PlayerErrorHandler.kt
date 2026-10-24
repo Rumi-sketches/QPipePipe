@@ -235,9 +235,14 @@ class PlayerErrorHandler(private val player: Player) {
         return networkFailures > 1
     }
 
-    /** Playback got ready, so the network failures before it are over. */
+    /**
+     * Playback got ready, so the network failures before it are over. The source can recover
+     * without the delayed reload (the source manager retries a failed item by itself), and that
+     * reload would then rebuild a source that is playing fine.
+     */
     fun onPlaybackReady() {
         networkFailures = 0
+        cancelDelayedReload()
     }
 
     /**
