@@ -57,12 +57,16 @@ class PlayerHistoryController(private val player: Player) {
 
     fun saveStreamProgressState() {
         val playQueue = player.playQueue
-        if (player.exoPlayerIsNull() || player.currentMetadata == null || playQueue == null
+        val metadata = player.currentMetadata
+        if (player.exoPlayerIsNull() || metadata == null || playQueue == null
             || playQueue.index != player.simpleExoPlayer.currentMediaItemIndex
         ) {
             // Make sure play queue and current window index are equal, to prevent saving state for
             // the wrong stream on discontinuity (e.g. when the stream just changed but the
             // playQueue index and currentMetadata still haven't updated)
+            return
+        }
+        if (!hasPlayedPosition(metadata)) {
             return
         }
         // Save current position. It will help to restore this position once a user
@@ -108,5 +112,16 @@ class PlayerHistoryController(private val player: Player) {
                     onResult(null)
                 })
         )
+    }
+
+    companion object {
+        /**
+         * Whether the player position belongs to [item]. An item that failed to load (no
+         * network, extraction error) carries its errors and never played: the player reports 0
+         * for it, which would overwrite the position to resume from and the saved progress, so a
+         * reload after the failure would start the video over.
+         */
+        @JvmStatic
+        fun hasPlayedPosition(item: PlayerMediaItem): Boolean = item.errors.isEmpty()
     }
 }

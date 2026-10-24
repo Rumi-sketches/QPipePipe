@@ -721,6 +721,35 @@ fresh URLs don't loop.
 Check: pause a video for more than its URL lifetime (hours), or switch between
 Wi-Fi and mobile data while it plays: it resumes at the same position.
 
+### No error loop without network
+
+Files: `PlayerErrorHandler` (`recoverFromNetworkError`, `networkRetryDelayMs`,
+`reloadIfWaiting`), `PlayerMetadataController.errorsToReport`,
+`PlayerHistoryController.hasPlayedPosition`, `Player.reloadPlayQueueManager`,
+`PlayerTransportController.play`, `PlayerPlaybackStateController` (`STATE_READY`).
+
+Upstream answered every network error by rebuilding the source at once. With no
+connection the rebuild fails as fast as DNS does, so the player looped forever,
+each time with a toast, an error notification (two: the player error and the
+failed item) and the detail player closing. Now the first failure reloads at
+once and notifies; further failures on the same item wait 2, 4, 8, then 10
+seconds and stay quiet, until playback gets ready again, which also drops the
+waiting reload. Pressing play during a wait reloads at once. Errors of a failed
+item that reach ExoPlayer (no network) are reported only by the error handler,
+not again by the metadata. An item that failed to load no longer saves its
+position: upstream saved 0 at every error, so the video started over once the
+network came back and its watch progress was lost.
+
+Upstream v5.5.0 also reworked the behind-live-window branch of
+`PlayerErrorHandler`: expect a small conflict there at the next sync.
+
+Check: play a video and cut the network (on a phone driven over adb Wi-Fi, set
+Private DNS to an invalid hostname instead): one toast, then retries 2, 4, 8,
+10 s apart in the log; restore the network and it resumes within 10 s, or at
+once when play is pressed, at the position it was at. To cover a resume after
+the OS killed the app: play, pause, cut the network, `adb shell am stop-app
+<app id>`, then `adb shell cmd media_session dispatch play`.
+
 ## Upstream services
 
 The extractor falls back to `api.pipepipe.dev` to decode YouTube signatures

@@ -1,6 +1,8 @@
 package org.schabi.newpipe.player
 
 import android.app.AlertDialog
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import com.google.android.exoplayer2.ExoPlaybackException
 import com.google.android.exoplayer2.PlaybackException
@@ -55,6 +57,16 @@ class PlayerErrorHandler(private val player: Player) {
     private var lastForbiddenItemUuid: String? = null
     private var lastForbiddenRecoveryMs = 0L
 
+    // Network failures in a row on the same queue item, with no playback getting ready in
+    // between. Without a connection (a tunnel, no coverage in the car) every reload fails as
+    // soon as DNS does, so the reloads wait longer and longer instead of looping reload->fail
+    // with a toast and a notification each time.
+    private var networkFailures = 0
+    private var networkFailureItemUuid: String? = null
+    private val retryHandler = Handler(Looper.getMainLooper())
+    private val delayedReload = Runnable { player.reloadPlayQueueManager() }
+    private var reloadPending = false
+
     /**
      * Process exceptions produced by [com.google.android.exoplayer2.ExoPlayer].
      *
@@ -70,6 +82,8 @@ class PlayerErrorHandler(private val player: Player) {
      *  * For [ERROR_CODE_TIMEOUT], [ERROR_CODE_IO_UNSPECIFIED] and
      *    [ERROR_CODE_IO_NETWORK_CONNECTION_FAILED]: keep the recovery record and keep the player
      *    at the current state until it is ready to play by restarting the media source manager.
+     *    When the restart fails again, the next ones are delayed and *catchable*, see
+     *    [recoverFromNetworkError].
      *  * On any ExoPlayer specific issue internal to its device interaction, such as
      *    [ERROR_CODE_DECODER_INIT_FAILED]: terminate the playback.
      *  * For any other unspecified issue internal: set a recovery and try to restart the playback.
@@ -124,12 +138,12 @@ class PlayerErrorHandler(private val player: Player) {
                         showIpBlocked()
                         player.onPlaybackShutdown()
                     } else {
-                        recoverFromNetworkError()
+                        isCatchableException = recoverFromNetworkError()
                     }
                 }
 
                 ERROR_CODE_IO_BAD_HTTP_STATUS -> if (!isForbidden(error)) {
-                    recoverFromNetworkError()
+                    isCatchableException = recoverFromNetworkError()
                 } else if (recoverFromForbidden()) {
                     // Expected after a long pause or a network change: reload quietly, without
                     // the error notification and without the detail page closing the player.
@@ -143,7 +157,7 @@ class PlayerErrorHandler(private val player: Player) {
                 ERROR_CODE_TIMEOUT,
                 ERROR_CODE_IO_NETWORK_CONNECTION_FAILED,
                 ERROR_CODE_IO_NETWORK_CONNECTION_TIMEOUT,
-                ERROR_CODE_UNSPECIFIED -> recoverFromNetworkError()
+                ERROR_CODE_UNSPECIFIED -> isCatchableException = recoverFromNetworkError()
 
                 ERROR_CODE_DECODER_INIT_FAILED -> {
                     val surfaceReleased = isSurfaceReleasedError(error)
@@ -192,7 +206,62 @@ class PlayerErrorHandler(private val player: Player) {
         player.listeners.onPlayerError(playerError, isCatchableException)
     }
 
-    private fun recoverFromNetworkError() {
+    /**
+     * Rebuild the current source after a network failure: at once the first time, then after
+     * longer and longer waits while the reloads keep failing on the same item, so playback comes
+     * back by itself once the connection does.
+     *
+     * @return whether the failure repeats one the user was already told about
+     */
+    private fun recoverFromNetworkError(): Boolean {
+        // The queue item is the one being loaded; the current item can still be the previous one.
+        val item = player.playQueue?.item ?: player.currentItem
+        if (item?.uuid != networkFailureItemUuid) {
+            networkFailureItemUuid = item?.uuid
+            networkFailures = 0
+        }
+        val delayMs = networkRetryDelayMs(networkFailures)
+        networkFailures++
+        if (delayMs == 0L) {
+            reloadNow()
+        } else {
+            Log.w(Player.TAG, "Network failure #$networkFailures, reloading in $delayMs ms")
+            player.setRecovery()
+            // A failure while a reload is already waiting replaces it instead of adding another.
+            retryHandler.removeCallbacks(delayedReload)
+            retryHandler.postDelayed(delayedReload, delayMs)
+            reloadPending = true
+        }
+        return networkFailures > 1
+    }
+
+    /**
+     * Playback got ready, so the network failures before it are over. The source can recover
+     * without the delayed reload (the source manager retries a failed item by itself), and that
+     * reload would then rebuild a source that is playing fine.
+     */
+    fun onPlaybackReady() {
+        networkFailures = 0
+        cancelDelayedReload()
+    }
+
+    /**
+     * The user asked to play while a reload waits out a network failure: the failed source can't
+     * play, so reload now instead of letting the press do nothing until the wait is over.
+     */
+    fun reloadIfWaiting() {
+        if (reloadPending) {
+            player.reloadPlayQueueManager()
+        }
+    }
+
+    /** Drop a delayed reload: another reload replaced it, or the player is going away. */
+    fun cancelDelayedReload() {
+        retryHandler.removeCallbacks(delayedReload)
+        reloadPending = false
+    }
+
+    private fun reloadNow() {
         player.setRecovery()
         player.reloadPlayQueueManager()
     }
@@ -218,7 +287,7 @@ class PlayerErrorHandler(private val player: Player) {
         if (item != null) {
             InfoCache.getInstance().removeInfo(item.serviceId, item.url, InfoItem.InfoType.STREAM)
         }
-        recoverFromNetworkError()
+        reloadNow()
         return true
     }
 
@@ -346,6 +415,23 @@ class PlayerErrorHandler(private val player: Player) {
 
         // Fresh URLs fail within seconds of the reload; a 403 later than this is a new expiry.
         private const val FORBIDDEN_RETRY_WINDOW_MS = 60_000L
+
+        private const val NETWORK_RETRY_FIRST_DELAY_MS = 2_000L
+        private const val NETWORK_RETRY_MAX_DELAY_MS = 10_000L
+
+        /**
+         * How long to wait before reloading after [previousFailures] network failures in a row:
+         * nothing the first time, then 2, 4, 8 and from there on 10 seconds.
+         */
+        @JvmStatic
+        fun networkRetryDelayMs(previousFailures: Int): Long {
+            if (previousFailures <= 0) {
+                return 0L
+            }
+            val doublings = (previousFailures - 1).coerceAtMost(30)
+            return (NETWORK_RETRY_FIRST_DELAY_MS shl doublings)
+                .coerceAtMost(NETWORK_RETRY_MAX_DELAY_MS)
+        }
 
         /** Whether the server refused the media request with 403 Forbidden. */
         @JvmStatic

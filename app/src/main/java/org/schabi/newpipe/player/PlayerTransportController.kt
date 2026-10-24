@@ -41,6 +41,8 @@ class PlayerTransportController(private val player: Player) {
             return
         }
 
+        // After a network failure the source waits to be reloaded: pressing play retries now.
+        player.reloadIfWaitingForNetwork()
         // A video paused for a long time holds stream URLs that are no longer served: reload it
         // at the same position instead of resuming into a 403.
         player.renewExpiredSource()

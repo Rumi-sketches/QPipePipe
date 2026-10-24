@@ -76,6 +76,7 @@ class PlayerPlaybackStateController(private val player: Player) {
 
             com.google.android.exoplayer2.Player.STATE_READY -> { // 3
                 PlaybackStartupTrace.mark(player.startupTraceId, "player_ready")
+                player.onPlaybackReady()
                 if (!player.isPrepared) {
                     player.isPrepared = true
                     onPrepared(playWhenReady)
