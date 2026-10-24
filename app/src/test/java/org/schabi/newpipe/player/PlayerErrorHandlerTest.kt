@@ -3,6 +3,7 @@ package org.schabi.newpipe.player
 import android.net.Uri
 import com.google.android.exoplayer2.upstream.DataSpec
 import com.google.android.exoplayer2.upstream.HttpDataSource.InvalidResponseCodeException
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -25,5 +26,21 @@ class PlayerErrorHandlerTest {
     fun otherHttpStatusesAreNotForbidden() {
         assertFalse(PlayerErrorHandler.isForbidden(sourceError(responseCode(404))))
         assertFalse(PlayerErrorHandler.isForbidden(sourceError(RuntimeException("403"))))
+    }
+
+    @Test
+    fun firstNetworkFailureReloadsAtOnce() {
+        assertEquals(0L, PlayerErrorHandler.networkRetryDelayMs(0))
+    }
+
+    @Test
+    fun repeatedNetworkFailuresWaitLongerUpToTenSeconds() {
+        val delays = (1..6).map { PlayerErrorHandler.networkRetryDelayMs(it) }
+        assertEquals(listOf(2_000L, 4_000L, 8_000L, 10_000L, 10_000L, 10_000L), delays)
+    }
+
+    @Test
+    fun endlessNetworkFailuresNeverOverflowTheDelay() {
+        assertEquals(10_000L, PlayerErrorHandler.networkRetryDelayMs(Int.MAX_VALUE))
     }
 }
