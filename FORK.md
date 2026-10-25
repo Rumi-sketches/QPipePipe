@@ -48,6 +48,13 @@ without commits and emails a warning first; re-enable it from the Actions tab. T
 older version and `dry_run` on: it merges and builds without pushing or opening
 anything. Locally: `python tools/upstream/check_upstream.py --dry-run`.
 
+## Pull request checks
+
+`.github/workflows/pr-checks.yml` runs on every pull request to `dev` or `main`:
+it builds the debug app with the extractor in `tools/upstream/pins.properties`,
+runs `testDebugUnitTest` and the unit tests of `tools/upstream` and
+`tools/release`. It needs no secrets, so it also runs on pull requests from forks.
+
 ## Merge rules
 
 1. Follow stable upstream releases only. Pre-releases (`-beta`) are skipped.
