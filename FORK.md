@@ -757,6 +757,24 @@ once when play is pressed, at the position it was at. To cover a resume after
 the OS killed the app: play, pause, cut the network, `adb shell am stop-app
 <app id>`, then `adb shell cmd media_session dispatch play`.
 
+### Recovery from a decoder that fails mid-stream
+
+Files: `PlayerErrorHandler` (`recoverFromDecoderFailure`, `OneRetryPerItem`).
+
+Upstream stopped playback with the bug report notification on
+`ERROR_CODE_DECODING_FAILED`. A hardware decoder fails like this when the system
+takes it back or its media process restarts (`MediaCodec.CodecException`
+`0xffffffe0`, DEAD_OBJECT), which says nothing about the stream. Now the first
+such failure of a queue item rebuilds the source at the same position, with a new
+decoder and no notification; a second failure of the same item within a minute
+stops playback as before. The 403 recovery uses the same once-per-item rule.
+
+Check: on an emulator with `adb root`, play a video in the video player and kill
+the decoder service (`adb shell kill -9 $(adb shell pidof
+android.hardware.media.c2@1.0-service-goldfish)`): playback resumes within a few
+seconds at the same position; a second kill within a minute stops it with the
+error notification.
+
 ## Upstream services
 
 The extractor falls back to `api.pipepipe.dev` to decode YouTube signatures

@@ -43,4 +43,26 @@ class PlayerErrorHandlerTest {
     fun endlessNetworkFailuresNeverOverflowTheDelay() {
         assertEquals(10_000L, PlayerErrorHandler.networkRetryDelayMs(Int.MAX_VALUE))
     }
+
+    @Test
+    fun oneRetryPerItemRecoversOnceThenGivesUp() {
+        val retry = OneRetryPerItem(60_000L)
+        assertTrue(retry.tryRetry("a", 0L))
+        assertFalse(retry.tryRetry("a", 59_999L))
+    }
+
+    @Test
+    fun oneRetryPerItemRecoversAgainAfterTheWindowOrOnAnotherItem() {
+        val retry = OneRetryPerItem(60_000L)
+        assertTrue(retry.tryRetry("a", 0L))
+        assertTrue(retry.tryRetry("a", 60_000L))
+        assertTrue(retry.tryRetry("b", 60_001L))
+    }
+
+    @Test
+    fun oneRetryPerItemAlwaysRecoversAnUnknownItem() {
+        val retry = OneRetryPerItem(60_000L)
+        assertTrue(retry.tryRetry(null, 0L))
+        assertTrue(retry.tryRetry(null, 1L))
+    }
 }

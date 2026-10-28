@@ -52,10 +52,13 @@ class PlayerErrorHandler(private val player: Player) {
     // genuinely broken surface can't loop recover->fail forever.
     private var lastSurfaceErrorRecoveryMs = 0L
 
-    // The queue item and time of the last recovery from a 403, so fresh URLs that are refused too
-    // stop playback instead of looping reload->403.
-    private var lastForbiddenItemUuid: String? = null
-    private var lastForbiddenRecoveryMs = 0L
+    // One recovery per item from a 403, so fresh URLs that are refused too stop playback instead
+    // of looping reload->403.
+    private val forbiddenRetry = OneRetryPerItem(FORBIDDEN_RETRY_WINDOW_MS)
+
+    // One recovery per item from a decoder that failed while decoding, so a stream the decoder
+    // really can't decode stops playback instead of looping reload->fail.
+    private val decoderRetry = OneRetryPerItem(DECODER_RETRY_WINDOW_MS)
 
     // Network failures in a row on the same queue item, with no playback getting ready in
     // between. Without a connection (a tunnel, no coverage in the car) every reload fails as
@@ -84,6 +87,8 @@ class PlayerErrorHandler(private val player: Player) {
      *    at the current state until it is ready to play by restarting the media source manager.
      *    When the restart fails again, the next ones are delayed and *catchable*, see
      *    [recoverFromNetworkError].
+     *  * [ERROR_CODE_DECODING_FAILED]: rebuild the source once per item, which gets a new decoder,
+     *    see [recoverFromDecoderFailure]. This recovery is *catchable*.
      *  * On any ExoPlayer specific issue internal to its device interaction, such as
      *    [ERROR_CODE_DECODER_INIT_FAILED]: terminate the playback.
      *  * For any other unspecified issue internal: set a recovery and try to restart the playback.
@@ -92,7 +97,7 @@ class PlayerErrorHandler(private val player: Player) {
      * notification so users are aware.
      *
      * Any error code not explicitly covered here is either unrelated to the app's use case (e.g.
-     * DRM) or not recoverable (e.g. decoder error). In both cases, the player should shutdown.
+     * DRM) or not recoverable (e.g. a renderer error). In both cases, the player should shutdown.
      */
     fun onPlayerError(error: PlaybackException) {
         Log.e(Player.TAG, "ExoPlayer - onPlayerError() called with:", error)
@@ -158,6 +163,16 @@ class PlayerErrorHandler(private val player: Player) {
                 ERROR_CODE_IO_NETWORK_CONNECTION_FAILED,
                 ERROR_CODE_IO_NETWORK_CONNECTION_TIMEOUT,
                 ERROR_CODE_UNSPECIFIED -> isCatchableException = recoverFromNetworkError()
+
+                // The decoder failed in the middle of the stream. A hardware decoder fails like this
+                // when the system takes it back or its media process restarts (MediaCodec
+                // DEAD_OBJECT), which says nothing about the stream: a new source gets a new
+                // decoder and resumes at the same position.
+                ERROR_CODE_DECODING_FAILED -> if (recoverFromDecoderFailure()) {
+                    isCatchableException = true
+                } else {
+                    player.onPlaybackShutdown()
+                }
 
                 ERROR_CODE_DECODER_INIT_FAILED -> {
                     val surfaceReleased = isSurfaceReleasedError(error)
@@ -276,16 +291,26 @@ class PlayerErrorHandler(private val player: Player) {
      */
     private fun recoverFromForbidden(): Boolean {
         val item = player.currentItem ?: player.playQueue?.item
-        val now = System.currentTimeMillis()
-        if (item != null && item.uuid == lastForbiddenItemUuid
-            && now - lastForbiddenRecoveryMs < FORBIDDEN_RETRY_WINDOW_MS
-        ) {
+        if (!forbiddenRetry.tryRetry(item?.uuid, System.currentTimeMillis())) {
             return false
         }
-        lastForbiddenItemUuid = item?.uuid
-        lastForbiddenRecoveryMs = now
         if (item != null) {
             InfoCache.getInstance().removeInfo(item.serviceId, item.url, InfoItem.InfoType.STREAM)
+        }
+        reloadNow()
+        return true
+    }
+
+    /**
+     * Rebuild the source after the decoder failed mid-stream, once per item: a second failure of
+     * the same item soon after means a new decoder doesn't help.
+     *
+     * @return whether a recovery was started
+     */
+    private fun recoverFromDecoderFailure(): Boolean {
+        val item = player.currentItem ?: player.playQueue?.item
+        if (!decoderRetry.tryRetry(item?.uuid, System.currentTimeMillis())) {
+            return false
         }
         reloadNow()
         return true
@@ -416,6 +441,9 @@ class PlayerErrorHandler(private val player: Player) {
         // Fresh URLs fail within seconds of the reload; a 403 later than this is a new expiry.
         private const val FORBIDDEN_RETRY_WINDOW_MS = 60_000L
 
+        // A decoder that can't decode the stream fails again within seconds of the reload.
+        private const val DECODER_RETRY_WINDOW_MS = 60_000L
+
         private const val NETWORK_RETRY_FIRST_DELAY_MS = 2_000L
         private const val NETWORK_RETRY_MAX_DELAY_MS = 10_000L
 
@@ -445,5 +473,24 @@ class PlayerErrorHandler(private val player: Player) {
             }
             return false
         }
+    }
+}
+
+/**
+ * Allows one recovery per queue item within [windowMs]: when the same item fails again that soon
+ * after a recovery, recovering again would only loop.
+ */
+internal class OneRetryPerItem(private val windowMs: Long) {
+    private var itemUuid: String? = null
+    private var retriedAtMs = 0L
+
+    /** @return whether to recover from this failure of [itemUuid] at [nowMs] */
+    fun tryRetry(itemUuid: String?, nowMs: Long): Boolean {
+        if (itemUuid != null && itemUuid == this.itemUuid && nowMs - retriedAtMs < windowMs) {
+            return false
+        }
+        this.itemUuid = itemUuid
+        retriedAtMs = nowMs
+        return true
     }
 }
