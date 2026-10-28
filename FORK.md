@@ -747,6 +747,16 @@ not again by the metadata. An item that failed to load no longer saves its
 position: upstream saved 0 at every error, so the video started over once the
 network came back and its watch progress was lost.
 
+When the cause is a missing connection (`PlayerErrorHandler.isNoConnection`: the
+host could not be resolved, reached or answered in time), the first failure
+shows "No internet connection" in a notification and a toast, instead of the
+bug report notification; the notification goes away when playback gets ready
+again or the player closes. The trace still goes to the debug error log. The
+media session (`MediaSessionManager`, error message provider) shows the same
+message while the player holds the error, so the car says why it stopped;
+other player errors show "Could not play this stream" there instead of no
+message at all.
+
 Upstream v5.5.0 also reworked the behind-live-window branch of
 `PlayerErrorHandler`: expect a small conflict there at the next sync.
 

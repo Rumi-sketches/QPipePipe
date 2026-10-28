@@ -84,4 +84,7 @@
     <string name="recent_queue_not_watched">To watch</string>
     <string name="recent_queue_added">added</string>
     <string name="playlist_never_played">Never played</string>
+    <!-- Playback stopped for lack of a connection (PlayerErrorHandler) -->
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="no_internet_connection_resume">Playback will resume when the connection is back</string>
 </resources>
