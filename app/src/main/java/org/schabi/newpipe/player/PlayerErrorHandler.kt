@@ -111,6 +111,9 @@ class PlayerErrorHandler(private val player: Player) {
 
         player.saveStreamProgressState()
         var isCatchableException = false
+        // Whether the network retries below will try this source again, which is what the
+        // "no internet connection" message promises.
+        var retriesNetwork = false
 
         if (containsTerminalSabrException(error)) {
             // Attestation retries are handled inside the media bridge. An attestation exception
@@ -148,11 +151,13 @@ class PlayerErrorHandler(private val player: Player) {
                         showIpBlocked()
                         player.onPlaybackShutdown()
                     } else {
+                        retriesNetwork = true
                         isCatchableException = recoverFromNetworkError()
                     }
                 }
 
                 ERROR_CODE_IO_BAD_HTTP_STATUS -> if (!isForbidden(error)) {
+                    retriesNetwork = true
                     isCatchableException = recoverFromNetworkError()
                 } else if (recoverFromForbidden()) {
                     // Expected after a long pause or a network change: reload quietly, without
@@ -167,7 +172,10 @@ class PlayerErrorHandler(private val player: Player) {
                 ERROR_CODE_TIMEOUT,
                 ERROR_CODE_IO_NETWORK_CONNECTION_FAILED,
                 ERROR_CODE_IO_NETWORK_CONNECTION_TIMEOUT,
-                ERROR_CODE_UNSPECIFIED -> isCatchableException = recoverFromNetworkError()
+                ERROR_CODE_UNSPECIFIED -> {
+                    retriesNetwork = true
+                    isCatchableException = recoverFromNetworkError()
+                }
 
                 ERROR_CODE_DECODER_INIT_FAILED -> {
                     val surfaceReleased = isSurfaceReleasedError(error)
@@ -210,7 +218,7 @@ class PlayerErrorHandler(private val player: Player) {
         val playerError = toPlayerError(error)
         if (!isCatchableException) {
             showMediaCodecWorkaroundHint(error)
-            if (isNoConnection(error)) {
+            if (retriesNetwork && isNoConnection(error)) {
                 showNoConnection(playerError)
             } else {
                 createErrorNotification(playerError)
@@ -438,6 +446,8 @@ class PlayerErrorHandler(private val player: Player) {
     }
 
     private fun createErrorNotification(error: PlayerError) {
+        // Another failure took over: the connection message no longer describes what happened.
+        dismissNoConnection()
         ErrorUtil.createNotification(player.getContext(), errorInfo(error))
     }
 
