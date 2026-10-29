@@ -3,7 +3,6 @@ package org.schabi.newpipe.qpipepipe;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import org.schabi.newpipe.NewPipeDatabase;
 import org.schabi.newpipe.database.history.dao.StreamHistoryDAO;
@@ -11,21 +10,27 @@ import org.schabi.newpipe.database.history.model.LatestPlayedStream;
 import org.schabi.newpipe.extractor.stream.StreamInfoItem;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 /**
- * Finds where a playlist should resume: the video started most recently according to the
- * watch history, or the one after it when that video was watched past
- * {@link #FINISHED_RATIO} of its length.
+ * Finds where a playlist should resume: the video furthest down the list among those played
+ * past {@link #STARTED_RATIO} of their length according to the watch history, or the one after
+ * it when that video was watched past {@link #FINISHED_RATIO}. Videos only opened for a moment
+ * are ignored.
  */
 public final class PlaylistResume {
 
     /** Share of a video that counts as watched, so playback resumes from the next one. */
     public static final double FINISHED_RATIO = 0.9;
+
+    /** Share of a video that must be played for it to count as the one to resume. */
+    static final double STARTED_RATIO = 0.05;
 
     /** Urls per query, under SQLite's limit of 999 bound parameters. */
     private static final int URLS_PER_QUERY = 500;
@@ -38,30 +43,27 @@ public final class PlaylistResume {
 
     /**
      * @return the index in {@code items} to resume from, or {@link #NO_RESUME} when none of
-     * the items was ever started or the last one started was the final one and is watched
+     * the items was played past {@link #STARTED_RATIO} or the furthest one played is the final
+     * one and is watched
      */
     public static Single<Integer> findResumeIndex(@NonNull final Context context,
                                                   @NonNull final List<StreamInfoItem> items) {
         final StreamHistoryDAO historyDao =
                 NewPipeDatabase.getInstance(context).streamHistoryDAO();
-        return Single.fromCallable(() -> resumeIndex(items, latestPlayed(historyDao, items)))
+        return Single.fromCallable(() -> resumeIndex(items, playedAmong(historyDao, items)))
                 .subscribeOn(Schedulers.io());
     }
 
-    @Nullable
-    private static LatestPlayedStream latestPlayed(@NonNull final StreamHistoryDAO historyDao,
-                                                   @NonNull final List<StreamInfoItem> items) {
+    private static List<LatestPlayedStream> playedAmong(
+            @NonNull final StreamHistoryDAO historyDao,
+            @NonNull final List<StreamInfoItem> items) {
         final List<String> urls = new ArrayList<>(new LinkedHashSet<>(urlsOf(items)));
-        LatestPlayedStream latest = null;
+        final List<LatestPlayedStream> played = new ArrayList<>();
         for (int from = 0; from < urls.size(); from += URLS_PER_QUERY) {
-            final LatestPlayedStream candidate = historyDao.getLatestPlayedAmong(
-                    urls.subList(from, Math.min(from + URLS_PER_QUERY, urls.size())));
-            if (candidate != null && (latest == null
-                    || candidate.getAccessDateMillis() > latest.getAccessDateMillis())) {
-                latest = candidate;
-            }
+            played.addAll(historyDao.getPlayedAmong(
+                    urls.subList(from, Math.min(from + URLS_PER_QUERY, urls.size()))));
         }
-        return latest;
+        return played;
     }
 
     private static List<String> urlsOf(@NonNull final List<StreamInfoItem> items) {
@@ -72,22 +74,39 @@ public final class PlaylistResume {
         return urls;
     }
 
+    /**
+     * @param played the items' streams found in the watch history, in any order
+     */
     static int resumeIndex(@NonNull final List<StreamInfoItem> items,
-                           @Nullable final LatestPlayedStream latest) {
-        if (latest == null) {
-            return NO_RESUME;
+                           @NonNull final List<LatestPlayedStream> played) {
+        final Map<String, LatestPlayedStream> started = new HashMap<>();
+        for (final LatestPlayedStream stream : played) {
+            if (isStarted(stream)) {
+                started.put(key(stream.getServiceId(), stream.getUrl()), stream);
+            }
         }
-        for (int i = 0; i < items.size(); i++) {
+        for (int i = items.size() - 1; i >= 0; i--) {
             final StreamInfoItem item = items.get(i);
-            if (item.getServiceId() == latest.getServiceId()
-                    && item.getUrl().equals(latest.getUrl())) {
-                if (!isWatched(latest)) {
+            final LatestPlayedStream stream = started.get(key(item.getServiceId(), item.getUrl()));
+            if (stream != null) {
+                if (!isWatched(stream)) {
                     return i;
                 }
                 return i + 1 < items.size() ? i + 1 : NO_RESUME;
             }
         }
         return NO_RESUME;
+    }
+
+    private static String key(final int serviceId, @NonNull final String url) {
+        return serviceId + " " + url;
+    }
+
+    /** A video with an unknown duration counts as soon as it was started. */
+    private static boolean isStarted(@NonNull final LatestPlayedStream stream) {
+        return stream.getDurationSeconds() <= 0
+                || stream.getProgressMillis()
+                >= stream.getDurationSeconds() * 1000 * STARTED_RATIO;
     }
 
     private static boolean isWatched(@NonNull final LatestPlayedStream stream) {
