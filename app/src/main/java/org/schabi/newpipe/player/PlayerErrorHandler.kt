@@ -481,16 +481,20 @@ class PlayerErrorHandler(private val player: Player) {
  * after a recovery, recovering again would only loop.
  */
 internal class OneRetryPerItem(private val windowMs: Long) {
-    private var itemUuid: String? = null
-    private var retriedAtMs = 0L
+    // When each item last recovered. Only entries still inside the window are kept, so the map
+    // stays as small as the items that failed in the last [windowMs].
+    private val retriedAtMs = HashMap<String, Long>()
 
     /** @return whether to recover from this failure of [itemUuid] at [nowMs] */
     fun tryRetry(itemUuid: String?, nowMs: Long): Boolean {
-        if (itemUuid != null && itemUuid == this.itemUuid && nowMs - retriedAtMs < windowMs) {
+        retriedAtMs.values.removeAll { nowMs - it >= windowMs }
+        if (itemUuid == null) {
+            return true
+        }
+        if (itemUuid in retriedAtMs) {
             return false
         }
-        this.itemUuid = itemUuid
-        retriedAtMs = nowMs
+        retriedAtMs[itemUuid] = nowMs
         return true
     }
 }

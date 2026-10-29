@@ -767,7 +767,10 @@ takes it back or its media process restarts (`MediaCodec.CodecException`
 `0xffffffe0`, DEAD_OBJECT), which says nothing about the stream. Now the first
 such failure of a queue item rebuilds the source at the same position, with a new
 decoder and no notification; a second failure of the same item within a minute
-stops playback as before. The 403 recovery uses the same once-per-item rule.
+stops playback as before. The 403 recovery uses the same once-per-item rule,
+kept for each item separately. The MediaCodec workaround hint (async queueing,
+`setOutputSurface`) now shows only when the recovery fails, with the error
+notification: a decoder that recovers by itself needs no setting changed.
 
 Check: on an emulator with `adb root`, play a video in the video player and kill
 the decoder service (`adb shell kill -9 $(adb shell pidof

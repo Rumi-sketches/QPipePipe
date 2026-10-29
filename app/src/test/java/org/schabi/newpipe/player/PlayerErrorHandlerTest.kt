@@ -65,4 +65,12 @@ class PlayerErrorHandlerTest {
         assertTrue(retry.tryRetry(null, 0L))
         assertTrue(retry.tryRetry(null, 1L))
     }
+
+    @Test
+    fun oneRetryPerItemKeepsEachItemsRecordWhenAnotherFailsInBetween() {
+        val retry = OneRetryPerItem(60_000L)
+        assertTrue(retry.tryRetry("a", 0L))
+        assertTrue(retry.tryRetry("b", 1_000L))
+        assertFalse(retry.tryRetry("a", 2_000L))
+    }
 }
