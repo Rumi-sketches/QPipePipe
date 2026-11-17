@@ -424,7 +424,7 @@ public final class Player {
 
         liveIdle = false;
         stopSabrBackoffCountdown();
-        playerErrorHandler.release();
+        playerErrorHandler.getRecovery().release();
         surfaceController.cleanupVideoSurface();
 
         if (!exoPlayerIsNull()) {
@@ -517,7 +517,7 @@ public final class Player {
 
     void reloadPlayQueueManager() {
         // This rebuild replaces any reload still waiting out a network failure.
-        playerErrorHandler.cancelDelayedReload();
+        playerErrorHandler.getRecovery().cancelDelayedReload();
         // Every rebuild of the current source resumes where it was, whichever caller asked for it.
         // A live stream resumes at its live edge instead.
         if (!isCurrentStreamLive()) {
@@ -579,7 +579,7 @@ public final class Player {
         // Releasing the source is what actually stops the manifest / playlist refresh and the
         // segment downloads ExoPlayer would otherwise keep doing for a prepared live source.
         simpleExoPlayer.stop();
-        playerErrorHandler.cancelDelayedReload();
+        playerErrorHandler.getRecovery().cancelDelayedReload();
         if (playQueueManager != null) {
             playQueueManager.dispose();
             playQueueManager = null;
@@ -1074,11 +1074,11 @@ public final class Player {
     }
 
     void onPlaybackReady() {
-        playerErrorHandler.onPlaybackReady();
+        playerErrorHandler.getRecovery().onPlaybackReady();
     }
 
     void reloadIfWaitingForNetwork() {
-        playerErrorHandler.reloadIfWaiting();
+        playerErrorHandler.getRecovery().reloadIfWaiting();
     }
     //endregion
 

@@ -24,10 +24,10 @@ import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector;
 import org.schabi.newpipe.MainActivity;
 import org.schabi.newpipe.R;
 import org.schabi.newpipe.player.NotificationUtil;
-import org.schabi.newpipe.player.PlayerErrorHandler;
 import org.schabi.newpipe.player.mediasession.MediaSessionCallback;
 import org.schabi.newpipe.player.mediasession.PlayQueueNavigator;
 import org.schabi.newpipe.player.playback.PlayerMediaSession;
+import org.schabi.newpipe.qpipepipe.player.PlaybackRecovery;
 import org.schabi.newpipe.util.StreamTypeUtil;
 
 import java.util.Optional;
@@ -95,7 +95,7 @@ public class MediaSessionManager {
         // error, so the car only shows that something went wrong, never what.
         sessionConnector.setErrorMessageProvider(error -> Pair.create(
                 PlaybackStateCompat.ERROR_CODE_APP_ERROR,
-                PlayerErrorHandler.mediaSessionErrorMessage(context, error)));
+                PlaybackRecovery.mediaSessionErrorMessage(context, error)));
         sessionConnector.setPlayer(new ForwardingPlayer(player) {
             @Override
             public void play() {

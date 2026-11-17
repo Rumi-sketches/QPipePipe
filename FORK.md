@@ -716,10 +716,43 @@ car:
 Without the car, `adb shell cmd media_session dispatch play` after the kill
 resumes the queue too.
 
+### Playback recovery hooks in PlayerErrorHandler
+
+Files: `qpipepipe/player/PlaybackRecovery.kt` (new), `PlayerErrorHandler`
+(hooks only), `Player` (`playerErrorHandler.getRecovery()`), `MediaSessionManager`.
+
+The three recoveries below (403, network, decoder) live in `PlaybackRecovery`,
+with `OneRetryPerItem` and the "No internet connection" message.
+`PlayerErrorHandler` keeps upstream's code plus these hooks, which must survive
+every merge:
+
+- the `recovery` field, `PlaybackRecovery(player, reload, shutdown,
+  currentItem)`, right after the class line: it hands over the player actions
+  that only the `player` package can reach;
+- in `onPlayerError`, the `else if (recovery.handles(error))` branch between the
+  SABR check and upstream's `when`. It takes the network error codes,
+  `ERROR_CODE_IO_BAD_HTTP_STATUS` and `ERROR_CODE_DECODING_FAILED`, so
+  upstream's branches for those codes, and its `recoverFromNetworkError`, no
+  longer run. A 403 known only from the cause message of
+  `ERROR_CODE_IO_UNSPECIFIED` stays with upstream's IP-blocked dialog;
+- `if (!recovery.showsNoConnection(playerError))` before upstream's
+  `createErrorNotification(playerError)`;
+- `positionMs`, `durationMs` and `PlayerDebugTrace.onPlayerError`, from "Debug
+  builds keep every error trace".
+
+The hooks stay off the lines upstream v5.5.0 changes (the behind-live-window
+branch, the fields after `lastSurfaceErrorRecoveryMs`, `saveStreamProgressState`):
+a trial `git merge-file` of its `PlayerErrorHandler.kt` merges without conflicts.
+
+Check after a merge: `git diff <upstream tag> -- app/src/main/java/org/schabi/newpipe/player/PlayerErrorHandler.kt`
+shows only these lines, and `PlaybackRecoveryRouteTest` passes. If upstream
+adds or changes a `when` branch for a code the hook takes, that branch does not
+run: decide whether the fork's recovery still applies.
+
 ### A long pause or a network change does not end in a 403
 
-Files: `PlayerErrorHandler` (`ERROR_CODE_IO_BAD_HTTP_STATUS`,
-`recoverFromForbidden`), `Player.renewExpiredSource`, `PlayerTransportController.play`,
+Files: `PlaybackRecovery` (`Route.FORBIDDEN`, `recoverFromForbidden`, hooks in
+`PlayerErrorHandler` above), `Player.renewExpiredSource`, `PlayerTransportController.play`,
 `MediaSourceManager.isCurrentSourceExpired`, `LoadedMediaSource.isExpired`.
 
 YouTube stream URLs expire and are bound to the IP they were extracted from.
@@ -735,8 +768,9 @@ Wi-Fi and mobile data while it plays: it resumes at the same position.
 
 ### No error loop without network
 
-Files: `PlayerErrorHandler` (`recoverFromNetworkError`, `networkRetryDelayMs`,
-`reloadIfWaiting`, `isNoConnection`, `showNoConnection`, `release`),
+Files: `PlaybackRecovery` (`recoverFromNetworkError`, `networkRetryDelayMs`,
+`reloadIfWaiting`, `isNoConnection`, `showsNoConnection`, `release`; hooks in
+`PlayerErrorHandler` above),
 `PlayerMetadataController.errorsToReport`, `PlayerHistoryController.hasPlayedPosition`,
 `Player.reloadPlayQueueManager`, `Player.destroyPlayer`, `PlayerTransportController.play`,
 `PlayerPlaybackStateController` (`STATE_READY`), `MediaSessionManager` (error message
@@ -754,7 +788,7 @@ not again by the metadata. An item that failed to load no longer saves its
 position: upstream saved 0 at every error, so the video started over once the
 network came back and its watch progress was lost.
 
-When the cause is a missing connection (`PlayerErrorHandler.isNoConnection`: the
+When the cause is a missing connection (`PlaybackRecovery.isNoConnection`: the
 host could not be resolved, reached or answered in time) and the retries above
 go on, the first failure
 shows "No internet connection" in a notification and a toast, instead of the
@@ -764,9 +798,6 @@ media session (`MediaSessionManager`, error message provider) shows the same
 message while the player holds the error, so the car says why it stopped;
 other player errors show "Could not play this stream" there instead of no
 message at all.
-
-Upstream v5.5.0 also reworked the behind-live-window branch of
-`PlayerErrorHandler`: expect a small conflict there at the next sync.
 
 Check: play a video and cut the network (on a phone driven over adb Wi-Fi, set
 Private DNS to an invalid hostname instead): one toast, then retries 2, 4, 8,
@@ -781,7 +812,8 @@ the OS killed the app: play, pause, cut the network, `adb shell am stop-app
 
 ### Recovery from a decoder that fails mid-stream
 
-Files: `PlayerErrorHandler` (`recoverFromDecoderFailure`, `OneRetryPerItem`).
+Files: `PlaybackRecovery` (`Route.DECODER`, `recoverFromDecoderFailure`,
+`OneRetryPerItem`; hooks in `PlayerErrorHandler` above).
 
 Upstream stopped playback with the bug report notification on
 `ERROR_CODE_DECODING_FAILED`. A hardware decoder fails like this when the system
