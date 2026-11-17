@@ -72,4 +72,5 @@
     <string name="recent_queue_not_watched">Skal ses</string>
     <string name="recent_queue_added">lagt til</string>
     <string name="playlist_never_played">Aldri avspilt</string>
+    <string name="queue_unplayable">Ingen av videoene i køen kan spilles av</string>
 </resources>

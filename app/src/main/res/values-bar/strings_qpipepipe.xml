@@ -72,4 +72,5 @@
     <string name="recent_queue_not_watched">No zum Oschaun</string>
     <string name="recent_queue_added">dazuadoa</string>
     <string name="playlist_never_played">No nia obgspuit</string>
+    <string name="queue_unplayable">Koans vo de Videos in da Warteschlang ko obgspuit wern</string>
 </resources>

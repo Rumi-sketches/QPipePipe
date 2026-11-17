@@ -72,4 +72,5 @@
     <string name="recent_queue_not_watched">Por ver</string>
     <string name="recent_queue_added">amestáu</string>
     <string name="playlist_never_played">Enxamás se reprodució</string>
+    <string name="queue_unplayable">Nun se pue reproducir dengún videu de la cola</string>
 </resources>

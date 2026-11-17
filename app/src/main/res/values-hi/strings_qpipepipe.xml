@@ -72,4 +72,5 @@
     <string name="recent_queue_not_watched">देखना है</string>
     <string name="recent_queue_added">जोड़ा गया</string>
     <string name="playlist_never_played">कभी नहीं चलाया गया</string>
+    <string name="queue_unplayable">कतार का कोई भी वीडियो चलाया नहीं जा सकता</string>
 </resources>

@@ -72,4 +72,5 @@
     <string name="recent_queue_not_watched">Te bekijken</string>
     <string name="recent_queue_added">toegevoegd</string>
     <string name="playlist_never_played">Nooit afgespeeld</string>
+    <string name="queue_unplayable">Geen van de video\'s in de wachtrij kan worden afgespeeld</string>
 </resources>

@@ -72,4 +72,5 @@
     <string name="recent_queue_not_watched">Para assistir</string>
     <string name="recent_queue_added">adicionado</string>
     <string name="playlist_never_played">Nunca reproduzida</string>
+    <string name="queue_unplayable">Nenhum dos vídeos da fila pode ser reproduzido</string>
 </resources>

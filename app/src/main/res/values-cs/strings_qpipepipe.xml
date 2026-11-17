@@ -76,4 +76,5 @@
     <string name="recent_queue_not_watched">Ke zhlédnutí</string>
     <string name="recent_queue_added">přidáno</string>
     <string name="playlist_never_played">Nikdy nepřehráno</string>
+    <string name="queue_unplayable">Žádné z videí ve frontě nelze přehrát</string>
 </resources>

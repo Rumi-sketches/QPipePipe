@@ -68,4 +68,5 @@
     <string name="recent_queue_not_watched">ยังไม่ได้ดู</string>
     <string name="recent_queue_added">เพิ่มแล้ว</string>
     <string name="playlist_never_played">ไม่เคยเล่น</string>
+    <string name="queue_unplayable">ไม่สามารถเล่นวิดีโอใดในคิวได้</string>
 </resources>

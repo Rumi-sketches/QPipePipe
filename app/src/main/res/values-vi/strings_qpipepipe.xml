@@ -72,4 +72,5 @@
     <string name="recent_queue_not_watched">Chưa xem</string>
     <string name="recent_queue_added">đã thêm</string>
     <string name="playlist_never_played">Chưa từng phát</string>
+    <string name="queue_unplayable">Không thể phát video nào trong hàng đợi</string>
 </resources>

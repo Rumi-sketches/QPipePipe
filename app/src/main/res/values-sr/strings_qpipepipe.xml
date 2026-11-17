@@ -76,4 +76,5 @@
     <string name="recent_queue_not_watched">За гледање</string>
     <string name="recent_queue_added">додато</string>
     <string name="playlist_never_played">Никад пуштено</string>
+    <string name="queue_unplayable">Ниједан видео у реду не може да се пусти</string>
 </resources>

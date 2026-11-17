@@ -11,6 +11,7 @@ import org.schabi.newpipe.extractor.stream.StreamInfo
 import org.schabi.newpipe.player.mediaitem.ExoMediaItems
 import org.schabi.newpipe.player.mediaitem.PlayerMediaItem
 import org.schabi.newpipe.player.mediasource.FailedMediaSource
+import org.schabi.newpipe.qpipepipe.player.UnplayableQueue
 import java.util.Optional
 
 /**
@@ -25,6 +26,8 @@ import java.util.Optional
  * exposes the two items, since most of the other controllers read them.
  */
 class PlayerMetadataController(private val player: Player) {
+    // QPipePipe: broken items reported once per queue, a repeat-all queue of them stops
+    private val unplayableQueue = UnplayableQueue.forPlayer(player)
 
     /** The item the play queue is currently at, as reported by the playback synchronization. */
     var currentItem: PlayerMediaItem? = null
@@ -66,7 +69,7 @@ class PlayerMetadataController(private val player: Player) {
             currentMetadata = tag
 
             val sourceErrors = errorsToReport(tag.errors)
-            if (sourceErrors.isNotEmpty()) {
+            if (unplayableQueue.onLanding(tag) && sourceErrors.isNotEmpty()) {
                 // new errors might have been added even if previousInfo == tag.getMaybeStreamInfo()
                 val errorInfo = ErrorInfo(
                     sourceErrors,

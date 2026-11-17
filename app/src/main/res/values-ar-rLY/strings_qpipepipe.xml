@@ -88,4 +88,5 @@
     <string name="recent_queue_not_watched">للمشاهدة</string>
     <string name="recent_queue_added">مُضاف</string>
     <string name="playlist_never_played">لم يُشغَّل قط</string>
+    <string name="queue_unplayable">لا يمكن تشغيل أي من مقاطع الفيديو في قائمة الانتظار</string>
 </resources>

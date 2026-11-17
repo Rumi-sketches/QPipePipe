@@ -80,4 +80,5 @@
     <string name="recent_queue_not_watched">לצפייה</string>
     <string name="recent_queue_added">נוסף</string>
     <string name="playlist_never_played">לא נוגן מעולם</string>
+    <string name="queue_unplayable">אי אפשר לנגן אף אחד מהסרטונים בתור</string>
 </resources>

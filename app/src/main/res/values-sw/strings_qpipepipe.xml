@@ -72,4 +72,5 @@
     <string name="recent_queue_not_watched">Ya kutazama</string>
     <string name="recent_queue_added">imeongezwa</string>
     <string name="playlist_never_played">Haijawahi kuchezwa</string>
+    <string name="queue_unplayable">Hakuna video yoyote kwenye foleni inayoweza kuchezwa</string>
 </resources>

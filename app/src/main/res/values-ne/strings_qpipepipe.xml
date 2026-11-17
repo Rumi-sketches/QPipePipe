@@ -72,4 +72,5 @@
     <string name="recent_queue_not_watched">हेर्न बाँकी</string>
     <string name="recent_queue_added">थपिएको</string>
     <string name="playlist_never_played">कहिल्यै प्ले नगरिएको</string>
+    <string name="queue_unplayable">लाइनमा रहेका कुनै पनि भिडियो प्ले गर्न सकिँदैन</string>
 </resources>

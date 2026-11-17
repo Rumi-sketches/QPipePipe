@@ -76,4 +76,5 @@
     <string name="recent_queue_not_watched">Neperžiūrėta</string>
     <string name="recent_queue_added">pridėta</string>
     <string name="playlist_never_played">Niekada negrota</string>
+    <string name="queue_unplayable">Nė vieno eilės vaizdo įrašo negalima paleisti</string>
 </resources>

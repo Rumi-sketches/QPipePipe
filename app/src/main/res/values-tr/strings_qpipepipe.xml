@@ -72,4 +72,5 @@
     <string name="recent_queue_not_watched">İzlenecek</string>
     <string name="recent_queue_added">eklendi</string>
     <string name="playlist_never_played">Hiç oynatılmadı</string>
+    <string name="queue_unplayable">Kuyruktaki videoların hiçbiri oynatılamıyor</string>
 </resources>

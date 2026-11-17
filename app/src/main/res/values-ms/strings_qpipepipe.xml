@@ -68,4 +68,5 @@
     <string name="recent_queue_not_watched">Untuk ditonton</string>
     <string name="recent_queue_added">ditambah</string>
     <string name="playlist_never_played">Tidak pernah dimainkan</string>
+    <string name="queue_unplayable">Tiada video dalam baris gilir yang boleh dimainkan</string>
 </resources>

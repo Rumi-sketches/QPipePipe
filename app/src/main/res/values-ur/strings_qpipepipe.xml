@@ -72,4 +72,5 @@
     <string name="recent_queue_not_watched">دیکھنی ہے</string>
     <string name="recent_queue_added">شامل کی گئیں</string>
     <string name="playlist_never_played">کبھی نہیں چلائی گئی</string>
+    <string name="queue_unplayable">قطار میں موجود کوئی بھی ویڈیو چلائی نہیں جا سکتی</string>
 </resources>

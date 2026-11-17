@@ -68,4 +68,5 @@
     <string name="recent_queue_not_watched">Goh lom geukalon</string>
     <string name="recent_queue_added">geutamah</string>
     <string name="playlist_never_played">Goh tom geuputa</string>
+    <string name="queue_unplayable">Hana video lam antrian nyang jeut geuputa</string>
 </resources>

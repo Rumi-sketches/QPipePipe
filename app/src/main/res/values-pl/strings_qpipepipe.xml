@@ -80,4 +80,5 @@
     <string name="recent_queue_not_watched">Do obejrzenia</string>
     <string name="recent_queue_added">dodane</string>
     <string name="playlist_never_played">Nigdy nie odtwarzano</string>
+    <string name="queue_unplayable">Nie można odtworzyć żadnego filmu z kolejki</string>
 </resources>

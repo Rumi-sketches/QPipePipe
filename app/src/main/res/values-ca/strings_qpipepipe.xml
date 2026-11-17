@@ -72,4 +72,5 @@
     <string name="recent_queue_not_watched">Per veure</string>
     <string name="recent_queue_added">afegit</string>
     <string name="playlist_never_played">Mai reproduïda</string>
+    <string name="queue_unplayable">No es pot reproduir cap dels vídeos de la cua</string>
 </resources>

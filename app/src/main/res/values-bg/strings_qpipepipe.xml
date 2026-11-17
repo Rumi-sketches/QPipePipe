@@ -72,4 +72,5 @@
     <string name="recent_queue_not_watched">За гледане</string>
     <string name="recent_queue_added">добавено</string>
     <string name="playlist_never_played">Никога не е пускан</string>
+    <string name="queue_unplayable">Нито едно от видеоклиповете в опашката не може да бъде възпроизведено</string>
 </resources>

@@ -72,4 +72,5 @@
     <string name="recent_queue_not_watched">చూడాల్సినవి</string>
     <string name="recent_queue_added">జోడించబడింది</string>
     <string name="playlist_never_played">ఎప్పుడూ ప్లే చేయలేదు</string>
+    <string name="queue_unplayable">క్యూలోని ఏ వీడియోనూ ప్లే చేయలేము</string>
 </resources>

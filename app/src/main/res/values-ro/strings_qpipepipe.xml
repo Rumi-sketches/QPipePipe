@@ -76,4 +76,5 @@
     <string name="recent_queue_not_watched">De vizionat</string>
     <string name="recent_queue_added">adăugat</string>
     <string name="playlist_never_played">Niciodată redată</string>
+    <string name="queue_unplayable">Niciunul dintre videoclipurile din coadă nu poate fi redat</string>
 </resources>

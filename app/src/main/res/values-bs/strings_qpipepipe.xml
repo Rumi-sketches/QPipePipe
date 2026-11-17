@@ -76,4 +76,5 @@
     <string name="recent_queue_not_watched">Za gledanje</string>
     <string name="recent_queue_added">dodano</string>
     <string name="playlist_never_played">Nikad reproducirano</string>
+    <string name="queue_unplayable">Nijedan video u redu se ne može reproducirati</string>
 </resources>
