@@ -98,7 +98,9 @@ public class DownloadManagerService extends Service {
     private Handler mHandler;
     // QPipePipe: restarts the downloads whose wait is over (FORK.md)
     private final Runnable mRetryMissions = () -> {
-        if (mHandler != null) updateForegroundState(mManager.runMissions());
+        if (mHandler == null) return;
+        updateForegroundState(mManager.mRetryBackoff.hasFailures()
+                ? mManager.runMissions() : mManager.getRunningMissionsCount() > 0);
     };
     private boolean mForeground = false;
     private NotificationManager mNotificationManager = null;
@@ -183,7 +185,7 @@ public class DownloadManagerService extends Service {
             public void onAvailable(Network network) {
                 handleConnectivityState(false);
                 Handler handler = mHandler;// QPipePipe: a new network ends the waits (FORK.md)
-                if (handler != null && mManager.mRetryBackoff.clear()) handler.post(mRetryMissions);
+                if (handler != null && mManager.mRetryBackoff.endWaits()) handler.post(mRetryMissions);
             }
 
             @Override

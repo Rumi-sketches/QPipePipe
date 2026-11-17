@@ -12,7 +12,7 @@ import java.util.WeakHashMap
  * answering 5xx) it restarted as fast as the error came, until the network went away or the user
  * paused it. Now the queue waits 2, 4, 8 ... seconds, up to [MAX_DELAY_MS], before restarting it;
  * the waits start over once the download made progress. A new network or "start all" ends every
- * wait, and starting one download by hand never waits.
+ * wait, starting one download by hand never waits, and "pause all" cancels the restarts.
  */
 class DownloadRetryBackoff @JvmOverloads constructor(
     private val nowMs: () -> Long = { SystemClock.elapsedRealtime() },
@@ -48,18 +48,29 @@ class DownloadRetryBackoff @JvmOverloads constructor(
     fun isWaiting(mission: Any): Boolean = waits[mission]?.let { nowMs() < it.retryAtMs } ?: false
 
     /**
-     * Ends every wait and forgets the failures: the network changed or the user started the
+     * Ends every wait and starts the waits over: the network changed or the user started the
      * downloads.
      *
      * @return whether a download was waiting
      */
     @Synchronized
-    fun clear(): Boolean {
+    fun endWaits(): Boolean {
         val now = nowMs()
         val anyWaiting = waits.values.any { now < it.retryAtMs }
-        waits.clear()
+        waits.values.forEach {
+            it.failures = 0
+            it.retryAtMs = 0
+        }
         return anyWaiting
     }
+
+    /** Forgets every failure: the user paused the downloads, so no wait restarts them. */
+    @Synchronized
+    fun forget() = waits.clear()
+
+    /** Whether a restart is still owed to a failure: false once [forget] ran. */
+    @Synchronized
+    fun hasFailures(): Boolean = waits.isNotEmpty()
 
     companion object {
         const val FIRST_DELAY_MS = 2_000L

@@ -77,18 +77,33 @@ class DownloadRetryBackoffTest {
     fun `a network change or start all ends the waits at once`() {
         repeat(4) { backoff.onFailure(mission, done = 0, willRetry = true) }
 
-        assertTrue(backoff.clear())
+        assertTrue(backoff.endWaits())
         assertFalse(backoff.isWaiting(mission))
+        // the delayed run still restarts it
+        assertTrue(backoff.hasFailures())
         assertEquals(2_000L, backoff.onFailure(mission, done = 0, willRetry = true))
     }
 
     @Test
-    fun `clearing with nothing waiting says so`() {
-        assertFalse(backoff.clear())
+    fun `ending the waits with nothing waiting says so`() {
+        assertFalse(backoff.endWaits())
 
         val delay = backoff.onFailure(mission, done = 0, willRetry = true)
         now += delay
-        assertFalse(backoff.clear())
+        assertFalse(backoff.endWaits())
+    }
+
+    @Test
+    fun `pause all cancels the restart the wait owes`() {
+        backoff.onFailure(mission, done = 0, willRetry = true)
+        assertTrue(backoff.hasFailures())
+
+        backoff.forget()
+
+        // the delayed run finds nothing to restart
+        assertFalse(backoff.hasFailures())
+        assertFalse(backoff.isWaiting(mission))
+        assertEquals(2_000L, backoff.onFailure(mission, done = 0, willRetry = true))
     }
 
     @Test

@@ -415,6 +415,7 @@ public class DownloadManager {
 
     public void pauseAllMissions(boolean force) {
         synchronized (this) {
+            mRetryBackoff.forget();// QPipePipe: no wait restarts them
             for (DownloadMission mission : mMissionsPending) {
                 if (!mission.running || mission.isPsRunning() || mission.isFinished()) continue;
 
@@ -435,7 +436,7 @@ public class DownloadManager {
                 if (!mission.running && !mission.isCorrupt()) mission.setEnqueued(true);
             }
 
-            mRetryBackoff.clear();// QPipePipe: the user starts them at once
+            mRetryBackoff.endWaits();// QPipePipe: the user starts them at once
             runMissions();
         }
     }

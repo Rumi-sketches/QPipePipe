@@ -892,8 +892,9 @@ then the next video plays; Cancel keeps it there, Next video moves on at once.
 
 Files: `qpipepipe/download/DownloadRetryBackoff`. Hooks, which must survive a merge: in
 `DownloadManager` the `mRetryBackoff` field after `mSelfMissionsControl`, the
-`isWaiting` block after the first `continue` in `runMissions` and
-`mRetryBackoff.clear()` before `runMissions()` in `startAllMissions`; in
+`isWaiting` block after the first `continue` in `runMissions`,
+`mRetryBackoff.endWaits()` before `runMissions()` in `startAllMissions` and
+`mRetryBackoff.forget()` at the top of `pauseAllMissions`; in
 `DownloadManagerService` the `mRetryMissions` field after `mHandler`, the two lines
 after `handleConnectivityState(false)` in `case MESSAGE_ERROR`, and the two lines after
 `handleConnectivityState(false)` in the network callback's `onAvailable`.
@@ -905,15 +906,15 @@ without data, DNS failing, a server down) it restarted forever, about 170 times 
 minute, keeping radio and CPU busy. Now the queue waits 2, 4, 8 ... seconds, up to 5
 minutes, before restarting it; the waits start over once it downloaded something. A new
 network (`onAvailable`) or "Start all" ends every wait; Start on the download itself
-restarts it at once. While a download waits, the service stays in the foreground
+restarts it at once; "Pause all" cancels the restarts still owed. While a download waits, the service stays in the foreground
 (as it did during the loop): starting it again from the background later is not
 allowed on recent Android. With no network at all nothing changes: the queue waits for
 the network as before. "Download failed" is still shown once.
 
 Check: `DownloadRetryBackoffTest` passes. On a phone, set Private DNS to an invalid
 hostname, start a download: `notifyError() code = 1005` in the log after 2, 4, 8 ...
-seconds instead of a burst; turning Wi-Fi off and on, or Start on the download, retries
-at once.
+seconds instead of a burst; turning Wi-Fi off and on, Start on the download or "Start
+all" retries at once; Start on a waiting download, then "Pause all": no attempt after.
 
 ## Upstream services
 
