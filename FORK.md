@@ -206,11 +206,11 @@ Upstream files touched only to plug the layer in: one entry in
 go in this screen, not in the upstream screens. Preference keys predate the
 screen and must not be renamed, or users lose their choices.
 
-Fork strings are translated in `res/values-*/strings_qpipepipe.xml` and
-`strings_qpipepipe_selection.xml`, one file each per locale that has an
-upstream `strings.xml` with content (87). They are not on Weblate: when a fork
-string is added or changed, translate it in every one of those files, keeping
-the plural quantities of the upstream file of that locale. `qpipepipe_update_log` and `qpipepipe_settings_title` stay English
+Fork strings are translated in `res/values-*/strings_qpipepipe.xml`, one file
+per locale that has an upstream `strings.xml` with content (87). They are not
+on Weblate: when a fork string is added or changed, translate it in every one
+of those files, keeping the plural quantities of the upstream file of that
+locale. `qpipepipe_update_log` and `qpipepipe_settings_title` stay English
 only.
 
 ## Fork patches
@@ -249,43 +249,6 @@ instead of starting background audio.
 Check: enable swipe actions, swipe left and right on rows in home, search,
 history, a local playlist and a channel group feed; the rows snap back and the
 action runs.
-
-### Multiple selection of videos
-
-Code in `qpipepipe/selection/` (`MultiSelect`, `SelectionController`,
-`SelectionDecoration`, `SelectionActions`), `res/layout/qpipepipe_selection_bar.xml`,
-`res/values/strings_qpipepipe_selection.xml` (translated in every
-`values-*/strings_qpipepipe_selection.xml`), `styles_qpipepipe.xml`,
-`ids_qpipepipe.xml`. Upstream files touched: `InfoItemDialog` (no dialog while
-selecting), `BaseListFragment` and `BaseLocalListFragment`
-(install, toolbar button, `getMultiSelectRemover`), `FeedFragment`,
-`LocalPlaylistFragment` and `StatisticsPlaylistFragment` (remove, no drag or
-swipe while selecting), `LocalItemListAdapter.getLocalItem`, `styles.xml`
-(`windowActionModeOverlay`, `actionModeBackground`).
-
-A toolbar button, placed after upstream's icons so it never pushes one of them
-into the overflow menu (where there is no room, it is in the overflow menu
-itself, e.g. local and remote playlists), starts selection mode. The long-press
-menu is unchanged. In selection mode taps select videos (headers keep their
-taps), an action mode over the toolbar, in the toolbar's color, shows the count and Select all, and a bar
-at the bottom applies one action to the selected videos in the order they were
-picked: queue, play next, background, popup, add to playlist, download (video
-or audio only, through "Download all"'s sequential downloader), and under More
-mark as watched, share links, remove from the playlist or the history. Back or
-the arrow leave selection mode, and so do leaving the screen or the list going
-out of sight (another tab, the player sheet collapsing). Videos are kept by key
-(url, or place in a local playlist), not by row, because history and feed
-reload while selecting. A long press selects too, and one that unselects the last
-video keeps the mode open, so the row's own long press doesn't open the menu. The selection
-state is drawn by an item decoration, so no row layout changes. Comments and
-the playlists list are excluded in `MultiSelect.holdsVideos`.
-
-Check: compare the toolbars with upstream's on home tabs, playlists, a local
-playlist, history, search and a channel: only "Multiple selection" is added. In
-search, tap it and select three videos: "3 selected" and three check marks. Queue starts or extends the queue with all
-three. Back leaves selection without leaving search. In a local playlist,
-select one video, More > Remove from playlist: it is gone after reopening. In a
-channel, select in Videos and swipe to another tab: selection mode ends.
 
 ### Clear-queue confirmation with enqueue options
 
@@ -450,7 +413,10 @@ list changes (pages loaded, sorting, dragging) through an adapter observer.
 
 In remote playlists only the pages loaded so far are searched. Shuffled
 background play and the long-press enqueue actions still start from the
-beginning. Channels and the feed keep upstream's `playlist_control.xml`.
+beginning. Channels and the feed keep upstream's `playlist_control.xml`. The
+root of `playlist_resume_control.xml` is upstream's `PlaylistControlLayout`, so
+Appearance > "Play buttons on list pages" hides the fork's header controls
+too, switch included.
 
 Check: in a local playlist of four videos about 2 minutes long, play the second
 to the end, the third for 15 s, the fourth for 2 s, then the first for 15 s,
@@ -845,6 +811,11 @@ support stay in this repository.
 
 - `7729a5383` (null context guard in the decoder error dialog): replaced by
   upstream `fb8e52e9e`.
+- `1f8455d64` (multiple selection of videos, `qpipepipe/selection/`): replaced
+  by upstream's multiple selection in v5.5.0 (`util/selection/`, the
+  `menu_multi_select` toolbar button). The order of picking and the bottom bar
+  are gone. Upstream's selection lacks four of our actions, to be added on top
+  of it: play next, popup, mark as watched, share.
 
 ## Known conflicts
 
@@ -853,5 +824,20 @@ support stay in this repository.
 - v5.4.0 replaced `PlayQueueItem` with `PlayerMediaItem` (`PlayQueue.getItem()`).
   `loadVideoIfUserConfirms` had to be ported; the merge was clean but did not
   compile.
+- v5.5.0 added its own multiple selection to the screens where the fork had
+  one: the fork's was reverted before the merge (see Dropped patches), which
+  left four conflicts in `BaseListFragment`, `PlaylistFragment` and
+  `LocalPlaylistFragment` (swipe actions and "Playlists continue where you left
+  off" next to upstream's list filter, play-button setting and back handling:
+  keep both).
+- v5.5.0 made `playlist_control.xml`'s root a `PlaylistControlLayout` and calls
+  `configure(page)` on it: `playlist_resume_control.xml` has the same root, so
+  that call works on the fork's header too.
+- `MediaSessionManager`: v5.5.0's `seekInsteadOfSkip` navigator and media
+  button handler go on the connector the fork reuses from
+  `PlayerServiceForAuto`, next to the fork's error message provider.
+- `VideoDetailFragment` saved state: v5.5.0 dropped `currentSponsorBlockMode`;
+  keep only the fork's queue saving (`StateSaver`).
+- `MainActivity` imports: keep the fork's and upstream's `SelectionToolbar`.
 
 `git rerere` is enabled locally and remembers these resolutions.

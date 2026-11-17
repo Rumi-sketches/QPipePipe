@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Play buttons of the playlist headers, with the "continue where you left off" switch.
      Driven by org.schabi.newpipe.qpipepipe.PlaylistResumeControls. Channels and the feed
-     keep upstream's playlist_control.xml. -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     keep upstream's playlist_control.xml. The root is upstream's PlaylistControlLayout, so the
+     "Play buttons on list pages" appearance setting hides these too. -->
+<org.schabi.newpipe.views.PlaylistControlLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -146,4 +147,4 @@
             android:layout_height="wrap_content"
             android:contentDescription="@string/playlist_resume_title" />
     </LinearLayout>
-</LinearLayout>
+</org.schabi.newpipe.views.PlaylistControlLayout>
