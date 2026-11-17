@@ -7,6 +7,7 @@ import org.schabi.newpipe.R
 import org.schabi.newpipe.player.helper.PlayerHelper
 import org.schabi.newpipe.player.playqueue.PlayQueue
 import org.schabi.newpipe.qpipepipe.LastPlayback
+import org.schabi.newpipe.qpipepipe.player.EnqueueNext
 import org.schabi.newpipe.qpipepipe.recentqueues.RecentQueueRecorder
 import org.schabi.newpipe.util.NavigationHelper
 import org.schabi.newpipe.util.SerializedCache
@@ -53,7 +54,7 @@ class PlayerStartController(private val player: Player) {
         ) {
             val currentIndex = playQueue.index
             playQueue.append(newQueue.streams)
-            playQueue.move(playQueue.size() - 1, currentIndex + 1)
+            EnqueueNext.moveAppendedAfter(playQueue, newQueue.size(), currentIndex) // QPipePipe
             RecentQueueRecorder.onItemsEnqueued(player.context, playQueue, newQueue)
             return
         }

@@ -802,11 +802,15 @@ error notification.
 
 ### More actions on the multiple selection
 
-Files: `qpipepipe/selection/ForkSelectionActions`, `res/menu/menu_selection_qpipepipe.xml`.
+Files: `qpipepipe/selection/ForkSelectionActions`, `res/menu/menu_selection_qpipepipe.xml`,
+`qpipepipe/player/EnqueueNext`.
 Hooks in upstream files, which must survive a merge:
 `SelectionToolbar` constructor (`ForkSelectionActions.addMenuItems(toolbar)` right
-after `inflateMenu`) and the first lines of `StreamSelectionActions.handle`
-(`ForkSelectionActions.handle(...)`).
+after `inflateMenu`), the first lines of `StreamSelectionActions.handle`
+(`ForkSelectionActions.handle(...)`) and the enqueue-next branch of
+`PlayerStartController.handleIntent` (`EnqueueNext.moveAppendedAfter(...)` instead
+of upstream's single `playQueue.move`, which put only the last of several videos
+right after the current one).
 
 Upstream's selection toolbar (v5.5.0, `util/selection/`) gets four more actions
 in its overflow menu, on every toolbar of videos (the ones with upstream's
