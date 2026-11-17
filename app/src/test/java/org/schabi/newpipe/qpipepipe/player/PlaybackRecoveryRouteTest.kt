@@ -2,6 +2,7 @@ package org.schabi.newpipe.qpipepipe.player
 
 import android.net.Uri
 import com.google.android.exoplayer2.PlaybackException
+import com.google.android.exoplayer2.mediacodec.MediaCodecDecoderException
 import com.google.android.exoplayer2.upstream.DataSpec
 import com.google.android.exoplayer2.upstream.HttpDataSource.InvalidResponseCodeException
 import org.junit.Assert.assertEquals
@@ -68,6 +69,17 @@ class PlaybackRecoveryRouteTest {
     @Test
     fun decodingFailuresGoToTheDecoderRecovery() {
         assertEquals(Route.DECODER, route(PlaybackException.ERROR_CODE_DECODING_FAILED))
+    }
+
+    // Issue #43: the audio renderer's opus decoder failing in queueInputBuffer. The route depends
+    // on the error code only, so the audio renderer gets the same recovery as the video one.
+    @Test
+    fun audioDecoderFailureGoesToTheDecoderRecovery() {
+        val opusFailure = RuntimeException(
+            "MediaCodecAudioRenderer error, index=1, format=audio/opus",
+            MediaCodecDecoderException(IllegalStateException("native_queueInputBuffer"), null)
+        )
+        assertEquals(Route.DECODER, route(PlaybackException.ERROR_CODE_DECODING_FAILED, opusFailure))
     }
 
     @Test

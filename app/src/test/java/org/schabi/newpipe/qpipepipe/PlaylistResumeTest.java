@@ -60,6 +60,17 @@ public class PlaylistResumeTest {
         assertEquals(1, resumeIndex(played("https://b", 1, 50), played("https://a", 2, 50)));
     }
 
+    // Issue #42: a build with the earlier "started most recently" rule resumed from #2, played
+    // last, although #4 further down had a longer bar.
+    @Test
+    public void furtherVideoWithALongerBarWinsOverTheOneAboveItPlayedLast() {
+        final List<StreamInfoItem> playlist = Arrays.asList(item("https://a"),
+                item("https://b"), item("https://c"), item("https://d"), item("https://e"));
+        assertEquals(3, PlaylistResume.resumeIndex(playlist, Arrays.asList(
+                played("https://a", 1, 100), played("https://d", 2, 79),
+                played("https://b", 3, 30))));
+    }
+
     @Test
     public void videoPlayedUnderFivePercentIsIgnored() {
         assertEquals(1, resumeIndex(played("https://b", 1, 50), played("https://c", 2, 4)));
