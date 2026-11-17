@@ -199,37 +199,72 @@ class UnplayableQueueTest {
 
     // Phase review of issue-aperte: the extractor wraps a network error of a later request in a
     // ParsingException, and MediaSourceManager took it for a broken video: countdown, "can't be
-    // played", and a repeat-all queue stopped while only the connection was missing.
-    @Test
-    fun aNetworkErrorTheExtractorWrappedIsNotABrokenVideo() {
-        val wrapped = ParsingException("Failed to fetch latest player metadata",
-            UnknownHostException("www.youtube.com"))
+    // played", and a repeat-all queue stopped while only the connection was missing. Whether the
+    // connection is missing is up to Android: with the phone online, the error comes from the
+    // server of that request (the signature decoder, api.pipepipe.dev), and retrying it would
+    // loop forever on "No internet connection".
+    private val playerMetadataOffline = ParsingException("Failed to fetch latest player metadata",
+        UnknownHostException("www.youtube.com"))
+    private val decodeApiDown = ParsingException("Failed to call decode API",
+        SocketTimeoutException("api.pipepipe.dev"))
 
-        assertEquals(false, UnplayableQueue.isBrokenSource(wrapped))
+    @Test
+    fun aNetworkErrorTheExtractorWrappedWithThePhoneOfflineIsNotABrokenVideo() {
+        val offline = { false }
+
+        assertEquals(false, UnplayableQueue.isBrokenSource(playerMetadataOffline, offline))
+        assertEquals(false, UnplayableQueue.isBrokenSource(decodeApiDown, offline))
         assertEquals(false, UnplayableQueue.isBrokenSource(
-            IllegalStateException("SABR session", SocketTimeoutException("timeout"))))
-        assertEquals(false, UnplayableQueue.isBrokenSource(UnknownHostException("www.youtube.com")))
+            IllegalStateException("SABR session", SocketTimeoutException("timeout")), offline))
+        assertEquals(false, UnplayableQueue.isBrokenSource(
+            UnknownHostException("www.youtube.com"), offline))
+    }
+
+    @Test
+    fun aNetworkErrorTheExtractorWrappedWithThePhoneOnlineIsTheServersFault() {
+        val online = { true }
+
+        assertEquals(true, UnplayableQueue.isBrokenSource(decodeApiDown, online))
+        assertEquals(true, UnplayableQueue.isBrokenSource(playerMetadataOffline, online))
+        // Upstream's retry of errors that aren't the source's stays as it was.
+        assertEquals(false, UnplayableQueue.isBrokenSource(
+            UnknownHostException("www.youtube.com"), online))
     }
 
     @Test
     fun aVideoTheExtractorCantLoadIsStillBroken() {
-        assertEquals(true, UnplayableQueue.isBrokenSource(ContentNotAvailableException("removed")))
-        assertEquals(true, UnplayableQueue.isBrokenSource(
-            ParsingException("Failed to fetch latest player metadata", ReCaptchaException("", ""))))
-        assertEquals(true, UnplayableQueue.isBrokenSource(IllegalStateException("no SABR probe")))
+        for (isOnline in listOf(true, false)) {
+            val network = { isOnline }
+            assertEquals(true, UnplayableQueue.isBrokenSource(
+                ContentNotAvailableException("removed"), network))
+            assertEquals(true, UnplayableQueue.isBrokenSource(
+                ParsingException("Failed to fetch latest player metadata",
+                    ReCaptchaException("", "")), network))
+            assertEquals(true, UnplayableQueue.isBrokenSource(
+                IllegalStateException("no SABR probe"), network))
+        }
     }
 
-    @Test
-    fun aRepeatAllQueueWithoutConnectionDoesNotStopAsBroken() {
-        // How MediaSourceManager tags each item, as in its onErrorReturn
-        val error = ParsingException("Failed to call decode API", UnknownHostException("api"))
-        val tagged = if (UnplayableQueue.isBrokenSource(error)) StreamInfoLoadException(error)
-            else Exception(error)
+    /** How MediaSourceManager tags an item that failed with [error], as in its onErrorReturn. */
+    private fun failed(index: Int, error: Throwable, isOnline: Boolean): PlayerMediaItem =
+        queued(index).withErrors(listOf(
+            if (UnplayableQueue.isBrokenSource(error) { isOnline }) StreamInfoLoadException(error)
+            else Exception(error)))
 
-        land(*(0..2).map { queued(it).withErrors(listOf(tagged)) }.toTypedArray())
+    @Test
+    fun aRepeatAllQueueWithThePhoneOfflineDoesNotStopAsBroken() {
+        land(*(0..2).map { failed(it, decodeApiDown, isOnline = false) }.toTypedArray())
 
         assertEquals(0, stops)
         assertEquals(listOf("hidden", "hidden", "hidden"), shown)
+    }
+
+    @Test
+    fun aRepeatAllQueueWithTheDecodeServerDownStopsAfterOneRound() {
+        land(*(0..2).map { failed(it, decodeApiDown, isOnline = true) }.toTypedArray())
+
+        assertEquals(1, stops)
+        assertEquals(listOf("video 1 -> next", "video 2 -> next", "hidden"), shown)
     }
 
     // Issue #41: «Resume» on a playlist whose resume video is broken showed only the video

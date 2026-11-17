@@ -828,7 +828,7 @@ still work.
 
 ### A queue of videos that can't be loaded does not loop
 
-Files: `qpipepipe/player/UnplayableQueue`, `strings_qpipepipe.xml`
+Files: `qpipepipe/player/UnplayableQueue`, `ValidatedInternet`, `strings_qpipepipe.xml`
 (`queue_unplayable`). Hooks in `PlayerMetadataController`, which must survive a
 merge: the `unplayableQueue` field after the class line, and
 `unplayableQueue.onLanding(tag) &&` in front of the condition that reports the
@@ -846,11 +846,16 @@ player does not land on it again). Videos that load reset the round, so a queue 
 playable video goes on as upstream, its broken videos skipped. An item that
 failed for a missing connection is not counted: `PlaybackRecovery` owns it.
 That includes a network error the extractor wraps in a `ParsingException`
-(player metadata, signature decoding after the page loaded): upstream took it
-for a broken video. Hook in `MediaSourceManager`, which must survive a merge:
-`UnplayableQueue.isBrokenSource(throwable)` as the condition in
+(player metadata, signature decoding after the page loaded) while Android sees
+no internet (`ValidatedInternet`: no default network, or one not validated):
+upstream took it for a broken video. With the phone online the same error means
+the server of that request is down (the signature decoder is `api.pipepipe.dev`),
+and the video counts as broken as upstream, so the queue can't retry forever on
+"No internet connection". Hook in `MediaSourceManager`, which must survive a merge:
+`UnplayableQueue.isBrokenSource(context, throwable)` as the condition in
 `onErrorReturn` of the source loading, in place of upstream's
 `ExtractionException || IllegalStateException` (kept inside `isBrokenSource`).
+No test goes through the hook: after a merge, check that the line is there.
 Without repeat all, only the once-per-queue report changes.
 
 Check: `UnplayableQueueTest` passes. On a phone, play in the background with

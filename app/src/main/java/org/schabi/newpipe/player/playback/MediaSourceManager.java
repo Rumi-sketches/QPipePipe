@@ -455,7 +455,7 @@ public class MediaSourceManager {
             // source-build failure (e.g. SABR probe / session creation), thrown by sourceOf. Both are
             // source errors: keep the real cause so the report says where it came from, and don't
             // auto-retry them as if they were transient (which would loop on a permanent failure).
-            if (UnplayableQueue.isBrokenSource(throwable)) { // QPipePipe: not if offline (FORK.md)
+            if (UnplayableQueue.isBrokenSource(context, throwable)) { // QPipePipe: FORK.md
                 return FailedMediaSource.of(stream, new StreamInfoLoadException(throwable));
             }
             // Non-source related error expected here (e.g. network),
