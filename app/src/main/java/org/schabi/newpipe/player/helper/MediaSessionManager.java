@@ -10,6 +10,7 @@ import android.support.v4.media.MediaMetadataCompat;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.util.Log;
+import android.util.Pair;
 import android.view.KeyEvent;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,7 @@ import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector;
 import org.schabi.newpipe.MainActivity;
 import org.schabi.newpipe.R;
 import org.schabi.newpipe.player.NotificationUtil;
+import org.schabi.newpipe.player.PlayerErrorHandler;
 import org.schabi.newpipe.player.mediasession.MediaSessionCallback;
 import org.schabi.newpipe.player.mediasession.PlayQueueNavigator;
 import org.schabi.newpipe.player.playback.PlayerMediaSession;
@@ -89,6 +91,11 @@ public class MediaSessionManager {
         sessionConnector = existingConnector != null
                 ? existingConnector : new MediaSessionConnector(mediaSession);
         sessionConnector.setQueueNavigator(new PlayQueueNavigator(mediaSession, callback));
+        // Without it the session goes to an error state with no message while the player holds an
+        // error, so the car only shows that something went wrong, never what.
+        sessionConnector.setErrorMessageProvider(error -> Pair.create(
+                PlaybackStateCompat.ERROR_CODE_APP_ERROR,
+                PlayerErrorHandler.mediaSessionErrorMessage(context, error)));
         sessionConnector.setPlayer(new ForwardingPlayer(player) {
             @Override
             public void play() {
@@ -225,6 +232,7 @@ public class MediaSessionManager {
     public void dispose() {
         sessionConnector.setPlayer(null);
         sessionConnector.setQueueNavigator(null);
+        sessionConnector.setErrorMessageProvider(null);
         if (!isExternalSession) {
             mediaSession.setActive(false);
             mediaSession.release();

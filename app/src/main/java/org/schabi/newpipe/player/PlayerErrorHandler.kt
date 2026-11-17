@@ -1,9 +1,13 @@
 package org.schabi.newpipe.player
 
 import android.app.AlertDialog
+import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.widget.Toast
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.google.android.exoplayer2.ExoPlaybackException
 import com.google.android.exoplayer2.PlaybackException
 import com.google.android.exoplayer2.PlaybackException.ERROR_CODE_BEHIND_LIVE_WINDOW
@@ -27,13 +31,19 @@ import com.google.android.exoplayer2.PlaybackException.ERROR_CODE_TIMEOUT
 import com.google.android.exoplayer2.PlaybackException.ERROR_CODE_UNSPECIFIED
 import com.google.android.exoplayer2.upstream.HttpDataSource.InvalidResponseCodeException
 import org.schabi.newpipe.R
+import org.schabi.newpipe.error.DebugErrorLog
 import org.schabi.newpipe.error.ErrorInfo
 import org.schabi.newpipe.error.ErrorUtil
 import org.schabi.newpipe.error.UserAction
 import org.schabi.newpipe.extractor.InfoItem
 import org.schabi.newpipe.extractor.services.youtube.sabr.exception.SabrAttestationException
+import org.schabi.newpipe.ktx.hasAssignableCause
 import org.schabi.newpipe.player.datasource.SabrLogicException
 import org.schabi.newpipe.util.InfoCache
+import java.net.ConnectException
+import java.net.NoRouteToHostException
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
 import java.util.Locale
 
 /**
@@ -101,6 +111,9 @@ class PlayerErrorHandler(private val player: Player) {
 
         player.saveStreamProgressState()
         var isCatchableException = false
+        // Whether the network retries below will try this source again, which is what the
+        // "no internet connection" message promises.
+        var retriesNetwork = false
 
         if (containsTerminalSabrException(error)) {
             // Attestation retries are handled inside the media bridge. An attestation exception
@@ -138,11 +151,13 @@ class PlayerErrorHandler(private val player: Player) {
                         showIpBlocked()
                         player.onPlaybackShutdown()
                     } else {
+                        retriesNetwork = true
                         isCatchableException = recoverFromNetworkError()
                     }
                 }
 
                 ERROR_CODE_IO_BAD_HTTP_STATUS -> if (!isForbidden(error)) {
+                    retriesNetwork = true
                     isCatchableException = recoverFromNetworkError()
                 } else if (recoverFromForbidden()) {
                     // Expected after a long pause or a network change: reload quietly, without
@@ -157,7 +172,10 @@ class PlayerErrorHandler(private val player: Player) {
                 ERROR_CODE_TIMEOUT,
                 ERROR_CODE_IO_NETWORK_CONNECTION_FAILED,
                 ERROR_CODE_IO_NETWORK_CONNECTION_TIMEOUT,
-                ERROR_CODE_UNSPECIFIED -> isCatchableException = recoverFromNetworkError()
+                ERROR_CODE_UNSPECIFIED -> {
+                    retriesNetwork = true
+                    isCatchableException = recoverFromNetworkError()
+                }
 
                 ERROR_CODE_DECODER_INIT_FAILED -> {
                     val surfaceReleased = isSurfaceReleasedError(error)
@@ -200,7 +218,11 @@ class PlayerErrorHandler(private val player: Player) {
         val playerError = toPlayerError(error)
         if (!isCatchableException) {
             showMediaCodecWorkaroundHint(error)
-            createErrorNotification(playerError)
+            if (retriesNetwork && isNoConnection(error)) {
+                showNoConnection(playerError)
+            } else {
+                createErrorNotification(playerError)
+            }
         }
 
         player.listeners.onPlayerError(playerError, isCatchableException)
@@ -243,6 +265,7 @@ class PlayerErrorHandler(private val player: Player) {
     fun onPlaybackReady() {
         networkFailures = 0
         cancelDelayedReload()
+        dismissNoConnection()
     }
 
     /**
@@ -259,6 +282,12 @@ class PlayerErrorHandler(private val player: Player) {
     fun cancelDelayedReload() {
         retryHandler.removeCallbacks(delayedReload)
         reloadPending = false
+    }
+
+    /** The player is going away: nothing is left to reload, and nothing will resume by itself. */
+    fun release() {
+        cancelDelayedReload()
+        dismissNoConnection()
     }
 
     private fun reloadNow() {
@@ -391,9 +420,40 @@ class PlayerErrorHandler(private val player: Player) {
         return PlayerError(error.errorCode, error.errorCodeName, type, error)
     }
 
+    /**
+     * Tell the user that playback stopped because there is no internet connection, instead of
+     * the bug report notification: nothing is broken, and the reloads above resume playback by
+     * themselves once the connection is back. The trace still goes to the debug error log.
+     */
+    private fun showNoConnection(error: PlayerError) {
+        val context = player.getContext()
+        DebugErrorLog.record(context, errorInfo(error))
+        val notification = NotificationCompat.Builder(
+            context, context.getString(R.string.error_report_channel_id)
+        )
+            .setSmallIcon(R.drawable.ic_cloud_off)
+            .setContentTitle(context.getString(R.string.no_internet_connection))
+            .setContentText(context.getString(R.string.no_internet_connection_resume))
+            .setOnlyAlertOnce(true)
+            .build()
+        NotificationManagerCompat.from(context).notify(NO_CONNECTION_NOTIFICATION_ID, notification)
+        // The notification is silent, so a toast says it too, like the error notification does.
+        Toast.makeText(context, R.string.no_internet_connection, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun dismissNoConnection() {
+        NotificationManagerCompat.from(player.getContext()).cancel(NO_CONNECTION_NOTIFICATION_ID)
+    }
+
     private fun createErrorNotification(error: PlayerError) {
+        // Another failure took over: the connection message no longer describes what happened.
+        dismissNoConnection()
+        ErrorUtil.createNotification(player.getContext(), errorInfo(error))
+    }
+
+    private fun errorInfo(error: PlayerError): ErrorInfo {
         val currentMetadata = player.currentMetadata
-        val errorInfo = if (currentMetadata == null) {
+        return if (currentMetadata == null) {
             ErrorInfo(
                 error, UserAction.PLAY_STREAM,
                 "Player error[type=" + error.errorCodeName
@@ -407,11 +467,12 @@ class PlayerErrorHandler(private val player: Player) {
                 currentMetadata.serviceId
             )
         }
-        ErrorUtil.createNotification(player.getContext(), errorInfo)
     }
 
     companion object {
         private const val SURFACE_ERROR_RECOVERY_COOLDOWN_MS = 10_000L
+
+        private const val NO_CONNECTION_NOTIFICATION_ID = 5340682
 
         // Fresh URLs fail within seconds of the reload; a 403 later than this is a new expiry.
         private const val FORBIDDEN_RETRY_WINDOW_MS = 60_000L
@@ -432,6 +493,39 @@ class PlayerErrorHandler(private val player: Player) {
             return (NETWORK_RETRY_FIRST_DELAY_MS shl doublings)
                 .coerceAtMost(NETWORK_RETRY_MAX_DELAY_MS)
         }
+
+        /**
+         * Whether playback failed because the device has no internet connection: the server
+         * could not be resolved, reached or answered in time. A server that answers with an
+         * error is not a missing connection.
+         */
+        @JvmStatic
+        fun isNoConnection(error: Throwable): Boolean {
+            if (error is PlaybackException && (
+                    error.errorCode == ERROR_CODE_IO_NETWORK_CONNECTION_FAILED
+                        || error.errorCode == ERROR_CODE_IO_NETWORK_CONNECTION_TIMEOUT
+                    )
+            ) {
+                return true
+            }
+            return error.hasAssignableCause(
+                UnknownHostException::class.java,
+                ConnectException::class.java,
+                NoRouteToHostException::class.java,
+                SocketTimeoutException::class.java
+            )
+        }
+
+        /**
+         * The message a media session (the car, the system media controls) shows while the
+         * player holds [error].
+         */
+        @JvmStatic
+        fun mediaSessionErrorMessage(context: Context, error: Throwable): String =
+            context.getString(
+                if (isNoConnection(error)) R.string.no_internet_connection
+                else R.string.player_stream_failure
+            )
 
         /** Whether the server refused the media request with 403 Forbidden. */
         @JvmStatic
