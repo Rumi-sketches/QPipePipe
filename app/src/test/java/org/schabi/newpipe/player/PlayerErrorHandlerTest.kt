@@ -49,6 +49,36 @@ class PlayerErrorHandlerTest {
     }
 
     @Test
+    fun oneRetryPerItemRecoversOnceThenGivesUp() {
+        val retry = OneRetryPerItem(60_000L)
+        assertTrue(retry.tryRetry("a", 0L))
+        assertFalse(retry.tryRetry("a", 59_999L))
+    }
+
+    @Test
+    fun oneRetryPerItemRecoversAgainAfterTheWindowOrOnAnotherItem() {
+        val retry = OneRetryPerItem(60_000L)
+        assertTrue(retry.tryRetry("a", 0L))
+        assertTrue(retry.tryRetry("a", 60_000L))
+        assertTrue(retry.tryRetry("b", 60_001L))
+    }
+
+    @Test
+    fun oneRetryPerItemAlwaysRecoversAnUnknownItem() {
+        val retry = OneRetryPerItem(60_000L)
+        assertTrue(retry.tryRetry(null, 0L))
+        assertTrue(retry.tryRetry(null, 1L))
+    }
+
+    @Test
+    fun oneRetryPerItemKeepsEachItemsRecordWhenAnotherFailsInBetween() {
+        val retry = OneRetryPerItem(60_000L)
+        assertTrue(retry.tryRetry("a", 0L))
+        assertTrue(retry.tryRetry("b", 1_000L))
+        assertFalse(retry.tryRetry("a", 2_000L))
+    }
+
+    @Test
     fun unresolvedHostIsNoConnection() {
         // The chain of the report from the car: the stream info request failed in DNS.
         val dns = UnknownHostException("Unable to resolve host \"youtubei.googleapis.com\"")
