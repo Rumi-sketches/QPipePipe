@@ -10,6 +10,7 @@ import org.schabi.newpipe.database.stream.model.StreamEntity;
 import org.schabi.newpipe.extractor.stream.StreamInfoItem;
 import org.schabi.newpipe.local.dialog.PlaylistDialog;
 import org.schabi.newpipe.player.playqueue.SinglePlayQueue;
+import org.schabi.newpipe.qpipepipe.selection.ForkSelectionActions;
 import org.schabi.newpipe.util.NavigationHelper;
 
 import java.util.ArrayList;
@@ -31,6 +32,9 @@ public final class StreamSelectionActions {
                                  @NonNull final CompositeDisposable disposables,
                                  @NonNull final MenuItem item,
                                  @NonNull final List<StreamEntity> streams) {
+        if (ForkSelectionActions.handle(fragment, item, streams)) { // QPipePipe
+            return true;
+        }
         final int id = item.getItemId();
         if (id != R.id.action_selection_add_to_playlist
                 && id != R.id.action_selection_enqueue
