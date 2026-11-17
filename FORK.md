@@ -718,11 +718,12 @@ resumes the queue too.
 
 ### Playback recovery hooks in PlayerErrorHandler
 
-Files: `qpipepipe/player/PlaybackRecovery.kt` (new), `PlayerErrorHandler`
-(hooks only), `Player` (`playerErrorHandler.getRecovery()`), `MediaSessionManager`.
+Files: `qpipepipe/player/` (new: `PlaybackRecovery`, `NoConnectionNotice`,
+`OneRetryPerItem`), `PlayerErrorHandler` (hooks only), `Player`
+(`playerErrorHandler.getRecovery()`), `MediaSessionManager`.
 
-The three recoveries below (403, network, decoder) live in `PlaybackRecovery`,
-with `OneRetryPerItem` and the "No internet connection" message.
+The three recoveries below (403, network, decoder) live in `PlaybackRecovery`;
+the "No internet connection" message in `NoConnectionNotice`.
 `PlayerErrorHandler` keeps upstream's code plus these hooks, which must survive
 every merge:
 
@@ -770,7 +771,7 @@ Wi-Fi and mobile data while it plays: it resumes at the same position.
 
 Files: `PlaybackRecovery` (`recoverFromNetworkError`, `networkRetryDelayMs`,
 `reloadIfWaiting`, `isNoConnection`, `showsNoConnection`, `release`; hooks in
-`PlayerErrorHandler` above),
+`PlayerErrorHandler` above), `NoConnectionNotice`,
 `PlayerMetadataController.errorsToReport`, `PlayerHistoryController.hasPlayedPosition`,
 `Player.reloadPlayQueueManager`, `Player.destroyPlayer`, `PlayerTransportController.play`,
 `PlayerPlaybackStateController` (`STATE_READY`), `MediaSessionManager` (error message

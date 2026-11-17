@@ -5,9 +5,6 @@ import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import android.widget.Toast
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import com.google.android.exoplayer2.PlaybackException
 import com.google.android.exoplayer2.PlaybackException.ERROR_CODE_DECODING_FAILED
 import com.google.android.exoplayer2.PlaybackException.ERROR_CODE_IO_BAD_HTTP_STATUS
@@ -19,9 +16,6 @@ import com.google.android.exoplayer2.PlaybackException.ERROR_CODE_TIMEOUT
 import com.google.android.exoplayer2.PlaybackException.ERROR_CODE_UNSPECIFIED
 import com.google.android.exoplayer2.upstream.HttpDataSource.InvalidResponseCodeException
 import org.schabi.newpipe.R
-import org.schabi.newpipe.error.DebugErrorLog
-import org.schabi.newpipe.error.ErrorInfo
-import org.schabi.newpipe.error.UserAction
 import org.schabi.newpipe.extractor.InfoItem
 import org.schabi.newpipe.ktx.hasAssignableCause
 import org.schabi.newpipe.player.Player
@@ -77,6 +71,7 @@ class PlaybackRecovery(
     // Set by [recover] when the error it could not recover from is a missing connection that the
     // network retries will try again, read once by [showsNoConnection] right after.
     private var noConnectionToShow = false
+    private val noConnectionNotice = NoConnectionNotice(player)
 
     /** Whether [recover] owns this error instead of the error handler's own dispatch. */
     fun handles(error: PlaybackException): Boolean = routeOf(error.errorCode, error) != null
@@ -133,9 +128,9 @@ class PlaybackRecovery(
         val show = noConnectionToShow
         noConnectionToShow = false
         if (show) {
-            showNoConnection(error)
+            noConnectionNotice.show(error)
         } else {
-            dismissNoConnection()
+            noConnectionNotice.dismiss()
         }
         return show
     }
@@ -177,7 +172,7 @@ class PlaybackRecovery(
     fun onPlaybackReady() {
         networkFailures = 0
         cancelDelayedReload()
-        dismissNoConnection()
+        noConnectionNotice.dismiss()
     }
 
     /**
@@ -199,7 +194,7 @@ class PlaybackRecovery(
     /** The player is going away: nothing is left to reload, and nothing will resume by itself. */
     fun release() {
         cancelDelayedReload()
-        dismissNoConnection()
+        noConnectionNotice.dismiss()
     }
 
     private fun reloadNow() {
@@ -256,56 +251,10 @@ class PlaybackRecovery(
         }
     }
 
-    /**
-     * Tell the user that playback stopped because there is no internet connection, instead of
-     * the bug report notification: nothing is broken, and the reloads above resume playback by
-     * themselves once the connection is back. The trace still goes to the debug error log.
-     */
-    private fun showNoConnection(error: PlayerError) {
-        val context = player.getContext()
-        DebugErrorLog.record(context, errorInfo(error))
-        val notification = NotificationCompat.Builder(
-            context, context.getString(R.string.error_report_channel_id)
-        )
-            .setSmallIcon(R.drawable.ic_cloud_off)
-            .setContentTitle(context.getString(R.string.no_internet_connection))
-            .setContentText(context.getString(R.string.no_internet_connection_resume))
-            .setOnlyAlertOnce(true)
-            .build()
-        NotificationManagerCompat.from(context).notify(NO_CONNECTION_NOTIFICATION_ID, notification)
-        // The notification is silent, so a toast says it too, like the error notification does.
-        Toast.makeText(context, R.string.no_internet_connection, Toast.LENGTH_SHORT).show()
-    }
-
-    private fun dismissNoConnection() {
-        NotificationManagerCompat.from(player.getContext()).cancel(NO_CONNECTION_NOTIFICATION_ID)
-    }
-
-    // The same report the error handler's error notification carries.
-    private fun errorInfo(error: PlayerError): ErrorInfo {
-        val currentMetadata = player.currentMetadata
-        return if (currentMetadata == null) {
-            ErrorInfo(
-                error, UserAction.PLAY_STREAM,
-                "Player error[type=" + error.errorCodeName
-                    + "] occurred, currentMetadata is null"
-            )
-        } else {
-            ErrorInfo(
-                error, UserAction.PLAY_STREAM,
-                "Player error[type=" + error.errorCodeName
-                    + "] occurred while playing " + currentMetadata.url,
-                currentMetadata.serviceId
-            )
-        }
-    }
-
     /** The recoveries this class owns, by the error they answer. */
     internal enum class Route { NETWORK, FORBIDDEN, DECODER }
 
     companion object {
-        private const val NO_CONNECTION_NOTIFICATION_ID = 5340682
-
         // Fresh URLs fail within seconds of the reload; a 403 later than this is a new expiry.
         private const val FORBIDDEN_RETRY_WINDOW_MS = 60_000L
 
@@ -402,28 +351,5 @@ class PlaybackRecovery(
             }
             return false
         }
-    }
-}
-
-/**
- * Allows one recovery per queue item within [windowMs]: when the same item fails again that soon
- * after a recovery, recovering again would only loop.
- */
-internal class OneRetryPerItem(private val windowMs: Long) {
-    // When each item last recovered. Only entries still inside the window are kept, so the map
-    // stays as small as the items that failed in the last [windowMs].
-    private val retriedAtMs = HashMap<String, Long>()
-
-    /** @return whether to recover from this failure of [itemUuid] at [nowMs] */
-    fun tryRetry(itemUuid: String?, nowMs: Long): Boolean {
-        retriedAtMs.values.removeAll { nowMs - it >= windowMs }
-        if (itemUuid == null) {
-            return true
-        }
-        if (itemUuid in retriedAtMs) {
-            return false
-        }
-        retriedAtMs[itemUuid] = nowMs
-        return true
     }
 }
