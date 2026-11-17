@@ -4,6 +4,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.RelativeLayout
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import org.schabi.newpipe.R
@@ -44,13 +45,36 @@ class UnplayableNotice(private val player: Player) : UnplayableQueue.Notice {
         player.pause() // the silence would skip it in 2 seconds
 
         val views = binding ?: inflate()
+        // Its buttons take the place of the player's, where they fit (not in the popup) and lead
+        // somewhere (a next video). Otherwise the player's buttons stay and the reason goes above.
+        val popup = player.popupPlayerSelected()
+        val buttons = hasNext && !popup
         views.unplayableReason.setText(UnplayableReason.of(item.errors))
-        views.unplayableNext.isVisible = hasNext
-        views.unplayableCancel.isVisible = hasNext
+        views.unplayableReason.textSize = if (popup) 13f else 16f
+        views.unplayableCountdown.textSize = if (popup) 12f else 14f
+        views.unplayableNext.isVisible = buttons
+        views.unplayableCancel.isVisible = buttons
         views.unplayableCountdown.isVisible = hasNext
+        (views.root.layoutParams as RelativeLayout.LayoutParams).apply {
+            if (buttons) {
+                removeRule(RelativeLayout.ALIGN_PARENT_TOP)
+                addRule(RelativeLayout.CENTER_IN_PARENT)
+                topMargin = 0
+            } else {
+                removeRule(RelativeLayout.CENTER_IN_PARENT)
+                addRule(RelativeLayout.CENTER_HORIZONTAL)
+                addRule(RelativeLayout.ALIGN_PARENT_TOP)
+                // Under the top controls, which are not laid out yet when the player just opened
+                topMargin = maxOf(player.binding.topControls.height,
+                    (TOP_CONTROLS_DP * views.root.resources.displayMetrics.density).toInt())
+            }
+        }
+        views.root.requestLayout()
         followQueuePanel()
-        // Its place: play has nothing to play here, and the notice has the way to the next video
-        player.binding.playButtons.isInvisible = true
+        player.binding.playButtons.isInvisible = buttons
+        if (buttons) {
+            views.unplayableNext.requestFocus() // with a D-pad, not on the hidden play button
+        }
         if (hasNext) {
             secondsLeft = COUNTDOWN_SECONDS
             showSecondsLeft()
@@ -116,5 +140,6 @@ class UnplayableNotice(private val player: Player) : UnplayableQueue.Notice {
 
     private companion object {
         const val COUNTDOWN_SECONDS = 7
+        const val TOP_CONTROLS_DP = 48
     }
 }

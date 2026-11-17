@@ -868,7 +868,9 @@ When the player lands on a video that can't be loaded (removed, private,
 age-restricted...), the video player pauses on it and shows the reason in place of the
 play buttons, with "Next video in 7 s", Cancel and Next video. When the countdown ends,
 or on Next video, the next item plays; Cancel stops the countdown and leaves the
-reason and Next video. The last video of a queue without repeat shows only the reason.
+reason and Next video. Next video takes the D-pad focus. The last video of a queue
+without repeat, and the popup (too small for the buttons), show the reason (and the
+countdown) above the player's own buttons, which stay.
 The reason is the extractor's exception, found under the player's wrapping; when the
 extractor gives none (a video YouTube removed today only gives "Initial WEB player
 response is not valid"), it says "This video can't be played". The notice steps aside
