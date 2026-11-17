@@ -96,6 +96,10 @@ public class DownloadManagerService extends Service {
     private DownloadManager mManager;
     private Notification mNotification;
     private Handler mHandler;
+    // QPipePipe: restarts the downloads whose wait is over (FORK.md)
+    private final Runnable mRetryMissions = () -> {
+        if (mHandler != null) updateForegroundState(mManager.runMissions());
+    };
     private boolean mForeground = false;
     private NotificationManager mNotificationManager = null;
     private boolean mDownloadNotificationEnable = true;
@@ -178,6 +182,8 @@ public class DownloadManagerService extends Service {
             @Override
             public void onAvailable(Network network) {
                 handleConnectivityState(false);
+                Handler handler = mHandler;// QPipePipe: a new network ends the waits (FORK.md)
+                if (handler != null && mManager.mRetryBackoff.clear()) handler.post(mRetryMissions);
             }
 
             @Override
@@ -294,6 +300,9 @@ public class DownloadManagerService extends Service {
             case MESSAGE_ERROR:
                 notifyFailedDownload(mission);
                 handleConnectivityState(false);
+                // QPipePipe: a download kept in the queue restarts after a growing wait (FORK.md)
+                long retryInMs = mManager.mRetryBackoff.onFailure(mission, mission.done, mission.enqueued);
+                if (retryInMs > 0) mHandler.postDelayed(mRetryMissions, retryInMs);
                 updateForegroundState(mManager.runMissions());
                 break;
             case MESSAGE_PAUSED:

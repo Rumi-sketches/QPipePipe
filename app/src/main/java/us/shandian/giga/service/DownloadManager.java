@@ -51,6 +51,9 @@ public class DownloadManager {
     boolean mPrefMeteredDownloads;
     private static final boolean QUEUE_LIMIT_ENABLED = true;
     private boolean mSelfMissionsControl;
+    // QPipePipe: waits before restarting a download after a network or server error (FORK.md)
+    final org.schabi.newpipe.qpipepipe.download.DownloadRetryBackoff mRetryBackoff =
+            new org.schabi.newpipe.qpipepipe.download.DownloadRetryBackoff();
 
     StoredDirectoryHelper mMainStorageAudio;
     StoredDirectoryHelper mMainStorageVideo;
@@ -432,6 +435,7 @@ public class DownloadManager {
                 if (!mission.running && !mission.isCorrupt()) mission.setEnqueued(true);
             }
 
+            mRetryBackoff.clear();// QPipePipe: the user starts them at once
             runMissions();
         }
     }
@@ -471,6 +475,10 @@ public class DownloadManager {
             for (DownloadMission mission : mMissionsPending) {
                 if (mission.running || !mission.enqueued || mission.isFinished())
                     continue;
+                if (mRetryBackoff.isWaiting(mission)) {// QPipePipe: restarted after its wait
+                    flag = true;// stays in the foreground meanwhile
+                    continue;
+                }
 
                 resumeMission(mission);
                 if (mission.errCode != ERROR_NOTHING) continue;
