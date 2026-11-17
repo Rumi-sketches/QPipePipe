@@ -73,4 +73,9 @@
     <string name="recent_queue_added">additum</string>
     <string name="playlist_never_played">Numquam lusum</string>
     <string name="queue_unplayable">Nullum ex videis in ordine reddi potest</string>
+    <string name="no_internet_connection">Nullus nexus interretialis</string>
+    <string name="no_internet_connection_resume">Redditio repetetur cum nexus redierit</string>
+    <string name="unplayable_video">Hoc video reddi non potest</string>
+    <string name="unplayable_next_in" formatted="true">Video sequens post %d s</string>
+    <string name="unplayable_next">Video sequens</string>
 </resources>

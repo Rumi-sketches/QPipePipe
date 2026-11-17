@@ -73,4 +73,9 @@
     <string name="recent_queue_added">ավելացված</string>
     <string name="playlist_never_played">Երբեք չի նվագարկվել</string>
     <string name="queue_unplayable">Հերթի տեսանյութերից ոչ մեկը հնարավոր չէ նվագարկել</string>
+    <string name="no_internet_connection">Ինտերնետ կապ չկա</string>
+    <string name="no_internet_connection_resume">Նվագարկումը կշարունակվի, երբ կապը վերականգնվի</string>
+    <string name="unplayable_video">Այս տեսանյութը հնարավոր չէ նվագարկել</string>
+    <string name="unplayable_next_in" formatted="true">Հաջորդ տեսանյութը %d վ-ից</string>
+    <string name="unplayable_next">Հաջորդ տեսանյութը</string>
 </resources>

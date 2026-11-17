@@ -73,4 +73,9 @@
     <string name="recent_queue_added">agregado</string>
     <string name="playlist_never_played">Nunca reproducida</string>
     <string name="queue_unplayable">No se puede reproducir ninguno de los vídeos de la cola</string>
+    <string name="no_internet_connection">No hay conexión a internet</string>
+    <string name="no_internet_connection_resume">La reproducción continuará cuando vuelva la conexión</string>
+    <string name="unplayable_video">Este vídeo no se puede reproducir</string>
+    <string name="unplayable_next_in" formatted="true">Siguiente vídeo en %d s</string>
+    <string name="unplayable_next">Siguiente vídeo</string>
 </resources>

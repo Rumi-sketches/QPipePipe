@@ -73,4 +73,9 @@
     <string name="recent_queue_added">जोड़ा गया</string>
     <string name="playlist_never_played">कभी नहीं चलाया गया</string>
     <string name="queue_unplayable">कतार का कोई भी वीडियो चलाया नहीं जा सकता</string>
+    <string name="no_internet_connection">इंटरनेट कनेक्शन नहीं है</string>
+    <string name="no_internet_connection_resume">कनेक्शन लौटने पर प्लेबैक फिर से शुरू होगा</string>
+    <string name="unplayable_video">यह वीडियो चलाया नहीं जा सकता</string>
+    <string name="unplayable_next_in" formatted="true">अगला वीडियो %d से. में</string>
+    <string name="unplayable_next">अगला वीडियो</string>
 </resources>

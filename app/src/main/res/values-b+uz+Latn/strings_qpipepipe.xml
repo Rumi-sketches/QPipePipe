@@ -73,4 +73,9 @@
     <string name="recent_queue_added">qo\'shildi</string>
     <string name="playlist_never_played">Hech qachon ijro etilmagan</string>
     <string name="queue_unplayable">Navbatdagi videolarning hech birini ijro etib bo‘lmaydi</string>
+    <string name="no_internet_connection">Internet aloqasi yo‘q</string>
+    <string name="no_internet_connection_resume">Aloqa tiklanganda ijro davom etadi</string>
+    <string name="unplayable_video">Bu videoni ijro etib bo‘lmaydi</string>
+    <string name="unplayable_next_in" formatted="true">Keyingi video %d s dan keyin</string>
+    <string name="unplayable_next">Keyingi video</string>
 </resources>

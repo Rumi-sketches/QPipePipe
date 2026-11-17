@@ -89,4 +89,8 @@
     <string name="no_internet_connection_resume">Playback will resume when the connection is back</string>
     <!-- A repeat-all queue in which a whole round played nothing (UnplayableQueue) -->
     <string name="queue_unplayable">None of the videos in the queue can be played</string>
+    <!-- The player on a queue item that can't be played (UnplayableNotice) -->
+    <string name="unplayable_video">This video can\'t be played</string>
+    <string name="unplayable_next_in" formatted="true">Next video in %d s</string>
+    <string name="unplayable_next">Next video</string>
 </resources>

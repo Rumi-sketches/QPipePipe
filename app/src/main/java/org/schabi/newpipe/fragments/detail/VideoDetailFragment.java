@@ -105,6 +105,7 @@ import org.schabi.newpipe.player.mediaitem.PlayerMediaItem;
 import org.schabi.newpipe.player.playqueue.PlayQueue;
 import org.schabi.newpipe.player.playqueue.SinglePlayQueue;
 import org.schabi.newpipe.qpipepipe.QPipePipePreferences;
+import org.schabi.newpipe.qpipepipe.player.UnplayableQueue;
 import org.schabi.newpipe.sleep.SleepTimerService;
 import org.schabi.newpipe.util.*;
 import org.schabi.newpipe.util.dearrow.DeArrowBinder;
@@ -231,6 +232,8 @@ public final class VideoDetailFragment
      * was playing the replaced queue, without asking again (see loadVideoIfUserConfirms).
      */
     private boolean queueReplacementConfirmed = false;
+    // QPipePipe: a queue whose first video can't be loaded still plays (UnplayableNotice)
+    private PlayQueue queueDespiteLoadError = null;
     /** The play queue written to disk, so it survives the OS killing the app in background. */
     @Nullable
     private org.schabi.newpipe.util.SavedState savedQueueState = null;
@@ -1138,6 +1141,7 @@ public final class VideoDetailFragment
 
     private void runWorker(final boolean forceLoad, final boolean addToBackStack) {
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
+        queueDespiteLoadError = null;
         currentWorker = ExtractorHelper.getStreamInfo(serviceId, url, forceLoad
                         || url.contains("live.bilibili.com"))
                 .subscribeOn(Schedulers.io())
@@ -1165,6 +1169,10 @@ public final class VideoDetailFragment
                     queueReplacementConfirmed = false;
                     showError(new ErrorInfo(throwable, UserAction.REQUESTED_STREAM,
                             url == null ? "no url" : url, serviceId));
+                    if (UnplayableQueue.playsDespiteLoadError(playQueue) && isAutoplayEnabled()) {
+                        queueDespiteLoadError = playQueue; // QPipePipe
+                        openVideoPlayerAutoFullscreen();
+                    }
                 });
     }
 
@@ -1568,7 +1576,8 @@ public final class VideoDetailFragment
 
         // The queue on screen now is the one that plays: the player can push its own queue to
         // this screen (see onQueueUpdate) while the user is still answering the confirmation
-        final PlayQueue queue = currentInfo == null ? null : setupPlayQueueForIntent(false);
+        final PlayQueue queue = currentInfo == null
+                ? queueDespiteLoadError : setupPlayQueueForIntent(false); // QPipePipe
         replaceQueueIfUserConfirms(queue, () -> openMainPlayer(queue));
     }
 

@@ -81,4 +81,9 @@
     <string name="recent_queue_added">дададзена</string>
     <string name="playlist_never_played">Яшчэ не прайграваўся</string>
     <string name="queue_unplayable">Ніводнае відэа ў чарзе немагчыма прайграць</string>
+    <string name="no_internet_connection">Няма злучэння з інтэрнэтам</string>
+    <string name="no_internet_connection_resume">Прайграванне аднавіцца, калі злучэнне вернецца</string>
+    <string name="unplayable_video">Гэта відэа немагчыма прайграць</string>
+    <string name="unplayable_next_in" formatted="true">Наступнае відэа праз %d с</string>
+    <string name="unplayable_next">Наступнае відэа</string>
 </resources>

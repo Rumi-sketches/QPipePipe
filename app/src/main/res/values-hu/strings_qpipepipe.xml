@@ -73,4 +73,9 @@
     <string name="recent_queue_added">hozzáadva</string>
     <string name="playlist_never_played">Még nem volt lejátszva</string>
     <string name="queue_unplayable">A sorban egyik videó sem játszható le</string>
+    <string name="no_internet_connection">Nincs internetkapcsolat</string>
+    <string name="no_internet_connection_resume">A lejátszás folytatódik, amint visszatér a kapcsolat</string>
+    <string name="unplayable_video">Ez a videó nem játszható le</string>
+    <string name="unplayable_next_in" formatted="true">Következő videó %d mp múlva</string>
+    <string name="unplayable_next">Következő videó</string>
 </resources>

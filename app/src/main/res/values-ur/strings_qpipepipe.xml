@@ -73,4 +73,9 @@
     <string name="recent_queue_added">شامل کی گئیں</string>
     <string name="playlist_never_played">کبھی نہیں چلائی گئی</string>
     <string name="queue_unplayable">قطار میں موجود کوئی بھی ویڈیو چلائی نہیں جا سکتی</string>
+    <string name="no_internet_connection">انٹرنیٹ کنکشن نہیں ہے</string>
+    <string name="no_internet_connection_resume">کنکشن واپس آنے پر پلے بیک دوبارہ شروع ہو جائے گا</string>
+    <string name="unplayable_video">یہ ویڈیو چلائی نہیں جا سکتی</string>
+    <string name="unplayable_next_in" formatted="true">اگلی ویڈیو %d سیکنڈ میں</string>
+    <string name="unplayable_next">اگلی ویڈیو</string>
 </resources>

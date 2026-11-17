@@ -73,4 +73,9 @@
     <string name="recent_queue_added">जोडलेले</string>
     <string name="playlist_never_played">कधीही प्ले केले नाही</string>
     <string name="queue_unplayable">रांगेतील कोणताही व्हिडिओ प्ले करता येत नाही</string>
+    <string name="no_internet_connection">इंटरनेट कनेक्शन नाही</string>
+    <string name="no_internet_connection_resume">कनेक्शन परत आल्यावर प्लेबॅक पुन्हा सुरू होईल</string>
+    <string name="unplayable_video">हा व्हिडिओ प्ले करता येत नाही</string>
+    <string name="unplayable_next_in" formatted="true">पुढील व्हिडिओ %d से. मध्ये</string>
+    <string name="unplayable_next">पुढील व्हिडिओ</string>
 </resources>

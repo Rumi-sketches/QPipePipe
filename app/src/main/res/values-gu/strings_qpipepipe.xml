@@ -73,4 +73,9 @@
     <string name="recent_queue_added">ઉમેરેલું</string>
     <string name="playlist_never_played">ક્યારેય ચલાવ્યું નથી</string>
     <string name="queue_unplayable">કતારમાંનો કોઈ પણ વીડિયો ચલાવી શકાતો નથી</string>
+    <string name="no_internet_connection">ઇન્ટરનેટ કનેક્શન નથી</string>
+    <string name="no_internet_connection_resume">કનેક્શન પાછું આવશે ત્યારે પ્લેબેક ફરી શરૂ થશે</string>
+    <string name="unplayable_video">આ વીડિયો ચલાવી શકાતો નથી</string>
+    <string name="unplayable_next_in" formatted="true">આગળનો વીડિયો %d સે. માં</string>
+    <string name="unplayable_next">આગળનો વીડિયો</string>
 </resources>

@@ -81,4 +81,9 @@
     <string name="recent_queue_added">dodane</string>
     <string name="playlist_never_played">Nigdy nie odtwarzano</string>
     <string name="queue_unplayable">Nie można odtworzyć żadnego filmu z kolejki</string>
+    <string name="no_internet_connection">Brak połączenia z internetem</string>
+    <string name="no_internet_connection_resume">Odtwarzanie zostanie wznowione po przywróceniu połączenia</string>
+    <string name="unplayable_video">Nie można odtworzyć tego filmu</string>
+    <string name="unplayable_next_in" formatted="true">Następny film za %d s</string>
+    <string name="unplayable_next">Następny film</string>
 </resources>

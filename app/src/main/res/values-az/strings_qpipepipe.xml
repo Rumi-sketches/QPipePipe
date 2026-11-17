@@ -73,4 +73,9 @@
     <string name="recent_queue_added">əlavə edildi</string>
     <string name="playlist_never_played">Heç oxudulmayıb</string>
     <string name="queue_unplayable">Növbədəki videoların heç biri oynadıla bilmir</string>
+    <string name="no_internet_connection">İnternet bağlantısı yoxdur</string>
+    <string name="no_internet_connection_resume">Bağlantı bərpa olunanda oynatma davam edəcək</string>
+    <string name="unplayable_video">Bu video oynadıla bilmir</string>
+    <string name="unplayable_next_in" formatted="true">Növbəti video %d san sonra</string>
+    <string name="unplayable_next">Növbəti video</string>
 </resources>

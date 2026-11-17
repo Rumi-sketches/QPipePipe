@@ -76,4 +76,7 @@
     <string name="no_internet_connection">Nessuna connessione a internet</string>
     <string name="no_internet_connection_resume">La riproduzione riprenderà quando torna la connessione</string>
     <string name="queue_unplayable">Nessuno dei video in coda si può riprodurre</string>
+    <string name="unplayable_video">Questo video non si può riprodurre</string>
+    <string name="unplayable_next_in" formatted="true">Video successivo tra %d s</string>
+    <string name="unplayable_next">Video successivo</string>
 </resources>

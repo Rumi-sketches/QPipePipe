@@ -69,4 +69,9 @@
     <string name="recent_queue_added">追加済み</string>
     <string name="playlist_never_played">未再生</string>
     <string name="queue_unplayable">キュー内の動画はどれも再生できません</string>
+    <string name="no_internet_connection">インターネットに接続されていません</string>
+    <string name="no_internet_connection_resume">接続が戻ると再生が再開されます</string>
+    <string name="unplayable_video">この動画は再生できません</string>
+    <string name="unplayable_next_in" formatted="true">%d 秒後に次の動画</string>
+    <string name="unplayable_next">次の動画</string>
 </resources>

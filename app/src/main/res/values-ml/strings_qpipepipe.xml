@@ -73,4 +73,9 @@
     <string name="recent_queue_added">ചേർത്തത്</string>
     <string name="playlist_never_played">ഒരിക്കലും പ്ലേ ചെയ്തിട്ടില്ല</string>
     <string name="queue_unplayable">ക്യൂവിലെ ഒരു വീഡിയോയും പ്ലേ ചെയ്യാനാകില്ല</string>
+    <string name="no_internet_connection">ഇന്റർനെറ്റ് കണക്ഷൻ ഇല്ല</string>
+    <string name="no_internet_connection_resume">കണക്ഷൻ തിരികെ വരുമ്പോൾ പ്ലേബാക്ക് തുടരും</string>
+    <string name="unplayable_video">ഈ വീഡിയോ പ്ലേ ചെയ്യാനാകില്ല</string>
+    <string name="unplayable_next_in" formatted="true">അടുത്ത വീഡിയോ %d സെ. കഴിഞ്ഞ്</string>
+    <string name="unplayable_next">അടുത്ത വീഡിയോ</string>
 </resources>

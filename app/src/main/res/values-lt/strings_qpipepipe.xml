@@ -77,4 +77,9 @@
     <string name="recent_queue_added">pridėta</string>
     <string name="playlist_never_played">Niekada negrota</string>
     <string name="queue_unplayable">Nė vieno eilės vaizdo įrašo negalima paleisti</string>
+    <string name="no_internet_connection">Nėra interneto ryšio</string>
+    <string name="no_internet_connection_resume">Atkūrimas tęsis, kai ryšys grįš</string>
+    <string name="unplayable_video">Šio vaizdo įrašo negalima paleisti</string>
+    <string name="unplayable_next_in" formatted="true">Kitas vaizdo įrašas po %d s</string>
+    <string name="unplayable_next">Kitas vaizdo įrašas</string>
 </resources>

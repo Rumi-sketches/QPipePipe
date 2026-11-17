@@ -81,4 +81,9 @@
     <string name="recent_queue_added">נוסף</string>
     <string name="playlist_never_played">לא נוגן מעולם</string>
     <string name="queue_unplayable">אי אפשר לנגן אף אחד מהסרטונים בתור</string>
+    <string name="no_internet_connection">אין חיבור לאינטרנט</string>
+    <string name="no_internet_connection_resume">הניגון ימשיך כשהחיבור יחזור</string>
+    <string name="unplayable_video">אי אפשר לנגן את הסרטון הזה</string>
+    <string name="unplayable_next_in" formatted="true">הסרטון הבא בעוד %d שנ׳</string>
+    <string name="unplayable_next">הסרטון הבא</string>
 </resources>

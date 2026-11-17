@@ -73,4 +73,9 @@
     <string name="recent_queue_added">زیادکراو</string>
     <string name="playlist_never_played">هەرگیز لێنەدراوە</string>
     <string name="queue_unplayable">هیچ کام لە ڤیدیۆکانی ڕیزەکە ناتوانرێت لێبدرێت</string>
+    <string name="no_internet_connection">پەیوەندی ئینتەرنێت نییە</string>
+    <string name="no_internet_connection_resume">لێدان بەردەوام دەبێت کاتێک پەیوەندی گەڕایەوە</string>
+    <string name="unplayable_video">ئەم ڤیدیۆیە ناتوانرێت لێبدرێت</string>
+    <string name="unplayable_next_in" formatted="true">ڤیدیۆی دواتر لە %d چرکەدا</string>
+    <string name="unplayable_next">ڤیدیۆی دواتر</string>
 </resources>

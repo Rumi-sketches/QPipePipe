@@ -853,6 +853,39 @@ export the database, add rows to `streams` and `playlist_stream_join` with a
 `thumbnail_url`, and import it): one error toast per video, then the queue
 message and the player paused, no more toasts.
 
+### A video that can't be played says why, and the queue goes on
+
+Files: `qpipepipe/player/UnplayableNotice`, `UnplayableReason`, `UnplayableQueue`
+(`Notice`, `playsDespiteLoadError`), `res/layout/player_unplayable_qpipepipe.xml`,
+`strings_qpipepipe.xml` (`unplayable_video`, `unplayable_next_in`,
+`unplayable_next`). Hooks in `VideoDetailFragment`, which must survive a merge: the
+`queueDespiteLoadError` field, its reset at the top of `runWorker`, the block after
+`showError` in the error branch of `runWorker` (`UnplayableQueue.playsDespiteLoadError`),
+and `queueDespiteLoadError` instead of `null` in the first line that picks the queue in
+`openVideoPlayer`.
+
+When the player lands on a video that can't be loaded (removed, private,
+age-restricted...), the video player pauses on it and shows the reason in place of the
+play buttons, with "Next video in 7 s", Cancel and Next video. When the countdown ends,
+or on Next video, the next item plays; Cancel stops the countdown and leaves the
+reason and Next video. The last video of a queue without repeat shows only the reason.
+The reason is the extractor's exception, found under the player's wrapping; when the
+extractor gives none (a video YouTube removed today only gives "Initial WEB player
+response is not valid"), it says "This video can't be played". The notice steps aside
+while the queue panel is open. The background player has no screen to show it on and
+skips after upstream's 2 seconds of silence. The round of the patch above still ends a
+repeat-all queue of broken videos with one message, without a countdown.
+
+Upstream opened a queue (a playlist's Play all or Resume) by loading its current video
+in the video page and started the player only once it loaded: when it could not, the
+page showed its error and the rest of the queue never played. Now a queue of more than
+one video goes to the player anyway; a single video keeps the page's error.
+
+Check: `UnplayableQueueTest` and `UnplayableReasonTest` pass. On a phone, a local
+playlist with removed videos (see the patch above): Resume on a removed video opens
+the player with the reason; picking a removed video in the queue shows the countdown,
+then the next video plays; Cancel keeps it there, Next video moves on at once.
+
 ## Upstream services
 
 The extractor falls back to `api.pipepipe.dev` to decode YouTube signatures

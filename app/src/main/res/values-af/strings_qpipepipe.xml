@@ -73,4 +73,9 @@
     <string name="recent_queue_added">bygevoeg</string>
     <string name="playlist_never_played">Nog nooit gespeel nie</string>
     <string name="queue_unplayable">Geen van die video\'s in die tou kan gespeel word nie</string>
+    <string name="no_internet_connection">Geen internetverbinding nie</string>
+    <string name="no_internet_connection_resume">Speel sal hervat wanneer die verbinding terug is</string>
+    <string name="unplayable_video">Hierdie video kan nie gespeel word nie</string>
+    <string name="unplayable_next_in" formatted="true">Volgende video oor %d s</string>
+    <string name="unplayable_next">Volgende video</string>
 </resources>

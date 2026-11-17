@@ -73,4 +73,9 @@
     <string name="recent_queue_added">προστέθηκε</string>
     <string name="playlist_never_played">Δεν έχει αναπαραχθεί ποτέ</string>
     <string name="queue_unplayable">Κανένα από τα βίντεο της ουράς δεν μπορεί να αναπαραχθεί</string>
+    <string name="no_internet_connection">Δεν υπάρχει σύνδεση στο διαδίκτυο</string>
+    <string name="no_internet_connection_resume">Η αναπαραγωγή θα συνεχιστεί όταν επανέλθει η σύνδεση</string>
+    <string name="unplayable_video">Αυτό το βίντεο δεν μπορεί να αναπαραχθεί</string>
+    <string name="unplayable_next_in" formatted="true">Επόμενο βίντεο σε %d δ</string>
+    <string name="unplayable_next">Επόμενο βίντεο</string>
 </resources>

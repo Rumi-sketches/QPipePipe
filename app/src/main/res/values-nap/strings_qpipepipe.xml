@@ -73,4 +73,9 @@
     <string name="recent_queue_added">aggiunto</string>
     <string name="playlist_never_played">Maje sentuta</string>
     <string name="queue_unplayable">Nisciuno video dint\'a coda se pò sentì</string>
+    <string name="no_internet_connection">Nun ce sta connessione a internet</string>
+    <string name="no_internet_connection_resume">’O video ripiglia quanno torna ’a connessione</string>
+    <string name="unplayable_video">Chistu video nun se pò sentì</string>
+    <string name="unplayable_next_in" formatted="true">Video appriesso fra %d s</string>
+    <string name="unplayable_next">Video appriesso</string>
 </resources>

@@ -73,4 +73,9 @@
     <string name="recent_queue_added">eklendi</string>
     <string name="playlist_never_played">Hiç oynatılmadı</string>
     <string name="queue_unplayable">Kuyruktaki videoların hiçbiri oynatılamıyor</string>
+    <string name="no_internet_connection">İnternet bağlantısı yok</string>
+    <string name="no_internet_connection_resume">Bağlantı geri geldiğinde oynatma devam edecek</string>
+    <string name="unplayable_video">Bu video oynatılamıyor</string>
+    <string name="unplayable_next_in" formatted="true">Sonraki video %d sn içinde</string>
+    <string name="unplayable_next">Sonraki video</string>
 </resources>

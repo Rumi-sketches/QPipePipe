@@ -73,4 +73,9 @@
     <string name="recent_queue_added">gehituta</string>
     <string name="playlist_never_played">Inoiz erreproduzitu gabea</string>
     <string name="queue_unplayable">Ilarako bideoetako bat ere ezin da erreproduzitu</string>
+    <string name="no_internet_connection">Ez dago Interneteko konexiorik</string>
+    <string name="no_internet_connection_resume">Erreprodukzioak jarraituko du konexioa itzultzean</string>
+    <string name="unplayable_video">Bideo hau ezin da erreproduzitu</string>
+    <string name="unplayable_next_in" formatted="true">Hurrengo bideoa %d s barru</string>
+    <string name="unplayable_next">Hurrengo bideoa</string>
 </resources>

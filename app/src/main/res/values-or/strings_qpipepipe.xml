@@ -73,4 +73,9 @@
     <string name="recent_queue_added">ଯୋଡ଼ାଯାଇଛି</string>
     <string name="playlist_never_played">କେବେ ଚଲାଯାଇନାହିଁ</string>
     <string name="queue_unplayable">ଧାଡ଼ିରେ ଥିବା କୌଣସି ଭିଡିଓ ଚଲାଯାଇପାରିବ ନାହିଁ</string>
+    <string name="no_internet_connection">ଇଣ୍ଟରନେଟ ସଂଯୋଗ ନାହିଁ</string>
+    <string name="no_internet_connection_resume">ସଂଯୋଗ ଫେରିଲେ ପ୍ଲେବ୍ୟାକ ପୁଣି ଆରମ୍ଭ ହେବ</string>
+    <string name="unplayable_video">ଏହି ଭିଡିଓ ଚଲାଯାଇପାରିବ ନାହିଁ</string>
+    <string name="unplayable_next_in" formatted="true">ପରବର୍ତ୍ତୀ ଭିଡିଓ %d ସେ. ପରେ</string>
+    <string name="unplayable_next">ପରବର୍ତ୍ତୀ ଭିଡିଓ</string>
 </resources>

@@ -77,4 +77,9 @@
     <string name="recent_queue_added">pridané</string>
     <string name="playlist_never_played">Nikdy neprehrané</string>
     <string name="queue_unplayable">Žiadne z videí v poradí nie je možné prehrať</string>
+    <string name="no_internet_connection">Žiadne pripojenie na internet</string>
+    <string name="no_internet_connection_resume">Prehrávanie bude pokračovať, keď sa pripojenie obnoví</string>
+    <string name="unplayable_video">Toto video nie je možné prehrať</string>
+    <string name="unplayable_next_in" formatted="true">Ďalšie video o %d s</string>
+    <string name="unplayable_next">Ďalšie video</string>
 </resources>

@@ -73,4 +73,9 @@
     <string name="recent_queue_added">lisätty</string>
     <string name="playlist_never_played">Ei koskaan toistettu</string>
     <string name="queue_unplayable">Mitään jonon videoista ei voi toistaa</string>
+    <string name="no_internet_connection">Ei internetyhteyttä</string>
+    <string name="no_internet_connection_resume">Toisto jatkuu, kun yhteys palaa</string>
+    <string name="unplayable_video">Tätä videota ei voi toistaa</string>
+    <string name="unplayable_next_in" formatted="true">Seuraava video %d s kuluttua</string>
+    <string name="unplayable_next">Seuraava video</string>
 </resources>

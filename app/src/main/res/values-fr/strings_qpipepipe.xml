@@ -73,4 +73,9 @@
     <string name="recent_queue_added">ajoutée</string>
     <string name="playlist_never_played">Jamais lue</string>
     <string name="queue_unplayable">Aucune des vidéos de la file d\'attente ne peut être lue</string>
+    <string name="no_internet_connection">Pas de connexion internet</string>
+    <string name="no_internet_connection_resume">La lecture reprendra quand la connexion sera rétablie</string>
+    <string name="unplayable_video">Cette vidéo ne peut pas être lue</string>
+    <string name="unplayable_next_in" formatted="true">Vidéo suivante dans %d s</string>
+    <string name="unplayable_next">Vidéo suivante</string>
 </resources>

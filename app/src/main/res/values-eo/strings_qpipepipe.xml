@@ -73,4 +73,9 @@
     <string name="recent_queue_added">aldonita</string>
     <string name="playlist_never_played">Neniam ludita</string>
     <string name="queue_unplayable">Neniu el la filmetoj en la vico povas esti ludata</string>
+    <string name="no_internet_connection">Neniu interreta konekto</string>
+    <string name="no_internet_connection_resume">La ludado daŭros kiam la konekto revenos</string>
+    <string name="unplayable_video">Ĉi tiu filmeto ne ludeblas</string>
+    <string name="unplayable_next_in" formatted="true">Sekva filmeto post %d s</string>
+    <string name="unplayable_next">Sekva filmeto</string>
 </resources>

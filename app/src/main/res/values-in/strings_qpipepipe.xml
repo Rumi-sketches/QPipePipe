@@ -69,4 +69,9 @@
     <string name="recent_queue_added">ditambahkan</string>
     <string name="playlist_never_played">Belum pernah diputar</string>
     <string name="queue_unplayable">Tidak ada video dalam antrean yang dapat diputar</string>
+    <string name="no_internet_connection">Tidak ada koneksi internet</string>
+    <string name="no_internet_connection_resume">Pemutaran akan dilanjutkan saat koneksi kembali</string>
+    <string name="unplayable_video">Video ini tidak dapat diputar</string>
+    <string name="unplayable_next_in" formatted="true">Video berikutnya dalam %d dtk</string>
+    <string name="unplayable_next">Video berikutnya</string>
 </resources>

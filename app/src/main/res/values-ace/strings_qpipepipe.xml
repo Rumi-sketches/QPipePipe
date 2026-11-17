@@ -69,4 +69,9 @@
     <string name="recent_queue_added">geutamah</string>
     <string name="playlist_never_played">Goh tom geuputa</string>
     <string name="queue_unplayable">Hana video lam antrian nyang jeut geuputa</string>
+    <string name="no_internet_connection">Hana sambungan internet</string>
+    <string name="no_internet_connection_resume">Putaran geusambông lom watèe sambungan ka na</string>
+    <string name="unplayable_video">Video nyoe hana jeut geuputa</string>
+    <string name="unplayable_next_in" formatted="true">Video lheuh nyoe lam %d d</string>
+    <string name="unplayable_next">Video lheuh nyoe</string>
 </resources>

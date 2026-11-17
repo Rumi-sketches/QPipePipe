@@ -73,4 +73,9 @@
     <string name="recent_queue_added">afegit</string>
     <string name="playlist_never_played">Mai reproduïda</string>
     <string name="queue_unplayable">No es pot reproduir cap dels vídeos de la cua</string>
+    <string name="no_internet_connection">No hi ha connexió a internet</string>
+    <string name="no_internet_connection_resume">La reproducció continuarà quan torni la connexió</string>
+    <string name="unplayable_video">Aquest vídeo no es pot reproduir</string>
+    <string name="unplayable_next_in" formatted="true">Vídeo següent d\'aquí a %d s</string>
+    <string name="unplayable_next">Vídeo següent</string>
 </resources>

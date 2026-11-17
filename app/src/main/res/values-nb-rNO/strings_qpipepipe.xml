@@ -73,4 +73,9 @@
     <string name="recent_queue_added">lagt til</string>
     <string name="playlist_never_played">Aldri avspilt</string>
     <string name="queue_unplayable">Ingen av videoene i køen kan spilles av</string>
+    <string name="no_internet_connection">Ingen internettilkobling</string>
+    <string name="no_internet_connection_resume">Avspillingen fortsetter når tilkoblingen er tilbake</string>
+    <string name="unplayable_video">Denne videoen kan ikke spilles av</string>
+    <string name="unplayable_next_in" formatted="true">Neste video om %d s</string>
+    <string name="unplayable_next">Neste video</string>
 </resources>

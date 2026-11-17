@@ -73,4 +73,9 @@
     <string name="recent_queue_added">జోడించబడింది</string>
     <string name="playlist_never_played">ఎప్పుడూ ప్లే చేయలేదు</string>
     <string name="queue_unplayable">క్యూలోని ఏ వీడియోనూ ప్లే చేయలేము</string>
+    <string name="no_internet_connection">ఇంటర్నెట్ కనెక్షన్ లేదు</string>
+    <string name="no_internet_connection_resume">కనెక్షన్ తిరిగి వచ్చినప్పుడు ప్లేబ్యాక్ కొనసాగుతుంది</string>
+    <string name="unplayable_video">ఈ వీడియోను ప్లే చేయలేము</string>
+    <string name="unplayable_next_in" formatted="true">తదుపరి వీడియో %d సె.లో</string>
+    <string name="unplayable_next">తదుపరి వీడియో</string>
 </resources>
