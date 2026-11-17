@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 
 import org.schabi.newpipe.R;
+import org.schabi.newpipe.qpipepipe.selection.ForkSelectionActions;
 
 /**
  * Toolbar shown on top of the main toolbar while a list is in selection mode.
@@ -41,6 +42,7 @@ public final class SelectionToolbar {
         this.controller = controller;
         toolbar.getMenu().clear();
         toolbar.inflateMenu(menuRes);
+        ForkSelectionActions.addMenuItems(toolbar); // QPipePipe
         toolbar.setNavigationOnClickListener(v -> controller.exit());
         toolbar.setOnMenuItemClickListener(actionListener::onSelectionAction);
     }

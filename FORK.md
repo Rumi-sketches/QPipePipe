@@ -800,6 +800,28 @@ android.hardware.media.c2@1.0-service-goldfish)`): playback resumes within a few
 seconds at the same position; a second kill within a minute stops it with the
 error notification.
 
+### More actions on the multiple selection
+
+Files: `qpipepipe/selection/ForkSelectionActions`, `res/menu/menu_selection_qpipepipe.xml`.
+Hooks in upstream files, which must survive a merge:
+`SelectionToolbar` constructor (`ForkSelectionActions.addMenuItems(toolbar)` right
+after `inflateMenu`) and the first lines of `StreamSelectionActions.handle`
+(`ForkSelectionActions.handle(...)`).
+
+Upstream's selection toolbar (v5.5.0, `util/selection/`) gets four more actions
+in its overflow menu, on every toolbar of videos (the ones with upstream's
+Enqueue: search, channel, playlist, kiosk, feed, history, local playlist; not
+bookmarks): Enqueue next, Start playing in a popup, Mark as watched (only with
+watch history on; live streams are skipped) and Share (the links, one per
+line). Each acts on the selected videos in the order of the list, then the
+selection closes like after upstream's actions. The labels are upstream
+strings, so there is nothing to translate.
+
+Check: in a playlist, start the selection, pick two videos out of order, and
+try each of the four actions: next and popup queue them in list order, the
+watched marks appear on both rows, share sends both links. Upstream's actions
+still work.
+
 ## Upstream services
 
 The extractor falls back to `api.pipepipe.dev` to decode YouTube signatures
@@ -814,8 +836,8 @@ support stay in this repository.
 - `1f8455d64` (multiple selection of videos, `qpipepipe/selection/`): replaced
   by upstream's multiple selection in v5.5.0 (`util/selection/`, the
   `menu_multi_select` toolbar button). The order of picking and the bottom bar
-  are gone. Upstream's selection lacks four of our actions, to be added on top
-  of it: play next, popup, mark as watched, share.
+  are gone. Its four actions upstream lacks are back on top of upstream's
+  selection (see "More actions on the multiple selection").
 
 ## Known conflicts
 
