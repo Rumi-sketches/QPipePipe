@@ -348,10 +348,11 @@ public class InfoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Nullable
     public StreamInfoItem getStreamItem(final int adapterPosition) {
         final int index = hasHeader() ? adapterPosition - 1 : adapterPosition;
-        if (index < 0 || index >= infoItemList.size()) {
+        final List<InfoItem> shown = shownList(); // the rows, filtered or sorted
+        if (index < 0 || index >= shown.size()) {
             return null;
         }
-        final InfoItem item = infoItemList.get(index);
+        final InfoItem item = shown.get(index);
         return item instanceof StreamInfoItem ? (StreamInfoItem) item : null;
     }
 
