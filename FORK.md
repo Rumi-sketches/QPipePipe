@@ -430,14 +430,18 @@ Files: `qpipepipe/PlaylistResume`, `qpipepipe/PlaylistResumeControls`,
 `qpipepipe/PlaylistResumeDecoration`, `res/layout/playlist_resume_control.xml`
 (included by `playlist_header.xml` and
 `local_playlist_header.xml` in place of `playlist_control.xml`),
-`StreamHistoryDAO.getLatestPlayedAmong`, `LocalPlaylistFragment`,
+`StreamHistoryDAO.getPlayedAmong`, `LocalPlaylistFragment`,
 `PlaylistFragment`. Key: `playlist_resume_key` (default off, one value for the
 whole app, set from the switch in the header).
 
 The playlist header has a main play button, Background and Popup as icon
 buttons, and a "Continue where you left off" switch. The resume point is the
-playlist video started most recently according to the watch history, or the
-next one when that video was watched past 90%. The switch row only shows up
+video furthest down the playlist among those played past 5% of their length
+according to the watch history, or the next one when that video was watched
+past 90%. The share is read from the saved position, which upstream only saves
+past 5 s or a quarter of the video (`StreamStateEntity.isValid`), so a short
+video also needs that much; videos only opened for a moment are ignored. A
+video with an unknown duration counts as soon as it is started. The switch row only shows up
 when that point is past the first video. When the switch is on, the three
 buttons start from it, the main one says "Resume from #N", and the list marks
 that video with a bar and a "Resume here" label. The label is an item
@@ -448,8 +452,9 @@ In remote playlists only the pages loaded so far are searched. Shuffled
 background play and the long-press enqueue actions still start from the
 beginning. Channels and the feed keep upstream's `playlist_control.xml`.
 
-Check: in a local playlist, play the second video to the end and the third for
-a few seconds, turn the switch on: the main button says "Resume from #3" and
+Check: in a local playlist of four videos about 2 minutes long, play the second
+to the end, the third for 15 s, the fourth for 2 s, then the first for 15 s,
+and turn the switch on: the main button says "Resume from #3" and
 Background starts from the third video. Turn it off: it starts from the first.
 
 ### Android Auto follows the car connection
