@@ -156,6 +156,17 @@ class UnplayableQueueTest {
         assertEquals(listOf("video 1 -> next", "hidden", "video 3"), shown)
     }
 
+    // The first page of a remote playlist: more videos come after its last loaded one.
+    @Test
+    fun theLastLoadedVideoOfAQueueWithMoreToFetchCountsDown() {
+        repeatAll = false
+        playQueue = IncompletePlayQueue(queueOf(2).streams)
+
+        land(loaded(0), broken(1))
+
+        assertEquals(listOf("hidden", "video 2 -> next"), shown)
+    }
+
     @Test
     fun withRepeatAllTheLastBrokenVideoCountsDownToTheFirst() {
         playQueue = queueOf(2)
