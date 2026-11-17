@@ -845,6 +845,12 @@ the same way (a queue of one broken video stays on its silence instead: the
 player does not land on it again). Videos that load reset the round, so a queue with at least one
 playable video goes on as upstream, its broken videos skipped. An item that
 failed for a missing connection is not counted: `PlaybackRecovery` owns it.
+That includes a network error the extractor wraps in a `ParsingException`
+(player metadata, signature decoding after the page loaded): upstream took it
+for a broken video. Hook in `MediaSourceManager`, which must survive a merge:
+`UnplayableQueue.isBrokenSource(throwable)` as the condition in
+`onErrorReturn` of the source loading, in place of upstream's
+`ExtractionException || IllegalStateException` (kept inside `isBrokenSource`).
 Without repeat all, only the once-per-queue report changes.
 
 Check: `UnplayableQueueTest` passes. On a phone, play in the background with

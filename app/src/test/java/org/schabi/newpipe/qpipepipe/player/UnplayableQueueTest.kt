@@ -2,6 +2,9 @@ package org.schabi.newpipe.qpipepipe.player
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import org.schabi.newpipe.extractor.exceptions.ContentNotAvailableException
+import org.schabi.newpipe.extractor.exceptions.ParsingException
+import org.schabi.newpipe.extractor.exceptions.ReCaptchaException
 import org.schabi.newpipe.extractor.stream.StreamInfo
 import org.schabi.newpipe.extractor.stream.StreamInfoItem
 import org.schabi.newpipe.extractor.stream.StreamType
@@ -10,6 +13,7 @@ import org.schabi.newpipe.player.mediasource.FailedMediaSource.StreamInfoLoadExc
 import org.schabi.newpipe.player.playqueue.IncompletePlayQueue
 import org.schabi.newpipe.player.playqueue.PlayQueue
 import org.schabi.newpipe.player.playqueue.SinglePlayQueue
+import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
 /**
@@ -191,6 +195,41 @@ class UnplayableQueueTest {
         land(broken(0), offline(1))
 
         assertEquals(listOf("video 1 -> next", "hidden"), shown)
+    }
+
+    // Phase review of issue-aperte: the extractor wraps a network error of a later request in a
+    // ParsingException, and MediaSourceManager took it for a broken video: countdown, "can't be
+    // played", and a repeat-all queue stopped while only the connection was missing.
+    @Test
+    fun aNetworkErrorTheExtractorWrappedIsNotABrokenVideo() {
+        val wrapped = ParsingException("Failed to fetch latest player metadata",
+            UnknownHostException("www.youtube.com"))
+
+        assertEquals(false, UnplayableQueue.isBrokenSource(wrapped))
+        assertEquals(false, UnplayableQueue.isBrokenSource(
+            IllegalStateException("SABR session", SocketTimeoutException("timeout"))))
+        assertEquals(false, UnplayableQueue.isBrokenSource(UnknownHostException("www.youtube.com")))
+    }
+
+    @Test
+    fun aVideoTheExtractorCantLoadIsStillBroken() {
+        assertEquals(true, UnplayableQueue.isBrokenSource(ContentNotAvailableException("removed")))
+        assertEquals(true, UnplayableQueue.isBrokenSource(
+            ParsingException("Failed to fetch latest player metadata", ReCaptchaException("", ""))))
+        assertEquals(true, UnplayableQueue.isBrokenSource(IllegalStateException("no SABR probe")))
+    }
+
+    @Test
+    fun aRepeatAllQueueWithoutConnectionDoesNotStopAsBroken() {
+        // How MediaSourceManager tags each item, as in its onErrorReturn
+        val error = ParsingException("Failed to call decode API", UnknownHostException("api"))
+        val tagged = if (UnplayableQueue.isBrokenSource(error)) StreamInfoLoadException(error)
+            else Exception(error)
+
+        land(*(0..2).map { queued(it).withErrors(listOf(tagged)) }.toTypedArray())
+
+        assertEquals(0, stops)
+        assertEquals(listOf("hidden", "hidden", "hidden"), shown)
     }
 
     // Issue #41: «Resume» on a playlist whose resume video is broken showed only the video

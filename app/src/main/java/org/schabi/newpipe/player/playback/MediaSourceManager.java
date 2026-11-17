@@ -12,7 +12,6 @@ import com.google.android.exoplayer2.source.MediaSource;
 
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
-import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 import org.schabi.newpipe.player.mediaitem.ExoMediaItems;
 import org.schabi.newpipe.player.mediaitem.ExtractorStreamInfoResolver;
 import org.schabi.newpipe.player.mediaitem.PlayerMediaItem;
@@ -26,6 +25,7 @@ import org.schabi.newpipe.player.playqueue.events.MoveEvent;
 import org.schabi.newpipe.player.playqueue.events.PlayQueueEvent;
 import org.schabi.newpipe.player.playqueue.events.RemoveEvent;
 import org.schabi.newpipe.player.playqueue.events.ReorderEvent;
+import org.schabi.newpipe.qpipepipe.player.UnplayableQueue;
 import org.schabi.newpipe.util.ServiceHelper;
 
 import java.io.UnsupportedEncodingException;
@@ -455,8 +455,7 @@ public class MediaSourceManager {
             // source-build failure (e.g. SABR probe / session creation), thrown by sourceOf. Both are
             // source errors: keep the real cause so the report says where it came from, and don't
             // auto-retry them as if they were transient (which would loop on a permanent failure).
-            if (throwable instanceof ExtractionException
-                    || throwable instanceof IllegalStateException) {
+            if (UnplayableQueue.isBrokenSource(throwable)) { // QPipePipe: not if offline (FORK.md)
                 return FailedMediaSource.of(stream, new StreamInfoLoadException(throwable));
             }
             // Non-source related error expected here (e.g. network),

@@ -2,6 +2,7 @@ package org.schabi.newpipe.qpipepipe.player
 
 import android.widget.Toast
 import org.schabi.newpipe.R
+import org.schabi.newpipe.extractor.exceptions.ExtractionException
 import org.schabi.newpipe.player.Player
 import org.schabi.newpipe.player.RepeatMode
 import org.schabi.newpipe.player.mediaitem.PlayerMediaItem
@@ -86,6 +87,19 @@ class UnplayableQueue(
     }
 
     companion object {
+        /**
+         * Whether loading a queue item failed because of the item itself (removed, private,
+         * extraction broken), so the player holds on it as broken; otherwise the load is retried
+         * and [PlaybackRecovery] handles it. Upstream's rule (an [ExtractionException] or an
+         * [IllegalStateException] from building the source), except for a missing connection:
+         * the extractor wraps a network error of a later request (player metadata, signature
+         * decoding) in a ParsingException, and that video is not broken.
+         */
+        @JvmStatic
+        fun isBrokenSource(error: Throwable): Boolean =
+            (error is ExtractionException || error is IllegalStateException) &&
+                !PlaybackRecovery.isNoConnection(error)
+
         /**
          * Whether the video page still starts [queue] when its first video can't be loaded.
          * Upstream showed only the page's error then, and the rest of a playlist never played:
