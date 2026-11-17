@@ -73,4 +73,9 @@
     <string name="recent_queue_added">imeongezwa</string>
     <string name="playlist_never_played">Haijawahi kuchezwa</string>
     <string name="queue_unplayable">Hakuna video yoyote kwenye foleni inayoweza kuchezwa</string>
+    <string name="no_internet_connection">Hakuna muunganisho wa intaneti</string>
+    <string name="no_internet_connection_resume">Uchezaji utaendelea muunganisho ukirudi</string>
+    <string name="unplayable_video">Video hii haiwezi kuchezwa</string>
+    <string name="unplayable_next_in" formatted="true">Video inayofuata baada ya sek %d</string>
+    <string name="unplayable_next">Video inayofuata</string>
 </resources>

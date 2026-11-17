@@ -73,4 +73,9 @@
     <string name="recent_queue_added">tettwarna</string>
     <string name="playlist_never_played">Werǧin tettwaɣra</string>
     <string name="queue_unplayable">Ulac tavidyut deg udras i yezmren ad teddu</string>
+    <string name="no_internet_connection">Ulac tuqqna ɣer internet</string>
+    <string name="no_internet_connection_resume">Taɣuri ad tkemmel mi ara d-tuɣal tuqqna</string>
+    <string name="unplayable_video">Tavidyut-a ur tezmir ara ad teddu</string>
+    <string name="unplayable_next_in" formatted="true">Tavidyut d-iteddun deg %d tsn</string>
+    <string name="unplayable_next">Tavidyut d-iteddun</string>
 </resources>

@@ -73,4 +73,9 @@
     <string name="recent_queue_added">amestáu</string>
     <string name="playlist_never_played">Enxamás se reprodució</string>
     <string name="queue_unplayable">Nun se pue reproducir dengún videu de la cola</string>
+    <string name="no_internet_connection">Nun hai conexón a internet</string>
+    <string name="no_internet_connection_resume">La reproducción va siguir cuando vuelva la conexón</string>
+    <string name="unplayable_video">Esti videu nun se pue reproducir</string>
+    <string name="unplayable_next_in" formatted="true">Videu siguiente en %d s</string>
+    <string name="unplayable_next">Videu siguiente</string>
 </resources>

@@ -77,4 +77,9 @@
     <string name="recent_queue_added">ᱥᱮᱞᱮᱫ ᱠᱟᱱ</string>
     <string name="playlist_never_played">ᱛᱤᱥ ᱦᱚᱸ ᱵᱟᱝ ᱪᱟᱹᱞᱩ ᱟᱠᱟᱱᱟ</string>
     <string name="queue_unplayable">ᱛᱟᱞᱟ ᱨᱮᱭᱟᱜ ᱡᱟᱦᱟᱸ ᱵᱷᱤᱰᱤᱭᱳ ᱦᱚᱸ ᱵᱟᱝ ᱪᱟᱞᱟᱣ ᱫᱟᱲᱮᱭᱟᱜ ᱠᱟᱱᱟ</string>
+    <string name="no_internet_connection">ᱤᱱᱴᱟᱨᱱᱮᱴ ᱡᱚᱲᱟᱣ ᱵᱟᱹᱱᱩᱜᱼᱟ</string>
+    <string name="no_internet_connection_resume">ᱡᱚᱲᱟᱣ ᱨᱩᱣᱟᱹᱲ ᱦᱤᱡᱩᱜ ᱠᱷᱟᱱ ᱯᱞᱮᱭᱵᱮᱠ ᱫᱚᱦᱲᱟ ᱮᱦᱚᱵᱚᱜᱼᱟ</string>
+    <string name="unplayable_video">ᱱᱚᱶᱟ ᱵᱷᱤᱰᱤᱭᱳ ᱵᱟᱝ ᱪᱟᱞᱟᱣ ᱫᱟᱲᱮᱭᱟᱜ ᱠᱟᱱᱟ</string>
+    <string name="unplayable_next_in" formatted="true">ᱤᱱᱟᱹ ᱛᱟᱭᱚᱢ ᱵᱷᱤᱰᱤᱭᱳ %d ᱥᱮ. ᱛᱮ</string>
+    <string name="unplayable_next">ᱤᱱᱟᱹ ᱛᱟᱭᱚᱢ ᱵᱷᱤᱰᱤᱭᱳ</string>
 </resources>

@@ -73,4 +73,9 @@
     <string name="recent_queue_added">aponduda</string>
     <string name="playlist_never_played">Pas jamai legida</string>
     <string name="queue_unplayable">Cap de las vidèos de la fila pòt pas èsser legida</string>
+    <string name="no_internet_connection">Pas cap de connexion a internet</string>
+    <string name="no_internet_connection_resume">La lectura tornarà quand la connexion serà tornada</string>
+    <string name="unplayable_video">Aquesta vidèo pòt pas èsser legida</string>
+    <string name="unplayable_next_in" formatted="true">Vidèo seguenta dins %d s</string>
+    <string name="unplayable_next">Vidèo seguenta</string>
 </resources>

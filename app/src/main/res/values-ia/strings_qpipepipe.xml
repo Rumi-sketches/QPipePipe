@@ -73,4 +73,9 @@
     <string name="recent_queue_added">addite</string>
     <string name="playlist_never_played">Nunquam reproducite</string>
     <string name="queue_unplayable">Nulle del videos in le cauda pote esser reproducite</string>
+    <string name="no_internet_connection">Nulle connexion a internet</string>
+    <string name="no_internet_connection_resume">Le reproduction continuara quando le connexion retorna</string>
+    <string name="unplayable_video">Iste video non pote esser reproducite</string>
+    <string name="unplayable_next_in" formatted="true">Video sequente in %d s</string>
+    <string name="unplayable_next">Video sequente</string>
 </resources>

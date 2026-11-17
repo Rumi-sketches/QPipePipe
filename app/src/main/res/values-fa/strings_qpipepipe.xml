@@ -73,4 +73,9 @@
     <string name="recent_queue_added">افزوده‌شده</string>
     <string name="playlist_never_played">هرگز پخش نشده</string>
     <string name="queue_unplayable">هیچ‌کدام از ویدیوهای صف قابل پخش نیست</string>
+    <string name="no_internet_connection">اتصال اینترنت برقرار نیست</string>
+    <string name="no_internet_connection_resume">پخش پس از برقراری دوباره اتصال ادامه می‌یابد</string>
+    <string name="unplayable_video">این ویدیو قابل پخش نیست</string>
+    <string name="unplayable_next_in" formatted="true">ویدیوی بعدی تا %d ثانیه دیگر</string>
+    <string name="unplayable_next">ویدیوی بعدی</string>
 </resources>

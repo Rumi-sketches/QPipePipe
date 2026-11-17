@@ -73,4 +73,9 @@
     <string name="recent_queue_added">zêdekirî</string>
     <string name="playlist_never_played">Qet nehatiye lîstin</string>
     <string name="queue_unplayable">Tu vîdyoyên di rêzê de nayên lêxistin</string>
+    <string name="no_internet_connection">Girêdana înternetê tune</string>
+    <string name="no_internet_connection_resume">Lêxistin dê berdewam bike dema ku girêdan vegere</string>
+    <string name="unplayable_video">Ev vîdyo nayê lêxistin</string>
+    <string name="unplayable_next_in" formatted="true">Vîdyoya din di %d ç de</string>
+    <string name="unplayable_next">Vîdyoya din</string>
 </resources>

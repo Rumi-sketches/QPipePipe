@@ -73,4 +73,9 @@
     <string name="recent_queue_added">đã thêm</string>
     <string name="playlist_never_played">Chưa từng phát</string>
     <string name="queue_unplayable">Không thể phát video nào trong hàng đợi</string>
+    <string name="no_internet_connection">Không có kết nối internet</string>
+    <string name="no_internet_connection_resume">Video sẽ tiếp tục phát khi có lại kết nối</string>
+    <string name="unplayable_video">Không thể phát video này</string>
+    <string name="unplayable_next_in" formatted="true">Video tiếp theo sau %d giây</string>
+    <string name="unplayable_next">Video tiếp theo</string>
 </resources>

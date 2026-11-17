@@ -77,4 +77,9 @@
     <string name="recent_queue_added">dodano</string>
     <string name="playlist_never_played">Nikad reproducirano</string>
     <string name="queue_unplayable">Nijedan video u redu se ne može reproducirati</string>
+    <string name="no_internet_connection">Nema internetske veze</string>
+    <string name="no_internet_connection_resume">Reprodukcija će se nastaviti kada se veza vrati</string>
+    <string name="unplayable_video">Ovaj video se ne može reproducirati</string>
+    <string name="unplayable_next_in" formatted="true">Sljedeći video za %d s</string>
+    <string name="unplayable_next">Sljedeći video</string>
 </resources>

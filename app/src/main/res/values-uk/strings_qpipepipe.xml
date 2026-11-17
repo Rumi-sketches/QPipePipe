@@ -81,4 +81,9 @@
     <string name="recent_queue_added">додано</string>
     <string name="playlist_never_played">Ще не відтворювалася</string>
     <string name="queue_unplayable">Жодне відео в черзі неможливо відтворити</string>
+    <string name="no_internet_connection">Немає підключення до інтернету</string>
+    <string name="no_internet_connection_resume">Відтворення продовжиться, коли з\'єднання відновиться</string>
+    <string name="unplayable_video">Це відео неможливо відтворити</string>
+    <string name="unplayable_next_in" formatted="true">Наступне відео через %d с</string>
+    <string name="unplayable_next">Наступне відео</string>
 </resources>

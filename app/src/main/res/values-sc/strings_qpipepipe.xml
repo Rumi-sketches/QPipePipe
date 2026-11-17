@@ -73,4 +73,9 @@
     <string name="recent_queue_added">annànghidu</string>
     <string name="playlist_never_played">Mai riproduida</string>
     <string name="queue_unplayable">Perunu de is vìdeos in sa coa si podet riproduire</string>
+    <string name="no_internet_connection">Peruna connessione a internet</string>
+    <string name="no_internet_connection_resume">Sa riprodutzione at a sighire cando torrat sa connessione</string>
+    <string name="unplayable_video">Custu vìdeu non si podet riproduire</string>
+    <string name="unplayable_next_in" formatted="true">Vìdeu imbeniente in %d s</string>
+    <string name="unplayable_next">Vìdeu imbeniente</string>
 </resources>

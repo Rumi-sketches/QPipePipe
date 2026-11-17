@@ -73,4 +73,9 @@
     <string name="recent_queue_added">එක් කළ</string>
     <string name="playlist_never_played">කිසිදා ධාවනය කර නැත</string>
     <string name="queue_unplayable">පෝලිමේ ඇති කිසිදු වීඩියෝවක් වාදනය කළ නොහැක</string>
+    <string name="no_internet_connection">අන්තර්ජාල සම්බන්ධතාවක් නැත</string>
+    <string name="no_internet_connection_resume">සම්බන්ධතාව නැවත ලැබුණු විට වාදනය දිගටම කරගෙන යනු ඇත</string>
+    <string name="unplayable_video">මෙම වීඩියෝව වාදනය කළ නොහැක</string>
+    <string name="unplayable_next_in" formatted="true">ඊළඟ වීඩියෝව තත්. %d කින්</string>
+    <string name="unplayable_next">ඊළඟ වීඩියෝව</string>
 </resources>

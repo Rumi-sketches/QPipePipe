@@ -73,4 +73,9 @@
     <string name="recent_queue_added">lagu daray</string>
     <string name="playlist_never_played">Weligii lama daarin</string>
     <string name="queue_unplayable">Muuqaalada safka midna lama daari karo</string>
+    <string name="no_internet_connection">Ma jiro xiriir internet</string>
+    <string name="no_internet_connection_resume">Daarintu way sii socon doontaa marka xiriirku soo noqdo</string>
+    <string name="unplayable_video">Muuqaalkan lama daari karo</string>
+    <string name="unplayable_next_in" formatted="true">Muuqaalka xiga %d il. kadib</string>
+    <string name="unplayable_next">Muuqaalka xiga</string>
 </resources>

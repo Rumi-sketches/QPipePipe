@@ -73,4 +73,9 @@
     <string name="recent_queue_added">добавено</string>
     <string name="playlist_never_played">Никога не е пускан</string>
     <string name="queue_unplayable">Нито едно от видеоклиповете в опашката не може да бъде възпроизведено</string>
+    <string name="no_internet_connection">Няма интернет връзка</string>
+    <string name="no_internet_connection_resume">Възпроизвеждането ще продължи, когато връзката се възстанови</string>
+    <string name="unplayable_video">Този видеоклип не може да бъде възпроизведен</string>
+    <string name="unplayable_next_in" formatted="true">Следващ видеоклип след %d с</string>
+    <string name="unplayable_next">Следващ видеоклип</string>
 </resources>

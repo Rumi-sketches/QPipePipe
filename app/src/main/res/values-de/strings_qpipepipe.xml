@@ -73,4 +73,9 @@
     <string name="recent_queue_added">hinzugefügt</string>
     <string name="playlist_never_played">Nie abgespielt</string>
     <string name="queue_unplayable">Keines der Videos in der Warteschlange kann abgespielt werden</string>
+    <string name="no_internet_connection">Keine Internetverbindung</string>
+    <string name="no_internet_connection_resume">Die Wiedergabe wird fortgesetzt, sobald die Verbindung wieder da ist</string>
+    <string name="unplayable_video">Dieses Video kann nicht abgespielt werden</string>
+    <string name="unplayable_next_in" formatted="true">Nächstes Video in %d s</string>
+    <string name="unplayable_next">Nächstes Video</string>
 </resources>

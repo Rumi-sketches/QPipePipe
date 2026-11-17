@@ -73,4 +73,9 @@
     <string name="recent_queue_added">যোগ করা</string>
     <string name="playlist_never_played">কখনো চালানো হয়নি</string>
     <string name="queue_unplayable">সারির কোনো ভিডিও চালানো যাচ্ছে না</string>
+    <string name="no_internet_connection">ইন্টারনেট সংযোগ নেই</string>
+    <string name="no_internet_connection_resume">সংযোগ ফিরে এলে প্লেব্যাক আবার শুরু হবে</string>
+    <string name="unplayable_video">এই ভিডিওটি চালানো যাচ্ছে না</string>
+    <string name="unplayable_next_in" formatted="true">পরের ভিডিও %d সে. পরে</string>
+    <string name="unplayable_next">পরের ভিডিও</string>
 </resources>

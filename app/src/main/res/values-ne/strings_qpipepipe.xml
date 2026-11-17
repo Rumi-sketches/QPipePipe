@@ -73,4 +73,9 @@
     <string name="recent_queue_added">थपिएको</string>
     <string name="playlist_never_played">कहिल्यै प्ले नगरिएको</string>
     <string name="queue_unplayable">लाइनमा रहेका कुनै पनि भिडियो प्ले गर्न सकिँदैन</string>
+    <string name="no_internet_connection">इन्टरनेट जडान छैन</string>
+    <string name="no_internet_connection_resume">जडान फर्केपछि प्लेब्याक फेरि सुरु हुनेछ</string>
+    <string name="unplayable_video">यो भिडियो प्ले गर्न सकिँदैन</string>
+    <string name="unplayable_next_in" formatted="true">अर्को भिडियो %d से. मा</string>
+    <string name="unplayable_next">अर्को भिडियो</string>
 </resources>

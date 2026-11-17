@@ -21,7 +21,17 @@ class UnplayableQueueTest {
     private var playQueue: PlayQueue = queueOf(3)
     private var repeatAll = true
     private var stops = 0
-    private val unplayable = UnplayableQueue({ playQueue }, { repeatAll }, { stops++ })
+    private val shown = mutableListOf<String>()
+    private val notice = object : UnplayableQueue.Notice {
+        override fun show(item: PlayerMediaItem, hasNext: Boolean) {
+            shown += item.title + if (hasNext) " -> next" else ""
+        }
+
+        override fun hide() {
+            shown += "hidden"
+        }
+    }
+    private val unplayable = UnplayableQueue({ playQueue }, { repeatAll }, { stops++ }, notice)
 
     private fun queueOf(size: Int): PlayQueue = SinglePlayQueue(
         (1..size).map {
@@ -134,5 +144,62 @@ class UnplayableQueueTest {
         land(broken(0), broken(1), broken(2))
 
         assertEquals(0, stops)
+    }
+
+    // Issue #41: the player holds on a broken video and says why, counting down to the next one.
+    @Test
+    fun aBrokenVideoShowsItsReasonWithACountdownWhenAnotherVideoFollows() {
+        repeatAll = false
+
+        land(broken(0), loaded(1), broken(2))
+
+        assertEquals(listOf("video 1 -> next", "hidden", "video 3"), shown)
+    }
+
+    // The first page of a remote playlist: more videos come after its last loaded one.
+    @Test
+    fun theLastLoadedVideoOfAQueueWithMoreToFetchCountsDown() {
+        repeatAll = false
+        playQueue = IncompletePlayQueue(queueOf(2).streams)
+
+        land(loaded(0), broken(1))
+
+        assertEquals(listOf("hidden", "video 2 -> next"), shown)
+    }
+
+    @Test
+    fun withRepeatAllTheLastBrokenVideoCountsDownToTheFirst() {
+        playQueue = queueOf(2)
+
+        land(loaded(0), broken(1))
+
+        assertEquals(listOf("hidden", "video 2 -> next"), shown)
+    }
+
+    // Issue #34 still holds: the round that found nothing playable ends with one message, no
+    // countdown that would start it again.
+    @Test
+    fun theStopAtTheEndOfABrokenRoundShowsNoCountdown() {
+        land(broken(0), broken(1), broken(2))
+
+        assertEquals(1, stops)
+        assertEquals(listOf("video 1 -> next", "video 2 -> next", "hidden"), shown)
+    }
+
+    @Test
+    fun anItemLeftForTheNetworkRecoveryHidesTheNotice() {
+        land(broken(0), offline(1))
+
+        assertEquals(listOf("video 1 -> next", "hidden"), shown)
+    }
+
+    // Issue #41: «Resume» on a playlist whose resume video is broken showed only the video
+    // page's error, and the playlist never reached the player. Upstream starts the player only
+    // once the first video loaded: false for every queue.
+    @Test
+    fun aQueueStillPlaysWhenItsFirstVideoCantBeLoaded() {
+        assertEquals(true, UnplayableQueue.playsDespiteLoadError(queueOf(3)))
+        assertEquals(false, UnplayableQueue.playsDespiteLoadError(queueOf(1)))
+        assertEquals(false, UnplayableQueue.playsDespiteLoadError(null))
     }
 }

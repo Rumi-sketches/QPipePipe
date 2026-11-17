@@ -73,4 +73,9 @@
     <string name="recent_queue_added">tillagd</string>
     <string name="playlist_never_played">Aldrig spelad</string>
     <string name="queue_unplayable">Inget av videoklippen i kön kan spelas upp</string>
+    <string name="no_internet_connection">Ingen internetanslutning</string>
+    <string name="no_internet_connection_resume">Uppspelningen fortsätter när anslutningen är tillbaka</string>
+    <string name="unplayable_video">Det här videoklippet kan inte spelas upp</string>
+    <string name="unplayable_next_in" formatted="true">Nästa video om %d s</string>
+    <string name="unplayable_next">Nästa video</string>
 </resources>

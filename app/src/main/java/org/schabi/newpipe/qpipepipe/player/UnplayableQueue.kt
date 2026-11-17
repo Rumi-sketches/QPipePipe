@@ -16,6 +16,8 @@ import org.schabi.newpipe.player.playqueue.PlayQueue
  * With "repeat all" and only broken items, that went on forever, an alert every 2 seconds. Now:
  *
  *  * each broken item is reported once per queue;
+ *  * the player holds on a broken item and shows why it can't be played, with a countdown to
+ *    the next item when there is one ([UnplayableNotice]);
  *  * once a whole round of a repeat-all queue found only broken items, playback pauses and a
  *    single message says that none of them can be played.
  *
@@ -26,7 +28,16 @@ class UnplayableQueue(
     private val queue: () -> PlayQueue?,
     private val repeatsAll: () -> Boolean,
     private val stop: () -> Unit,
+    private val notice: Notice,
 ) {
+    /** What the player shows about the broken item it is on. */
+    interface Notice {
+        /** Shows why [item] can't be played, counting down to the next item if [hasNext]. */
+        fun show(item: PlayerMediaItem, hasNext: Boolean)
+
+        fun hide()
+    }
+
     private var queueSeen: PlayQueue? = null
     private val reported = HashSet<String>()
     private val brokenThisRound = HashSet<String>()
@@ -50,9 +61,11 @@ class UnplayableQueue(
             if (item.maybeStreamInfo.isPresent) {
                 brokenThisRound.clear()
             }
+            notice.hide()
             return true
         }
         if (item.errors.none { it is FailedMediaSourceException }) {
+            notice.hide()
             return true // no network: PlaybackRecovery reports and retries it
         }
 
@@ -62,15 +75,26 @@ class UnplayableQueue(
             current.streams.all { it.uuid in brokenThisRound }
         ) {
             brokenThisRound.clear() // pressing play again starts a new round
+            notice.hide()
             stop()
             return false
         }
-        // The item is skipped by the FailedMediaSource silence, as upstream does. A visible
-        // reason or a countdown before the skip belongs here.
+        val index = current.indexOf(item)
+        notice.show(item, hasNext = repeatsAll() || !current.isComplete ||
+            (index >= 0 && index < current.size() - 1))
         return firstReport
     }
 
     companion object {
+        /**
+         * Whether the video page still starts [queue] when its first video can't be loaded.
+         * Upstream showed only the page's error then, and the rest of a playlist never played:
+         * now the player gets the queue, holds on the broken video with its reason and moves on.
+         * A single video keeps the page's error, which already says what went wrong.
+         */
+        @JvmStatic
+        fun playsDespiteLoadError(queue: PlayQueue?): Boolean = queue != null && queue.size() > 1
+
         @JvmStatic
         fun forPlayer(player: Player) = UnplayableQueue(
             queue = { player.playQueue },
@@ -80,6 +104,7 @@ class UnplayableQueue(
                 Toast.makeText(player.context, R.string.queue_unplayable, Toast.LENGTH_LONG)
                     .show()
             },
+            notice = UnplayableNotice(player),
         )
     }
 }

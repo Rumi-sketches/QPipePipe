@@ -73,4 +73,9 @@
     <string name="recent_queue_added">lisatud</string>
     <string name="playlist_never_played">Pole kunagi esitatud</string>
     <string name="queue_unplayable">Ühtegi järjekorras olevat videot ei saa esitada</string>
+    <string name="no_internet_connection">Internetiühendus puudub</string>
+    <string name="no_internet_connection_resume">Esitus jätkub, kui ühendus taastub</string>
+    <string name="unplayable_video">Seda videot ei saa esitada</string>
+    <string name="unplayable_next_in" formatted="true">Järgmine video %d s pärast</string>
+    <string name="unplayable_next">Järgmine video</string>
 </resources>

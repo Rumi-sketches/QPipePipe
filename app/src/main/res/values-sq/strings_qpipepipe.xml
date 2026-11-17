@@ -73,4 +73,9 @@
     <string name="recent_queue_added">shtuar</string>
     <string name="playlist_never_played">Nuk është luajtur kurrë</string>
     <string name="queue_unplayable">Asnjë nga videot në radhë nuk mund të luhet</string>
+    <string name="no_internet_connection">Nuk ka lidhje interneti</string>
+    <string name="no_internet_connection_resume">Luajtja do të vazhdojë kur të kthehet lidhja</string>
+    <string name="unplayable_video">Kjo video nuk mund të luhet</string>
+    <string name="unplayable_next_in" formatted="true">Videoja tjetër pas %d s</string>
+    <string name="unplayable_next">Videoja tjetër</string>
 </resources>

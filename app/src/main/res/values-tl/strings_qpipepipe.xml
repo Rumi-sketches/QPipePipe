@@ -73,4 +73,9 @@
     <string name="recent_queue_added">idinagdag</string>
     <string name="playlist_never_played">Hindi pa naipalabas</string>
     <string name="queue_unplayable">Wala sa mga video sa pila ang mape-play</string>
+    <string name="no_internet_connection">Walang koneksyon sa internet</string>
+    <string name="no_internet_connection_resume">Magpapatuloy ang pag-play kapag bumalik ang koneksyon</string>
+    <string name="unplayable_video">Hindi mape-play ang video na ito</string>
+    <string name="unplayable_next_in" formatted="true">Susunod na video sa loob ng %d s</string>
+    <string name="unplayable_next">Susunod na video</string>
 </resources>

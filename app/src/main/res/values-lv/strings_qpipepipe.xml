@@ -77,4 +77,9 @@
     <string name="recent_queue_added">pievienots</string>
     <string name="playlist_never_played">Nekad nav atskaņots</string>
     <string name="queue_unplayable">Nevienu no rindā esošajiem video nevar atskaņot</string>
+    <string name="no_internet_connection">Nav interneta savienojuma</string>
+    <string name="no_internet_connection_resume">Atskaņošana turpināsies, kad savienojums atjaunosies</string>
+    <string name="unplayable_video">Šo video nevar atskaņot</string>
+    <string name="unplayable_next_in" formatted="true">Nākamais video pēc %d s</string>
+    <string name="unplayable_next">Nākamais video</string>
 </resources>

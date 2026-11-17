@@ -77,4 +77,9 @@
     <string name="recent_queue_added">додато</string>
     <string name="playlist_never_played">Никад пуштено</string>
     <string name="queue_unplayable">Ниједан видео у реду не може да се пусти</string>
+    <string name="no_internet_connection">Нема интернет везе</string>
+    <string name="no_internet_connection_resume">Репродукција ће се наставити када се веза врати</string>
+    <string name="unplayable_video">Овај видео не може да се пусти</string>
+    <string name="unplayable_next_in" formatted="true">Следећи видео за %d с</string>
+    <string name="unplayable_next">Следећи видео</string>
 </resources>

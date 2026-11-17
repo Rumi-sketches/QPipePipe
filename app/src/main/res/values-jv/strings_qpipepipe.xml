@@ -69,4 +69,9 @@
     <string name="recent_queue_added">ditambahke</string>
     <string name="playlist_never_played">Durung tau diputer</string>
     <string name="queue_unplayable">Ora ana video ing antrean sing bisa diputer</string>
+    <string name="no_internet_connection">Ora ana sambungan internet</string>
+    <string name="no_internet_connection_resume">Puteran bakal diterusaké yèn sambungan wis bali</string>
+    <string name="unplayable_video">Video iki ora bisa diputer</string>
+    <string name="unplayable_next_in" formatted="true">Video sabanjuré ing %d dtk</string>
+    <string name="unplayable_next">Video sabanjuré</string>
 </resources>

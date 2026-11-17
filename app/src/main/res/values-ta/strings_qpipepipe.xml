@@ -73,4 +73,9 @@
     <string name="recent_queue_added">சேர்க்கப்பட்டது</string>
     <string name="playlist_never_played">ஒருபோதும் இயக்கப்படவில்லை</string>
     <string name="queue_unplayable">வரிசையில் உள்ள எந்த வீடியோவையும் இயக்க முடியாது</string>
+    <string name="no_internet_connection">இணைய இணைப்பு இல்லை</string>
+    <string name="no_internet_connection_resume">இணைப்பு திரும்பியதும் இயக்கம் தொடரும்</string>
+    <string name="unplayable_video">இந்த வீடியோவை இயக்க முடியாது</string>
+    <string name="unplayable_next_in" formatted="true">அடுத்த வீடியோ %d வி. இல்</string>
+    <string name="unplayable_next">அடுத்த வீடியோ</string>
 </resources>

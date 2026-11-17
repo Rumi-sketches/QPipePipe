@@ -73,4 +73,9 @@
     <string name="recent_queue_added">ਜੋੜੀ ਗਈ</string>
     <string name="playlist_never_played">ਕਦੇ ਨਹੀਂ ਚਲਾਈ</string>
     <string name="queue_unplayable">ਕਤਾਰ ਵਿੱਚ ਕੋਈ ਵੀ ਵੀਡੀਓ ਚਲਾਈ ਨਹੀਂ ਜਾ ਸਕਦੀ</string>
+    <string name="no_internet_connection">ਕੋਈ ਇੰਟਰਨੈੱਟ ਕਨੈਕਸ਼ਨ ਨਹੀਂ</string>
+    <string name="no_internet_connection_resume">ਕਨੈਕਸ਼ਨ ਵਾਪਸ ਆਉਣ ਤੇ ਪਲੇਬੈਕ ਮੁੜ ਸ਼ੁਰੂ ਹੋਵੇਗਾ</string>
+    <string name="unplayable_video">ਇਹ ਵੀਡੀਓ ਚਲਾਈ ਨਹੀਂ ਜਾ ਸਕਦੀ</string>
+    <string name="unplayable_next_in" formatted="true">ਅਗਲੀ ਵੀਡੀਓ %d ਸ. ਵਿੱਚ</string>
+    <string name="unplayable_next">ਅਗਲੀ ਵੀਡੀਓ</string>
 </resources>

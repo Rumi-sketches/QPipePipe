@@ -73,4 +73,9 @@
     <string name="recent_queue_added">dazuadoa</string>
     <string name="playlist_never_played">No nia obgspuit</string>
     <string name="queue_unplayable">Koans vo de Videos in da Warteschlang ko obgspuit wern</string>
+    <string name="no_internet_connection">Koa Internetverbindung</string>
+    <string name="no_internet_connection_resume">Des Obspuin geht weida, wenn d’Verbindung wieda do is</string>
+    <string name="unplayable_video">Des Video ko ned obgspuit wern</string>
+    <string name="unplayable_next_in" formatted="true">Nächsts Video in %d s</string>
+    <string name="unplayable_next">Nächsts Video</string>
 </resources>
