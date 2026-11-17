@@ -72,4 +72,7 @@
     <string name="recent_queue_not_watched">Da vedere</string>
     <string name="recent_queue_added">aggiunto</string>
     <string name="playlist_never_played">Mai riprodotta</string>
+    <!-- Playback stopped for lack of a connection (PlayerErrorHandler) -->
+    <string name="no_internet_connection">Nessuna connessione a internet</string>
+    <string name="no_internet_connection_resume">La riproduzione riprenderà quando torna la connessione</string>
 </resources>

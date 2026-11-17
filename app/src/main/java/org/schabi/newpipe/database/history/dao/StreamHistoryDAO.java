@@ -68,19 +68,18 @@ public abstract class StreamHistoryDAO implements HistoryDAO<StreamHistoryEntity
     public abstract StreamHistoryEntity getLatestEntry(long streamId);
 
     /**
-     * The most recently started stream whose url is in {@code urls}, or null if none of them
-     * is in the history. Keep {@code urls} under SQLite's limit of bound parameters (999).
+     * The streams whose url is in {@code urls} and that are in the history, each with the date
+     * it was last started. Keep {@code urls} under SQLite's limit of bound parameters (999).
      */
     @Query("SELECT streams.service_id, streams.url, streams.duration, "
-            + "stream_history.access_date, "
+            + "MAX(stream_history.access_date) AS access_date, "
             + "IFNULL(stream_state.progress_time, 0) AS progress_time"
             + " FROM streams"
             + " INNER JOIN stream_history ON streams.uid = stream_history.stream_id"
             + " LEFT JOIN stream_state ON streams.uid = stream_state.stream_id"
             + " WHERE streams.url IN (:urls)"
-            + " ORDER BY stream_history.access_date DESC LIMIT 1")
-    @Nullable
-    public abstract LatestPlayedStream getLatestPlayedAmong(List<String> urls);
+            + " GROUP BY streams.uid")
+    public abstract List<LatestPlayedStream> getPlayedAmong(List<String> urls);
 
     @Query("DELETE FROM " + STREAM_HISTORY_TABLE + " WHERE " + JOIN_STREAM_ID + " = :streamId")
     public abstract int deleteStreamHistory(long streamId);

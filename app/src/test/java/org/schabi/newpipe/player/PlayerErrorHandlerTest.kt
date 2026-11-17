@@ -7,6 +7,10 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import java.io.IOException
+import java.net.ConnectException
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
 
 class PlayerErrorHandlerTest {
     private fun responseCode(code: Int) = InvalidResponseCodeException(
@@ -72,5 +76,24 @@ class PlayerErrorHandlerTest {
         assertTrue(retry.tryRetry("a", 0L))
         assertTrue(retry.tryRetry("b", 1_000L))
         assertFalse(retry.tryRetry("a", 2_000L))
+    }
+
+    @Test
+    fun unresolvedHostIsNoConnection() {
+        // The chain of the report from the car: the stream info request failed in DNS.
+        val dns = UnknownHostException("Unable to resolve host \"youtubei.googleapis.com\"")
+        assertTrue(PlayerErrorHandler.isNoConnection(sourceError(Exception(dns))))
+    }
+
+    @Test
+    fun refusedOrTimedOutConnectionsAreNoConnection() {
+        assertTrue(PlayerErrorHandler.isNoConnection(sourceError(ConnectException())))
+        assertTrue(PlayerErrorHandler.isNoConnection(sourceError(SocketTimeoutException())))
+    }
+
+    @Test
+    fun serverAnswersAreNotNoConnection() {
+        assertFalse(PlayerErrorHandler.isNoConnection(sourceError(responseCode(403))))
+        assertFalse(PlayerErrorHandler.isNoConnection(sourceError(IOException("bad data"))))
     }
 }

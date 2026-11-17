@@ -424,7 +424,7 @@ public final class Player {
 
         liveIdle = false;
         stopSabrBackoffCountdown();
-        playerErrorHandler.cancelDelayedReload();
+        playerErrorHandler.release();
         surfaceController.cleanupVideoSurface();
 
         if (!exoPlayerIsNull()) {

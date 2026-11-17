@@ -430,14 +430,18 @@ Files: `qpipepipe/PlaylistResume`, `qpipepipe/PlaylistResumeControls`,
 `qpipepipe/PlaylistResumeDecoration`, `res/layout/playlist_resume_control.xml`
 (included by `playlist_header.xml` and
 `local_playlist_header.xml` in place of `playlist_control.xml`),
-`StreamHistoryDAO.getLatestPlayedAmong`, `LocalPlaylistFragment`,
+`StreamHistoryDAO.getPlayedAmong`, `LocalPlaylistFragment`,
 `PlaylistFragment`. Key: `playlist_resume_key` (default off, one value for the
 whole app, set from the switch in the header).
 
 The playlist header has a main play button, Background and Popup as icon
 buttons, and a "Continue where you left off" switch. The resume point is the
-playlist video started most recently according to the watch history, or the
-next one when that video was watched past 90%. The switch row only shows up
+video furthest down the playlist among those played past 5% of their length
+according to the watch history, or the next one when that video was watched
+past 90%. The share is read from the saved position, which upstream only saves
+past 5 s or a quarter of the video (`StreamStateEntity.isValid`), so a short
+video also needs that much; videos only opened for a moment are ignored. A
+video with an unknown duration counts as soon as it is started. The switch row only shows up
 when that point is past the first video. When the switch is on, the three
 buttons start from it, the main one says "Resume from #N", and the list marks
 that video with a bar and a "Resume here" label. The label is an item
@@ -448,8 +452,9 @@ In remote playlists only the pages loaded so far are searched. Shuffled
 background play and the long-press enqueue actions still start from the
 beginning. Channels and the feed keep upstream's `playlist_control.xml`.
 
-Check: in a local playlist, play the second video to the end and the third for
-a few seconds, turn the switch on: the main button says "Resume from #3" and
+Check: in a local playlist of four videos about 2 minutes long, play the second
+to the end, the third for 15 s, the fourth for 2 s, then the first for 15 s,
+and turn the switch on: the main button says "Resume from #3" and
 Background starts from the third video. Turn it off: it starts from the first.
 
 ### Android Auto follows the car connection
@@ -731,9 +736,11 @@ Wi-Fi and mobile data while it plays: it resumes at the same position.
 ### No error loop without network
 
 Files: `PlayerErrorHandler` (`recoverFromNetworkError`, `networkRetryDelayMs`,
-`reloadIfWaiting`), `PlayerMetadataController.errorsToReport`,
-`PlayerHistoryController.hasPlayedPosition`, `Player.reloadPlayQueueManager`,
-`PlayerTransportController.play`, `PlayerPlaybackStateController` (`STATE_READY`).
+`reloadIfWaiting`, `isNoConnection`, `showNoConnection`, `release`),
+`PlayerMetadataController.errorsToReport`, `PlayerHistoryController.hasPlayedPosition`,
+`Player.reloadPlayQueueManager`, `Player.destroyPlayer`, `PlayerTransportController.play`,
+`PlayerPlaybackStateController` (`STATE_READY`), `MediaSessionManager` (error message
+provider), `strings_qpipepipe.xml` (`no_internet_connection`), `ic_cloud_off`.
 
 Upstream answered every network error by rebuilding the source at once. With no
 connection the rebuild fails as fast as DNS does, so the player looped forever,
@@ -747,13 +754,28 @@ not again by the metadata. An item that failed to load no longer saves its
 position: upstream saved 0 at every error, so the video started over once the
 network came back and its watch progress was lost.
 
+When the cause is a missing connection (`PlayerErrorHandler.isNoConnection`: the
+host could not be resolved, reached or answered in time) and the retries above
+go on, the first failure
+shows "No internet connection" in a notification and a toast, instead of the
+bug report notification; the notification goes away when playback gets ready
+again, another error takes its place or the player closes. The trace still goes to the debug error log. The
+media session (`MediaSessionManager`, error message provider) shows the same
+message while the player holds the error, so the car says why it stopped;
+other player errors show "Could not play this stream" there instead of no
+message at all.
+
 Upstream v5.5.0 also reworked the behind-live-window branch of
 `PlayerErrorHandler`: expect a small conflict there at the next sync.
 
 Check: play a video and cut the network (on a phone driven over adb Wi-Fi, set
 Private DNS to an invalid hostname instead): one toast, then retries 2, 4, 8,
 10 s apart in the log; restore the network and it resumes within 10 s, or at
-once when play is pressed, at the position it was at. To cover a resume after
+once when play is pressed, at the position it was at. While it is offline the
+phone shows "No internet connection" (toast and notification, no bug report
+notification), the notification goes away when playback resumes, and the media
+session reports the same message (`adb shell dumpsys media_session`: `state=ERROR`,
+`error=No internet connection`), which is what Android Auto shows. To cover a resume after
 the OS killed the app: play, pause, cut the network, `adb shell am stop-app
 <app id>`, then `adb shell cmd media_session dispatch play`.
 
