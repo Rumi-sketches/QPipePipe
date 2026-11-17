@@ -72,4 +72,5 @@
     <string name="recent_queue_not_watched">A observar</string>
     <string name="recent_queue_added">addite</string>
     <string name="playlist_never_played">Nunquam reproducite</string>
+    <string name="queue_unplayable">Nulle del videos in le cauda pote esser reproducite</string>
 </resources>

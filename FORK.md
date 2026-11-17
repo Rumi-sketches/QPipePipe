@@ -826,6 +826,33 @@ try each of the four actions: next and popup queue them in list order, the
 watched marks appear on both rows, share sends both links. Upstream's actions
 still work.
 
+### A queue of videos that can't be loaded does not loop
+
+Files: `qpipepipe/player/UnplayableQueue`, `strings_qpipepipe.xml`
+(`queue_unplayable`). Hooks in `PlayerMetadataController`, which must survive a
+merge: the `unplayableQueue` field after the class line, and
+`unplayableQueue.onLanding(tag) &&` in front of the condition that reports the
+item errors in `onEvents`.
+
+Upstream gives a video that can't be loaded (extraction failed, video removed)
+a `FailedMediaSource`: 2 seconds of silence, then the next item, with a toast
+and a bug report notification every time the player lands on it. With "repeat
+all" and only such videos, that looped forever. Now each of them is reported
+once per queue, and once a whole round of a repeat-all queue found only broken
+videos, playback pauses and one toast says "None of the videos in the queue can
+be played". Pressing play again goes through one more quiet round, then stops
+the same way (a queue of one broken video stays on its silence instead: the
+player does not land on it again). Videos that load reset the round, so a queue with at least one
+playable video goes on as upstream, its broken videos skipped. An item that
+failed for a missing connection is not counted: `PlaybackRecovery` owns it.
+Without repeat all, only the once-per-queue report changes.
+
+Check: `UnplayableQueueTest` passes. On a phone, play in the background with
+repeat all a local playlist of removed videos (the app refuses to add one, so
+export the database, add rows to `streams` and `playlist_stream_join` with a
+`thumbnail_url`, and import it): one error toast per video, then the queue
+message and the player paused, no more toasts.
+
 ## Upstream services
 
 The extractor falls back to `api.pipepipe.dev` to decode YouTube signatures

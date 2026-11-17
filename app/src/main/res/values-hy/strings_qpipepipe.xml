@@ -72,4 +72,5 @@
     <string name="recent_queue_not_watched">Դիտելու</string>
     <string name="recent_queue_added">ավելացված</string>
     <string name="playlist_never_played">Երբեք չի նվագարկվել</string>
+    <string name="queue_unplayable">Հերթի տեսանյութերից ոչ մեկը հնարավոր չէ նվագարկել</string>
 </resources>

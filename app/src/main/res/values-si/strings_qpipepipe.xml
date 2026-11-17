@@ -72,4 +72,5 @@
     <string name="recent_queue_not_watched">නැරඹීමට ඇති</string>
     <string name="recent_queue_added">එක් කළ</string>
     <string name="playlist_never_played">කිසිදා ධාවනය කර නැත</string>
+    <string name="queue_unplayable">පෝලිමේ ඇති කිසිදු වීඩියෝවක් වාදනය කළ නොහැක</string>
 </resources>

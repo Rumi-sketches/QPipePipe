@@ -72,4 +72,5 @@
     <string name="recent_queue_not_watched">À regarder</string>
     <string name="recent_queue_added">ajoutée</string>
     <string name="playlist_never_played">Jamais lue</string>
+    <string name="queue_unplayable">Aucune des vidéos de la file d\'attente ne peut être lue</string>
 </resources>

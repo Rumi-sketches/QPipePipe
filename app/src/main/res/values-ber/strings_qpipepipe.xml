@@ -72,4 +72,5 @@
     <string name="recent_queue_not_watched">ⵉ ⵡⴰⵏⵏⴰⵢ</string>
     <string name="recent_queue_added">ⵉⵜⵜⵡⴰⵔⵏⴰ</string>
     <string name="playlist_never_played">ⵓⵔ ⵊⵊⵉⵏ ⵉⵜⵜⵡⴰⵖⵔⴰ</string>
+    <string name="queue_unplayable">ⵓⵔ ⵉⵣⵎⵉⵔ ⵢⴰⵏ ⵓⴼⵉⴷⵢⵓ ⴳ ⵜⵍⴳⴰⵎⵜ ⵏ ⵓⵔⴰⵊⵓ ⴰⴷ ⵉⵜⵜⵡⴰⵖⵔ</string>
 </resources>

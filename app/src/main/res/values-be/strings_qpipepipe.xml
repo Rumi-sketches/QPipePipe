@@ -80,4 +80,5 @@
     <string name="recent_queue_not_watched">Не прагледжана</string>
     <string name="recent_queue_added">дададзена</string>
     <string name="playlist_never_played">Яшчэ не прайграваўся</string>
+    <string name="queue_unplayable">Ніводнае відэа ў чарзе немагчыма прайграць</string>
 </resources>

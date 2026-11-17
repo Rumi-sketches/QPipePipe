@@ -72,4 +72,5 @@
     <string name="recent_queue_not_watched">De veire</string>
     <string name="recent_queue_added">aponduda</string>
     <string name="playlist_never_played">Pas jamai legida</string>
+    <string name="queue_unplayable">Cap de las vidèos de la fila pòt pas èsser legida</string>
 </resources>

@@ -72,4 +72,5 @@
     <string name="recent_queue_not_watched">Për t\'u parë</string>
     <string name="recent_queue_added">shtuar</string>
     <string name="playlist_never_played">Nuk është luajtur kurrë</string>
+    <string name="queue_unplayable">Asnjë nga videot në radhë nuk mund të luhet</string>
 </resources>

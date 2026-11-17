@@ -72,4 +72,5 @@
     <string name="recent_queue_not_watched">Ji bo temaşekirinê</string>
     <string name="recent_queue_added">zêdekirî</string>
     <string name="playlist_never_played">Qet nehatiye lîstin</string>
+    <string name="queue_unplayable">Tu vîdyoyên di rêzê de nayên lêxistin</string>
 </resources>

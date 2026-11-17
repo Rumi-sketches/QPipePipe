@@ -68,4 +68,5 @@
     <string name="recent_queue_not_watched">待觀看</string>
     <string name="recent_queue_added">已新增</string>
     <string name="playlist_never_played">從未播放</string>
+    <string name="queue_unplayable">佇列中的影片都無法播放</string>
 </resources>

@@ -76,4 +76,5 @@
     <string name="recent_queue_not_watched">Neskatīts</string>
     <string name="recent_queue_added">pievienots</string>
     <string name="playlist_never_played">Nekad nav atskaņots</string>
+    <string name="queue_unplayable">Nevienu no rindā esošajiem video nevar atskaņot</string>
 </resources>

@@ -72,4 +72,5 @@
     <string name="recent_queue_not_watched">Videndum</string>
     <string name="recent_queue_added">additum</string>
     <string name="playlist_never_played">Numquam lusum</string>
+    <string name="queue_unplayable">Nullum ex videis in ordine reddi potest</string>
 </resources>

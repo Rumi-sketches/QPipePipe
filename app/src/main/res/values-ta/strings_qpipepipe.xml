@@ -72,4 +72,5 @@
     <string name="recent_queue_not_watched">பார்க்க வேண்டியது</string>
     <string name="recent_queue_added">சேர்க்கப்பட்டது</string>
     <string name="playlist_never_played">ஒருபோதும் இயக்கப்படவில்லை</string>
+    <string name="queue_unplayable">வரிசையில் உள்ள எந்த வீடியோவையும் இயக்க முடியாது</string>
 </resources>

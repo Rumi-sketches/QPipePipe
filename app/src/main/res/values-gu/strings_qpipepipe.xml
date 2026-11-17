@@ -72,4 +72,5 @@
     <string name="recent_queue_not_watched">જોવાનું બાકી</string>
     <string name="recent_queue_added">ઉમેરેલું</string>
     <string name="playlist_never_played">ક્યારેય ચલાવ્યું નથી</string>
+    <string name="queue_unplayable">કતારમાંનો કોઈ પણ વીડિયો ચલાવી શકાતો નથી</string>
 </resources>

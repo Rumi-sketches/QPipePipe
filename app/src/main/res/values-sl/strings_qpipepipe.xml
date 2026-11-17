@@ -80,4 +80,5 @@
     <string name="recent_queue_not_watched">Za ogled</string>
     <string name="recent_queue_added">dodano</string>
     <string name="playlist_never_played">Še ni bilo predvajano</string>
+    <string name="queue_unplayable">Nobenega videoposnetka v čakalni vrsti ni mogoče predvajati</string>
 </resources>

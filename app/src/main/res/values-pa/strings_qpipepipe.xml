@@ -72,4 +72,5 @@
     <string name="recent_queue_not_watched">ਵੇਖਣੀ ਹੈ</string>
     <string name="recent_queue_added">ਜੋੜੀ ਗਈ</string>
     <string name="playlist_never_played">ਕਦੇ ਨਹੀਂ ਚਲਾਈ</string>
+    <string name="queue_unplayable">ਕਤਾਰ ਵਿੱਚ ਕੋਈ ਵੀ ਵੀਡੀਓ ਚਲਾਈ ਨਹੀਂ ਜਾ ਸਕਦੀ</string>
 </resources>

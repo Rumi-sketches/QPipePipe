@@ -72,4 +72,5 @@
     <string name="recent_queue_not_watched">Ikusteko</string>
     <string name="recent_queue_added">gehituta</string>
     <string name="playlist_never_played">Inoiz erreproduzitu gabea</string>
+    <string name="queue_unplayable">Ilarako bideoetako bat ere ezin da erreproduzitu</string>
 </resources>

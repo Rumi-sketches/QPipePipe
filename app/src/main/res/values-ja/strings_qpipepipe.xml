@@ -68,4 +68,5 @@
     <string name="recent_queue_not_watched">未視聴</string>
     <string name="recent_queue_added">追加済み</string>
     <string name="playlist_never_played">未再生</string>
+    <string name="queue_unplayable">キュー内の動画はどれも再生できません</string>
 </resources>
