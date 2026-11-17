@@ -1,0 +1,112 @@
+{
+  "package": "io.github.rumisketches.qpipepipe.debug",
+  "device": "Redmi K30 5G",
+  "started": "2026-11-17 14:00:41",
+  "upgrade": {
+    "ok": true,
+    "install": [
+      "Success"
+    ],
+    "before": {
+      "tap_always_plays_key": null,
+      "clear_queue_confirmation_key": null,
+      "enable_swipe_actions_key": null,
+      "swipe_left_action_key": null,
+      "swipe_right_action_key": null
+    },
+    "after": {
+      "tap_always_plays_key": null,
+      "clear_queue_confirmation_key": null,
+      "enable_swipe_actions_key": null,
+      "swipe_left_action_key": null,
+      "swipe_right_action_key": null
+    }
+  },
+  "version": [
+    "5.5.0-q1"
+  ],
+  "features": [
+    {
+      "name": "tap always plays",
+      "verdict": "PASS",
+      "on": true,
+      "off": false
+    },
+    {
+      "name": "clear-queue dialog",
+      "verdict": "PASS",
+      "on": true,
+      "off": false
+    },
+    {
+      "name": "swipe enqueue",
+      "verdict": "PASS",
+      "on": true,
+      "off": false
+    }
+  ],
+  "timings": {
+    "cold_start": {
+      "median_ms": 2472.0,
+      "min_ms": 2331,
+      "max_ms": 2678,
+      "failed": 0,
+      "samples": [
+        2376,
+        2539,
+        2331,
+        2678,
+        2468,
+        2585,
+        2476,
+        2428,
+        2408,
+        2529
+      ]
+    },
+    "video_jNQXAC9IVRw": {
+      "median_ms": 7220,
+      "min_ms": 6878,
+      "max_ms": 8415,
+      "failed": 0,
+      "samples": [
+        8415,
+        7110,
+        7220,
+        6878,
+        7507
+      ]
+    },
+    "video_aqz-KE-bpKQ": {
+      "median_ms": 7227,
+      "min_ms": 6923,
+      "max_ms": 7839,
+      "failed": 0,
+      "samples": [
+        7839,
+        7530,
+        6923,
+        7227,
+        7139
+      ]
+    },
+    "video_dQw4w9WgXcQ": {
+      "median_ms": 7513.5,
+      "min_ms": 7225,
+      "max_ms": 8190,
+      "failed": 1,
+      "samples": [
+        7225,
+        7505,
+        null,
+        8190,
+        7522
+      ]
+    }
+  },
+  "regressions": [
+    "cold_start: 1578.0 -> 2472.0 ms",
+    "video_dQw4w9WgXcQ: 1 of 5 starts failed"
+  ],
+  "crashes": []
+}
