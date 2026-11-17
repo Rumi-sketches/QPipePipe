@@ -37,7 +37,6 @@ import org.schabi.newpipe.info_list.dialog.InfoItemDialog;
 import org.schabi.newpipe.info_list.InfoListAdapter;
 import org.schabi.newpipe.info_list.swipe.StreamSwipeItemTouchCallback;
 import org.schabi.newpipe.info_list.swipe.SwipeActionPreferences;
-import org.schabi.newpipe.qpipepipe.selection.MultiSelect;
 import org.schabi.newpipe.util.NavigationHelper;
 import org.schabi.newpipe.util.OnClickGesture;
 import org.schabi.newpipe.util.StateSaver;
@@ -271,8 +270,6 @@ public abstract class BaseListFragment<I, N> extends BaseStateFragment<I>
         }
 
         itemsList.setAdapter(infoListAdapter);
-        // QPipePipe: multiple selection
-        MultiSelect.install(this, itemsList, infoListAdapter::getStreamItem, null);
     }
 
     protected void onItemSelected(final InfoItem selectedItem) {
@@ -499,7 +496,6 @@ public abstract class BaseListFragment<I, N> extends BaseStateFragment<I>
             supportActionBar.setDisplayShowTitleEnabled(true);
             supportActionBar.setDisplayHomeAsUpEnabled(!useAsFrontPage);
         }
-        MultiSelect.addMenuItem(this, menu);
     }
 
     /*//////////////////////////////////////////////////////////////////////////

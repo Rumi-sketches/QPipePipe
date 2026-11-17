@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.schabi.newpipe.error.ErrorUtil;
 import org.schabi.newpipe.extractor.stream.StreamInfoItem;
-import org.schabi.newpipe.qpipepipe.selection.MultiSelect;
 
 /**
  * <p>
@@ -62,7 +61,7 @@ public class StreamSwipeItemTouchCallback extends ItemTouchHelper.SimpleCallback
 
     @Override
     public boolean isItemViewSwipeEnabled() {
-        return !MultiSelect.isSelecting(fragment);
+        return true;
     }
 
     @Override
