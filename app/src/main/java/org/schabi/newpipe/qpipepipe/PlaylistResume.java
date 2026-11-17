@@ -22,7 +22,8 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
  * Finds where a playlist should resume: the video furthest down the list among those played
  * past {@link #STARTED_RATIO} of their length according to the watch history, or the one after
  * it when that video was watched past {@link #FINISHED_RATIO}. Videos only opened for a moment
- * are ignored.
+ * are ignored. The share comes from the saved position, which is only saved past 5 s or a
+ * quarter of the video ({@code StreamStateEntity.isValid}).
  */
 public final class PlaylistResume {
 
