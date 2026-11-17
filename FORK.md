@@ -413,7 +413,10 @@ list changes (pages loaded, sorting, dragging) through an adapter observer.
 
 In remote playlists only the pages loaded so far are searched. Shuffled
 background play and the long-press enqueue actions still start from the
-beginning. Channels and the feed keep upstream's `playlist_control.xml`.
+beginning. Channels and the feed keep upstream's `playlist_control.xml`. The
+root of `playlist_resume_control.xml` is upstream's `PlaylistControlLayout`, so
+Appearance > "Play buttons on list pages" hides the fork's header controls
+too, switch included.
 
 Check: in a local playlist of four videos about 2 minutes long, play the second
 to the end, the third for 15 s, the fourth for 2 s, then the first for 15 s,
@@ -808,6 +811,11 @@ support stay in this repository.
 
 - `7729a5383` (null context guard in the decoder error dialog): replaced by
   upstream `fb8e52e9e`.
+- `1f8455d64` (multiple selection of videos, `qpipepipe/selection/`): replaced
+  by upstream's multiple selection in v5.5.0 (`util/selection/`, the
+  `menu_multi_select` toolbar button). The order of picking and the bottom bar
+  are gone. Upstream's selection lacks four of our actions, to be added on top
+  of it: play next, popup, mark as watched, share.
 
 ## Known conflicts
 
@@ -816,5 +824,20 @@ support stay in this repository.
 - v5.4.0 replaced `PlayQueueItem` with `PlayerMediaItem` (`PlayQueue.getItem()`).
   `loadVideoIfUserConfirms` had to be ported; the merge was clean but did not
   compile.
+- v5.5.0 added its own multiple selection to the screens where the fork had
+  one: the fork's was reverted before the merge (see Dropped patches), which
+  left four conflicts in `BaseListFragment`, `PlaylistFragment` and
+  `LocalPlaylistFragment` (swipe actions and "Playlists continue where you left
+  off" next to upstream's list filter, play-button setting and back handling:
+  keep both).
+- v5.5.0 made `playlist_control.xml`'s root a `PlaylistControlLayout` and calls
+  `configure(page)` on it: `playlist_resume_control.xml` has the same root, so
+  that call works on the fork's header too.
+- `MediaSessionManager`: v5.5.0's `seekInsteadOfSkip` navigator and media
+  button handler go on the connector the fork reuses from
+  `PlayerServiceForAuto`, next to the fork's error message provider.
+- `VideoDetailFragment` saved state: v5.5.0 dropped `currentSponsorBlockMode`;
+  keep only the fork's queue saving (`StateSaver`).
+- `MainActivity` imports: keep the fork's and upstream's `SelectionToolbar`.
 
 `git rerere` is enabled locally and remembers these resolutions.
