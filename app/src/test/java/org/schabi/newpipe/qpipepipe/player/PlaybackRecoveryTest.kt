@@ -1,4 +1,4 @@
-package org.schabi.newpipe.player
+package org.schabi.newpipe.qpipepipe.player
 
 import android.net.Uri
 import com.google.android.exoplayer2.upstream.DataSpec
@@ -12,7 +12,7 @@ import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
-class PlayerErrorHandlerTest {
+class PlaybackRecoveryTest {
     private fun responseCode(code: Int) = InvalidResponseCodeException(
         code, null, null, emptyMap(), DataSpec(Uri.EMPTY), ByteArray(0)
     )
@@ -23,29 +23,29 @@ class PlayerErrorHandlerTest {
 
     @Test
     fun forbiddenIsFoundBehindThePlaybackException() {
-        assertTrue(PlayerErrorHandler.isForbidden(sourceError(responseCode(403))))
+        assertTrue(PlaybackRecovery.isForbidden(sourceError(responseCode(403))))
     }
 
     @Test
     fun otherHttpStatusesAreNotForbidden() {
-        assertFalse(PlayerErrorHandler.isForbidden(sourceError(responseCode(404))))
-        assertFalse(PlayerErrorHandler.isForbidden(sourceError(RuntimeException("403"))))
+        assertFalse(PlaybackRecovery.isForbidden(sourceError(responseCode(404))))
+        assertFalse(PlaybackRecovery.isForbidden(sourceError(RuntimeException("403"))))
     }
 
     @Test
     fun firstNetworkFailureReloadsAtOnce() {
-        assertEquals(0L, PlayerErrorHandler.networkRetryDelayMs(0))
+        assertEquals(0L, PlaybackRecovery.networkRetryDelayMs(0))
     }
 
     @Test
     fun repeatedNetworkFailuresWaitLongerUpToTenSeconds() {
-        val delays = (1..6).map { PlayerErrorHandler.networkRetryDelayMs(it) }
+        val delays = (1..6).map { PlaybackRecovery.networkRetryDelayMs(it) }
         assertEquals(listOf(2_000L, 4_000L, 8_000L, 10_000L, 10_000L, 10_000L), delays)
     }
 
     @Test
     fun endlessNetworkFailuresNeverOverflowTheDelay() {
-        assertEquals(10_000L, PlayerErrorHandler.networkRetryDelayMs(Int.MAX_VALUE))
+        assertEquals(10_000L, PlaybackRecovery.networkRetryDelayMs(Int.MAX_VALUE))
     }
 
     @Test
@@ -82,18 +82,18 @@ class PlayerErrorHandlerTest {
     fun unresolvedHostIsNoConnection() {
         // The chain of the report from the car: the stream info request failed in DNS.
         val dns = UnknownHostException("Unable to resolve host \"youtubei.googleapis.com\"")
-        assertTrue(PlayerErrorHandler.isNoConnection(sourceError(Exception(dns))))
+        assertTrue(PlaybackRecovery.isNoConnection(sourceError(Exception(dns))))
     }
 
     @Test
     fun refusedOrTimedOutConnectionsAreNoConnection() {
-        assertTrue(PlayerErrorHandler.isNoConnection(sourceError(ConnectException())))
-        assertTrue(PlayerErrorHandler.isNoConnection(sourceError(SocketTimeoutException())))
+        assertTrue(PlaybackRecovery.isNoConnection(sourceError(ConnectException())))
+        assertTrue(PlaybackRecovery.isNoConnection(sourceError(SocketTimeoutException())))
     }
 
     @Test
     fun serverAnswersAreNotNoConnection() {
-        assertFalse(PlayerErrorHandler.isNoConnection(sourceError(responseCode(403))))
-        assertFalse(PlayerErrorHandler.isNoConnection(sourceError(IOException("bad data"))))
+        assertFalse(PlaybackRecovery.isNoConnection(sourceError(responseCode(403))))
+        assertFalse(PlaybackRecovery.isNoConnection(sourceError(IOException("bad data"))))
     }
 }
