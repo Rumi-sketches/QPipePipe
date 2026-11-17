@@ -859,8 +859,9 @@ Files: `qpipepipe/player/UnplayableNotice`, `UnplayableReason`, `UnplayableQueue
 (`Notice`, `playsDespiteLoadError`), `res/layout/player_unplayable_qpipepipe.xml`,
 `strings_qpipepipe.xml` (`unplayable_video`, `unplayable_next_in`,
 `unplayable_next`). Hooks in `VideoDetailFragment`, which must survive a merge: the
-`queueDespiteLoadError` field, its reset at the top of `runWorker`, the block after
-`showError` in the error branch of `runWorker` (`UnplayableQueue.playsDespiteLoadError`),
+`queueDespiteLoadError` field, its reset at the top of `runWorker`, in the error branch of
+`runWorker` the `confirmed` line before `showError` and the block after it
+(`UnplayableQueue.playsDespiteLoadError`),
 and `queueDespiteLoadError` instead of `null` in the first line that picks the queue in
 `openVideoPlayer`.
 
@@ -954,6 +955,7 @@ support stay in this repository.
   `PlayerServiceForAuto`, next to the fork's error message provider.
 - `VideoDetailFragment` saved state: v5.5.0 dropped `currentSponsorBlockMode`;
   keep only the fork's queue saving (`StateSaver`).
-- `MainActivity` imports: keep the fork's and upstream's `SelectionToolbar`.
+- `MainActivity` imports: keep the fork's (`DebugBuildNotes`, `QPipePipeNotices`)
+  and upstream's `SelectionToolbar`.
 
 `git rerere` is enabled locally and remembers these resolutions.
