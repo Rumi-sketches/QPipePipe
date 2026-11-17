@@ -1166,11 +1166,14 @@ public final class VideoDetailFragment
                         openVideoPlayerAutoFullscreen();
                     }
                 }, throwable -> {
+                    final boolean confirmed = queueReplacementConfirmed; // QPipePipe
                     queueReplacementConfirmed = false;
                     showError(new ErrorInfo(throwable, UserAction.REQUESTED_STREAM,
                             url == null ? "no url" : url, serviceId));
-                    if (UnplayableQueue.playsDespiteLoadError(playQueue) && isAutoplayEnabled()) {
+                    if (UnplayableQueue.playsDespiteLoadError(playQueue)
+                            && (confirmed || isAutoplayEnabled())) {
                         queueDespiteLoadError = playQueue; // QPipePipe
+                        queueReplacementConfirmed = confirmed; // asked once, as on success
                         openVideoPlayerAutoFullscreen();
                     }
                 });
