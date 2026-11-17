@@ -2,10 +2,12 @@ package org.schabi.newpipe.qpipepipe.player
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import org.schabi.newpipe.extractor.stream.StreamInfo
 import org.schabi.newpipe.extractor.stream.StreamInfoItem
 import org.schabi.newpipe.extractor.stream.StreamType
 import org.schabi.newpipe.player.mediaitem.PlayerMediaItem
 import org.schabi.newpipe.player.mediasource.FailedMediaSource.StreamInfoLoadException
+import org.schabi.newpipe.player.playqueue.IncompletePlayQueue
 import org.schabi.newpipe.player.playqueue.PlayQueue
 import org.schabi.newpipe.player.playqueue.SinglePlayQueue
 import java.net.UnknownHostException
@@ -29,13 +31,23 @@ class UnplayableQueueTest {
         0
     )
 
-    private fun broken(index: Int): PlayerMediaItem = loaded(index)
+    private fun queued(index: Int): PlayerMediaItem = playQueue.getItem(index)!!
+
+    private fun broken(index: Int): PlayerMediaItem = queued(index)
         .withErrors(listOf(StreamInfoLoadException(RuntimeException("video removed"))))
 
-    private fun offline(index: Int): PlayerMediaItem = loaded(index)
+    private fun offline(index: Int): PlayerMediaItem = queued(index)
         .withErrors(listOf(Exception(UnknownHostException("www.youtube.com"))))
 
-    private fun loaded(index: Int): PlayerMediaItem = playQueue.getItem(index)!!
+    /** The item once its stream info loaded, as LoadedMediaSource tags it. */
+    private fun loaded(index: Int): PlayerMediaItem = PlayerMediaItem
+        .forStreamInfo(
+            StreamInfo(0, "video$index", queued(index).url, "video $index").apply {
+                streamType = StreamType.VIDEO_STREAM
+                uploaderName = "uploader"
+            }
+        )
+        .withUuid(queued(index).uuid)
 
     /** Lands on [items] in order and returns which of them may be reported. */
     private fun land(vararg items: PlayerMediaItem): List<Boolean> =
@@ -92,5 +104,35 @@ class UnplayableQueueTest {
 
         assertEquals(0, stops)
         assertEquals(listOf(true, true, true, false, true, false), reports)
+    }
+
+    // A video that played, then broke (its reload failed), must not end the round it played in.
+    @Test
+    fun aVideoThatLoadedStartsANewRound() {
+        playQueue = queueOf(2)
+
+        land(broken(0), loaded(1), broken(1))
+        assertEquals(0, stops)
+
+        land(broken(0))
+        assertEquals(1, stops)
+    }
+
+    // The player can land on the placeholder of an item whose extraction is still running.
+    @Test
+    fun aPlaceholderDoesNotStartANewRound() {
+        land(broken(0), broken(1), PlayerMediaItem.placeholder(), broken(2))
+
+        assertEquals(1, stops)
+    }
+
+    // The first page of a remote playlist: more videos come once the player reaches its end.
+    @Test
+    fun aQueueWithMoreVideosToFetchDoesNotStop() {
+        playQueue = IncompletePlayQueue(queueOf(3).streams)
+
+        land(broken(0), broken(1), broken(2))
+
+        assertEquals(0, stops)
     }
 }

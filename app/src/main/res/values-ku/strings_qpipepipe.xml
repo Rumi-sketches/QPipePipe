@@ -72,5 +72,5 @@
     <string name="recent_queue_not_watched">بۆ بینین</string>
     <string name="recent_queue_added">زیادکراو</string>
     <string name="playlist_never_played">هەرگیز لێنەدراوە</string>
-    <string name="queue_unplayable">Tu vîdyoyên di rêzê de nayên lêxistin</string>
+    <string name="queue_unplayable">هیچ کام لە ڤیدیۆکانی ڕیزەکە ناتوانرێت لێبدرێت</string>
 </resources>

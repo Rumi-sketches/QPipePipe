@@ -45,7 +45,11 @@ class UnplayableQueue(
             brokenThisRound.clear()
         }
         if (item.errors.isEmpty()) {
-            brokenThisRound.clear() // something loaded: a new round starts
+            // Something loaded: a new round starts. The placeholder of an item still loading has
+            // no stream info and does not count.
+            if (item.maybeStreamInfo.isPresent) {
+                brokenThisRound.clear()
+            }
             return true
         }
         if (item.errors.none { it is FailedMediaSourceException }) {
