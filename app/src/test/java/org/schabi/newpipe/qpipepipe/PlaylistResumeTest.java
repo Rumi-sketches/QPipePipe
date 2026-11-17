@@ -22,52 +22,83 @@ public class PlaylistResumeTest {
         return new StreamInfoItem(SERVICE, url, url, StreamType.VIDEO_STREAM);
     }
 
-    /** A 100 second video started at {@code url}, watched up to {@code progressSeconds}. */
-    private static LatestPlayedStream played(final String url, final long progressSeconds) {
-        return new LatestPlayedStream(SERVICE, url, 100, 0, progressSeconds * 1000);
+    /**
+     * A 100 second video at {@code url}, last started at {@code accessDate} and watched up to
+     * {@code progressSeconds}.
+     */
+    private static LatestPlayedStream played(final String url, final long accessDate,
+                                             final long progressSeconds) {
+        return new LatestPlayedStream(SERVICE, url, 100, accessDate, progressSeconds * 1000);
+    }
+
+    private static int resumeIndex(final LatestPlayedStream... played) {
+        return PlaylistResume.resumeIndex(PLAYLIST, Arrays.asList(played));
     }
 
     @Test
     public void nothingStartedMeansNoResume() {
-        assertEquals(NO_RESUME, PlaylistResume.resumeIndex(PLAYLIST, null));
+        assertEquals(NO_RESUME, resumeIndex());
     }
 
     @Test
     public void partlyWatchedVideoIsResumed() {
-        assertEquals(1, PlaylistResume.resumeIndex(PLAYLIST, played("https://b", 89)));
-    }
-
-    @Test
-    public void startedWithoutSavedProgressIsResumed() {
-        assertEquals(1, PlaylistResume.resumeIndex(PLAYLIST, played("https://b", 0)));
+        assertEquals(1, resumeIndex(played("https://b", 1, 89)));
     }
 
     @Test
     public void videoWatchedPastNinetyPercentResumesFromTheNext() {
-        assertEquals(2, PlaylistResume.resumeIndex(PLAYLIST, played("https://b", 90)));
+        assertEquals(2, resumeIndex(played("https://b", 1, 90)));
     }
 
     @Test
     public void watchedLastVideoMeansNoResume() {
-        assertEquals(NO_RESUME, PlaylistResume.resumeIndex(PLAYLIST, played("https://c", 100)));
+        assertEquals(NO_RESUME, resumeIndex(played("https://c", 1, 100)));
     }
 
     @Test
-    public void unknownDurationIsNeverWatched() {
-        final LatestPlayedStream live = new LatestPlayedStream(SERVICE, "https://b", 0, 0, 5000);
-        assertEquals(1, PlaylistResume.resumeIndex(PLAYLIST, live));
+    public void videoFurthestDownTheListWinsOverTheMostRecent() {
+        assertEquals(1, resumeIndex(played("https://b", 1, 50), played("https://a", 2, 50)));
+    }
+
+    @Test
+    public void videoPlayedUnderFivePercentIsIgnored() {
+        assertEquals(1, resumeIndex(played("https://b", 1, 50), played("https://c", 2, 4)));
+    }
+
+    @Test
+    public void videoPlayedFivePercentCounts() {
+        assertEquals(2, resumeIndex(played("https://b", 1, 50), played("https://c", 2, 5)));
+    }
+
+    @Test
+    public void repeatedVideoResumesAtItsLastPlace() {
+        final List<StreamInfoItem> repeated = Arrays.asList(
+                item("https://a"), item("https://b"), item("https://a"), item("https://c"));
+        assertEquals(2, PlaylistResume.resumeIndex(repeated,
+                Collections.singletonList(played("https://a", 1, 40))));
+    }
+
+    @Test
+    public void onlyBrieflyOpenedVideosMeanNoResume() {
+        assertEquals(NO_RESUME, resumeIndex(played("https://b", 1, 0), played("https://c", 2, 4)));
+    }
+
+    @Test
+    public void unknownDurationCountsAndIsNeverWatched() {
+        final LatestPlayedStream live = new LatestPlayedStream(SERVICE, "https://b", 0, 1, 0);
+        assertEquals(1, resumeIndex(live));
     }
 
     @Test
     public void sameUrlOnAnotherServiceDoesNotMatch() {
         final LatestPlayedStream other = new LatestPlayedStream(SERVICE + 1, "https://b", 100,
-                0, 0);
-        assertEquals(NO_RESUME, PlaylistResume.resumeIndex(PLAYLIST, other));
+                2, 50 * 1000);
+        assertEquals(0, resumeIndex(played("https://a", 1, 50), other));
     }
 
     @Test
     public void emptyPlaylistMeansNoResume() {
-        assertEquals(NO_RESUME,
-                PlaylistResume.resumeIndex(Collections.emptyList(), played("https://a", 10)));
+        assertEquals(NO_RESUME, PlaylistResume.resumeIndex(Collections.emptyList(),
+                Collections.singletonList(played("https://a", 1, 10))));
     }
 }

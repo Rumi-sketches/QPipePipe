@@ -3,8 +3,8 @@ package org.schabi.newpipe.database.history.model
 import androidx.room.ColumnInfo
 
 /**
- * The most recently started stream among a set of urls, with its saved progress
- * (0 when none was saved). See [org.schabi.newpipe.database.history.dao.StreamHistoryDAO.getLatestPlayedAmong].
+ * A stream in the watch history, with the date it was last started and its saved progress
+ * (0 when none was saved). See [org.schabi.newpipe.database.history.dao.StreamHistoryDAO.getPlayedAmong].
  */
 data class LatestPlayedStream(
     @ColumnInfo(name = "service_id")
