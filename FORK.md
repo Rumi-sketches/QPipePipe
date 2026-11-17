@@ -745,8 +745,9 @@ The hooks stay off the lines upstream v5.5.0 changes (the behind-live-window
 branch, the fields after `lastSurfaceErrorRecoveryMs`, `saveStreamProgressState`):
 a trial `git merge-file` of its `PlayerErrorHandler.kt` merges without conflicts.
 
-Check after a merge: `git diff <upstream tag> -- app/src/main/java/org/schabi/newpipe/player/PlayerErrorHandler.kt`
-shows only these lines, and `PlaybackRecoveryRouteTest` passes. If upstream
+Check after a merge: `git diff <client commit> -- app/src/main/java/org/schabi/newpipe/player/PlayerErrorHandler.kt`,
+with the `client=` commit of `tools/upstream/pins.properties` (upstream's tags
+are not in this repo), shows only these lines, and `PlaybackRecoveryRouteTest` passes. If upstream
 adds or changes a `when` branch for a code the hook takes, that branch does not
 run: decide whether the fork's recovery still applies.
 

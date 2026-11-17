@@ -50,11 +50,19 @@ class PlaybackRecoveryRouteTest {
         )
     }
 
-    // A 403 known only from the cause message keeps upstream's IP-blocked dialog and stop.
+    // A 403 known only from the cause message keeps upstream's IP-blocked dialog and stop. Only
+    // the direct cause counts, as in upstream's branch: the error's own message is not read.
     @Test
-    fun unspecifiedIoWith403InTheMessageStaysWithTheHandler() {
-        val error = RuntimeException(IOException("Response code: 403"))
+    fun unspecifiedIoWith403InTheCauseMessageStaysWithTheHandler() {
+        val error = RuntimeException("Source error", IOException("Response code: 403"))
         assertNull(route(PlaybackException.ERROR_CODE_IO_UNSPECIFIED, error))
+        assertEquals(
+            Route.NETWORK,
+            route(
+                PlaybackException.ERROR_CODE_IO_UNSPECIFIED,
+                RuntimeException("Response code: 403", IOException("Source error"))
+            )
+        )
     }
 
     @Test
