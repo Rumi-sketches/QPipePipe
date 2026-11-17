@@ -70,6 +70,29 @@ public class EnqueueNextTest {
         assertEquals(Arrays.asList("X", "A", "Y"), urls(playing));
     }
 
+    /**
+     * V-01: the playing video is the auto-queued tail, which the append drops (upstream);
+     * the selection must still follow in its order, without the index jumping past it.
+     */
+    @Test
+    public void autoQueuedTailPlayingKeepsTheSelectionInOrder() {
+        final PlayQueue playing = queue(0, "X");
+        playing.appendAutoQueued(queue(0, "T").getStreams());
+        playing.setIndex(1);
+        enqueueNext(playing, queue(0, "A", "B"));
+        assertEquals(Arrays.asList("X", "A", "B"), urls(playing));
+        assertEquals(1, playing.getIndex());
+    }
+
+    @Test
+    public void autoQueuedTailNotPlayingIsDroppedAndOrderHolds() {
+        final PlayQueue playing = queue(0, "X", "Y");
+        playing.appendAutoQueued(queue(0, "T").getStreams());
+        enqueueNext(playing, queue(0, "A", "B"));
+        assertEquals(Arrays.asList("X", "A", "B", "Y"), urls(playing));
+        assertEquals(0, playing.getIndex());
+    }
+
     @Test
     public void lastVideoPlayingAppendsInOrder() {
         final PlayQueue playing = queue(1, "X", "Y");

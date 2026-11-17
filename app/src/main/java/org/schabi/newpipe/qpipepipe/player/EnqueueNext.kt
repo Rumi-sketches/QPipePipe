@@ -13,6 +13,10 @@ object EnqueueNext {
     fun moveAppendedAfter(queue: PlayQueue, count: Int, currentIndex: Int) {
         // the append may drop an auto-queued tail, so count back from the end
         val firstAppended = queue.size() - count
+        if (firstAppended <= currentIndex) {
+            // the dropped tail was the current item: the new ones already follow, in order
+            return
+        }
         for (i in 0 until count) {
             queue.move(firstAppended + i, currentIndex + 1 + i)
         }
