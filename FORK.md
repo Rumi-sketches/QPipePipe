@@ -828,7 +828,7 @@ still work.
 
 ### A queue of videos that can't be loaded does not loop
 
-Files: `qpipepipe/player/UnplayableQueue`, `strings_qpipepipe.xml`
+Files: `qpipepipe/player/UnplayableQueue`, `ValidatedInternet`, `strings_qpipepipe.xml`
 (`queue_unplayable`). Hooks in `PlayerMetadataController`, which must survive a
 merge: the `unplayableQueue` field after the class line, and
 `unplayableQueue.onLanding(tag) &&` in front of the condition that reports the
@@ -845,13 +845,28 @@ the same way (a queue of one broken video stays on its silence instead: the
 player does not land on it again). Videos that load reset the round, so a queue with at least one
 playable video goes on as upstream, its broken videos skipped. An item that
 failed for a missing connection is not counted: `PlaybackRecovery` owns it.
+That includes a network error the extractor wraps in a `ParsingException`
+(player metadata, signature decoding after the page loaded) while Android sees
+no internet (`ValidatedInternet`: no default network, or one not validated):
+upstream took it for a broken video. With the phone online the same error means
+the server of that request is down (the signature decoder is `api.pipepipe.dev`),
+and the video counts as broken as upstream, so the queue can't retry forever on
+"No internet connection". Hook in `MediaSourceManager`, which must survive a merge:
+`UnplayableQueue.isBrokenSource(context, throwable)` as the condition in
+`onErrorReturn` of the source loading, in place of upstream's
+`ExtractionException || IllegalStateException` (kept inside `isBrokenSource`).
+No test goes through the hook: after a merge, check that the line is there.
 Without repeat all, only the once-per-queue report changes.
 
 Check: `UnplayableQueueTest` passes. On a phone, play in the background with
 repeat all a local playlist of removed videos (the app refuses to add one, so
 export the database, add rows to `streams` and `playlist_stream_join` with a
 `thumbnail_url`, and import it): one error toast per video, then the queue
-message and the player paused, no more toasts.
+message and the player paused, no more toasts. The wrapped network error has
+no clean phone check: the app decodes signatures on the phone and calls
+`api.pipepipe.dev` only as a fallback, so blocking that host changes nothing.
+`UnplayableQueueTest` covers it: offline, the queue doesn't stop; online with
+the decoder server down, it stops after one round.
 
 ### A video that can't be played says why, and the queue goes on
 

@@ -1,7 +1,9 @@
 package org.schabi.newpipe.qpipepipe.player
 
+import android.content.Context
 import android.widget.Toast
 import org.schabi.newpipe.R
+import org.schabi.newpipe.extractor.exceptions.ExtractionException
 import org.schabi.newpipe.player.Player
 import org.schabi.newpipe.player.RepeatMode
 import org.schabi.newpipe.player.mediaitem.PlayerMediaItem
@@ -86,6 +88,28 @@ class UnplayableQueue(
     }
 
     companion object {
+        /**
+         * Whether loading a queue item failed because of the item itself (removed, private,
+         * extraction broken), so the player holds on it as broken; otherwise the load is retried
+         * and [PlaybackRecovery] handles it. Upstream's rule (an [ExtractionException] or an
+         * [IllegalStateException] from building the source), except for a missing connection:
+         * the extractor wraps a network error of a later request (player metadata, signature
+         * decoding) in a ParsingException, and that video is not broken.
+         *
+         * Those requests go to other servers than the video page (the signature decoder is
+         * `api.pipepipe.dev`), so a network error alone doesn't say the connection is missing:
+         * with the phone online it means that server is down, and retrying would loop forever on
+         * "No internet connection". Only when Android sees no internet is it a missing connection.
+         */
+        @JvmStatic
+        fun isBrokenSource(context: Context, error: Throwable): Boolean =
+            isBrokenSource(error) { ValidatedInternet.isAvailable(context) }
+
+        @JvmStatic
+        internal fun isBrokenSource(error: Throwable, isOnline: () -> Boolean): Boolean =
+            (error is ExtractionException || error is IllegalStateException) &&
+                !(PlaybackRecovery.isNoConnection(error) && !isOnline())
+
         /**
          * Whether the video page still starts [queue] when its first video can't be loaded.
          * Upstream showed only the page's error then, and the rest of a playlist never played:
