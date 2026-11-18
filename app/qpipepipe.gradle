@@ -34,6 +34,11 @@ def nightlyNumber = (providers.gradleProperty("qpipepipeNightly").getOrNull()
 if (nightlyNumber && !(nightlyNumber ==~ /[0-9]+/)) {
     throw new GradleException("The nightly number must be a number, not '${nightlyNumber}'")
 }
+// "036" would be an octal literal in BuildConfig; 0 means no number.
+nightlyNumber = nightlyNumber ? nightlyNumber.toInteger().toString() : ""
+if (nightlyNumber == "0") {
+    nightlyNumber = ""
+}
 def nightlyCommit = ""
 if (nightlyNumber) {
     try {
