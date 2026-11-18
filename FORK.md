@@ -113,7 +113,9 @@ announcements and your crash reports reach QPipePipe:
    in upstream's file to avoid a conflict on every merge.
 3. Your own keystore, the `KEYSTORE_BASE64` and `KEYSTORE_PASSWORD` secrets, the
    key alias (`KEY_ALIAS` in `.github/workflows/release.yml`), and the certificate
-   fingerprint in `tools/release/certificate-sha256.txt` and `README.md`.
+   fingerprint in `tools/release/certificate-sha256.txt` and `README.md`. For
+   nightlies, the `DEBUG_KEYSTORE_BASE64` secret and
+   `tools/release/debug-certificate-sha256.txt`.
 4. `ERROR_EMAIL_SUBJECT` in `ErrorActivity` and the app name in `app/qpipepipe.gradle`
    if you rename the app.
 
@@ -599,7 +601,8 @@ session, not one per video.
 
 ### Nightly builds
 
-Files: `app/qpipepipe.gradle`, `qpipepipe/QPipePipeReleases`,
+Files: `app/qpipepipe.gradle`, `.github/workflows/nightly.yml`,
+`tools/release/debug-certificate-sha256.txt`, `qpipepipe/QPipePipeReleases`,
 `qpipepipe/QPipePipeUpdateActivity`, `qpipepipe/DebugBuildNotes`,
 `qpipepipe/QPipePipeNotices`, `error/DebugErrorLog`, `NewVersionWorker` (hook,
 see "Updates are downloaded and installed in the app"), `MainActivity` (one
@@ -635,18 +638,46 @@ whose tag starts with `nightly_`. It reads the version from the tag
 offers the nightly with the highest number when its number or its version is
 newer than its own. A nightly it cannot read is skipped.
 
-What the nightly workflow must produce, so that the app reads it:
+Nightlies are built and published by `.github/workflows/nightly.yml`, run by
+hand:
 
-- build with `-PqpipepipeNightly=<n>` from a git checkout (the commit comes
-  from `HEAD`); to show notes, write them in `debug_build.txt` below a first
-  line, which the property overrides;
-- a GitHub pre-release tagged `nightly_<version>`, e.g. `nightly_5.5.0-q1`;
+```sh
+gh workflow run nightly.yml -R Rumi-sketches/QPipePipe -f ref=dev \
+    -f notes="First thing to test\nSecond thing to test"
+```
+
+- `ref`: the branch or commit to build, `dev` by default;
+- `notes`: what to test, one line per test, separated by `\n` (real new lines
+  work too);
+- `number`: optional; by default the highest number in the APK names of the
+  `nightly_` releases, plus one. Required when no nightly is published.
+
+The workflow writes the number and the notes in `debug_build.txt`, builds
+`assembleDebug -PqpipepipeNightly=<n>` with the pinned extractor, signs with the
+debug key from the `DEBUG_KEYSTORE_BASE64` secret, and checks that every APK has
+the number, the commit and the certificate in
+`tools/release/debug-certificate-sha256.txt`. Then it replaces the release of
+that version, so that the app reads it:
+
+- a GitHub pre-release, never "latest", tagged `nightly_<version>`, e.g.
+  `nightly_5.5.0-q1`, on the commit just built: the previous nightly of the
+  version and its tag are deleted first;
 - the APKs with the names Gradle gives them, and only those of the latest
   build: the app reads the number from the first APK it finds;
 - a release name that release builds up to 5.4.0-q2 read as an old version
   (they parse every name when "Show pre-releases" is on, and stop at one they
-  cannot read): it must start with `0.0.0-beta`, e.g.
-  `0.0.0-beta nightly 5.5.0-q1 #36`.
+  cannot read): it starts with `0.0.0-beta`, e.g.
+  `0.0.0-beta nightly 5.5.0-q1 #36`;
+- notes with the number, the commit, the ref and what to test.
+
+The debug key is the maintainer's `~/.android/debug.keystore`, so nightlies
+install over the debug builds already on their phones. It was set once with:
+
+```sh
+base64 -w0 ~/.android/debug.keystore | gh secret set DEBUG_KEYSTORE_BASE64 -R Rumi-sketches/QPipePipe
+```
+
+A fork sets its own debug key and certificate, or nightlies fail the check.
 
 Check: build with `-PqpipepipeNightly=5` and a line of notes in the file,
 install the debug APK: the launcher shows "QPipePipe Nightly 5", the dialog
