@@ -21,7 +21,6 @@ import java.util.concurrent.Executors
 object DebugErrorLog {
     private const val TAG = "DebugErrorLog"
     private const val DIRECTORY = "errors"
-    private const val BUILD_NUMBER_ASSET = "debug_build.txt"
     private const val CALLER_FRAMES = 15
     private const val REPEAT_WINDOW_MS = 60_000L
 
@@ -71,7 +70,7 @@ object DebugErrorLog {
                     ?: File(appContext.filesDir, DIRECTORY)
                 directory.mkdirs()
                 File(directory, fileName(time))
-                    .appendText(header(time, buildLabel(appContext)).append(text).toString())
+                    .appendText(header(time, BUILD_LABEL).append(text).toString())
             } catch (e: Exception) {
                 Log.e(TAG, "Could not write the error log", e)
             }
@@ -124,11 +123,6 @@ object DebugErrorLog {
             .append("Build: ").append(build).append('\n')
     }
 
-    private fun buildLabel(context: Context): String {
-        val number = runCatching {
-            context.assets.open(BUILD_NUMBER_ASSET).bufferedReader().use { it.readLine()?.trim() }
-        }.getOrNull()
-        val version = "${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
-        return if (number.isNullOrEmpty()) version else "$version, debug $number"
-    }
+    /** A nightly's version name has its number and commit (app/qpipepipe.gradle). */
+    private const val BUILD_LABEL = BuildConfig.VERSION_NAME
 }

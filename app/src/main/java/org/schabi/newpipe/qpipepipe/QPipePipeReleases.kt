@@ -4,22 +4,35 @@ import com.grack.nanojson.JsonArray
 import com.grack.nanojson.JsonObject
 import org.schabi.newpipe.BuildConfig
 
-/** The build the update check compares with. [nightly] is null for a release build. */
+/**
+ * The build the update check compares with: its version ("5.5.0-q1") and, for a debug build,
+ * its nightly number (0 without one). [nightly] is null for a release build.
+ */
 data class InstalledBuild(val version: String, val nightly: Int?)
 
 /** An update to offer: the version to show, the APK for this device and the release page. */
 data class QPipePipeUpdate(val version: String, val apkUrl: String?, val releaseUrl: String?)
 
-/** Picks the update to offer among the GitHub releases of QPipePipe ([NewVersionWorker]). */
+/**
+ * Picks the update to offer among the GitHub releases of QPipePipe ([NewVersionWorker]).
+ * A release build follows the releases, a debug build the nightlies: pre-releases tagged
+ * `nightly_<version>`, whose APKs are named `QPipePipe_<version>-nightly<n>-<commit>-<abi>-debug.apk`
+ * (FORK.md, "Nightly builds"). A release that cannot be read is skipped.
+ */
 object QPipePipeReleases {
+    private const val NIGHTLY_TAG_PREFIX = "nightly_"
     private val RELEASE_APK_ABIS = listOf("armeabi-v7a", "arm64-v8a", "x86_64", "x86")
     private val QPIPEPIPE_RELEASE_SUFFIX = Regex("-q([0-9]+)$")
+    private val NIGHTLY_APK = Regex("-nightly([0-9]+)(?:-([0-9a-f]{7,40}))?-")
 
     /** This build. */
     @JvmField
-    val INSTALLED = InstalledBuild(BuildConfig.VERSION_NAME, null)
+    val INSTALLED = InstalledBuild(
+        BuildConfig.QPIPEPIPE_VERSION,
+        if (BuildConfig.DEBUG) BuildConfig.QPIPEPIPE_NIGHTLY else null
+    )
 
-    /** The newest release newer than [installed], or null. [releases] is the GitHub API list. */
+    /** The newest release, or nightly, newer than [installed]; null if there is none. */
     @JvmStatic
     fun findUpdate(
         releases: JsonArray,
@@ -27,36 +40,92 @@ object QPipePipeReleases {
         includePreRelease: Boolean,
         abis: Array<String>
     ): QPipePipeUpdate? {
-        var selectedRelease: JsonObject? = null
-        for (i in 0 until releases.size) {
-            val release = releases.getObject(i)
-            if (!includePreRelease && release.getBoolean("prerelease")) continue
-            if (selectedRelease == null || isNewerRelease(release, selectedRelease)) {
-                selectedRelease = release
+        val all = (0 until releases.size).map { releases.getObject(it) }
+        return if (installed.nightly == null) {
+            findRelease(all, installed.version, includePreRelease, abis)
+        } else {
+            findNightly(all, installed.version, installed.nightly, abis)
+        }
+    }
+
+    private fun findRelease(
+        releases: List<JsonObject>,
+        installedVersion: String,
+        includePreRelease: Boolean,
+        abis: Array<String>
+    ): QPipePipeUpdate? {
+        val installed = parseVersion(installedVersion) ?: return null
+        val newest = releases
+            .filter { !isNightly(it) && (includePreRelease || !it.getBoolean("prerelease")) }
+            .mapNotNull { release ->
+                parseVersion(release.getString("name", "").removePrefix("v"))
+                    ?.let { release to it }
             }
-        }
-        val release = selectedRelease ?: return null
-        val versionName = release.getString("name").removePrefix("v")
-        if (compareVersions(parseVersion(installed.version), parseVersion(versionName)) >= 0) {
-            return null
-        }
+            .maxWithOrNull { a, b -> compareVersions(a.second, b.second) }
+            ?.takeIf { compareVersions(it.second, installed) > 0 }
+            ?.first
+            ?: return null
         return QPipePipeUpdate(
-            versionName, findCompatibleApkUrl(release, abis), release.getString("html_url")
+            newest.getString("name").removePrefix("v"),
+            findCompatibleApkUrl(newest, abis), newest.getString("html_url")
         )
     }
 
-    private fun isNewerRelease(newRelease: JsonObject, currentRelease: JsonObject): Boolean {
-        val newVersion = parseVersion(newRelease.getString("name").removePrefix("v"))
-        val currentVersion = parseVersion(currentRelease.getString("name").removePrefix("v"))
-        return compareVersions(newVersion, currentVersion) > 0
+    private class Nightly(
+        val release: JsonObject,
+        val version: String,
+        val parsedVersion: Version,
+        val number: Int,
+        val commit: String?
+    )
+
+    private fun findNightly(
+        releases: List<JsonObject>,
+        installedVersion: String,
+        installedNumber: Int,
+        abis: Array<String>
+    ): QPipePipeUpdate? {
+        val installed = parseVersion(installedVersion) ?: return null
+        val newest = releases.filter(::isNightly).mapNotNull(::readNightly)
+            .maxWithOrNull(
+                compareBy<Nightly> { it.number }
+                    .then { a, b -> compareVersions(a.parsedVersion, b.parsedVersion) }
+            )
+            ?.takeIf {
+                it.number > installedNumber || compareVersions(it.parsedVersion, installed) > 0
+            }
+            ?: return null
+        val label = "${newest.version}-nightly${newest.number}" +
+            (newest.commit?.let { " ($it)" } ?: "")
+        return QPipePipeUpdate(
+            label, findCompatibleApkUrl(newest.release, abis), newest.release.getString("html_url")
+        )
     }
 
-    private fun findCompatibleApkUrl(release: JsonObject, abis: Array<String>): String? {
-        val assets = release.getArray("assets")
-        val apkAssets = (0 until assets.size)
-            .map { assets.getObject(it) }
-            .filter { it.getString("name").endsWith(".apk") }
+    private fun isNightly(release: JsonObject) =
+        release.getString("tag_name", "").startsWith(NIGHTLY_TAG_PREFIX)
 
+    /** The version of the tag and the number and commit in the APK names, or null. */
+    private fun readNightly(release: JsonObject): Nightly? {
+        val version = release.getString("tag_name", "").removePrefix(NIGHTLY_TAG_PREFIX)
+        val parsedVersion = parseVersion(version) ?: return null
+        val match = apkNames(release).firstNotNullOfOrNull { NIGHTLY_APK.find(it) } ?: return null
+        val number = match.groupValues[1].toIntOrNull() ?: return null
+        val commit = match.groups[2]?.value
+        return Nightly(release, version, parsedVersion, number, commit)
+    }
+
+    private fun apkAssets(release: JsonObject): List<JsonObject> {
+        val assets = release.getArray("assets") ?: return emptyList()
+        return (0 until assets.size)
+            .map { assets.getObject(it) }
+            .filter { it.getString("name", "").endsWith(".apk") }
+    }
+
+    private fun apkNames(release: JsonObject) = apkAssets(release).map { it.getString("name") }
+
+    private fun findCompatibleApkUrl(release: JsonObject, abis: Array<String>): String? {
+        val apkAssets = apkAssets(release)
         abis.forEach { abi ->
             val compatibleAsset = apkAssets.firstOrNull { asset ->
                 getReleaseApkAbi(asset.getString("name")) == abi
@@ -82,14 +151,14 @@ object QPipePipeReleases {
         val qpipepipeRelease: Int // N in "-qN", 0 when absent
     )
 
-    private fun parseVersion(versionStr: String): Version {
+    /** "5.4.0-q2", "v5.5.0-beta1"...; null if it is not a version. */
+    private fun parseVersion(versionStr: String): Version? {
         val qpipepipeMatch = QPIPEPIPE_RELEASE_SUFFIX.find(versionStr)
-        val qpipepipeRelease = qpipepipeMatch?.groupValues?.get(1)?.toInt() ?: 0
+        val qpipepipeRelease = qpipepipeMatch?.groupValues?.get(1)?.toIntOrNull() ?: 0
         val normalized = versionStr.removePrefix("v").removeSuffix(qpipepipeMatch?.value ?: "")
         val parts = normalized.split("-beta", limit = 2)
-        val mainParts = parts[0].split(".").map {
-            it.toIntOrNull() ?: throw IllegalArgumentException("Invalid version part: $it")
-        }
+        val mainParts = parts[0].split(".").map { it.toIntOrNull() ?: return null }
+        if (mainParts.size < 3) return null
         val (major, minor, patch) = mainParts
         val betaVersion = when {
             parts.size == 1 -> null
