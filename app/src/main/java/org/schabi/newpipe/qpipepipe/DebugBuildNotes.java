@@ -18,9 +18,9 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
 /**
- * Debug builds installed on the user's phone are numbered, and say what to test with them:
- * {@code src/debug/assets/debug_build.txt} (not in git, see {@code app/qpipepipe.gradle}) holds
- * the number on its first line and the notes below it. They are shown once per number.
+ * A nightly says what to test with it: {@code src/debug/assets/debug_build.txt} (not in git, see
+ * {@code app/qpipepipe.gradle}) holds the notes below its first line. They are shown once per
+ * nightly number ({@code BuildConfig.QPIPEPIPE_NIGHTLY}).
  */
 public final class DebugBuildNotes {
     private static final String ASSET = "debug_build.txt";
@@ -30,54 +30,37 @@ public final class DebugBuildNotes {
     }
 
     public static void showIfNew(@NonNull final Activity activity) {
-        if (!BuildConfig.DEBUG) {
+        final int number = BuildConfig.QPIPEPIPE_NIGHTLY;
+        if (!BuildConfig.DEBUG || number <= 0) {
             return;
         }
-        final Notes notes = parse(readAsset(activity));
-        if (notes == null) {
+        final String notes = notesOf(readAsset(activity));
+        if (notes.isEmpty()) {
             return;
         }
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
-        if (prefs.getInt(SHOWN_KEY, 0) >= notes.number) {
+        if (prefs.getInt(SHOWN_KEY, 0) >= number) {
             return;
         }
         new AlertDialog.Builder(activity)
                 .setTitle(activity.getString(R.string.app_name))
-                .setMessage(notes.text)
+                .setMessage(notes)
                 .setPositiveButton(R.string.ok, null)
                 .setOnDismissListener(dialog ->
-                        prefs.edit().putInt(SHOWN_KEY, notes.number).apply())
+                        prefs.edit().putInt(SHOWN_KEY, number).apply())
                 .show();
     }
 
+    /** @return the lines of {@code file} below the first, which holds the number */
     @VisibleForTesting
-    static final class Notes {
-        final int number;
-        @NonNull
-        final String text;
-
-        Notes(final int number, @NonNull final String text) {
-            this.number = number;
-            this.text = text;
-        }
-    }
-
-    /** @return the number and notes of {@code file}, or null if it has no number */
-    @VisibleForTesting
-    @Nullable
-    static Notes parse(@Nullable final String file) {
+    @NonNull
+    static String notesOf(@Nullable final String file) {
         if (file == null) {
-            return null;
+            return "";
         }
         final String content = file.replace("\r\n", "\n");
         final int newline = content.indexOf('\n');
-        final String first = (newline < 0 ? content : content.substring(0, newline)).trim();
-        try {
-            return new Notes(Integer.parseInt(first),
-                    newline < 0 ? "" : content.substring(newline + 1).trim());
-        } catch (final NumberFormatException e) {
-            return null;
-        }
+        return newline < 0 ? "" : content.substring(newline + 1).trim();
     }
 
     @Nullable
@@ -91,7 +74,7 @@ public final class DebugBuildNotes {
             }
             return out.toString(StandardCharsets.UTF_8.name());
         } catch (final IOException e) {
-            // not a numbered debug build
+            // no notes
             return null;
         }
     }

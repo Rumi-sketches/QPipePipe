@@ -22,27 +22,58 @@ def qpipepipeVersionName = "${upstreamVersionName}-q${qpipepipeRelease}"
 // leaves room for 99 fork releases per upstream release and one digit for the ABI.
 def qpipepipeVersionCode = upstreamVersionCode * 1000 + qpipepipeRelease * 10
 
-// Debug builds installed on the user's phone are numbered. src/debug/assets/debug_build.txt,
-// not in git, holds the number on its first line and what to test below it. The number goes in
-// the app name and the APK name; the app shows the notes once (qpipepipe/DebugBuildNotes).
+// Nightlies are debug builds with a number (FORK.md, Nightly builds). GitHub Actions passes it
+// as the Gradle property qpipepipeNightly; local builds take the first line of
+// src/debug/assets/debug_build.txt, not in git, which holds what to test below it (shown once
+// by qpipepipe/DebugBuildNotes). A nightly is "<version>-nightly<n> (<commit>)" wherever the app
+// shows its version, and its APK names carry the same: the update check of nightlies reads them.
 def debugBuildFile = file("src/debug/assets/debug_build.txt")
-def debugBuildNumber = debugBuildFile.exists() ? (debugBuildFile.readLines()[0]?.trim() ?: "") : ""
+def nightlyNumber = (providers.gradleProperty("qpipepipeNightly").getOrNull()
+        ?: (debugBuildFile.exists() ? debugBuildFile.readLines().with { it ? it[0] : "" } : ""))
+        .trim()
+if (nightlyNumber && !(nightlyNumber ==~ /[0-9]+/)) {
+    throw new GradleException("The nightly number must be a number, not '${nightlyNumber}'")
+}
+// "036" would be an octal literal in BuildConfig; 0 means no number.
+nightlyNumber = nightlyNumber ? nightlyNumber.toInteger().toString() : ""
+if (nightlyNumber == "0") {
+    nightlyNumber = ""
+}
+def nightlyCommit = ""
+if (nightlyNumber) {
+    try {
+        nightlyCommit = providers.exec {
+            commandLine "git", "rev-parse", "--short=7", "HEAD"
+            ignoreExitValue = true
+        }.standardOutput.asText.get().trim()
+    } catch (Exception ignored) {
+        // git not installed: the nightly has no commit
+    }
+}
+def nightlyName = nightlyNumber ? "-nightly${nightlyNumber}" : ""
 
 android {
     defaultConfig {
         applicationId qpipepipeApplicationId
         buildConfigField "String", "QPIPEPIPE_GITHUB_REPO", "\"${qpipepipeGithubRepo}\""
         buildConfigField "String", "QPIPEPIPE_CONTACT_EMAIL", "\"${qpipepipeContactEmail}\""
+        // The version without the nightly part, e.g. 5.5.0-q1.
+        buildConfigField "String", "QPIPEPIPE_VERSION", "\"${qpipepipeVersionName}\""
         versionName qpipepipeVersionName
         versionCode qpipepipeVersionCode
     }
 
     buildTypes {
         debug {
+            buildConfigField "int", "QPIPEPIPE_NIGHTLY", nightlyNumber ?: "0"
+            if (nightlyNumber) {
+                versionNameSuffix nightlyName + (nightlyCommit ? " (${nightlyCommit})" : "")
+            }
             resValue "string", "app_name",
-                    debugBuildNumber ? "QPipePipe Debug " + debugBuildNumber : "QPipePipe Debug"
+                    nightlyNumber ? "QPipePipe Nightly " + nightlyNumber : "QPipePipe Debug"
         }
         release {
+            buildConfigField "int", "QPIPEPIPE_NIGHTLY", "0"
             if (System.properties.containsKey('packageSuffix')) {
                 resValue "string", "app_name", "QPipePipe " + System.getProperty('packageSuffix')
             } else {
@@ -72,8 +103,9 @@ androidComponents.onVariants(androidComponents.selector().all()) { variant ->
             versionCode += abiCodes[abi]
         }
         output.versionCode.set(versionCode)
-        def debugSuffix = variant.buildType == "debug" && debugBuildNumber ? "-d${debugBuildNumber}" : ""
+        def nightlySuffix = variant.buildType == "debug" && nightlyNumber
+                ? nightlyName + (nightlyCommit ? "-${nightlyCommit}" : "") : ""
         output.outputFileName.set(
-                "QPipePipe_${qpipepipeVersionName}${debugSuffix}-${abi ?: 'universal'}-${variant.name}.apk")
+                "QPipePipe_${qpipepipeVersionName}${nightlySuffix}-${abi ?: 'universal'}-${variant.name}.apk")
     }
 }

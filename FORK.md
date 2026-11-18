@@ -91,6 +91,7 @@ as upstream sets them.
 - Version code `upstream code * 1000 + N * 10 + ABI` (ABI 1-4).
 - GitHub release names must be `v<version name>` (e.g. `v5.4.0-q1`):
   `NewVersionWorker` reads them from the QPipePipe releases to offer updates.
+  Tags starting with `nightly_` are nightlies (see "Nightly builds").
 - Release notes: rewrite `qpipepipe_update_log` (`strings_qpipepipe.xml`) for
   every fork release. The What's New dialog shows it under "QPipePipe
   <version>:" and, when the upstream release changed, upstream's
@@ -353,11 +354,19 @@ QPipePipe issues.
 
 ### Updates are downloaded and installed in the app
 
-Files: `NewVersionWorker` (QPipePipe releases, `-qN` versions, notification,
-"latest version" toast), `App` (update channel description),
+Files: `NewVersionWorker` (QPipePipe releases, notification, "latest version"
+toast), `QPipePipeReleases` (which release to offer), `App` (update channel
+description),
 `QPipePipeUpdateActivity`, `QPipePipeInstallReceiver`, `AndroidManifest.xml`
 (`REQUEST_INSTALL_PACKAGES`, the activity and the receiver). Their texts are the
 `qpipepipe_update_*` strings, so they say QPipePipe and are English only.
+
+`NewVersionWorker` keeps the request and the notification; the choice of the
+release is `QPipePipeReleases.findUpdate`, and upstream's version functions left
+in the worker are unused. A release build offers the newest release newer than
+its own, by name (`v5.4.0-q2`), never one tagged `nightly_`, and pre-releases
+only with "Show pre-releases". A release whose name is not a version is skipped.
+Debug builds follow the nightlies (see "Nightly builds").
 
 The update notification ("QPipePipe X is available") opens a dialog: download
 and install, release notes, later. The APK for the device's ABI is downloaded
@@ -541,7 +550,7 @@ Files: `DebugErrorLog` and `RepeatFilter` (new), `ErrorUtil` (`openActivity`,
 `PlayerTransportController.onPlaybackSynchronize` and
 `VideoDetailFragment.onQueueUpdate`.
 
-Debug builds append each reported error (time, version and debug number, action,
+Debug builds append each reported error (time, version with the nightly number, action,
 service, request, message, all stack traces) to `Android/data/<app
 id>/files/errors/errors-YYYY-MM-DD.log`. Nothing rotates or deletes the files;
 only uninstalling the app or clearing its data does. Release builds skip it
@@ -588,21 +597,61 @@ Check: play three different videos in background, then
 `adb shell dumpsys media_session`: the app has one `MediaSessionManager`
 session, not one per video.
 
-### Numbered debug builds
+### Nightly builds
 
-Files: `app/qpipepipe.gradle`, `qpipepipe/DebugBuildNotes`, `MainActivity`
-(one call after the announcements), `tools/qcheck/qcheck.py`.
+Files: `app/qpipepipe.gradle`, `qpipepipe/QPipePipeReleases`,
+`qpipepipe/QPipePipeUpdateActivity`, `qpipepipe/DebugBuildNotes`,
+`qpipepipe/QPipePipeNotices`, `error/DebugErrorLog`, `NewVersionWorker` (hook,
+see "Updates are downloaded and installed in the app"), `MainActivity` (one
+call after the announcements), `tools/qcheck/qcheck.py`.
 
-A debug build installed on the user's phone gets a sequential number and says
-what to test with it. `app/src/debug/assets/debug_build.txt`, which git
-ignores, holds the number on its first line and the notes below it. With the
-file present, the app is named "QPipePipe Debug <n>", the APK
-`QPipePipe_<version>-d<n>-<abi>-debug.apk`, and the first start of that
-number shows the notes in a dialog. Without the file nothing changes. qcheck
-marks the notes as seen, like What's New.
+A nightly is a debug build (app id `.debug`) with a number. The numbers are one
+sequence across versions. The number comes from the Gradle property
+`qpipepipeNightly` (`-PqpipepipeNightly=36`, or the environment variable
+`ORG_GRADLE_PROJECT_qpipepipeNightly=36`); without it, from the first line of
+`app/src/debug/assets/debug_build.txt`, which git ignores. The lines below the
+first say what to test: the first start of that number shows them once in a
+dialog. The commit is `git rev-parse --short=7 HEAD`.
 
-Check: write `5` and a line of notes to the file, build and install the debug
-APK: the launcher shows "QPipePipe Debug 5" and the dialog appears once.
+A nightly of the coming version 5.5.0-q1, number 36, commit `abc1234`:
+
+- version name `5.5.0-q1-nightly36 (abc1234)`, so About, Android's app info, the
+  error screen and its report (text, JSON, markdown, email subject) and the
+  debug error log all show it;
+- app name "QPipePipe Nightly 36";
+- APKs `QPipePipe_5.5.0-q1-nightly36-abc1234-<abi>-debug.apk`;
+- version code equal to the release of that version: nightlies of one version
+  replace each other, and `QPipePipeUpdateActivity` accepts an equal code in a
+  debug build;
+- What's New keeps the coming version ("QPipePipe 5.5.0-q1"), from
+  `BuildConfig.QPIPEPIPE_VERSION`.
+
+A debug build without a number is "QPipePipe Debug", version `5.5.0-q1`, with no
+dialog. Release builds do not change.
+
+The update check (Settings > Updates) of a debug build looks only at releases
+whose tag starts with `nightly_`. It reads the version from the tag
+(`nightly_5.5.0-q1`) and the number and commit from the APK names above, and
+offers the nightly with the highest number when its number or its version is
+newer than its own. A nightly it cannot read is skipped.
+
+What the nightly workflow must produce, so that the app reads it:
+
+- build with `-PqpipepipeNightly=<n>` from a git checkout (the commit comes
+  from `HEAD`); to show notes, write them in `debug_build.txt` below a first
+  line, which the property overrides;
+- a GitHub pre-release tagged `nightly_<version>`, e.g. `nightly_5.5.0-q1`;
+- the APKs with the names Gradle gives them, and only those of the latest
+  build: the app reads the number from the first APK it finds;
+- a release name that release builds up to 5.4.0-q2 read as an old version
+  (they parse every name when "Show pre-releases" is on, and stop at one they
+  cannot read): it must start with `0.0.0-beta`, e.g.
+  `0.0.0-beta nightly 5.5.0-q1 #36`.
+
+Check: build with `-PqpipepipeNightly=5` and a line of notes in the file,
+install the debug APK: the launcher shows "QPipePipe Nightly 5", the dialog
+appears once, About shows `<version>-nightly5 (<commit>)`. The update check:
+`QPipePipeReleasesTest`.
 
 ### Playback resumes after the OS killed the app
 

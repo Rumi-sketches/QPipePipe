@@ -53,12 +53,12 @@ public final class QPipePipeNotices {
     public static String getReleaseNotes(@NonNull final Context context,
                                          final int lastShownVersionCode) {
         final StringBuilder notes = new StringBuilder("QPipePipe ")
-                .append(BuildConfig.VERSION_NAME).append(":\n\n")
+                .append(BuildConfig.QPIPEPIPE_VERSION).append(":\n\n")
                 .append(context.getString(R.string.qpipepipe_update_log));
         if (lastShownVersionCode / UPSTREAM_VERSION_CODE_FACTOR
                 != BuildConfig.VERSION_CODE / UPSTREAM_VERSION_CODE_FACTOR) {
             notes.append("\n\nPipePipe ")
-                    .append(BuildConfig.VERSION_NAME.replaceFirst("-q[0-9]+$", ""))
+                    .append(BuildConfig.QPIPEPIPE_VERSION.replaceFirst("-q[0-9]+$", ""))
                     .append(":\n\n")
                     .append(context.getString(R.string.update_log));
         }
