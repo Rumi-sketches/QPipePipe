@@ -641,7 +641,8 @@ What the nightly workflow must produce, so that the app reads it:
   from `HEAD`); to show notes, write them in `debug_build.txt` below a first
   line, which the property overrides;
 - a GitHub pre-release tagged `nightly_<version>`, e.g. `nightly_5.5.0-q1`;
-- the APKs with the names Gradle gives them;
+- the APKs with the names Gradle gives them, and only those of the latest
+  build: the app reads the number from the first APK it finds;
 - a release name that release builds up to 5.4.0-q2 read as an old version
   (they parse every name when "Show pre-releases" is on, and stop at one they
   cannot read): it must start with `0.0.0-beta`, e.g.
