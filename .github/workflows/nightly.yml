@@ -33,7 +33,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     env:
-      GH_TOKEN: ${{ github.token }}
       REF: ${{ inputs.ref }}
       NOTES: ${{ inputs.notes }}
       NUMBER: ${{ inputs.number }}
@@ -47,6 +46,8 @@ jobs:
 
       - name: Choose the nightly number
         id: number
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           if [ -z "$NUMBER" ]; then
             last=$(gh api "repos/$GITHUB_REPOSITORY/releases" --paginate \
@@ -178,6 +179,7 @@ jobs:
       - name: Publish the nightly
         working-directory: PipePipeClient
         env:
+          GH_TOKEN: ${{ github.token }}
           N: ${{ steps.number.outputs.number }}
           VERSION: ${{ steps.apks.outputs.version }}
           COMMIT: ${{ steps.apks.outputs.commit }}

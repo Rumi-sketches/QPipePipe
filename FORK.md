@@ -650,7 +650,7 @@ gh workflow run nightly.yml -R Rumi-sketches/QPipePipe -f ref=dev \
 - `notes`: what to test, one line per test, separated by `\n` (real new lines
   work too);
 - `number`: optional; by default the highest number in the APK names of the
-  `nightly_` releases, plus one.
+  `nightly_` releases, plus one. Required when no nightly is published.
 
 The workflow writes the number and the notes in `debug_build.txt`, builds
 `assembleDebug -PqpipepipeNightly=<n>` with the pinned extractor, signs with the
