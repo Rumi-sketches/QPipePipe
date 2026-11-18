@@ -20,6 +20,8 @@ import com.grack.nanojson.JsonParser
 import com.grack.nanojson.JsonParserException
 import org.schabi.newpipe.extractor.downloader.Response
 import org.schabi.newpipe.extractor.exceptions.ReCaptchaException
+import org.schabi.newpipe.qpipepipe.QPipePipeReleases
+import org.schabi.newpipe.qpipepipe.QPipePipeUpdate
 import org.schabi.newpipe.qpipepipe.QPipePipeUpdateActivity
 import org.schabi.newpipe.util.ReleaseVersionUtil.coerceUpdateCheckExpiry
 import org.schabi.newpipe.util.ReleaseVersionUtil.isLastUpdateCheckExpired
@@ -39,19 +41,13 @@ class NewVersionWorker(
      * Method to compare the current and latest available app version.
      * If a newer version is available, we show the update notification.
      *
-     * @param versionName    Name of new version
-     * @param apkLocationUrl Url with the new apk
-     * @param releaseUrl     Url of the release page
+     * @param update the newer release or nightly (QPipePipeReleases), null if none
      */
     private fun compareAppVersionAndShowNotification(
-        versionName: String,
-        apkLocationUrl: String?,
-        releaseUrl: String?,
+        update: QPipePipeUpdate?,
         isManual: Boolean
     ) {
-        val currentVersion = parseVersion(BuildConfig.VERSION_NAME)
-        val newVersion = parseVersion(versionName)
-        if (compareVersions(currentVersion, newVersion) >= 0) {
+        if (update == null) {
             if (isManual) {
                 ContextCompat.getMainExecutor(applicationContext).execute {
                     Toast.makeText(
@@ -64,8 +60,9 @@ class NewVersionWorker(
         }
 
         // QPipePipe: download and install in the app; the release page if there is no APK.
+        val versionName = update.version
         val intent = QPipePipeUpdateActivity.intent(
-            applicationContext, versionName, apkLocationUrl, releaseUrl
+            applicationContext, versionName, update.apkUrl, update.releaseUrl
         )
         val pendingIntent = PendingIntent.getActivity(
             applicationContext, 0, intent,
@@ -128,25 +125,15 @@ class NewVersionWorker(
         try {
             val githubReleases = JsonParser.`array`().from(response.responseBody())
             val includePreRelease = prefs.getBoolean(applicationContext.getString(R.string.show_prerelease_key), false)
-            var selectedRelease: JsonObject? = null
-
-            // 选择最新符合要求的版本（稳定版或包括预发布）
-            for (i in 0 until githubReleases.size) {
-                val release = githubReleases.getObject(i)
-                if (!includePreRelease && release.getBoolean("prerelease")) continue
-                if (selectedRelease == null || isNewerRelease(release, selectedRelease)) {
-                    selectedRelease = release
-                }
-            }
-
-            selectedRelease?.let { release ->
-                val versionName = release.getString("name").removePrefix("v")
-                val apkUrl = findCompatibleApkUrl(release, Build.SUPPORTED_ABIS)
-                compareAppVersionAndShowNotification(
-                    versionName, apkUrl, release.getString("html_url"),
-                    inputData.getBoolean(IS_MANUAL, false)
-                )
-            }
+            // QPipePipe: QPipePipeReleases picks the release, or the nightly for a debug build;
+            // upstream's version functions in this file are unused.
+            compareAppVersionAndShowNotification(
+                QPipePipeReleases.findUpdate(
+                    githubReleases, QPipePipeReleases.INSTALLED, includePreRelease,
+                    Build.SUPPORTED_ABIS
+                ),
+                inputData.getBoolean(IS_MANUAL, false)
+            )
         } catch (e: JsonParserException) {
             if (DEBUG) Log.w(TAG, "JSON解析错误", e)
         }
@@ -231,16 +218,11 @@ data class Version(
     val major: Int,
     val minor: Int,
     val patch: Int,
-    val betaVersion: Int?, // null表示正式版，数字表示beta版本号
-    val qpipepipeRelease: Int // N in "-qN", 0 when absent
+    val betaVersion: Int? // null表示正式版，数字表示beta版本号
 )
 
-private val QPIPEPIPE_RELEASE_SUFFIX = Regex("-q([0-9]+)$")
-
 private fun parseVersion(versionStr: String): Version {
-    val qpipepipeMatch = QPIPEPIPE_RELEASE_SUFFIX.find(versionStr)
-    val qpipepipeRelease = qpipepipeMatch?.groupValues?.get(1)?.toInt() ?: 0
-    val normalized = versionStr.removePrefix("v").removeSuffix(qpipepipeMatch?.value ?: "")
+    val normalized = versionStr.removePrefix("v")
     val parts = normalized.split("-beta", limit = 2)
     val mainPart = parts[0]
 
@@ -257,7 +239,7 @@ private fun parseVersion(versionStr: String): Version {
         else -> parts[1].toIntOrNull() // 是 "-beta1" 这样的格式
     }
 
-    return Version(major, minor, patch, betaVersion, qpipepipeRelease)
+    return Version(major, minor, patch, betaVersion)
 }
 
 private fun compareVersions(v1: Version, v2: Version): Int {
@@ -273,8 +255,7 @@ private fun compareVersions(v1: Version, v2: Version): Int {
 
     // 主版本号相同，比较beta版本
     return when {
-        v1.betaVersion == null && v2.betaVersion == null ->
-            v1.qpipepipeRelease.compareTo(v2.qpipepipeRelease)
+        v1.betaVersion == null && v2.betaVersion == null -> 0  // 都是正式版
         v1.betaVersion == null -> 1  // v1是正式版，比beta版大
         v2.betaVersion == null -> -1 // v2是正式版，比beta版大
         else -> v1.betaVersion.compareTo(v2.betaVersion) // 比较beta版本号
