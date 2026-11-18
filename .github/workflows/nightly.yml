@@ -98,8 +98,8 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      # Debug builds are signed with ~/.android/debug.keystore: the maintainer's, so nightlies
-      # install over the debug builds already on the phones.
+      # Debug builds are signed with debug.keystore in ANDROID_USER_HOME: the maintainer's, so
+      # nightlies install over the debug builds already on the phones.
       - name: Write the debug keystore
         env:
           DEBUG_KEYSTORE_BASE64: ${{ secrets.DEBUG_KEYSTORE_BASE64 }}
@@ -107,16 +107,18 @@ jobs:
           if [ -z "$DEBUG_KEYSTORE_BASE64" ]; then
             echo "::error::Set the DEBUG_KEYSTORE_BASE64 secret (FORK.md, Nightly builds)"; exit 1
           fi
-          mkdir -p ~/.android
-          echo "$DEBUG_KEYSTORE_BASE64" | base64 -d > ~/.android/debug.keystore
+          mkdir -p "$RUNNER_TEMP/android-user"
+          echo "$DEBUG_KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/android-user/debug.keystore"
 
       - name: Build the nightly APKs
         working-directory: PipePipeClient
+        env:
+          ANDROID_USER_HOME: ${{ runner.temp }}/android-user
         run: ./gradlew assembleDebug -PqpipepipeNightly=${{ steps.number.outputs.number }} --no-daemon
 
       - name: Remove the debug keystore
         if: always()
-        run: rm -f ~/.android/debug.keystore
+        run: rm -rf "$RUNNER_TEMP/android-user"
 
       - name: Check the APKs
         id: apks
@@ -136,7 +138,9 @@ jobs:
               echo "::error::$name is not nightly $N of commit $commit"; exit 1
             fi
             version=$v
-            if ! "$tools/apksigner" verify --print-certs "$apk" | grep -q "SHA-256 digest: $cert"; then
+            certs=$("$tools/apksigner" verify --print-certs "$apk" 2> /dev/null || true)
+            if ! grep -q "SHA-256 digest: $cert" <<< "$certs"; then
+              echo "$certs"
               echo "::error::$name is not signed with the debug certificate"; exit 1
             fi
             echo "$name: OK"
