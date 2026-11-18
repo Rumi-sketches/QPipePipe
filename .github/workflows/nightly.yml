@@ -5,6 +5,8 @@
 name: Nightly build
 
 on:
+  push:
+    branches: [feat/nightly-2]
   workflow_dispatch:
     inputs:
       ref:
