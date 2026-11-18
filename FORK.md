@@ -647,8 +647,8 @@ gh workflow run nightly.yml -R Rumi-sketches/QPipePipe -f ref=dev \
 ```
 
 - `ref`: the branch or commit to build, `dev` by default;
-- `notes`: what to test, one line per test, separated by `\n` (real new lines
-  work too);
+- `notes`: what to test, in English like everything on GitHub, one line per
+  test, separated by `\n` (real new lines work too);
 - `number`: optional; by default the highest number in the APK names of the
   `nightly_` releases, plus one. Required when no nightly is published.
 

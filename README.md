@@ -73,6 +73,17 @@ A version is the PipePipe version it is based on plus a QPipePipe release number
 `5.4.0-q1` is the first QPipePipe release on PipePipe 5.4.0, `5.4.0-q2` the next
 one, and `5.5.0-q1` the first on PipePipe 5.5.0.
 
+### Nightly builds
+
+Before a release, test builds are published as a pre-release tagged
+`nightly_<coming version>`, for example
+[`nightly_5.5.0-q1`](https://github.com/Rumi-sketches/QPipePipe/releases/tag/nightly_5.5.0-q1).
+Each new build replaces the previous one. A nightly is a separate app,
+"QPipePipe Nightly", next to the stable one, with its own data. It is signed
+with a debug key, not the release certificate above, and it updates itself
+from the next nightly. Its release notes say what to test. Use the stable
+releases unless you want to help test.
+
 ## How it is maintained
 
 QPipePipe follows PipePipe's stable releases; betas are skipped. A daily check
