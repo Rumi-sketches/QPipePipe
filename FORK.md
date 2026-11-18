@@ -862,7 +862,11 @@ Check: `UnplayableQueueTest` passes. On a phone, play in the background with
 repeat all a local playlist of removed videos (the app refuses to add one, so
 export the database, add rows to `streams` and `playlist_stream_join` with a
 `thumbnail_url`, and import it): one error toast per video, then the queue
-message and the player paused, no more toasts.
+message and the player paused, no more toasts. The wrapped network error has
+no clean phone check: the app decodes signatures on the phone and calls
+`api.pipepipe.dev` only as a fallback, so blocking that host changes nothing.
+`UnplayableQueueTest` covers it: offline, the queue doesn't stop; online with
+the decoder server down, it stops after one round.
 
 ### A video that can't be played says why, and the queue goes on
 
