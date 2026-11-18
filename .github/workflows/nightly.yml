@@ -1,0 +1,190 @@
+# Builds a nightly (a numbered debug build) from dev or a branch, signs it with the debug key,
+# and publishes it as the GitHub pre-release nightly_<coming version>, replacing the previous
+# nightly of that version. Debug builds update from these releases in the app.
+# See FORK.md, "Nightly builds".
+name: Nightly build
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Branch or commit to build"
+        required: true
+        default: dev
+      notes:
+        description: "What to test, one line per test (separate lines with \\n)"
+        required: false
+        default: ""
+      number:
+        description: "Nightly number (default: the latest published nightly + 1)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+# One nightly at a time, so two runs never take the same number.
+concurrency:
+  group: nightly
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REF: ${{ inputs.ref }}
+      NOTES: ${{ inputs.notes }}
+      NUMBER: ${{ inputs.number }}
+    steps:
+      - name: Check out the nightly
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref }}
+          path: PipePipeClient
+          persist-credentials: false
+
+      - name: Choose the nightly number
+        id: number
+        run: |
+          if [ -z "$NUMBER" ]; then
+            last=$(gh api "repos/$GITHUB_REPOSITORY/releases" --paginate \
+                --jq '.[] | select(.tag_name | startswith("nightly_")) | .assets[].name' \
+              | sed -n 's/.*-nightly\([0-9]\+\)-.*/\1/p' | sort -n | tail -1)
+            if [ -z "$last" ]; then
+              echo "::error::No published nightly to count from: pass the number"; exit 1
+            fi
+            NUMBER=$((last + 1))
+          fi
+          if ! [[ "$NUMBER" =~ ^[1-9][0-9]*$ ]]; then
+            echo "::error::The nightly number must be a positive number, not '$NUMBER'"; exit 1
+          fi
+          echo "number=$NUMBER" >> "$GITHUB_OUTPUT"
+          echo "Nightly $NUMBER"
+
+      - name: Write the test notes
+        working-directory: PipePipeClient
+        env:
+          N: ${{ steps.number.outputs.number }}
+        run: |
+          # gh workflow run -f notes="a\nb" passes a literal \n: it becomes a new line.
+          mkdir -p app/src/debug/assets
+          { echo "$N"; printf '%s\n' "$NOTES" | sed 's/\\n/\n/g' | sed 's/^[[:space:]]*//; /^$/d'; } \
+            > app/src/debug/assets/debug_build.txt
+          cat app/src/debug/assets/debug_build.txt
+
+      - name: Read the pinned extractor
+        id: pins
+        run: |
+          extractor=$(sed -n 's/^extractor=//p' PipePipeClient/tools/upstream/pins.properties)
+          if [ -z "$extractor" ]; then echo "::error::No extractor in pins.properties"; exit 1; fi
+          echo "extractor=$extractor" >> "$GITHUB_OUTPUT"
+
+      - name: Check out the extractor
+        uses: actions/checkout@v4
+        with:
+          repository: InfinityLoop1308/PipePipeExtractor
+          ref: ${{ steps.pins.outputs.extractor }}
+          path: PipePipeExtractor
+          persist-credentials: false
+
+      - name: Set up JDK 25
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "25"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      # Debug builds are signed with ~/.android/debug.keystore: the maintainer's, so nightlies
+      # install over the debug builds already on the phones.
+      - name: Write the debug keystore
+        env:
+          DEBUG_KEYSTORE_BASE64: ${{ secrets.DEBUG_KEYSTORE_BASE64 }}
+        run: |
+          if [ -z "$DEBUG_KEYSTORE_BASE64" ]; then
+            echo "::error::Set the DEBUG_KEYSTORE_BASE64 secret (FORK.md, Nightly builds)"; exit 1
+          fi
+          mkdir -p ~/.android
+          echo "$DEBUG_KEYSTORE_BASE64" | base64 -d > ~/.android/debug.keystore
+
+      - name: Build the nightly APKs
+        working-directory: PipePipeClient
+        run: ./gradlew assembleDebug -PqpipepipeNightly=${{ steps.number.outputs.number }} --no-daemon
+
+      - name: Remove the debug keystore
+        if: always()
+        run: rm -f ~/.android/debug.keystore
+
+      - name: Check the APKs
+        id: apks
+        working-directory: PipePipeClient
+        env:
+          N: ${{ steps.number.outputs.number }}
+        run: |
+          tools=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
+          cert=$(tr -d '[:space:]' < tools/release/debug-certificate-sha256.txt)
+          commit=$(git rev-parse --short=7 HEAD)
+          version=""
+          count=0
+          for apk in app/build/outputs/apk/debug/*.apk; do
+            name=$(basename "$apk")
+            v=$(echo "$name" | sed -n "s/^QPipePipe_\(.*\)-nightly$N-$commit-.*-debug\.apk$/\1/p")
+            if [ -z "$v" ] || { [ -n "$version" ] && [ "$v" != "$version" ]; }; then
+              echo "::error::$name is not nightly $N of commit $commit"; exit 1
+            fi
+            version=$v
+            if ! "$tools/apksigner" verify --print-certs "$apk" | grep -q "SHA-256 digest: $cert"; then
+              echo "::error::$name is not signed with the debug certificate"; exit 1
+            fi
+            echo "$name: OK"
+            count=$((count + 1))
+          done
+          if [ "$count" -eq 0 ]; then echo "::error::No APK built"; exit 1; fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "commit=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          echo "short=$commit" >> "$GITHUB_OUTPUT"
+
+      - name: Write the release notes
+        working-directory: PipePipeClient
+        env:
+          N: ${{ steps.number.outputs.number }}
+          COMMIT: ${{ steps.apks.outputs.commit }}
+          SHORT: ${{ steps.apks.outputs.short }}
+        run: |
+          {
+            echo "Nightly $N, commit [$SHORT](https://github.com/$GITHUB_REPOSITORY/commit/$COMMIT), from \`$REF\`."
+            echo
+            tests=$(tail -n +2 app/src/debug/assets/debug_build.txt)
+            if [ -n "$tests" ]; then
+              echo "What to test:"
+              echo
+              echo "$tests" | sed 's/^/- /'
+              echo
+            fi
+            echo "A debug build (app id \`.debug\`), for testing. It installs over the previous"
+            echo "nightly; debug builds update from here in Settings > Updates."
+          } > ../notes.md
+          cat ../notes.md
+
+      # One release per version: the previous nightly of this version goes, with its tag, and
+      # the new one takes the tag on the commit just built. Never "latest".
+      - name: Publish the nightly
+        working-directory: PipePipeClient
+        env:
+          N: ${{ steps.number.outputs.number }}
+          VERSION: ${{ steps.apks.outputs.version }}
+          COMMIT: ${{ steps.apks.outputs.commit }}
+        run: |
+          tag="nightly_$VERSION"
+          if gh release view "$tag" -R "$GITHUB_REPOSITORY" > /dev/null 2>&1; then
+            gh release delete "$tag" -R "$GITHUB_REPOSITORY" --cleanup-tag --yes
+          elif gh api "repos/$GITHUB_REPOSITORY/git/refs/tags/$tag" > /dev/null 2>&1; then
+            gh api -X DELETE "repos/$GITHUB_REPOSITORY/git/refs/tags/$tag"
+          fi
+          gh release create "$tag" -R "$GITHUB_REPOSITORY" --target "$COMMIT" \
+            --prerelease --latest=false --title "0.0.0-beta nightly $VERSION #$N" \
+            --notes-file ../notes.md app/build/outputs/apk/debug/*.apk
+          echo "::notice::Nightly $N: https://github.com/$GITHUB_REPOSITORY/releases/tag/$tag"
