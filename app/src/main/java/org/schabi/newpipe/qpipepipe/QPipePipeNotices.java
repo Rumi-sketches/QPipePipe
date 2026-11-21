@@ -46,23 +46,33 @@ public final class QPipePipeNotices {
     }
 
     /**
-     * QPipePipe's notes ({@code qpipepipe_update_log}), followed by upstream's
-     * ({@code update_log}) when the upstream release changed since the last notes shown.
+     * Whether upstream's What's New ({@code update_log}) and the donation dialog after it
+     * appear: only when the upstream release changed since the last notes shown, as upstream
+     * does. A fork-only release shows just {@link #showReleaseNotes}.
      */
-    @NonNull
-    public static String getReleaseNotes(@NonNull final Context context,
-                                         final int lastShownVersionCode) {
-        final StringBuilder notes = new StringBuilder("QPipePipe ")
-                .append(BuildConfig.QPIPEPIPE_VERSION).append(":\n\n")
-                .append(context.getString(R.string.qpipepipe_update_log));
-        if (lastShownVersionCode / UPSTREAM_VERSION_CODE_FACTOR
-                != BuildConfig.VERSION_CODE / UPSTREAM_VERSION_CODE_FACTOR) {
-            notes.append("\n\nPipePipe ")
-                    .append(BuildConfig.QPIPEPIPE_VERSION.replaceFirst("-q[0-9]+$", ""))
-                    .append(":\n\n")
-                    .append(context.getString(R.string.update_log));
+    public static boolean hasUpstreamNotes(final int lastShownVersionCode) {
+        return upstreamChanged(lastShownVersionCode, BuildConfig.VERSION_CODE);
+    }
+
+    static boolean upstreamChanged(final int lastShownVersionCode, final int versionCode) {
+        return lastShownVersionCode / UPSTREAM_VERSION_CODE_FACTOR
+                != versionCode / UPSTREAM_VERSION_CODE_FACTOR;
+    }
+
+    /**
+     * Shows QPipePipe's notes ({@code qpipepipe_update_log}) in their own dialog. It comes
+     * after upstream's startup dialogs, so users read upstream's first and the fork's last.
+     */
+    public static void showReleaseNotes(@NonNull final Activity activity) {
+        if (activity.isFinishing()) {
+            return;
         }
-        return notes.toString();
+        new AlertDialog.Builder(activity)
+                .setTitle("QPipePipe: " + activity.getString(R.string.fragment_feed_title))
+                .setMessage("QPipePipe " + BuildConfig.QPIPEPIPE_VERSION + ":\n\n"
+                        + activity.getString(R.string.qpipepipe_update_log))
+                .setPositiveButton(R.string.ok, null)
+                .show();
     }
 
     /** Title of a notice that comes from upstream, e.g. "PipePipe: Announcement". */

@@ -196,8 +196,8 @@ public class MainActivity extends AppCompatActivity {
 
         if (QPipePipeNotices.hasReleaseNotes(storedVersionCode)) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle(R.string.fragment_feed_title);
-            builder.setMessage(QPipePipeNotices.getReleaseNotes(this, storedVersionCode));
+            builder.setTitle(QPipePipeNotices.fromPipePipe(this, R.string.fragment_feed_title));
+            builder.setMessage(R.string.update_log);
             builder.setPositiveButton(R.string.ok, null);
 
             AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
@@ -210,6 +210,7 @@ public class MainActivity extends AppCompatActivity {
             builder2.setNegativeButton(R.string.no, null);
 
             final AlertDialog dialog2 = builder2.create();
+            dialog2.setOnDismissListener(dialog -> QPipePipeNotices.showReleaseNotes(this));
 
             final AlertDialog dialog1 = builder.create();
             dialog1.setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -219,11 +220,17 @@ public class MainActivity extends AppCompatActivity {
                             || currentTime - lastShowDonationTime > 30L * 24 * 60 * 60 * 1000) {
                         prefs.edit().putLong("last_show_donation_time", currentTime).apply();
                         dialog2.show();
+                    } else {
+                        QPipePipeNotices.showReleaseNotes(MainActivity.this);
                     }
                 }
             });
 
-            dialog1.show();
+            if (QPipePipeNotices.hasUpstreamNotes(storedVersionCode)) {
+                dialog1.show();
+            } else {
+                QPipePipeNotices.showReleaseNotes(this);
+            }
             prefs.edit().putInt("version_code", currentVersionCode).apply();
         }
         String lastAnnouncementId = prefs.getString("last_announcement_id", null);

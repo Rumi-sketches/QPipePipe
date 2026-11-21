@@ -1,7 +1,9 @@
 package org.schabi.newpipe.qpipepipe;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.schabi.newpipe.util.AnnouncementParser;
@@ -33,6 +35,13 @@ public class QPipePipeNoticesTest {
                 QPipePipeNotices.parseAnnouncements(PAGE, "261020");
         assertEquals("261102", result.latestId);
         assertEquals("## 261102\nSecond announcement.\n", result.contents);
+    }
+
+    @Test
+    public void upstreamNotesOnlyWhenTheUpstreamReleaseChanged() {
+        assertTrue(QPipePipeNotices.upstreamChanged(1109021, 1110011)); // 5.4.0-q2 -> 5.5.0-q1
+        assertTrue(QPipePipeNotices.upstreamChanged(0, 1110011)); // first install
+        assertFalse(QPipePipeNotices.upstreamChanged(1110011, 1110021)); // fork release only
     }
 
     @Test
