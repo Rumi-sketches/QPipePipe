@@ -392,11 +392,19 @@ QPipePipe announcements come from the `Announcement` page of the QPipePipe
 wiki, in upstream's format (`## yyMMdd` headings, newest first), titled
 "QPipePipe: Announcement". The app reads the page's raw markdown at most every
 6 hours; fetching the HTML page on every start slowed video starts by about
-half a second. What's New appears after every version change, fork releases
-included (upstream only showed it when the version code grew by more than 90).
+half a second.
 
-Check: install over an older build: What's New shows the QPipePipe notes, and
-the PipePipe notes too when the upstream version changed.
+After an update, upstream's dialogs come first, as upstream shows them: when
+the upstream version changed, "PipePipe: What's New" (`update_log`), then the
+donation dialog when upstream's timing allows it. The QPipePipe notes
+(`qpipepipe_update_log`) follow in their own "QPipePipe: What's New" dialog,
+after every version change, fork releases included. Announcements are fetched
+in the background and appear on top whenever they arrive.
+
+Check: install over an older build with a different upstream version:
+"PipePipe: What's New", then the donation dialog if due, then "QPipePipe:
+What's New". Over a build of the same upstream version: only "QPipePipe:
+What's New".
 
 ### Playlists continue where you left off
 

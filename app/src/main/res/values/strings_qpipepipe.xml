@@ -4,7 +4,7 @@
 <resources>
     <!-- What's New notes of the current QPipePipe release, shown above upstream's update_log.
          Rewrite them for every release (see FORK.md, Identity and versions). -->
-    <string name="qpipepipe_update_log">- Updates are now downloaded and installed inside the app: tap the update notification\n- The update notification now says QPipePipe</string>
+    <string name="qpipepipe_update_log">- Select several videos in a list to play them next, in a popup, mark them as watched or share them\n- Playlists continue from the furthest video you played, and your recent queues are kept\n- The queue survives when Android closes the app in background, and playback resumes where it was after a reload, a long pause or a network change\n- Without internet the player says so, instead of reporting a bug or retrying in a loop\n- A video that can\'t be played says why, and the queue goes on\n- The player recovers when the video decoder fails mid-stream\n- Android Auto follows the car connection\n- Downloads interrupted by a network error restart on their own\n- Play now plays the chosen video, in the player you are using</string>
     <string name="qpipepipe_settings_title">QPipePipe</string>
     <string name="qpipepipe_settings_summary">Queue and swipe features added by this fork</string>
     <string name="qpipepipe_category_playback">Playback</string>
