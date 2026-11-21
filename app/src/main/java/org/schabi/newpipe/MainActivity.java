@@ -75,7 +75,9 @@ import org.schabi.newpipe.player.PlayerIntentConstants;
 import org.schabi.newpipe.player.event.OnKeyDownListener;
 import org.schabi.newpipe.player.helper.PlayerHolder;
 import org.schabi.newpipe.player.playqueue.PlayQueue;
+import org.schabi.newpipe.qpipepipe.DebugBuildNotes;
 import org.schabi.newpipe.qpipepipe.QPipePipeNotices;
+import org.schabi.newpipe.util.selection.SelectionToolbar;
 import org.schabi.newpipe.util.*;
 import org.schabi.newpipe.util.external_communication.ShareUtils;
 import org.schabi.newpipe.views.FocusOverlayView;
@@ -181,11 +183,6 @@ public class MainActivity extends AppCompatActivity {
         final App app = App.getApp();
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(app);
 
-        String audioLang = prefs.getString(getString(R.string.preferred_audio_language_key), "original");
-        if (!Arrays.asList("original", "en", "fr", "de", "es", "pt", "ru", "tr", "zh", "ja", "hi", "ko", "th", "vi", "bn", "id", "ar").contains(audioLang)) {
-            prefs.edit().putString(getString(R.string.preferred_audio_language_key), "original").apply();
-        } // remove this after sometime
-
         if (prefs.getBoolean(app.getString(R.string.update_app_key), false)) {
             // Start the worker which is checking all conditions
             // and eventually searching for a new version.
@@ -199,8 +196,8 @@ public class MainActivity extends AppCompatActivity {
 
         if (QPipePipeNotices.hasReleaseNotes(storedVersionCode)) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle(R.string.fragment_feed_title);
-            builder.setMessage(QPipePipeNotices.getReleaseNotes(this, storedVersionCode));
+            builder.setTitle(QPipePipeNotices.fromPipePipe(this, R.string.fragment_feed_title));
+            builder.setMessage(R.string.update_log);
             builder.setPositiveButton(R.string.ok, null);
 
             AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
@@ -213,20 +210,27 @@ public class MainActivity extends AppCompatActivity {
             builder2.setNegativeButton(R.string.no, null);
 
             final AlertDialog dialog2 = builder2.create();
+            dialog2.setOnDismissListener(dialog -> QPipePipeNotices.showReleaseNotes(this));
 
             final AlertDialog dialog1 = builder.create();
             dialog1.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialog) {
-                    if((storedVersionCode / 100 < 1109 && currentTime - lastShowDonationTime > 14 * 24 * 60 * 60 * 1000)
+                    if((storedVersionCode / 100 < 1110 && currentTime - lastShowDonationTime > 14 * 24 * 60 * 60 * 1000)
                             || currentTime - lastShowDonationTime > 30L * 24 * 60 * 60 * 1000) {
                         prefs.edit().putLong("last_show_donation_time", currentTime).apply();
                         dialog2.show();
+                    } else {
+                        QPipePipeNotices.showReleaseNotes(MainActivity.this);
                     }
                 }
             });
 
-            dialog1.show();
+            if (QPipePipeNotices.hasUpstreamNotes(storedVersionCode)) {
+                dialog1.show();
+            } else {
+                QPipePipeNotices.showReleaseNotes(this);
+            }
             prefs.edit().putInt("version_code", currentVersionCode).apply();
         }
         String lastAnnouncementId = prefs.getString("last_announcement_id", null);
@@ -249,6 +253,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception ignore) {
         }
         QPipePipeNotices.showAnnouncements(this);
+        DebugBuildNotes.showIfNew(this);
 
 
         int isFirstRun = prefs.getInt("isFirstRun", 0);
@@ -636,6 +641,10 @@ public class MainActivity extends AppCompatActivity {
         // interacts with a fragment inside fragment_holder so all back presses should be
         // handled by it
         if (bottomSheetHiddenOrCollapsed()) {
+            // a list in multi-selection mode leaves it first
+            if (SelectionToolbar.onBackPressed()) {
+                return;
+            }
             final Fragment fragment = getSupportFragmentManager()
                     .findFragmentById(R.id.fragment_holder);
             // If current fragment implements BackPressable (i.e. can/wanna handle back press)

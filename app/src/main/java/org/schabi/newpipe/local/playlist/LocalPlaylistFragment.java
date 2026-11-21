@@ -36,13 +36,14 @@ import org.reactivestreams.Subscription;
 import org.schabi.newpipe.NewPipeDatabase;
 import org.schabi.newpipe.R;
 import org.schabi.newpipe.database.LocalItem;
+import org.schabi.newpipe.util.PicassoHelper;
 import org.schabi.newpipe.database.history.model.StreamHistoryEntry;
 import org.schabi.newpipe.database.playlist.PlaylistStreamEntry;
 import org.schabi.newpipe.database.stream.model.StreamEntity;
 import org.schabi.newpipe.database.stream.model.StreamStateEntity;
 import org.schabi.newpipe.databinding.DialogEditTextBinding;
 import org.schabi.newpipe.databinding.LocalPlaylistHeaderBinding;
-import org.schabi.newpipe.databinding.PlaylistControlBinding;
+import org.schabi.newpipe.databinding.PlaylistResumeControlBinding;
 import org.schabi.newpipe.error.ErrorInfo;
 import org.schabi.newpipe.error.UserAction;
 import org.schabi.newpipe.extractor.stream.StreamInfoItem;
@@ -58,6 +59,7 @@ import org.schabi.newpipe.local.history.HistoryRecordManager;
 import org.schabi.newpipe.player.PlayerService.PlayerType;
 import org.schabi.newpipe.player.playqueue.PlayQueue;
 import org.schabi.newpipe.player.playqueue.SinglePlayQueue;
+import org.schabi.newpipe.qpipepipe.PlaylistResumeControls;
 import org.schabi.newpipe.util.*;
 import org.schabi.newpipe.util.external_communication.ShareUtils;
 import org.schabi.newpipe.util.StreamProcessor;
@@ -90,7 +92,8 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
     Parcelable itemsListState;
 
     private LocalPlaylistHeaderBinding headerBinding;
-    private PlaylistControlBinding playlistControlBinding;
+    private PlaylistResumeControlBinding playlistControlBinding;
+    private PlaylistResumeControls resumeControls;
 
     private ItemTouchHelper itemTouchHelper;
 
@@ -106,6 +109,8 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
     private AtomicBoolean isLoadingComplete;
     /* Has the playlist been modified (e.g. items reordered or deleted) */
     private AtomicBoolean isModified;
+    /* Has a save renumbered the join indexes since the last handled db emission */
+    private boolean joinIndexesRenumbered = false;
     /* Is the playlist currently being processed to remove watched videos */
     private boolean isRemovingWatched = false;
     /* Is the playlist currently being processed to remove duplicate streams */
@@ -253,6 +258,9 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
         headerBinding = LocalPlaylistHeaderBinding.inflate(activity.getLayoutInflater(), itemsList,
                 false);
         playlistControlBinding = headerBinding.playlistControl;
+        resumeControls = new PlaylistResumeControls(playlistControlBinding, this::getStreamItems,
+                itemsList);
+        playlistControlBinding.getRoot().configure(getString(R.string.list_control_page_local_playlist));
 
         headerBinding.playlistTitleView.setSelected(true);
 
@@ -271,6 +279,9 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
         itemListAdapter.setSelectedListener(new OnClickGesture<LocalItem>() {
             @Override
             public void selected(final LocalItem selectedItem) {
+                if (toggleSelectionIfActive(selectedItem)) {
+                    return;
+                }
                 if (selectedItem instanceof PlaylistStreamEntry) {
                     final StreamEntity item =
                             ((PlaylistStreamEntry) selectedItem).getStreamEntity();
@@ -298,7 +309,8 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
             @Override
             public void drag(final LocalItem selectedItem,
                              final RecyclerView.ViewHolder viewHolder) {
-                if (itemTouchHelper != null) {
+                // reordering would invalidate the selection keys
+                if (itemTouchHelper != null && !selection.isActive()) {
                     itemTouchHelper.startDrag(viewHolder);
                 }
             }
@@ -350,6 +362,14 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
     ///////////////////////////////////////////////////////////////////////////
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if (resumeControls != null) {
+            resumeControls.refresh();
+        }
+    }
+
+    @Override
     public void onPause() {
         super.onPause();
         itemsListState = itemsList.getLayoutManager().onSaveInstanceState();
@@ -376,6 +396,50 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
         }
         name = savedInstanceState.getString("name");
         itemsListState = savedInstanceState.getParcelable("itemsListState");
+    }
+
+    private void addToHomeScreen() {
+        final android.content.Context context = requireContext().getApplicationContext();
+        final long id = playlistId;
+        final String label = name;
+        disposables.add(io.reactivex.rxjava3.core.Single.fromCallable(() -> {
+                    try {
+                        final String url = playlistManager.getPlaylistThumbnail(id);
+                        if (url == null || url.isEmpty()) {
+                            return java.util.Optional.<android.graphics.Bitmap>empty();
+                        }
+                        return java.util.Optional.ofNullable(PicassoHelper.loadOrigin(url)
+                                .resize(192, 192).centerCrop().get());
+                    } catch (final Exception e) {
+                        return java.util.Optional.<android.graphics.Bitmap>empty();
+                    }
+                })
+                .subscribeOn(io.reactivex.rxjava3.schedulers.Schedulers.io())
+                .observeOn(io.reactivex.rxjava3.android.schedulers.AndroidSchedulers.mainThread())
+                .subscribe(bitmap -> {
+                    final androidx.core.graphics.drawable.IconCompat icon = bitmap.isPresent()
+                            ? androidx.core.graphics.drawable.IconCompat
+                                    .createWithAdaptiveBitmap(bitmap.get())
+                            : androidx.core.graphics.drawable.IconCompat
+                                    .createWithResource(context, R.mipmap.ic_launcher);
+                    final android.content.Intent launch = new android.content.Intent(context,
+                            PlayPlaylistShortcutActivity.class)
+                            .setAction(android.content.Intent.ACTION_VIEW)
+                            .putExtra(PlayPlaylistShortcutActivity.EXTRA_PLAYLIST_ID, id);
+                    final androidx.core.content.pm.ShortcutInfoCompat info =
+                            new androidx.core.content.pm.ShortcutInfoCompat.Builder(
+                                    context, PlayPlaylistShortcutActivity.shortcutId(id))
+                                    .setShortLabel(label)
+                                    .setIcon(icon)
+                                    .setIntent(launch)
+                                    .build();
+                    if (!androidx.core.content.pm.ShortcutManagerCompat.requestPinShortcut(
+                            context, info, null)) {
+                        Toast.makeText(context, R.string.general_error, Toast.LENGTH_SHORT)
+                                .show();
+                    }
+                }, throwable -> Toast.makeText(context, R.string.general_error,
+                        Toast.LENGTH_SHORT).show()));
     }
 
     @Override
@@ -405,8 +469,10 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
             playlistControlBinding.playlistCtrlPlayBgButton.setOnClickListener(null);
             playlistControlBinding.playlistCtrlPlayAllButton.setOnClickListener(null);
             playlistControlBinding.playlistCtrlPlayPopupButton.setOnClickListener(null);
+            resumeControls.dispose();
 
             headerBinding = null;
+            resumeControls = null;
             playlistControlBinding = null;
         }
 
@@ -484,7 +550,9 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
 
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
-        if (item.getItemId() == R.id.menu_item_share_playlist) {
+        if (item.getItemId() == R.id.action_multi_select) {
+            selection.enter();
+        } else if (item.getItemId() == R.id.menu_item_share_playlist) {
             createShareConfirmationDialog();
         } else if (item.getItemId() == R.id.menu_item_remove_watched) {
             if (!isRemovingWatched) {
@@ -521,7 +589,10 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
             ActionBar actionBar = activity.getSupportActionBar();
             View customView = getLayoutInflater().inflate(R.layout.local_playlist_search_toolbar, null, false);
             assert actionBar != null;
-            actionBar.setCustomView(customView);
+            actionBar.setDisplayShowTitleEnabled(false);
+            actionBar.setCustomView(customView, new ActionBar.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT));
             actionBar.setDisplayShowCustomEnabled(true);
             editText = activity.findViewById(R.id.toolbar_search_edit_text_local);
             editText.requestFocus();
@@ -595,24 +666,36 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
             openFilePicker();
         } else if (item.getItemId() == R.id.menu_item_append_playlist) {
             appendAllToOtherPlaylist();
-        } else if (item.getItemId() == R.id.menu_item_sort_origin) {
-            itemListAdapter.sortMode = SortMode.ORIGIN;
-            itemListAdapter.sort(SortMode.ORIGIN);
-            PreferenceManager.getDefaultSharedPreferences(requireContext()).edit().putString(getString(R.string.playlist_sort_mode_key), SortMode.ORIGIN.name()).apply();
-        } else if (item.getItemId() == R.id.menu_item_sort_origin_reverse) {
-            itemListAdapter.sortMode = SortMode.ORIGIN_REVERSE;
-            itemListAdapter.sort(SortMode.ORIGIN_REVERSE);
-            PreferenceManager.getDefaultSharedPreferences(requireContext()).edit().putString(getString(R.string.playlist_sort_mode_key), SortMode.ORIGIN_REVERSE.name()).apply();
-        } else if (item.getItemId() == R.id.menu_item_sort_name) {
-            itemListAdapter.sortMode = SortMode.SORT_NAME;
-            itemListAdapter.sort(SortMode.SORT_NAME);
-            PreferenceManager.getDefaultSharedPreferences(requireContext()).edit().putString(getString(R.string.playlist_sort_mode_key), SortMode.SORT_NAME.name()).apply();
-        } else if (item.getItemId() == R.id.menu_item_sort_name_reverse) {
-            itemListAdapter.sortMode = SortMode.SORT_NAME_REVERSE;
-            itemListAdapter.sort(SortMode.SORT_NAME_REVERSE);
-            PreferenceManager.getDefaultSharedPreferences(requireContext()).edit().putString(getString(R.string.playlist_sort_mode_key), SortMode.SORT_NAME_REVERSE.name()).apply();
+        } else if (item.getItemId() == R.id.menu_item_sort) {
+            showSortDialog();
+        } else if (item.getItemId() == R.id.menu_item_add_to_home_screen) {
+            addToHomeScreen();
         }
         return true;
+    }
+
+    private void showSortDialog() {
+        final SortMode[] modes = {SortMode.ORIGIN, SortMode.ORIGIN_REVERSE,
+                SortMode.DURATION, SortMode.DURATION_REVERSE,
+                SortMode.SORT_NAME, SortMode.SORT_NAME_REVERSE};
+        final String[] items = {getString(R.string.sort_origin),
+                getString(R.string.sort_origin_reverse),
+                getString(R.string.sort_duration_ascending),
+                getString(R.string.sort_duration_descending),
+                getString(R.string.sort_name_ascending),
+                getString(R.string.sort_name_descending)};
+        new AlertDialog.Builder(requireContext())
+                .setTitle(R.string.sort)
+                .setSingleChoiceItems(items, java.util.Arrays.asList(modes)
+                        .indexOf(itemListAdapter.sortMode), (dialog, which) -> {
+                    itemListAdapter.sortMode = modes[which];
+                    itemListAdapter.sort(modes[which]);
+                    PreferenceManager.getDefaultSharedPreferences(requireContext()).edit()
+                            .putString(getString(R.string.playlist_sort_mode_key),
+                                    modes[which].name()).apply();
+                    dialog.dismiss();
+                })
+                .show();
     }
 
     private void openFilePicker() {
@@ -669,6 +752,11 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
             return;
         }
 
+        // Capture locally: the fragment may be destroyed (playlistManager nulled) while importing
+        final LocalPlaylistManager manager = new LocalPlaylistManager(
+                NewPipeDatabase.getInstance(requireContext().getApplicationContext()));
+        final long targetPlaylistId = playlistId;
+
         // Use StreamProcessor with custom callback for playlist addition
         StreamProcessor streamProcessor = new StreamProcessor();
         streamProcessor.processStreamsSequentiallyWithProgress(requireContext(), streamItems, null, 
@@ -676,14 +764,13 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
                 // Convert StreamInfo to StreamEntity and add to playlist
                 StreamEntity streamEntity = new StreamEntity(streamInfo);
                 List<StreamEntity> entityList = Collections.singletonList(streamEntity);
-                playlistManager.appendToPlaylist(playlistId, entityList)
+                // Blocking on the processor's thread keeps order and surfaces errors as failures
+                manager.appendToPlaylist(targetPlaylistId, entityList)
                     .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(
+                    .blockingSubscribe(
                         longs -> { /* Success handled by progress notification */ },
-                        throwable -> {
-                            throw new RuntimeException("Failed to add stream to playlist: " + streamInfo.getUrl(), throwable);
-                        }
+                        throwable -> Log.e(TAG, "Failed to add stream to playlist: "
+                                + streamInfo.getUrl(), throwable)
                     );
             }
         );
@@ -876,6 +963,15 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
 
         itemListAdapter.clearStreamItemList();
 
+        if (selection.isActive()) {
+            if (joinIndexesRenumbered) {
+                remapSelectionAfterSave(result);
+            } else {
+                selection.retainOnly(getSelectionKeys(new ArrayList<>(result)));
+            }
+        }
+        joinIndexesRenumbered = false;
+
         if (result.isEmpty()) {
             showEmptyState();
             return;
@@ -888,10 +984,13 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
         }
         setStreamCountAndOverallDuration(itemListAdapter.getItemsList());
 
+        resumeControls.refresh();
         playlistControlBinding.playlistCtrlPlayAllButton.setOnClickListener(view ->
-                NavigationHelper.playOnMainPlayer(activity, getPlayQueue()));
+                resumeControls.startFromResumePoint(index ->
+                        NavigationHelper.playOnMainPlayer(activity, getPlayQueue(index))));
         playlistControlBinding.playlistCtrlPlayPopupButton.setOnClickListener(view ->
-                NavigationHelper.playOnPopupPlayer(activity, getPlayQueue(), false));
+                resumeControls.startFromResumePoint(index ->
+                        NavigationHelper.playOnPopupPlayer(activity, getPlayQueue(index), false)));
 
 
 
@@ -901,7 +1000,8 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
             if (prefs.getBoolean(getString(R.string.random_music_play_mode_key), false)) {
                 NavigationHelper.playOnBackgroundPlayerShuffled(activity, getPlayQueue(), false);
             } else {
-                NavigationHelper.playOnBackgroundPlayer(activity, getPlayQueue(), false);
+                resumeControls.startFromResumePoint(index -> NavigationHelper
+                        .playOnBackgroundPlayer(activity, getPlayQueue(index), false));
             }
 
         });
@@ -1038,6 +1138,7 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
         }
 
         itemListAdapter.removeItem(item);
+        retainExistingSelection();
         if (playlistManager.getPlaylistThumbnail(playlistId)
                 .equals(item.getStreamEntity().getThumbnailUrl())) {
             updateThumbnailUrl();
@@ -1156,6 +1257,7 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
                             if (isModified != null) {
                                 isModified.set(false);
                             }
+                            joinIndexesRenumbered = true;
                         },
                         throwable -> showError(new ErrorInfo(throwable,
                                 UserAction.REQUESTED_BOOKMARK, "Saving playlist"))
@@ -1241,7 +1343,7 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
 
             @Override
             public boolean isItemViewSwipeEnabled() {
-                return !isShowingAsTab;
+                return !isShowingAsTab && !selection.isActive();
             }
 
             @Override
@@ -1438,8 +1540,18 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
     }
 
     private PlayQueue getPlayQueue(final int index) {
+        final PlayQueue queue = new SinglePlayQueue(getStreamItems(), index);
+        // QPipePipe recent queues: videos enqueued later are appended to this playlist
+        if (playlistId != null) {
+            queue.setSourcePlaylistId(playlistId);
+        }
+        return queue;
+    }
+
+    /** The streams in the order they are shown, which is the order they are queued in. */
+    private List<StreamInfoItem> getStreamItems() {
         if (itemListAdapter == null) {
-            return new SinglePlayQueue(Collections.emptyList(), 0);
+            return Collections.emptyList();
         }
 
         final List<LocalItem> infoItems = itemListAdapter.getItemsList();
@@ -1449,11 +1561,14 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
                 streamInfoItems.add(((PlaylistStreamEntry) item).toStreamInfoItem());
             }
         }
-        return new SinglePlayQueue(streamInfoItems, index);
+        return streamInfoItems;
     }
 
     @Override
     public boolean onBackPressed() {
+        if (exitSelectionOnBack()) {
+            return true;
+        }
         if(Objects.requireNonNull(activity.getSupportActionBar()).getCustomView() != null){
             destroyCustomViewInActionBar();
             return true;
@@ -1467,6 +1582,7 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
         }
         actionBar.setCustomView(null);
         actionBar.setDisplayShowCustomEnabled(false);
+        actionBar.setDisplayShowTitleEnabled(true);
         View searchLocal = activity.findViewById(R.id.action_search_local);
         // they will both be null if back button is pressed
         if(searchLocal != null){
@@ -1515,6 +1631,154 @@ public class LocalPlaylistFragment extends BaseLocalListFragment<List<PlaylistSt
      * with the playlist details or just the list of stream URLs.
      * After the user has made a choice, the playlist is shared.
      */
+    /*//////////////////////////////////////////////////////////////////////////
+    // Multi-selection
+    //////////////////////////////////////////////////////////////////////////*/
+
+    @Override
+    protected int getSelectionMenu() {
+        return R.menu.menu_local_playlist_selection;
+    }
+
+    /** Join index is unique within the playlist, so duplicated streams stay distinguishable. */
+    @Nullable
+    @Override
+    protected Long getSelectionKey(@NonNull final LocalItem item) {
+        return item instanceof PlaylistStreamEntry
+                ? (long) ((PlaylistStreamEntry) item).getJoinIndex() : null;
+    }
+
+    @Nullable
+    @Override
+    protected StreamEntity getSelectionStream(@NonNull final LocalItem item) {
+        return item instanceof PlaylistStreamEntry
+                ? ((PlaylistStreamEntry) item).getStreamEntity() : null;
+    }
+
+    @Override
+    protected boolean canPersistSelection() {
+        // pending or just saved changes renumber join indexes once the playlist reloads
+        return !joinIndexesRenumbered && (isModified == null || !isModified.get());
+    }
+
+    @Override
+    protected boolean onSelectionAction(@NonNull final MenuItem item) {
+        final int id = item.getItemId();
+        if (id == R.id.action_selection_delete) {
+            confirmRemoveSelected();
+        } else if (id == R.id.action_selection_move_top) {
+            moveSelected(true);
+        } else if (id == R.id.action_selection_move_bottom) {
+            moveSelected(false);
+        } else {
+            return false;
+        }
+        return true;
+    }
+
+    private void confirmRemoveSelected() {
+        final int count = selection.getSelectedCount();
+        if (count == 0) {
+            return;
+        }
+        new AlertDialog.Builder(requireContext())
+                .setMessage(getResources().getString(R.string.remove_selected_from_playlist_confirm, count))
+                .setNegativeButton(R.string.cancel, null)
+                .setPositiveButton(R.string.play_queue_remove, (d, w) -> removeSelected())
+                .show();
+    }
+
+    private void removeSelected() {
+        if (itemListAdapter == null || playlistManager == null) {
+            return;
+        }
+        final List<LocalItem> items = getSelectedItems();
+        if (items.isEmpty()) {
+            return;
+        }
+        final String thumbnailUrl = playlistManager.getPlaylistThumbnail(playlistId);
+        boolean thumbnailRemoved = false;
+        for (final LocalItem item : items) {
+            if (Objects.equals(thumbnailUrl,
+                    ((PlaylistStreamEntry) item).getStreamEntity().getThumbnailUrl())) {
+                thumbnailRemoved = true;
+                break;
+            }
+        }
+
+        selection.exit();
+        itemListAdapter.removeItems(items);
+        if (thumbnailRemoved) {
+            updateThumbnailUrl();
+        }
+        setStreamCountAndOverallDuration(itemListAdapter.getItemsList());
+        if (itemListAdapter.getItemsList().isEmpty()) {
+            showEmptyState();
+        }
+        saveChanges();
+    }
+
+    private void moveSelected(final boolean toTop) {
+        if (itemListAdapter == null) {
+            return;
+        }
+        // other sort modes are re-sorted by join index on save, which would undo the move
+        if (itemListAdapter.sortMode != SortMode.ORIGIN
+                && itemListAdapter.sortMode != SortMode.ORIGIN_REVERSE) {
+            Toast.makeText(requireContext(), R.string.move_requires_original_order,
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+        final List<LocalItem> items = getSelectedItems();
+        if (items.isEmpty()) {
+            return;
+        }
+        selection.exit();
+        itemListAdapter.moveItemsToEdge(items, toTop);
+        saveChanges();
+    }
+
+    /**
+     * Saving rewrites join indexes as 0..n-1 in the saved order, so the selected keys are mapped
+     * to the new indexes by matching each entry's stream id and its occurrence among duplicates.
+     */
+    private void remapSelectionAfterSave(@NonNull final List<PlaylistStreamEntry> result) {
+        if (itemListAdapter == null) {
+            return;
+        }
+        // order the old entries were saved in, see saveImmediate()
+        final List<PlaylistStreamEntry> savedOrder = new ArrayList<>();
+        for (final LocalItem item : itemListAdapter.getItemsList()) {
+            if (item instanceof PlaylistStreamEntry) {
+                savedOrder.add((PlaylistStreamEntry) item);
+            }
+        }
+        if (itemListAdapter.sortMode == SortMode.ORIGIN_REVERSE) {
+            Collections.reverse(savedOrder);
+        }
+
+        final Set<String> selectedOccurrences = new HashSet<>();
+        final Map<Long, Integer> occurrences = new HashMap<>();
+        for (final PlaylistStreamEntry entry : savedOrder) {
+            final int occurrence = occurrences.merge(entry.getStreamId(), 1, Integer::sum);
+            if (selection.isSelected((long) entry.getJoinIndex())) {
+                selectedOccurrences.add(entry.getStreamId() + ":" + occurrence);
+            }
+        }
+
+        final List<PlaylistStreamEntry> newOrder = new ArrayList<>(result);
+        newOrder.sort(Comparator.comparingInt(PlaylistStreamEntry::getJoinIndex));
+        occurrences.clear();
+        final List<Long> newKeys = new ArrayList<>();
+        for (final PlaylistStreamEntry entry : newOrder) {
+            final int occurrence = occurrences.merge(entry.getStreamId(), 1, Integer::sum);
+            if (selectedOccurrences.contains(entry.getStreamId() + ":" + occurrence)) {
+                newKeys.add((long) entry.getJoinIndex());
+            }
+        }
+        selection.setSelected(newKeys);
+    }
+
     private void createShareConfirmationDialog() {
         new AlertDialog.Builder(requireContext())
                 .setTitle(R.string.share_playlist)

@@ -10,7 +10,6 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.car.app.connection.CarConnection;
 import androidx.core.app.NotificationChannelCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.multidex.MultiDexApplication;
@@ -28,7 +27,9 @@ import org.schabi.newpipe.extractor.services.youtube.YoutubeApiDecoder;
 import org.schabi.newpipe.ktx.ExceptionUtils;
 import org.schabi.newpipe.settings.NewPipeSettings;
 import org.schabi.newpipe.util.*;
+import org.schabi.newpipe.util.dearrow.DeArrowImages;
 import org.schabi.newpipe.youtube.LocalDomPoTokenProvider;
+import org.schabi.newpipe.qpipepipe.recentqueues.RecentQueueUndo;
 
 import java.io.IOException;
 import java.io.InterruptedIOException;
@@ -70,8 +71,6 @@ public class App extends MultiDexApplication {
     private static final String TAG = App.class.toString();
     private static App app;
 
-    private CarConnectionStateReceiver carConnectionReceiver;
-
     @NonNull
     public static App getApp() {
         return app;
@@ -86,6 +85,8 @@ public class App extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        // QPipePipe: lets the player offer Undo on the screen in front
+        RecentQueueUndo.register(this);
         app = this;
 
         if (ACRA.isACRASenderServiceProcess()) {
@@ -102,19 +103,7 @@ public class App extends MultiDexApplication {
             return;
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            registerCarConnectionReceiver();
-            CarConnection carConnection = new CarConnection(this);
-            carConnection.getType().observeForever(new androidx.lifecycle.Observer<Integer>() {
-                @Override
-                public void onChanged(Integer connectionState) {
-                    boolean isConnected = (connectionState != null && connectionState != CarConnection.CONNECTION_TYPE_NOT_CONNECTED);
-                    Log.d(TAG, "Initial check: Is car connected? " + isConnected);
-                    CarConnectionStateReceiver.setCarConnectionState(isConnected);
-                    carConnection.getType().removeObserver(this);
-                }
-            });
-        }
+        CarConnectionMonitor.start(this);
 
         // Initialize settings first because others inits can use its values
         NewPipeSettings.initSettings(this);
@@ -149,6 +138,9 @@ public class App extends MultiDexApplication {
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         reconcileYoutubePlayerClient(this);
         PicassoHelper.init(this);
+        // Lets the system reclaim DeArrow's decoded images under pressure; without it they are
+        // process-lifetime and the only way to get the memory back is to kill the app.
+        DeArrowImages.registerTrimCallback(this);
         PicassoHelper.setShouldLoadImages(
                 prefs.getBoolean(getString(R.string.download_thumbnail_key), true));
         PicassoHelper.setIndicatorsEnabled(DEBUG
@@ -167,7 +159,8 @@ public class App extends MultiDexApplication {
         final boolean allowed = loggedIn
                 ? "mweb".equals(selectedClient)
                 : "mweb".equals(selectedClient)
-                        || "visionos".equals(selectedClient);
+                        || "visionos".equals(selectedClient)
+                        || "tv_samsung".equals(selectedClient);
         final String reconciledClient = allowed ? selectedClient : defaultClient;
 
         if (!reconciledClient.equals(selectedClient)) {
@@ -223,25 +216,6 @@ public class App extends MultiDexApplication {
     public void onTerminate() {
         super.onTerminate();
         PicassoHelper.terminate();
-        if (carConnectionReceiver != null) {
-            unregisterReceiver(carConnectionReceiver);
-        }
-    }
-
-    private void registerCarConnectionReceiver() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            carConnectionReceiver = new CarConnectionStateReceiver();
-            IntentFilter filter = new IntentFilter(
-                    "androidx.car.app.connection.action.CAR_CONNECTION_UPDATED"
-            );
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                // Android 13+ requires explicit export flag
-                registerReceiver(carConnectionReceiver, filter, Context.RECEIVER_EXPORTED);
-            } else {
-                registerReceiver(carConnectionReceiver, filter);
-            }
-            Log.d("CarConnectionReceiver", "Receiver registered dynamically");
-        }
     }
 
 
@@ -366,7 +340,7 @@ public class App extends MultiDexApplication {
                 .Builder(getString(R.string.app_update_notification_channel_id),
                         NotificationManagerCompat.IMPORTANCE_LOW)
                 .setName(getString(R.string.app_update_notification_channel_name))
-                .setDescription(getString(R.string.app_update_notification_channel_description_new))
+                .setDescription(getString(R.string.qpipepipe_update_channel_description))
                 .build());
 
         notificationChannelCompats.add(new NotificationChannelCompat

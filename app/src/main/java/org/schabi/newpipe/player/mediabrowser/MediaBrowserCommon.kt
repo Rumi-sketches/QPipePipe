@@ -10,6 +10,9 @@ internal const val ID_BOOKMARKS = "playlists"
 internal const val ID_HISTORY = "history"
 internal const val ID_INFO_ITEM = "item"
 
+/** The queue played last, see [org.schabi.newpipe.qpipepipe.LastPlayback] */
+internal const val ID_RESUME = "resume"
+
 internal const val ID_LOCAL = "local"
 internal const val ID_REMOTE = "remote"
 internal const val ID_URL = "url"
@@ -33,6 +36,11 @@ internal fun infoItemTypeFromString(type: String): InfoType {
         ID_CHANNEL -> InfoType.CHANNEL
         else -> throw IllegalStateException("Unexpected value: $type")
     }
+}
+
+/** @return the keys whose value differs between [old] and [new], including added and removed */
+internal fun <K, V> changedKeys(old: Map<K, V>, new: Map<K, V>): Set<K> {
+    return (old.keys + new.keys).filterTo(HashSet()) { old[it] != new[it] }
 }
 
 internal fun parseError(mediaId: String): ContentNotAvailableException {

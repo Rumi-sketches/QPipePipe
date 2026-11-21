@@ -29,6 +29,7 @@ import org.schabi.newpipe.error.ErrorUtil
 import org.schabi.newpipe.error.UserAction
 import org.schabi.newpipe.extractor.services.youtube.sabr.exception.SabrAttestationException
 import org.schabi.newpipe.player.datasource.SabrLogicException
+import org.schabi.newpipe.qpipepipe.player.PlaybackRecovery
 import java.util.Locale
 
 /**
@@ -43,9 +44,24 @@ import java.util.Locale
  */
 class PlayerErrorHandler(private val player: Player) {
 
+    // QPipePipe: recovery from 403, network and decoder failures (FORK.md, Fork patches).
+    val recovery = PlaybackRecovery(
+        player, player::reloadPlayQueueManager, player::onPlaybackShutdown, { player.currentItem }
+    )
+
     // Cooldown between automatic recoveries from a surface-released decoder-init failure, so a
     // genuinely broken surface can't loop recover->fail forever.
     private var lastSurfaceErrorRecoveryMs = 0L
+
+    // Timestamps of the behind-live-window recoveries, oldest first. The live window keeps moving
+    // so a single jump back to the live edge is normal; a burst within a short span means the
+    // recovery is not sticking and the source itself has to be rebuilt.
+    private val behindLiveWindowRecoveries = ArrayDeque<Long>()
+
+    // How many source rebuilds in a short span the live window needed, to tell the user once the
+    // rebuilds themselves stop helping.
+    private var liveWindowEscalations = 0
+    private var lastLiveWindowEscalationMs = 0L
 
     /**
      * Process exceptions produced by [com.google.android.exoplayer2.ExoPlayer].
@@ -54,7 +70,8 @@ class PlayerErrorHandler(private val player: Player) {
      *
      *  * [ERROR_CODE_BEHIND_LIVE_WINDOW]: if the playback on livestreams is lagged too far behind
      *    the current playable window, seek to the latest timestamp and restart the playback. This
-     *    error is *catchable*.
+     *    error is *catchable*. Repeated failures escalate to rebuilding the source, see
+     *    [recoverFromBehindLiveWindow].
      *  * From [ERROR_CODE_IO_INVALID_HTTP_CONTENT_TYPE] to
      *    [ERROR_CODE_PARSING_MANIFEST_UNSUPPORTED]: if the stream source is validated by the
      *    extractor but not recognized by the player, try to recover playback by signalling an
@@ -74,8 +91,12 @@ class PlayerErrorHandler(private val player: Player) {
      */
     fun onPlayerError(error: PlaybackException) {
         Log.e(Player.TAG, "ExoPlayer - onPlayerError() called with:", error)
+        val positionMs = player.simpleExoPlayer.currentPosition
+        val durationMs = player.simpleExoPlayer.duration
 
-        player.saveStreamProgressState()
+        if (error.errorCode != ERROR_CODE_BEHIND_LIVE_WINDOW) {
+            player.saveStreamProgressState()
+        }
         var isCatchableException = false
 
         if (containsTerminalSabrException(error)) {
@@ -83,15 +104,18 @@ class PlayerErrorHandler(private val player: Player) {
             // reaching the player has exhausted those recovery paths. SABR logic exceptions
             // describe broken source invariants, so rebuilding the same source cannot recover.
             player.onPlaybackShutdown()
+        } else if (recovery.handles(error)) {
+            isCatchableException = recovery.recover(error)
         } else {
             when (error.errorCode) {
                 ERROR_CODE_BEHIND_LIVE_WINDOW -> {
                     isCatchableException = true
-                    player.simpleExoPlayer.seekToDefaultPosition()
-                    player.simpleExoPlayer.prepare()
-                    // Inform the user that we are reloading the stream by
-                    // switching to the buffering state
-                    player.onBuffering()
+                    if (recoverFromBehindLiveWindow()) {
+                        // Rebuilding the source stopped being enough: the window is unreachable for
+                        // this stream (a device clock ahead of the stream is the usual cause). Keep
+                        // recovering, but stop failing silently.
+                        recordLiveWindowEscalation { createErrorNotification(toPlayerError(error)) }
+                    }
                 }
 
                 ERROR_CODE_IO_FILE_NOT_FOUND,
@@ -172,10 +196,12 @@ class PlayerErrorHandler(private val player: Player) {
             }
         }
 
+        PlayerDebugTrace.onPlayerError(player, error, positionMs, durationMs, isCatchableException)
+
         val playerError = toPlayerError(error)
         if (!isCatchableException) {
             showMediaCodecWorkaroundHint(error)
-            createErrorNotification(playerError)
+            if (!recovery.showsNoConnection(playerError)) createErrorNotification(playerError)
         }
 
         player.listeners.onPlayerError(playerError, isCatchableException)
@@ -184,6 +210,77 @@ class PlayerErrorHandler(private val player: Player) {
     private fun recoverFromNetworkError() {
         player.setRecovery()
         player.reloadPlayQueueManager()
+    }
+
+    /**
+     * Jump back to the live edge, escalating to a full source rebuild once the plain recovery
+     * demonstrably stops working.
+     *
+     * A stale recovery position defeats the jump: [org.schabi.newpipe.player.Player.sourceOf] and
+     * the queue synchronization resume playback where the window error just proved there is no
+     * content anymore, so the recovery record is dropped before retrying.
+     *
+     * @return whether the recovery escalated to rebuilding the source
+     */
+    private fun recoverFromBehindLiveWindow(): Boolean {
+        val nowMs = System.currentTimeMillis()
+        behindLiveWindowRecoveries.addLast(nowMs)
+        while (!behindLiveWindowRecoveries.isEmpty()
+            && nowMs - behindLiveWindowRecoveries.first() > BEHIND_LIVE_WINDOW_BURST_WINDOW_MS
+        ) {
+            behindLiveWindowRecoveries.removeFirst()
+        }
+
+        val playQueue = player.playQueue
+        val queueIndex = playQueue?.index ?: -1
+        if (queueIndex >= 0) {
+            playQueue?.unsetRecovery(queueIndex)
+        }
+
+        val escalated =
+            if (behindLiveWindowRecoveries.size >= BEHIND_LIVE_WINDOW_ESCALATION_COUNT) {
+                // The seek to the live edge keeps landing behind the window (device clock ahead of
+                // the stream, or a stale extraction): rebuild the source, which re-resolves the
+                // stream info and re-reads the manifest instead of seeking inside the old timeline
+                // again. The rebuilt manager prepares a fresh source once it is loaded, so there is
+                // no prepare() here on the old timeline.
+                Log.e(Player.TAG, "Behind live window repeatedly, rebuilding the live source")
+                behindLiveWindowRecoveries.clear()
+                player.reloadPlayQueueManager()
+                true
+            } else {
+                player.simpleExoPlayer.seekToDefaultPosition()
+                player.simpleExoPlayer.prepare()
+                false
+            }
+        // Inform the user that we are reloading the stream by switching to the buffering state,
+        // which also covers the rebuild: its source is resolved asynchronously.
+        player.onBuffering()
+        return escalated
+    }
+
+    /**
+     * Count a source rebuild caused by the live window and run [onStuck] once the rebuilds
+     * themselves stop helping. Only called after an escalation, see
+     * [recoverFromBehindLiveWindow].
+     *
+     * A rebuild longer ago than the reset window belongs to an unrelated lag, so only rebuilds that
+     * keep coming are worth telling the user about.
+     */
+    private inline fun recordLiveWindowEscalation(onStuck: () -> Unit) {
+        val nowMs = System.currentTimeMillis()
+        liveWindowEscalations = if (nowMs - lastLiveWindowEscalationMs
+            > BEHIND_LIVE_WINDOW_ESCALATION_RESET_MS
+        ) {
+            1
+        } else {
+            liveWindowEscalations + 1
+        }
+        lastLiveWindowEscalationMs = nowMs
+        if (liveWindowEscalations >= BEHIND_LIVE_WINDOW_ESCALATION_LIMIT) {
+            liveWindowEscalations = 0
+            onStuck()
+        }
     }
 
     private fun containsTerminalSabrException(error: Throwable): Boolean {
@@ -294,5 +391,15 @@ class PlayerErrorHandler(private val player: Player) {
 
     companion object {
         private const val SURFACE_ERROR_RECOVERY_COOLDOWN_MS = 10_000L
+
+        // Recoveries further apart than this are independent lags, not a failing recovery, so the
+        // escalation only triggers on a burst.
+        private const val BEHIND_LIVE_WINDOW_BURST_WINDOW_MS = 30_000L
+        private const val BEHIND_LIVE_WINDOW_ESCALATION_COUNT = 3
+
+        // A rebuild longer ago than this belongs to an unrelated lag, so only rebuilds that keep
+        // coming are worth telling the user about.
+        private const val BEHIND_LIVE_WINDOW_ESCALATION_RESET_MS = 2 * 60_000L
+        private const val BEHIND_LIVE_WINDOW_ESCALATION_LIMIT = 3
     }
 }

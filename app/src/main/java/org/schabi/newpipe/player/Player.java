@@ -68,6 +68,7 @@ import org.schabi.newpipe.player.playqueue.PlayQueue;
 import org.schabi.newpipe.player.playqueue.PlayQueueAdapter;
 import org.schabi.newpipe.player.resolver.PlayerQualityResolver;
 import org.schabi.newpipe.player.resolver.SourceResolver;
+import org.schabi.newpipe.qpipepipe.LastPlayback;
 import org.schabi.newpipe.util.*;
 import org.schabi.newpipe.views.ExpandableSurfaceView;
 import android.widget.TextView;
@@ -375,10 +376,15 @@ public final class Player {
     }
 
     void setupMediaSession() {
+        // Called again once a queue is set: release the previous session, otherwise it stays
+        // active with no player behind it and can take the media buttons
+        if (mediaSessionManager != null) {
+            mediaSessionManager.dispose();
+        }
         playerMediaSession = new PlayerMediaSession(this, simpleExoPlayer);
         mediaSessionManager = new MediaSessionManager(context, simpleExoPlayer,
                 playerMediaSession, service.getMediaSession(),
-                service.getMediaBrowserPlaybackPreparer());
+                service.getMediaSessionConnector());
     }
 
     private void initListeners() {
@@ -418,6 +424,7 @@ public final class Player {
 
         liveIdle = false;
         stopSabrBackoffCountdown();
+        playerErrorHandler.getRecovery().release();
         surfaceController.cleanupVideoSurface();
 
         if (!exoPlayerIsNull()) {
@@ -457,6 +464,8 @@ public final class Player {
         // Close popup menus before destroying to prevent crash
         closeAllPopupMenus();
         
+        // A closed player is not playing anymore, whatever it was doing
+        LastPlayback.onPlayingChanged(context, playQueue, false);
         destroyPlayer();
         broadcastReceiverController.unregister();
         sponsorBlockController.destroy();
@@ -477,13 +486,22 @@ public final class Player {
         }
 
         final int queuePos = playQueue.getIndex();
-        final long windowPos = simpleExoPlayer.getCurrentPosition();
-        final long duration = simpleExoPlayer.getDuration();
-
-        final long newPos =  Math.max(0, Math.min(windowPos, duration));
-        if(newPos > 0) {
+        final long newPos = recoveryPositionOf(simpleExoPlayer.getCurrentPosition(),
+                simpleExoPlayer.getDuration());
+        if (newPos > 0) {
             setRecovery(queuePos, newPos);
         }
+    }
+
+    /**
+     * The position to resume from after a reload, or 0 when there is nothing to resume. The
+     * duration only caps the position when it is known: while a source is being rebuilt or has
+     * failed it is {@link com.google.android.exoplayer2.C#TIME_UNSET}, and capping by it would
+     * drop the position and restart the video from the beginning.
+     */
+    static long recoveryPositionOf(final long windowPos, final long duration) {
+        final long position = Math.max(0, windowPos);
+        return duration < 0 ? position : Math.min(position, duration);
     }
 
     private void setRecovery(final int queuePos, final long windowPos) {
@@ -498,6 +516,14 @@ public final class Player {
     }
 
     void reloadPlayQueueManager() {
+        // This rebuild replaces any reload still waiting out a network failure.
+        playerErrorHandler.getRecovery().cancelDelayedReload();
+        // Every rebuild of the current source resumes where it was, whichever caller asked for it.
+        // A live stream resumes at its live edge instead.
+        if (!isCurrentStreamLive()) {
+            setRecovery();
+        }
+        PlayerDebugTrace.onReload(this);
         if (playQueueManager != null) {
             playQueueManager.dispose();
         }
@@ -505,6 +531,18 @@ public final class Player {
         if (playQueue != null) {
             playQueueManager = new MediaSourceManager(context, playbackListenerAdapter, playQueue);
         }
+    }
+
+    /**
+     * Rebuilds the current source at the current position if it has expired while it sat
+     * prepared, e.g. a video left paused for hours. Its stream URLs are past their lifetime (and
+     * bound to the IP they were extracted from), so resuming on them would fail with a 403.
+     */
+    void renewExpiredSource() {
+        if (playQueueManager == null || !playQueueManager.isCurrentSourceExpired()) {
+            return;
+        }
+        reloadPlayQueueManager();
     }
 
     /**
@@ -541,6 +579,7 @@ public final class Player {
         // Releasing the source is what actually stops the manifest / playlist refresh and the
         // segment downloads ExoPlayer would otherwise keep doing for a prepared live source.
         simpleExoPlayer.stop();
+        playerErrorHandler.getRecovery().cancelDelayedReload();
         if (playQueueManager != null) {
             playQueueManager.dispose();
             playQueueManager = null;
@@ -965,6 +1004,9 @@ public final class Player {
                     + "newPositionMs = [" + newPosition.positionMs + "], "
                     + "discontinuityReason = [" + discontinuityReason + "]");
         }
+        PlayerDebugTrace.onPositionDiscontinuity(this, oldPosition.mediaItemIndex,
+                oldPosition.positionMs, newPosition.mediaItemIndex, newPosition.positionMs,
+                discontinuityReason);
         if (playQueue == null) {
             return;
         }
@@ -1029,6 +1071,14 @@ public final class Player {
      */
     void onPlayerError(@NonNull final PlaybackException error) {
         playerErrorHandler.onPlayerError(error);
+    }
+
+    void onPlaybackReady() {
+        playerErrorHandler.getRecovery().onPlaybackReady();
+    }
+
+    void reloadIfWaitingForNetwork() {
+        playerErrorHandler.getRecovery().reloadIfWaiting();
     }
     //endregion
 
@@ -1313,6 +1363,14 @@ public final class Player {
      */
     public void changeFullscreen(final boolean fullscreen) {
         uiModeController.changeFullscreen(fullscreen);
+    }
+
+    /**
+     * Leaves the fullscreen layout without requesting another screen orientation, so the screen
+     * stays as the user has it (e.g. landscape while minimizing by swiping down).
+     */
+    public void exitFullscreenLayoutOnly() {
+        uiModeController.setFullscreen(false);
     }
 
     void setResizeMode(@AspectRatioFrameLayout.ResizeMode final int resizeMode) {
@@ -1602,6 +1660,14 @@ public final class Player {
     }
 
     @NonNull
+    public boolean isScreenLocked() {
+        return controlsVisibilityController.isLocked();
+    }
+
+    public void showUnlockButtonTemporarily() {
+        controlsVisibilityController.showUnlockButtonTemporarily();
+    }
+
     PlayerControlsVisibilityController getControlsVisibilityController() {
         return controlsVisibilityController;
     }

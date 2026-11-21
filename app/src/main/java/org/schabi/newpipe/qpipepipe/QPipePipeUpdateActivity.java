@@ -20,6 +20,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.pm.PackageInfoCompat;
 
+import org.schabi.newpipe.BuildConfig;
 import org.schabi.newpipe.R;
 import org.schabi.newpipe.util.Localization;
 import org.schabi.newpipe.util.ThemeHelper;
@@ -192,9 +193,11 @@ public final class QPipePipeUpdateActivity extends AppCompatActivity {
         } catch (final PackageManager.NameNotFoundException e) {
             throw new IllegalStateException(e);
         }
+        // Nightlies of one version share its version code (app/qpipepipe.gradle).
+        final long minimumVersionCode = PackageInfoCompat.getLongVersionCode(installed)
+                + (BuildConfig.DEBUG ? 0 : 1);
         if (archive == null || !getPackageName().equals(archive.packageName)
-                || PackageInfoCompat.getLongVersionCode(archive)
-                <= PackageInfoCompat.getLongVersionCode(installed)) {
+                || PackageInfoCompat.getLongVersionCode(archive) < minimumVersionCode) {
             apk.delete();
             showError(getString(R.string.qpipepipe_update_wrong_build));
             return;

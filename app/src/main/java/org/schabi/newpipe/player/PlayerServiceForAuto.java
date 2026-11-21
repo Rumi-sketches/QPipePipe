@@ -25,8 +25,10 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.SystemClock;
 import android.support.v4.media.MediaBrowserCompat;
 import android.support.v4.media.session.MediaSessionCompat;
+import android.support.v4.media.session.PlaybackStateCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +46,7 @@ import org.schabi.newpipe.databinding.PlayerBinding;
 import org.schabi.newpipe.player.mediabrowser.MediaBrowserImpl;
 import org.schabi.newpipe.player.mediabrowser.MediaBrowserPlaybackPreparer;
 import org.schabi.newpipe.player.mediasession.PlayerServiceInterface;
+import org.schabi.newpipe.qpipepipe.LastPlayback;
 import org.schabi.newpipe.util.DeviceUtils;
 import org.schabi.newpipe.util.ThemeHelper;
 
@@ -78,6 +81,76 @@ public final class PlayerServiceForAuto extends MediaBrowserServiceCompat implem
 
     private final IBinder mBinder = new PlayerServiceForAuto.LocalBinder();
 
+    // With its autoplay setting on, Android Auto sends play to the media app it used last right
+    // after connecting, and once more as soon as there is something to play: see
+    // takeCarAutoPlay(). Only accessed on the main thread.
+    private static final long CAR_FIRST_PLAY_MILLIS = 2000;
+    private static final long CAR_START_MILLIS = 15000;
+    // whether the next root request comes from a car that has just connected
+    private boolean awaitingCar = true;
+    private long carConnectedAt = 0;
+    // the car's automatic plays still expected
+    private int carAutoPlays = 0;
+    // the phone's player is being handed over to this service, see CarConnectionMonitor
+    private static boolean handOverPending = false;
+
+    // Lets playback stay on this service after leaving the car, see hasActivePlayer().
+    // Only accessed on the main thread.
+    @Nullable
+    private static PlayerServiceForAuto runningInstance;
+
+    /**
+     * @return whether this service holds a player with a queue, even paused. After leaving the
+     * car such a player keeps serving the phone until it is closed, so that the phone never
+     * ends up with two players.
+     */
+    public static boolean hasActivePlayer() {
+        final PlayerServiceForAuto service = runningInstance;
+        return service != null && service.player != null
+                && service.player.getPlayQueue() != null;
+    }
+
+    /** Pauses the player, if any, e.g. when the phone leaves the car. */
+    public static void pausePlayer() {
+        final PlayerServiceForAuto service = runningInstance;
+        if (service != null && service.player != null) {
+            service.player.pause();
+        }
+    }
+
+    /** Called when the phone leaves the car: the next connection is a new car start. */
+    public static void onCarDisconnected() {
+        final PlayerServiceForAuto service = runningInstance;
+        if (service != null) {
+            service.awaitingCar = true;
+        }
+    }
+
+    /** Called while the phone's player is being handed over to this service, and after. */
+    public static void setHandOverPending(final boolean pending) {
+        handOverPending = pending;
+    }
+
+    /**
+     * @return whether a play request is one of the two Android Auto sends by itself when it
+     * connects. The first one comes right after connecting: without it (autoplay off) no request
+     * counts as automatic, so a play pressed by the user always plays.
+     */
+    public boolean takeCarAutoPlay() {
+        final long sinceConnected = SystemClock.elapsedRealtime() - carConnectedAt;
+        final boolean automatic = carAutoPlays == 2
+                ? sinceConnected < CAR_FIRST_PLAY_MILLIS
+                : carAutoPlays == 1 && sinceConnected < CAR_START_MILLIS;
+        carAutoPlays = automatic ? carAutoPlays - 1 : 0;
+        return automatic;
+    }
+
+    /** @return whether the car's first automatic play is still expected, without taking it */
+    private boolean isCarFirstPlay() {
+        return carAutoPlays == 2
+                && SystemClock.elapsedRealtime() - carConnectedAt < CAR_FIRST_PLAY_MILLIS;
+    }
+
     @Override
     public Service getInstance() {
         return this;
@@ -93,14 +166,17 @@ public final class PlayerServiceForAuto extends MediaBrowserServiceCompat implem
         if (DEBUG) {
             Log.d(TAG, "onCreate() called");
         }
+        runningInstance = this;
         assureCorrectAppLanguage(this);
         windowManager = ContextCompat.getSystemService(this, WindowManager.class);
 
         ThemeHelper.setTheme(this);
-        createView();
         mediaBrowserImpl = new MediaBrowserImpl(this, this::notifyChildrenChanged);
 
         // see https://developer.android.com/training/cars/media#browser_workflow
+        // This is the only connector of the session: the player's MediaSessionManager reuses
+        // it (see getMediaSessionConnector()), since a second connector would overwrite the
+        // playback state published by this one.
         mediaSession = new MediaSessionCompat(this, "MediaSessionPlayerServ");
         setSessionToken(mediaSession.getSessionToken());
         sessionConnector = new MediaSessionConnector(mediaSession);
@@ -108,15 +184,64 @@ public final class PlayerServiceForAuto extends MediaBrowserServiceCompat implem
 
         mediaBrowserPlaybackPreparer = new MediaBrowserPlaybackPreparer(
                 this,
-                sessionConnector::setCustomErrorMessage,
-                () -> sessionConnector.setCustomErrorMessage(null),
+                this::setMediaSessionError,
+                () -> setMediaSessionError(null, 0),
                 (playWhenReady) -> {
-                    if (player != null) {
+                    if (player != null && player.getPlayQueue() != null) {
                         player.onPrepare();
+                    } else if (playWhenReady) {
+                        onPlayWithNothingLoaded();
                     }
                 }
         );
         sessionConnector.setPlaybackPreparer(mediaBrowserPlaybackPreparer);
+
+        // after the session, which the player attaches to instead of creating its own
+        createView();
+    }
+
+    /**
+     * A car has just connected: show it what was played last, playing only if it was playing,
+     * otherwise paused, waiting for the user; the car's own plays that follow are ignored (see
+     * PlayerMediaSession.play()). With nothing to resume, e.g. the video ended, the car stays
+     * on its lists.
+     */
+    private void onCarConnected() {
+        awaitingCar = false;
+        carConnectedAt = SystemClock.elapsedRealtime();
+        carAutoPlays = 2;
+        if ((player != null && player.getPlayQueue() != null)
+                || PlayerService.hasActivePlayer() || handOverPending) {
+            // already loaded, or the phone's player is being handed over
+            return;
+        }
+        LastPlayback.resume(this, LastPlayback.wasPlaying(this), () -> { });
+    }
+
+    /**
+     * Play with nothing loaded, e.g. from the car or the system media controls after the OS
+     * killed the app: resume what was playing last. With nothing to resume nothing happens,
+     * with no error, so the car stays on its lists.
+     */
+    private void onPlayWithNothingLoaded() {
+        if (isCarFirstPlay()) {
+            // the car's own play on connecting: onCarConnected() already loads what to resume
+            return;
+        }
+        setMediaSessionError(null, 0);
+        LastPlayback.resume(this, true, () -> { });
+    }
+
+    private void setMediaSessionError(@Nullable final String message, final int errorCode) {
+        sessionConnector.setCustomErrorMessage(message, errorCode);
+        if (message != null && (player == null || player.getMediaSessionManager() == null)) {
+            // Without a player the connector only publishes STATE_NONE: show the error here
+            mediaSession.setPlaybackState(new PlaybackStateCompat.Builder()
+                    .setState(PlaybackStateCompat.STATE_ERROR, 0, 0)
+                    .setErrorMessage(errorCode, message)
+                    .setActions(PlaybackStateCompat.ACTION_PLAY_FROM_MEDIA_ID)
+                    .build());
+        }
     }
 
     private void createView() {
@@ -144,16 +269,26 @@ public final class PlayerServiceForAuto extends MediaBrowserServiceCompat implem
             return START_NOT_STICKY;
         }
         if (Intent.ACTION_MEDIA_BUTTON.equals(intent.getAction())
-                && player.getPlayQueue() == null) {
-            // Player is not working, no need to process media button's action
+                && (player == null || player.getPlayQueue() == null)) {
+            // Nothing loaded. MediaButtonReceiver starts this service with
+            // startForegroundService(), so it must still post a notification, otherwise Android
+            // reports the app as not responding.
+            NotificationUtil.getInstance().startForegroundWithDummyNotification(this);
+            if (LastPlayback.isPlayButton(intent)) {
+                // e.g. the OS killed the app since: play what was playing last
+                LastPlayback.resume(this, true, this::stopService);
+            } else {
+                stopService();
+            }
             return START_NOT_STICKY;
         }
         // null check
         if (player == null) {
-            final PlayerBinding binding = PlayerBinding.inflate(LayoutInflater.from(this));
-
-            player = new Player(this);
-            player.setupFromView(binding);
+            createView();
+        }
+        if (intent.getStringExtra(PlayerIntentConstants.PLAY_QUEUE_KEY) != null) {
+            // e.g. the queue handed over from the phone's player
+            handOverPending = false;
         }
 
         if (Intent.ACTION_MEDIA_BUTTON.equals(intent.getAction())
@@ -211,6 +346,9 @@ public final class PlayerServiceForAuto extends MediaBrowserServiceCompat implem
             Log.d(TAG, "destroy() called");
         }
         super.onDestroy();
+        if (runningInstance == this) {
+            runningInstance = null;
+        }
 
         cleanup();
 
@@ -321,22 +459,26 @@ public final class PlayerServiceForAuto extends MediaBrowserServiceCompat implem
         return mediaSession;
     }
 
-    /**
-     * @return the media browser playback preparer for Android Auto compatibility
-     */
     @NonNull
-    public MediaBrowserPlaybackPreparer getMediaBrowserPlaybackPreparer() {
-        return mediaBrowserPlaybackPreparer;
+    @Override
+    public MediaSessionConnector getMediaSessionConnector() {
+        return sessionConnector;
     }
 
     //endregion
 
     //region Media browser
+    @Nullable
     @Override
     public BrowserRoot onGetRoot(@NonNull final String clientPackageName,
                                  final int clientUid,
                                  @Nullable final Bundle rootHints) {
         // TODO check if the accessing package has permission to view data
+        final boolean recent = rootHints != null
+                && rootHints.getBoolean(BrowserRoot.EXTRA_RECENT);
+        if (!recent && awaitingCar) {
+            onCarConnected();
+        }
         return mediaBrowserImpl.onGetRoot(clientPackageName, clientUid, rootHints);
     }
 

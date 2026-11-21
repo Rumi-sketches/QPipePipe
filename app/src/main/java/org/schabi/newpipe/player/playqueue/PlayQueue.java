@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -69,6 +70,12 @@ public abstract class PlayQueue implements Serializable {
     @Nullable
     private String autoQueuedUuid;
 
+    /** QPipePipe recent queues: identifies this queue across the copies made for intents. */
+    @NonNull
+    private String sessionId = UUID.randomUUID().toString();
+    /** QPipePipe recent queues: the local playlist this queue was started from, or -1. */
+    private long sourcePlaylistId = -1;
+
     private transient BehaviorSubject<PlayQueueEvent> eventBroadcast;
     private transient Flowable<PlayQueueEvent> broadcastReceiver;
     private transient boolean disposed = false;
@@ -81,6 +88,24 @@ public abstract class PlayQueue implements Serializable {
         }
 
         queueIndex = new AtomicInteger(index);
+    }
+
+    @NonNull
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    /** Makes this queue continue the recent queue of an earlier session. */
+    public void setSessionId(@NonNull final String id) {
+        sessionId = id;
+    }
+
+    public long getSourcePlaylistId() {
+        return sourcePlaylistId;
+    }
+
+    public void setSourcePlaylistId(final long playlistId) {
+        sourcePlaylistId = playlistId;
     }
 
     /*//////////////////////////////////////////////////////////////////////////

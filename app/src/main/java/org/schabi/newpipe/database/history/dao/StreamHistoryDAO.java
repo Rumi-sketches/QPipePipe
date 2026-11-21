@@ -5,9 +5,11 @@ import androidx.room.Dao;
 import androidx.room.Query;
 import androidx.room.RewriteQueriesToDropUnusedColumns;
 
+import org.schabi.newpipe.database.history.model.LatestPlayedStream;
 import org.schabi.newpipe.database.history.model.StreamHistoryEntity;
 import org.schabi.newpipe.database.history.model.StreamHistoryEntry;
 import org.schabi.newpipe.database.stream.StreamStatisticsEntry;
+import org.schabi.newpipe.qpipepipe.StreamProgress;
 
 import java.util.List;
 
@@ -65,8 +67,25 @@ public abstract class StreamHistoryDAO implements HistoryDAO<StreamHistoryEntity
     @Nullable
     public abstract StreamHistoryEntity getLatestEntry(long streamId);
 
+    /**
+     * The streams whose url is in {@code urls} and that are in the history, each with the date
+     * it was last started. Keep {@code urls} under SQLite's limit of bound parameters (999).
+     */
+    @Query("SELECT streams.service_id, streams.url, streams.duration, "
+            + "MAX(stream_history.access_date) AS access_date, "
+            + "IFNULL(stream_state.progress_time, 0) AS progress_time"
+            + " FROM streams"
+            + " INNER JOIN stream_history ON streams.uid = stream_history.stream_id"
+            + " LEFT JOIN stream_state ON streams.uid = stream_state.stream_id"
+            + " WHERE streams.url IN (:urls)"
+            + " GROUP BY streams.uid")
+    public abstract List<LatestPlayedStream> getPlayedAmong(List<String> urls);
+
     @Query("DELETE FROM " + STREAM_HISTORY_TABLE + " WHERE " + JOIN_STREAM_ID + " = :streamId")
     public abstract int deleteStreamHistory(long streamId);
+
+    @Query("DELETE FROM " + STREAM_HISTORY_TABLE + " WHERE " + JOIN_STREAM_ID + " IN (:streamIds)")
+    public abstract int deleteStreamHistories(List<Long> streamIds);
 
     @RewriteQueriesToDropUnusedColumns
     @Query("SELECT * FROM " + STREAM_TABLE
@@ -86,4 +105,10 @@ public abstract class StreamHistoryDAO implements HistoryDAO<StreamHistoryEntity
             + " FROM " + STREAM_STATE_TABLE + " )"
             + " ON " + STREAM_ID + " = " + JOIN_STREAM_ID_ALIAS)
     public abstract Flowable<List<StreamStatisticsEntry>> getStatistics();
+
+    /** QPipePipe: saved progress of the streams in {@code urls} that have one (under 999). */
+    @Query("SELECT streams.url, streams.duration, stream_state.progress_time"
+            + " FROM streams INNER JOIN stream_state ON streams.uid = stream_state.stream_id"
+            + " WHERE streams.url IN (:urls)")
+    public abstract List<StreamProgress> getProgressOf(List<String> urls);
 }

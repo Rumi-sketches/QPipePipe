@@ -20,6 +20,7 @@ import org.schabi.newpipe.extractor.exceptions.ContentNotAvailableException
 import org.schabi.newpipe.extractor.linkhandler.ListLinkHandler
 import org.schabi.newpipe.local.playlist.LocalPlaylistManager
 import org.schabi.newpipe.local.playlist.RemotePlaylistManager
+import org.schabi.newpipe.qpipepipe.LastPlayback
 import org.schabi.newpipe.player.playqueue.ChannelPlayQueue
 import org.schabi.newpipe.player.playqueue.PlayQueue
 import org.schabi.newpipe.player.playqueue.PlaylistPlayQueue
@@ -151,6 +152,8 @@ class MediaBrowserPlaybackPreparer(
                 )
 
                 ID_HISTORY -> extractPlayQueueFromHistoryMediaId(mediaId, path)
+
+                ID_RESUME -> LastPlayback.load(context).toSingle()
 
                 ID_INFO_ITEM -> extractPlayQueueFromInfoItemMediaId(
                     mediaId,

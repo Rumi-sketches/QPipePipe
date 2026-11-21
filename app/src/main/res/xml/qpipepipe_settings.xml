@@ -24,6 +24,14 @@
             app:singleLineTitle="false"
             app:iconSpaceReserved="false" />
 
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:key="@string/recent_queues_key"
+            android:summary="@string/recent_queues_summary"
+            android:title="@string/recent_queues_title"
+            app:singleLineTitle="false"
+            app:iconSpaceReserved="false" />
+
     </PreferenceCategory>
 
     <PreferenceCategory

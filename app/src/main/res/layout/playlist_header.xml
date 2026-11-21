@@ -87,7 +87,7 @@
 
         <include
             android:id="@+id/playlist_control"
-            layout="@layout/playlist_control" />
+            layout="@layout/playlist_resume_control" />
     </LinearLayout>
 
 </RelativeLayout>

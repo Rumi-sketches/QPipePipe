@@ -43,6 +43,7 @@ class ErrorUtil {
          */
         @JvmStatic
         fun openActivity(context: Context, errorInfo: ErrorInfo) {
+            DebugErrorLog.record(context, errorInfo)
             context.startActivity(getErrorActivityIntent(context, errorInfo))
         }
 
@@ -107,6 +108,7 @@ class ErrorUtil {
          */
         @JvmStatic
         fun createNotification(context: Context, errorInfo: ErrorInfo) {
+            DebugErrorLog.record(context, errorInfo)
             var pendingIntentFlags = PendingIntent.FLAG_UPDATE_CURRENT
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 pendingIntentFlags = pendingIntentFlags or PendingIntent.FLAG_IMMUTABLE
@@ -149,6 +151,7 @@ class ErrorUtil {
         }
 
         private fun showSnackbar(context: Context, rootView: View?, errorInfo: ErrorInfo) {
+            DebugErrorLog.record(context, errorInfo)
             if (rootView == null || findSuitableParent(rootView) == null) {
                 // fallback to showing a notification if no root view is available
                 createNotification(context, errorInfo)

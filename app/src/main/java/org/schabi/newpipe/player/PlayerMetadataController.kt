@@ -10,6 +10,8 @@ import org.schabi.newpipe.extractor.ServiceList
 import org.schabi.newpipe.extractor.stream.StreamInfo
 import org.schabi.newpipe.player.mediaitem.ExoMediaItems
 import org.schabi.newpipe.player.mediaitem.PlayerMediaItem
+import org.schabi.newpipe.player.mediasource.FailedMediaSource
+import org.schabi.newpipe.qpipepipe.player.UnplayableQueue
 import java.util.Optional
 
 /**
@@ -24,6 +26,8 @@ import java.util.Optional
  * exposes the two items, since most of the other controllers read them.
  */
 class PlayerMetadataController(private val player: Player) {
+    // QPipePipe: broken items reported once per queue, a repeat-all queue of them stops
+    private val unplayableQueue = UnplayableQueue.forPlayer(player)
 
     /** The item the play queue is currently at, as reported by the playback synchronization. */
     var currentItem: PlayerMediaItem? = null
@@ -64,10 +68,11 @@ class PlayerMetadataController(private val player: Player) {
                 .flatMap { item: PlayerMediaItem -> item.maybeStreamInfo }.orElse(null)
             currentMetadata = tag
 
-            if (tag.errors.isNotEmpty()) {
+            val sourceErrors = errorsToReport(tag.errors)
+            if (unplayableQueue.onLanding(tag) && sourceErrors.isNotEmpty()) {
                 // new errors might have been added even if previousInfo == tag.getMaybeStreamInfo()
                 val errorInfo = ErrorInfo(
-                    tag.errors,
+                    sourceErrors,
                     UserAction.PLAY_STREAM,
                     "Loading failed for [" + tag.title + "]: " + tag.url,
                     tag.serviceId
@@ -166,4 +171,16 @@ class PlayerMetadataController(private val player: Player) {
             }
             return url
         }
+
+    companion object {
+        /**
+         * The item errors this controller has to report itself: the source errors that
+         * [FailedMediaSource] swallows. Any other error, e.g. no network, is thrown to ExoPlayer
+         * and reported by [PlayerErrorHandler], which also retries it; reporting it here as well
+         * would notify again on every retry, since each one carries a new item.
+         */
+        @JvmStatic
+        fun errorsToReport(errors: List<Exception>): List<Exception> =
+            errors.filter { it is FailedMediaSource.FailedMediaSourceException }
+    }
 }

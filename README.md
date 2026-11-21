@@ -31,7 +31,8 @@ PipePipe's settings:
   per direction. Off by default; turning it on switches those lists to list view.
 - **Queue protection.** When a queue is playing and you open another video, a
   dialog asks whether to play it now, enqueue it next or enqueue it at the end,
-  instead of replacing the queue. Off by default.
+  instead of replacing the queue. Play now starts it in the player you were
+  using (background, popup or main). Off by default.
 - **Tapping a video always plays it.** Playback starts when you open a video, even
   with Autoplay limited to Wi-Fi or turned off. Autoplay still controls automatic
   starts. On by default.
@@ -55,6 +56,9 @@ it. To move your subscriptions, playlists and history, use Settings > Backup >
 Export database in PipePipe, then Import database in QPipePipe.
 
 The app checks this repository for new versions and tells you when one is out.
+Since 5.4.0-q2 you can download and install the update from the notification,
+without a browser. Android asks you once to allow installs from QPipePipe, then
+to confirm each update.
 
 Releases are signed with this certificate. You can check it with
 `apksigner verify --print-certs <apk>`:
@@ -69,12 +73,25 @@ A version is the PipePipe version it is based on plus a QPipePipe release number
 `5.4.0-q1` is the first QPipePipe release on PipePipe 5.4.0, `5.4.0-q2` the next
 one, and `5.5.0-q1` the first on PipePipe 5.5.0.
 
+### Nightly builds
+
+Before a release, test builds are published as a pre-release tagged
+`nightly_<coming version>`, for example
+[`nightly_5.5.0-q1`](https://github.com/Rumi-sketches/QPipePipe/releases/tag/nightly_5.5.0-q1).
+Each new build replaces the previous one. A nightly is a separate app,
+"QPipePipe Nightly", next to the stable one, with its own data. It is signed
+with a debug key, not the release certificate above, and it updates itself
+from the next nightly. Its release notes say what to test. Use the stable
+releases unless you want to help test.
+
 ## How it is maintained
 
-QPipePipe follows PipePipe's stable releases; betas are skipped. Each new release
-is merged into the fork mostly with the help of AI, mainly to resolve
-conflicts between upstream changes and the fork's features faster. When upstream fixes
-something the fork had also fixed, upstream's fix is kept.
+QPipePipe follows PipePipe's stable releases; betas are skipped. A daily check
+notices each new release and prepares the merge. The merge is done mostly with
+the help of AI, mainly to resolve conflicts between upstream changes and the
+fork's features faster. When upstream fixes something the fork had also fixed,
+upstream's fix is kept. Releases are built and signed by GitHub Actions and
+published after a check on a test phone.
 
 The merge rules and the list of fork changes are in [FORK.md](FORK.md).
 

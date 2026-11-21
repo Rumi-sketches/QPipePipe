@@ -10,6 +10,7 @@ import android.support.v4.media.MediaMetadataCompat;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.util.Log;
+import android.util.Pair;
 import android.view.KeyEvent;
 
 import androidx.annotation.NonNull;
@@ -19,14 +20,15 @@ import androidx.media.session.MediaButtonReceiver;
 import com.google.android.exoplayer2.ForwardingPlayer;
 import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector;
-import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector.PlaybackPreparer;
 
 import org.schabi.newpipe.MainActivity;
 import org.schabi.newpipe.R;
 import org.schabi.newpipe.player.NotificationUtil;
+import org.schabi.newpipe.player.helper.PlayerHelper;
 import org.schabi.newpipe.player.mediasession.MediaSessionCallback;
 import org.schabi.newpipe.player.mediasession.PlayQueueNavigator;
 import org.schabi.newpipe.player.playback.PlayerMediaSession;
+import org.schabi.newpipe.qpipepipe.player.PlaybackRecovery;
 import org.schabi.newpipe.util.StreamTypeUtil;
 
 import java.util.Optional;
@@ -67,7 +69,7 @@ public class MediaSessionManager {
                                @NonNull final Player player,
                                @NonNull final MediaSessionCallback callback,
                                @Nullable final MediaSessionCompat existingSession,
-                               @Nullable final PlaybackPreparer playbackPreparer) {
+                               @Nullable final MediaSessionConnector existingConnector) {
         if (DEBUG) {
             Log.d(TAG, "MediaSessionManager called");
         }
@@ -86,9 +88,50 @@ public class MediaSessionManager {
                         | PlaybackStateCompat.ACTION_PLAY_FROM_MEDIA_ID)
                 .build());
 
-        sessionConnector = new MediaSessionConnector(mediaSession);
-        sessionConnector.setQueueNavigator(new PlayQueueNavigator(mediaSession, callback));
+        // An external session comes with its own connector: a second one would fight over it
+        sessionConnector = existingConnector != null
+                ? existingConnector : new MediaSessionConnector(mediaSession);
+        final PlayQueueNavigator queueNavigator = new PlayQueueNavigator(mediaSession, callback);
+        queueNavigator.setSeekInsteadOfSkip(() -> PlayerHelper.getSeekInsteadOfSkip(context));
+        sessionConnector.setQueueNavigator(queueNavigator);
+        // Without it the session goes to an error state with no message while the player holds an
+        // error, so the car only shows that something went wrong, never what.
+        sessionConnector.setErrorMessageProvider(error -> Pair.create(
+                PlaybackStateCompat.ERROR_CODE_APP_ERROR,
+                PlaybackRecovery.mediaSessionErrorMessage(context, error)));
+        // previous/next are no longer advertised when seeking instead, so handle the keys here
+        sessionConnector.setMediaButtonEventHandler((p, event) -> {
+            if (!PlayerHelper.getSeekInsteadOfSkip(context)) {
+                return false;
+            }
+            final KeyEvent key = event.getParcelableExtra(Intent.EXTRA_KEY_EVENT);
+            if (key == null) {
+                return false;
+            }
+            final int code = key.getKeyCode();
+            if (code != KeyEvent.KEYCODE_MEDIA_NEXT && code != KeyEvent.KEYCODE_MEDIA_PREVIOUS) {
+                return false;
+            }
+            if (key.getAction() == KeyEvent.ACTION_DOWN && key.getRepeatCount() == 0) {
+                if (code == KeyEvent.KEYCODE_MEDIA_NEXT) {
+                    callback.fastForward();
+                } else {
+                    callback.fastRewind();
+                }
+            }
+            return true;
+        });
         sessionConnector.setPlayer(new ForwardingPlayer(player) {
+            @Override
+            public void seekBack() {
+                callback.fastRewind();
+            }
+
+            @Override
+            public void seekForward() {
+                callback.fastForward();
+            }
+
             @Override
             public void play() {
                 callback.play();
@@ -99,7 +142,12 @@ public class MediaSessionManager {
                 callback.pause();
             }
         });
-        MediaSessionConnector.CustomActionProvider[] providers = new MediaSessionConnector.CustomActionProvider[2];
+        MediaSessionConnector.CustomActionProvider[] providers = new MediaSessionConnector.CustomActionProvider[4];
+        // rewind/fast-forward go first so Android 13+ puts them in the freed previous/next slots
+        providers[2] = seekActionProvider(context, callback, ACTION_FAST_REWIND, "Rewind",
+                R.drawable.exo_controls_rewind);
+        providers[3] = seekActionProvider(context, callback, ACTION_FAST_FORWARD, "Fast-forward",
+                R.drawable.exo_controls_fastforward);
         providers[0] = new MediaSessionConnector.CustomActionProvider() {
             @Override
             public void onCustomAction(@NonNull Player player, @NonNull String action, @Nullable Bundle extras) {
@@ -144,20 +192,52 @@ public class MediaSessionManager {
                         ACTION_CLOSE, "Close", R.drawable.ic_close).build();
             }
         };
-        sessionConnector.setCustomActionProviders(providers);
+        sessionConnector.setCustomActionProviders(
+                providers[2], providers[3], providers[0], providers[1]);
         sessionConnector.setMetadataDeduplicationEnabled(true);
         sessionConnector.setMediaMetadataProvider(exoPlayer -> buildMediaMetadata());
+    }
 
-        // Set PlaybackPreparer if provided (for Android Auto support)
-        if (playbackPreparer != null) {
-            sessionConnector.setPlaybackPreparer(playbackPreparer);
-        }
+    private static MediaSessionConnector.CustomActionProvider seekActionProvider(
+            @NonNull final Context context, @NonNull final MediaSessionCallback callback,
+            @NonNull final String actionName, @NonNull final String label, final int icon) {
+        return new MediaSessionConnector.CustomActionProvider() {
+            @Override
+            public void onCustomAction(@NonNull final Player player, @NonNull final String action,
+                                       @Nullable final Bundle extras) {
+                if (action.equals(actionName)) {
+                    if (actionName.equals(ACTION_FAST_FORWARD)) {
+                        callback.fastForward();
+                    } else {
+                        callback.fastRewind();
+                    }
+                }
+            }
+
+            @Nullable
+            @Override
+            public PlaybackStateCompat.CustomAction getCustomAction(final Player player) {
+                if (!PlayerHelper.getSeekInsteadOfSkip(context)) {
+                    return null;
+                }
+                return new PlaybackStateCompat.CustomAction.Builder(actionName, label, icon)
+                        .build();
+            }
+        };
     }
 
     @Nullable
     @SuppressWarnings("UnusedReturnValue")
     public KeyEvent handleMediaButtonIntent(final Intent intent) {
         return MediaButtonReceiver.handleIntent(mediaSession, intent);
+    }
+
+    /**
+     * Republishes the metadata, e.g. after the thumbnail finished loading: the connector
+     * otherwise only rebuilds it on player events.
+     */
+    public void invalidateMetadata() {
+        sessionConnector.invalidateMediaSessionMetadata();
     }
 
     public MediaSessionCompat.Token getSessionToken() {
@@ -221,6 +301,7 @@ public class MediaSessionManager {
     public void dispose() {
         sessionConnector.setPlayer(null);
         sessionConnector.setQueueNavigator(null);
+        sessionConnector.setErrorMessageProvider(null);
         if (!isExternalSession) {
             mediaSession.setActive(false);
             mediaSession.release();

@@ -6,7 +6,7 @@ import android.os.IBinder;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.view.View;
 import androidx.annotation.Nullable;
-import org.schabi.newpipe.player.mediabrowser.MediaBrowserPlaybackPreparer;
+import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector;
 
 public interface PlayerServiceInterface{
 
@@ -37,7 +37,12 @@ public interface PlayerServiceInterface{
 
     public MediaSessionCompat getMediaSession();
 
-    public MediaBrowserPlaybackPreparer getMediaBrowserPlaybackPreparer();
+    /**
+     * @return the connector that already drives {@link #getMediaSession()}, which the player
+     * must reuse instead of attaching a second one, or null if the player creates its own
+     */
+    @Nullable
+    public MediaSessionConnector getMediaSessionConnector();
 
     public Service getInstance();
 

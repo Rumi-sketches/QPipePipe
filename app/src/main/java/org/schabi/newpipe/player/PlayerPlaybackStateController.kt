@@ -11,6 +11,7 @@ import org.schabi.newpipe.R
 import org.schabi.newpipe.ktx.AnimationType
 import org.schabi.newpipe.ktx.animate
 import org.schabi.newpipe.player.helper.PlayerHelper
+import org.schabi.newpipe.qpipepipe.LastPlayback
 
 /**
  * Owns the playback state machine of a [Player].
@@ -35,6 +36,7 @@ class PlayerPlaybackStateController(private val player: Player) {
         } else {
             player.simpleExoPlayer.playbackState
         }
+        LastPlayback.onPlayingChanged(player.context, player.playQueue, playWhenReady)
         updatePlaybackState(playWhenReady, playbackState)
     }
 
@@ -74,6 +76,7 @@ class PlayerPlaybackStateController(private val player: Player) {
 
             com.google.android.exoplayer2.Player.STATE_READY -> { // 3
                 PlaybackStartupTrace.mark(player.startupTraceId, "player_ready")
+                player.onPlaybackReady()
                 if (!player.isPrepared) {
                     player.isPrepared = true
                     onPrepared(playWhenReady)
@@ -372,6 +375,9 @@ class PlayerPlaybackStateController(private val player: Player) {
 
         if (playQueue.index < playQueue.size() - 1) {
             playQueue.offsetIndex(+1)
+        } else if (playQueue.isComplete) {
+            // the whole queue was played: don't bring it back on the next resume
+            LastPlayback.onQueueFinished(player.context, playQueue)
         }
         if (player.progressController.isProgressLoopRunning()) {
             player.progressController.stopProgressLoop()

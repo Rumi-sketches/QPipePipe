@@ -5,10 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- QPipePipe: Playlists / Recent queues switch (RecentQueuesTabs) -->
+    <include
+        android:id="@+id/recent_queues_tabs"
+        layout="@layout/qpipepipe_bookmarks_tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/items_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/recent_queues_tabs"
         android:scrollbars="vertical"
         app:layoutManager="LinearLayoutManager"
         tools:listitem="@layout/list_playlist_mini_item" />
@@ -33,6 +42,18 @@
         android:layout_marginTop="50dp"
         android:visibility="gone"
         tools:visibility="visible" />
+
+    <!-- QPipePipe: recent queues, over the playlists while selected; opaque and clickable so
+         the playlists below neither show through nor take taps -->
+    <FrameLayout
+        android:id="@+id/recent_queues_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/recent_queues_tabs"
+        android:background="?android:attr/windowBackground"
+        android:clickable="true"
+        android:focusable="false"
+        android:visibility="gone" />
 
     <View
         android:layout_width="match_parent"

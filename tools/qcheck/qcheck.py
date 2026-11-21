@@ -61,6 +61,7 @@ BASE_PREFS = {
     "last_announcement_id": "991231",
     "qpipepipe_last_announcement_id": "991231",
     "version_code": 2_000_000_000,
+    "qpipepipe_debug_build_shown": 2_000_000_000,
 }
 
 

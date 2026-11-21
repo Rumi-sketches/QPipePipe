@@ -74,12 +74,6 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name="androidx.media.session.MediaButtonReceiver" android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MEDIA_BUTTON" />
-            </intent-filter>
-        </receiver>
-
 
         <receiver android:name=".sleep.TimerStopReceiver"/>
         <service
@@ -106,6 +100,8 @@
             </intent-filter>
         </service>
 
+        <!-- The only MEDIA_BUTTON receiver: with two, media sessions register none, and media
+             buttons pressed after the OS killed the app reach nothing -->
         <receiver android:name=".util.MediaButtonReceiver"
                   android:exported="true">
             <intent-filter>
@@ -212,6 +208,13 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/nnf_provider_paths" />
         </provider>
+
+        <activity
+                android:name=".local.playlist.PlayPlaylistShortcutActivity"
+                android:excludeFromRecents="true"
+                android:taskAffinity=""
+                android:theme="@android:style/Theme.NoDisplay"
+                android:exported="false" />
 
         <activity
                 android:name=".RouterActivity"
@@ -562,6 +565,22 @@
         <activity
                 android:name=".settings.ChannelFilterListActivity"
                 android:label="@string/filter_by_channel_title"
+                android:parentActivityName=".settings.SettingsActivity" />
+        <activity
+                android:name=".settings.CommentKeywordFilterListActivity"
+                android:label="@string/filter_by_keyword_title"
+                android:parentActivityName=".settings.SettingsActivity" />
+        <activity
+                android:name=".settings.ChannelIdFilterListActivity"
+                android:label="@string/filter_by_channel_id_title"
+                android:parentActivityName=".settings.SettingsActivity" />
+        <activity
+                android:name=".settings.CommentUserIdFilterListActivity"
+                android:label="@string/filter_by_channel_id_title"
+                android:parentActivityName=".settings.SettingsActivity" />
+        <activity
+                android:name=".settings.CommentUsernameFilterListActivity"
+                android:label="@string/filter_by_username_title"
                 android:parentActivityName=".settings.SettingsActivity" />
 
         <activity

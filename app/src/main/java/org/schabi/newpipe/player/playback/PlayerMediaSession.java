@@ -6,9 +6,12 @@ import android.support.v4.media.MediaDescriptionCompat;
 import android.support.v4.media.MediaMetadataCompat;
 
 import org.schabi.newpipe.player.Player;
+import org.schabi.newpipe.player.PlayerServiceForAuto;
 import org.schabi.newpipe.player.RepeatMode;
+import org.schabi.newpipe.player.helper.PlayerHelper;
 import org.schabi.newpipe.player.mediaitem.PlayerMediaItem;
 import org.schabi.newpipe.player.mediasession.MediaSessionCallback;
+import org.schabi.newpipe.qpipepipe.LastPlayback;
 
 public class PlayerMediaSession implements MediaSessionCallback {
     public final Player player;
@@ -22,13 +25,31 @@ public class PlayerMediaSession implements MediaSessionCallback {
     }
 
     @Override
+    public void fastRewind() {
+        player.fastRewind();
+    }
+
+    @Override
+    public void fastForward() {
+        player.fastForward();
+    }
+
+    @Override
     public void playPrevious() {
-        player.playPrevious();
+        if (PlayerHelper.getSeekInsteadOfSkip(player.getContext())) {
+            player.fastRewind();
+        } else {
+            player.playPrevious();
+        }
     }
 
     @Override
     public void playNext() {
-        player.playNext();
+        if (PlayerHelper.getSeekInsteadOfSkip(player.getContext())) {
+            player.fastForward();
+        } else {
+            player.playNext();
+        }
     }
 
     @Override
@@ -92,6 +113,12 @@ public class PlayerMediaSession implements MediaSessionCallback {
 
     @Override
     public void play() {
+        if (player.service instanceof PlayerServiceForAuto
+                && ((PlayerServiceForAuto) player.service).takeCarAutoPlay()
+                && !player.getPlayWhenReady() && !LastPlayback.wasPlaying(player.getContext())) {
+            // Android Auto resuming by itself on connecting: a paused video waits for the user
+            return;
+        }
         refresh();
         player.play();
         // hide the player controls even if the play command came from the media session
