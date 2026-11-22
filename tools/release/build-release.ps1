@@ -1,13 +1,13 @@
 # Builds the signed QPipePipe release APKs.
 #
-#   powershell -ExecutionPolicy Bypass -File tools\release\build-release.ps1
+#   powershell -ExecutionPolicy Bypass -File tools\release\build-release.ps1 -KeyPath <keystore>
 #
-# The keystore password is asked here, kept only in this process and never written to
+# -KeyPath defaults to the QPIPEPIPE_KEYSTORE environment variable. The keystore password is asked here, kept only in this process and never written to
 # disk. The APKs end up in app\build\outputs\apk\release\. The script fails unless every
 # APK is signed with the expected certificate: with a wrong or empty password Gradle
 # silently builds unsigned APKs.
 param(
-    [string]$KeyPath = "$env:USERPROFILE\keystores\qpipepipe-release.jks",
+    [string]$KeyPath = $env:QPIPEPIPE_KEYSTORE,
     [string]$KeyAlias = "qpipepipe",
     [string]$JavaHome = "C:\Program Files\Eclipse Adoptium\jdk-25.0.3.9-hotspot",
     # SHA-256 of the release certificate, as published in README.md.
@@ -15,6 +15,7 @@ param(
 )
 $ErrorActionPreference = "Stop"
 $root = (Resolve-Path "$PSScriptRoot\..\..").Path
+if (-not $KeyPath) { throw "Pass -KeyPath or set QPIPEPIPE_KEYSTORE to the keystore path" }
 if (-not (Test-Path $KeyPath)) { throw "Keystore not found: $KeyPath" }
 
 # apksigner comes with the Android SDK build tools; take the newest version.
