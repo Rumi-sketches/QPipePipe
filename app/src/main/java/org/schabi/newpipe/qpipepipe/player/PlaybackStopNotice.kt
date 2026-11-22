@@ -1,6 +1,8 @@
 package org.schabi.newpipe.qpipepipe.player
 
 import android.widget.Toast
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import org.schabi.newpipe.R
@@ -11,30 +13,48 @@ import org.schabi.newpipe.player.Player
 import org.schabi.newpipe.player.PlayerError
 
 /**
- * The "No internet connection" notification and toast that replace the bug report notification
- * when playback stopped for a missing connection.
+ * A notification and a toast that say why playback stopped, in place of the bug report
+ * notification: the cause is known and nothing in the app is broken. The trace still goes to the
+ * debug error log. All notices share one notification, so a new one replaces the previous one.
  */
-internal class NoConnectionNotice(private val player: Player) {
+internal class PlaybackStopNotice private constructor(
+    private val player: Player,
+    @DrawableRes private val icon: Int,
+    @StringRes private val title: Int,
+    @StringRes private val text: Int,
+    @StringRes private val toast: Int,
+    private val toastLength: Int,
+) {
+    companion object {
+        private const val NOTIFICATION_ID = 5340682
 
-    /**
-     * Tell the user that playback stopped because there is no internet connection, instead of
-     * the bug report notification: nothing is broken, and the network retries resume playback by
-     * themselves once the connection is back. The trace still goes to the debug error log.
-     */
+        /** No connection: the network retries resume playback once it is back. */
+        fun noConnection(player: Player) = PlaybackStopNotice(player, R.drawable.ic_cloud_off,
+            R.string.no_internet_connection, R.string.no_internet_connection_resume,
+            R.string.no_internet_connection, Toast.LENGTH_SHORT)
+
+        /** YouTube refuses fresh stream URLs too: the IP is blocked for a while. */
+        fun ipBlocked(player: Player) = PlaybackStopNotice(player, R.drawable.ic_blocking,
+            R.string.network_error, R.string.ip_blocked_summary, R.string.ip_blocked_summary,
+            Toast.LENGTH_LONG)
+    }
+
     fun show(error: PlayerError) {
         val context = player.getContext()
         DebugErrorLog.record(context, errorInfo(error))
+        val text = context.getString(text)
         val notification = NotificationCompat.Builder(
             context, context.getString(R.string.error_report_channel_id)
         )
-            .setSmallIcon(R.drawable.ic_cloud_off)
-            .setContentTitle(context.getString(R.string.no_internet_connection))
-            .setContentText(context.getString(R.string.no_internet_connection_resume))
+            .setSmallIcon(icon)
+            .setContentTitle(context.getString(title))
+            .setContentText(text)
+            .setStyle(NotificationCompat.BigTextStyle().bigText(text))
             .setOnlyAlertOnce(true)
             .build()
         NotificationManagerCompat.from(context).notify(NOTIFICATION_ID, notification)
         // The notification is silent, so a toast says it too, like the error notification does.
-        Toast.makeText(context, R.string.no_internet_connection, Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, toast, toastLength).show()
     }
 
     fun dismiss() {
@@ -58,9 +78,5 @@ internal class NoConnectionNotice(private val player: Player) {
                 currentMetadata.serviceId
             )
         }
-    }
-
-    private companion object {
-        const val NOTIFICATION_ID = 5340682
     }
 }

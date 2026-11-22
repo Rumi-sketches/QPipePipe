@@ -772,12 +772,13 @@ resumes the queue too.
 
 ### Playback recovery hooks in PlayerErrorHandler
 
-Files: `qpipepipe/player/` (new: `PlaybackRecovery`, `NoConnectionNotice`,
+Files: `qpipepipe/player/` (new: `PlaybackRecovery`, `PlaybackStopNotice`,
 `OneRetryPerItem`), `PlayerErrorHandler` (hooks only), `Player`
 (`playerErrorHandler.getRecovery()`), `MediaSessionManager`.
 
 The three recoveries below (403, network, decoder) live in `PlaybackRecovery`;
-the "No internet connection" message in `NoConnectionNotice`.
+the messages that replace the bug report notification when the cause is known
+("No internet connection", IP blocked) in `PlaybackStopNotice`.
 `PlayerErrorHandler` keeps upstream's code plus these hooks, which must survive
 every merge:
 
@@ -789,8 +790,8 @@ every merge:
   `ERROR_CODE_IO_BAD_HTTP_STATUS` and `ERROR_CODE_DECODING_FAILED`, so
   upstream's branches for those codes, and its `recoverFromNetworkError`, no
   longer run. A 403 known only from the cause message of
-  `ERROR_CODE_IO_UNSPECIFIED` stays with upstream's IP-blocked dialog;
-- `if (!recovery.showsNoConnection(playerError))` before upstream's
+  `ERROR_CODE_IO_UNSPECIFIED` goes to the same 403 recovery;
+- `if (!recovery.showsNotice(playerError))` before upstream's
   `createErrorNotification(playerError)`;
 - `positionMs`, `durationMs` and `PlayerDebugTrace.onPlayerError`, from "Debug
   builds keep every error trace".
@@ -816,8 +817,12 @@ Upstream resumed a video paused for hours, or played on after a Wi-Fi/data
 switch, on the same URLs and stopped with a 403. Now play() rebuilds an expired
 source at the same position first, and a 403 drops the cached stream info and
 reloads quietly, without the error notification. A second 403 on the same item
-within a minute still stops playback with the IP-blocked message, so refused
-fresh URLs don't loop.
+within a minute stops playback, so refused fresh URLs don't loop, and says why
+with `PlaybackStopNotice.ipBlocked` (upstream's `ip_blocked_summary`, in a
+notification and a toast) instead of the bug report notification: the cause is
+known. Upstream v5.6.0 removed its IP-blocked dialog; the fork never shows one.
+A 403 reported only in the cause message of `ERROR_CODE_IO_UNSPECIFIED` is handled
+the same way (upstream just stops).
 
 Check: pause a video for more than its URL lifetime (hours), or switch between
 Wi-Fi and mobile data while it plays: it resumes at the same position.
@@ -825,8 +830,8 @@ Wi-Fi and mobile data while it plays: it resumes at the same position.
 ### No error loop without network
 
 Files: `PlaybackRecovery` (`recoverFromNetworkError`, `networkRetryDelayMs`,
-`reloadIfWaiting`, `isNoConnection`, `showsNoConnection`, `release`; hooks in
-`PlayerErrorHandler` above), `NoConnectionNotice`,
+`reloadIfWaiting`, `isNoConnection`, `showsNotice`, `release`; hooks in
+`PlayerErrorHandler` above), `PlaybackStopNotice`,
 `PlayerMetadataController.errorsToReport`, `PlayerHistoryController.hasPlayedPosition`,
 `Player.reloadPlayQueueManager`, `Player.destroyPlayer`, `PlayerTransportController.play`,
 `PlayerPlaybackStateController` (`STATE_READY`), `MediaSessionManager` (error message

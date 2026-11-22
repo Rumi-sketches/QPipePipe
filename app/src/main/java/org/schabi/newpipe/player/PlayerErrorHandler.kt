@@ -189,7 +189,7 @@ class PlayerErrorHandler(private val player: Player) {
         val playerError = toPlayerError(error)
         if (!isCatchableException) {
             showMediaCodecWorkaroundHint(error)
-            if (!recovery.showsNoConnection(playerError)) createErrorNotification(playerError)
+            if (!recovery.showsNotice(playerError)) createErrorNotification(playerError)
         }
 
         player.listeners.onPlayerError(playerError, isCatchableException)
