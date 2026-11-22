@@ -40,8 +40,9 @@ which compares PipePipe's latest stable release with `appVersionName` in
 - **Conflicts:** it pushes `sync/vX.Y.Z` at `dev` and opens an issue listing the
   conflicting files and the commands to merge and resolve them locally.
 
-The maintainer hears about it through GitHub's notification for the pull request
-or the issue; on days without a new release nothing happens. An existing
+The pull request or the issue is assigned to the repository owner, so GitHub
+notifies them even when they do not watch every activity of the repository; on
+days without a new release nothing happens. An existing
 `sync/vX.Y.Z` on origin means the release is being handled, so the watcher does
 nothing. GitHub pauses scheduled workflows of public repositories after 60 days
 without commits and emails a warning first; re-enable it from the Actions tab. To test it, run it by hand with `based_on` set to an
