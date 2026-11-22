@@ -30,6 +30,7 @@ import org.schabi.newpipe.fragments.list.sponsorblock.SponsorBlockFragment
 import org.schabi.newpipe.fragments.list.sponsorblock.SponsorBlockFragmentListener
 import org.schabi.newpipe.player.PlaybackStartupTrace
 import org.schabi.newpipe.player.Player
+import org.schabi.newpipe.player.PlayerDebugTrace
 import org.schabi.newpipe.player.PlayerError
 import org.schabi.newpipe.player.PlayerPlaybackParameters
 import org.schabi.newpipe.player.PlayerPlaybackState
@@ -43,6 +44,10 @@ import org.schabi.newpipe.player.helper.PlayerHolder
 import org.schabi.newpipe.player.mediasession.PlayerServiceInterface
 import org.schabi.newpipe.player.playqueue.PlayQueue
 import org.schabi.newpipe.player.playqueue.SinglePlayQueue
+import org.schabi.newpipe.qpipepipe.QPipePipePreferences
+import org.schabi.newpipe.qpipepipe.player.QueueReplacement
+import org.schabi.newpipe.qpipepipe.player.SavedPlayQueue
+import org.schabi.newpipe.qpipepipe.player.UnplayableQueue
 import org.schabi.newpipe.util.NO_SERVICE_ID
 import org.schabi.newpipe.util.DeviceUtils
 import org.schabi.newpipe.util.NavigationHelper
@@ -93,6 +98,8 @@ class VideoDetailFragment : BaseStateFragment<StreamInfo>(), BackPressable,
     private lateinit var vm: VideoDetailViewModel
 
     private var autoPlayEnabled = true
+    private val queueReplacement = QueueReplacement(this) { player } // QPipePipe
+    private val savedQueue = SavedPlayQueue() // QPipePipe
 
     /** The last stable state of the bottom sheet, restored when the views are recreated. */
     private var sheetStateToSave = BottomSheetBehavior.STATE_EXPANDED
@@ -129,13 +136,15 @@ class VideoDetailFragment : BaseStateFragment<StreamInfo>(), BackPressable,
 
     fun selectAndLoadVideo(newServiceId: Int, newUrl: String?, newTitle: String,
                            newQueue: PlayQueue?) {
-        val currentItem = vm.playQueue?.item
-        if (newQueue != null && currentItem != null && currentItem.url != newUrl) {
-            // Preloading can be disabled since playback is surely being replaced.
-            player?.disablePreloadingOfCurrentTrack()
+        queueReplacement.beforeLoading(newServiceId, newUrl, newQueue) { // QPipePipe
+            val currentItem = vm.playQueue?.item
+            if (newQueue != null && currentItem != null && currentItem.url != newUrl) {
+                // Preloading can be disabled since playback is surely being replaced.
+                player?.disablePreloadingOfCurrentTrack()
+            }
+            setInitialData(newServiceId, newUrl, newTitle, newQueue)
+            load(forceLoad = false, addToBackStack = true)
         }
-        setInitialData(newServiceId, newUrl, newTitle, newQueue)
-        load(forceLoad = false, addToBackStack = true)
     }
 
     private var forceFullscreen = false
@@ -161,7 +170,8 @@ class VideoDetailFragment : BaseStateFragment<StreamInfo>(), BackPressable,
             // service started for this playback connects.
             player?.changeFullscreen(true)
         }
-        openMainPlayer()
+        val queue = playQueueForIntent() // QPipePipe
+        queueReplacement.beforePlaying(vm.serviceId, vm.url, queue) { openMainPlayer(queue) }
     }
 
     fun openVideoPlayerAutoFullscreen() {
@@ -251,15 +261,16 @@ class VideoDetailFragment : BaseStateFragment<StreamInfo>(), BackPressable,
         outState.putString(STATE_URL, vm.url)
         outState.putInt(STATE_SHEET, MiniPlayerSheetController.sanitizeSheetState(sheetStateToSave))
         outState.putBoolean(STATE_AUTO_PLAY, autoPlayEnabled)
+        savedQueue.save(outState, vm.playQueue, requireActivity().isChangingConfigurations)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        pendingInitialData = InitialData(
-            savedInstanceState.getInt(STATE_SERVICE_ID, NO_SERVICE_ID),
-            savedInstanceState.getString(STATE_URL),
+        val serviceId = savedInstanceState.getInt(STATE_SERVICE_ID, NO_SERVICE_ID)
+        val url = savedInstanceState.getString(STATE_URL)
+        pendingInitialData = InitialData(serviceId, url,
             savedInstanceState.getString(STATE_TITLE, ""),
-            null)
+            savedQueue.restore(savedInstanceState, serviceId, url)) // QPipePipe
         sheetStateToSave = MiniPlayerSheetController.sanitizeSheetState(
             savedInstanceState.getInt(STATE_SHEET, BottomSheetBehavior.STATE_EXPANDED))
         autoPlayEnabled = savedInstanceState.getBoolean(STATE_AUTO_PLAY, true)
@@ -418,12 +429,23 @@ class VideoDetailFragment : BaseStateFragment<StreamInfo>(), BackPressable,
                 if (result.addToBackStack) {
                     pushToHistory(result.info)
                 }
-                if (isAutoplayEnabled()) {
+                if (queueReplacement.confirmed) { // QPipePipe
+                    playInActivePlayer()
+                } else if (isAutoplayEnabled()) {
                     openVideoPlayerAutoFullscreen()
                 }
             }
-            is VideoDetailViewModel.LoadResult.Failure -> showError(ErrorInfo(result.error,
-                UserAction.REQUESTED_STREAM, result.url ?: "no url", result.serviceId))
+            is VideoDetailViewModel.LoadResult.Failure -> {
+                showError(ErrorInfo(result.error,
+                    UserAction.REQUESTED_STREAM, result.url ?: "no url", result.serviceId))
+                // QPipePipe: a queue whose first video can't be loaded still plays
+                if (UnplayableQueue.playsDespiteLoadError(vm.playQueue)
+                    && (queueReplacement.confirmed || isAutoplayEnabled())) {
+                    openVideoPlayerAutoFullscreen()
+                } else {
+                    queueReplacement.forget()
+                }
+            }
         }
     }
 
@@ -521,14 +543,17 @@ class VideoDetailFragment : BaseStateFragment<StreamInfo>(), BackPressable,
     // Players
 
     private fun openBackgroundPlayer() {
+        // QPipePipe: before connecting to the player, which pushes its own queue (onQueueUpdate)
+        val queue = playQueueForIntent() ?: return
         player?.changeFullscreen(false)
         // FIXME Workaround #7427
         player?.setRecovery()
         if (player == null) {
             playerHolder.startService(false, this)
         }
-        val queue = playQueueForIntent() ?: return
-        NavigationHelper.playOnBackgroundPlayer(requireActivity(), queue, true)
+        queueReplacement.beforePlaying(vm.serviceId, vm.url, queue) {
+            NavigationHelper.playOnBackgroundPlayer(requireActivity(), queue, true)
+        }
     }
 
     private fun openPopupPlayer() {
@@ -537,6 +562,8 @@ class VideoDetailFragment : BaseStateFragment<StreamInfo>(), BackPressable,
             PermissionHelper.showPopupEnablementToast(activity)
             return
         }
+        // QPipePipe: before connecting to the player, which pushes its own queue (onQueueUpdate)
+        val queue = playQueueForIntent() ?: return
         // See UI changes while the remote play queue changes
         val player = player
         if (player == null) {
@@ -546,18 +573,32 @@ class VideoDetailFragment : BaseStateFragment<StreamInfo>(), BackPressable,
             player.setRecovery()
             player.changeFullscreen(false)
         }
-        val queue = playQueueForIntent() ?: return
-        NavigationHelper.playOnPopupPlayer(activity, queue, true)
+        queueReplacement.beforePlaying(vm.serviceId, vm.url, queue) {
+            NavigationHelper.playOnPopupPlayer(activity, queue, true)
+        }
     }
 
-    private fun openMainPlayer() {
+    /** QPipePipe: Play now chosen while loading plays in the player that was playing. */
+    private fun playInActivePlayer() {
+        val player = player
+        when {
+            player?.audioPlayerSelected() == true -> openBackgroundPlayer()
+            player?.popupPlayerSelected() == true -> openPopupPlayer()
+            else -> {
+                autoPlayEnabled = true // forcefully start playing
+                openVideoPlayerAutoFullscreen()
+            }
+        }
+    }
+
+    private fun openMainPlayer(queue: PlayQueue?) {
         val playerService = playerService
         if (playerService == null || playerHolder.listener == null) {
             PlaybackStartupTrace.mark(pendingStartupTraceId, "waiting_for_player_service")
             playerHolder.startService(autoPlayEnabled, this)
             return
         }
-        val queue = playQueueForIntent() ?: return
+        queue ?: return
         PlaybackStartupTrace.mark(pendingStartupTraceId, "play_queue_ready")
         // The video view can still show parts of the popup. It is hidden until the player
         // shows it again once ready.
@@ -604,7 +645,8 @@ class VideoDetailFragment : BaseStateFragment<StreamInfo>(), BackPressable,
         autoPlayEnabled
             && player?.videoPlayerSelected() != false
             && sheetStateToSave != BottomSheetBehavior.STATE_HIDDEN
-            && (forceFullscreen || PlayerHelper.isAutoplayAllowedByUser(requireContext()))
+            && (forceFullscreen || QPipePipePreferences.isTapAlwaysPlays(requireContext())
+                || PlayerHelper.isAutoplayAllowedByUser(requireContext()))
 
     private fun beginStartupTrace() {
         vm.currentInfo?.let { pendingStartupTraceId = PlaybackStartupTrace.begin(it.id, it.url) }
@@ -640,6 +682,7 @@ class VideoDetailFragment : BaseStateFragment<StreamInfo>(), BackPressable,
     }
 
     override fun onQueueUpdate(queue: PlayQueue) {
+        activity?.let { PlayerDebugTrace.onScreenQueueReplaced(it, vm.playQueue, queue) }
         vm.playQueue = queue
         // The only place where the history grows while playing: it holds the live queue, so it
         // knows about the items added or removed in the background.

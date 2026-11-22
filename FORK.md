@@ -221,7 +221,8 @@ only.
 ### Tapping a video always plays it
 
 Commit `292f3839d`, made optional in the QPipePipe screen. Files:
-`NavigationHelper.openVideoDetailFragment`, `VideoDetailFragment.isAutoplayEnabled`.
+`NavigationHelper.openVideoDetailFragment`, `VideoDetailFragment.isAutoplayEnabled`
+(`VideoDetailFragment.kt` since v5.6.0).
 Key: `tap_always_plays_key` (default on).
 
 When on, tapping a video starts it even when Autoplay is set to "Wi-Fi only" or
@@ -255,9 +256,14 @@ action runs.
 
 ### Clear-queue confirmation with enqueue options
 
-Commit `fb4865a17`. Files: `VideoDetailFragment` (`loadVideoIfUserConfirms`
-and the dialog), `QPipePipePreferences.isClearingQueueConfirmationRequired`.
-Key: `clear_queue_confirmation_key`.
+Commit `fb4865a17`. Files: `qpipepipe/player/QueueReplacement` (the dialog and
+when it is shown), `QPipePipePreferences.isClearingQueueConfirmationRequired`.
+Key: `clear_queue_confirmation_key`. Hooks in `VideoDetailFragment.kt`, which must
+survive a merge: the `queueReplacement` field; `beforeLoading` around the body of
+`selectAndLoadVideo`; `beforePlaying` in `openVideoPlayer`, `openBackgroundPlayer`
+and `openPopupPlayer`, each with the queue taken at the top of the method;
+`openMainPlayer(queue)` taking that queue; `playInActivePlayer`; in `onLoadResult`
+the `queueReplacement.confirmed` branch before autoplay. Test: `QueueReplacementTest`.
 
 Upstream removed this setting. The fork restores it: when a queue is playing
 and the user opens a different video, a dialog offers Play now, Enqueue next
@@ -267,26 +273,17 @@ Check: enable the setting, play a playlist, tap another video from search: the
 dialog appears and each choice behaves as labelled.
 
 The queue that plays is the one on screen when the user acts (`openVideoPlayer`,
-`openNormalBackgroundPlayer`, `openPopupPlayer`, `replaceQueueIfUserConfirms`).
+`openBackgroundPlayer`, `openPopupPlayer`, `beforePlaying`).
 Upstream read `playQueue` again after connecting to the player and after the
 dialog, but every connection pushes the player's queue into it
 (`onQueueUpdate`): on 21/10/2026 at 00:25 Play now on a new video resumed the
 16-video queue that was paused in the background instead.
 
-Play now on a video tapped while a queue plays (`loadVideoIfUserConfirms`)
+Play now on a video tapped while a queue plays (`beforeLoading`)
 starts it once loaded, in the player that was playing (background, popup or
-main), without asking again (`queueReplacementConfirmed`, `playInActivePlayer`).
+main), without asking again (`QueueReplacement.confirmed`, `playInActivePlayer`).
 Before, it only loaded it on screen when the open player was not the main one,
 and pressing play then showed the same dialog a second time.
-
-### No crash when the service reconnects without a player
-
-Commit `55fec9953`. File: `VideoDetailFragment.onServiceConnected`.
-
-The player service is bound with `BIND_AUTO_CREATE`, so after the OS kills and
-recreates it the fragment can connect before a `Player` exists. The guard
-returns early instead of dereferencing a null player. Upstream `a43bcc346`
-(null intent in `onStartCommand`) fixes a different path; both stay.
 
 ### Related videos load after Android recreates the screen
 
@@ -306,8 +303,11 @@ off again.
 
 ### The play queue survives the OS killing the app
 
-File: `VideoDetailFragment` (`onSaveInstanceState`, `onRestoreInstanceState`,
-`StateSaver.WriteRead`).
+File: `qpipepipe/player/SavedPlayQueue`. Hooks in `VideoDetailFragment.kt`: the
+`savedQueue` field, the `savedQueue.save` line at the end of `onSaveInstanceState`
+and `savedQueue.restore` as the queue of the `InitialData` built in
+`onRestoreInstanceState`. A rotation keeps the queue in upstream's
+`VideoDetailViewModel`; the file is for the OS killing the app.
 
 Upstream saves only the url of the open video, and the navigation stack is
 static, so when the OS kills the app in background the video came back alone,
@@ -961,12 +961,12 @@ the decoder server down, it stops after one round.
 Files: `qpipepipe/player/UnplayableNotice`, `UnplayableReason`, `UnplayableQueue`
 (`Notice`, `playsDespiteLoadError`), `res/layout/player_unplayable_qpipepipe.xml`,
 `strings_qpipepipe.xml` (`unplayable_video`, `unplayable_next_in`,
-`unplayable_next`). Hooks in `VideoDetailFragment`, which must survive a merge: the
-`queueDespiteLoadError` field, its reset at the top of `runWorker`, in the error branch of
-`runWorker` the `confirmed` line before `showError` and the block after it
-(`UnplayableQueue.playsDespiteLoadError`),
-and `queueDespiteLoadError` instead of `null` in the first line that picks the queue in
-`openVideoPlayer`.
+`unplayable_next`). Hooks, which must survive a merge: in `VideoDetailFragment.kt`
+the block after `showError` in the `Failure` branch of `onLoadResult`
+(`UnplayableQueue.playsDespiteLoadError`); since v5.6.0 `playQueueForIntent` already
+returns the page's queue while no stream info is loaded. In `ErrorPanelHelper`,
+`getExceptionDescription` is public (v5.6.0 made it private): `UnplayableReason`
+uses it, and names anti-bot blocks itself through `AntiBotHints`.
 
 When the player lands on a video that can't be loaded (removed, private,
 age-restricted...), the video player pauses on it and shows the reason in place of the
@@ -1031,6 +1031,11 @@ support stay in this repository.
 
 - `7729a5383` (null context guard in the decoder error dialog): replaced by
   upstream `fb8e52e9e`.
+- `55fec9953` (no crash when the player service reconnects without a player, a
+  guard in `VideoDetailFragment.onServiceConnected`): dropped with the v5.6.0
+  merge. Upstream `fb8e52e9e` (v5.5.0) ignores such a connection in
+  `PlayerHolder`, and v5.6.0's Kotlin `onServiceConnected` takes a non-null
+  `Player`.
 - `1f8455d64` (multiple selection of videos, `qpipepipe/selection/`): replaced
   by upstream's multiple selection in v5.5.0 (`util/selection/`, the
   `menu_multi_select` toolbar button). The order of picking and the bottom bar
@@ -1060,5 +1065,16 @@ support stay in this repository.
   keep only the fork's queue saving (`StateSaver`).
 - `MainActivity` imports: keep the fork's (`DebugBuildNotes`, `QPipePipeNotices`)
   and upstream's `SelectionToolbar`.
+- v5.6.0 rewrote `VideoDetailFragment` in Kotlin and split it (`DetailActions`,
+  `DetailPlayerViewHost`, `VideoDetailViewModel`...): the merge deletes the Java file
+  the fork had changed. The fork's logic moved to `qpipepipe/player/QueueReplacement`
+  and `SavedPlayQueue`, with hooks in `VideoDetailFragment.kt` (see each patch).
+- v5.6.0 conflicts with only one side to add: `.gitignore`, `app/build.gradle`
+  (upstream's desugaring block goes before `apply from: "qpipepipe.gradle"`, which stays
+  last), the debug `AndroidManifest.xml` (`usesCleartextTraffic` and the fork's
+  receiver), `SettingsResourceRegistry` (both entries), `StreamHistoryDAO` (both
+  queries), `NewVersionWorker` imports (`AntiBotException` replaced
+  `ReCaptchaException`). In `PlaylistFragment` upstream dropped the long clicks that
+  enqueued the playlist: keep the fork's resume calls and drop the long clicks.
 
 `git rerere` is enabled locally and remembers these resolutions.

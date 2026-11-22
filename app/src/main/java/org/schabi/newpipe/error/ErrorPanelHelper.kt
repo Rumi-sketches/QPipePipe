@@ -245,7 +245,7 @@ class ErrorPanelHelper(
         }
 
         @StringRes
-        private fun getExceptionDescription(throwable: Throwable?): Int {
+        fun getExceptionDescription(throwable: Throwable?): Int {
             return when (throwable) {
                 is NeedLoginException -> R.string.need_login_hint
                 is LiveNotStartException -> R.string.live_not_started

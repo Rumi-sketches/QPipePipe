@@ -49,7 +49,7 @@ class UnplayableNotice(private val player: Player) : UnplayableQueue.Notice {
         // somewhere (a next video). Otherwise the player's buttons stay and the reason goes above.
         val popup = player.popupPlayerSelected()
         val buttons = hasNext && !popup
-        views.unplayableReason.setText(UnplayableReason.of(item.errors))
+        views.unplayableReason.text = UnplayableReason.message(player.context, item.errors)
         views.unplayableReason.textSize = if (popup) 13f else 16f
         views.unplayableCountdown.textSize = if (popup) 12f else 14f
         views.unplayableNext.isVisible = buttons
