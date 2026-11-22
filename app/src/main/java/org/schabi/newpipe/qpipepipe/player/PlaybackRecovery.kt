@@ -1,6 +1,5 @@
 package org.schabi.newpipe.qpipepipe.player
 
-import android.app.AlertDialog
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
@@ -38,7 +37,7 @@ import java.net.UnknownHostException
  *  * a decoder that fails mid-stream: rebuild the source once, see [recoverFromDecoderFailure].
  *
  * The error handler asks [handles] before its own dispatch and lets [recover] take the errors this
- * class owns; [showsNoConnection] picks the message when the error stops playback. The player
+ * class owns; [showsNotice] picks the message when the error stops playback. The player
  * reaches the rest ([onPlaybackReady], [reloadIfWaiting], [cancelDelayedReload], [release])
  * through the handler's `recovery`.
  *
@@ -68,10 +67,12 @@ class PlaybackRecovery(
     private val delayedReload = Runnable { reload() }
     private var reloadPending = false
 
-    // Set by [recover] when the error it could not recover from is a missing connection that the
-    // network retries will try again, read once by [showsNoConnection] right after.
-    private var noConnectionToShow = false
-    private val noConnectionNotice = NoConnectionNotice(player)
+    // Set by [recover] when the error it could not recover from has a known cause, read once by
+    // [showsNotice] right after: a missing connection that the network retries will try again,
+    // or a 403 on fresh URLs too.
+    private var noticeToShow: PlaybackStopNotice? = null
+    private val noConnectionNotice = PlaybackStopNotice.noConnection(player)
+    private val ipBlockedNotice = PlaybackStopNotice.ipBlocked(player)
 
     /** Whether [recover] owns this error instead of the error handler's own dispatch. */
     fun handles(error: PlaybackException): Boolean = routeOf(error.errorCode, error) != null
@@ -83,12 +84,14 @@ class PlaybackRecovery(
      * @return whether the error is caught: playback goes on without telling the user
      */
     fun recover(error: PlaybackException): Boolean {
-        noConnectionToShow = false
+        noticeToShow = null
         return when (routeOf(error.errorCode, error)) {
             Route.NETWORK -> {
                 val caught = recoverFromNetworkError()
                 // The retries will try this source again, which is what the message promises.
-                noConnectionToShow = !caught && isNoConnection(error)
+                if (!caught && isNoConnection(error)) {
+                    noticeToShow = noConnectionNotice
+                }
                 caught
             }
 
@@ -97,7 +100,7 @@ class PlaybackRecovery(
             Route.FORBIDDEN -> if (recoverFromForbidden()) {
                 true
             } else {
-                showIpBlocked()
+                noticeToShow = ipBlockedNotice
                 shutdown()
                 false
             }
@@ -118,21 +121,21 @@ class PlaybackRecovery(
     }
 
     /**
-     * Tell the user that playback stopped because there is no internet connection, when that is
-     * why [recover] stopped it. Otherwise another failure takes over, and the connection message
-     * no longer describes what happened.
+     * Tell the user why playback stopped when [recover] stopped it for a known cause (no
+     * connection, IP blocked). Otherwise another failure takes over, and a previous notice no
+     * longer describes what happened.
      *
-     * @return whether the message was shown, in place of the error notification
+     * @return whether a notice was shown, in place of the bug report notification
      */
-    fun showsNoConnection(error: PlayerError): Boolean {
-        val show = noConnectionToShow
-        noConnectionToShow = false
-        if (show) {
-            noConnectionNotice.show(error)
+    fun showsNotice(error: PlayerError): Boolean {
+        val notice = noticeToShow
+        noticeToShow = null
+        if (notice != null) {
+            notice.show(error)
         } else {
             noConnectionNotice.dismiss()
         }
-        return show
+        return notice != null
     }
 
     /**
@@ -237,20 +240,6 @@ class PlaybackRecovery(
         return true
     }
 
-    // The same dialog the error handler shows for a 403 reported without an HTTP status.
-    private fun showIpBlocked() {
-        try {
-            AlertDialog.Builder(player.getParentActivity())
-                .setTitle(R.string.network_error)
-                .setMessage(R.string.ip_blocked_summary)
-                .setPositiveButton(R.string.ok) { _, _ -> }
-                .show()
-        } catch (e: Exception) {
-            // when there is no context, e.g. background playing
-            e.printStackTrace()
-        }
-    }
-
     /** The recoveries this class owns, by the error they answer. */
     internal enum class Route { NETWORK, FORBIDDEN, DECODER }
 
@@ -267,13 +256,13 @@ class PlaybackRecovery(
         /**
          * Which recovery answers an error with [errorCode] and cause chain [error], or null when
          * the error handler's own dispatch keeps it. A 403 reported without an HTTP status (only
-         * in the cause message) keeps upstream's IP-blocked dialog and stop.
+         * in the direct cause's message, as upstream reads it) is a 403 all the same.
          */
         @JvmStatic
         internal fun routeOf(errorCode: Int, error: Throwable): Route? = when (errorCode) {
             ERROR_CODE_IO_UNSPECIFIED ->
                 if (error.cause?.message?.contains("Response code: 403") == true) {
-                    null
+                    Route.FORBIDDEN
                 } else {
                     Route.NETWORK
                 }
