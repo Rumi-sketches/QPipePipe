@@ -119,8 +119,8 @@ announcements and your crash reports reach QPipePipe:
 4. `ERROR_EMAIL_SUBJECT` in `ErrorActivity` and the app name in `app/qpipepipe.gradle`
    if you rename the app.
 
-`tools/release/build-release.ps1` and `tools/qcheck/results/` are the QPipePipe
-maintainer's: the script has their keystore path, the results come from their phone.
+`tools/qcheck/results/` are the QPipePipe maintainer's: the results come from their
+test phone.
 `tools/qcheck/qcheck.py` works with any phone (`--package <your debug app id>`).
 
 ## Publishing a release
@@ -149,7 +149,7 @@ The workflow signs with two repository secrets, set once by the maintainer from
 their own terminal so the password never passes through anyone else:
 
 ```powershell
-[Convert]::ToBase64String([IO.File]::ReadAllBytes("$env:USERPROFILE\keystores\qpipepipe-release.jks")) | gh secret set KEYSTORE_BASE64 -R Rumi-sketches/QPipePipe
+[Convert]::ToBase64String([IO.File]::ReadAllBytes("<path of the keystore>")) | gh secret set KEYSTORE_BASE64 -R Rumi-sketches/QPipePipe
 gh secret set KEYSTORE_PASSWORD -R Rumi-sketches/QPipePipe
 ```
 
@@ -159,10 +159,11 @@ builds unsigned and creates nothing.
 Local fallback, with the same checks:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File tools\release\build-release.ps1
+powershell -ExecutionPolicy Bypass -File tools\release\build-release.ps1 -KeyPath <path of the keystore>
 ```
 
-It asks for the keystore password, builds `assembleRelease` and fails unless every
+`-KeyPath` can be left out when the `QPIPEPIPE_KEYSTORE` environment variable holds
+the path. It asks for the keystore password, builds `assembleRelease` and fails unless every
 APK in `app\build\outputs\apk\release\` is signed with the release certificate.
 
 ## Release checks
