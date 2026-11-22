@@ -1,0 +1,109 @@
+{
+  "package": "io.github.rumisketches.qpipepipe.debug",
+  "device": "Redmi K30 5G",
+  "started": "2026-11-22 14:52:51",
+  "upgrade": {
+    "ok": true,
+    "install": [
+      "Success"
+    ],
+    "before": {
+      "tap_always_plays_key": null,
+      "clear_queue_confirmation_key": null,
+      "enable_swipe_actions_key": null,
+      "swipe_left_action_key": null,
+      "swipe_right_action_key": null
+    },
+    "after": {
+      "tap_always_plays_key": null,
+      "clear_queue_confirmation_key": null,
+      "enable_swipe_actions_key": null,
+      "swipe_left_action_key": null,
+      "swipe_right_action_key": null
+    }
+  },
+  "version": [
+    "5.6.0-q1"
+  ],
+  "features": [
+    {
+      "name": "tap always plays",
+      "verdict": "PASS",
+      "on": true,
+      "off": false
+    },
+    {
+      "name": "clear-queue dialog",
+      "verdict": "PASS",
+      "on": true,
+      "off": false
+    },
+    {
+      "name": "swipe enqueue",
+      "verdict": "PASS",
+      "on": true,
+      "off": false
+    }
+  ],
+  "timings": {
+    "cold_start": {
+      "median_ms": 2410.5,
+      "min_ms": 2322,
+      "max_ms": 2558,
+      "failed": 0,
+      "samples": [
+        2464,
+        2558,
+        2457,
+        2375,
+        2366,
+        2322,
+        2397,
+        2432,
+        2424,
+        2361
+      ]
+    },
+    "video_jNQXAC9IVRw": {
+      "median_ms": 7134,
+      "min_ms": 6894,
+      "max_ms": 7260,
+      "failed": 0,
+      "samples": [
+        7134,
+        7260,
+        7197,
+        6924,
+        6894
+      ]
+    },
+    "video_aqz-KE-bpKQ": {
+      "median_ms": 7225,
+      "min_ms": 6876,
+      "max_ms": 7881,
+      "failed": 0,
+      "samples": [
+        7881,
+        7258,
+        7225,
+        6926,
+        6876
+      ]
+    },
+    "video_dQw4w9WgXcQ": {
+      "median_ms": 7151,
+      "min_ms": 6203,
+      "max_ms": 7193,
+      "failed": 0,
+      "samples": [
+        7193,
+        7151,
+        6203,
+        7184,
+        6817
+      ]
+    }
+  },
+  "regressions": [],
+  "crashes": []
+}
