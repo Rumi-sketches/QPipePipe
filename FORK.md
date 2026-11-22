@@ -40,8 +40,9 @@ which compares PipePipe's latest stable release with `appVersionName` in
 - **Conflicts:** it pushes `sync/vX.Y.Z` at `dev` and opens an issue listing the
   conflicting files and the commands to merge and resolve them locally.
 
-The maintainer hears about it through GitHub's notification for the pull request
-or the issue; on days without a new release nothing happens. An existing
+The pull request or the issue is assigned to the repository owner, so GitHub
+notifies them even when they do not watch every activity of the repository; on
+days without a new release nothing happens. An existing
 `sync/vX.Y.Z` on origin means the release is being handled, so the watcher does
 nothing. GitHub pauses scheduled workflows of public repositories after 60 days
 without commits and emails a warning first; re-enable it from the Actions tab. To test it, run it by hand with `based_on` set to an
@@ -119,8 +120,8 @@ announcements and your crash reports reach QPipePipe:
 4. `ERROR_EMAIL_SUBJECT` in `ErrorActivity` and the app name in `app/qpipepipe.gradle`
    if you rename the app.
 
-`tools/release/build-release.ps1` and `tools/qcheck/results/` are the QPipePipe
-maintainer's: the script has their keystore path, the results come from their phone.
+`tools/qcheck/results/` are the QPipePipe maintainer's: the results come from their
+test phone.
 `tools/qcheck/qcheck.py` works with any phone (`--package <your debug app id>`).
 
 ## Publishing a release
@@ -149,7 +150,7 @@ The workflow signs with two repository secrets, set once by the maintainer from
 their own terminal so the password never passes through anyone else:
 
 ```powershell
-[Convert]::ToBase64String([IO.File]::ReadAllBytes("$env:USERPROFILE\keystores\qpipepipe-release.jks")) | gh secret set KEYSTORE_BASE64 -R Rumi-sketches/QPipePipe
+[Convert]::ToBase64String([IO.File]::ReadAllBytes("<path of the keystore>")) | gh secret set KEYSTORE_BASE64 -R Rumi-sketches/QPipePipe
 gh secret set KEYSTORE_PASSWORD -R Rumi-sketches/QPipePipe
 ```
 
@@ -159,10 +160,11 @@ builds unsigned and creates nothing.
 Local fallback, with the same checks:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File tools\release\build-release.ps1
+powershell -ExecutionPolicy Bypass -File tools\release\build-release.ps1 -KeyPath <path of the keystore>
 ```
 
-It asks for the keystore password, builds `assembleRelease` and fails unless every
+`-KeyPath` can be left out when the `QPIPEPIPE_KEYSTORE` environment variable holds
+the path. It asks for the keystore password, builds `assembleRelease` and fails unless every
 APK in `app\build\outputs\apk\release\` is signed with the release certificate.
 
 ## Release checks

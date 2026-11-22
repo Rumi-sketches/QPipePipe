@@ -7,7 +7,7 @@ name: Upstream watcher
 
 on:
   schedule:
-    # 06:17 UTC: 08:17 in Italy in summer time, 07:17 in winter.
+    # 06:17 UTC; GitHub often starts scheduled runs hours late.
     - cron: "17 6 * * *"
   workflow_dispatch:
     inputs:
@@ -113,7 +113,8 @@ jobs:
 
           Merge with a **merge commit**, never Squash and merge: squashing drops upstream's history and brings every conflict back at the next sync.
           EOF
-          gh pr create --base dev --head "$BRANCH" --title "Merge upstream v$VERSION" --body-file ../pr-body.md
+          gh pr create --base dev --head "$BRANCH" --title "Merge upstream v$VERSION" --body-file ../pr-body.md \
+            --assignee "$GITHUB_REPOSITORY_OWNER"
 
       - name: Open an issue for the conflicts
         if: steps.check.outputs.status == 'conflict' && inputs.dry_run != true
@@ -147,4 +148,5 @@ jobs:
 
           Then open a pull request from \`$BRANCH\` to \`dev\`, run the release checks and merge it with a **merge commit**.
           EOF
-          gh issue create --title "Upstream v$VERSION: merge conflicts to resolve" --body-file ../issue-body.md
+          gh issue create --title "Upstream v$VERSION: merge conflicts to resolve" --body-file ../issue-body.md \
+            --assignee "$GITHUB_REPOSITORY_OWNER"
