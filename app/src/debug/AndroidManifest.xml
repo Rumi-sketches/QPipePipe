@@ -6,6 +6,7 @@
 
     <application
         android:name=".DebugApp"
+        android:usesCleartextTraffic="true"
         tools:replace="android:name">
 
         <!-- QPipePipe: preferences access for tools/qcheck where run-as is blocked.
