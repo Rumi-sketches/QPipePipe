@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- Αν το YouTube μπλοκάρει τη σύνδεση, ένα μήνυμα εξηγεί γιατί σταμάτησε το βίντεο</string>
     <string name="qpipepipe_settings_summary">Λειτουργίες ουράς και σύρσιμου που προστέθηκαν από αυτό το fork</string>
     <string name="qpipepipe_category_playback">Αναπαραγωγή</string>
     <string name="qpipepipe_category_swipe_actions">Ενέργειες σύρσιμου</string>

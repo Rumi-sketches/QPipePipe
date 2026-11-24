@@ -2,9 +2,9 @@
 <!-- QPipePipe strings, kept apart from strings.xml so upstream merges and translation
      updates don't touch them. -->
 <resources>
-    <!-- What's New notes of the current QPipePipe release, shown above upstream's update_log.
-         Rewrite them for every release (see FORK.md, Identity and versions). -->
-    <string name="qpipepipe_update_log">- When YouTube blocks your IP address, the player stops and tells you, instead of reporting a bug\n- QPipePipe features carried over to PipePipe 5.6.0</string>
+    <!-- What's New notes of the current QPipePipe release, after upstream's update_log.
+         Rewrite and translate them for every release (FORK.md, Release notes). -->
+    <string name="qpipepipe_update_log">- If YouTube blocks your connection, a message tells you why the video stopped</string>
     <string name="qpipepipe_settings_title">QPipePipe</string>
     <string name="qpipepipe_settings_summary">Queue and swipe features added by this fork</string>
     <string name="qpipepipe_category_playback">Playback</string>

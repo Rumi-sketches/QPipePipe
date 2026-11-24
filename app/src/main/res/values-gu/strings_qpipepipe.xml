@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- જો YouTube કનેક્શન બ્લોક કરે, તો એક સંદેશ જણાવે છે કે વિડિયો કેમ અટકી ગયો</string>
     <string name="qpipepipe_settings_summary">આ ફોર્કમાં ઉમેરાયેલી કતાર અને સ્વાઇપ સુવિધાઓ</string>
     <string name="qpipepipe_category_playback">પ્લેબેક</string>
     <string name="qpipepipe_category_swipe_actions">સ્વાઇપ ક્રિયાઓ</string>

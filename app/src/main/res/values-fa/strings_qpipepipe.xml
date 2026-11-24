@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- اگر YouTube اتصال را مسدود کند، پیامی توضیح می‌دهد چرا ویدیو متوقف شد</string>
     <string name="qpipepipe_settings_summary">ویژگی‌های صف و کشیدن که این انشعاب افزوده است</string>
     <string name="qpipepipe_category_playback">پخش</string>
     <string name="qpipepipe_category_swipe_actions">کنش‌های کشیدن</string>

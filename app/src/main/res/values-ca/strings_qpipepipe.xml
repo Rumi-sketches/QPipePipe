@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- Si YouTube bloqueja la connexió, un missatge explica per què s\'ha aturat el vídeo</string>
     <string name="qpipepipe_settings_summary">Funcions de cua i de lliscament afegides per aquest fork</string>
     <string name="qpipepipe_category_playback">Reproducció</string>
     <string name="qpipepipe_category_swipe_actions">Accions de lliscament</string>

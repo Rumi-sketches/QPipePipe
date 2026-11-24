@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- Yen YouTube mblokir sambungan, ana pesen sing nerangake kenapa video mandheg</string>
     <string name="qpipepipe_settings_summary">Fitur antrian lan geser sing ditambahke fork iki</string>
     <string name="qpipepipe_category_playback">Muter</string>
     <string name="qpipepipe_category_swipe_actions">Tumindak geser</string>

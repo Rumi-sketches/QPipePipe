@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- Když YouTube zablokuje připojení, zpráva vysvětlí, proč se video zastavilo</string>
     <string name="qpipepipe_settings_summary">Funkce fronty a přejetí přidané tímto forkem</string>
     <string name="qpipepipe_category_playback">Přehrávání</string>
     <string name="qpipepipe_category_swipe_actions">Akce přejetím</string>

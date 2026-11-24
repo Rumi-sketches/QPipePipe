@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- Ger YouTube girêdanê asteng bike, peyamek diyar dike çima vîdyo rawestiya</string>
     <string name="qpipepipe_settings_summary">Taybetmendiyên rêz û xişandinê yên ku vê forkê lê zêde kirine</string>
     <string name="qpipepipe_category_playback">Lîstin</string>
     <string name="qpipepipe_category_swipe_actions">Çalakiyên xişandinê</string>

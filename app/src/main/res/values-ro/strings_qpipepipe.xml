@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- Dacă YouTube blochează conexiunea, un mesaj explică de ce s-a oprit videoclipul</string>
     <string name="qpipepipe_settings_summary">Funcții pentru coadă și glisare adăugate de acest fork</string>
     <string name="qpipepipe_category_playback">Redare</string>
     <string name="qpipepipe_category_swipe_actions">Acțiuni de glisare</string>

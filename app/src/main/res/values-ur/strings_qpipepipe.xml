@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- اگر YouTube کنکشن بلاک کر دے تو ایک پیغام بتاتا ہے کہ ویڈیو کیوں رکی</string>
     <string name="qpipepipe_settings_summary">اس فورک میں شامل کی گئی قطار اور سوائپ کی خصوصیات</string>
     <string name="qpipepipe_category_playback">پلے بیک</string>
     <string name="qpipepipe_category_swipe_actions">سوائپ ایکشنز</string>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- 如果 YouTube 屏蔽了连接，会有提示说明视频为什么停止</string>
     <string name="qpipepipe_settings_summary">此分支新增的队列和滑动功能</string>
     <string name="qpipepipe_category_playback">播放</string>
     <string name="qpipepipe_category_swipe_actions">滑动操作</string>

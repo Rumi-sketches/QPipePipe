@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- Haddii YouTube uu xannibo xiriirka, fariin ayaa sharraxaysa sababta muuqaalku u istaagay</string>
     <string name="qpipepipe_settings_summary">Hormada iyo jiidista ee uu ku daray nuqulkan</string>
     <string name="qpipepipe_category_playback">Daarid</string>
     <string name="qpipepipe_category_swipe_actions">Ficillada jiidista</string>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- Si YouTube blocca \'a connessione, nu messaggio spiega pecché \'o video s\'è fermato</string>
     <string name="qpipepipe_settings_summary">Funzione pe ccode e scurrimiento aggiunte da stu fork</string>
     <string name="qpipepipe_category_playback">Riproduzione</string>
     <string name="qpipepipe_category_swipe_actions">Aziune \'e scurrimiento</string>

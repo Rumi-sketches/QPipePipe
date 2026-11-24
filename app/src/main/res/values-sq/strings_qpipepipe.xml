@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- Nëse YouTube bllokon lidhjen, një mesazh shpjegon pse u ndal videoja</string>
     <string name="qpipepipe_settings_summary">Veçori të radhës dhe të rrëshqitjes të shtuara nga ky fork</string>
     <string name="qpipepipe_category_playback">Luajtja</string>
     <string name="qpipepipe_category_swipe_actions">Veprimet me rrëshqitje</string>

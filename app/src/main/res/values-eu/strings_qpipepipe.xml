@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- YouTubek konexioa blokeatzen badu, mezu batek azaltzen du zergatik gelditu den bideoa</string>
     <string name="qpipepipe_settings_summary">Fork honek gehitutako ilara eta lerratze funtzioak</string>
     <string name="qpipepipe_category_playback">Erreprodukzioa</string>
     <string name="qpipepipe_category_swipe_actions">Lerratze-ekintzak</string>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- Ако YouTube ја блокира врската, порака објаснува зошто запре видеото</string>
     <string name="qpipepipe_settings_summary">Функции за редицата и повлекувањето, додадени од овој форк</string>
     <string name="qpipepipe_category_playback">Репродукција</string>
     <string name="qpipepipe_category_swipe_actions">Дејства со повлекување</string>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- YouTube সংযোগ ব্লক করলে, একটি বার্তা জানায় ভিডিওটি কেন থেমে গেছে</string>
     <string name="qpipepipe_settings_summary">এই ফর্কে যোগ করা সারি ও সোয়াইপ ফিচার</string>
     <string name="qpipepipe_category_playback">প্লেব্যাক</string>
     <string name="qpipepipe_category_swipe_actions">সোয়াইপ অ্যাকশন</string>
