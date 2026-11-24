@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- Ha a YouTube letiltja a kapcsolatot, egy üzenet elmagyarázza, miért állt le a videó</string>
     <string name="qpipepipe_settings_summary">A fork által hozzáadott lejátszási sor- és húzásfunkciók</string>
     <string name="qpipepipe_category_playback">Lejátszás</string>
     <string name="qpipepipe_category_swipe_actions">Húzási műveletek</string>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- Hvis YouTube blokerer forbindelsen, forklarer en besked, hvorfor videoen stoppede</string>
     <string name="qpipepipe_settings_summary">Kø- og strygefunktioner tilføjet af denne fork</string>
     <string name="qpipepipe_category_playback">Afspilning</string>
     <string name="qpipepipe_category_swipe_actions">Strygehandlinger</string>

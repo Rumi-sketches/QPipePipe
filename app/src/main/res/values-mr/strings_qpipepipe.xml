@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- YouTube ने कनेक्शन ब्लॉक केल्यास, व्हिडिओ का थांबला ते एक संदेश सांगतो</string>
     <string name="qpipepipe_settings_summary">या फोर्कमध्ये जोडलेली रांग आणि स्वाइप वैशिष्ट्ये</string>
     <string name="qpipepipe_category_playback">प्लेबॅक</string>
     <string name="qpipepipe_category_swipe_actions">स्वाइप क्रिया</string>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- YouTube కనెక్షన్‌ను బ్లాక్ చేస్తే, వీడియో ఎందుకు ఆగిపోయిందో ఒక సందేశం వివరిస్తుంది</string>
     <string name="qpipepipe_settings_summary">ఈ ఫోర్క్ జోడించిన క్యూ మరియు స్వైప్ ఫీచర్‌లు</string>
     <string name="qpipepipe_category_playback">ప్లేబ్యాక్</string>
     <string name="qpipepipe_category_swipe_actions">స్వైప్ చర్యలు</string>

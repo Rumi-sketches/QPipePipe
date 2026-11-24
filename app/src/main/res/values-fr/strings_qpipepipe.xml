@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- Si YouTube bloque la connexion, un message explique pourquoi la vidéo s\'est arrêtée</string>
     <string name="qpipepipe_settings_summary">Fonctions de file d\'attente et de balayage ajoutées par ce fork</string>
     <string name="qpipepipe_category_playback">Lecture</string>
     <string name="qpipepipe_category_swipe_actions">Actions de balayage</string>

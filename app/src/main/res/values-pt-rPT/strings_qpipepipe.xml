@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- Se o YouTube bloquear a ligação, uma mensagem explica porque é que o vídeo parou</string>
     <string name="qpipepipe_settings_summary">Funções de fila e de deslizar adicionadas por este fork</string>
     <string name="qpipepipe_category_playback">Reprodução</string>
     <string name="qpipepipe_category_swipe_actions">Ações de deslizar</string>

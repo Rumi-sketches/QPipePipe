@@ -94,10 +94,10 @@ as upstream sets them.
   `NewVersionWorker` reads them from the QPipePipe releases to offer updates.
   Tags starting with `nightly_` are nightlies (see "Nightly builds").
 - Release notes: rewrite `qpipepipe_update_log` (`strings_qpipepipe.xml`) for
-  every fork release. The What's New dialog shows it under "QPipePipe
-  <version>:" and, when the upstream release changed, upstream's
-  `update_log` under "PipePipe <version>:". Never edit `update_log`: it is
-  upstream's text and translations.
+  every fork release, following "Release notes" below. The What's New dialog
+  shows it under "QPipePipe <version>:" and, when the upstream release
+  changed, upstream's `update_log` under "PipePipe <version>:". Never edit
+  `update_log`: it is upstream's text and translations.
 - Launcher icon: `qpipepipe_launcher_*` drawables and
   `qpipepipe_launcher_background`, wired in `mipmap-anydpi-v26/ic_launcher.xml`;
   the legacy `mipmap-*/ic_launcher.png` are replaced.
@@ -127,8 +127,8 @@ test phone.
 ## Publishing a release
 
 1. On a `chore/release-<version>` branch from `dev`: bump `qpipepipeRelease`
-   (or keep 1 right after an upstream sync), rewrite `qpipepipe_update_log`,
-   run the release checks below and add their result file. Check the What's New
+   (or keep 1 right after an upstream sync), rewrite and translate
+   `qpipepipe_update_log` (see Release notes), run the release checks below and add their result file. Check the What's New
    dialog on the test phone. Merge into `dev`.
 2. Merge a pull request from `dev` to `main` with a merge commit.
 3. Tag the merge commit and push the tag:
@@ -166,6 +166,23 @@ powershell -ExecutionPolicy Bypass -File tools\release\build-release.ps1 -KeyPat
 `-KeyPath` can be left out when the `QPIPEPIPE_KEYSTORE` environment variable holds
 the path. It asks for the keystore password, builds `assembleRelease` and fails unless every
 APK in `app\build\outputs\apk\release\` is signed with the release certificate.
+
+## Release notes
+
+`qpipepipe_update_log` is what users read after an update, in the What's New
+dialog; the English text is also the GitHub Release notes.
+
+- Language: translate it in every `values-*/strings_qpipepipe.xml` (see
+  QPipePipe settings layer), so each phone shows it in its own language.
+  `test_release_notes.py` fails when a locale misses it or has a different
+  number of points than English, because a locale left behind would show the
+  previous release's notes.
+- Content: only changes users notice since the previous fork release, in
+  everyday words. Each point says what happens now and, if it helps, what
+  happened before. No technical terms (403, IP, SABR, decoder), class names or
+  internal changes; upstream's changes are in its own dialog.
+- Form: a bullet list, one point per change, most important first, each point
+  a short sentence starting with `- ` and separated by `\n`.
 
 ## Release checks
 
@@ -215,8 +232,7 @@ Fork strings are translated in `res/values-*/strings_qpipepipe.xml`, one file
 per locale that has an upstream `strings.xml` with content (87). They are not
 on Weblate: when a fork string is added or changed, translate it in every one
 of those files, keeping the plural quantities of the upstream file of that
-locale. `qpipepipe_update_log` and `qpipepipe_settings_title` stay English
-only.
+locale. `qpipepipe_settings_title` stays English only.
 
 ## Fork patches
 

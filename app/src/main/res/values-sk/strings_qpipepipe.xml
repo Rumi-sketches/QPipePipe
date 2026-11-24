@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- Ak YouTube zablokuje pripojenie, správa vysvetlí, prečo sa video zastavilo</string>
     <string name="qpipepipe_settings_summary">Funkcie poradia a potiahnutí pridané týmto forkom</string>
     <string name="qpipepipe_category_playback">Prehrávanie</string>
     <string name="qpipepipe_category_swipe_actions">Akcie potiahnutím</string>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- Mk iqqn YouTube tuqqna, izen ad isfsr maxef iḥbes uvidyu</string>
     <string name="qpipepipe_settings_summary">Tiwuriwin n talgamt n uraju d uzuɣer ittwarnan s ufurk-a</string>
     <string name="qpipepipe_category_playback">Taɣuri</string>
     <string name="qpipepipe_category_swipe_actions">Tigawin n uzuɣer</string>

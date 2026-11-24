@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- YouTube കണക്ഷൻ തടഞ്ഞാൽ, വീഡിയോ എന്തുകൊണ്ട് നിന്നുവെന്ന് ഒരു സന്ദേശം വിശദീകരിക്കും</string>
     <string name="qpipepipe_settings_summary">ഈ ഫോർക്ക് ചേർത്ത ക്യൂ, സ്വൈപ്പ് സവിശേഷതകൾ</string>
     <string name="qpipepipe_category_playback">പ്ലേബാക്ക്</string>
     <string name="qpipepipe_category_swipe_actions">സ്വൈപ്പ് പ്രവർത്തനങ്ങൾ</string>

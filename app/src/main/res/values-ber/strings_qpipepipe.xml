@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- ⵎⴽ ⵢⵇⵇⵏ YouTube ⴰⵙⴰⵖⵓⵍ, ⵜⴰⵏⵣⵡⵉⴷⵜ ⴰⴷ ⵜⵙⵙⴼⵙⵔ ⵎⴰⵅ ⵢⵃⴱⵙ ⵓⴼⵉⴷⵢⵓ</string>
     <string name="qpipepipe_settings_summary">ⵜⵉⵡⵓⵔⵉⵡⵉⵏ ⵏ ⵜⴰⵍⴳⴰⵎⵜ ⵏ ⵓⵔⴰⵊⵓ ⴷ ⵓⵣⵓⵖⵔ ⵉⵜⵜⵡⴰⵔⵏⴰⵏ ⵙ ⵓⴼⵓⵔⴽ-ⴰ</string>
     <string name="qpipepipe_category_playback">ⵜⴰⵖⵓⵔⵉ</string>
     <string name="qpipepipe_category_swipe_actions">ⵜⵉⴳⴰⵡⵉⵏ ⵏ ⵓⵣⵓⵖⵔ</string>

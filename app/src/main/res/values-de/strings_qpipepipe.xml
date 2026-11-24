@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- Sperrt YouTube die Verbindung, erklärt eine Meldung, warum das Video angehalten hat</string>
     <string name="qpipepipe_settings_summary">Warteschlangen- und Wischfunktionen dieses Forks</string>
     <string name="qpipepipe_category_playback">Wiedergabe</string>
     <string name="qpipepipe_category_swipe_actions">Wischaktionen</string>

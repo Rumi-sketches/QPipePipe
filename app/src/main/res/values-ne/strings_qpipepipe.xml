@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- YouTube ले जडान रोकेमा, भिडियो किन रोकियो भनेर एउटा सन्देशले बताउँछ</string>
     <string name="qpipepipe_settings_summary">यो फोर्कले थपेका लाम र स्वाइप सुविधाहरू</string>
     <string name="qpipepipe_category_playback">प्लेब्याक</string>
     <string name="qpipepipe_category_swipe_actions">स्वाइप कार्यहरू</string>

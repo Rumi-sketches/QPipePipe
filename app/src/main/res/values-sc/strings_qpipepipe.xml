@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- Si YouTube blocat sa connessione, unu messàgiu ispiegat pro ite su vìdeu s\'est firmadu</string>
     <string name="qpipepipe_settings_summary">Funtziones de lista e de trìsinu annànghidas dae custu fork</string>
     <string name="qpipepipe_category_playback">Riprodutzione</string>
     <string name="qpipepipe_category_swipe_actions">Atziones de trìsinu</string>

@@ -1,7 +1,15 @@
 """Tests for release_notes.py: python -m unittest discover tools/release"""
 import unittest
 
-from release_notes import fork_release, update_log, upstream_version
+from release_notes import ROOT, fork_release, update_log, upstream_version
+
+RES = ROOT / "app" / "src" / "main" / "res"
+
+
+def bullets(strings_xml):
+    lines = update_log(strings_xml.read_text(encoding="utf-8")).split("\n")
+    assert all(line.startswith("- ") for line in lines), lines
+    return len(lines)
 
 
 class ReleaseNotesTest(unittest.TestCase):
@@ -16,6 +24,13 @@ class ReleaseNotesTest(unittest.TestCase):
                '- Don\\\'t \\"lose\\" it</string></resources>')
         self.assertEqual(update_log(xml),
                          "- One (Settings > QPipePipe)\n- Don't \"lose\" it")
+
+    def test_every_locale_has_the_current_notes(self):
+        # A locale left behind would show the previous release's notes (FORK.md, Release notes).
+        expected = bullets(RES / "values" / "strings_qpipepipe.xml")
+        for strings_xml in RES.glob("values-*/strings_qpipepipe.xml"):
+            with self.subTest(strings_xml.parent.name):
+                self.assertEqual(bullets(strings_xml), expected)
 
 
 if __name__ == "__main__":

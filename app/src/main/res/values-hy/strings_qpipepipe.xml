@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- Եթե YouTube-ը արգելափակի կապը, հաղորդագրությունը կբացատրի, թե ինչու է տեսանյութը կանգ առել</string>
     <string name="qpipepipe_settings_summary">Այս ճյուղի ավելացրած հերթի և սահեցման գործառույթներ</string>
     <string name="qpipepipe_category_playback">Նվագարկում</string>
     <string name="qpipepipe_category_swipe_actions">Սահեցման գործողություններ</string>

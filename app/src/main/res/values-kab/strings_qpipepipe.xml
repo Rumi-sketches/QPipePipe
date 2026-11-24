@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- Ma yessewḥel YouTube tuqqna, izen ad d-yini acuɣer i yeḥbes uvidyu</string>
     <string name="qpipepipe_settings_summary">Timahilin n tebdart n uraǧu d uzuɣer yernan deg lqem-a</string>
     <string name="qpipepipe_category_playback">Taɣuri</string>
     <string name="qpipepipe_category_swipe_actions">Tigawin n uzuɣer</string>
