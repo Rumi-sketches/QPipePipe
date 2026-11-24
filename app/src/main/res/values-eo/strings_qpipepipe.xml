@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- Se YouTube blokas la konekton, mesaĝo klarigas, kial la video haltis</string>
     <string name="qpipepipe_settings_summary">Atendovicaj kaj ŝovaj funkcioj aldonitaj de ĉi tiu forko</string>
     <string name="qpipepipe_category_playback">Ludado</string>
     <string name="qpipepipe_category_swipe_actions">Ŝovaj agoj</string>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- Jei YouTube užblokuoja ryšį, pranešimas paaiškina, kodėl vaizdo įrašas sustojo</string>
     <string name="qpipepipe_settings_summary">Eilės ir perbraukimo funkcijos, pridėtos šioje atšakoje</string>
     <string name="qpipepipe_category_playback">Atkūrimas</string>
     <string name="qpipepipe_category_swipe_actions">Perbraukimo veiksmai</string>

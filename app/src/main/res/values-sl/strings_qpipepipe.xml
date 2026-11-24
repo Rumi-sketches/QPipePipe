@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- Če YouTube blokira povezavo, sporočilo pojasni, zakaj se je video ustavil</string>
     <string name="qpipepipe_settings_summary">Funkcije čakalne vrste in potegov, ki jih dodaja ta fork</string>
     <string name="qpipepipe_category_playback">Predvajanje</string>
     <string name="qpipepipe_category_swipe_actions">Dejanja s potegom</string>

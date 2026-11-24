@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- As YouTube die verbinding blokkeer, verduidelik \'n boodskap hoekom die video gestop het</string>
     <string name="qpipepipe_settings_summary">Waglys- en swiepfunksies wat hierdie fork bygevoeg het</string>
     <string name="qpipepipe_category_playback">Afspeel</string>
     <string name="qpipepipe_category_swipe_actions">Swiepaksies</string>

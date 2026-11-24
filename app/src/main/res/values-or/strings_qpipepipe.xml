@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- ଯଦି YouTube ସଂଯୋଗକୁ ଅବରୋଧ କରେ, ଭିଡିଓ କାହିଁକି ବନ୍ଦ ହେଲା ତାହା ଏକ ବାର୍ତ୍ତା ବୁଝାଏ</string>
     <string name="qpipepipe_settings_summary">ଏହି ଫର୍କରେ ଯୋଡ଼ାଯାଇଥିବା ଧାଡ଼ି ଓ ସ୍ୱାଇପ୍ ସୁବିଧା</string>
     <string name="qpipepipe_category_playback">ପ୍ଲେବ୍ୟାକ୍</string>
     <string name="qpipepipe_category_swipe_actions">ସ୍ୱାଇପ୍ କାର୍ଯ୍ୟ</string>

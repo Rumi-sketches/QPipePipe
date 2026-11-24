@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- YouTube ikizuia muunganisho, ujumbe unaeleza kwa nini video ilisimama</string>
     <string name="qpipepipe_settings_summary">Vipengele vya foleni na kutelezesha vilivyoongezwa na fork hii</string>
     <string name="qpipepipe_category_playback">Uchezaji</string>
     <string name="qpipepipe_category_swipe_actions">Vitendo vya kutelezesha</string>

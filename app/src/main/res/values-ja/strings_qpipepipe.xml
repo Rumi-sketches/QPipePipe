@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- YouTube に接続をブロックされると、動画が止まった理由をメッセージでお知らせします</string>
     <string name="qpipepipe_settings_summary">このフォークで追加されたキューとスワイプの機能</string>
     <string name="qpipepipe_category_playback">再生</string>
     <string name="qpipepipe_category_swipe_actions">スワイプ操作</string>

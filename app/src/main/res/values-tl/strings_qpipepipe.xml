@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- Kapag hinarang ng YouTube ang koneksyon, ipinapaliwanag ng isang mensahe kung bakit huminto ang video</string>
     <string name="qpipepipe_settings_summary">Mga tampok sa pila at pag-swipe na idinagdag ng fork na ito</string>
     <string name="qpipepipe_category_playback">Pagpapalabas</string>
     <string name="qpipepipe_category_swipe_actions">Mga aksyon sa pag-swipe</string>

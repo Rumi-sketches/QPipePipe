@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- Jika YouTube memblokir koneksi, sebuah pesan menjelaskan mengapa video berhenti</string>
     <string name="qpipepipe_settings_summary">Fitur antrean dan usap yang ditambahkan oleh fork ini</string>
     <string name="qpipepipe_category_playback">Pemutaran</string>
     <string name="qpipepipe_category_swipe_actions">Tindakan usap</string>

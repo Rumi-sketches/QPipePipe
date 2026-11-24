@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- YouTube가 연결을 차단하면 동영상이 멈춘 이유를 메시지로 알려 줍니다</string>
     <string name="qpipepipe_settings_summary">이 포크에서 추가한 대기열 및 스와이프 기능</string>
     <string name="qpipepipe_category_playback">재생</string>
     <string name="qpipepipe_category_swipe_actions">스와이프 동작</string>

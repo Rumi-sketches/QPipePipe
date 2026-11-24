@@ -1,11 +1,24 @@
 package org.schabi.newpipe.qpipepipe.player
 
+import android.content.Context
 import androidx.annotation.StringRes
 import org.schabi.newpipe.R
+import org.schabi.newpipe.error.AntiBotHints
 import org.schabi.newpipe.error.ErrorPanelHelper
 
 /** Why a queue item can't be played, in words for the user. */
 object UnplayableReason {
+
+    /**
+     * The reason as shown: a block by the service's anti-bot protection names the service, as
+     * upstream's error panel does since v5.6.0; otherwise [of].
+     */
+    @JvmStatic
+    fun message(context: Context, errors: List<Throwable>): String {
+        errors.firstNotNullOfOrNull { AntiBotHints.find(it) }
+            ?.let { return AntiBotHints.message(context, it) }
+        return context.getString(of(errors))
+    }
 
     /**
      * The reason the extractor gave in [errors] (removed, private, age-restricted, blocked in

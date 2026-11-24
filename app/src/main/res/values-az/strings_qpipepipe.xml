@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- YouTube bağlantını bloklasa, mesaj videonun niyə dayandığını izah edir</string>
     <string name="qpipepipe_settings_summary">Bu fork tərəfindən əlavə edilmiş növbə və sürüşdürmə xüsusiyyətləri</string>
     <string name="qpipepipe_category_playback">Oxutma</string>
     <string name="qpipepipe_category_swipe_actions">Sürüşdürmə əməliyyatları</string>

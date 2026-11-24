@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- YouTube இணைப்பைத் தடுத்தால், வீடியோ ஏன் நின்றது என்று ஒரு செய்தி விளக்கும்</string>
     <string name="qpipepipe_settings_summary">இந்த ஃபோர்க் சேர்த்த சாரை மற்றும் ஸ்வைப் வசதிகள்</string>
     <string name="qpipepipe_category_playback">இயக்கம்</string>
     <string name="qpipepipe_category_swipe_actions">ஸ்வைப் செயல்கள்</string>

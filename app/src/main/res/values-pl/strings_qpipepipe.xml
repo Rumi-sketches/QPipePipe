@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- Jeśli YouTube zablokuje połączenie, komunikat wyjaśni, dlaczego film się zatrzymał</string>
     <string name="qpipepipe_settings_summary">Funkcje kolejki i przesuwania dodane przez ten fork</string>
     <string name="qpipepipe_category_playback">Odtwarzanie</string>
     <string name="qpipepipe_category_swipe_actions">Akcje przesunięcia</string>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- Meunyo YouTube jitheun koneksi, saboh peusan geupeugah pakon video meuhenti</string>
     <string name="qpipepipe_settings_summary">Fitur antre ngen usap nyang geutamah lé fork nyoe</string>
     <string name="qpipepipe_category_playback">Puta</string>
     <string name="qpipepipe_category_swipe_actions">Buet usap</string>

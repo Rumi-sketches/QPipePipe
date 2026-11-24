@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- Якщо YouTube заблокує з\'єднання, повідомлення пояснить, чому відео зупинилося</string>
     <string name="qpipepipe_settings_summary">Функції черги та свайпів, додані цим форком</string>
     <string name="qpipepipe_category_playback">Відтворення</string>
     <string name="qpipepipe_category_swipe_actions">Дії свайпом</string>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- QPipePipe strings, see values/strings_qpipepipe.xml. -->
 <resources>
+    <string name="qpipepipe_update_log">- Wenn YouTube d\'Verbindung sperrt, sogt a Meldung, warum des Video stehbliem is</string>
     <string name="qpipepipe_settings_summary">Warteschlang- und Wisch-Sachan, de wo dea Fork dazuadoa hod</string>
     <string name="qpipepipe_category_playback">Obspuin</string>
     <string name="qpipepipe_category_swipe_actions">Wisch-Aktionen</string>
